@@ -6,7 +6,6 @@ process BISMARK_ALIGN {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
         'quay.io/biocontainers/bismark:0.23.0--0' }"
-
     input:
     tuple val(meta), path(reads)
     path index
@@ -21,9 +20,9 @@ process BISMARK_ALIGN {
     task.ext.when == null || task.ext.when
 
     script:
-    def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ''
-    def fastq      = "-1 ${reads[0]} -2 ${reads[1]}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def fastq      = meta.single_end ? reads : "-1 ${reads[0]} -2 ${reads[1]}"
     """
     bismark \\
         $fastq \\
