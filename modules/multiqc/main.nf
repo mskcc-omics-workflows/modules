@@ -6,10 +6,6 @@ process MULTIQC {
         'https://depot.galaxyproject.org/singularity/multiqc:1.12--pyhdfd78af_0' :
         'quay.io/biocontainers/multiqc:1.12--pyhdfd78af_0' }"
 
-    input:
-    path  multiqc_files, stageAs: "?/*"
-    tuple path(multiqc_config), path(multiqc_logo)
-
     output:
     path "*multiqc_report.html", emit: report
     path "*_data"              , emit: data
