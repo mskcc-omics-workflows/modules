@@ -1,0 +1,6 @@
+.nextflow/
+.nextflow.log*
+*.swp
+*.pyc
+.vscode/
+work/

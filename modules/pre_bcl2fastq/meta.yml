@@ -1,0 +1,29 @@
+name: "pre_bcl2fastq"
+description: "Operator for bcl2fastq tool"
+keywords:
+  - pre_bcl2fastq
+tools:
+  - "pre_bcl2fastq":
+      description: "Operator for bcl2fastq tool"
+      homepage: ""
+      documentation: ""
+      licence: "DMS"
+
+input:
+  - runinfo:
+      type: file
+      description: RunInfo.xml
+      pattern: "*.xml"
+  - runparams:
+      tye: file
+      description: RunParameters.xml
+      pattern: "*.xml"
+
+output:
+  - meta_file:
+      type: file
+      description: CSV file with metadata
+      pattern: "*.csv"
+
+authors:
+  - "Yu Hu"

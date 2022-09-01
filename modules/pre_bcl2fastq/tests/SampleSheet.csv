@@ -1,0 +1,33 @@
+[Header],,,,,,,,,,,
+IEMFileVersion,4,,,,,,,,,,
+Date,7/26/2022,,,,,,,,,,
+Workflow,GenerateFASTQ,,,,,,,,,,
+ProjectName,ArcherV4-CLIN-20220134-ArcherPanHemeV2-CLIN-20220132,,,,,,,,,,
+ExperimentName,ArcherV4-CLIN-20220134-PHCLIN132-Pool,,,,,,,,,,
+InvestigatorName,PurvilS,,,,,,,,,,
+Application,FASTQOnly,,,,,,,,,,
+InstrumentType,MiSeq,,,,,,,,,,
+Assay,Nextera,,,,,,,,,,
+IndexAdapters,"NexteraIndexKit(24Indexes,96Samples)",,,,,,,,,,
+Description,Description,,,,,,,,,,
+Chemistry,Amplicon,,,,,,,,,,
+,,,,,,,,,,,
+[Reads],,,,,,,,,,,
+151,,,,,,,,,,,
+151,,,,,,,,,,,
+,,,,,,,,,,,
+[Settings],,,,,,,,,,,
+Adapter,CTGTCTCTTATACACATCT,,,,,,,,,,
+,,,,,,,,,,,
+[Data],,,,,,,,,,,
+Lane,Sample_ID,Sample_Name,Sample_Plate,Sample_Well,I7_Index_ID,index,I5_Index_ID,index2,Sample_Project,Description,GenomeFolder
+1,Sureshot-180007,Sureshot-180007,Plate,Well,P7_8,CAGAGAGG,Illumina_RBC3_BC21,CTCTCTTG,ArcherV4-CLIN-20220134,Custom Solid,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,PanHemePCP-180007,PanHemePCP-180007,Plate,Well,P7_3,AGGCAGAA,Illumina_RBC3_BC20,CAATCACC,ArcherPanHemeV2-CLIN-20220132,Custom Pan-Heme,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-12345,M22-12345,Plate,Well,P7_4,TCCTGAGC,Illumina_RBC1_BC4,AGACTCAC,ArcherPanHemeV2-CLIN-20220132,Custom Pan-Heme,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-54321,M22-54321,Plate,Well,P7_8,CAGAGAGG,Illumina_RBC1_BC8,AACTACGG,ArcherV4-CLIN-20220134,Custom Solid,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-67890,M22-67890,Plate,Well,P7_7,CTCTCTAC,Illumina_RBC1_BC7,ATGACACG,ArcherV4-CLIN-20220134,Custom Solid,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-09876,M22-09876,Plate,Well,P7_3,AGGCAGAA,Illumina_RBC1_BC3,TGCTACGA,ArcherPanHemeV2-CLIN-20220132,Custom Pan-Heme,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-11111,M22-11111,Plate,Well,P7_2,CGTACTAG,Illumina_RBC1_BC2,GTTCACAG,ArcherPanHemeV2-CLIN-20220132,Custom Pan-Heme,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-22222,M22-22222,Plate,Well,P7_1,TAAGGCGA,Illumina_RBC1_BC1,ATCCGTAC,ArcherPanHemeV2-CLIN-20220132,Custom Pan-Heme,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-33333,M22-33333,Plate,Well,P7_6,TAGGCATG,Illumina_RBC1_BC6,CGCATTCA,ArcherV4-CLIN-20220134,Custom Solid,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
+1,M22-44444,M22-44444,Plate,Well,P7_5,GGACTCCT,Illumina_RBC1_BC5,ATCCAAGC,ArcherV4-CLIN-20220134,Custom Solid,PhiX\Illumina\RTA\Sequence\WholeGenomeFASTA
