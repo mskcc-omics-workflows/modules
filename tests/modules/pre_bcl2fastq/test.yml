@@ -1,0 +1,4 @@
+- name: pre_bcl2fastq test_pre_bcl2fastq
+  command: nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/config/nextflow.config  -c ./tests/modules/pre_bcl2fastq/nextflow.config -profile docker
+  tags:
+    - pre_bcl2fastq
