@@ -13,6 +13,9 @@ process PRE_BCL2FASTQ {
     output:
     path "*.csv"           , emit: meta_file
 
+    when:
+    task.ext.when == null || task.ext.when
+    
     script:
     """
     python /create_meta.py \\
