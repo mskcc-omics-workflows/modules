@@ -1,0 +1,7 @@
+bcl2fastq2:
+- modules/bcl2fastq2/**
+- tests/modules/bcl2fastq2/**
+
+cutadapt:
+- modules/cutadapt/**
+- tests/modules/cutadapt/**
