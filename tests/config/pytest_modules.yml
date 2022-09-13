@@ -2,7 +2,10 @@ bcl2fastq2:
 - modules/bcl2fastq2/**
 - tests/modules/bcl2fastq2/**
 
+cutadapt:
+- modules/cutadapt/**
+- tests/modules/cutadapt/**
+
 pre_bcl2fastq:
 - modules/pre_bcl2fastq/**
 - tests/modules/pre_bcl2fastq/**
-
