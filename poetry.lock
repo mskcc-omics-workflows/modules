@@ -413,34 +413,38 @@ python-versions = ">=3.7"
 [[package]]
 name = "nf-core"
 version = "2.5.1"
-description = "Forked from nf-core/tools"
+description = "Helper tools for use with nf-core Nextflow pipelines."
 category = "main"
 optional = false
-python-versions = "^3.8"
+python-versions = "*"
+develop = false
 
 [package.dependencies]
-click = ">=8.1.3,<9.0.0"
-galaxy-tool-util = ">=22.1.2,<23.0.0"
-GitPython = ">=3.1.27,<4.0.0"
-Jinja2 = ">=3.1.2,<4.0.0"
+click = "*"
+galaxy-tool-util = "*"
+GitPython = "*"
+jinja2 = "*"
 jsonschema = ">=3.0"
-Markdown = ">=3.3"
-packaging = ">=21.3,<22.0"
+markdown = ">=3.3"
+packaging = "*"
 prompt-toolkit = ">=3.0.3"
 pytest = ">=7.0.0"
 pytest-workflow = ">=1.6.0"
-PyYAML = ">=6.0,<7.0"
+pyyaml = "*"
 questionary = ">=1.8.0"
-refgenie = ">=0.12.1,<0.13.0"
-requests = ">=2.28.1,<3.0.0"
-requests-cache = ">=0.9.6,<0.10.0"
+refgenie = "*"
+requests = "*"
+requests-cache = "*"
 rich = ">=10.7.0"
 rich-click = ">=1.0.0"
-tabulate = ">=0.8.10,<0.9.0"
+tabulate = "*"
 
 [package.source]
-type = "url"
-url = "http://orion.mskcc.org:7004/packages/staging/+f/565/12949aca2beab/nf-core-2.5.1.tar.gz#sha256=56512949aca2beabde02a3aa867a523f07a671d9a4892b0a386aaf302f46ac68"
+type = "git"
+url = "https://github.com/mskcc-omics-workflows/nfcore-cmd.git"
+reference = "mskcc/nf-core"
+resolved_reference = "b2d1d0c8cb54cfaf573cfdea85aa353f16b1531c"
+
 [[package]]
 name = "numpy"
 version = "1.23.3"
@@ -1016,7 +1020,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f31f63808eb36532fc72e7cbebd311a5567e74808267091eb78e91a26b873cbe"
+content-hash = "955e35c6e4bc88c303de954d33b652059576453e250eb863de7ea1a2769f81f6"
 
 [metadata.files]
 appdirs = [
