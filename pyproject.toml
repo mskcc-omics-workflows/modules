@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pipeline-tools"
+name = "tools"
 version = "0.1.0"
 description = ""
 authors = ["Yu Hu <huy1@mskcc.org>"]
@@ -7,7 +7,7 @@ authors = ["Yu Hu <huy1@mskcc.org>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 cookiecutter = "^2.1.1"
-nf-core = "^2.5.1"
+nf-core = {url = "http://orion.mskcc.org:7004/packages/staging/+f/a81/7a6591874a7c7/nf-core-2.5.1.tar.gz#sha256=a817a6591874a7c7caa1c73684ea28b73a61c69805e7a1fe4ad02dc607699ade"}
 
 [tool.poetry.dev-dependencies]
 
