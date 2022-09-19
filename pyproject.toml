@@ -1,11 +1,12 @@
 [tool.poetry]
-name = "pipeline-tools"
+name = "tools"
 version = "0.1.0"
 description = ""
 authors = ["Yu Hu <huy1@mskcc.org>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+nf-core = {git = "https://github.com/mskcc-omics-workflows/nfcore-cmd.git", rev = "mskcc/nf-core"}
 cookiecutter = "^2.1.1"
 
 [tool.poetry.dev-dependencies]

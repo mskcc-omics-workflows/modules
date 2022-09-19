@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-include { PRE_BCL2FASTQ } from '../main.nf'
+include { PRE_BCL2FASTQ } from '../../../modules/pre_bcl2fastq/main.nf'
 
 workflow test_pre_bcl2fastq {
     input = [
