@@ -14,6 +14,11 @@
     ```
 * The second half of the code above is to delete all text when you do `--version` to the tool, so the `Using` word needs to be changed based on the text from the tool.
 * Optional inputs can be achieved in the main script, example is here: [https://github.com/nextflow-io/patterns/blob/master/docs/optional-input.adoc](https://github.com/nextflow-io/patterns/blob/master/docs/optional-input.adoc)
+* After adding Dockerfile and README.md (see the tutorial), please move <mark style="color:blue;">README.md</mark> to the module root directory, ie, from <mark style="color:blue;">modules/\<your\_module\_name>/container to modules/\<your\_module\_name>.</mark> README.md should contain:&#x20;
+  * Module\_name
+  * Description
+  * Usage (Inputs and Outputs)
+  * Reference (full command of the tool, or any other information)
 
 #### Write unit test
 
