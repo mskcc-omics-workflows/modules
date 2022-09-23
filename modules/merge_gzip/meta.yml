@@ -1,4 +1,4 @@
-name: "merge"
+name: "merge_gzip"
 description: Merge a pair of raw fastq files from two different lanes
 keywords:
   - merge

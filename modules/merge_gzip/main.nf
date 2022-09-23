@@ -1,11 +1,11 @@
-process MERGE {
+process MERGE_GZIP {
     tag "FASTQ_MRG_${meta.id}"
     label 'process_low'
 
     if (params.enable_conda) {
         exit 1, "Conda environments cannot be used when using merge. Please use docker or singularity containers."
     }
-    container "mpathdms/merge:0.1.0"
+    container "mpathdms/merge-gzip:1.6-5ubuntu1.2"
 
     input:
     tuple val(meta), path(fastq_1), path(fastq_2)
@@ -30,7 +30,7 @@ process MERGE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        merge: \$(echo \$(gzip --version 2>&1) | sed 's/^.*gzip //; s/Using.*\$//' ))
+        merge_gzip: \$(echo \$(gzip --version 2>&1) | sed 's/^.*gzip //; s/Using.*\$//' ))
     END_VERSIONS
     """
 }

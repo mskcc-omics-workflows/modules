@@ -1,0 +1,12 @@
+## TODO nf-core: Please run the following command to build this file:
+#                nf-core modules create-test-yml merge
+- name: "merge_gzip"
+  command: nextflow run ./tests/modules/merge_gzip -entry test_merge_gzip -c ./tests/config/nextflow.config -c ./tests/modules/merge_gzip/nextflow.config
+  tags:
+    - "merge_gzip"
+
+  files:
+    - path: "output/merge_gzip/Sample1-T2_L000_R1_mrg.fastq.gz"
+      md5sum: 519c2c4c5b4c44ea70d8a92f1ce75e9b
+    - path: output/merge_gzip/versions.yml
+      md5sum: 2091b697cc1c8d64ec10c1290506fe98

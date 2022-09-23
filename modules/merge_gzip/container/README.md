@@ -1,4 +1,4 @@
-## Merge
+## merge_gzip
 
 #### Description:
 

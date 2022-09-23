@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-include { MERGE } from '../../../modules/merge/main.nf'
+include { MERGE_GZIP } from '../../../modules/merge/main.nf'
 
 ch_test_data = Channel.fromFilePairs( '../../../tools-test-dataset/merge/Sample*_L00{1,2}_R1_001.fastq.gz')
     .flatten()
@@ -19,7 +19,7 @@ workflow test_merge {
                 [ meta, fastq_1, fastq_2 ] }
         .set { input }
 
-    MERGE ( input )
+    MERGE_GZIP ( input )
 }
 
 workflow {
