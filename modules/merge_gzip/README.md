@@ -8,8 +8,8 @@ Merge Fastq files from two lanes to one
 
 Inputs:
 
-- <Sample_Name>\_L001_R1_001.fastq.gz
-- <Sample_Name>\_L002_R1_001.fastq.gz
+- <Sample_Name>\_L001_R1_001.fastq.gz (usually) OR <Sample_Name>\_R2_001.fastq.gz (for fastq files without lane information)
+- <Sample_Name>\_L002_R1_001.fastq.gz (usually) OR null (for fastq files without lane information)
 
 Outputs:
 
