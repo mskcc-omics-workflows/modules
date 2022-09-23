@@ -20,17 +20,18 @@ process MERGE_GZIP {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def fsatq_filter = fastq_2.name != "null" ? fastq_2 : ""
 
     """
     zcat \\
     ${fastq_1} \\
-    ${fastq_2} \\
+    ${fsatq_filter} \\
     | \\
     gzip > ${meta.sample_name}_L000_R${meta.read}_mrg.fastq.gz
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        merge_gzip: \$(echo \$(gzip --version 2>&1) | sed 's/^.*gzip //; s/Using.*\$//' ))
+        merge_gzip: \$(echo \$(gzip --version 2>&1) | sed 's/^.*gzip //; s/Copyright.*\$//' )
     END_VERSIONS
     """
 }

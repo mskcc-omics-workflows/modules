@@ -1,7 +1,7 @@
 name: "merge_gzip"
-description: Merge a pair of raw fastq files from two different lanes
+description: Merge a pair of raw fastq files from two different lanes (single fastq file is also acceptable)
 keywords:
-  - merge
+  - merge_gzip
 tools:
   - "gzip":
       description: "Files to compress or decompress"
@@ -11,34 +11,27 @@ tools:
       doi: ""
       licence: ""
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
-  # Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', sample_name:'Sample-T', read:'1' ]
-  #
-  ## TODO nf-core: Delete / customise this example input
   - fastq_1:
       type: file
       description: fastq file from Lane 1
-      pattern: "*_L001_R*_001.fastq.gz"
-  - fastq_2:
+      pattern: "*_{L001_,}R*_001.fastq.gz"
+  - fastq_2: # Optional if there is only one fastq file
       type: file
       description: fastq file from Lane 2
-      pattern: "*_L002_R*_001.fastq.gz"
+      pattern: "*_L002_R*_001.fastq.gz" # OR null
 
-## TODO nf-core: Add a description of all of the variables used as output
 output:
-  #Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', sample_name:'Sample-T', read:'1' ]
-  #
   - versions:
       type: file
       description: File containing software versions
