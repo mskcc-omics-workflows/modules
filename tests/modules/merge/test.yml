@@ -4,9 +4,9 @@
   command: nextflow run ./tests/modules/merge -entry test_merge -c ./tests/config/nextflow.config -c ./tests/modules/merge/nextflow.config
   tags:
     - "merge"
-    #
+
   files:
-    - path: "output/merge/test.bam"
-      md5sum: e667c7caad0bc4b7ac383fd023c654fc
+    - path: "output/merge/Sample1-T2_L000_R1_mrg.fastq.gz"
+      md5sum: 519c2c4c5b4c44ea70d8a92f1ce75e9b
     - path: output/merge/versions.yml
-      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b
+      md5sum: 2091b697cc1c8d64ec10c1290506fe98

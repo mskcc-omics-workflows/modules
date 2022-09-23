@@ -1,5 +1,5 @@
 process MERGE {
-    tag "FASTQ_MRG_$meta.id"
+    tag "FASTQ_MRG_${meta.id}"
     label 'process_low'
 
     if (params.enable_conda) {
@@ -30,7 +30,7 @@ process MERGE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        merge: \$(echo \$(gzip --version 2>&1) | sed 's/^.*gzip //' ))
+        merge: \$(echo \$(gzip --version 2>&1) | sed 's/^.*gzip //; s/Using.*\$//' ))
     END_VERSIONS
     """
 }
