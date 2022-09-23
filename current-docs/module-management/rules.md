@@ -5,6 +5,82 @@
 * Version control of the bioinformatics tools will be tracked via containers. In the nextflow.config file, we can specify the containers that we need to run tools, regardless of the containers written inside of the modules. That way we can run the same modules with different versions of containers.
 * Reference: [https://www.nextflow.io/docs/latest/container.html](https://www.nextflow.io/docs/latest/container.html)
 
+#### Modify main module script
+
+*   In the <mark style="color:blue;">main.nf</mark> script, in the `versions` generation in the script section, there is a typo in nf-core template. There should be just one `)` at the end of the line below. Otherwise, you will see an additional `)` at the end of the version in your output `versions.yml`
+
+    ```
+    {{ tool }}: $(echo $(samtools --version 2>&1) | sed 's/^.samtools //; s/Using.$//' )
+    ```
+* The second half of the code above is to delete all text when you do `--version` to the tool, so the `Using` word needs to be changed based on the text from the tool.
+* Optional inputs can be achieved in the main script, example is here: [https://github.com/nextflow-io/patterns/blob/master/docs/optional-input.adoc](https://github.com/nextflow-io/patterns/blob/master/docs/optional-input.adoc)
+
+#### Write unit test
+
+*   If your module name contains underline "\_", in <mark style="color:blue;">tests/modules/\<your\_module\_name>/nextflow.config</mark>, change&#x20;
+
+    ```
+    publishDir = { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" }
+    ```
+
+    To:
+
+    ```
+    publishDir = { "${params.outdir}/${task.process.tokenize(':')[-1].toLowerCase()}" }
+    ```
+*   Profiles to add for process tools in the config file above
+
+    <pre><code><strong>profiles {
+    </strong>    debug { process.beforeScript = 'echo $HOSTNAME' }
+        conda {
+            params.enable_conda    = true
+            docker.enabled         = false
+            singularity.enabled    = false
+            podman.enabled         = false
+            shifter.enabled        = false
+            charliecloud.enabled   = false
+        }
+        docker {
+            docker.enabled         = true
+            docker.userEmulation   = true
+            singularity.enabled    = false
+            podman.enabled         = false
+            shifter.enabled        = false
+            charliecloud.enabled   = false
+        }
+        singularity {
+            singularity.enabled    = true
+            singularity.autoMounts = true
+            docker.enabled         = false
+            podman.enabled         = false
+            shifter.enabled        = false
+            charliecloud.enabled   = false
+        }
+        podman {
+            podman.enabled         = true
+            docker.enabled         = false
+            singularity.enabled    = false
+            shifter.enabled        = false
+            charliecloud.enabled   = false
+        }
+        shifter {
+            shifter.enabled        = true
+            docker.enabled         = false
+            singularity.enabled    = false
+            podman.enabled         = false
+            charliecloud.enabled   = false
+        }
+        charliecloud {
+            charliecloud.enabled   = true
+            docker.enabled         = false
+            singularity.enabled    = false
+            podman.enabled         = false
+            shifter.enabled        = false
+        }
+    }</code></pre>
+* Test datasets/files provided to the module can be added in the config file above, with FULL PATHs. You can also use `Channel` in nextflow to load input files. When loading to `Channel`, the file path can be relative, BUT it must be accessible in `$PWD` where you are running unit test.
+* In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file, but it will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum.
+
 #### If a module is already in nf-core/modules, there is no need to create our own. But we need a container for the module
 
 * Need unit testing with our own customized config???
