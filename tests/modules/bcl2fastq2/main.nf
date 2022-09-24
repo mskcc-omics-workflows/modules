@@ -4,20 +4,26 @@ nextflow.enable.dsl = 2
 
 include { BCL2FASTQ } from '../../../modules/bcl2fastq2/main.nf'
 
+input = [
+    [ id:'test',
+      run:'220726_M07206_0107_000000000-KGBL6',
+      mismatches: '1',
+      base_mask: 'y151,i8,i8,y151',
+      no_lane_split: false,
+      ignore_map: [
+        bcls: true,
+        filter: true,
+        positions: true,
+        controls: true
+      ]], // meta map
+        
+    file(params.samplesheet, checkIfExists: true),
+    params.run_dir,
+    params.casava_dir
+]
+
+
 workflow test_bcl2fastq2 {
-    input = [
-        [ id:['test'],
-          run:['220726_M07206_0107_000000000-KGBL6'],
-          pool:['test'],
-          mismatches: ['1'],
-          base_mask: ['y151,i8,i8,y151'],
-          no_lane_split: [""]],
-          //no_lane_split: ["--no-lane-splitting"]], // meta map
-          
-        file(params.samplesheet, checkIfExists: true),
-        params.run_dir,
-        params.casava_dir
-    ]
 
     BCL2FASTQ ( input )
 }
@@ -25,3 +31,4 @@ workflow test_bcl2fastq2 {
 workflow {
     test_bcl2fastq2 ()
 }
+//nextflow run main.nf -process.echo -profile docker

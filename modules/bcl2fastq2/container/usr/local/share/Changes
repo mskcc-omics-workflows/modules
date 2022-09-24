@@ -1,0 +1,380 @@
+* BTOF-679: bcl2fastq should fully utilize the cpus
+
+bcl2fastq2-v2.18.0.12
+* BTOF-663: Revert to disallowing --use-bases-mask with UMI trimming
+
+bcl2fastq2-v2.18.0.11
+* BTOF-674: ConversionResults does not have an array of objects
+
+bcl2fastq2-v2.18.0.10
+* BTOF-663: Checked in missing files 
+* BTOF-673: Update ConversionResults property in Stats.json file
+* BTOF-672: IndexMetricsOut.bin should concatenate indexes with a '-'
+* BTOF-663: Implement the TrimUMI sample sheet setting
+* BTOF-646: Read[1,2]StartFromCycle does not trim reads
+* BTOF-645: Unexpected error when index is missing from one lane
+
+bcl2fastq2-v2.18.0.9
+* BTOF-635: Requesting better fail message for incorrectly specified tiles include (--tiles)
+* BTOF-642: Missing PF Clusters information in reports file - NextSeq Regression run
+* BTOF-633: Fatal Internal Error when masking single index and outputting index files for HiSeqX Smoke
+* BTOF-638: Mask Second Index not working for NextSeq Smoke run
+* BTOF-639: Empty Index 1 behavior in v2.18 different Than v2.17
+* BTOF-447: Sample numbers are assigned by lane instead of order in samplesheet
+* BTOF-631: TrimmedBases for ReadNumber 1 is always 33 or 49 in Stats.json
+* BTOF-433: --create-fastq-for-index-reads does not produce index fastq files when sample sheet does not exist in the run folder
+
+bcl2fastq2-v2.18.0.8
+* BTOF-463: bcl2fastq2 errors out on data with more than 8 lanes
+
+bcl2fastq2-v2.18.0.7
+* BTOF-460: bcl2fastq does not properly set the number of allowed mismatches
+* BTOF-462: bcl2fastq throws an exception when the runfolder path contains a space
+
+bcl2fastq2-v2.18.0.6
+* BTOF-459: Stats files are malformed
+
+bcl2fastq2-v2.18.0.5
+* BTOF-453: Report all samples to IndexMetricsOut.bin, even ones that have 0 clusters demultiplexed.
+
+bcl2fastq2-v2.18.0.4
+* BTOF-455: "Identical barcode" error for samples loaded on different lanes
+
+bcl2fastq2-v2.18.0.3
+* BTOF-456: bcl2fastq throwing exception on smallRNA build
+
+bcl2fastq2-v2.18.0.2
+* BTOF-455: "Identical barcode" error for samples loaded on different lanes
+
+bcl2fastq2-v2.18.0.1
+* BTOF-454: bcl2fastq2 v2.18.0.0 fails with generating fastq on a smoke dataset that worked with older bcl2fastq2
+
+bcl2fastq2-v2.18.0.0
+*BTOF-452: Support multiple indexes for the same sample ID
+*BTOF-451: Consolidated stats format
+
+bcl2fastq2-v2.17.2.1
+* BTOF-450: Improve error handling when ignoring missing/corrupt files
+* BTOF-449: Read number in ConversionStats.xml can be nonsense
+* BTOF-271: Add Visual Studio project files for Windows build
+* BTOF-436: Need more file handles on Windows
+* BTOF-435: bcl2fastq runs slowly when tiles are small (NextSeq) and there are many samples
+* BTOF-250: Don't throw an exception if the Interop folder is read only. (Windows)
+* BTOF-374: Fix to adapter trimming algorithm
+* BTOF-410: Add log message for bgzf compression configuration
+* BTOF-431: UMI sequence should not be removed from reads by default
+* BTOF-404: When using "-v" options, bcl2fastq output more information than expected
+
+bcl2fastq2-v2.17.1.14
+* BTOF-368: The location coordinates are slightly different for MiSeq, NextSeq, and HiSeqX data
+
+bcl2fastq2-v2.17.1.13
+* BTOF-392: Error message does not change when barcode collision occurs for mismatch set to > 1
+* BTOF-405: Add the --no-bgzf-compression back in
+* BTOF-387: --tiles in command line option does not overwrite the samplesheet option.
+* BTOF-390: --use-bases-mask failed to parse 7bp index using "Y151, I7n, Y151" for a 8bp index run
+
+bcl2fastq2-v2.17.1.12
+* BTOF-137: Improve barcode collision error message
+
+bcl2fastq2-v2.17.1.11
+* BTOF-327: usebases mask '*' should match on 0 or more
+
+bcl2fastq2-v2.17.1.10
+* BTOF-336: IndexMetricsOut.bin should use PF clusters
+* BTOF-335: HTML report improvements
+
+bcl2fastq2-v2.17.1.9
+* BTOF-329: More bugs with masking index reads
+
+bcl2fastq2-v2.17.1.8
+* BTOF-329: UMIs are not supported with --use-base-mask
+
+bcl2fastq2-v2.17.1.7
+* BTOF-329: Handle masking an entire index
+
+bcl2fastq2-v2.17.1.6
+* BTOF-329: Throw exception when index length in --use-bases-mask doesn't match sample sheet
+* BTOF-334: Empty index in dual index dataset makes all reads undetermined
+
+bcl2fastq2-v2.17.1.5
+* BTOF-330: Masking a whole read with "--use-bases-mask" fails
+* BTOF-331: Fastq contains reads with duplicated names
+
+bcl2fastq2-v2.17.1.4
+* BTOF-328: Move files out of share/bcl2fastq2-v* directory
+* BTOF-327: usebases mask '*' should match on 0 or more
+
+bcl2fastq2-v2.17.1.3
+* BTOF-320: Fixed lane parsing logic
+
+bcl2fastq2-v2.17.1.2
+* BTOF-322: Disallow special characters in sample sheet settings
+* BTOF-320: Fixed unit tests
+* BTOF-320: Sample ID must be a unique identifier
+
+bcl2fastq2-v2.17.1.1
+* BTOF-303: Fixed unit tests
+* BTOF-303: Add option to automatically set allowed mismatches to 0 on barcode collision
+* BTOF-302: Trim white space in the settings section of the sample sheet
+* BTOF-192: Record barcode mismatches 1-5 in DemultiplexingStats.xml
+* BTOF-270: Delete --no-bgzf-compression option
+* BTOF-47: Use sample name and number for html report
+* BTOF-273: Warning message if --sample-sheet option is specified but not found
+* BTOF-272: Fixed empty space in sample sheet columns
+
+bcl2fastq2-v2.16.1.11
+* BTOF-271: Update bcl2fastq to run on Windows
+* BTOF-249: DemuxSummary files' header says SampleName but lists SampleID
+
+bcl2fastq2-v2.16.1.10
+* BTOF-250: Updates for accidental check in
+* BTOF-268: Bcl2fastq fails to read clocs files
+* BTOF-250: Don't throw an exception if the Interop folder is read only.
+* BTOF-191: Delete FASTQ files of 0 size if they exist - Fixed bug
+* BTOF-152: UMI support - Add '+' as delimiter, fix stats
+
+bcl2fastq2-v2.16.1.9
+* BTOF-191: Delete FASTQ files of 0 size if they exist
+
+bcl2fastq2-v2.16.1.8
+* BTOF-152: UMI support
+
+bcl2fastq2-v2.16.1.7
+* BTOF-246: When output reverse complement reads, the quality score does not reverse
+* BTOF-237: Isis support - stats and barcode fix
+* BTOF-245: All the index reads are masked with N/#
+* BTOF-237: Isis support - stats fix
+
+bcl2fastq2-v2.16.1.6
+*BTOF-241: Allow index2 to be used when index1 is missing in the sample sheet
+*BTOF-240: Compress complete fastq records for base space uploader compatibility
+*BTOF-239: Accept barcodes in SampleSheet.csv that are shorter than indicated by RunInfo.xml
+
+bcl2fastq2-v2.16.1.5
+* BTOF-237: Isis support - Adapter trimming stats
+
+bcl2fastq2-v2.16.1.4
+* BTOF-237: Isis support
+* BTOF-236: Support Opus+ program for HiSeq X
+
+bcl2fastq2-v2.16.1.3
+* BTOF-216: Port adapter locator enhancements from Isis
+* BTOF-214: Avoid memory allocations on multiple threads
+* BTOF-215: Use c++11
+* BTOF-211: Allow underscores in FASTQ file names
+
+bcl2fastq2-v2.16.1.2
+* merged with bcl2fastq2-v2.16.0.10
+* removed code accidentally checked in
+
+bcl2fastq2-v2.16.1.1
+* Isis support - stats and sample sheet parsing
+
+bcl2fastq2-v2.16.0.10
+* BTOF-198: Throw an exception for non-ACGTN characters in barcodes
+* BTOF-193: Separate adapters in sample sheet with '+'
+
+bcl2fastq2-v2.16.0.9
+* BTOF-201: Update default values for --minimum-trimmed-read-length and --mask-short-adapter-reads
+* BTOF-200: bcl2fastq failed when some lanes are specified but others are not
+
+bcl2fastq2-v2.16.0.8
+* BTOF-194: Fixed core dump when using --tiles
+
+bcl2fastq2-v2.16.0.7
+* BTOF-190: Throw an error if a sample is missing a barcode in the sample sheet
+* BTOF-191: Don't generate FASTQ files of 0 size
+* JAS-120: Modifications to support basespace fastq uploader
+
+bcl2fastq2-v2.16.0.6
+* BTOF-170: create stats directory using --stats-dir
+* BTOF-48: FASTQ naming convention for non-multiplexed run
+* BTOF-160: --ignore-missing-bcls option fixed
+
+bcl2fastq2-v2.16.0.5
+* BTOF-154: Updated help text of --ignore-missing-positions
+* BTOF-160: --ignore-missing-bcls option is not working
+* BTOF-48: FASTQ naming convention is different from GenerateFASTQ
+* BTOF-147: Seg fault when selecting tiles
+* BTOF-45: Seg fault when number of lanes in RunInfo.xml doesn't match config.xml
+* JAS-120: Allow bgzf compression to be turned off with: --no-bgzf-compression
+
+bcl2fastq2-v2.16.0.4
+* BTOF-156: Naming should fall back to SampleId if SampleName is absent
+* BTOF-150: Verify existence of necessary files at start of execution
+
+bcl2fastq2-v2.16.0.3
+* BTOF-136: Support for differing index lengths per lane
+* BTOF-137: Improve barcode collisions validation
+* BTOF-154: Fixed RPM installation with "--prefix"
+* BTOF-151: Adapter trimming stats categorized by sample
+* BTOF-155: Make coordinates in sequence identifiers unique
+* BTOF-151: Adapter trimming stats
+
+bcl2fastq2-v2.16.0.2
+* BTOF-146: Support for 0-padded tile numbers in filter file names
+* BTOF-153: Comply with bgzf standards
+
+bcl2fastq2-v2.16.0.1
+* BTOF-153: Write size of compressed blocks in gzip header
+* BTOF-152: Improve adapter trimming logic
+* BTOF-149: Add table with unknown barcodes to stats
+* BTOF-125: Explicit mention of version in log output
+* BTOF-137: Improve barcode collisions validation
+* BTOF-135: Option for output of fastq files without lane splitting
+* BTOF-130: Improved automatic thread allocation logic
+* BTOF-148: Improved handling of corrupt files
+* BTOF-134: Support for --sample-sheet
+* BTOF-147: Speed enhancements for the FASTQ conversion stage
+* BTOF-144: --use-bases-mask now accepts masking all bases of a read
+* BTOF-126: Adjust --minimum-trimmed-read-length to size of shortest non-index read
+* BTOF-140: Changed config param name from --ignore-missing-locs to --ignore-missing-positions
+* BTOF-129: Added support for various file formats: clocs, controls, filter, pos
+* BTOF-142: bcl2fastq does not compile with intel compilers
+* BTOF-141: comma separated list now accepted for tiles option
+* BTOF-138: Add config parameter for fastq compression level
+* BTOF-131: Support for uncompressed BCLs
+* BTOF-139: --ignore-missing-locs does not work
+
+bcl2fastq2-v2.15.0.4
+* BTOF-127: Full Hiseq X datatsets are stopping about ~75% into processing
+
+bcl2fastq2-v2.15.0.3
+* BTOF-128: Sample naming convention does not follow user guide
+
+bcl2fastq2-v2.15.0.2
+* BTOF-123: Lane Summary Cluster Counts in HTML report the same in Raw and Filtered sections for some datasets
+* BTOF-121: Boost installation is still showing a superfluous dependency on BZIP libs
+
+bcl2fastq2-v2.15.0.1
+* BTOF-120: Change versioning convention for upcoming releases
+* BTOF-118: Bcl2fastq is masking adapters when it should be trimming them
+* BTOF-119: Failure to generate reports for non-multiplexed sample
+
+bcl2fastq-02.14.05.29
+* BTOF-117: Internal Program Error occurring for datasets with more than 1 tile per lane
+* BTOF-115: logic error when dataset has no indices specified in the sample sheet
+
+bcl2fastq-02.14.05.28
+* BTOF-106: Implement table with most popular index sequences
+* BTOF-111: Downgrade reporting failures to a warning
+* BTOF-116: Error message if Reports or Stats directories clash with Project
+
+bcl2fastq-02.14.05.21
+* BTOF-109 %Reads identify in IndexMetrics InterOp are over 100% for certain samples/indexes
+* BTOF-112 'Sample_Project' or 'Project' can be used in SampleSheet.csv
+* BTOF-108 Add “--use-bases-mask" functionality
+* BTOF-105 Gather missing (PF) data in the report
+* BTOF-75 Generate DemultiplexSummary file
+
+bcl2fastq-02.14.05.13
+* BTOF-79 Add "Processing Complete" message to all log levels
+* BTOF-104 HiseqX Dataset only demultiplexes lane 1
+* BTOF-80 Avoid overwriting previous (especially 1.8.4) RPM installation
+* BTOF-82 Masking and trimming logic needs to be disabled when generating fastqs for index reads
+* BTOF-81 Add observed index sequence to FASTQ reference
+* BTOF-77 Demux by lane for hiseq datasets
+* BTOF-84 incorrect order of reads in fastq output files
+
+bcl2fastq-02.14.03.13
+* BTOF-74 the latest build does not work on NextSeq data
+
+bcl2fastq-02.14.03.07
+* BTOF-73 bcl2fastq crashes when reading bcl files with no data (registration failures/swath dropouts)
+
+bcl2fastq-02.14.02.25
+* BTOF-72 avoid -static when linking cppunittest binaries
+* BTOF-71 --ignore-missing-filter does not work
+
+bcl2fastq-02.14.02.21
+* BTOF-69 Capability to deal with tiles > 4M clusters
+* BTOF-66 Add support for bcl files that are in the same gzipped format as previous HiSeq models
+* BTOF-68 Improve auto-detection mechanism
+* BTOF-65 bcl2fastq should work, even when there is no config.xml file in the BaseCalls directory
+* BTOF-67 Patterned flowcells have only 1 locs file per run for all tiles
+
+bcl2fastq-02.14.01.17
+* BTOF-59 Provide reasonable defaults for thread counts of individual stages.
+* BTOF-56 Default value of mask-short-adapter-reads changed to 10 (was 32).
+* BTOF-61 Make adapter stringency configurable.
+* BTOF-60 Use FastIo instead of Boost lexical casts in FASTQ creation stage.
+* BTOF-59 Provide reasonable defaults for thread counts of individual stages.
+* BTOF-58 Write FASTQ complement.
+* BTOF-57 Convert only selected lanes/tiles.
+
+bcl2fastq-02.14.01.07
+* BTOF-56 Short read trimming special handling.
+* BTOF-55 Set default prefix.
+
+bcl2fastq-02.14.01.06
+
+bcl2fastq-02.13.12.27
+* BTOF-54 Include observed index in FASTQ header for Undetermined sample.
+
+bcl2fastq-02.13.12.20
+* BTOF-53 Corrected FASTQ header.
+
+bcl2fastq-02.13.12.15
+* BTOF-53 Corrected FASTQ header.
+
+bcl2fastq-02.13.12.14
+* BTOF-50 Added linking against librt.
+* BTOF-48 Added support for read-specific adapters.
+* BTOF-48 Added options for ignoring missing positions and filter files.
+* BTOF-52 Corrected handling of missing BCLs.
+* BTOF-51 Corrected BCL file name for HiSeq.
+* BTOF-42 Escape underscore in FASTQ file names.
+
+bcl2fastq-02.13.12.13
+* BTOF-42  Corrected default location of InterOp directory.
+
+bcl2fastq-02.13.12.12
+* BTOF-42 Escape non-alphanumeric characters in FASTQ file names.
+* BTOF-51 Corrected BCL file name for HiSeq.
+
+bcl2fastq-02.13.12.11
+* BTOF-36 HiSeq/MiSeq support.
+* BTOF-33 Correct positions data.
+* BTOF-42 ISIS-like naming scheme for output files.
+* BTOF-46 Corrected mismatching tiles in InterOp stats.
+* BOTF-49 Changed default number of allowed barcode mismatches to 1.
+
+bcl2fastq-02.13.11.15
+* BTOF-45 Use gcc/g++ by default.
+* BTOF-44 Added legacy sample sheet option 'Adapter' for adapter trimming.
+* BTOF-43 Corrected value of adapter stringency.
+* BTOF-39 Dependency on Boost.Chrono made conditional.
+* BTOF-38 Include non-PF clusters.
+* BTOF-37 Configurable number of mismatches.
+
+bcl2fastq-02.13.11.08
+* BTOF-34 Package name.
+* BTOF-35 Remove superfluous dependency on BZIP.
+* BTOF-19 Allow single sample without index in sample sheet.
+* BTOF-32 Do not demultiplex in case there are no index reads.
+* BTOF-30 Keep BCL and FASTQ files open (hacked, needs refactoring).
+* BTOF-30 Added fake BCL producer and FASTQ consumer.
+* BOTF-30 Added timing of individual stages.
+* BOTF-28 Solved deadlock after assertion.
+* BTOF-24 Merge data- and index- reads metadata into single container.
+* BTOF-22 Do not produce empty GZIPs.
+* BOTF-18 Sample sheet alternative column names "Sample_ID" and "Sample_Name".
+* BTOF-20 Skip only InterOp for filtered out clusters.
+* BTOF-20 Do not include filtered-out clusters in InterOp file.
+* BTOF-20 Do not include sample #0 in InterOp file.
+* BTOF-21 Cluster filtering.
+* BTOF-16 Demultiplexing statistics.
+* BTOF-15 Missng BCLs as no-calls.
+* BTOF-14 Create FASTQs for index reads.
+* BTOF-13 Adapter masking/trimming.
+* BTOF-12 Reading adapters from sample sheet.
+* BTOF-09 Corrected bug in initialization of lookup barcode table.
+* BTOF-09 Demultiplexing.
+* BTOF-8 Multiple barcodes per sample.
+* BTOF-10 Removed superfluous dependency on libgcrypt.
+* BTOF-8 Sample sheet parsing.
+* BTOF-4 Added positions handling.
+* BTOF-4 Added tile handling.
+* BTOF-4 Review amendments.
+* BTOF-4 Initial commit.

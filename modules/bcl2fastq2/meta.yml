@@ -16,7 +16,8 @@ input:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. [ id:'test', single_end:false ]
+        e.g. [ id:'test', run:'220726_M0720', mismatch: '1', base_mask: '', no_lane_split: '', ignore_map: [:]]
+        # no_lane_split can be null, ignore_map can be null. In ignore_map, ONLY "bcls", "filter", "positions", "controls" are allowed.
   - samplesheet:
       type: file
       description: "Input samplesheet"
