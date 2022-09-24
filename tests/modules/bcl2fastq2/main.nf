@@ -28,7 +28,7 @@ workflow test_bcl2fastq2 {
     BCL2FASTQ ( input )
 }
 
-workflow {
-    test_bcl2fastq2 ()
-}
+//workflow {
+//    test_bcl2fastq2 ()
+//}
 //nextflow run main.nf -process.echo -profile docker
