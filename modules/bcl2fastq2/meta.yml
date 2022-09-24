@@ -25,7 +25,7 @@ input:
   - run_dir:
       type: directory
       description: "Input run directory containing RunInfo.xml and BCL data"
-  - casava_dir:
+  - casava_dir: # Need to create it before running bcl2fastq, need FULL PATH
       type: directory
       desciption: "Output directory where fastq files will be stored"
 
