@@ -19,6 +19,12 @@
   * Description
   * Usage (Inputs and Outputs)
   * Reference (full command of the tool, or any other information)
+*   In the <mark style="color:blue;">meta.yml</mark> file, if there is meta map object, please add comment about all the allowed key and value pairs in meta object. For example, for bcl2fastq, &#x20;
+
+    ```
+     Groovy Map containing sample information
+     e.g. [ id:'test', run:'220726_M0720', pool: 'test', mismatch: '1', base_mask: '', no_lane_split: '', ignore_map: [:]]
+    ```
 
 #### Write unit test
 
