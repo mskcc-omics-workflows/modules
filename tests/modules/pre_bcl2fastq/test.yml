@@ -1,4 +1,9 @@
-- name: pre_bcl2fastq test_pre_bcl2fastq
-  command: nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/config/nextflow.config  -c ./tests/modules/pre_bcl2fastq/nextflow.config -profile docker
+- name: "pre_bcl2fastq test_pre_bcl2fastq"
+  command: nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/config/nextflow.config  -c ./tests/modules/pre_bcl2fastq/nextflow.config
   tags:
-    - pre_bcl2fastq
+    - "pre_bcl2fastq"
+
+  files:
+    - path: "output/pre_bcl2fastq/meta.csv"
+    - path: "output/pre_bcl2fastq/versions.yml"
+      md5sum: d4c86a1c07dd0066b51b55197ee21ca5
