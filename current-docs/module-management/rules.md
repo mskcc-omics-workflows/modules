@@ -90,7 +90,7 @@
         }
     }</code></pre>
 * Test datasets/files provided to the module can be added in the config file above, with FULL PATHs. You can also use `Channel` in nextflow to load input files. When loading to `Channel`, the file path can be relative, BUT it must be accessible in `$PWD` where you are running unit test.
-* In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file, but it will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum.
+* In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file. It will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum at the beginning of your test. We can include them in the final version of the module, right before the release.
 
 #### If a module is already in nf-core/modules, there is no need to create our own. But we need a container for the module
 
