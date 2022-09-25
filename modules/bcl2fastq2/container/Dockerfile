@@ -18,6 +18,11 @@ COPY usr/local/bin/bcl2fastq /usr/local/bin/bcl2fastq
 RUN chmod +x /usr/local/bin/bcl2fastq
 
 # xsl files for generating the reports
-RUN mkdir -p /user/local/share/xsl/demux
-COPY demux/* /user/local/share/xsl/demux/
-RUN chmod +x /user/local/share/xsl/demux
+RUN mkdir -p /usr/local/share/xsl/demux
+RUN mkdir -p /usr/local/share/xsl/common
+COPY xsl/demux/* /usr/local/share/xsl/demux/
+COPY xsl/common/* /usr/local/share/xsl/common/
+RUN chmod +x -R /usr/local/share/xsl
+RUN mkdir -p /usr/local/share/css
+COPY css/* /usr/local/share/css/
+RUN chmod +x -R /usr/local/share/css
