@@ -92,6 +92,36 @@
 * Test datasets/files provided to the module can be added in the config file above, with FULL PATHs. You can also use `Channel` in nextflow to load input files. When loading to `Channel`, the file path can be relative, BUT it must be accessible in `$PWD` where you are running unit test.
 * In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file. It will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum at the beginning of your test. We can include them in the final version of the module, right before the release.
 
+#### Unit testing on LSF
+
+1.  Running on HPC requires some changes in the nextflow config file.&#x20;
+
+    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html). In order to avoid confusion with the local unit testing, I recommend to add a new config file named <mark style="color:blue;">`lsf_test.config`</mark> in <mark style="color:blue;">tests/modules/\<your\_module\_name></mark> repo with the following section:
+
+    ```
+    executor {
+        name = 'lsf'
+        queueSize = 20
+        submitRateLimit = '10/2min'
+    }
+    ```
+2.  Create conda using:&#x20;
+
+    ```
+    conda env create -f nextflow_env.yml
+    ```
+3.  Set up singularity authentication before running the test. This is for bypassing the auth from github:&#x20;
+
+    ```
+    export SINGULARITY_DOCKER_USERNAME=<github_user_name>
+    export SINGULARITY_DOCKER_PASSWORD=<persional_access_token>
+    ```
+4.  Use `-profile singularity` on Juno when running the test. I used `singularity/3.7.1` and it is working. For example:
+
+    ```
+    nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/config/nextflow.config -c ./tests/modules/pre_bcl2fastq/lsf_test.config -profile singularity
+    ```
+
 #### If a module is already in nf-core/modules, there is no need to create our own. But we need a container for the module
 
 * Need unit testing with our own customized config???
