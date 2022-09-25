@@ -16,7 +16,7 @@ process BCL2FASTQ {
     tuple val(meta), path("${casava_dir}/Undetermined_S0*_R*_00?.fastq.gz")            ,emit: undetermined
     tuple val(meta), path("${casava_dir}/Reports")                                     ,emit: reports
     tuple val(meta), path("${casava_dir}/Stats")                                       ,emit: stats
-    path("versions.yml")                                                               ,emit: versions
+    path("versions.yml")                                                            ,emit: versions
 
     when:
     task.ext.when == null || task.ext.when
