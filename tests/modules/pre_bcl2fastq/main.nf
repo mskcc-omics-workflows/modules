@@ -14,6 +14,7 @@ workflow test_pre_bcl2fastq {
     PRE_BCL2FASTQ ( input )
 }
 
-workflow {
-    test_pre_bcl2fastq ()
-}
+//workflow {
+//    test_pre_bcl2fastq ()
+//}
+//nextflow run main.nf -process.echo -profile docker
