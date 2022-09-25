@@ -5,7 +5,7 @@ process MERGE_GZIP {
     if (params.enable_conda) {
         exit 1, "Conda environments cannot be used when using merge. Please use docker or singularity containers."
     }
-    container "mpathdms/merge-gzip:1.6-5ubuntu1.2"
+    container "ghcr.io/mskcc-omics-workflows/merge-gzip:1.6-5ubuntu1.2"
 
     input:
     tuple val(meta), path(fastq_1), path(fastq_2)
@@ -20,12 +20,12 @@ process MERGE_GZIP {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def fsatq_filter = fastq_2.name != "null" ? fastq_2 : ""
+    def fastq_filter = fastq_2.name != "null" ? fastq_2 : ""
 
     """
     zcat \\
     ${fastq_1} \\
-    ${fsatq_filter} \\
+    ${fastq_filter} \\
     | \\
     gzip > ${meta.sample_name}_L000_R${meta.read}_mrg.fastq.gz
 

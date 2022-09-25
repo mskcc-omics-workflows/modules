@@ -7,4 +7,5 @@
 
   files:
     - path: "output/merge_gzip/Sample1-T2_L000_R1_mrg.fastq.gz"
-    - path: output/merge_gzip/versions.yml
+    - path: "output/merge_gzip/versions.yml"
+      md5sum: ce2671e3f9c4504db54be74c7de35c8d
