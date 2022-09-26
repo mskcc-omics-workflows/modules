@@ -94,9 +94,9 @@
 
 #### Unit testing on LSF
 
-1.  Running on HPC requires some changes in the nextflow config file.&#x20;
+*   Running on HPC requires some changes in the nextflow config file.&#x20;
 
-    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html). In order to avoid confusion with the local unit testing, please add <mark style="color:blue;">`lsf_test.config`</mark> in the root directory of tools.git when running test command for your module on LSF. It has the following section:
+    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html). In order to avoid confusion with the local unit testing, please add <mark style="color:blue;">`lsf_test.config`</mark> from the root directory of tools.git when running the test command for your module on LSF. It has the following section:
 
     ```
     executor {
@@ -105,21 +105,21 @@
         submitRateLimit = '10/2min'
     }
     ```
-2.  Create conda using:&#x20;
+*   Create conda using:&#x20;
 
     ```
     conda env create -f nextflow_env.yml
     ```
-3.  Set up singularity authentication before running the test. This is for bypassing the auth from github:&#x20;
+*   Set up singularity authentication before running the test. This is for bypassing the auth from github:&#x20;
 
     ```
     export SINGULARITY_DOCKER_USERNAME=<github_user_name>
     export SINGULARITY_DOCKER_PASSWORD=<personal_access_token>
     ```
-4.  Use `-profile singularity` on Juno when running the test. I used `singularity/3.7.1` and it is working. For example:
+*   Use `-profile singularity` on Juno when running the test. I used `singularity/3.7.1` and it is working. For example:
 
     ```
-    nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/config/nextflow.config -c ./tests/modules/pre_bcl2fastq/lsf_test.config -profile singularity
+    nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/modules/pre_bcl2fastq/nextflow.config -c ./lsf_test.config -profile singularity
     ```
 
 #### If a module is already in nf-core/modules, there is no need to create our own. But we need a container for the module
