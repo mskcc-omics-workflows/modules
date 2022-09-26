@@ -96,7 +96,7 @@
 
 1.  Running on HPC requires some changes in the nextflow config file.&#x20;
 
-    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html). In order to avoid confusion with the local unit testing, I recommend to add a new config file named <mark style="color:blue;">`lsf_test.config`</mark> in <mark style="color:blue;">tests/modules/\<your\_module\_name></mark> repo with the following section:
+    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html). In order to avoid confusion with the local unit testing, please add <mark style="color:blue;">`lsf_test.config`</mark> in the root directory of tools.git when running test command for your module on LSF. It has the following section:
 
     ```
     executor {
@@ -114,7 +114,7 @@
 
     ```
     export SINGULARITY_DOCKER_USERNAME=<github_user_name>
-    export SINGULARITY_DOCKER_PASSWORD=<persional_access_token>
+    export SINGULARITY_DOCKER_PASSWORD=<personal_access_token>
     ```
 4.  Use `-profile singularity` on Juno when running the test. I used `singularity/3.7.1` and it is working. For example:
 
