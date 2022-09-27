@@ -74,7 +74,7 @@ dependencies:
     - lxml==4.9.1
     - markdown==3.4.1
     - markupsafe==2.1.1
-    - nf-core==2.5.1
+    - nf-core==2.5.1.2
     - numpy==1.23.3
     - oyaml==1.0
     - packaging==21.3

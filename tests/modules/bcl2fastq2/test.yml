@@ -1,7 +1,16 @@
-- name: "bcl2fastq2 test_bcl2fastq2"
+- name: "bcl2fastq2"
   command: nextflow run ./tests/modules/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/bcl2fastq2/nextflow.config
   tags:
     - "bcl2fastq2"
+  files:
+    - path: "output/bcl2fastq/CASAVA_Processing"
+    - path: "output/bcl2fastq/versions.yml"
+      md5sum: 69f40bc54945f9ef765ef1395160a92f
+
+- name: "hpc_bcl2fastq2"
+  command: nextflow run ./tests/modules/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/bcl2fastq2/nextflow.config -c ./hpc_test.config
+  tags:
+    - "hpc_bcl2fastq2"
   files:
     - path: "output/bcl2fastq/CASAVA_Processing"
     - path: "output/bcl2fastq/versions.yml"
