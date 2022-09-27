@@ -7,7 +7,13 @@
 
 #### Modify main module script
 
-*   In the <mark style="color:blue;">main.nf</mark> script, in the `versions` generation in the script section, there is a typo in nf-core template. There should be just one `)` at the end of the line below. Otherwise, you will see an additional `)` at the end of the version in your output `versions.yml`
+*   <mark style="color:red;">`New updates available: In nf-core v2.5.1.2, this typo was fixed. Please update via:`</mark>&#x20;
+
+    ```textile
+    poetry update nf-core
+    ```
+
+    Previous: In the <mark style="color:blue;">main.nf</mark> script, in the `versions` generation in the script section, there is a typo in nf-core template. There should be just one `)` at the end of the line below. Otherwise, you will see an additional `)` at the end of the version in your output `versions.yml`
 
     ```
     {{ tool }}: $(echo $(samtools --version 2>&1) | sed 's/^.samtools //; s/Using.$//' )
@@ -28,7 +34,13 @@
 
 #### Write unit test
 
-*   If your module name contains underline "\_", in <mark style="color:blue;">tests/modules/\<your\_module\_name>/nextflow.config</mark>, change&#x20;
+*   <mark style="color:red;">`New updates available: In nf-core v2.5.1.2, the $publishDir has been changed to the second one below. If you are using "_" in your module name, you don't need to change this variable anymore. Please update via the following command. Please note that this update won't change your existing modules. It only affects new modules.`</mark>&#x20;
+
+    ```textile
+    poetry update nf-core
+    ```
+
+    Previous: If your module name contains underline "\_", in <mark style="color:blue;">tests/modules/\<your\_module\_name>/nextflow.config</mark>, change&#x20;
 
     ```
     publishDir = { "${params.outdir}/${task.process.tokenize(':')[-1].tokenize('_')[0].toLowerCase()}" }
@@ -90,13 +102,22 @@
         }
     }</code></pre>
 * Test datasets/files provided to the module can be added in the config file above, with FULL PATHs. You can also use `Channel` in nextflow to load input files. When loading to `Channel`, the file path can be relative, BUT it must be accessible in `$PWD` where you are running unit test.
-* In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file. It will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum at the beginning of your test. We can include them in the final version of the module, right before the release.
+*   <mark style="color:red;">`New release available: In nf-core v2.5.1.2, there is an additional testing added to test.yml. This is for testing on HPC, with the name and tags starting with "hpc_". Please DO NOT delete this key words, otherwise it will error out during the testing. This is only available for new modules. Please update via:`</mark>&#x20;
+
+    ```textile
+    poetry update nf-core
+    ```
+
+    In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file. It will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum at the beginning of your test. We can include them in the final version of the module, right before the release. <mark style="color:red;"></mark>&#x20;
 
 #### Unit testing on LSF
 
 *   Running on HPC requires some changes in the nextflow config file.&#x20;
 
-    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html). In order to avoid confusion with the local unit testing, please add <mark style="color:blue;">`lsf_test.config`</mark> from the root directory of tools.git when running the test command for your module on LSF. It has the following section:
+    Reference can be found here: [https://www.nextflow.io/docs/latest/executor.html](https://www.nextflow.io/docs/latest/executor.html) and [https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html](https://www.nextflow.io/blog/2021/5\_tips\_for\_hpc\_users.html).&#x20;
+*   <mark style="color:red;">`New updates available: The config added to the root directory of tools.git, has been renamed as "hpc_test.config".`</mark>
+
+    Previous: In order to avoid confusion with the local unit testing, please add <mark style="color:blue;">`lsf_test.config`</mark> from the root directory of tools.git when running the test command for your module on LSF. It has the following section:
 
     ```
     executor {
@@ -116,11 +137,31 @@
     export SINGULARITY_DOCKER_USERNAME=<github_user_name>
     export SINGULARITY_DOCKER_PASSWORD=<personal_access_token>
     ```
-*   Use `-profile singularity` on Juno when running the test. I used `singularity/3.7.1` and it is working. For example:
+*   Use `-profile singularity` on Juno when running the test. I used `singularity/3.7.1` and it is working.&#x20;
+
+    <mark style="color:red;">`New release available: In nf-core v2.5.1.2, testing on HPC is available through nf-core command:`</mark>&#x20;
+
+    ```textile
+    nf-core modules test <your_module_name> --hpc
+    ```
+
+    <mark style="color:red;">`It will look for sections in test.yml starting with "hpc_" in the names and tags, and run the test. Please note that checking for "md5sum" is not available in this version. You can still use the previous command to run test on HPC. Please update via:`</mark>&#x20;
+
+    ```textile
+    poetry update nf-core
+    ```
+
+    Previous: For example:
 
     ```
-    nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/modules/pre_bcl2fastq/nextflow.config -c ./lsf_test.config -profile singularity
+    nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/modules/pre_bcl2fastq/nextflow.config -c ./hpc_test.config -profile singularity
     ```
+
+#### Module testing on HPC
+
+* Release as v2.5.1.2
+
+<mark style="color:red;">``</mark>
 
 #### If a module is already in nf-core/modules, there is no need to create our own. But we need a container for the module
 
@@ -134,6 +175,4 @@
 
 
 
-#### Module testing on HPC
-
-* To be developed...
+####
