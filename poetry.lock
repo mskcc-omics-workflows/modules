@@ -412,7 +412,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "nf-core"
-version = "2.5.1"
+version = "2.5.1.2"
 description = "Helper tools for use with nf-core Nextflow pipelines."
 category = "main"
 optional = false
@@ -443,7 +443,7 @@ tabulate = "*"
 type = "git"
 url = "https://github.com/mskcc-omics-workflows/nfcore-cmd.git"
 reference = "mskcc/nf-core"
-resolved_reference = "b2d1d0c8cb54cfaf573cfdea85aa353f16b1531c"
+resolved_reference = "b596979ca8ae8e5f96c6e4cee6c2eec8dd88879e"
 
 [[package]]
 name = "numpy"
