@@ -5,10 +5,13 @@ import subprocess
 
 def test_run(yml, module):
     proc,files = hpc_run(yml, module)
+    status_list = []
     for f in files:
         if os.path.isdir(f["path"]) or os.path.isfile(f["path"]):
-            status = True
-    assert status
+            status_list.append(True)
+        else:
+            status_list.append(False)
+    assert False not in status_list
 
 
 def hpc_run(yaml_file, module_name):
