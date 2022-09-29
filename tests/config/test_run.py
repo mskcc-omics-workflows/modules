@@ -4,6 +4,8 @@ from pathlib import Path
 import subprocess
 
 def test_run(yml, module):
+    if not yml:
+        return
     proc,files = hpc_run(yml, module)
     status_list = []
     for f in files:
