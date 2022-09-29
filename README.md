@@ -79,13 +79,35 @@
 
 #### Document and Dockerfile
 
-*   To us only to add Dockerfile and README.md
+*   For us only to add Dockerfile and README.md
 
     ```
     make dockerfile
     ```
 
     * It requires to provide an existing module. The two files will be in <mark style="color:blue;">modules/\<your\_module\_name>/container</mark>
+* In order to push images to github package, we need to create a new personal access token (PAT) with the appropriate scopes for the tasks you want to accomplish.
+  * Select the `read:packages` scope to download container images and read their metadata.
+  * Select the `write:packages` scope to download and upload container images and read and write their metadata.
+  * Select the `delete:packages` scope to delete container images.
+* After creating your personal token:
+  *   Save your PAT. We recommend saving your PAT as an environment variable.
+
+      ```shell
+      $ export CR_PAT=<<YOUR_TOKEN>
+      ```
+  *   Using the CLI for your container type, sign in to the Container registry service at `ghcr.io`.
+
+      ```shell
+      $ echo $CR_PAT | docker login ghcr.io -u <your_github_username> --password-stdin
+      > Login Succeeded
+      ```
+*   To create docker image, modify the <mark style="color:blue;">Dockerfile</mark> first, and change $PWD to <mark style="color:blue;">modules/\<your\_module\_name>/container</mark>, and run:
+
+    ```
+    docker build . -t ghcr.io/mskcc-omics-workflows/<YOUR_MODULE_NAME>:<VERSION>
+    docker push ghcr.io/mskcc-omics-workflows/<YOUR_MODULE_NAME>:<VERSION>
+    ```
 
 #### Check current modules
 
