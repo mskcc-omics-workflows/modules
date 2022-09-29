@@ -76,6 +76,11 @@
     ```
     nf-core modules lint <your_module_name> --dir .
     ```
+*   To run test on HPC (ONLY available when you install nf-core v2.5.1.2, and create new modules with nf-core v2.5.1.2)
+
+    ```
+    nf-core modules test <your_module_name> --hpc
+    ```
 
 #### Document and Dockerfile
 

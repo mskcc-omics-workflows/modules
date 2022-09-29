@@ -109,6 +109,11 @@
     ```
 
     In <mark style="color:blue;">test.yml</mark> file,  you can include md5sum to the output file. It will change frequently due to a different location of output file, or changing the inputs of the test. So I recommend not to check md5sum at the beginning of your test. We can include them in the final version of the module, right before the release. <mark style="color:red;"></mark>&#x20;
+*   When doing the test, after choosing in "Docker", "Singularity", and "Conda", if the container is still not found, please run the following line and restart your testing:
+
+    ```
+    export PROFILE="docker" # Or "singularity" or "conda"
+    ```
 
 #### Unit testing on LSF
 
@@ -155,6 +160,11 @@
 
     ```
     nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/modules/pre_bcl2fastq/nextflow.config -c ./hpc_test.config -profile singularity
+    ```
+*   When doing the test, after choosing in "Docker", "Singularity", and "Conda", if the container is still not found, please run the following line and restart your testing:
+
+    ```
+    export PROFILE="docker" # Or "singularity" or "conda"
     ```
 
 #### Module testing on HPC
