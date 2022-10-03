@@ -14,9 +14,9 @@ tools:
       description: |
         Bismark is a tool to map bisulfite treated sequencing reads
         and perform methylation calling in a quick and easy-to-use fashion.
-homepage: https://github.com/FelixKrueger/Bismark
+      homepage: https://github.com/FelixKrueger/Bismark
       documentation: https://github.com/FelixKrueger/Bismark/tree/master/Docs
-      doi: 10.1093/bioinformatics/btr167
+      doi: "10.1093/bioinformatics/btr167"
       licence: ["GPL-3.0-or-later"]
 input:
   - meta:
@@ -24,22 +24,22 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-- reads:
-      type: file
-      description: |
-        List of input FastQ files of size 1 and 2 for single-end and paired-end data,
-        respectively.
-- index:
-      type: dir
-      description: Bismark genome index directory
-      pattern: "BismarkIndex"
+  - reads:
+        type: file
+        description: |
+          List of input FastQ files of size 1 and 2 for single-end and paired-end data,
+          respectively.
+  - index:
+        type: dir
+        description: Bismark genome index directory
+        pattern: "BismarkIndex"
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-- bam:
+  - bam:
       type: file
       description: Output BAM file containing read alignments
       pattern: "*.{bam}"
