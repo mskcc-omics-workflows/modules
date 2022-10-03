@@ -7,6 +7,11 @@ process FASTP {
         'https://depot.galaxyproject.org/singularity/fastp:0.23.2--h79da9fb_0' :
         'quay.io/biocontainers/fastp:0.23.2--h79da9fb_0' }"
 
+    input:
+    tuple val(meta), path(reads)
+    val   save_trimmed_fail
+    val   save_merged
+
     output:
     tuple val(meta), path('*.fastp.fastq.gz') , optional:true, emit: reads
     tuple val(meta), path('*.json')           , emit: json
