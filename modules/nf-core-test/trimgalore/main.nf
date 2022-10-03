@@ -11,12 +11,16 @@ process TRIMGALORE {
     tuple val(meta), path(reads)
 
     output:
-    tuple val(meta), path("*.fq.gz")    , emit: reads
-    tuple val(meta), path("*report.txt"), emit: log
-    path "versions.yml"                 , emit: versions
+    tuple val(meta), path("*{trimmed,val}*.fq.gz"), emit: reads
+    tuple val(meta), path("*report.txt")          , emit: log
+    path "versions.yml"                           , emit: versions
 
-    tuple val(meta), path("*.html"), emit: html optional true
-    tuple val(meta), path("*.zip") , emit: zip optional true
+    tuple val(meta), path("*unpaired*.fq.gz")     , emit: unpaired, optional: true
+    tuple val(meta), path("*.html")               , emit: html    , optional: true
+    tuple val(meta), path("*.zip")                , emit: zip     , optional: true
+
+    when:
+    task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
@@ -28,7 +32,7 @@ process TRIMGALORE {
         cores = (task.cpus as int) - 4
         if (meta.single_end) cores = (task.cpus as int) - 3
         if (cores < 1) cores = 1
-        if (cores > 4) cores = 4
+        if (cores > 8) cores = 8
     }
 
     // Clipping presets have to be evaluated in the context of SE/PE
@@ -38,7 +42,7 @@ process TRIMGALORE {
     def tpc_r2 = params.three_prime_clip_r2 > 0 ? "--three_prime_clip_r2 ${params.three_prime_clip_r2}" : ''
 
     // Added soft-links to original fastqs for consistent naming in MultiQC
-    def prefix = task.ext.suffix ? "${meta.id}${task.ext.suffix}" : "${meta.id}"
+    def prefix = task.ext.prefix ?: "${meta.id}"
     if (meta.single_end) {
         """
         [ ! -f  ${prefix}.fastq.gz ] && ln -s $reads ${prefix}.fastq.gz
