@@ -6,6 +6,7 @@ process BISMARK_ALIGN {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
         'quay.io/biocontainers/bismark:0.23.0--0' }"
+
     input:
     tuple val(meta), path(reads)
     path index
