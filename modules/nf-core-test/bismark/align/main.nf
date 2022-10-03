@@ -21,9 +21,9 @@ process BISMARK_ALIGN {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def fastq      = meta.single_end ? reads : "-1 ${reads[0]} -2 ${reads[1]}"
+    def args = task.ext.args ?: ''
+    def fastq      = "-1 ${reads[0]} -2 ${reads[1]}"
     """
     bismark \\
         $fastq \\
