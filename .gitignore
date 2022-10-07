@@ -4,3 +4,5 @@
 *.pyc
 .vscode/
 work/
+.DS_Store
+tests/modules/getbasecountmultisample/test.vcf
