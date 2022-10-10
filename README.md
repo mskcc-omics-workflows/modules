@@ -1,140 +1,40 @@
-# Module Management
+# Information from nf-core
 
-#### Reference
+## Prerequisites <a href="#prerequisites" id="prerequisites"></a>
 
-{% embed url="https://nf-co.re/developers/modules" %}
+* Check you agree with the [Code of Conduct](https://nf-co.re/code\_of\_conduct) of the event.
+* If you haven’t already, set-up a GitHub account and join the nf-core GitHub organisation.
+* Join the [nf-core slack](https://nf-co.re/join)
+* Have installed on your computer:
+  * [Nextflow](https://nextflow.io/)
+  * [nf-core/tools](https://nf-co.re/tools)
+  * Docker/Singularity/Conda: \[Google is your friend]
+* Familiarise yourself with the documentation on the nf-core website for nf-core modules:
+  * [https://nf-co.re/docs/contributing/modules](https://nf-co.re/docs/contributing/modules)
+  * [https://www.nextflow.io/docs/latest/dsl2.html#modules](https://www.nextflow.io/docs/latest/dsl2.html#modules)
+  * Relevant nf-core/bytesize talks are also listed below
 
-### Step to create a new module
+## Training in October 2022 <a href="#interesting-bytesize-talks" id="interesting-bytesize-talks"></a>
 
-#### Set up environment
+[https://nf-co.re/events/2022/training-october-2022](https://nf-co.re/events/2022/training-october-2022)
 
-1.  Install poetry and git flow to local: (or use pip)
+## Interesting Bytesize talks <a href="#interesting-bytesize-talks" id="interesting-bytesize-talks"></a>
 
-    ```
-    brew install poetry
-    brew install git-flow
-    ```
-2.  Clone the develop branch of tools repo to local:
+We have recorded bytesize talks in the past few months going over some of the details of tasks we will be tackling during the hackathon. Take a look if you would like to learn more:
 
-    ```
-    git clone https://github.com/mskcc-omics-workflows/tools.git
-    ```
-3.  change directory to the downloaded repo:
+* [GitHub contribution basics](https://www.youtube.com/watch?v=gTEXDXWf4hE\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=4)
+* [DSL module development](https://www.youtube.com/watch?v=ggGGhTMgyHI\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=5)
+* [DSL2 Coding style recommendations (Part 1)](https://www.youtube.com/watch?v=KnYPzZ0Dd-Y)
+* [Updates on the new DSL2 syntax](https://youtu.be/17NqUsh73BU)
+* [Adding modules to nf-core/modules](https://www.youtube.com/watch?v=Wc4A2tQ6WWY\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=7)
+* [How to use modules in a pipeline](https://www.youtube.com/watch?v=tWvou0xj9wA\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=6)
+* [Modules test data](https://www.youtube.com/watch?v=QXfAerydAT0\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=17)
+* [Test modules](https://www.youtube.com/watch?v=pjhscKyWH74\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=18)
+* [Where do I start writing my own DSL2 pipeline?!](https://youtu.be/Z\_uPj7fAes8)
+* [Troubleshooting a failed pipeline](https://youtu.be/z9n2F4ByIkY)
+* [Development environments & workflows (Phil)](https://www.youtube.com/watch?v=XB96efweCLI\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=12)
+* [Development environments & workflows (Maxime)](https://www.youtube.com/watch?v=OF55x-FT5WE\&list=PL3xpfTVZLcNiSvvPWORbO32S1WDJqKp1e\&index=19)
+* [gitpod.io](https://www.youtube.com/watch?v=kBoC6QBU-M0)
+* [Nextflow Tower CLI](https://youtu.be/MggFf15vGCw)
 
-    ```
-    cd tools
-    ```
-4.  Create new feature branch
-
-    ```
-    git flow init
-    git flow feature start <your-module-name>
-    ```
-5.  Install all dependencies
-
-    ```
-    poetry install
-    ```
-6.  Activate virtual environment
-
-    ```
-    poetry shell
-    ```
-
-#### Create a module with test files
-
-*   To create a new module, use the nf-core command directly
-
-    ```
-    nf-core modules create <Module_Name> --author @<your_github_username> --label process_low --meta 
-    ```
-* Note:
-  * If the module is a subtool, please use, for example, `samtools/sort` for the module name
-  * You will be able to find your module in <mark style="color:blue;">modules/</mark> directory, and tests in <mark style="color:blue;">tests/modules/\<your\_module\_name></mark>
-  * Module name can contain "\_" but not "-"
-
-#### Add small-sized test datasets
-
-1. Make a new folder for test datasets for the module in [https://github.com/mskcc-omics-workflows/tools-test-dataset.git](https://github.com/mskcc-omics-workflows/tools-test-dataset.git). This repo is a submodule of the main tools repo
-2.  In your feature branch, do the following and pull the latest changes
-
-    ```
-    git submodule update --init --recursive
-    ```
-
-#### To run test or check the format of the module
-
-*   To run test
-
-    ```
-    nf-core modules test <your_module_name>
-    ```
-
-    * In <mark style="color:blue;">nextflow.config</mark> of the test in <mark style="color:blue;">tests/modules/\<your\_module\_name></mark>, the path of the container has to be added, with the correct version of the tool
-*   To check if the format is matching with nf-core:&#x20;
-
-    ```
-    nf-core modules lint <your_module_name> --dir .
-    ```
-*   To run test on HPC (ONLY available when you install nf-core v2.5.1.2, and create new modules with nf-core v2.5.1.2)
-
-    ```
-    nf-core modules test <your_module_name> --hpc
-    ```
-
-#### Document and Dockerfile
-
-*   For us only to add Dockerfile and README.md
-
-    ```
-    make dockerfile
-    ```
-
-    * It requires to provide an existing module. The two files will be in <mark style="color:blue;">modules/\<your\_module\_name>/container</mark>
-* In order to push images to github package, we need to create a new personal access token (PAT) with the appropriate scopes for the tasks you want to accomplish.
-  * Select the `read:packages` scope to download container images and read their metadata.
-  * Select the `write:packages` scope to download and upload container images and read and write their metadata.
-  * Select the `delete:packages` scope to delete container images.
-* After creating your personal token:
-  *   Save your PAT. We recommend saving your PAT as an environment variable.
-
-      ```shell
-      $ export CR_PAT=<<YOUR_TOKEN>
-      ```
-  *   Using the CLI for your container type, sign in to the Container registry service at `ghcr.io`.
-
-      ```shell
-      $ echo $CR_PAT | docker login ghcr.io -u <your_github_username> --password-stdin
-      > Login Succeeded
-      ```
-*   To create docker image, modify the <mark style="color:blue;">Dockerfile</mark> first, and change $PWD to <mark style="color:blue;">modules/\<your\_module\_name>/container</mark>, and run:
-
-    ```
-    docker build . -t ghcr.io/mskcc-omics-workflows/<YOUR_MODULE_NAME>:<VERSION>
-    docker push ghcr.io/mskcc-omics-workflows/<YOUR_MODULE_NAME>:<VERSION>
-    ```
-
-#### Check current modules
-
-*   To list all available modules in tools repo
-
-    ```
-    nf-core modules list remote
-    ```
-*   To check information of a particular tool
-
-    ```
-    nf-core modules info <module_name>
-    ```
-*   All nf-core modules commands are available
-
-    ```
-    ╭─ Developing new modules ─────────────────────────────────────────────────────────────────────────╮
-    │ create            Create a new DSL2 module from the nf-core template.                            │
-    │ create-test-yml   Auto-generate a test.yml file for a new module.                                │
-    │ lint              Lint one or more modules in a directory.                                       │
-    │ bump-versions     Bump versions for one or more modules in a clone of the nf-core/modules repo.  │
-    │ mulled            Generate the name of a BioContainers mulled image version 2.                   │
-    │ test              Run module tests locally.                                                      │                                        │
-    ╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ```
+\
