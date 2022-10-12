@@ -81,6 +81,7 @@
     ```
     nf-core modules test <your_module_name> --hpc
     ```
+* <mark style="color:red;">NOTES: A potential issue might happen when running the test: "profile" value is not able to parse to the testing itself. Either choosing from the provided list of "docker", "singularity", and "conda", or setting up the env var</mark> <mark style="color:red;"></mark><mark style="color:red;">`$PROFILE`</mark> <mark style="color:red;"></mark><mark style="color:red;">manually, the testing is still not be able to get that. In this case, please add</mark> <mark style="color:red;"></mark><mark style="color:red;">`-profile <your_profile>`</mark> <mark style="color:red;"></mark><mark style="color:red;">in the testing command in</mark> <mark style="color:red;"></mark><mark style="color:red;">`test.yml`</mark> <mark style="color:red;"></mark><mark style="color:red;">of the module, it will work fine.</mark>&#x20;
 
 #### Document and Dockerfile
 
