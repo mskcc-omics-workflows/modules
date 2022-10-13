@@ -3,6 +3,7 @@
 ## 🧐 Current Docs
 
 * [Information from nf-core](README.md)
+* [Update nf-core/tools to v2.6](current-docs/update-nf-core-tools-to-v2.6.md)
 * [Module Management](<README (1).md>)
   * [Rules](current-docs/module-management/rules.md)
   * [Test dataset management](current-docs/module-management/test-dataset-management.md)
