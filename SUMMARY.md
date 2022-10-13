@@ -5,6 +5,7 @@
 * [Information from nf-core](README.md)
 * [Module Management](<README (1).md>)
   * [Rules](current-docs/module-management/rules.md)
+  * [Test dataset management](current-docs/module-management/test-dataset-management.md)
 * [Workflow Management](current-docs/workflow-management/README.md)
   * [Rules](current-docs/workflow-management/rules.md)
 * [Full CMDs for ClinBx](current-docs/full-cmds-for-clinbx.md)
