@@ -14,6 +14,8 @@
     ```textile
     VOLUME /test-datasets
     ```
+* Save the Dockerfile in [https://github.mskcc.org/MSKCC-Omics-Workflows/tools-test-dataset](https://github.mskcc.org/MSKCC-Omics-Workflows/tools-test-dataset)
+  * Create a feature branch in this repo, and add your Dockerfile to <mark style="color:blue;">\<your\_module\_name>/</mark> in root directory
 * Build the image with the name starting with <mark style="color:red;">"testdata-"</mark>, for example, "testdata-merge\_gzip"
 * Upload the docker image to [https://github.com/orgs/mskcc-omics-workflows/packages](https://github.com/orgs/mskcc-omics-workflows/packages) (See instructions in Module Management about publishing github package)
 * Steps to pull test datasets from a docker image:
@@ -26,4 +28,3 @@
   3. Edit your test.yml file to include your target locations where the test data is located and run the test.
 * TODO:
   * Right now, this is individual modules. We can create a general docker image or a command to pull multiple test datasets at the same time.
-  * Large test datasets are now separated from small test datasets. Will figure out a way to manage them better.
