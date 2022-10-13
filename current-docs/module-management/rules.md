@@ -15,9 +15,11 @@
 
     Previous: In the <mark style="color:blue;">main.nf</mark> script, in the `versions` generation in the script section, there is a typo in nf-core template. There should be just one `)` at the end of the line below. Otherwise, you will see an additional `)` at the end of the version in your output `versions.yml`
 
+    {% code overflow="wrap" %}
     ```
     {{ tool }}: $(echo $(samtools --version 2>&1) | sed 's/^.samtools //; s/Using.$//' )
     ```
+    {% endcode %}
 * The second half of the code above is to delete all text when you do `--version` to the tool, so the `Using` word needs to be changed based on the text from the tool.
 * Optional inputs can be achieved in the main script, example is here: [https://github.com/nextflow-io/patterns/blob/master/docs/optional-input.adoc](https://github.com/nextflow-io/patterns/blob/master/docs/optional-input.adoc)
 * After adding Dockerfile and README.md (see the tutorial), please move <mark style="color:blue;">README.md</mark> to the module root directory, ie, from <mark style="color:blue;">modules/\<your\_module\_name>/container to modules/\<your\_module\_name>.</mark> README.md should contain:&#x20;
@@ -27,10 +29,12 @@
   * Reference (full command of the tool, or any other information)
 *   In the <mark style="color:blue;">meta.yml</mark> file, if there is meta map object, please add comment about all the allowed key and value pairs in meta object. For example, for bcl2fastq, &#x20;
 
+    {% code overflow="wrap" %}
     ```
      Groovy Map containing sample information
      e.g. [ id:'test', run:'220726_M0720', pool: 'test', mismatch: '1', base_mask: '', no_lane_split: '', ignore_map: [:]]
     ```
+    {% endcode %}
 
 #### Write unit test
 
@@ -158,9 +162,11 @@
 
     Previous: For example:
 
+    {% code overflow="wrap" %}
     ```
     nextflow run ./tests/modules/pre_bcl2fastq -entry test_pre_bcl2fastq -c ./tests/modules/pre_bcl2fastq/nextflow.config -c ./hpc_test.config -profile singularity
     ```
+    {% endcode %}
 *   When doing the test, after choosing in "Docker", "Singularity", and "Conda", if the container is still not found, please run the following line and restart your testing:
 
     ```

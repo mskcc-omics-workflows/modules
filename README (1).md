@@ -45,9 +45,11 @@
 
 *   To create a new module, use the nf-core command directly
 
+    {% code overflow="wrap" %}
     ```
     nf-core modules create <Module_Name> --author @<your_github_username> --label process_low --meta 
     ```
+    {% endcode %}
 * Note:
   * If the module is a subtool, please use, for example, `samtools/sort` for the module name
   * You will be able to find your module in <mark style="color:blue;">modules/</mark> directory, and tests in <mark style="color:blue;">tests/modules/\<your\_module\_name></mark>
@@ -104,10 +106,12 @@
       ```
   *   Using the CLI for your container type, sign in to the Container registry service at `ghcr.io`.
 
+      {% code overflow="wrap" %}
       ```shell
       $ echo $CR_PAT | docker login ghcr.io -u <your_github_username> --password-stdin
       > Login Succeeded
       ```
+      {% endcode %}
 *   To create docker image, modify the <mark style="color:blue;">Dockerfile</mark> first, and change $PWD to <mark style="color:blue;">modules/\<your\_module\_name>/container</mark>, and run:
 
     ```
