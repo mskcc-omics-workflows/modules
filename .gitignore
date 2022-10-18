@@ -1,8 +1,14 @@
+# ignore nextflow output 
 .nextflow/
 .nextflow.log*
 *.swp
 *.pyc
-.vscode/
 work/
+
+# ignore output subfolders, but not output folder itselt 
+!output/*
+output/*
+
+# ignore software and OS artifacts 
 .DS_Store
-tests/modules/getbasecountmultisample/test.vcf
+.vscode/
