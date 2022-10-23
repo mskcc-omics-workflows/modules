@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-include { BCL2FASTQ } from '../../../modules/bcl2fastq2/main.nf'
+include { BCL2FASTQ } from '../../../../modules/msk-tools/bcl2fastq2/main.nf'
 
 // Deal with output dir
 File out_dir = new File(params.casava_dir)
@@ -34,7 +34,3 @@ workflow test_bcl2fastq2 {
     BCL2FASTQ ( input )
 }
 
-workflow {
-    test_bcl2fastq2 ()
-}
-//nextflow run main.nf -process.echo -profile docker
