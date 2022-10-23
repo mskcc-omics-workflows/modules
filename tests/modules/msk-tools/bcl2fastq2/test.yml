@@ -1,5 +1,5 @@
 - name: "bcl2fastq2"
-  command: nextflow run ./tests/modules/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/bcl2fastq2/nextflow.config
+  command: nextflow run ./tests/modules/msk-tools/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/bcl2fastq2/nextflow.config
   tags:
     - "bcl2fastq2"
   files:
@@ -8,7 +8,7 @@
       md5sum: 69f40bc54945f9ef765ef1395160a92f
 
 - name: "hpc_bcl2fastq2"
-  command: nextflow run ./tests/modules/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/bcl2fastq2/nextflow.config -c ./hpc_test.config
+  command: nextflow run ./tests/modules/msk-tools/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/bcl2fastq2/nextflow.config -c ./hpc_test.config
   tags:
     - "hpc_bcl2fastq2"
   files:
