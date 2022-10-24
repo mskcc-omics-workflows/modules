@@ -3,8 +3,8 @@ bcl2fastq2:
 - tests/modules/msk-tools/bcl2fastq2/**
 
 merge_gzip:
-- modules/merge_gzip/**
-- tests/modules/merge_gzip/**
+- modules/msk-tools/merge_gzip/**
+- tests/modules/msk-tools/merge_gzip/**
 
 pre_bcl2fastq:
 - modules/msk-tools/pre_bcl2fastq/**
