@@ -6,7 +6,7 @@
     - "getbasecountmultisample"
     #
   files:
-    - path: "output/getbasecountmultisample/test.vcf"
+    - path: "../output/test.vcf"
 
 # This is for unit testing on HPC
 # The name and the tags have to start with 'hpc_', otherwise, it will error out
