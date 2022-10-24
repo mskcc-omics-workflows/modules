@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-include { GETBASECOUNTMULTISAMPLE } from '../../../modules/getbasecountmultisample/main.nf'
+include { GETBASECOUNTMULTISAMPLE } from '../../../../modules/msk-tools/getbasecountmultisample/main.nf'
 
 File out_dir = new File("output")
 if (!out_dir.exists()) {

@@ -1,7 +1,7 @@
 ## TODO nf-core: Please run the following command to build this file:
 #                nf-core modules create-test-yml getbasecount/multisample
-- name: "getbasecountmultisample"
-  command: nextflow run ./tests/modules/getbasecountmultisample -entry test_getbasecountmultisample -c ./tests/config/nextflow.config -c ./tests/modules/getbasecountmultisample/nextflow.config -profile docker
+- name: "msk-tools/getbasecountmultisample"
+  command: nextflow run ./tests/modules/msk-tools/getbasecountmultisample -entry test_getbasecountmultisample -c ./tests/config/nextflow.config -c ./tests/modules/msk-tools/getbasecountmultisample/nextflow.config -profile docker
   tags:
     - "getbasecountmultisample"
     #
@@ -11,7 +11,7 @@
 # This is for unit testing on HPC
 # The name and the tags have to start with 'hpc_', otherwise, it will error out
 - name: "hpc_getbasecount multisample"
-  command: nextflow run ./tests/modules/getbasecount/multisample -entry test_getbasecount_multisample -c ./tests/config/nextflow.config -c ./tests/modules/getbasecount/multisample/nextflow.config -c ./hpc_test.config
+  command: nextflow run ./tests/modules/msk-tools/getbasecount/multisample -entry test_getbasecount_multisample -c ./tests/config/nextflow.config -c ./tests/modules/getbasecount/multisample/nextflow.config -c ./hpc_test.config
   tags:
     - "hpc_getbasecount"
     #
