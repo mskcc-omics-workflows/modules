@@ -443,7 +443,7 @@ tabulate = "*"
 type = "git"
 url = "https://github.com/mskcc-omics-workflows/nfcore-cmd.git"
 reference = "mskcc/2.6"
-resolved_reference = "9f323bee24838f592f3538d09ea10cbb22623a86"
+resolved_reference = "9eab5f3ac1b32c125da544f9e5d96d7534e0cc13"
 
 [[package]]
 name = "numpy"
@@ -997,7 +997,7 @@ ubiquerg = ">=0.6.1"
 
 [[package]]
 name = "zipp"
-version = "3.9.0"
+version = "3.10.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 category = "main"
 optional = false
