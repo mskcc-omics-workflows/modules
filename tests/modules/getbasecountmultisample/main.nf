@@ -20,7 +20,6 @@ input = [
     params.fragment_count,
     params.filter_duplicate, 
     params.maq, 
-    file(params.outdir, checkIfExists: true)
     
 ]
 
