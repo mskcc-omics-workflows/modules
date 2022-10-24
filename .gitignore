@@ -5,10 +5,8 @@
 *.pyc
 work/
 
-# ignore output subfolders, but not output folder itselt 
-!output/*
-output/*
 
 # ignore software and OS artifacts 
 .DS_Store
 .vscode/
+output/

@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-include { PRE_BCL2FASTQ } from '../../../modules/pre_bcl2fastq/main.nf'
+include { PRE_BCL2FASTQ } from '../../../../modules/msk-tools/pre_bcl2fastq/main.nf'
 
 workflow test_pre_bcl2fastq {
     input = [
@@ -14,7 +14,3 @@ workflow test_pre_bcl2fastq {
     PRE_BCL2FASTQ ( input )
 }
 
-//workflow {
-//    test_pre_bcl2fastq ()
-//}
-//nextflow run main.nf -process.echo -profile docker
