@@ -1,6 +1,0 @@
-- name: bcl2fastq2 test_bcl2fastq2
-  command: nextflow run ./tests/modules/bcl2fastq2 -entry test_bcl2fastq2 -c ./tests/config/nextflow.config  -c ./tests/modules/bcl2fastq2/nextflow.config -profile docker
-  tags:
-    - bcl2fastq2
-  files:
-    - path: /Users/huy1/project/pipeline-rewrite/220726_M07206_0107_000000000-KGBL6/CASAVA_Processing

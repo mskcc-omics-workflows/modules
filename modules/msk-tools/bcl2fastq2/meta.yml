@@ -16,7 +16,8 @@ input:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. [ id:'test', single_end:false ]
+        e.g. [ id:'test', run:'220726_M0720', mismatch: '1', base_mask: '', no_lane_split: '', ignore_map: [:]]
+        # no_lane_split can be null, ignore_map can be null. In ignore_map, ONLY "bcls", "filter", "positions", "controls" are allowed.
   - samplesheet:
       type: file
       description: "Input samplesheet"
@@ -24,14 +25,14 @@ input:
   - run_dir:
       type: directory
       description: "Input run directory containing RunInfo.xml and BCL data"
-  - casava_dir:
+  - casava_dir: # Need to create it before running demultiplex. Can be relative or absolute path
       type: directory
-      desciption: "Output directory where fastq files will be stored"
+      description: "Output directory where fastq files will be stored"
 
 output:
   - control_fastq:
       type: file
-      desciption: Demultiplexed control sample FASTQ files if available
+      description: Demultiplexed control sample FASTQ files if available
   - fastq:
       type: file
       description: Demultiplexed sample FASTQ files
@@ -50,4 +51,4 @@ output:
       pattern: "Stats/*"
 
 authors:
-  - "Yu Hu"
+  - "@huyu335"

@@ -1,0 +1,46 @@
+name: "merge_gzip"
+description: Merge a pair of raw fastq files from two different lanes (single fastq file is also acceptable)
+keywords:
+  - merge_gzip
+tools:
+  - "gzip":
+      description: "Files to compress or decompress"
+      homepage: ""
+      documentation: ""
+      tool_dev_url: ""
+      doi: ""
+      licence: ""
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', sample_name:'Sample-T', read:'1' ]
+  - fastq_1:
+      type: file
+      description: fastq file from Lane 1
+      pattern: "*_{L001_,}R*_001.fastq.gz"
+  - fastq_2: # Optional if there is only one fastq file
+      type: file
+      description: fastq file from Lane 2
+      pattern: "*_L002_R*_001.fastq.gz" # OR null
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', sample_name:'Sample-T', read:'1' ]
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - mrg_fq:
+      type: file
+      description: Merge fastq file
+      pattern: "*_R*_mrg.fastq.gz"
+
+authors:
+  - "@huyu335"
