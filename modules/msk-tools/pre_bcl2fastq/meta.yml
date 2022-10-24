@@ -15,7 +15,7 @@ input:
       description: RunInfo.xml
       pattern: "*.xml"
   - runparams:
-      tye: file
+      type: file
       description: RunParameters.xml
       pattern: "*.xml"
 
@@ -26,4 +26,4 @@ output:
       pattern: "*.csv"
 
 authors:
-  - "Yu Hu"
+  - "@huyu335"
