@@ -1,7 +1,7 @@
 ## TODO nf-core: Please run the following command to build this file:
 #                nf-core modules create-test-yml merge
 - name: "merge_gzip"
-  command: nextflow run ./tests/modules/merge_gzip -entry test_merge_gzip -c ./tests/config/nextflow.config -c ./tests/modules/merge_gzip/nextflow.config
+  command: nextflow run ./tests/modules/msk-tools/merge_gzip -entry test_merge_gzip -c ./tests/config/nextflow.config -c ./tests/modules/msk-tools/merge_gzip/nextflow.config
   tags:
     - "merge_gzip"
 
@@ -11,7 +11,7 @@
       md5sum: ce2671e3f9c4504db54be74c7de35c8d
 
 - name: "hpc_merge_gzip"
-  command: nextflow run ./tests/modules/merge_gzip -entry test_merge_gzip -c ./tests/config/nextflow.config -c ./tests/modules/merge_gzip/nextflow.config -c ./hpc_test.config
+  command: nextflow run ./tests/modules/msk-tools/merge_gzip -entry test_merge_gzip -c ./tests/config/nextflow.config -c ./tests/modules/msk-tools/merge_gzip/nextflow.config -c ./hpc_test.config
   tags:
     - "hpc_merge_gzip"
 

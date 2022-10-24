@@ -2,9 +2,9 @@
 
 nextflow.enable.dsl = 2
 
-include { MERGE_GZIP } from '../../../modules/merge_gzip/main.nf'
+include { MERGE_GZIP } from '../../../../modules/msk-tools/merge_gzip/main.nf'
 
-//ch_test_data = Channel.fromFilePairs( '../../../tools-test-dataset/merge_gzip/Sample*_L00{1,2}_R1_001.fastq.gz')
+//ch_test_data = Channel.fromFilePairs( '../../../../tools-test-dataset/merge_gzip/Sample*_L00{1,2}_R1_001.fastq.gz')
 //    .flatten()
 //    .toList()
 //    .set { ch_pair_data }
