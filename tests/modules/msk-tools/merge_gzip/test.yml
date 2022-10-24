@@ -8,7 +8,7 @@
   files:
     - path: "output/merge_gzip/Sample1-T2_L000_R1_mrg.fastq.gz"
     - path: "output/merge_gzip/versions.yml"
-      md5sum: ce2671e3f9c4504db54be74c7de35c8d
+      md5sum: f4dfb61b8c58dd426ecc37588e6fefd2
 
 - name: "hpc_merge_gzip"
   command: nextflow run ./tests/modules/msk-tools/merge_gzip -entry test_merge_gzip -c ./tests/config/nextflow.config -c ./tests/modules/msk-tools/merge_gzip/nextflow.config -c ./hpc_test.config
@@ -18,4 +18,3 @@
   files:
     - path: "output/merge_gzip/Sample1-T2_L000_R1_mrg.fastq.gz"
     - path: "output/merge_gzip/versions.yml"
-      md5sum: ce2671e3f9c4504db54be74c7de35c8d
