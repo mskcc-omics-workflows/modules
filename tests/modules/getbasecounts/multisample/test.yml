@@ -1,0 +1,29 @@
+## TODO nf-core: Please run the following command to build this file:
+#                nf-core modules create-test-yml getbasecounts/multisample
+- name: "getbasecounts multisample"
+  command: nextflow run ./tests/modules/getbasecounts/multisample -entry test_getbasecounts_multisample -c ./tests/config/nextflow.config -c ./tests/modules/getbasecounts/multisample/nextflow.config
+  tags:
+    - "getbasecounts"
+    #
+    - "getbasecounts/multisample"
+    #
+  files:
+    - path: "output/getbasecounts/test.bam"
+      md5sum: e667c7caad0bc4b7ac383fd023c654fc
+    - path: output/getbasecounts/versions.yml
+      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b
+
+# This is for unit testing on HPC
+# The name and the tags have to start with 'hpc_', otherwise, it will error out
+- name: "hpc_getbasecounts multisample"
+  command: nextflow run ./tests/modules/getbasecounts/multisample -entry test_getbasecounts_multisample -c ./tests/config/nextflow.config -c ./tests/modules/getbasecounts/multisample/nextflow.config -c ./hpc_test.config
+  tags:
+    - "hpc_getbasecounts"
+    #
+    - "hpc_getbasecounts/multisample"
+    #
+  files:
+    - path: "output/getbasecounts/test.bam"
+      md5sum: e667c7caad0bc4b7ac383fd023c654fc
+    - path: output/getbasecounts/versions.yml
+      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b
