@@ -3,8 +3,8 @@ bcl2fastq2:
 - tests/modules/msk-tools/bcl2fastq2/**
 
 getbasecountmultisample:
-- modules/getbasecountmultisample/**
-- tests/modules/getbasecountmultisample/**
+- modules/msk-tools/getbasecountmultisample/**
+- tests/modules/msk-tools/getbasecountmultisample/**
 
 pre_bcl2fastq:
 - modules/msk-tools/pre_bcl2fastq/**
