@@ -5,6 +5,9 @@ bcl2fastq2:
 getbasecountmultisample:
 - modules/msk-tools/getbasecountmultisample/**
 - tests/modules/msk-tools/getbasecountmultisample/**
+merge_gzip:
+- modules/msk-tools/merge_gzip/**
+- tests/modules/msk-tools/merge_gzip/**
 
 pre_bcl2fastq:
 - modules/msk-tools/pre_bcl2fastq/**
