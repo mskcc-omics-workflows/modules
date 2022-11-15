@@ -1,17 +1,13 @@
-- name: msk-tools getbasecountmultisample test_getbasecountmultisample_maf
+- name: getbasecountmultisample test_getbasecountmultisample_maf
   command: nextflow run ./tests/modules/msk-tools/getbasecountmultisample -entry test_getbasecountmultisample_maf -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/getbasecountmultisample/nextflow.config
   tags:
-  - msk-tools
-  - msk-tools/getbasecountmultisample
+  - getbasecountmultisample
   files:
   - path: output/getbasecountmultisample_maf/test.maf
-    md5sum: 039df7916aa49258d63929173923154a
 
-- name: msk-tools getbasecountmultisample test_getbasecountmultisample_vcf
+- name: getbasecountmultisample test_getbasecountmultisample_vcf
   command: nextflow run ./tests/modules/msk-tools/getbasecountmultisample -entry test_getbasecountmultisample_vcf -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/getbasecountmultisample/nextflow.config
   tags:
-  - msk-tools
-  - msk-tools/getbasecountmultisample
+  - getbasecountmultisample
   files:
   - path: output/getbasecountmultisample_vcf/test.vcf
-    md5sum: 45feba6137ca2283bea64bbe67ab036e
