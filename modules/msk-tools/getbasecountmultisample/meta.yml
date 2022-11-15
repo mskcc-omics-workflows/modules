@@ -1,13 +1,13 @@
 name: "getbasecountmultisample"
 ## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description:  calculates the base counts in multiple BAM files for all the sites in a given VCF file or MAF file
 keywords:
   - sort
 tools:
-  - "getbasecount":
+  - "getbasecountmultisample":
       ## TODO nf-core: Add a description and other details for the software below
-      description: ""
-      homepage: ""
+      description: "calculates the base counts in multiple BAM files for all the sites in a given VCF file or MAF file"
+      homepage: "https://github.com/msk-access/GetBaseCountsMultiSample"
       documentation: ""
       tool_dev_url: ""
       doi: ""
@@ -16,36 +16,60 @@ tools:
 ## TODO nf-core: Add a description of all of the variables used as input
 input:
   # Only when we have meta
-  - meta:
+  - options:
       type: map
       description: |
-        Groovy Map containing sample information
-        e.g. [ id:'test', single_end:false ]
+        Groovy Map containing optional arguments, which are as follow: 
+        --omaf                                  Output the result in maf format
+        --thread                <int>           Number of thread. Default 1
+        --maq                   <int>           Mapping quality threshold. Default 20
+        --baq                   <int>           Base quality threshold, Default 0
+        --filter_duplicate      [0, 1]          Whether to filter reads that are marked as duplicate. 0=off, 1=on. Default 1
+        --filter_improper_pair  [0, 1]          Whether to filter reads that are marked as improperly paired. 0=off, 1=on. Default 0
+        --filter_qc_failed      [0, 1]          Whether to filter reads that are marked as failed quality control. 0=off, 1=on. Default 0
+        --filter_indel          [0, 1]          Whether to filter reads that contain indels. 0=off, 1=on. Default 0
+        --filter_non_primary    [0, 1]          Whether to filter reads that are marked as non primary alignment. Default 0
+        --positive_count        [0, 1]          Whether to output positive strand read counts DPP/RDP/ADP. 0=off, 1=on. Default 1
+        --fragment_count        [0, 1]          Whether to output fragment read counts DPF/RDF/ADF. 0=off, 1=on. Default 0
+        --fragment_fractional_weight            Whether to add a fractional depth (0.5) when there is disaggrement between strands on an ALT allele. Default 0
+        --suppress_warning      <int>           Only print a limit number of warnings for each type. Default 3
+        --help                                  Print command line usage
   # 
   ## TODO nf-core: Delete / customise this example input
+  - fasta:
+      type: file
+      description: Input reference sequence file
+      pattern: "*.{fasta}"
+  - fastafai:
+      type: file
+      description: Input reference sequence file index
+      pattern: "*.{fai}"
   - bam:
       type: file
-      description: BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Input bam file
+      pattern: "*.{bam}"
+  - bambai:
+      type: file
+      description: Input bam file index
+      pattern: "*.{bai}"
+  - sample:
+      type: string
+      description: sample name to get basecounts for
+  - outdir:
+      type: string
+      description: name of output directory
 
 ## TODO nf-core: Add a description of all of the variables used as output
 output:
-  #Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. [ id:'test', single_end:false ]
-  # 
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
   ## TODO nf-core: Delete / customise this example output
-  - bam:
+  - variant_file:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: calculated base counts in multiple BAM files for all the sites in a given VCF file or MAF file
+      pattern: "*.{vcf, maf}"
 
 authors:
   - "@buehlere"

@@ -11,7 +11,8 @@ process GETBASECOUNTMULTISAMPLE {
     tuple val(meta), path(fasta), path(fastafai), path(bam), path(bambai), path(variant_file), val(sample), val(output), val(options)
 
     output:
-     path('test.{vcf,maf}')
+     path('variant_file.{vcf,maf}')
+     path("versions.yml")
      
     script:
     // determine if input file is a maf of vcf 
@@ -34,5 +35,10 @@ process GETBASECOUNTMULTISAMPLE {
     ${variant_input} \\
     --output ${output} \\
     --bam $sample:${bam} ${options.args}
+    
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        \$(GetBaseCountsMultiSample --help | grep "GetBaseCountsMultiSample [0-9].[0-9.].[0-9.]")
+    END_VERSIONS
     """
 }

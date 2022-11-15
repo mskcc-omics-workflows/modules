@@ -2,8 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-include { GETBASECOUNTMULTISAMPLE as GETBASECOUNTMULTISAMPLE_MAF} from '../../../../modules/msk-tools/getbasecountmultisample/main.nf'
-include { GETBASECOUNTMULTISAMPLE as GETBASECOUNTMULTISAMPLE_VCF} from '../../../../modules/msk-tools/getbasecountmultisample/main.nf'
+include { GETBASECOUNTMULTISAMPLE as GETBASECOUNTMULTISAMPLE} from '../../../../modules/msk-tools/getbasecountmultisample/main.nf'
 
 File out_dir = new File("output")
 if (!out_dir.exists()) {
@@ -22,11 +21,11 @@ workflow test_getbasecountmultisample_maf {
         file("tools-test-dataset/getbasecountmultisample/chr22.maf"),
         params.sample,
         // customize test specific parameters here
-        "test.maf",
+        "variant_file.maf",
         [args: '--omaf']
         
     ]
-    GETBASECOUNTMULTISAMPLE_MAF ( input )
+    GETBASECOUNTMULTISAMPLE ( input )
 }
 
 
@@ -41,9 +40,9 @@ workflow test_getbasecountmultisample_vcf {
         file("tools-test-dataset/getbasecountmultisample/chr22.vcf"),
         params.sample,
         // customize test specific parameters here
-        "test.vcf",
+        "variant_file.vcf",
         [args: '']
         
     ]
-    GETBASECOUNTMULTISAMPLE_VCF ( input )
+    GETBASECOUNTMULTISAMPLE ( input )
 }
