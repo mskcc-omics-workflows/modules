@@ -3,59 +3,57 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - bzip2=1.0.8=h7b6447c_0
+  - _libgcc_mutex=0.1=main
   - c-ares=1.18.1=h7f8727e_0
-  - ca-certificates=2022.07.19=h06a4308_0
-  - certifi=2022.9.14=py38h06a4308_0
+  - ca-certificates=2022.10.11=h06a4308_0
   - coreutils=8.25=1
-  - curl=7.84.0=h5eee18b_0
+  - curl=7.82.0=h7f8727e_0
   - dbus=1.13.18=hb2f20db_0
   - expat=2.4.4=h295c915_0
   - freetype=2.11.0=h70c0345_0
-  - gettext=0.21.0=hf68c758_0
-  - git=2.34.1=pl5262hc120c5b_0
   - glib=2.69.1=h4ff587b_1
-  - icu=58.2=he6710b0_3
   - krb5=1.19.2=hac12032_0
   - ld_impl_linux-64=2.38=h1181459_1
-  - libcurl=7.84.0=h91b91d3_0
+  - libcurl=7.82.0=h0b77cf5_0
   - libedit=3.1.20210910=h7f8727e_0
   - libev=4.33=h7f8727e_1
   - libffi=3.3=he6710b0_2
   - libgcc=7.2.0=h69d50b8_2
-  - libgcc-ng=11.2.0=h1234567_1
+  - libgcc-ng=9.1.0=hdf63c60_0
   - libnghttp2=1.46.0=hce63b2e_0
   - libpng=1.6.37=hbc83047_0
   - libssh2=1.10.0=h8f2d780_0
-  - libstdcxx-ng=11.2.0=h1234567_1
+  - libstdcxx-ng=9.1.0=hdf63c60_0
   - libxcb=1.15=h7f8727e_0
-  - libxml2=2.9.14=h74e7548_0
-  - ncurses=6.3=h5eee18b_3
-  - nextflow=22.04.5=h4a94de4_0
+  - ncurses=6.3=h7f8727e_2
+  - nextflow=22.04.0=h4a94de4_0
   - openjdk=11.0.13=h87a67e3_0
-  - openssl=1.1.1q=h7f8727e_0
+  - openssl=1.1.1s=h7f8727e_0
   - pcre=8.45=h295c915_0
-  - pcre2=10.37=he7ceb23_1
-  - perl=5.26.2=h14c3975_0
-  - pip=22.1.2=py38h06a4308_0
+  - pip=22.2.2=py38h06a4308_0
   - python=3.8.13=h12debd9_0
   - readline=8.1.2=h7f8727e_1
-  - setuptools=63.4.1=py38h06a4308_0
-  - sqlite=3.39.2=h5082296_0
+  - setuptools=65.5.0=py38h06a4308_0
+  - sqlite=3.38.5=hc218d9a_0
   - tk=8.6.12=h1ccaba5_0
   - wheel=0.37.1=pyhd3eb1b0_0
   - xz=5.2.5=h7f8727e_1
-  - zlib=1.2.12=h5eee18b_3
+  - zlib=1.2.12=h7f8727e_2
   - pip:
     - appdirs==1.4.4
+    - arrow==1.2.3
     - attmap==0.13.2
     - attrs==22.1.0
+    - binaryornot==0.4.4
     - bleach==5.0.1
     - boltons==21.0.0
     - cattrs==22.1.0
+    - certifi==2022.6.15.2
+    - chardet==5.0.0
     - charset-normalizer==2.1.1
     - click==8.1.3
     - commonmark==0.9.1
+    - cookiecutter==2.1.1
     - docutils==0.19
     - exceptiongroup==1.0.0rc9
     - future==0.18.2
@@ -69,16 +67,17 @@ dependencies:
     - importlib-resources==5.9.0
     - iniconfig==1.1.1
     - jinja2==3.1.2
+    - jinja2-time==0.2.0
     - jsonschema==4.16.0
     - logmuse==0.2.7
     - lxml==4.9.1
     - markdown==3.4.1
     - markupsafe==2.1.1
-    - nf-core==2.6.0.1
+    - nf-core @ git+https://github.com/mskcc-omics-workflows/nfcore-cmd.git@mskcc/2.6
     - numpy==1.23.3
     - oyaml==1.0
     - packaging==21.3
-    - pandas==1.5.0
+    - pandas==1.4.4
     - piper==0.12.3
     - pkgutil-resolve-name==1.3.10
     - pluggy==1.0.0
@@ -94,6 +93,7 @@ dependencies:
     - pytest==7.1.3
     - pytest-workflow==1.6.0
     - python-dateutil==2.8.2
+    - python-slugify==6.1.2
     - pytz==2022.2.1
     - pyyaml==6.0
     - questionary==1.10.0
@@ -109,6 +109,7 @@ dependencies:
     - smmap==5.0.0
     - sortedcontainers==2.4.0
     - tabulate==0.8.10
+    - text-unidecode==1.3
     - tomli==2.0.1
     - tqdm==4.64.1
     - typing-extensions==4.3.0
