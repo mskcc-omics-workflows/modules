@@ -32,7 +32,7 @@ logmuse==0.2.7
 lxml==4.9.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 markdown==3.4.1; python_version >= "3.7"
 markupsafe==2.1.1; python_version >= "3.7"
-nf-core @ git+https://github.com/mskcc-omics-workflows/nfcore-cmd.git@mskcc/nf-core
+nf-core @ git+https://github.com/mskcc-omics-workflows/nfcore-cmd.git@mskcc/2.6
 numpy==1.23.3
 oyaml==1.0
 packaging==21.3; python_version >= "3.7"
