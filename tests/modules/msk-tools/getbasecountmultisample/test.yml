@@ -1,0 +1,23 @@
+- name: getbasecountmultisample test_getbasecountmultisample_maf
+  command: nextflow run ./tests/modules/msk-tools/getbasecountmultisample -entry test_getbasecountmultisample_maf -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/getbasecountmultisample/nextflow.config
+  tags:
+  - getbasecountmultisample
+  files:
+  - path: output/getbasecountmultisample/variant_file.maf
+  - path: output/getbasecountmultisample/versions.yml
+
+- name: getbasecountmultisample test_getbasecountmultisample_vcf
+  command: nextflow run ./tests/modules/msk-tools/getbasecountmultisample -entry test_getbasecountmultisample_vcf -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/getbasecountmultisample/nextflow.config
+  tags:
+  - getbasecountmultisample
+  files:
+  - path: output/getbasecountmultisample/variant_file.vcf
+  - path: output/getbasecountmultisample/versions.yml
+
+- name: "hpc_getbasecountmultisample"
+  command: nextflow run ./tests/modules/msk-tools/getbasecountmultisample -entry test_getbasecountmultisample_maf -c ./tests/config/nextflow.config  -c ./tests/modules/msk-tools/getbasecountmultisample/nextflow.config -c ./hpc_test.config
+  tags:
+    - "hpc_getbasecountmultisample"
+  files:
+  - path: output/getbasecountmultisample/variant_file.maf
+  - path: output/getbasecountmultisample/versions.yml

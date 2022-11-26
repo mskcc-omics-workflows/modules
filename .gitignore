@@ -1,7 +1,12 @@
+# ignore nextflow output 
 .nextflow/
 .nextflow.log*
 *.swp
 *.pyc
-.vscode/
 work/
+
+
+# ignore software and OS artifacts 
+.DS_Store
+.vscode/
 output/
