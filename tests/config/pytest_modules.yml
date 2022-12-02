@@ -1,0 +1,7 @@
+fastp:
+  - modules/my-path/fastp/**
+  - tests/modules/my-path/fastp/**
+
+multiqc:
+  - modules/my-path/multiqc/**
+  - tests/modules/my-path/multiqc/**
