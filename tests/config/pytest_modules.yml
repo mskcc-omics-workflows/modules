@@ -6,6 +6,18 @@ multiqc:
   - modules/my-path/multiqc/**
   - tests/modules/my-path/multiqc/**
 
+samtools/stats:
+  - modules/nf-core/samtools/stats/**
+  - tests/modules/nf-core/samtools/stats/**
+
+samtools/flagstat:
+  - modules/nf-core/samtools/flagstat/**
+  - tests/modules/nf-core/samtools/flagstat/**
+
+samtools/idxstats:
+  - modules/nf-core/samtools/idxstats/**
+  - tests/modules/nf-core/samtools/idxstats/**
+
 subworkflows/bam_stats_samtools:
   - subworkflows/nf-core/bam_stats_samtools/**
   - tests/subworkflows/nf-core/bam_stats_samtools/**
