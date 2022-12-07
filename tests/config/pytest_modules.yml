@@ -5,3 +5,7 @@ fastp:
 multiqc:
   - modules/my-path/multiqc/**
   - tests/modules/my-path/multiqc/**
+
+subworkflows/bam_stats_samtools:
+  - subworkflows/nf-core/bam_stats_samtools/**
+  - tests/subworkflows/nf-core/bam_stats_samtools/**
