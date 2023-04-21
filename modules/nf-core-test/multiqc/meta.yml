@@ -31,7 +31,7 @@ output:
       description: MultiQC report file
       pattern: "multiqc_report.html"
   - data:
-      type: dir
+      type: directory
       description: MultiQC data dir
       pattern: "multiqc_data"
   - plots:
