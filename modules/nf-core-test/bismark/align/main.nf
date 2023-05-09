@@ -5,7 +5,7 @@ process BISMARK_ALIGN {
     conda (params.enable_conda ? "bioconda::bismark=0.23.0" : null)
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/bismark:0.23.0--0' :
-        'quay.io/biocontainers/bismark:0.23.0--0' }"
+        'biocontainers/bismark:0.23.0--0' }"
     
     input:
     tuple val(meta), path(reads)
