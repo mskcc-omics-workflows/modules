@@ -1,0 +1,11 @@
+## TODO nf-core: Please run the following command to build this file:
+#                nf-core subworkflows create-test-yml 
+- name: "test_bwa_markdup_bqsr"
+  command: nextflow run ./tests/subworkflows/nf-core-test/bwa_markdup_bqsr/main.nf -entry test_bwa_markdup_bqsr -c ./tests/config/nextflow.config
+  tags:
+    - "subworkflows/bwa_markdup_bqsr"
+  files:
+    - path: "output//test.bam"
+      md5sum: e667c7caad0bc4b7ac383fd023c654fc
+    - path: output//versions.yml
+      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b
