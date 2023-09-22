@@ -2,9 +2,9 @@
 
 nextflow.enable.dsl = 2
 
-include { BWA_INDEX } from '../../../../../modules/nf-core/samtools/faidx/main.nf'
-include { GATK4_CREATESEQUENCEDICTIONARY } from '../../../../../modules/nf-core/samtools/faidx/main.nf'
-include { SAMTOOLS_FAIDX } from '../../../../../modules/nf-core/samtools/faidx/main.nf'
+include { BWA_INDEX } from '../../../../modules/nf-core/bwa/index/main.nf'
+include { GATK4_CREATESEQUENCEDICTIONARY } from '../../../../modules/nf-core/gatk4/createsequencedictionary/main.nf'
+include { SAMTOOLS_FAIDX } from '../../../../modules/nf-core/samtools/faidx/main.nf'
 include { BWA_MARKDUP_BQSR } from '../../../../subworkflows/nf-core-test/bwa_markdup_bqsr/main.nf'
 
 workflow test_bwa_markdup_bqsr {
@@ -17,21 +17,18 @@ workflow test_bwa_markdup_bqsr {
         ]
     ]
 
-    fasta = [
-        [id: 'testfa'],
-        file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
-    ]
+    fasta = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
 
-    BWA_INDEX ( fasta )
-    SAMTOOLS_FAIDX ( fasta,[[],[]] )
-    GATK4_CREATESEQUENCEDICTIONARY(fasta)
+    BWA_INDEX ( [[id: 'testfa'],fasta] )
+    SAMTOOLS_FAIDX ( [[id: 'testfa'],fasta],[[],[]] )
+    GATK4_CREATESEQUENCEDICTIONARY([[id: 'testfa'],fasta])
 
     BWA_MARKDUP_BQSR( 
         input,
         fasta,
-        SAMTOOLS_FAIDX.out.fai,
+        SAMTOOLS_FAIDX.out.fai.map{ it[1] }.first(),
         BWA_INDEX.out.index,
-        GATK4_CREATESEQUENCEDICTIONARY.out.dict,
+        GATK4_CREATESEQUENCEDICTIONARY.out.dict.map{ it[1] }.first(),
         [],
         [],
         false

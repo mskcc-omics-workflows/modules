@@ -72,7 +72,7 @@ workflow BWA_MARKDUP_BQSR {
                 fai
             )
             GATK4_BASERECALIBRATOR(
-                GATK4_MARKDUPLICATES.out.output,
+                GATK4_MARKDUPLICATES.out.bam,
                 fasta,
                 fai,
                 dict,
@@ -80,8 +80,8 @@ workflow BWA_MARKDUP_BQSR {
                 known_sites_tbi
             )
             GATK4_APPLYBQSR(
-                GATK4_MARKDUPLICATES.out.output
-                    .join(GATK4_MARKDUPLICATES.out.bam_index)
+                GATK4_MARKDUPLICATES.out.bam
+                    .join(GATK4_MARKDUPLICATES.out.bai)
                     .join(GATK4_BASERECALIBRATOR.out.table)
                     .map{meta, bam, bai, table ->
                         [ meta, bam, bai, table, [] ] // what is intervals? 
