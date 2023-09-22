@@ -4,7 +4,6 @@ import yaml
 import re
 from textwrap import dedent
 
-
 def _get_workflow_names():
     """Get all names of all workflows which have a test.yml in the tests directory.
 
@@ -60,20 +59,3 @@ def test_ensure_valid_version_yml(workflow_dir):
             r"^\d.*|^[a-f0-9]{40}$", str(version)
         ), f"Version number for {tool} must start with a number, or be a Git SHA commit id. "
 
-@pytest.fixture(scope="session", autouse=True)
-def link_nfcore_components(request):
-    print(request)
-    workflow_dir = Path(workflow_dir)
-    addfile = workflow_dir / f"testfile.txt"
-    Path(addfile).touch()
-    yield
-    pass
-    #Path(addfile).unlink()
-
-#@pytest.mark.workflow(*_get_workflow_names())
-def unlink_nfcore_components(workflow_dir):
-    workflow_dir = Path(workflow_dir)
-    addfile = workflow_dir / f"testfile.txt"
-    assert Path(addfile).is_file()
-    Path(addfile).unlink()
-    assert not Path(addfile).is_file()
