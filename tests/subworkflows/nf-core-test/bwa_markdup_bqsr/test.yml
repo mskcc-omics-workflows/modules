@@ -31,6 +31,6 @@
       md5sum: 7362679f176e0f52add03c08f457f646
     - path: output/gatk4/test.bam.metrics
       contains:
-        - ' # TODO nf-core: file md5sum was variable, please replace this text with a string found in the file instead '
+        - 'picard.sam.DuplicationMetrics'
     - path: output/samtools/genome.fasta.fai
       md5sum: 9da2a56e2853dc8c0b86a9e7229c9fe5
