@@ -8,6 +8,25 @@ workflow test_gbcms {
     
     input = [
         [ id:'test' ], // meta map
+        [],
+        [],
+        [],
+        [],
+        [],
+        params.sample,
+        // customize test specific parameters here
+        "variant_file.maf",
+        [args: '--omaf']
+        
+    ]
+
+    GBCMS ( input )
+}
+
+workflow test_gbcms_data {
+    
+    input = [
+        [ id:'test' ], // meta map
         file(params.fasta, checkIfExists: true),
         file(params.fastafai, checkIfExists: true),
         file(params.bam, checkIfExists: true),

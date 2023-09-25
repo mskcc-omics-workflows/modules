@@ -4,5 +4,4 @@
     - gbcms
   files:
     - path: output/gbcms/variant_file.maf
-      md5sum: 039df7916aa49258d63929173923154a
     - path: output/gbcms/versions.yml

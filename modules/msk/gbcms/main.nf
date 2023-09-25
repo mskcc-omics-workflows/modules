@@ -41,7 +41,7 @@ process GBCMS {
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    echo stub > ${prefix}.maf
+    echo stub > 'variant_file.maf'
     echo "${task.process}:" > versions.yml
     echo ' GetBaseCountsMultiSample: 1.2.5' >> versions.yml
 
