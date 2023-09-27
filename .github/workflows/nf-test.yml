@@ -20,11 +20,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: "tests/config/nftest_modules.yml"
-
   test:
     runs-on: ubuntu-20.04
 
