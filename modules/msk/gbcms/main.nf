@@ -13,7 +13,6 @@ process GBCMS {
     script:
     // determine if input file is a maf of vcf 
     // the --maf and --vcf inputs are mutually input exclusive parameters.
-    // Both are part of the same subcommand. Thus warrants groovy scripting. 
     def input_ext = variant_file.getExtension()
     def variant_input = ''
     if(input_ext == 'maf') {
