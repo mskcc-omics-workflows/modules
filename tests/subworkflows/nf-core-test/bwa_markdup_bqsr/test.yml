@@ -31,6 +31,6 @@
       md5sum: 7362679f176e0f52add03c08f457f646
     - path: output/gatk4/test.bam.metrics
       contains:
-        - 'picard.sam.DuplicationMetrics'
+        - "picard.sam.DuplicationMetrics"
     - path: output/samtools/genome.fasta.fai
       md5sum: 9da2a56e2853dc8c0b86a9e7229c9fe5
