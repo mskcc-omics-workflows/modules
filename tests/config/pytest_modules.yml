@@ -41,4 +41,3 @@ samtools/faidx:
 subworkflows/bwa_markdup_bqsr:
   - subworkflows/mskcc/bwa_markdup_bqsr/**
   - tests/subworkflows/mskcc/bwa_markdup_bqsr/**
-
