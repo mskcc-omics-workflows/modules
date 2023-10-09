@@ -137,7 +137,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install Python dependencies
-        run: python -m pip install --upgrade pip pytest-workflow cryptography
+        run: python -m pip install --upgrade pip pytest-workflow cryptography GitPython
 
       - name: Setup Nextflow ${{ matrix.NXF_VER }}
         uses: nf-core/setup-nextflow@v1
