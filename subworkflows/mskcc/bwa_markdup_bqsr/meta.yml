@@ -1,0 +1,76 @@
+name: bam_markdup_bqsr
+description: A subworkflow for generating a BAM file from FASTQ
+keywords:
+  - bam
+  - alignment
+  - markduplicates
+  - bqsr
+  - duplicates
+
+components:
+  - bwa/mem
+  - gatk4/markduplicates
+  - gatk4/applybqsr
+  - gatk4/baserecalibrator
+  - samtools/index
+  - gatk4/markduplicatesspark
+  - gatk4/applybqsrspark
+  - gatk4/baserecalibratorspark
+
+input:
+  - reads:
+      description: |
+        An input channel containing fastq.gz files
+        Structure: [ val(meta), path(reads)]
+      pattern: "*.{fastq.gz}"
+  - fasta:
+      description: |
+        A channel containing the reference FASTA file
+        Structure: [ path(fasta) ]
+      pattern: "*.{fasta,fa}"
+  - fai:
+      description: |
+        A channel containing the index of the reference FASTA file
+        Structure: [ path(fai) ]
+      pattern: "*.{fai}"
+  - bwa_index:
+      description: |
+        A channel containing bwa index reference, which can be created using bwa/index
+        Structure: [ val(meta2), path(bwa_index) ]
+      pattern: "*.{amb,ann,bwt,pac,sa}"
+  - dict:
+      description: |
+        A channel containing a sequence dictionary file (`dict`), which can be created using gatk4/createsequencedictionary 
+        Structure: [ path(blacklist) ]
+      pattern: "*.{dict}"
+  - known_sites:
+      description: |
+        A channel containing one or more files containing known polymorphic sites that should be excluded during base recalibration. 
+        Structure: [ path([known_sites_1, known_sites_2]) ]
+      pattern: "*.vcf.gz"
+  - known_sites_tbi:
+      description: |
+        A channel containing tabix index files of the known_sites files
+        Structure: [ path([known_sites_1_tbi, known_sites_2_tbi]) ]
+      pattern: "*.vcf.gz.tbi"
+  - spark:
+      type: boolean
+      description: |
+        If true use spark gatk4 modules: GATK4_MARKDUPLICATES_SPARK, GATK4_APPLYBQSR_SPARK, GATK4_BASERECALIBRATOR_SPARK
+      pattern: "true|false"
+
+output:
+  - bam:
+      description: |
+        BAM file with marked duplicates and BQSR
+        Structure: [ val(meta), path(bam) ]
+  - bai:
+      description: |
+        BAM index file
+        Structure: [ val(meta), path(bai) ]
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@anoronh4"

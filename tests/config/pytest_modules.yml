@@ -1,0 +1,43 @@
+bwa/mem:
+  - modules/mskcc/bwa/mem/**
+  - tests/modules/mskcc/bwa/mem/**
+
+gatk4/applybqsr:
+  - modules/mskcc/gatk4/applybqsr/**
+  - tests/modules/mskcc/gatk4/applybqsr/**
+
+gatk4/applybqsrspark:
+  - modules/mskcc/gatk4/applybqsrspark/**
+  - tests/modules/mskcc/gatk4/applybqsrspark/**
+
+gatk4/baserecalibrator:
+  - modules/mskcc/gatk4/baserecalibrator/**
+  - tests/modules/mskcc/gatk4/baserecalibrator/**
+
+gatk4/baserecalibratorspark:
+  - modules/mskcc/gatk4/baserecalibratorspark/**
+  - tests/modules/mskcc/gatk4/baserecalibratorspark/**
+
+gatk4/createsequencedictionary:
+  - modules/mskcc/gatk4/createsequencedictionary/**
+  - tests/modules/mskcc/gatk4/createsequencedictionary/**
+
+gatk4/markduplicates:
+  - modules/mskcc/gatk4/markduplicates/**
+  - tests/modules/mskcc/gatk4/markduplicates/**
+
+gatk4/markduplicatesspark:
+  - modules/mskcc/gatk4/markduplicatesspark/**
+  - tests/modules/mskcc/gatk4/markduplicatesspark/**
+
+samtools/index:
+  - modules/mskcc/samtools/index/**
+  - tests/modules/mskcc/samtools/index/**
+
+samtools/faidx:
+  - modules/mskcc/samtools/faidx/**
+  - tests/modules/mskcc/samtools/faidx/**
+
+subworkflows/bwa_markdup_bqsr:
+  - subworkflows/mskcc/bwa_markdup_bqsr/**
+  - tests/subworkflows/mskcc/bwa_markdup_bqsr/**
