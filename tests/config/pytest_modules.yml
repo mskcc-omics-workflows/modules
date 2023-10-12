@@ -1,0 +1,3 @@
+subworkflows/bwa_markdup_bqsr:
+  - subworkflows/nf-core-test/bwa_markdup_bqsr/**
+  - tests/subworkflows/nf-core-test/bwa_markdup_bqsr/**
