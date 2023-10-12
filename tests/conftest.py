@@ -14,13 +14,15 @@ def pytest_sessionstart(session):
     # Add the remote origin
     has_remote = False
     for remote in repo.remotes:
-        if remote.name == "nf-core-repo":
+        if remote.name == remote_name:
             has_remote = True
     if not has_remote:
         repository_url = "https://github.com/nf-core/modules.git"
         remote = repo.create_remote(remote_name, repository_url, track="master")
     remote.fetch()
-    master_branch = repo.create_head("master", remote.refs.master)
+    latest_commit = remote.refs['master'].commit
+
+    master_branch = repo.create_head("master", commit=latest_commit)
 
     # Print the remote URLs to verify
     for remote in repo.remotes:
@@ -30,7 +32,7 @@ def pytest_sessionstart(session):
     repo.git.read_tree("--prefix=" + subfolder_path, "-u", f"{remote_name}/master:{subfolder_path}")
 
 
-def pytest_sessionfinish(session, exitstatus): 
+def pytest_sessionfinish(session, exitstatus):
     local_repository_path = Path(__file__).parent.parent.resolve()
     repo = git.Repo(local_repository_path)
     repo.git.rm(subfolder_path, r=True,f=True,q=True)
