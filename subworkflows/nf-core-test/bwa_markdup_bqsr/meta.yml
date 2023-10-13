@@ -1,4 +1,4 @@
-name: bam_markdup_bqsr
+name: bwa_markdup_bqsr
 description: A subworkflow for generating a BAM file from FASTQ
 keywords:
   - bam
@@ -13,9 +13,9 @@ components:
   - gatk4/applybqsr
   - gatk4/baserecalibrator
   - samtools/index
-  - gatk4/markduplicatesspark
-  - gatk4/applybqsrspark
-  - gatk4/baserecalibratorspark
+  - gatk4/markduplicates/spark
+  - gatk4/applybqsr/spark
+  - gatk4/baserecalibrator/spark
 
 input:
   - reads:
