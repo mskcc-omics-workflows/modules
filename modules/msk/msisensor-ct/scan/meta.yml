@@ -1,0 +1,43 @@
+name: msisensor_ct_scan
+description: MSIsensor-pro evaluates Microsatellite Instability (MSI) for cancer patients with next generation sequencing data. It accepts the whole genome sequencing, whole exome sequencing and target region (panel) sequencing data as input
+keywords:
+  - micro-satellite-scan
+  - msisensor-ct
+  - scan
+tools:
+  - msisensor_ct:
+      description: "MSIsensor-ct microsatellite instability detection using cfDNA sequencing data."
+      homepage: "https://github.com/niu-lab/msisensor-ct"
+      documentation: "https://github.com/niu-lab/msisensor-ct"
+      tool_dev_url: "https://github.com/msk-access/msisensor-ct"
+      doi: "https://doi.org/10.1093/bib/bbaa402"
+      licence: ["Custom Licence"]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  - fasta:
+      type: file
+      description: Reference genome
+      pattern: "*.{fasta}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. [ id:'test', single_end:false ]
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - list:
+      type: file
+      description: File containing microsatellite list
+      pattern: "*.{list}"
+
+authors:
+  - "charalk@mskcc.org"
