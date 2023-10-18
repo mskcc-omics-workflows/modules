@@ -1,0 +1,7 @@
+- name: msisensor-ct test_msisensor_ct
+  command: nextflow run ./tests/modules/msk/msisensor-ct -entry test_msisensor_ct -c ./tests/config/nextflow.config -c ./tests/modules/msk/msisensor-ct/nextflow.config -stub-run
+  tags:
+    - msisensor-ct
+  files:
+    - path: output/msisensor-ct/${prefix}.msisensor_scan.list
+    - path: output/msisensor-ct/versions.yml
