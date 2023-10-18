@@ -2,25 +2,16 @@
 
 nextflow.enable.dsl = 2
 
-include { MSISENSOR-CT } from '../../../../modules/msk/msisensor-ct/scan/main.nf'
+include { MSISENSOR_CT_SCAN } from '../../../../modules/msk/msisensor-ct/scan/main.nf'
 
 workflow test_msisensor_ct {
 
     input = [
         [ id:'test' ], // meta map
-        [],
-        [],
-        [],
-        [],
-        [],
-        params.sample,
-        // customize test specific parameters here
-        "fasta",
-        [args: '--fa']
-
+        []
     ]
 
-    MSISENSOR-CT ( input )
+    MSISENSOR_CT_SCAN ( input )
 }
 
 workflow test_msisensor_ct_data {
@@ -28,7 +19,7 @@ workflow test_msisensor_ct_data {
     input = [
         [ id:'test' ], // meta map
         file(params.fasta, checkIfExists: true),
-        file("/home/buehlere/access_nextflow/getbasecountmultisample/chr22.maf"),
+        file("/home/charalk/Homo_sapiens_assembly19.fasta"),
         params.sample,
         // customize test specific parameters here
         "fasta",
@@ -36,5 +27,5 @@ workflow test_msisensor_ct_data {
 
     ]
 
-    MSISENSOR-CT ( input )
+    MSISENSOR_CT_SCAN ( input )
 }

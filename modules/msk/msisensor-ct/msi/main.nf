@@ -9,6 +9,7 @@ process MSISENSOR_CT_MSI {
     tuple val(meta), path(tumor_bam), path(tumor_bam_index), path(normal_bam), path(normal_bam_index), path(intervals)
     path scan
     path(models, stageAs: "models/*")
+    val(ctdna)
 
     output:
     tuple val(meta), path("${prefix}")        , emit: msi
@@ -27,7 +28,7 @@ process MSISENSOR_CT_MSI {
     def tumor_bam_cmd     = tumor_bam  ? "-t $tumor_bam"  : ""
     def normal_bam_cmd    = normal_bam ? "-n $normal_bam" : ""
     def interval_command  = intervals  ? "-e $intervals"  : ""
-    def ctdna_cmd  = ctdna  ? "-D "  : ""
+    def ctdna_cmd  = "-D $ctdna"
     """
     msisensor-ct msi \\
         -b ${task.cpus} \\

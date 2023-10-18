@@ -30,4 +30,12 @@ process MSISENSOR_CT_SCAN {
         msisensor-ct: \$(msisensor-ct 2>&1 | sed -nE 's/Version:\\sv([0-9]\\.[0-9])/\\1/ p')
     END_VERSIONS
     """
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    """
+    echo stub > '${prefix}.msisensor_scan.list'
+    echo "${task.process}:" > versions.yml
+    echo ' msisensor-ct: 1.0' >> versions.yml
+
+    """
 }
