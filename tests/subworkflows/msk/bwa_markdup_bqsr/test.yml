@@ -1,0 +1,36 @@
+- name: bwa_markdup_bqsr test_bwa_markdup_bqsr
+  command: nextflow run ./tests/subworkflows/msk/bwa_markdup_bqsr -entry test_bwa_markdup_bqsr -c ./tests/config/nextflow.config
+  tags:
+    - bwa
+    - bwa/mem
+    - gatk4
+    - gatk4/applybqsr
+    - gatk4/applybqsr/spark
+    - gatk4/baserecalibrator
+    - gatk4/baserecalibrator/spark
+    - gatk4/markduplicates
+    - gatk4/markduplicates/spark
+    - samtools
+    - samtools/index
+    - subworkflows
+    - subworkflows/bwa_markdup_bqsr
+  files:
+    - path: output/bwa/bwa/genome.amb
+      md5sum: 3a68b8b2287e07dd3f5f95f4344ba76e
+    - path: output/bwa/bwa/genome.ann
+      md5sum: c32e11f6c859f166c7525a9c1d583567
+    - path: output/bwa/bwa/genome.bwt
+      md5sum: 0469c30a1e239dd08f68afe66fde99da
+    - path: output/bwa/bwa/genome.pac
+      md5sum: 983e3d2cd6f36e2546e6d25a0da78d66
+    - path: output/bwa/bwa/genome.sa
+      md5sum: ab3952cabf026b48cd3eb5bccbb636d1
+    - path: output/bwa/test.bam
+      md5sum: cf74076b67bb4c9b9c7b2d88964bf5d9
+    - path: output/gatk4/genome.dict
+      md5sum: 7362679f176e0f52add03c08f457f646
+    - path: output/gatk4/test.bam.metrics
+      contains:
+        - "picard.sam.DuplicationMetrics"
+    - path: output/samtools/genome.fasta.fai
+      md5sum: 9da2a56e2853dc8c0b86a9e7229c9fe5
