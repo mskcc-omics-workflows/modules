@@ -5,7 +5,7 @@ nextflow.enable.dsl = 2
 include { BWA_INDEX } from '../../../../modules/nf-core/bwa/index/main.nf'
 include { GATK4_CREATESEQUENCEDICTIONARY } from '../../../../modules/nf-core/gatk4/createsequencedictionary/main.nf'
 include { SAMTOOLS_FAIDX } from '../../../../modules/nf-core/samtools/faidx/main.nf'
-include { BWA_MARKDUP_BQSR } from '../../../../subworkflows/nf-core-test/bwa_markdup_bqsr/main.nf'
+include { BWA_MARKDUP_BQSR } from '../../../../subworkflows/msk/bwa_markdup_bqsr/main.nf'
 
 workflow test_bwa_markdup_bqsr {
     

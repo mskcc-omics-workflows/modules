@@ -1,5 +1,5 @@
 - name: bwa_markdup_bqsr test_bwa_markdup_bqsr
-  command: nextflow run ./tests/subworkflows/nf-core-test/bwa_markdup_bqsr -entry test_bwa_markdup_bqsr -c ./tests/config/nextflow.config
+  command: nextflow run ./tests/subworkflows/msk/bwa_markdup_bqsr -entry test_bwa_markdup_bqsr -c ./tests/config/nextflow.config
   tags:
     - bwa
     - bwa/mem
