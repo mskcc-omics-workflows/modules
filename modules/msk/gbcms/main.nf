@@ -4,7 +4,7 @@ process GBCMS {
     container "ghcr.io/msk-access/gbcms:1.2.5"
     
     input:
-    tuple val(meta), path(fasta), path(fastafai), path(bam), path(bambai), path(variant_file), val(sample), val(output)
+    tuple val(meta), path(fasta), path(bam), path(variant_file), val(sample), val(output)
 
     output:
      path('variant_file.{vcf,maf}')
