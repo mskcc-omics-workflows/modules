@@ -7,9 +7,11 @@ process GBCMS {
     tuple val(meta), path(fasta), path(fastfai), path(bam), path(bambai), path(variant_file), val(sample), val(output)
 
     output:
-     path('variant_file.{vcf,maf}')
-     path("versions.yml")
-     
+     tuple val(meta), path('variant_file.{vcf,maf}') , emit: variant_file
+     tuple val(meta), path("versions.yml")   , emit: versions
+
+    when:
+        task.ext.when == null || task.ext.when
     script:
     def args = task.ext.args ?: ''
     // determine if input file is a maf of vcf 

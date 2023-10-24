@@ -1,7 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
 name: "gbcms"
-## TODO nf-core: Add a description of the module and list keywords
 description: This module wraps GetBaseCountsMultiSample, which calculates the base counts in multiple BAM files for all the sites in a given VCF file or MAF file
 keywords:
   - basecount
@@ -9,12 +8,11 @@ keywords:
   - vcf
 tools:
   - "gbcms":
-      ## TODO nf-core: Add a description and other details for the software below
       description: "Calculate the base counts in multiple BAM files for all the sites in a given VCF file or MAF file"
       homepage: "https://github.com/msk-access/GetBaseCountsMultiSample"
       documentation: "https://github.com/msk-access/GetBaseCountsMultiSample/blob/master/README.md"
       
-## TODO nf-core: Add a description of all of the variables used as input
+
 input:
   # Only when we have meta
   - meta:
@@ -23,7 +21,6 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'test', single_end:false ]`
 
-  ## TODO nf-core: Delete / customise this example input
   - fasta:
       type: file
       description: Input reference sequence file
@@ -52,8 +49,6 @@ input:
       description: Output file
 
   
-
-## TODO nf-core: Add a description of all of the variables used as output
 output:
   #Only when we have meta
   - meta:
@@ -66,7 +61,6 @@ output:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
   - variant_file:
       type: file
       description: base counts in multiple BAM files for all the sites in a given VCF file or MAF file
