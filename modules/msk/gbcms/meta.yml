@@ -13,7 +13,7 @@ tools:
       description: "Calculate the base counts in multiple BAM files for all the sites in a given VCF file or MAF file"
       homepage: "https://github.com/msk-access/GetBaseCountsMultiSample"
       documentation: "https://github.com/msk-access/GetBaseCountsMultiSample/blob/master/README.md"
-      
+
 ## TODO nf-core: Add a description of all of the variables used as input
 input:
   # Only when we have meta
@@ -50,8 +50,6 @@ input:
   - output:
       type: string
       description: Output file
-
-  
 
 ## TODO nf-core: Add a description of all of the variables used as output
 output:
