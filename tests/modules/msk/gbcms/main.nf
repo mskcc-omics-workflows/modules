@@ -31,7 +31,7 @@ workflow test_gbcms_data {
         file(params.fastafai, checkIfExists: true),
         file(params.bam, checkIfExists: true),
         file(params.bambai, checkIfExists: true),
-        file("/home/buehlere/access_nextflow/getbasecountmultisample/chr22.maf"),
+        file(params.variant, checkIfExists: true),
         params.sample,
         // customize test specific parameters here
         "variant_file.maf"
