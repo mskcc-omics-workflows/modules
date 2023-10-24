@@ -28,10 +28,18 @@ input:
       type: file
       description: Input reference sequence file
       pattern: "*.fasta"
+  - fastafai:
+      type: file
+      description: Index of the reference Fasta
+      pattern: "*.fai"
   - bam:
       type: file
       description: Input bam file, in the format of SAMPLE_NAME:BAM_FILE. This paramter need to be specified at least once
       pattern: "*.bam"
+  - bambai:
+      type: file
+      description: Index of Bam
+      pattern: "*.bai"
   - variant_file:
       type: file
       description: Input variant file in TCGA maf format. --maf or --vcf need to be specified at least once. But --maf and --vcf are mutually exclusive

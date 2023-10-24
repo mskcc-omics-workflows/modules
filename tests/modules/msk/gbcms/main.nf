@@ -34,8 +34,7 @@ workflow test_gbcms_data {
         file("/home/buehlere/access_nextflow/getbasecountmultisample/chr22.maf"),
         params.sample,
         // customize test specific parameters here
-        "variant_file.maf",
-        [args: '--omaf']
+        "variant_file.maf"
         
     ]
 

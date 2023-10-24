@@ -2,19 +2,21 @@ process GBCMS {
     tag "$meta.id"
     label 'process_single'
     container "ghcr.io/msk-access/gbcms:1.2.5"
-    
+    // add back fasta.fai and bam.bai 
     input:
-    tuple val(meta), path(fasta), path(bam), path(variant_file), val(sample), val(output)
+    tuple val(meta), path(fasta), path(fastfai), path(bam), path(bambai), path(variant_file), val(sample), val(output)
 
     output:
      path('variant_file.{vcf,maf}')
      path("versions.yml")
      
     script:
+    def args = task.ext.args ?: ''
     // determine if input file is a maf of vcf 
     // the --maf and --vcf inputs are mutually input exclusive parameters.
     def input_ext = variant_file.getExtension()
     def variant_input = ''
+    
     if(input_ext == 'maf') {
         variant_input = '--maf ' + variant_file
     } 
@@ -25,6 +27,7 @@ process GBCMS {
     if(variant_input == ''){
         throw new Exception("Variant file must be maf or vcf, not ${input_ext}")
     }
+
     """
     GetBaseCountsMultiSample --fasta ${fasta} \\
     ${variant_input} \\
