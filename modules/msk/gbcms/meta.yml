@@ -11,7 +11,7 @@ tools:
       description: "Calculate the base counts in multiple BAM files for all the sites in a given VCF file or MAF file"
       homepage: "https://github.com/msk-access/GetBaseCountsMultiSample"
       documentation: "https://github.com/msk-access/GetBaseCountsMultiSample/blob/master/README.md"
-      
+
 input:
   # Only when we have meta
   - meta:
@@ -47,7 +47,6 @@ input:
       type: string
       description: Output file
 
-  
 output:
   #Only when we have meta
   - meta:
