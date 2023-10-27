@@ -4,16 +4,19 @@ process GBCMS {
     container "ghcr.io/msk-access/gbcms:1.2.5"
     // add back fasta.fai and bam.bai 
     input:
-    tuple val(meta), path(fasta), path(fastfai), path(bam), path(bambai), path(variant_file), val(sample), val(output)
+    tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
+    path(fasta) 
+    path(fastfai)
 
     output:
-     tuple val(meta), path('variant_file.{vcf,maf}') , emit: variant_file
+     tuple val(meta), path('*.{vcf,maf}') , emit: variant_file
      tuple val(meta), path("versions.yml")   , emit: versions
 
     when:
         task.ext.when == null || task.ext.when
     script:
     def args = task.ext.args ?: ''
+    def sample = meta.sample
     // determine if input file is a maf of vcf 
     // the --maf and --vcf inputs are mutually input exclusive parameters.
     def input_ext = variant_file.getExtension()

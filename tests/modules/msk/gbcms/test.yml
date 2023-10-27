@@ -1,5 +1,5 @@
 - name: gbcms test_gbcms
-  command: nextflow run ./tests/modules/msk/gbcms -entry test_gbcms -c ./tests/config/nextflow.config -c ./tests/modules/msk/gbcms/nextflow.config -stub-run
+  command: nextflow run ./tests/modules/msk/gbcms -entry test_gbcms -c ./tests/config/nextflow.config -c ./tests/modules/msk/gbcms/nextflow.config
   tags:
     - gbcms
   files:

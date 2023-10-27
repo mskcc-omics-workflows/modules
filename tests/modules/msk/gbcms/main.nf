@@ -4,39 +4,32 @@ nextflow.enable.dsl = 2
 
 include { GBCMS } from '../../../../modules/msk/gbcms/main.nf'
 
-workflow test_gbcms {
+workflow test_gbcms_stub {
     
     input = [
-        [ id:'test' ], // meta map
+        [ id:'test', sample:'sample' ], // meta map
         [],
         [],
         [],
-        [],
-        [],
-        params.sample,
-        // customize test specific parameters here
-        "variant_file.maf",
-        [args: '--omaf']
-        
-    ]
-
-    GBCMS ( input )
-}
-
-workflow test_gbcms_data {
-    
-    input = [
-        [ id:'test' ], // meta map
-        file(params.fasta, checkIfExists: true),
-        file(params.fastafai, checkIfExists: true),
-        file(params.bam, checkIfExists: true),
-        file(params.bambai, checkIfExists: true),
-        file(params.variant, checkIfExists: true),
-        params.sample,
-        // customize test specific parameters here
         "variant_file.maf"
         
     ]
 
-    GBCMS ( input )
+    GBCMS ( input, [], [])
+}
+
+workflow test_gbcms {
+    
+    input = [
+        [ id:'test', sample:'197' ], // meta map
+        file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
+        file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
+        file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
+        "variant_file.vcf"
+        
+    ]
+    fasta = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
+    fastafai = file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true)
+
+    GBCMS ( input, fasta, fastafai)
 }
