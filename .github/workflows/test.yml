@@ -121,7 +121,7 @@ jobs:
           - tags: "nf-test"
           - profile: "conda"
             tags: gbcms
-            
+
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
