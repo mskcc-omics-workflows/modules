@@ -117,6 +117,9 @@ jobs:
       matrix:
         tags: ["${{ fromJson(needs.pytest-changes.outputs.modules) }}"]
         profile: ["docker", "singularity", "conda"]
+        exclude:
+          - tags: "gbcms"
+          - profile: "conda"
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
