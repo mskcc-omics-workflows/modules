@@ -118,8 +118,10 @@ jobs:
         tags: ["${{ fromJson(needs.pytest-changes.outputs.modules) }}"]
         profile: ["docker", "singularity", "conda"]
         exclude:
-          - tags: "gbcms"
+          - tags: "nf-test"
           - profile: "conda"
+            tags: gbcms
+            
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
