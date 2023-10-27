@@ -1,9 +1,7 @@
 process GBCMS {
     tag "$meta.id"
     label 'process_single'
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/gbcms:1.2.5' :
-        'ghcr.io/msk-access/gbcms:1.2.5' }"
+    container "ghcr.io/msk-access/gbcms:1.2.5"
     
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
@@ -17,6 +15,9 @@ process GBCMS {
     when:
         task.ext.when == null || task.ext.when
     script:
+    if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
+        error "GetBaseCountsMultiSample module does not support Conda. Please use Docker / Singularity / Podman instead."
+    }
     def args = task.ext.args ?: ''
     def sample = meta.sample
     // determine if input file is a maf of vcf 
