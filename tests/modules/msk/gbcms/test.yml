@@ -3,5 +3,5 @@
   tags:
     - gbcms
   files:
-    - path: output/gbcms/variant_file.{vcf,maf}
+    - path: output/gbcms/variant_file.vcf
     - path: output/gbcms/versions.yml

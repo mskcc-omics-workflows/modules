@@ -11,7 +11,7 @@ workflow test_gbcms_stub {
         [],
         [],
         [],
-        "variant_file.maf"
+        "variant_file.vcf"
         
     ]
 
