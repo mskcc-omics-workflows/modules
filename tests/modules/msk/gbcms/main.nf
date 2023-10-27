@@ -30,6 +30,5 @@ workflow test_gbcms {
     ]
     fasta = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
     fastafai = file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true)
-
     GBCMS ( input, fasta, fastafai)
 }

@@ -2,7 +2,7 @@ process GBCMS {
     tag "$meta.id"
     label 'process_single'
     container "ghcr.io/msk-access/gbcms:1.2.5"
-    // add back fasta.fai and bam.bai 
+    
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
     path(fasta) 
