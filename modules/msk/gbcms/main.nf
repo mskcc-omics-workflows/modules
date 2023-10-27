@@ -41,7 +41,7 @@ process GBCMS {
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}": 
-        gbcms: \$(echo \$(GetBaseCountsMultiSample --help) | grep -oP '[0-9]\\.[0-9]\\.[0-9]')
+        GetBaseCountsMultiSample: \$(echo \$(GetBaseCountsMultiSample --help) | grep -oP '[0-9]\\.[0-9]\\.[0-9]')
     END_VERSIONS
     """
 
@@ -50,7 +50,7 @@ process GBCMS {
     """
     echo stub > 'variant_file.maf'
     echo "${task.process}:" > versions.yml
-    echo 'gbcms: 1.2.5' >> versions.yml
+    echo 'GetBaseCountsMultiSample: 1.2.5' >> versions.yml
 
     """
 }
