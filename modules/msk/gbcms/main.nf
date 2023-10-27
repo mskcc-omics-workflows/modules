@@ -28,7 +28,6 @@ process GBCMS {
     if(input_ext == 'vcf'){
             variant_input = '--vcf ' + variant_file
     }
-    // raise exception if file extension other than maf or vcf is passed 
     if(variant_input == ''){
         throw new Exception("Variant file must be maf or vcf, not ${input_ext}")
     }
