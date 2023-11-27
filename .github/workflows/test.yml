@@ -117,10 +117,6 @@ jobs:
       matrix:
         tags: ["${{ fromJson(needs.pytest-changes.outputs.modules) }}"]
         profile: ["docker", "singularity", "conda"]
-        exclude:
-          - tags: "nf-test"
-          - profile: "conda"
-            tags: gbcms
 
     env:
       NXF_ANSI_LOG: false
