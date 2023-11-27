@@ -40,9 +40,6 @@ input:
       type: file
       description: Input variant file in TCGA maf format. --maf or --vcf need to be specified at least once. But --maf and --vcf are mutually exclusive
       pattern: "*.{maf,vcf}"
-  - sample:
-      type: string
-      description: Required for formatting BAM input
   - output:
       type: string
       description: Output file
