@@ -1,6 +1,7 @@
 process GBCMS {
     tag "$meta.id"
     label 'process_single'
+    //TODO:need to change container
     container "ghcr.io/msk-access/gbcms:1.2.5"
     
     input:
@@ -21,6 +22,7 @@ process GBCMS {
     def args = task.ext.args ?: ''
     def sample = meta.sample
     // determine if input file is a maf of vcf 
+
     def input_ext = variant_file.getExtension()
     def variant_input = ''
     
