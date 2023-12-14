@@ -15,9 +15,9 @@ process GBCMS {
     when:
         task.ext.when == null || task.ext.when
     script:
-    // if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
-    //     error "GetBaseCountsMultiSample module does not support Conda. Please use Docker / Singularity / Podman instead."
-    // }
+    if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
+        error "GetBaseCountsMultiSample module does not support Conda. Please use Docker / Singularity / Podman instead."
+    }
     def args = task.ext.args ?: ''
     def sample = meta.sample
     // determine if input file is a maf of vcf 

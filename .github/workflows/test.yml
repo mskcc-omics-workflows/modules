@@ -463,6 +463,9 @@ jobs:
         exclude:
           - tags: "nf-test"
           - profile: "conda"
+            tags: gbcms
+          - tags: "nf-test"
+          - profile: "conda"
             tags: annotsv
           - profile: "conda"
             tags: happy/sompy
