@@ -1,7 +1,0 @@
-- name: gbcms test_gbcms
-  command: nextflow run ./tests/modules/msk/gbcms -entry test_gbcms -c ./tests/config/nextflow.config -c ./tests/modules/msk/gbcms/nextflow.config
-  tags:
-    - gbcms
-  files:
-    - path: output/gbcms/variant_file.vcf
-    - path: output/gbcms/versions.yml
