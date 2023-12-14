@@ -1,13 +1,12 @@
 process GBCMS {
     tag "$meta.id"
     label 'process_single'
-    //TODO:need to change container
     container "ghcr.io/msk-access/gbcms:1.2.5"
     
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
     path(fasta) 
-    path(fastfai)
+    path(fastafai)
 
     output:
      tuple val(meta), path('*.{vcf,maf}') , emit: variant_file

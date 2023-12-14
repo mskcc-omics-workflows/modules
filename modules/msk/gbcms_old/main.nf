@@ -6,7 +6,7 @@ process GBCMS {
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
     path(fasta) 
-    path(fastfai)
+    path(fastafai)
 
     output:
      tuple val(meta), path('*.{vcf,maf}') , emit: variant_file
