@@ -459,11 +459,9 @@ jobs:
       fail-fast: false
       matrix:
         tags: ["${{ fromJson(needs.nf-test-changes.outputs.modules) }}"]
-        profile: ["docker", "singularity", "conda"]
+        profile: ["docker", "singularity"]
         exclude:
           - tags: "nf-test"
-          - profile: "conda"
-            tags: gbcms
           - tags: "nf-test"
           - profile: "conda"
             tags: annotsv
