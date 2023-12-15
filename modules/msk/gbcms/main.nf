@@ -49,7 +49,9 @@ process GBCMS {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
+
     """
+    
     touch variant_file.maf
     cat <<-END_VERSIONS > versions.yml
     "${task.process}": 
