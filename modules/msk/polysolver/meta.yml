@@ -1,40 +1,49 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "polysolver"
-## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: HLA class I genotyping
 keywords:
-  - sort
-  - example
-  - genomics
+  - hla
+  - genotyping
+  - bam
 tools:
   - "polysolver":
-      ## TODO nf-core: Add a description and other details for the software below
-      description: "The BWA read mapper."
+      description: "HLA typing"
       homepage: "None"
       documentation: "None"
       tool_dev_url: "None"
       doi: ""
       licence: ["GPL v3"]
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
-  # Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  ## TODO nf-core: Delete / customise this example input
   - bam:
       type: file
-      description: Sorted BAM/CRAM/SAM file
+      description: Sorted BAM file
       pattern: "*.{bam,cram,sam}"
+  
+  - includeFreq:
+      type: val
+      description: "Flag indicating whether population-level allele frequencies should be used as priors (0 or 1) (Default: 1)"
+  
+  - build:
+      type: val
+      description: "reference genome used in the BAM file (hg18 or hg19 or hg38) (Default: hg19)"
+  
+  - format:
+      type: val
+      description: "fastq format (STDFQ, ILMFQ, ILM1.8 or SLXFQ; see Novoalign documentation) (Default: STDFQ)"
 
-## TODO nf-core: Add a description of all of the variables used as output
+  - insertCalc:
+      type: val
+      description: "flag indicating whether empirical insert size distribution should be used in the model (0 or 1) (Default: 0)"
+
 output:
-  #Only when we have meta
   - meta:
       type: map
       description: |
@@ -45,11 +54,10 @@ output:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
-  - bam:
+  - hla:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Polysolver HLA genotyping result
+      pattern: "*.hla.txt"
 
 authors:
   - "@anoronh4"
