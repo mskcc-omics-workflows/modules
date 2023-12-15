@@ -29,7 +29,6 @@ process POLYSOLVER {
     def build_param       = build ? (["GRCh37","hg19"].contains(build) ? "hg19" : "hg38") : "hg19"
     def format_param      = format ?: "STDFQ"
     """
-    #export PATH=/home/polysolver/scripts/:\$PATH
     cp /home/polysolver/scripts/shell_call_hla_type .
     sed -i "171s/TMP_DIR=.*/TMP_DIR=nf-scratch/" shell_call_hla_type 
     bash shell_call_hla_type \\
