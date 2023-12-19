@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "snppileup"
+description: Calculate snp pileups from a bam pair
+keywords:
+  - snp
+  - pileup
+  - bams
+tools:
+  - "htstools":
+      description: "Contains tools to process bam files for downstream copy number analysis."
+      homepage: "https://github.com/mskcc/htstools"
+      documentation: "https://github.com/mskcc/htstools"
+      tool_dev_url: ""
+      doi: ""
+      licence:
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+  - input:
+      type: list
+      description: "List of input bams in the order of tumor then normal e.g. [ tumor.bam, normal.bam ]"
+  - input_index:
+      type: list
+      description: "List of input bam indexes in the same order as input e.g. [ tumor.bai, normal.bai ]"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - pileup:
+      type: file
+      description: snppileup file
+      pattern: "*.snp_pileup.gz"
+
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"
