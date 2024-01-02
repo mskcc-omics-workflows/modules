@@ -8,7 +8,9 @@ process SNPPILEUP {
 
     input:
 
-    tuple val(meta), path(input), path(input_index)    //  [ meta (id), [ tumorBam, normalBam ], [ tumorBai, normalBai ]]
+    tuple val(meta),  path(normal), path(normal_index)
+    tuple val(meta1), path(tumor),  path(tumor_index)
+    tuple val(meta2), path(dbsnp),  path(dbsnp_index)
 
 
     output:
@@ -25,9 +27,10 @@ process SNPPILEUP {
     """
     /usr/bin/snp-pileup \
         ${args} \
+        ${dbsnp} \
         ${prefix}.snp_pileup.gz \
-        ${input[1]} \
-        ${input[0]}
+        ${normal} \
+        ${tumor}
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         htslib: 1.5

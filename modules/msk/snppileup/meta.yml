@@ -21,12 +21,26 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'pair_id' ]`
-  - input:
-      type: list
-      description: "List of input bams in the order of tumor then normal e.g. [ tumor.bam, normal.bam ]"
-  - input_index:
-      type: list
-      description: "List of input bam indexes in the same order as input e.g. [ tumor.bai, normal.bai ]"
+  - normal_bam:
+      type: file
+      description: "The bam of the normal sample"
+      pattern: "*.bam"
+  - normal_bai:
+      type: file
+      description: "The bam index of the normal sample"
+      pattern: "*.bai"
+  - tumor_bam:
+      type: file
+      description: "The bam of the tumor sample"
+      pattern: "*.bam"
+  - tumor_bai:
+      type: file
+      description: "The bam index of the tumor sample"
+      pattern: "*.bai"
+  - dbsnp:
+      type: file
+      descrption: A NCBI provided database on genetic variation
+      pattern:
 
 output:
   - meta:
