@@ -20,15 +20,29 @@ nextflow_process {
         when {
             process {
                 """                
-                input[0] = [ id:'test' ] // meta map
-                input[1] = [
-                            file(params.test_data['homo_sapiens']['illumina']['test2_paired_end_markduplicates_sorted_bam'], checkIfExists: true),
-                            file(params.test_data['homo_sapiens']['illumina']['test_paired_end_markduplicates_sorted_bam'], checkIfExists: true) 
-                           ]
-                input[2] = [
-                            file(params.test_data['homo_sapiens']['illumina']['test2_paired_end_markduplicates_sorted_bam_bai'], checkIfExists: true),
-                            file(params.test_data['homo_sapiens']['illumina']['test_paired_end_markduplicates_sorted_bam_bai'], checkIfExists: true) 
-                           ]
+                meta = [ id:'test' ] // meta map
+                normal = [
+                                meta,
+                                [
+                                file(params.test_data['homo_sapiens']['illumina']['test_paired_end_markduplicates_sorted_bam'], checkIfExists: true),
+                                file(params.test_data['homo_sapiens']['illumina']['test_paired_end_markduplicates_sorted_bam_bai'], checkIfExists: true) 
+                                ]
+                         ]
+                tumor = [
+                                meta,
+                                [
+                                file(params.test_data['homo_sapiens']['illumina']['test2_paired_end_markduplicates_sorted_bam'], checkIfExists: true),
+                                file(params.test_data['homo_sapiens']['illumina']['test2_paired_end_markduplicates_sorted_bam_bai'], checkIfExists: true)
+                                ]
+                        ]
+                dbsnp = [
+                                meta,
+                                [
+                                file(params.test_data['homo_sapiens']['genome']['dbsnp_146_hg38_vcf_gz'], checkIfExists: true),
+                                file(params.test_data['homo_sapiens']['genome']['dbsnp_146_hg38_vcf_gz_tbi'], checkIfExists: true)
+                                ]
+                        ]
+                input = [normal, tumor, dbsnp]
                 """
             }
         }
