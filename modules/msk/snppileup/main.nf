@@ -48,11 +48,9 @@ process SNPPILEUP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        facets_suite: 2.0.9-7d54d0f67e3136bd60d94ad810a9c855df113096
-        facets: 0.6.2
-        htslib: 1.18
-        r: 4.3
-        pctGCdata: 0.3.0
+        htslib: 1.5
+        htstools: 0.1.1
+        r: 3.6.1
     END_VERSIONS
     """
 }
