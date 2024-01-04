@@ -1,7 +1,9 @@
 process GBCMS {
     tag "$meta.id"
     label 'process_single'
-    container "ghcr.io/msk-access/gbcms:1.2.5"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'ghcr.io/msk-access/gbcms:1.2.5':
+        'ghcr.io/msk-access/gbcms:1.2.5' }"
     
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
@@ -16,7 +18,7 @@ process GBCMS {
         task.ext.when == null || task.ext.when
     script:
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
-        error "GetBaseCountsMultiSample module does not support Conda. Please use Docker / Singularity / Podman instead."
+        error "GetBaseCountsMultiSample module does not support Conda. Please use Docker / Singularity instead."
     }
     def args = task.ext.args ?: ''
     def sample = meta.sample
@@ -51,7 +53,7 @@ process GBCMS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    
+
     touch variant_file.maf
     cat <<-END_VERSIONS > versions.yml
     "${task.process}": 
