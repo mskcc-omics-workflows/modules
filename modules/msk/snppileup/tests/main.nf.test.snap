@@ -1,0 +1,31 @@
+{
+    "snppileup - bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.snp_pileup.gz:md5,a75ede2dbc28d4e7182a4a10236913a7"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,3d47f22d82f47b1b7d18da5c39924560"
+                ],
+                "pileup": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.snp_pileup.gz:md5,a75ede2dbc28d4e7182a4a10236913a7"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,3d47f22d82f47b1b7d18da5c39924560"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-03T13:44:35.442154"
+    }
+}
