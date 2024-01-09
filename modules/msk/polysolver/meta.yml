@@ -26,15 +26,15 @@ input:
       type: file
       description: Sorted BAM file
       pattern: "*.{bam,cram,sam}"
-  
+
   - includeFreq:
       type: val
       description: "Flag indicating whether population-level allele frequencies should be used as priors (0 or 1) (Default: 1)"
-  
+
   - build:
       type: val
       description: "reference genome used in the BAM file (hg18 or hg19 or hg38) (Default: hg19)"
-  
+
   - format:
       type: val
       description: "fastq format (STDFQ, ILMFQ, ILM1.8 or SLXFQ; see Novoalign documentation) (Default: STDFQ)"
