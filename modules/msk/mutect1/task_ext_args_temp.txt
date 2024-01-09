@@ -1,0 +1,7 @@
+
+    --downsample_to_coverage 50000
+    --downsampling_type NONE
+    --enable_extended_output
+    --fraction_contamination 0.0005
+    --minimum_mutation_cell_fraction 0.0005
+    --read_filter BadCigar
