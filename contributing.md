@@ -15,7 +15,27 @@ Additional recommendations for mskcc-omics-workflows are detailed below.
 
 Refer to nf-core's guide on [creating new modules](https://nf-co.re/docs/contributing/modules).
 
-#### Stubs
+#### Testing Using nf-core/tools
+
+When testing a module using `nf-core modules test` in the mskcc-omics-workflows/modules repo, the `--git-remote` argument and `-b` arguments must be used:
+
+{% code overflow="wrap" %}
+```
+nf-core modules test --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <tool> 
+```
+{% endcode %}
+
+This is due to a quirk in nf-core/tools in which the org\_path (msk in this case) is pulled from the remote github instead of using the local .nf-core.yml. Note that your module branch must be pushed to remote for this to work. \
+\
+If you experience trouble using nf-test through nf-core/tools, you can always use nf-test directly:&#x20;
+
+```
+nf-test test --profile=docker --tag <module_tag>
+```
+
+That being said, testing through nf-core/tools is preferable as it checks snapshot stability by running nf-test twice and comparing snapshots for equality.&#x20;
+
+#### Testing Using Stubs
 
 All modules in mskcc-omics-workflows/modules should have a [`stub`](https://www.nextflow.io/docs/latest/process.html#stub) block to facilitate easier testing. This is not required in nf-core/modules repository or for nf-core/tools compatibility, but this feature makes it easier to quickly prototype workflow logic without using the real commands.
 
@@ -47,4 +67,5 @@ Creating a custom configuration file for a subworkflow in a Nextflow pipeline is
 
 ### Test data
 
-Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test\_data\_guidelines). An alternative source of data specific to MSKCC is currently under development.
+Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test\_data\_guidelines). An alternative source of data specific to MSKCC is currently under development.\
+\
