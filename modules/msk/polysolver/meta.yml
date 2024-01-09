@@ -9,11 +9,8 @@ keywords:
 tools:
   - "polysolver":
       description: "HLA typing"
-      homepage: "None"
-      documentation: "None"
-      tool_dev_url: "None"
-      doi: ""
       licence: ["GPL v3"]
+      homepage: "https://software.broadinstitute.org/cancer/cga/polysolver"
 
 input:
   - meta:
@@ -28,19 +25,19 @@ input:
       pattern: "*.{bam,cram,sam}"
 
   - includeFreq:
-      type: val
+      type: integer
       description: "Flag indicating whether population-level allele frequencies should be used as priors (0 or 1) (Default: 1)"
 
   - build:
-      type: val
+      type: string
       description: "reference genome used in the BAM file (hg18 or hg19 or hg38) (Default: hg19)"
 
   - format:
-      type: val
+      type: string
       description: "fastq format (STDFQ, ILMFQ, ILM1.8 or SLXFQ; see Novoalign documentation) (Default: STDFQ)"
 
   - insertCalc:
-      type: val
+      type: integer
       description: "flag indicating whether empirical insert size distribution should be used in the model (0 or 1) (Default: 0)"
 
 output:
