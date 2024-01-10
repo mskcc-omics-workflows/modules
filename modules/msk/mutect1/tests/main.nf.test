@@ -23,13 +23,26 @@ nextflow_process {
                 """
                 // TODO nf-core: define inputs of the process here. Example:
                 
-                input = [
-                    [ id:'test', single_end:false ], // meta map
-                    file(params.test_data['sarscov2']['illumina']['test_paired_end_bam'], checkIfExists: true)
+                input[0] = [
+                    string("Myeloid200-1"), // meta map
+                    (file("/home/naidur/test_data/Myeloid200-1-05500HJ_uncollapsed_FM_P20_down_0.001.bam"), checkIfExists: true)
+                    ]
+
+                input[1] = [
+                    string("Myeloid200-2"), // meta map
+                    (file("/home/naidur/test_data/Myeloid200-2-05500HJ_P20_collapsed_fx_down_0.001.bam"), checkIfExists: true)
+                    ]
+
+                input[2] = [
+                    (file("CH_transcript_pad3bp_athena_nodup.bed"), checkIfExists: true), // meta map
+                    (file("/home/naidur/test_data/Homo_sapiens_assembly19.fasta"), checkIfExists: true),
+                    (file("/home/naidur/test_data/Homo_sapiens_assembly19.fasta.fai"), checkIfExists: true)
                     ]
                 """
             }
         }
+
+
 
         then {
             assertAll(
