@@ -1,0 +1,2 @@
+mutect1:
+  - "modules/nf-core-test/mutect1/**"
