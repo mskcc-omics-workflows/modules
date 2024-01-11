@@ -32,14 +32,13 @@ process MUTECT1 {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output {COMPLETED}
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(case_sample_name), path(case_bam), path(case_bais)
-    tuple val(control_sample_name), path(control_bam), path(control_bais)
+    tuple val(meta1), val(meta2),path(case_bam), path(control_bam), path(case_bais), path(control_bais)
     tuple val(bed_file), val(fasta_file), val(fasta_index_file)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels {COMPLETED}
-    tuple val(case_sample_name),val(control_sample_name), path("*.mutect.vcf"), emit: vcf
-    tuple val(case_sample_name),val(control_sample_name), path("*.mutect.txt"), emit: standard_mutect_output
+    tuple val(meta1), path("*.mutect.vcf"), emit: vcf
+    tuple val(meta2), path("*.mutect.txt"), emit: standard_mutect_output
     // TODO nf-core: List additional required output channels/values here {COMPLETED}
     path "versions.yml"           , emit: versions
 
@@ -66,16 +65,14 @@ process MUTECT1 {
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;) {COMPLETED}
     """
     java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /usr/bin/mutect.jar -T MuTect \
-    --cosmic ${TBD} \
-    --dbsnp ${TBD} \
     --input_file_normal ${control_bam} \
     --input_file_tumor ${case_bam} \
     --intervals ${bed} \
-    --normal_sample_name ${control_sample_name} \
-    --out "${case_sample_name}.${control_sample_name}.mutect.txt" \
+    --normal_sample_name ${meta1.id} \
+    --out "${meta2.id}.${meta1.id}.mutect.txt" \
     --reference_sequence ${fasta} \
-    --tumor_sample_name ${case_sample_name} \
-    --vcf "${case_sample_name}.${control_sample_name}.mutect.vcf"
+    --tumor_sample_name ${meta2.id} \
+    --vcf "${meta2.id}.${meta1.id}.mutect.vcf"
 
 
     cat <<-END_VERSIONS > versions.yml
