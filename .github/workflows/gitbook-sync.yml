@@ -7,6 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "feature/sync-gitbook" ]
+  pull_request:
+    branches: [ "feature/sync-gitbook" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -22,9 +24,11 @@ jobs:
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Create MD file in docs branch
-        uses: mskcc-omics-workflows/modules@docs
+      - uses: actions/checkout@v4
+        with:
+          ref: docs
+          sparse-checkout: modules
       - run: |
-          echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{}}/meta.yml' %}" >> modules/${{}}.md
+          echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message}}/meta.yml' %}" >> ${{github.event.head_commit.message}}.md
           git add .
-          git commit -m "add doc for ${{}}"
+          git commit -m "add doc for ${{github.event.head_commit.message}}"
