@@ -12,9 +12,6 @@ tools:
       description: "Contains tools to process bam files for downstream copy number analysis."
       homepage: "https://github.com/mskcc/htstools"
       documentation: "https://github.com/mskcc/htstools"
-      tool_dev_url: ""
-      doi: ""
-      licence:
 
 input:
   - meta:
