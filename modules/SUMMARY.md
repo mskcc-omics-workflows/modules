@@ -2,3 +2,4 @@
 
 * [README](README.md)
 * [](.md)
+* [polysolver](polysolver.md)
