@@ -2,3 +2,4 @@
 
 * [README](README.md)
 * [gbcms](gbcms.md)
+* [polysolver](polysolver.md)
