@@ -19,6 +19,16 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'pair_id' ]`
+  - meta1:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+  - meta2:
+      type: map
+      description: |
+        Groovy Map containing resource information
+        e.g. `[ "dbsnp" ]`
   - normal:
       type: file
       description: "Normal bam file"
