@@ -6,7 +6,8 @@ nextflow_process {
     config "./nextflow.config"
 
     tag "modules"
-    tag "modules_mskcc"
+    tag "modules_nfcore"
+    tag "modules_msk"
     tag "snppileup"
 
     test("snppileup - bam") {
