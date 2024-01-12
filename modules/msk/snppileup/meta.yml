@@ -6,6 +6,7 @@ keywords:
   - snp
   - pileup
   - bams
+  - dbsnp
 tools:
   - "htstools":
       description: "Contains tools to process bam files for downstream copy number analysis."
@@ -16,34 +17,41 @@ tools:
       licence:
 
 input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
   - normal:
-      type: list
-      description: |
-        Groovy Map containing sample information
-        followed by the normal bam and index
-        e.g. `[ id:'pair_id', file(normal.bam), file(normal.bai) ]`
+      type: file
+      description: "Normal bam file"
+      pattern: "*.bam"
+  - normal_index:
+      type: file
+      description: "Index of the normal bam file"
+      pattern: "*.bai"
   - tumor:
-      type: list
-      description: |
-        Groovy Map containing sample information
-        followed by the tumor bam and index
-        e.g. `[ id:'pair_id', file(tumor.bam), file(tumor.bai) ]`
+      type: file
+      description: "Tumor bam file"
+      pattern: "*.bam"
+  - tumor_index:
+      type: file
+      description: "Index of tumor bam file"
+      pattern: "*.bai"
   - dbsnp:
-      type: list
-      description: |
-        Groovy Map containing sample information
-        followed by a vcf NCBI provided database vcf file 
-        on genetic variation and the correspoding index
-        e.g. `[ id:'pair_id', file(dbsnp.vcf.gz), file(dbsnp.vcf.gz.tbi) ]`
+      type: file
+      description: The NCBI provided database vcf file on genetic variation
+      pattern: "*.vcf.gz"
+  - dbsnp_index:
+      type: file
+      description: The index of the dbsnp vcf file
+      pattern: "*.vcf.gz.tbi"
 
 output:
   - pileup:
-      type: list
-      description: |
-        Groovy Map containing sample information
-        followed by the pileup file
-        e.g. `[ id:'pair_id', file(pair_id.snp_pileup.gz) ]`
-
+      type: file
+      description: The pileup file
+      pattern: "*.snp_pileup.gz"
   - versions:
       type: file
       description: File containing software versions
