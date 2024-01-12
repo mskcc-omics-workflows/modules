@@ -15,8 +15,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  new-module:
+    if: ${{ github.event_name == 'pull_request' || (github.event_name == 'push' && contains( github.event.head_commit.message, 'Module:')) }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -28,11 +28,11 @@ jobs:
         with:
           ref: docs
           sparse-checkout: modules
-      - run: echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message}}/meta.yml' %}" > ./modules/${{github.event.head_commit.message}}.md
-      - run: echo "* [${{github.event.head_commit.message}}](${{github.event.head_commit.message}}.md)" >> ./modules/SUMMARY.md
+      - run: echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message.split(':')[1]}}/meta.yml' %}" > ./modules/${{github.event.head_commit.message.split(':')[1]}}.md
+      - run: echo "* [${{github.event.head_commit.message.split(':')[1]}}](${{github.event.head_commit.message.split(':')[1]}}.md)" >> ./modules/SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: 'add doc for ${{github.event.head_commit.message}}'
+          message: "add doc for ${{github.event.head_commit.message.split(':')[1]}}"
           add: '*.md --force'
           cwd: './modules/'
