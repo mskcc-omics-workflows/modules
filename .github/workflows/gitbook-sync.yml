@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "feature/sync-gitbook" ]
   pull_request:
-    branches: [ "feature/sync-gitbook" ]
+    branches: [ "develop" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
