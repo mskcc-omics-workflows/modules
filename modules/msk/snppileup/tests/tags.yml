@@ -1,2 +1,2 @@
 snppileup:
-  - "modules/nf-core-test/snppileup/**"
+  - "modules/msk/snppileup/**"
