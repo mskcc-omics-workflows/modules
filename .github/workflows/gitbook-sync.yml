@@ -24,15 +24,20 @@ jobs:
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Split branch name
+        env:
+          MODULE: ${{github.event.head_commit.message}}
+        id: split
+        run: echo "::set-output name=fragment::${MODULE##*:}"
       - uses: actions/checkout@v4
         with:
           ref: docs
           sparse-checkout: modules
-      - run: echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message.split(':')[1]}}/meta.yml' %}" > ./modules/${{github.event.head_commit.message.split(':')[1]}}.md
-      - run: echo "* [${{github.event.head_commit.message.split(':')[1]}}](${{github.event.head_commit.message.split(':')[1]}}.md)" >> ./modules/SUMMARY.md
+      - run: echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{ steps.split.outputs.fragment }}/meta.yml' %}" > ./modules/${{ steps.split.outputs.fragment }}.md
+      - run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "add doc for ${{github.event.head_commit.message.split(':')[1]}}"
+          message: "add doc for ${{ steps.split.outputs.fragment }}"
           add: '*.md --force'
           cwd: './modules/'
