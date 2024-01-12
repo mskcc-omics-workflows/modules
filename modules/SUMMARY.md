@@ -1,4 +1,3 @@
 # Table of contents
 
-* [gbcms](README.md)
-* [polysolver](polysolver.md)
+* [Page](README.md)
