@@ -28,11 +28,10 @@ jobs:
         with:
           ref: update-docs
           sparse-checkout: modules
+      - run: echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message}}/meta.yml' %}" > ./modules/${{github.event.head_commit.message}}.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: 'update md for ${{github.event.head_commit.message}}'
-          run: |
-            echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message}}/meta.yml' %}" >> ${{github.event.head_commit.message}}.md
-            git add .
-            git commit -m "add doc for ${{github.event.head_commit.message}}"
+          message: 'add doc for ${{github.event.head_commit.message}}'
+          add: '*.md --force'
+          cwd: './modules/'
