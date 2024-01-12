@@ -26,7 +26,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         with:
-          ref: update-docs
+          ref: docs
           sparse-checkout: modules
       - run: echo "{% @github-files/github-code-block url='https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{github.event.head_commit.message}}/meta.yml' %}" > ./modules/${{github.event.head_commit.message}}.md
       - run: echo "* [${{github.event.head_commit.message}}](${{github.event.head_commit.message}}.md)" >> ./modules/SUMMARY.md
