@@ -1,6 +1,1 @@
 root: ./
-
-
-structure:
-  template: ./yaml-schema.json
-  gbcms: ./msk/gbcms/meta.yml
