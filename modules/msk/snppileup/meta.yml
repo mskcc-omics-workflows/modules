@@ -16,48 +16,38 @@ tools:
       licence:
 
 input:
-  - meta:
-      type: map
+  - normal:
+      type: list
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'pair_id' ]`
-  - normal_bam:
-      type: file
-      description: "The bam of the normal sample"
-      pattern: "*.bam"
-  - normal_bai:
-      type: file
-      description: "The bam index of the normal sample"
-      pattern: "*.bai"
-  - tumor_bam:
-      type: file
-      description: "The bam of the tumor sample"
-      pattern: "*.bam"
-  - tumor_bai:
-      type: file
-      description: "The bam index of the tumor sample"
-      pattern: "*.bai"
+        followed by the normal bam and index
+        e.g. `[ id:'pair_id', file(normal.bam), file(normal.bai) ]`
+  - tumor:
+      type: list
+      description: |
+        Groovy Map containing sample information
+        followed by the tumor bam and index
+        e.g. `[ id:'pair_id', file(tumor.bam), file(tumor.bai) ]`
   - dbsnp:
-      type: file
-      descrption: A NCBI provided database on genetic variation
-      pattern:
+      type: list
+      description: |
+        Groovy Map containing sample information
+        followed by a vcf NCBI provided database vcf file 
+        on genetic variation and the correspoding index
+        e.g. `[ id:'pair_id', file(dbsnp.vcf.gz), file(dbsnp.vcf.gz.tbi) ]`
 
 output:
-  - meta:
-      type: map
+  - pileup:
+      type: list
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'pair_id' ]`
+        followed by the pileup file
+        e.g. `[ id:'pair_id', file(pair_id.snp_pileup.gz) ]`
 
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-
-  - pileup:
-      type: file
-      description: snppileup file
-      pattern: "*.snp_pileup.gz"
 
 authors:
   - "@nikhil"
