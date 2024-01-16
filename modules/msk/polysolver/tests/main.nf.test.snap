@@ -1,0 +1,33 @@
+{
+    "homo_sapiens - bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                ],
+                "hla": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                ]
+            }
+        ],
+        "timestamp": "2023-12-13T00:23:12.779923"
+    }
+}
