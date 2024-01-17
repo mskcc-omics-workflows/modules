@@ -33,9 +33,7 @@ jobs:
         with:
           ref: docs
           sparse-checkout: modules
-      - run: echo "```\n" > ./modules/${{ steps.split.outputs.fragment }}.md
-      - run: cat https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{ steps.split.outputs.fragment }}/meta.yml >> ./modules/${{ steps.split.outputs.fragment }}.md
-      - run: echo "\n```" >> ./modules/${{ steps.split.outputs.fragment }}.md
+      - run: echo "```\n $(cat https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/${{ steps.split.outputs.fragment }}/meta.yml) \n```" > ./modules/${{ steps.split.outputs.fragment }}.md
       - run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
