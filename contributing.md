@@ -67,5 +67,19 @@ Creating a custom configuration file for a subworkflow in a Nextflow pipeline is
 
 ### Test data
 
-Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test\_data\_guidelines). An alternative source of data specific to MSKCC is currently under development.\
-\
+Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test\_data\_guidelines). An alternative source of data specific to MSKCC is currently under development.
+
+### When to contribute to mskcc-omics-workflows
+
+Although developers at MSKCC can contribute to either the publicly available nf-core/modules repository or the insitutional mskcc-omics-workflows/modules repository, there are cases in which the latter are more favorable. Developers are encouraged to contribute to our institutional modules repository under the following circumstances:
+
+1. **Code/Packages that are private to MSKCC:**\
+   If the software is intended solely for internal use within our organization, it should be housed in mskcc-omics-workflows/modules
+2. **Subworkflows:**\
+   Any subworkflow with institution-specific configurations should be housed in mskcc-omics-workflows/modules.
+3. **Modules Intended For Use in Subworkflows:**\
+   Currently, subworkflows in mskcc-omics-workflows/modules can only include modules and subworkflows from the same repository. Therefore, even if the module already exists in nf-core/modules, it may be necessary to replicate it in our institutional repo to make it accessible to other subworkflows.
+
+
+
+###
