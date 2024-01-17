@@ -21,7 +21,7 @@ When testing a module using `nf-core modules test` in the mskcc-omics-workflows/
 
 {% code overflow="wrap" %}
 ```
-nf-core modules test --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <tool> 
+nf-core modules --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <tool> 
 ```
 {% endcode %}
 
