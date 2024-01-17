@@ -2,7 +2,7 @@
 
 ### Contributing
 
-To contribute new and updated existing [modules](https://nf-co.re/docs/contributing/modules) and [subworkflows](https://nf-co.re/docs/contributing/subworkflows) the mskcc-omics-workflows repository, please perform all development in a fork of the repository and open a pull request to merge changes into the master branch of the upstream repository.
+To contribute new and updated existing [modules](https://nf-co.re/docs/contributing/modules) and [subworkflows](https://nf-co.re/docs/contributing/subworkflows) to the mskcc-omics-workflows repository, please perform all development in a fork of the repository and open a pull request to merge changes into the master branch of the upstream repository.
 
 Please follow nf-core's guides for contributing [modules](https://nf-co.re/docs/contributing/modules) and [subworkflows](https://nf-co.re/docs/contributing/subworkflows), but with two major differences:
 
@@ -45,10 +45,10 @@ Refer to nf-core's guide on [creating new subworkflows](https://nf-co.re/tools#c
 
 #### Configuration
 
-Creating a custom configuration file for a subworkflow in a Nextflow pipeline is a good practice for including useful settings without changing process definitions of the module. That way a module can be reused in multiple workflows, but its implementation changes in the context of a subworkflow. Here are the steps to create and use a custom configuration file for a subworkflow:
+Creating a custom configuration file for a subworkflow in a Nextflow pipeline is a good practice for including useful settings without changing the process definitions of the module. That way a module can be reused in multiple workflows, but its implementation changes in the context of a subworkflow. Here are the steps to create and use a custom configuration file for a subworkflow:
 
 1. Create a `nextflow.config` file in the directory where your subworkflow file is located.
-2.  In the `nextflow.config` file, you can specify configurations specific to your subworkflow. These configurations can include command-line arguments, input data paths, output paths, and any other settings relevant to your subworkflow. Below is an example of what a nextflow.config file might look like:
+2.  In the `nextflow.config` file, you can specify configurations specific to your subworkflow. These configurations can include command-line arguments, input data paths, output paths, and any other settings relevant to your subworkflow. Below is an example of what a nextflow.config file might look like this:
 
     ```
     process {
@@ -71,7 +71,7 @@ Testing workflows for modules and subworkflows should make use of test-data that
 
 ### When to contribute to mskcc-omics-workflows
 
-Although developers at MSKCC can contribute to either the publicly available nf-core/modules repository or the insitutional mskcc-omics-workflows/modules repository, there are cases in which the latter are more favorable. Developers are encouraged to contribute to our institutional modules repository under the following circumstances:
+Although developers at MSKCC can contribute to either the publicly available nf-core/modules repository or the institutional mskcc-omics-workflows/modules repository, there are cases in which the latter are more favorable. Developers are encouraged to contribute to our institutional modules repository under the following circumstances:
 
 1. **Code/Packages that are private to MSKCC:**\
    If the software is intended solely for internal use within our organization, it should be housed in mskcc-omics-workflows/modules
@@ -79,7 +79,3 @@ Although developers at MSKCC can contribute to either the publicly available nf-
    Any subworkflow with institution-specific configurations should be housed in mskcc-omics-workflows/modules.
 3. **Modules Intended For Use in Subworkflows:**\
    Currently, subworkflows in mskcc-omics-workflows/modules can only include modules and subworkflows from the same repository. Therefore, even if the module already exists in nf-core/modules, it may be necessary to replicate it in our institutional repo to make it accessible to other subworkflows.
-
-
-
-###
