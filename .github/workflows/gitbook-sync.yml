@@ -43,7 +43,7 @@ jobs:
         with:
           ref: docs
       - run: echo "${{ steps.cat_file.outputs.content }}"
-      - run: echo "``` ${{ steps.cat_file.outputs.content }} ```" > ./modules/${{ steps.split.outputs.fragment }}.md
+      - run: echo "\`\`\` ${{ steps.cat_file.outputs.content }} \`\`\`" > ./modules/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY
         if: steps.check_files.outputs.files_exists == 'false'
         run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
