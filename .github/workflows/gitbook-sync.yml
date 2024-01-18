@@ -37,7 +37,7 @@ jobs:
       - uses: pCYSl5EDgo/cat@master
         id: cat_file
         with:
-          path: https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
+          path: msk/${{ steps.split.outputs.fragment }}/meta.yml
       - uses: actions/checkout@v4
         with:
           ref: docs
