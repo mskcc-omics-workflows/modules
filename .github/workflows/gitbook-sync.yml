@@ -37,11 +37,12 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file
         with:
+          branch: develop
           path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
       - uses: actions/checkout@v4
         with:
           ref: docs
-      - run: echo "```\n${{ steps.package.outputs.content }}\n```" > ./modules/${{ steps.split.outputs.fragment }}.md
+      - run: echo "```\n${{ steps.develop.outputs.content }}\n```" > ./modules/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY
         if: steps.check_files.outputs.files_exists == 'false'
         run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
