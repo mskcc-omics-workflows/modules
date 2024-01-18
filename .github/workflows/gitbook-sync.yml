@@ -29,11 +29,6 @@ jobs:
           MODULE: ${{github.event.head_commit.message}}
         id: split
         run: echo "::set-output name=fragment::${MODULE##*:}"
-      - name: Check file existence
-        id: check_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: modules/${{ steps.split.outputs.fragment }}.md
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file
         with:
@@ -44,6 +39,11 @@ jobs:
           ref: docs
       - run: echo "${{ steps.cat_file.outputs.content }}"
       - run: echo "\`\`\` ${{ steps.cat_file.outputs.content }} \`\`\`" > ./modules/${{ steps.split.outputs.fragment }}.md
+      - name: Check file existence
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: modules/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY
         if: steps.check_files.outputs.files_exists == 'false'
         run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
