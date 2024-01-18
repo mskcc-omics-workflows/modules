@@ -41,7 +41,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: docs
-          sparse-checkout: modules
       - run: echo "```\n ${{ steps.cat_file.outputs.text }} \n```" > ./modules/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY
         if: steps.check_files.outputs.files_exists == 'false'
