@@ -5,7 +5,6 @@ nextflow_process {
     name "Test Process MUTECT1"
     script "../main.nf"
     process "MUTECT1"
-    config "./nextflow.config"
 
     tag "mutect1"
 
@@ -23,17 +22,14 @@ nextflow_process {
                 // TODO nf-core: define inputs of the process here. Example:
                 
                 input[0] = [
-                    string("Myeloid200-1"), // meta map
-                    (file("/home/naidur/test_data/Myeloid200-1-05500HJ_uncollapsed_FM_P20_down_0.001.bam"), checkIfExists: true)
-                    ]
-
-                input[1] = [
-                    string("Myeloid200-2"), // meta map
+                    file('Myeloid200-1'), 
+                    file('Myeloid200-2'),
+                    (file("/home/naidur/test_data/samplenormal.bam"), checkIfExists: true),
                     (file("/home/naidur/test_data/Myeloid200-2-05500HJ_P20_collapsed_fx_down_0.001.bam"), checkIfExists: true)
                     ]
 
-                input[2] = [
-                    (file("CH_transcript_pad3bp_athena_nodup.bed"), checkIfExists: true), // meta map
+                input[1] = [
+                    (file("/home/naidur/test_data/CH_transcript_pad3bp_athena_nodup.bed"), checkIfExists: true), // meta map
                     (file("/home/naidur/test_data/Homo_sapiens_assembly19.fasta"), checkIfExists: true),
                     (file("/home/naidur/test_data/Homo_sapiens_assembly19.fasta.fai"), checkIfExists: true)
                     ]

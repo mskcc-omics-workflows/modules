@@ -17,13 +17,16 @@
 
 process MUTECT1 {
     //tag "$meta.id"
-    label 'process_single'
+    //label 'process_single'
+    shell '/bin/sh'
 
     // TODO nf-core: List required Conda package(s) {COMPLETED - NO CONDA PACKAGES}.
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
-    container 'ghcr.io/msk-access/test:latest'
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'ghcr.io/msk-access/test:1.1.5':
+        'ghcr.io/msk-access/test:1.1.5' }"
 
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
@@ -32,14 +35,13 @@ process MUTECT1 {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output {COMPLETED}
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(case_sample_name), path(case_bam), path(case_bais)
-    tuple val(control_sample_name), path(control_bam), path(control_bais)
+    tuple val(meta1), val(meta2),path(case_bam), path(control_bam)
     tuple val(bed_file), val(fasta_file), val(fasta_index_file)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels {COMPLETED}
-    tuple val(case_sample_name),val(control_sample_name), path("*.mutect.vcf"), emit: vcf
-    tuple val(case_sample_name),val(control_sample_name), path("*.mutect.txt"), emit: standard_mutect_output
+    tuple val(meta1), path("*.mutect.vcf"), emit: vcf
+    tuple val(meta2), path("*.mutect.txt"), emit: standard_mutect_output
     // TODO nf-core: List additional required output channels/values here {COMPLETED}
     path "versions.yml"           , emit: versions
 
@@ -50,10 +52,10 @@ process MUTECT1 {
     //def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
-    def reference_fasta = ref_fasta ? "--reference_sequence ${fasta}" : ''
-    def bed_file = bed ? "--intervals ${bed}" : ''
-    def control_bam_file = control_bam ? "--intervals ${control_bam}" : ''
-    def case_bam_file = case_bam ? "--intervals ${case_bam}" : ''
+    def reference_fasta = fasta_file ? "--reference_sequence ${fasta_file}" : ''
+    def bed_file = bed_file ? "--intervals ${bed_file}" : ''
+    //def control_bam_file = control_bam ? "--intervals ${control_bam}" : ''
+    //def case_bam_file = case_bam ? "--intervals ${case_bam}" : ''
 
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
     //               If the software is unable to output a version number on the command-line then it can be manually specified
@@ -65,44 +67,18 @@ process MUTECT1 {
     // TODO nf-core: Please replace the example samtools command below with your module's command {COMPLETED}
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;) {COMPLETED}
     """
-    java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /usr/bin/mutect.jar -T MuTect \
-    --cosmic ${TBD} \
-    --dbsnp ${TBD} \
-    --input_file_normal ${control_bam} \
-    --input_file_tumor ${case_bam} \
-    --intervals ${bed} \
-    --normal_sample_name ${control_sample_name} \
-    --out "${case_sample_name}.${control_sample_name}.mutect.txt" \
-    --reference_sequence ${fasta} \
-    --tumor_sample_name ${case_sample_name} \
-    --vcf "${case_sample_name}.${control_sample_name}.mutect.vcf"
-
+    java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /opt/mutect/muTect-1.1.5.jar -T MuTect \
+    --input_file ${control_bam} \
+    --intervals ${bed_file} \
+    --normal_sample_name ${meta1} \
+    --out "${meta2}.${meta1}.mutect.txt" \
+    --reference_sequence ${reference_fasta} \
+    --tumor_sample_name ${meta2} \
+    --vcf "${meta2}.${meta1}.mutect.vcf"
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutect1: \$(java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /usr/bin/mutect.jar -T MuTect')
-    END_VERSIONS
-    """
-
-    stub:
-    //def prefix = task.ext.prefix ?: "${meta.id}"
-    def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
-    def reference_fasta = ref_fasta ? "--reference_sequence ${fasta}" : ''
-    def bed_file = bed ? "--intervals ${bed}" : ''
-    def control_bam_file = control_bam ? "--intervals ${control_bam}" : ''
-    def case_bam_file = case_bam ? "--intervals ${case_bam}" : ''
-    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible {COMPLETED}
-    //               Have a look at the following examples:
-    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
-    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
-    """
-    touch ${case_sample_name}.${control_sample_name}.mutect.txt
-    touch ${case_sample_name}.${control_sample_name}.mutect.vcf
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutect1: \$(java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /usr/bin/mutect.jar -T MuTect')
+    "${task.process}": 
+        mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
     END_VERSIONS
     """
 }
