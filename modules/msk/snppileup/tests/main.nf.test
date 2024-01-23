@@ -15,23 +15,19 @@ nextflow_process {
         when {
             process {
                 """                
-                meta = [ id:'test' ] // meta map
-                input[0] = [
-                                meta,
-                                file(params.test_data['homo_sapiens']['illumina']['test_paired_end_markduplicates_sorted_bam'], checkIfExists: true),
-                                file(params.test_data['homo_sapiens']['illumina']['test_paired_end_markduplicates_sorted_bam_bai'], checkIfExists: true)                               
-                           ]
-                input[1] = [
-                                meta,
-                                file(params.test_data['homo_sapiens']['illumina']['test2_paired_end_markduplicates_sorted_bam'], checkIfExists: true),
-                                file(params.test_data['homo_sapiens']['illumina']['test2_paired_end_markduplicates_sorted_bam_bai'], checkIfExists: true)
-                                
-                           ]
-                input[2] = [
-                                meta,
-                                file(params.test_data['homo_sapiens']['genome']['dbsnp_146_hg38_vcf_gz'], checkIfExists: true),
-                                file(params.test_data['homo_sapiens']['genome']['dbsnp_146_hg38_vcf_gz_tbi'], checkIfExists: true)
-                           ]
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file(params.test_data['homo_sapiens']['mskcc']['test_argos_sample_1_normal_bam'], checkIfExists: true),
+                                    file(params.test_data['homo_sapiens']['mskcc']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
+                                    file(params.test_data['homo_sapiens']['mskcc']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
+                                    file(params.test_data['homo_sapiens']['mskcc']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true)
+                                ]
+                    input[1] = [
+                                    meta,
+                                    file(params.test_data['homo_sapiens']['mskcc']['dbsnp_138_b37_chr17_vcf_gz'], checkIfExists: true),
+                                    file(params.test_data['homo_sapiens']['mskcc']['dbsnp_138_b37_chr17_vcf_gz_tbi'], checkIfExists: true)
+                               ]
                 """
             }
         }
