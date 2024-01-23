@@ -21,9 +21,9 @@ process CUSTOM_SPLITFASTQBYLANE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def read1 = [reads].flatten()[0]
-    def read2 = [reads].flatten().size() > 1 ? reads[1] : null
+    def read2 = [reads].flatten().size() > 1 ? reads[1] : '' 
     """
-    split_lanes_awk.sh ${prefix} ${read1} ${read2 ?: ''}
+    split_lanes_awk.sh ${prefix} ${read1} ${read2}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
