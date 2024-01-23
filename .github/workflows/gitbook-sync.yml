@@ -37,9 +37,15 @@ jobs:
         id: split
         run: echo "::set-output name=fragment::${MODULE##*:}"
       - name: Download convertor from yml to md
-        run: curl -o yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/yaml_to_md.py
+        run: |
+          curl -o yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/yaml_to_md.py
+          curl -o requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/requirements.txt
       - name: Give convertor permissions
         run: chmod +x yaml_to_md.py
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file
         with:
