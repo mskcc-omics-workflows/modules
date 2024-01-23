@@ -30,11 +30,12 @@ process SNPPILEUP {
         ${prefix}.snp_pileup.gz \
         ${normal} \
         ${tumor}
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        htslib: 1.5
+        htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
         htstools: 0.1.1
-        r: 3.6.1
+        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
     END_VERSIONS
     """
 
@@ -47,9 +48,9 @@ process SNPPILEUP {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        htslib: 1.5
+        htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
         htstools: 0.1.1
-        r: 3.6.1
+        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
     END_VERSIONS
     """
 }
