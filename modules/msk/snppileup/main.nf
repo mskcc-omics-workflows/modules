@@ -8,9 +8,8 @@ process SNPPILEUP {
 
     input:
 
-    tuple val(meta),  path(normal), path(normal_index)
-    tuple val(meta1), path(tumor),  path(tumor_index)
-    tuple val(meta2), path(dbsnp),  path(dbsnp_index)
+    tuple val(meta),  path(normal), path(normal_index), path(tumor),  path(tumor_index)
+    tuple val(meta1), path(dbsnp),  path(dbsnp_index)
 
 
     output:
