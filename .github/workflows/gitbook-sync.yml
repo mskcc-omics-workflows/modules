@@ -55,7 +55,7 @@ jobs:
       - name: Run convertor to generate md file
         if: ${{ github.event_name == 'push' }}
         run: |
-          cp ${{ steps.cat_file.outputs.path }} temp.yml
+          echo '${{ steps.cat_file.outputs.content }}' > temp.yml
           python yaml_to_md.py --yaml-file temp.yml --output-file ./modules/${{ steps.split.outputs.fragment }}.md
       - name: Check file existence
         id: check_files
