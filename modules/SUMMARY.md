@@ -14,7 +14,3 @@
 ## Subworkflows
 
 * [Untitled](subworkflows/untitled.md)
-
-## Modules
-
-* [example](modules/gbcms.md)
