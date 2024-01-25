@@ -1,0 +1,46 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_splitfastqbylane"
+description: Split fastq into multiple fastqs by lane
+keywords:
+  - awk
+  - fastq
+  - split
+tools:
+  - "custom":
+      description: "GNU awk"
+      homepage: "https://www.gnu.org/software/gawk/manual/gawk.html"
+      licence: ["GPL v3"]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - reads:
+      type: file
+      description: Paired end or single end FASTQ file(s)
+      pattern: "*.{fastq,fastq.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - reads:
+      type: file
+      description: Output fastq files containing only one read lane per file.
+      pattern: "*.{split.fastq.gz}"
+
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"
