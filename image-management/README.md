@@ -15,7 +15,7 @@ All customized images and packages will be stored in the "docker-local" reposito
 Step 1. Docker login, when asked for a password, enter the **ci service account** identity token
 
 ```
-docker login -u<username> <jfrog_url>
+docker login -u<ci_service_account_username> <jfrog_url>
 ```
 
 Step 2. Tag the image
@@ -37,7 +37,7 @@ docker push <jfrog_url>/omicswf-docker-dev-local/mskcc-omics-workflows/example:0
 Docker login, when asked for a password, enter **cd service account** identity token
 
 ```
-docker login -u<username> <jfrog_url>
+docker login -u<cd_service_account_username> <jfrog_url>
 ```
 
 ```
@@ -49,7 +49,7 @@ docker pull <jfrog_url>/omicswf-docker-dev-local/mskcc-omics-workflows/<DOCKER_I
 Set up singularity authentication before running the test. This is for bypassing the auth from Jfrog:
 
 ```
-export SINGULARITY_DOCKER_USERNAME=<cd_server_account>
+export SINGULARITY_DOCKER_USERNAME=<cd_server_account_username>
 export SINGULARITY_DOCKER_PASSWORD=<access_token>
 ```
 
