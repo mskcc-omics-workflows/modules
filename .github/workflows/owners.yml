@@ -19,7 +19,8 @@ jobs:
           - name: Install CLI Dependencies
             run: |
                 sudo apt-get install fd-find wget
-                wget https://github.com/mikefarah/yq/releases/download/3.4.1/yq_linux_amd64 | sudo chmod +x yq_linux_amd64 && sudo mv yq_linux_amd64 /usr/bin/yq
+                sudo add-apt-repository ppa:rmescandon/yq
+                sudo apt install yq -y
           - name: Run Generate Owner's Script
             run: |
                 chmod +x ./.github/generate_codeowners.sh
