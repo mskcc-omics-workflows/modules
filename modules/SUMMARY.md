@@ -14,3 +14,4 @@
 ## Subworkflows
 
 * [Untitled](subworkflows/untitled.md)
+* [polysolver](polysolver.md)
