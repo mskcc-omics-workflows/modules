@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get all of the meta.yaml files
-METAS=$(fdfind meta.yml)
+METAS=$(fd meta.yml)
 
 # Define the output file path
 output_file=".github/CODEOWNERS-tmp"
