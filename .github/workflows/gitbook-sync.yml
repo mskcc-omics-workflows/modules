@@ -74,8 +74,8 @@ jobs:
         with:
           files: subworkflows/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY for modules
-        if: ${{ github.event_name == 'push' && steps.check_module_files.outputs.files_exists == 'false' && contains( github.event.head_commit.message, 'Module:' ) }}
-        run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./SUMMARY.md
+        if: ${{ github.event_name == 'push' && steps.check_module_files.outputs.files_exists == 'true' && contains( github.event.head_commit.message, 'Module:' ) }}
+        run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
       - name: Add to SUMMARY for subworkflows
         if: ${{ github.event_name == 'push' && steps.check_subworkflow_files.outputs.files_exists == 'false' && contains( github.event.head_commit.message, 'Subworkflow:' ) }}
         run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./SUMMARY.md
