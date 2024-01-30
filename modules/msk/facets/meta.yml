@@ -1,0 +1,98 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "Facets"
+description: Algorithm to implement Fraction and Allele specific Copy number Estimate from Tumor/normal Sequencing.
+keywords:
+  - facets
+  - pileup
+  - Allele specific
+  - Copy number
+tools:
+  - "facets-suite":
+      description: "An R package with functions to run"
+      homepage: "https://github.com/mskcc/facets-suite"
+      documentation: "https://github.com/mskcc/facets-suite"
+      licence: ["MIT"]
+  - "facets":
+      description: "Algorithm to implement Fraction and Allele specific Copy number Estimate from Tumor/normal Sequencing."
+      homepage: "https://github.com/mskcc/facets"
+      documentation: "https://github.com/mskcc/facets"
+      doi: "10.1093/nar/gkw520"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+  - pileup:
+      type: file
+      description: The pileup file
+      pattern: "*.snp_pileup.gz"
+
+output:
+  - purity_seg:
+      type: file
+      description: The purity seg file
+      pattern: "*_purity.seg"
+  - purity_rdata:
+      type: file
+      description: The purity R data file
+      pattern: "*_purity.Rdata"
+  - purity_png:
+      type: file
+      description: The purity png file
+      pattern: "*_purity.CNCF.png"
+  - purity_out:
+      type: file
+      description: The purity out file
+      pattern: "*_purity.out"
+  - purity_cncf_txt:
+      type: file
+      description: The purity cncf file
+      pattern: "*_purity.cncf.txt"
+  - hisens_seg:
+      type: file
+      description: The hisens seg file
+      pattern: "*_hisens.seg"
+  - hisens_rdata:
+      type: file
+      description: The hisens R data file
+      pattern: "*_hisens.Rdata"
+  - hisens_png:
+      type: file
+      description: The hisens png file
+      pattern: "*_hisens.CNCF.png"
+  - hisens_out:
+      type: file
+      description: The hisense out file
+      pattern: "*_hisens.out"
+  - hisens_cncf_txt:
+      type: file
+      description: The hisens cncf file
+      pattern: "*_hisens.cncf.txt"
+  - qc_txt:
+      type: file
+      description: The qc file
+      pattern: "*.qc.txt"
+  - gene_level_txt:
+      type: file
+      description: The gene level file
+      pattern: "*.gene_level.txt"
+  - arm_level_txt:
+      type: file
+      description: The arm level file
+      pattern: "*.arm_level.txt"
+  - output_txt:
+      type: file
+      description: The complete facets output file
+      pattern: "*.txt"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"
