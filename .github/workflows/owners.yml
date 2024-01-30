@@ -16,6 +16,8 @@ jobs:
         steps:
           - name: Check out repository
             uses: actions/checkout@v4
+          - name: Install CLI Dependencies
+            run: sudo apt-get install -y fd yq
           - name: Run Generate Owner's Script
             run: |
                 chmod +x ./.github/generate_codeowners.sh
