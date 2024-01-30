@@ -83,5 +83,5 @@ jobs:
         with:
           default_author: github_actions
           message: "add doc for ${{ steps.split.outputs.fragment }}"
-          add: '*/*.md --force'
+          add: '. --force'
           cwd: './'
