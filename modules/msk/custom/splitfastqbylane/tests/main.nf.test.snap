@@ -1,0 +1,82 @@
+{
+    "sarscov2 - fastq - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "out.split.fastq.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,68b779fcdaf62c97ffcd67d49ab59b0e"
+                ],
+                "reads": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "out.split.fastq.gz:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,68b779fcdaf62c97ffcd67d49ab59b0e"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-16T11:28:05.672874"
+    },
+    "homo_sapiens - fastq": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test@HK3MMAFX2_L001_R1.split.fastq.gz:md5,6fdae9563e6f3428ea953435cb71f762",
+                            "test@HK3MMAFX2_L001_R2.split.fastq.gz:md5,a2315ba81e2993823e38af0b83b9e7bd",
+                            "test@HK3MMAFX2_L002_R1.split.fastq.gz:md5,3c5e1d1bf430c964fa2ac1b7faf8c313",
+                            "test@HK3MMAFX2_L002_R2.split.fastq.gz:md5,f3aee4f14f59bd2e26753ec0dda1d5dc",
+                            "test@HK3MMAFX2_L003_R1.split.fastq.gz:md5,c98453d33b9bb4ff224ae5571489913b",
+                            "test@HK3MMAFX2_L003_R2.split.fastq.gz:md5,898a6d549be78b5214c3d5647e7c3c49",
+                            "test@HK3MMAFX2_L004_R1.split.fastq.gz:md5,11b776b50ea9bcc6670aaca952f6a939",
+                            "test@HK3MMAFX2_L004_R2.split.fastq.gz:md5,a50125ecb428a7f534a944c5a22c8109"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,68b779fcdaf62c97ffcd67d49ab59b0e"
+                ],
+                "reads": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        [
+                            "test@HK3MMAFX2_L001_R1.split.fastq.gz:md5,6fdae9563e6f3428ea953435cb71f762",
+                            "test@HK3MMAFX2_L001_R2.split.fastq.gz:md5,a2315ba81e2993823e38af0b83b9e7bd",
+                            "test@HK3MMAFX2_L002_R1.split.fastq.gz:md5,3c5e1d1bf430c964fa2ac1b7faf8c313",
+                            "test@HK3MMAFX2_L002_R2.split.fastq.gz:md5,f3aee4f14f59bd2e26753ec0dda1d5dc",
+                            "test@HK3MMAFX2_L003_R1.split.fastq.gz:md5,c98453d33b9bb4ff224ae5571489913b",
+                            "test@HK3MMAFX2_L003_R2.split.fastq.gz:md5,898a6d549be78b5214c3d5647e7c3c49",
+                            "test@HK3MMAFX2_L004_R1.split.fastq.gz:md5,11b776b50ea9bcc6670aaca952f6a939",
+                            "test@HK3MMAFX2_L004_R2.split.fastq.gz:md5,a50125ecb428a7f534a944c5a22c8109"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,68b779fcdaf62c97ffcd67d49ab59b0e"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-16T11:27:57.305806"
+    }
+}
