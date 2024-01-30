@@ -12,25 +12,14 @@ on:
 
 jobs:
     generate_owners:
-        runs-on: macos-latest
+        runs-on: ubuntu-latest
         steps:
           - name: Check out repository
             uses: actions/checkout@v4
-          - name: Update Homebrew
+          - name: Install CLI Dependencies
             run: |
-              brew update --preinstall
-              cat "$(brew --repository)/Library/Taps/homebrew/homebrew-core/Formula/foo.rb" > .github/brew-formulae
-          - name: Configure Homebrew cache
-            uses: actions/cache@v2
-            with:
-              path: |
-                ~/Library/Caches/Homebrew/foo--*
-                ~/Library/Caches/Homebrew/downloads/*--foo-*
-              key: brew-${{ hashFiles('.github/brew-formulae') }}
-              restore-keys: brew-
-          - name: Install Homebrew dependencies
-            run: |
-              env HOMEBREW_NO_AUTO_UPDATE=1 brew install yq fd
+                sudo apt-get install fd-find wget
+                wget https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64.tar.gz -O - | sudo tar xz && sudo mv yq_linux_amd64 /usr/bin/yq
           - name: Run Generate Owner's Script
             run: |
                 chmod +x ./.github/generate_codeowners.sh
