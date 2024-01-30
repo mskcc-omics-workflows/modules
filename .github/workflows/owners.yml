@@ -19,6 +19,7 @@ jobs:
           - name: Install CLI Dependencies
             run: |
                 sudo apt-get install fd-find wget
+                sudo ln -s $(which fdfind) ~/.local/bin/fd
                 wget https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64.tar.gz -O - | sudo tar xz && sudo mv yq_linux_amd64 /usr/bin/yq
           - name: Run Generate Owner's Script
             run: |
