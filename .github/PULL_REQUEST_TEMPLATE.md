@@ -1,14 +1,14 @@
 <!--
-# nf-core/modules pull request
+# mskcc-omics-workflows/modules pull request
 
-Many thanks for contributing to nf-core/modules!
+Many thanks for contributing to mskcc-omics-workflows/modules!
 
 Please fill in the appropriate checklist below (delete whatever is not relevant).
 These are the most common things requested on pull requests (PRs).
 
 Remember that PRs should be made against the master branch.
 
-Learn more about contributing: [CONTRIBUTING.md](https://github.com/nf-core/modules/tree/master/.github/CONTRIBUTING.md)
+Learn more about contributing: [gitbook](https://app.gitbook.com/o/Txb2lda7D1fX9CVuQbQ0/s/x32s1acwH78k3hruISMe/contributing)
 -->
 
 ## PR checklist
