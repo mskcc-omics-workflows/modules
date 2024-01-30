@@ -14,7 +14,7 @@ for file in $METAS; do
     # Add a double star to the end of the path
     path="$path/**"
 
-    authors=$(yq ".authors | .[]" "$file" | sed 's/^//')
+    authors=$(yq '.authors | .[]' "$file" | sed 's/^//')
     # Remove quotes from authors
     authors=$(echo "$authors" | sed 's/"//g')
     echo "$path" $authors >> $output_file
