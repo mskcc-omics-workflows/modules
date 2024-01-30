@@ -35,13 +35,13 @@ process MUTECT1 {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output {COMPLETED}
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta1), val(meta2),path(case_bam), path(control_bam)
-    tuple val(bed_file), val(fasta_file), val(fasta_index_file)
+    tuple val(case_sample_name), val(control_sample_name), path(case_bam), path(control_bam), path(case_bai), path(control_bai)
+    tuple path(bed_file), path(fasta_file), path(fasta_index_file), path(fasta_dict_file)
 
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels {COMPLETED}
-    tuple val(meta1), path("*.mutect.vcf"), emit: vcf
-    tuple val(meta2), path("*.mutect.txt"), emit: standard_mutect_output
+    path("*.mutect.vcf"), emit: vcf
+    path("*.mutect.txt"), emit: standard_mutect_output
     // TODO nf-core: List additional required output channels/values here {COMPLETED}
     path "versions.yml"           , emit: versions
 
@@ -52,8 +52,8 @@ process MUTECT1 {
     //def prefix = task.ext.prefix ?: "${meta.id}"
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
-    def reference_fasta = fasta_file ? "--reference_sequence ${fasta_file}" : ''
-    def bed_file = bed_file ? "--intervals ${bed_file}" : ''
+    //def reference_fasta = fasta_file ? "--reference_sequence ${fasta_file}" : ''
+    //def bed_file = bed_file ? "--intervals ${bed_file}" : ''
     //def control_bam_file = control_bam ? "--intervals ${control_bam}" : ''
     //def case_bam_file = case_bam ? "--intervals ${case_bam}" : ''
 
@@ -68,13 +68,15 @@ process MUTECT1 {
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;) {COMPLETED}
     """
     java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /opt/mutect/muTect-1.1.5.jar -T MuTect \
-    --input_file ${control_bam} \
-    --intervals ${bed_file} \
-    --normal_sample_name ${meta1} \
-    --out "${meta2}.${meta1}.mutect.txt" \
-    --reference_sequence ${reference_fasta} \
-    --tumor_sample_name ${meta2} \
-    --vcf "${meta2}.${meta1}.mutect.vcf"
+        --input_file:normal ${control_bam} \
+        --input_file:tumor ${case_bam} \
+        --intervals ${bed_file} \
+        --normal_sample_name ${control_sample_name} \
+        --reference_sequence ${fasta_file} \
+        --tumor_sample_name ${case_sample_name} \
+        --out ${case_sample_name}.${control_sample_name}.mutect.txt \
+        --vcf ${case_sample_name}.${control_sample_name}.mutect.vcf
+    
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}": 
