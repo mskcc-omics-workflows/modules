@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Get all of the meta.yaml files
 METAS=$(fd meta.yml)
