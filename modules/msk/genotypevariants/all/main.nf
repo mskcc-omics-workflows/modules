@@ -9,14 +9,14 @@ process GENOTYPEVARIANTS_ALL {
         'ghcr.io/msk-access/genotype_variants:sha-60b7f8bc' }"
 
     input:
-    tuple val(meta), path(bam)
-    tuple val(meta), path(maf)
-    path  fasta
-    path  fai
+        tuple val(meta), path(bam)
+        path(maf)
+        path(fasta)
+        path(fai)
 
     output:
-    tuple val(meta), path("*.maf"), emit: maf
-    path "versions.yml"           , emit: versions
+        tuple val(meta), path("*.maf"), emit: maf
+        path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -30,13 +30,12 @@ process GENOTYPEVARIANTS_ALL {
     //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
     """
     genotype_variants small_variants all \\
-        -i ${maf} \\ 
-        -r ${fasta} \\
-        -g /usr/local/bin/GetBaseCountsMultiSample \\
-        -p ${patient} \\
-        -b ${bam} \\
-        -s ${sample} \\
-        $args
+    -i ${maf} \\
+    -r ${fasta} \\
+    -g /usr/local/bin/GetBaseCountsMultiSample \\
+    -p ${patient} \\
+    -b ${bam} \\
+    -s ${sample} $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
