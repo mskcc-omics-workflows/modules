@@ -38,8 +38,8 @@ jobs:
         run: echo "::set-output name=fragment::${MODULE##*:}"
       - name: Download convertor from yml to md
         run: |
-          curl -o yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/yaml_to_md.py
-          curl -o requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/requirements.txt
+          curl -o yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
+          curl -o requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
       - name: Give convertor permissions
         run: chmod +x yaml_to_md.py
       - name: Install python packages
@@ -57,12 +57,12 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           echo '${{ steps.cat_file.outputs.content }}' > temp.yml
-          python yaml_to_md.py --yaml-file temp.yml
+          python yaml_to_md.py validate --yaml-file temp.yml
       - name: Run convertor to generate md file
         if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file.outputs.content }}' > temp.yml
-          python yaml_to_md.py --yaml-file temp.yml --output-file ./modules/${{ steps.split.outputs.fragment }}.md
+          python yaml_to_md.py all --yaml-file temp.yml --output-file ./modules/${{ steps.split.outputs.fragment }}.md
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
@@ -75,13 +75,13 @@ jobs:
           files: subworkflows/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY for modules
         if: ${{ github.event_name == 'push' }} && steps.check_module_files.outputs.files_exists == 'false' && ${{ contains( github.event.head_commit.message, 'Module:' }}
-        run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
+        run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./SUMMARY.md
       - name: Add to SUMMARY for subworkflows
         if: ${{ github.event_name == 'push' }} && steps.check_subworkflow_files.outputs.files_exists == 'false' && ${{ contains( github.event.head_commit.message, 'Subworkflow:' }}
-        run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./modules/SUMMARY.md
+        run: echo "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" >> ./SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
           message: "add doc for ${{ steps.split.outputs.fragment }}"
-          add: '*.md --force'
-          cwd: './modules/'
+          add: '*/*.md --force'
+          cwd: './'
