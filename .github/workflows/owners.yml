@@ -19,6 +19,7 @@ jobs:
           - name: Run Generate Owner's Script
             run: |
                 chmod +x ./.github/generate_codeowners.sh
+                ./.github/generate_codeowners.sh
           - uses: EndBug/add-and-commit@v9
             with:
                 default_author: github_actions
