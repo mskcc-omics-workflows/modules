@@ -1,7 +1,2 @@
 # Review from a member of the review-team is required 
 * @mskcc-omics-workflows/reviewers
-./modules/msk/custom/splitfastqbylane/**
-./modules/msk/gatk4/applybqsr/**
-./modules/msk/gbcms/**
-./modules/msk/polysolver/**
-./subworkflows/msk/bwa_markdup_bqsr/**

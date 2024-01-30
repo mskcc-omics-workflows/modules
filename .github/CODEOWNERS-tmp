@@ -1,5 +1,0 @@
-./modules/msk/custom/splitfastqbylane/**
-./modules/msk/gatk4/applybqsr/**
-./modules/msk/gbcms/**
-./modules/msk/polysolver/**
-./subworkflows/msk/bwa_markdup_bqsr/**
