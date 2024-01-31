@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "Facets"
+name: "facets"
 description: Algorithm to implement Fraction and Allele specific Copy number Estimate from Tumor/normal Sequencing.
 keywords:
   - facets
