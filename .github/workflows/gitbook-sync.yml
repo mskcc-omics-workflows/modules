@@ -73,7 +73,7 @@ jobs:
         id: check_module_files
         uses: andstor/file-existence-action@v1
         with:
-          files: modules/${{ steps.split.outputs.fragment }}.md
+          files: modules/${{ env.MD_NAME }}.md
       - name: Add to SUMMARY for modules
         if: ${{ github.event_name == 'push'  && steps.check_module_files.outputs.files_exists == 'true' }}
         run: |
@@ -150,7 +150,7 @@ jobs:
         id: check_subworkflow_files
         uses: andstor/file-existence-action@v1
         with:
-          files: subworkflows/${{ steps.split.outputs.fragment }}.md
+          files: subworkflows/${{ env.MD_NAME }}.md
       - name: Add to SUMMARY for subworkflows
         if: ${{ github.event_name == 'push' && steps.check_subworkflow_files.outputs.files_exists == 'false' }}
         run: |
