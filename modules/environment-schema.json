@@ -12,13 +12,19 @@
             "type": "array",
             "items": [
                 {
-                    "enum": ["conda-forge"]
+                    "enum": [
+                        "conda-forge"
+                    ]
                 },
                 {
-                    "enum": ["bioconda"]
+                    "enum": [
+                        "bioconda"
+                    ]
                 },
                 {
-                    "enum": ["defaults"]
+                    "enum": [
+                        "defaults"
+                    ]
                 }
             ],
             "minItems": 3
@@ -30,5 +36,9 @@
             }
         }
     },
-    "required": ["name", "channels", "dependencies"]
+    "required": [
+        "name",
+        "channels",
+        "dependencies"
+    ]
 }
