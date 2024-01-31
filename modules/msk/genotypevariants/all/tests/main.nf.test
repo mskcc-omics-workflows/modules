@@ -18,7 +18,7 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                            [ id:'test', sample:'197', patient:'c-id'], // meta map
+                            [ id:'197', patient:'c-id'], // meta map
                             file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
                             file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true)
                         ]
@@ -47,7 +47,7 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                            [ id:'test', sample:'197', patient:'c-id'], // meta map
+                            [ id:'197', patient:'c-id'], // meta map
                             file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
                             file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true)
                         ]

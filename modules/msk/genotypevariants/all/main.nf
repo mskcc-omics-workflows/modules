@@ -23,8 +23,7 @@ process GENOTYPEVARIANTS_ALL {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    def sample = "${meta.sample}"
+    def sample = task.ext.prefix ?: "${meta.id}"
     def patient = "${meta.patient}"
     // TODO nf-core: If the tool supports multi-threading then you MUST provide the appropriate parameter
     //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
@@ -53,7 +52,7 @@ process GENOTYPEVARIANTS_ALL {
     //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
     //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
     """
-    touch ${sample}.maf
+    touch ${prefix}.maf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
