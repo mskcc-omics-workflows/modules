@@ -7,8 +7,6 @@
   * [Connection to GitHub Actions](image-management/connection-to-github-actions.md)
 ## Modules
 * [GBCMS](modules/gbcms.md)
-* [polysolver](polysolver.md)
-* [polysolver](modules/polysolver.md)
 
 ## Subworkflows
 * [Untitled](subworkflows/untitled.md)
