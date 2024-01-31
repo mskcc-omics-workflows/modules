@@ -282,6 +282,8 @@ jobs:
             tags: gbcms
           - profile: "conda"
             tags: polysolver
+          - profile: "conda"
+            tags: genotypevariant_all
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
