@@ -57,22 +57,22 @@ jobs:
           branch: develop
           path: subworkflows/msk/${{ steps.split.outputs.fragment }}/meta.yml
       - name: Run convertor to verify only for new module
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' && contains( github.event.head_commit.message, 'Module:')}}
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml
       - name: Run convertor to generate md file for new module
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && contains( github.event.head_commit.message, 'Module:')}}
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ steps.split.outputs.fragment }}.md
       - name: Run convertor to verify only for new subworkflow
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event_name == 'pull_request' && contains( github.event.head_commit.message, 'Subworkflow:')}}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml
       - name: Run convertor to generate md file for new subworkflow
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && contains( github.event.head_commit.message, 'Subworkflow:')}}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ steps.split.outputs.fragment }}.md
@@ -87,7 +87,7 @@ jobs:
         with:
           files: subworkflows/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY for modules
-        if: ${{ github.event_name == 'push' && steps.check_module_files.outputs.files_exists == 'true' && contains( github.event.head_commit.message, 'Module:' ) }}
+        if: ${{ github.event_name == 'push' && contains( github.event.head_commit.message, 'Module:' ) }}
         run: |
           python ./.github/workflows/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" module > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
