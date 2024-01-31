@@ -8,6 +8,7 @@
 ## Modules
 * [GBCMS](modules/gbcms.md)
 * [polysolver](polysolver.md)
+* [polysolver](modules/polysolver.md)
 
 ## Subworkflows
 * [Untitled](subworkflows/untitled.md)
