@@ -24,13 +24,35 @@ input:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  
-  ## TODO nf-core: Delete / customise this example input
-  - bam:
+        e.g. `[ id:'sample1', patient:'patient_1' ]`
+  - bam_standard:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Full path to standard bam file. 
+      pattern: "*.{bam}"
+  - bai_standard:
+      type: file
+      description: Requires the standard .bai file is present at same location as the bam file.
+      pattern: "*.{bai}"
+  - bam_duplex:
+      type: file
+      description: Full path to duplex bam file. 
+      pattern: "*.{bam}"
+  - bai_duplex:
+      type: file
+      description: Requires the duplex .bai file is present at same location as the bam file.
+      pattern: "*.{bai}"
+  - bam_simplex:
+      type: file
+      description: Full path to simplex bam file. 
+      pattern: "*.{bam}"
+  - bai_simplex:
+      type: file
+      description: Requires the simplex .bai file is present at same location as the bam file.
+      pattern: "*.{bai}"
+  - maf:
+      type: file
+      description: Full path to small variants input file in MAF format
+      pattern: "*.{maf}"
 
 ## TODO nf-core: Add a description of all of the variables used as output
 output:
@@ -39,17 +61,22 @@ output:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  
+        e.g. `[ id:'sample1', patient:'patient_1' ]`
+  - maf:
+      type: file
+      description: |
+        Genotyped mafs for each bam type (simplex, duplex, standard) provided 
+        and a merged genotyped maf.
+        The maf(s) will be labelled with patient identifier, 
+        or sample identifier as the prefix, 
+        and end with their type (standard, simplex, duplex).
+        The sample identifier is prioritized.
+      pattern: "*.{mafs}"
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
   ## TODO nf-core: Delete / customise this example output
-  - bam:
-      type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
 
 authors:
   - "@buehlere"

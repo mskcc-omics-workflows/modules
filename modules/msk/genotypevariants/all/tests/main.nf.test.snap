@@ -1,5 +1,5 @@
 {
-    "sarscov2 - bam - stub": {
+    "illumina - bam - stub": {
         "content": [
             {
                 "0": [
@@ -28,9 +28,50 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-31T10:44:42.455827"
+        "timestamp": "2024-01-31T16:51:32.54827"
     },
-    "sarscov2 - bam, msk - maf": {
+    "illumina - duplex and simplex, msk - maf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-DUPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7",
+                            "197-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,6f37d4e00ab92ce623bd286f6804f30a",
+                            "197-SIMPLEX-DUPLEX_genotyped.maf:md5,6d6c71cdf73e74c10fcb68e477a4455f",
+                            "197-SIMPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-DUPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7",
+                            "197-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,6f37d4e00ab92ce623bd286f6804f30a",
+                            "197-SIMPLEX-DUPLEX_genotyped.maf:md5,6d6c71cdf73e74c10fcb68e477a4455f",
+                            "197-SIMPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-31T16:49:27.251395"
+    },
+    "illumina - bam, msk - maf": {
         "content": [
             {
                 "0": [
@@ -65,6 +106,6 @@
                 ]
             }
         ],
-        "timestamp": "2024-01-31T10:44:36.646565"
+        "timestamp": "2024-01-31T16:51:18.614439"
     }
 }

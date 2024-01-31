@@ -5,11 +5,11 @@ process GENOTYPEVARIANTS_ALL {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/genotype_variants:sha-60b7f8bc':
-        'ghcr.io/msk-access/genotype_variants:sha-60b7f8bc' }"
+        'ghcr.io/msk-access/genotype_variants:sha-303d0244':
+        'ghcr.io/msk-access/genotype_variants:sha-303d0244' }"
 
     input:
-    tuple val(meta), path(bam)
+    tuple val(meta), path(bam_standard), path(bai_standard), path(bam_duplex), path(bai_duplex), path(bam_simplex), path(bai_simplex)
     path(maf)
     path(fasta)
     path(fai)
@@ -25,6 +25,8 @@ process GENOTYPEVARIANTS_ALL {
     def args = task.ext.args ?: ''
     def sample = task.ext.prefix ?: "${meta.id}"
     def patient = "${meta.patient}"
+    def bams_standard = bam_standard ?"-b $bam_standard" : ''
+    def bam_liquid = (bam_duplex && bam_simplex) ? "-d $bam_duplex -s $bam_simplex" : ''
     // TODO nf-core: If the tool supports multi-threading then you MUST provide the appropriate parameter
     //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
     """
@@ -33,8 +35,9 @@ process GENOTYPEVARIANTS_ALL {
     -r ${fasta} \\
     -g /usr/local/bin/GetBaseCountsMultiSample \\
     -p ${patient} \\
-    -b ${bam} \\
-    -s ${sample} $args
+    $bams_standard \\
+    $bam_liquid \\
+    -si ${sample} $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
