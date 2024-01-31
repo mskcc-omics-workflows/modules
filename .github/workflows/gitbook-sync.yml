@@ -40,7 +40,9 @@ jobs:
       - name: Rename md file
         id: replace_slash
         run: |
-          echo "MD_NAME=${steps.split.outputs.fragment/\//_}" >> $GITHUB_ENV
+          FRAGMENT="${{ steps.split.outputs.fragment }}"
+          MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
+          echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
           echo "${MD_NAME}"
       - name: Download convertor from yml to md
         run: |
