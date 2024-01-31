@@ -8,6 +8,7 @@
 ## Modules
 * [GBCMS](modules/gbcms.md)
 * [polysolver](modules/polysolver.md)
+* [gatk4_applybqsr](modules/gatk4_applybqsr.md)
 
 ## Subworkflows
 * [Untitled](subworkflows/untitled.md)
