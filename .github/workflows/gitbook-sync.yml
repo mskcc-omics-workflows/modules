@@ -37,6 +37,9 @@ jobs:
           MODULE: ${{github.event.head_commit.message}}
         id: split
         run: echo "::set-output name=fragment::${MODULE##*:}"
+      - name: Rename md file
+        id: replace_slash
+        run: MD_NAME="$(echo $steps.split.outputs.fragment | sed 's/\//_/g')"
       - name: Download convertor from yml to md
         run: |
           curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
@@ -61,7 +64,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ steps.split.outputs.fragment//\//_ }}.md
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ steps.replace_slash.MD_NAME }}.md
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
@@ -71,7 +74,7 @@ jobs:
         if: ${{ github.event_name == 'push'  && steps.check_module_files.outputs.files_exists == 'true' }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/feature/sync-gitbook/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](modules/${{ steps.split.outputs.fragment }}.md)" module > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ steps.replace_slash.MD_NAME }}](modules/${{ steps.replace_slash.MD_NAME }}.md)" module > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
