@@ -61,7 +61,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ steps.split.outputs.fragment }}.md
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ steps.split.outputs.fragment//\//_ }}.md
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
