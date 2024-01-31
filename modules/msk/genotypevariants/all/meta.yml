@@ -1,7 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "genotypevariants_all"
-## TODO nf-core: Add a description of the module and list keywords
 description: write your description here
 keywords:
   - sort
@@ -9,15 +8,10 @@ keywords:
   - genomics
 tools:
   - "genotypevariants":
-      ## TODO nf-core: Add a description and other details for the software below
-      description: ""
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
-      doi: ""
-      licence: 
+      description: "module supports genotyping and merging small variants (SNV and INDELS)."
+      documentation: "https://genotype-variants.readthedocs.io/en/latest/"
+      licence: ["MIT"] 
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
   # Only when we have meta
   - meta:
@@ -53,8 +47,16 @@ input:
       type: file
       description: Full path to small variants input file in MAF format
       pattern: "*.{maf}"
+  - fasta:
+      type: file
+      description: The reference fasta file
+      pattern: "*.fasta"
+  - fai:
+      type: file
+      description: Index of reference fasta file
+      pattern: "*.fasta.fai"
 
-## TODO nf-core: Add a description of all of the variables used as output
+
 output:
   #Only when we have meta
   - meta:
@@ -76,7 +78,6 @@ output:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
 
 authors:
   - "@buehlere"

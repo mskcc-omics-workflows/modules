@@ -27,8 +27,6 @@ process GENOTYPEVARIANTS_ALL {
     def patient = "${meta.patient}"
     def bams_standard = bam_standard ?"-b $bam_standard" : ''
     def bam_liquid = (bam_duplex && bam_simplex) ? "-d $bam_duplex -s $bam_simplex" : ''
-    // TODO nf-core: If the tool supports multi-threading then you MUST provide the appropriate parameter
-    //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
     """
     genotype_variants small_variants all \\
     -i ${maf} \\
@@ -37,7 +35,8 @@ process GENOTYPEVARIANTS_ALL {
     -p ${patient} \\
     $bams_standard \\
     $bam_liquid \\
-    -si ${sample} $args
+    -si ${sample} \\
+    $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -50,10 +49,6 @@ process GENOTYPEVARIANTS_ALL {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def sample = "${meta.sample}"
     def patient = "${meta.patient}"
-    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
-    //               Have a look at the following examples:
-    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
-    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
     """
     touch ${prefix}.maf
 
