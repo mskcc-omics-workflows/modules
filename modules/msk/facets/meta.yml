@@ -25,7 +25,7 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'pair_id' ]`
-  - pileup:
+  - snp_pileup:
       type: file
       description: The pileup file
       pattern: "*.snp_pileup.gz"

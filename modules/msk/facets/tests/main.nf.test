@@ -9,6 +9,7 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "facets"
+    tag "snppileup"
 
     test("facets - pileup") {
 

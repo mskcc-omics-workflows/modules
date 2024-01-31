@@ -1,3 +1,2 @@
 facets:
   - "modules/msk/facets/**"
-  - "modules/msk/snppileup/**"
