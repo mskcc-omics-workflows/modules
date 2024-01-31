@@ -6,8 +6,8 @@ def update_summary(origin: str, new_feature: str, feature_type: str):
     for line in f.readlines():
       if feature_type == "module" and line.startswith("## Subworkflows"):
         out_summary += new_feature + '\n\n'
-    if line.strip():
-      out_summary += line
+      if line.strip():
+        out_summary += line
   if feature_type == "subworkflow":
     out_summary += new_feature
   return out_summary
