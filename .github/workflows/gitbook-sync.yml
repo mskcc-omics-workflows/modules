@@ -145,7 +145,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ en.MD_NAME }}.md
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md
       - name: Check file existence for subworkflows
         id: check_subworkflow_files
         uses: andstor/file-existence-action@v1
@@ -155,7 +155,7 @@ jobs:
         if: ${{ github.event_name == 'push' && steps.check_subworkflow_files.outputs.files_exists == 'false' }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/feature/sync-gitbook/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ en.MD_NAME }}](subworkflows/${{ en.MD_NAME }}.md)" subworkflow > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](subworkflows/${{ env.MD_NAME }}.md)" subworkflow > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
