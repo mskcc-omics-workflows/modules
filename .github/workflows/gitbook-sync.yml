@@ -47,22 +47,35 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ${{ github.workspace }}/requirements.txt
       - uses: jaywcjlove/github-action-read-file@main
-        id: cat_file
+        id: cat_file_module
         with:
           branch: develop
           path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
-      #- run: echo "${{ steps.cat_file.outputs.content }}"
-      #- run: echo "\`\`\` ${{ steps.cat_file.outputs.content }} \`\`\`" > ./modules/${{ steps.split.outputs.fragment }}.md
-      - name: Run convertor to verify only
+      - uses: jaywcjlove/github-action-read-file@main
+        id: cat_file_subworkflow
+        with:
+          branch: develop
+          path: subworkflows/msk/${{ steps.split.outputs.fragment }}/meta.yml
+      - name: Run convertor to verify only for new module
         if: ${{ github.event_name == 'pull_request' }}
         run: |
-          echo '${{ steps.cat_file.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml
-      - name: Run convertor to generate md file
+      - name: Run convertor to generate md file for new module
         if: ${{ github.event_name == 'push' }}
         run: |
-          echo '${{ steps.cat_file.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ steps.split.outputs.fragment }}.md
+      - name: Run convertor to verify only for new subworkflow
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          python yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml
+      - name: Run convertor to generate md file for new subworkflow
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          python yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ steps.split.outputs.fragment }}.md
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
@@ -74,7 +87,7 @@ jobs:
         with:
           files: subworkflows/${{ steps.split.outputs.fragment }}.md
       - name: Add to SUMMARY for modules
-        if: ${{ github.event_name == 'push' && steps.check_module_files.outputs.files_exists == 'false' && contains( github.event.head_commit.message, 'Module:' ) }}
+        if: ${{ github.event_name == 'push' && steps.check_module_files.outputs.files_exists == 'true' && contains( github.event.head_commit.message, 'Module:' ) }}
         run: |
           python ./.github/workflows/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" module > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
