@@ -1,0 +1,74 @@
+{
+    "sarscov2 - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "197",
+                            "patient": "c-id"
+                        },
+                        "197.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "197",
+                            "patient": "c-id"
+                        },
+                        "197.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-31T09:42:25.524655"
+    },
+    "sarscov2 - bam, msk - maf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-ORG-STD_genotyped.maf:md5,8a140bbb7af1c291e8597866fb9d6bb9",
+                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-ORG-STD_genotyped.maf:md5,8a140bbb7af1c291e8597866fb9d6bb9",
+                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-31T09:45:19.495512"
+    }
+}
