@@ -76,11 +76,13 @@ jobs:
       - name: Add to SUMMARY for modules
         if: ${{ github.event_name == 'push' && steps.check_module_files.outputs.files_exists == 'false' && contains( github.event.head_commit.message, 'Module:' ) }}
         run: |
-          python ./.github/workflows/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" module > SUMMARY.md
+          python ./.github/workflows/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" module > tmp_summary.md
+          mv tmp_summary.md SUMMARY.md
       - name: Add to SUMMARY for subworkflows
         if: ${{ github.event_name == 'push' && steps.check_subworkflow_files.outputs.files_exists == 'false' && contains( github.event.head_commit.message, 'Subworkflow:' ) }}
         run: |
-          python ./.github/workflows/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" subworkflow > SUMMARY.md
+          python ./.github/workflows/update_summary.py SUMMARY.md "* [${{ steps.split.outputs.fragment }}](${{ steps.split.outputs.fragment }}.md)" subworkflow > tmp_summary.md
+          mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
