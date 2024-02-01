@@ -39,7 +39,26 @@ input:
       description: Control sample BAM index file
       pattern: "*.{bai}"
 
-## TODO nf-core: Add a description of all of the variables used as output
+  - bed_file:
+      type: file
+      description: Input BED file
+      pattern: "*.{bed}"
+
+  - fasta_file:
+      type: file
+      description: Input reference fasta file
+      pattern: "*.{fasta}"
+
+  - fasta_dict_file:
+      type: file
+      description: Input reference fasta dictionary file
+      pattern: "*.{dict}"
+
+  - fasta_index_file:
+      type: file
+      description: Input reference fasta index file
+      pattern: "*.{fasta.fai}"
+
 output:
   #Only when we have meta
   - mutect_vcf:
