@@ -171,10 +171,6 @@ jobs:
         profile: ["docker", "singularity", "conda"]
         exclude:
           - tags: "nf-test"
-          - profile: "conda"
-            tags: gbcms
-          - profile: "conda"
-            tags: polysolver
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
