@@ -10,6 +10,7 @@
 * [polysolver](modules/polysolver.md)
 * [gatk4_applybqsr](modules/gatk4_applybqsr.md)
 * [custom_splitfastqbylane](modules/custom_splitfastqbylane.md)
+* [custom_splitfastqbylane](modules/custom_splitfastqbylane.md)
 
 ## Subworkflows
 * [Untitled](subworkflows/untitled.md)
