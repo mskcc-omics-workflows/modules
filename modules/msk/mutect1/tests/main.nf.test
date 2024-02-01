@@ -5,6 +5,9 @@ nextflow_process {
     process "MUTECT1"
     config "./nextflow.config"
 
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
     tag "mutect1"
 
     
