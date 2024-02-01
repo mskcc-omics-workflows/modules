@@ -10,20 +10,20 @@ Split fastq into multiple fastqs by lane
 | fastq |
 | split |
 
-**Tools:**
+## Tools
 
 | Tool | Description | License | Homepage |
 |------|-------------|---------|----------|
 | custom | GNU awk | GPL v3 | https://www.gnu.org/software/gawk/manual/gawk.html |
 
-**Inputs:**
+## Inputs
 
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
 | reads | file | Paired end or single end FASTQ file(s) | *.{fastq,fastq.gz} |
 
-**Outputs:**
+## Outputs
 
 | Output | Type | Description | Pattern |
 |--------|------|-------------|---------|
@@ -31,11 +31,11 @@ Split fastq into multiple fastqs by lane
 | versions | file | File containing software versions | versions.yml |
 | reads | file | Output fastq files containing only one read lane per file. | *.{split.fastq.gz} |
 
-**Authors:**
+## Authors
 
 @anoronh4
 
-**Maintainers:**
+## Maintainers
 
 @anoronh4
 
