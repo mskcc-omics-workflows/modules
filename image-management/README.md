@@ -29,7 +29,7 @@ docker login -u<ci_service_account_username> https://mskcc.jfrog.io/
 Step 2. Tag the image
 
 ```
-docker tag example:0.1.0 <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
+docker tag <DOCKER_IMAGE>:<DOCKER_TAG> <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
 OR
 docker tag <DOCKER_IMAGE_ID> <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
