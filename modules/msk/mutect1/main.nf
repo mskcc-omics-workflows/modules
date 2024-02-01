@@ -9,12 +9,12 @@ process MUTECT1 {
         'ghcr.io/msk-access/test:1.1.5' }"
 
     input:
-    tuple val(case_sample_name), val(control_sample_name), path(case_bam), path(control_bam), path(case_bai), path(control_bai)
-    tuple val(meta), path(bed_file), path(fasta_file), path(fasta_index_file), path(fasta_dict_file)
+    tuple val(meta), path(case_bam), path(control_bam), path(case_bai), path(control_bai)
+    tuple path(bed_file), path(fasta_file), path(fasta_index_file), path(fasta_dict_file)
 
     output:
     
-    path("*.mutect.vcf"), emit: vcf
+    path("*.mutect.vcf"), emit: mutect_vcf
     path("*.mutect.txt"), emit: standard_mutect_output
     
     path "versions.yml"           , emit: versions
@@ -25,17 +25,21 @@ process MUTECT1 {
     script:
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
+    def case_sample_name = task.ext.prefix ?: "${meta.case_id}"
+    def control_sample_name = task.ext.prefix ?: "${meta.control_id}"
     def bed_file = bed_file ? "--intervals ${bed_file}" : ''
 
     
     """
     java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /opt/mutect/muTect-1.1.5.jar -T MuTect \
+        ${args} \
         --input_file:normal ${control_bam} \
         --input_file:tumor ${case_bam} \
         --intervals ${bed_file} \
         --normal_sample_name ${control_sample_name} \
         --reference_sequence ${fasta_file} \
         --tumor_sample_name ${case_sample_name} \
+        ${args2} \
         --out ${case_sample_name}.${control_sample_name}.mutect.txt \
         --vcf ${case_sample_name}.${control_sample_name}.mutect.vcf
     
@@ -49,6 +53,8 @@ process MUTECT1 {
     stub:
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
+    def case_sample_name = task.ext.prefix ?: "${meta.case_id}"
+    def control_sample_name = task.ext.prefix ?: "${meta.control_id}"
     def bed_file = bed_file ? "--intervals ${bed_file}" : ''
 
     """
