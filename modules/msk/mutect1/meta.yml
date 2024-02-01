@@ -17,28 +17,26 @@ input:
   # Only when we have meta
   - meta:
       type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ tumor_id:'tumor_sample', normal_id:'normal_sample' ]`
+      description: Groovy Map containing sample information e.g. `[ tumor_id:'tumor_sample', normal_id:'normal_sample' ]`
 
   - case_bam:
       type: file
-      description: case sample BAM file
+      description: Case sample BAM file
       pattern: "*.{bam}"
 
   - control_bam:
       type: file
-      description: control sample BAM file
+      description: Control sample BAM file
       pattern: "*.{bam}"
 
   - case_bai:
       type: file
-      description: case sample BAM index file
+      description: Case sample BAM index file
       pattern: "*.{bai}"
 
   - control_bai:
       type: file
-      description: control sample BAM index file
+      description: Control sample BAM index file
       pattern: "*.{bai}"
 
 ## TODO nf-core: Add a description of all of the variables used as output
