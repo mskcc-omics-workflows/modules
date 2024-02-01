@@ -18,17 +18,51 @@ Step 1. Docker login, when asked for a password, enter the **ci service account*
 docker login -u<ci_service_account_username> <jfrog_url>
 ```
 
+For example (contact the team for service account information),
+
+```
+docker login -u<ci_service_account_username> https://mskcc.jfrog.io/
+```
+
+
+
 Step 2. Tag the image
 
 ```
-docker tag example:0.1.0 <jfrog_url>/omicswf-docker-dev-local/mskcc-omics-workflows/example:0.1.0
+docker tag example:0.1.0 <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
+OR
+docker tag <DOCKER_IMAGE_ID> <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
+
+For example,
+
+```
+docker tag example:0.1.0 mskcc.jfrog.io/omicswf-docker-test-local/mskcc-omics-workflows/example:0.1.0cv2/example:0.1.0
+OR
+docker tag <DOCKER_IMAGE_ID> <jfrog_url>/omicswf-docker-test-local/mskcc-omics-workflows/example:0.1.0
+```
+
+NOTE: we have several local folders to store images:
+
+* omicswf-docker-dev-local -- for develop purposes
+* omicswf-docker-test-local -- for testing purposes, docker images (if needed to store in JFrog) should be uploaded to this repository along with pull request from feature branch to develop branch in the common library github
+* omicswf-docker-prod-local -- for production purposes, docker images should be uploaded along with the official release (from develop branch to main branch). We can just make copies from `omicswf-docker-test-local` to `omicswf-docker-prod-local`on JFrog platform directly
+
+
 
 Step 3. Push the image
 
 ```
-docker push <jfrog_url>/omicswf-docker-dev-local/mskcc-omics-workflows/example:0.1.0
+docker push <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
+
+For example,
+
+```
+docker push mskcc.jfrog.io/omicswf-docker-test-local/mskcc-omics-workflows/example:0.1.0
+```
+
+
 
 ### Download images/packages
 
@@ -40,8 +74,20 @@ Docker login, when asked for a password, enter **cd service account** identity t
 docker login -u<cd_service_account_username> <jfrog_url>
 ```
 
+For example (contact the team for service account information),
+
 ```
-docker pull <jfrog_url>/omicswf-docker-dev-local/mskcc-omics-workflows/<DOCKER_IMAGE>:<DOCKER_TAG>
+docker login -u<cd_service_account_username> https://mskcc.jfrog.io
+```
+
+Pull images
+
+```
+docker pull <jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
+```
+
+```
+docker pull mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/example:0.1.0
 ```
 
 #### Singularity:
@@ -54,6 +100,15 @@ export SINGULARITY_DOCKER_PASSWORD=<access_token>
 ```
 
 ```
-singularity pull docker://<jfrog_url>/omicswf-docker-dev-local/mskcc-omics-workflows/example:0.1.0
+singularity pull docker://<jfrog_url>/<DOCKER_IMAGE>:<DOCKER_TAG>
 ```
 
+For example,
+
+```
+singularity pull docker://mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/example:0.1.0
+```
+
+### List of available images
+
+[https://mskcc.jfrog.io/ui/native/omicswf-docker-dev-virtual/mskcc-omics-workflows/](https://mskcc.jfrog.io/ui/native/omicswf-docker-dev-virtual/mskcc-omics-workflows/)

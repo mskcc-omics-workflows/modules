@@ -13,3 +13,4 @@
 1. Base image should be as light as possible
 2. Avoid using "latest" tag (to avoid discrepancy from new tags)
 3. Images should be tested with Nextflow modules BEFORE pushing to JFrog
+4. Dockerfile (if available) should be stored in common library github repo (related issue: [https://github.com/mskcc-omics-workflows/modules/issues/30](https://github.com/mskcc-omics-workflows/modules/issues/30), feature set in pending)
