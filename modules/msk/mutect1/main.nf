@@ -5,8 +5,8 @@ process MUTECT1 {
 
    
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/test:1.1.5':
-        'ghcr.io/msk-access/test:1.1.5' }"
+        'ghcr.io/msk-access/mutect1:1.1.5':
+        'ghcr.io/msk-access/mutect1:1.1.5' }"
 
     input:
     tuple val(meta), path(case_bam), path(control_bam), path(case_bai), path(control_bai)
@@ -14,8 +14,8 @@ process MUTECT1 {
 
     output:
     
-    path("*.mutect.vcf"), emit: mutect_vcf
-    path("*.mutect.txt"), emit: standard_mutect_output
+    tuple val(meta), path("*.mutect.vcf"), emit: mutect_vcf
+    tuple val(meta), path("*.mutect.txt"), emit: standard_mutect_output
     
     path "versions.yml"           , emit: versions
 
