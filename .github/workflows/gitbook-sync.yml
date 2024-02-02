@@ -63,12 +63,12 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/nextflow_schema/modules/meta-schema.json
       - name: Run convertor to generate md file for new module
         if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/main/nextflow_schema/modules/meta-schema.json
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
@@ -142,12 +142,12 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
       - name: Run convertor to generate md file for new subworkflow
         if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
       - name: Check file existence for subworkflows
         id: check_subworkflow_files
         uses: andstor/file-existence-action@v1
