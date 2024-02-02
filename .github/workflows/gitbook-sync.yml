@@ -113,7 +113,7 @@ jobs:
           ref: docs
       - name: Split branch name
         env:
-          MODULE: ${{github.event.head_commit.message}}
+          SUBWORKFLOW: ${{github.event.head_commit.message}}
         id: split
         run: echo "::set-output name=fragment::${SUBWORKFLOW##*:}"
       - name: Rename md file
