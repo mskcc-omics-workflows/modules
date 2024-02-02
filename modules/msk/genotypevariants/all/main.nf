@@ -23,8 +23,8 @@ process GENOTYPEVARIANTS_ALL {
 
     script:
     def args = task.ext.args ?: ''
-    def sample = task.ext.prefix ?: "${meta.id}"
-    def patient = "${meta.patient}"
+    def sample = task.ext.prefix != null ? "-si ${task.ext.prefix}" : (meta.id != null ? "-si ${meta.id}" : "")
+    def patient = meta.patient ?"-p ${meta.patient}": ''
     def bams_standard = bam_standard ?"-b $bam_standard" : ''
     def bam_liquid = (bam_duplex && bam_simplex) ? "-d $bam_duplex -s $bam_simplex" : ''
     """
@@ -32,10 +32,11 @@ process GENOTYPEVARIANTS_ALL {
     -i ${maf} \\
     -r ${fasta} \\
     -g /usr/local/bin/GetBaseCountsMultiSample \\
-    -p ${patient} \\
+    $patient \\
     $bams_standard \\
     $bam_liquid \\
-    -si ${sample} \\
+    $sample \\
+    -t $task.cpus \\
     $args
 
     cat <<-END_VERSIONS > versions.yml

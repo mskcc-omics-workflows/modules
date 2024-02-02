@@ -3,9 +3,9 @@
 name: "genotypevariants_all"
 description: write your description here
 keywords:
-  - sort
-  - example
-  - genomics
+  - genotype
+  - bams
+  - maf
 tools:
   - "genotypevariants":
       description: "module supports genotyping and merging small variants (SNV and INDELS)."
