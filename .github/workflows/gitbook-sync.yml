@@ -76,8 +76,8 @@ jobs:
           files: modules/${{ env.MD_NAME }}.md
       - name: Add to SUMMARY for modules
         if: |
-          github.event_name == 'push'
-            && steps.check_module_files.outputs.files_exists == 'false'
+          ${{ github.event_name == 'push'
+            && (steps.check_module_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/feature/sync-gitbook/.github/workflows/update_summary.py
           python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](modules/${{ env.MD_NAME }}.md)" module > tmp_summary.md
@@ -155,8 +155,8 @@ jobs:
           files: subworkflows/${{ env.MD_NAME }}.md
       - name: Add to SUMMARY for subworkflows
         if: |
-          github.event_name == 'push'
-            && steps.check_subworkflow_files.outputs.files_exists == 'false'
+          ${{ github.event_name == 'push'
+            && (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/feature/sync-gitbook/.github/workflows/update_summary.py
           python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](subworkflows/${{ env.MD_NAME }}.md)" subworkflow > tmp_summary.md
