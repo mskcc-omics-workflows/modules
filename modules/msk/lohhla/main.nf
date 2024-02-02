@@ -31,7 +31,7 @@ process LOHHLA {
     input:
     tuple val(metaT), path(bamTumor)
     tuple val(metaN), path(bamNormal) 
-    path(winnersHla) //HLA output from polysolver or other hla caller. 
+    tuple val(metahlaN),path(winnersHla) //HLA output from polysolver or other hla caller. 
     path(purityOut)  // purityOut is from FACETS run
     tuple path(hlaFasta), path(hlaDat) 
         
