@@ -10,13 +10,13 @@ HLA class I genotyping
 | genotyping |
 | bam |
 
-**Tools:**
+## Tools
 
 | Tool | Description | License | Homepage |
 |------|-------------|---------|----------|
 | polysolver | HLA typing | GPL v3 | https://software.broadinstitute.org/cancer/cga/polysolver |
 
-**Inputs:**
+## Inputs
 
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
@@ -27,7 +27,7 @@ HLA class I genotyping
 | format | string | fastq format (STDFQ, ILMFQ, ILM1.8 or SLXFQ; see Novoalign documentation) (Default: STDFQ) |  |
 | insertCalc | integer | flag indicating whether empirical insert size distribution should be used in the model (0 or 1) (Default: 0) |  |
 
-**Outputs:**
+## Outputs
 
 | Output | Type | Description | Pattern |
 |--------|------|-------------|---------|
@@ -35,11 +35,11 @@ HLA class I genotyping
 | versions | file | File containing software versions | versions.yml |
 | hla | file | Polysolver HLA genotyping result | *.hla.txt |
 
-**Authors:**
+## Authors
 
 @anoronh4
 
-**Maintainers:**
+## Maintainers
 
 @anoronh4
 
