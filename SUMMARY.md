@@ -12,5 +12,4 @@
 * [custom_splitfastqbylane](modules/custom_splitfastqbylane.md)
 * [mutect1](modules/mutect1.md)
 ## Subworkflows
-* [Untitled](subworkflows/untitled.md)
 * [bwa_markdup_bqsr](subworkflows/bwa_markdup_bqsr.md)
