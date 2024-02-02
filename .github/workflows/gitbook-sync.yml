@@ -142,7 +142,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json
       - name: Run convertor to generate md file for new subworkflow
         if: ${{ github.event_name == 'push' }}
         run: |
