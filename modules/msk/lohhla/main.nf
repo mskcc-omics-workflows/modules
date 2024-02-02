@@ -17,7 +17,7 @@
 
 process LOHHLA {
     tag "$meta.id"
-    label 'process-high'
+    label 'process_high'
 
     // TODO nf-core: List required Conda package(s).
     //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
@@ -37,7 +37,7 @@ process LOHHLA {
         
 
     output:
-    tuple val(metaT), val(metaN), path("*.DNA.HLAlossPrediction_CI.txt"), path("*DNA.IntegerCPN_CI.txt"), path("*.pdf"), path("*.RData") emit: lohhlaOutput
+    tuple val(metaT), val(metaN), path("*.DNA.HLAlossPrediction_CI.txt"), path("*DNA.IntegerCPN_CI.txt"), path("*.pdf"), path("*.RData"), emit: lohhlaOutput
     path  "versions.yml"              , emit: versions
 
 
@@ -139,9 +139,9 @@ process LOHHLA {
 
     my_array=("a" "b" "c")
 
-    for hlagene in "${my_array[@]}"
+    for hlagene in "\${my_array[@]}"
     do
-        touch ${outputPrefix}.hla_${hlagene}.tmp.data.plots.RData
+        touch ${outputPrefix}.hla_\${hlagene}.tmp.data.plots.RData
     done
 
     touch ${outputPrefix}.hla_a.tmp.data.plots.RData
