@@ -26,7 +26,7 @@ process LOHHLA {
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'cmopipeline/lohhla:1.1.7':
-        'cmopipeline/lohhla:1.1.7   ' }"
+        'cmopipeline/lohhla:1.1.7' }"
 
     input:
     tuple val(metaT), path(bamTumor)

@@ -1,2 +1,3 @@
 lohhla:
   - "modules/nf-core-test/lohhla/**"
+  - "modules/msk/polysolver/**"
