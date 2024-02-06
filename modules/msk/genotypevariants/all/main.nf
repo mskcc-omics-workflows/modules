@@ -5,8 +5,8 @@ process GENOTYPEVARIANTS_ALL {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/genotype_variants:sha-303d0244':
-        'ghcr.io/msk-access/genotype_variants:sha-303d0244' }"
+        'ghcr.io/msk-access/genotype_variants:sha-6fa1d7cd':
+        'ghcr.io/msk-access/genotype_variants:sha-6fa1d7cd' }"
 
     input:
     tuple val(meta), path(bam_standard), path(bai_standard), path(bam_duplex), path(bai_duplex), path(bam_simplex), path(bai_simplex), path(maf)
