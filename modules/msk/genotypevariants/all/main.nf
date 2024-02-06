@@ -9,8 +9,7 @@ process GENOTYPEVARIANTS_ALL {
         'ghcr.io/msk-access/genotype_variants:sha-303d0244' }"
 
     input:
-    tuple val(meta), path(bam_standard), path(bai_standard), path(bam_duplex), path(bai_duplex), path(bam_simplex), path(bai_simplex)
-    path(maf)
+    tuple val(meta), path(bam_standard), path(bai_standard), path(bam_duplex), path(bai_duplex), path(bam_simplex), path(bai_simplex), path(maf)
     path(fasta)
     path(fai)
 
