@@ -16,7 +16,7 @@
 //               list (`[]`) instead of a file can be used to work around this issue.
 
 process LOHHLA {
-    tag "$meta.id"
+    tag "$metaT.id"
     label 'process_high'
 
     // TODO nf-core: List required Conda package(s).
@@ -25,15 +25,15 @@ process LOHHLA {
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'cmopipeline/lohhla:1.1.7':
-        'cmopipeline/lohhla:1.1.7' }"
+        'docker.io/orgeraj/lohhla:1.1.8':
+        'docker.io/orgeraj/lohhla:1.1.8' }"
 
     input:
     tuple val(metaT), path(bamTumor)
     tuple val(metaN), path(bamNormal) 
     tuple val(metahlaN),path(winnersHla) //HLA output from polysolver or other hla caller. 
-    path(purityOut)  // purityOut is from FACETS run
-    tuple path(hlaFasta), path(hlaDat) 
+    tuple val(metaFacets) , path(purityOut)  // purityOut is from FACETS run
+    
         
 
     output:
@@ -46,11 +46,12 @@ process LOHHLA {
 
     script:
     def args              = task.ext.args ?: ''
-    def build_param       = build ? (["GRCh37","hg19"].contains(build) ? "hg19" : "hg38") : "hg19"
     def prefixTumor       = task.ext.prefix ?: "${metaT.id}"
     def prefixNormal      = task.ext.prefix ?: "${metaN.id}"
     def minCoverageFilter = 10
     def outputPrefix      = task.ext.prefix ?: "${prefixTumor}_${prefixNormal}"
+    def hlaFasta          =  "/lohhla/data/abc_complete.fasta"
+    def hlaDat            = "/lohhla/data/hla.dat"
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
     //               If the software is unable to output a version number on the command-line then it can be manually specified
     //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
@@ -84,7 +85,7 @@ process LOHHLA {
 
     if [[ -f ${outputPrefix}.${minCoverageFilter}.DNA.HLAlossPrediction_CI.txt ]]
     then
-        sed -i "s/^${idTumor}/${outputPrefix}/g" ${outputPrefix}.${minCoverageFilter}.DNA.HLAlossPrediction_CI.txt
+        sed -i "s/^${prefixTumor}/${outputPrefix}/g" ${outputPrefix}.${minCoverageFilter}.DNA.HLAlossPrediction_CI.txt
     else
         rm -rf *.DNA.HLAlossPrediction_CI.txt
     fi
@@ -106,7 +107,7 @@ process LOHHLA {
     if find Figures -mindepth 1 | read
     then
         mv Figures/* .
-        mv ${idTumor}.minCoverage_${minCoverageFilter}.HLA.pdf ${outputPrefix}.HLA.pdf
+        mv ${prefixTumor}.minCoverage_${minCoverageFilter}.HLA.pdf ${outputPrefix}.HLA.pdf
     fi
 
     
@@ -119,7 +120,6 @@ process LOHHLA {
 
     stub:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
     def prefixTumor       = task.ext.prefix ?: "${metaT.id}"
     def prefixNormal      = task.ext.prefix ?: "${metaN.id}"
     def minCoverageFilter = 10

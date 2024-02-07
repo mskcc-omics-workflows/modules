@@ -1,3 +1,5 @@
 lohhla:
   - "modules/nf-core-test/lohhla/**"
   - "modules/msk/polysolver/**"
+  - "modules/msk/facets/**"
+  - "modules/msk/snppileup/**"
