@@ -285,7 +285,7 @@ jobs:
           - profile: "conda"
             tags: mutect1
           - profile: "conda"
-            tags: genotypevariant_all
+            tags: genotypevariants_all
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
