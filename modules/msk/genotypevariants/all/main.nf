@@ -26,6 +26,7 @@ process GENOTYPEVARIANTS_ALL {
     def patient = meta.patient ?"-p ${meta.patient}": ''
     def bams_standard = bam_standard ?"-b $bam_standard" : ''
     def bam_liquid = (bam_duplex && bam_simplex) ? "-d $bam_duplex -s $bam_simplex" : ''
+
     """
     genotype_variants small_variants all \\
     -i ${maf} \\
@@ -49,6 +50,7 @@ process GENOTYPEVARIANTS_ALL {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def sample = "${meta.sample}"
     def patient = "${meta.patient}"
+    
     """
     touch ${prefix}.maf
 
