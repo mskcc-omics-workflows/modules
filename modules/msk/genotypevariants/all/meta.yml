@@ -10,7 +10,7 @@ tools:
   - "genotypevariants":
       description: "module supports genotyping and merging small variants (SNV and INDELS)."
       documentation: "https://genotype-variants.readthedocs.io/en/latest/"
-      licence: ["MIT"] 
+      licence: ["MIT"]
 
 input:
   # Only when we have meta
@@ -21,7 +21,7 @@ input:
         e.g. `[ id:'sample1', patient:'patient_1' ]`
   - bam_standard:
       type: file
-      description: Full path to standard bam file. 
+      description: Full path to standard bam file.
       pattern: "*.{bam}"
   - bai_standard:
       type: file
@@ -29,7 +29,7 @@ input:
       pattern: "*.{bai}"
   - bam_duplex:
       type: file
-      description: Full path to duplex bam file. 
+      description: Full path to duplex bam file.
       pattern: "*.{bam}"
   - bai_duplex:
       type: file
@@ -37,7 +37,7 @@ input:
       pattern: "*.{bai}"
   - bam_simplex:
       type: file
-      description: Full path to simplex bam file. 
+      description: Full path to simplex bam file.
       pattern: "*.{bam}"
   - bai_simplex:
       type: file
@@ -55,7 +55,6 @@ input:
       type: file
       description: Index of reference fasta file
       pattern: "*.fasta.fai"
-
 
 output:
   #Only when we have meta
