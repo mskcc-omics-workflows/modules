@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
                 ],
                 "maf": [
                     [
@@ -24,11 +24,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
                 ]
             }
         ],
-        "timestamp": "2024-01-31T16:51:32.54827"
+        "timestamp": "2024-02-12T11:27:25.169131"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -48,7 +48,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
                 ],
                 "maf": [
                     [
@@ -65,11 +65,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
                 ]
             }
         ],
-        "timestamp": "2024-01-31T17:40:36.589657"
+        "timestamp": "2024-02-12T11:27:17.612126"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -87,7 +87,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
                 ],
                 "maf": [
                     [
@@ -102,10 +102,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,bde4f933543cca4f05d70a7f0347e9bf"
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
                 ]
             }
         ],
-        "timestamp": "2024-01-31T17:40:27.792079"
+        "timestamp": "2024-02-12T11:27:06.821575"
     }
 }
