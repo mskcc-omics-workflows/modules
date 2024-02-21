@@ -62,11 +62,13 @@ process LOHHLA {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-
+    samtools index -b ${bamTumor}
+    samtools index -b ${bamNormal}
 
     cat ${winnersHla} | tr "\t" "\n" | grep -v "HLA" > massaged.winners.hla.txt
 
     PURITY=\$(grep Purity *_purity.out | grep -oP "[0-9\\.]+|NA+")
+    [[ \$PURITY == "NA" ]] && PURITY=0.5
     PLOIDY=\$(grep Ploidy *_purity.out | grep -oP "[0-9\\.]+|NA+")
     cat <(echo -e "tumorPurity\ttumorPloidy") <(echo -e "${prefixTumor}\t\$PURITY\t\$PLOIDY") > tumor_purity_ploidy.txt
 

@@ -1,0 +1,251 @@
+{
+    "facets - pileup": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.seg:md5,a4e7cf69e12b7d7e2d1ccec81cd1c032"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.Rdata:md5,e28f0252fb36358fb3c70920fb402033"
+                    ]
+                ],
+                "10": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.qc.txt:md5,97f248167bc6d61d714a1a8fb49b077f"
+                    ]
+                ],
+                "11": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.gene_level.txt:md5,4b94d595242700da7ea15d362b4e498c"
+                    ]
+                ],
+                "12": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.arm_level.txt:md5,06846b84c731a5768f4cc996de2098df"
+                    ]
+                ],
+                "13": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test.arm_level.txt:md5,06846b84c731a5768f4cc996de2098df",
+                            "test.gene_level.txt:md5,4b94d595242700da7ea15d362b4e498c",
+                            "test.qc.txt:md5,97f248167bc6d61d714a1a8fb49b077f",
+                            "test_hisens.cncf.txt:md5,dabe379f3f9acc9a489879678eb297d8",
+                            "test_purity.cncf.txt:md5,4083bfc9655c5b4ff48a8d9bd2aa69d3"
+                        ]
+                    ]
+                ],
+                "14": [
+                    "versions.yml:md5,d89b44510220c64887a3b4b0112c182b"
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.CNCF.png:md5,569501072d3e0e51c57f35993b985e8e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.out:md5,8a93be2bafdcc20ad71ba660b19157d6"
+                    ]
+                ],
+                "4": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.cncf.txt:md5,4083bfc9655c5b4ff48a8d9bd2aa69d3"
+                    ]
+                ],
+                "5": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.seg:md5,a4e7cf69e12b7d7e2d1ccec81cd1c032"
+                    ]
+                ],
+                "6": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.Rdata:md5,9bc324b7329a148a805647ded5d2f113"
+                    ]
+                ],
+                "7": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.CNCF.png:md5,17a0c2fac69e0fff252ed2f5b87d856b"
+                    ]
+                ],
+                "8": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.out:md5,2a51d7227f21a4d0d47ccc459200a279"
+                    ]
+                ],
+                "9": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.cncf.txt:md5,dabe379f3f9acc9a489879678eb297d8"
+                    ]
+                ],
+                "arm_level_txt": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.arm_level.txt:md5,06846b84c731a5768f4cc996de2098df"
+                    ]
+                ],
+                "gene_level_txt": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.gene_level.txt:md5,4b94d595242700da7ea15d362b4e498c"
+                    ]
+                ],
+                "hisens_cncf_txt": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.cncf.txt:md5,dabe379f3f9acc9a489879678eb297d8"
+                    ]
+                ],
+                "hisens_out": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.out:md5,2a51d7227f21a4d0d47ccc459200a279"
+                    ]
+                ],
+                "hisens_png": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.CNCF.png:md5,17a0c2fac69e0fff252ed2f5b87d856b"
+                    ]
+                ],
+                "hisens_rdata": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.Rdata:md5,9bc324b7329a148a805647ded5d2f113"
+                    ]
+                ],
+                "hisens_seg": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_hisens.seg:md5,a4e7cf69e12b7d7e2d1ccec81cd1c032"
+                    ]
+                ],
+                "output_txt": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        [
+                            "test.arm_level.txt:md5,06846b84c731a5768f4cc996de2098df",
+                            "test.gene_level.txt:md5,4b94d595242700da7ea15d362b4e498c",
+                            "test.qc.txt:md5,97f248167bc6d61d714a1a8fb49b077f",
+                            "test_hisens.cncf.txt:md5,dabe379f3f9acc9a489879678eb297d8",
+                            "test_purity.cncf.txt:md5,4083bfc9655c5b4ff48a8d9bd2aa69d3"
+                        ]
+                    ]
+                ],
+                "purity_cncf_txt": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.cncf.txt:md5,4083bfc9655c5b4ff48a8d9bd2aa69d3"
+                    ]
+                ],
+                "purity_out": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.out:md5,8a93be2bafdcc20ad71ba660b19157d6"
+                    ]
+                ],
+                "purity_png": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.CNCF.png:md5,569501072d3e0e51c57f35993b985e8e"
+                    ]
+                ],
+                "purity_rdata": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.Rdata:md5,e28f0252fb36358fb3c70920fb402033"
+                    ]
+                ],
+                "purity_seg": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_purity.seg:md5,a4e7cf69e12b7d7e2d1ccec81cd1c032"
+                    ]
+                ],
+                "qc_txt": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.qc.txt:md5,97f248167bc6d61d714a1a8fb49b077f"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d89b44510220c64887a3b4b0112c182b"
+                ]
+            }
+        ],
+        "timestamp": "2024-01-30T17:06:53.227019"
+    }
+}

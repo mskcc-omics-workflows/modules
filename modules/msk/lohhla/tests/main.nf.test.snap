@@ -1,0 +1,25 @@
+{
+    "homo_sapiens - bam": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "lohhlaOutput": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.0"
+        },
+        "timestamp": "2024-02-05T15:53:37.351433"
+    }
+}

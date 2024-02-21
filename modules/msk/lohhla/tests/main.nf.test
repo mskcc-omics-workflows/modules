@@ -29,15 +29,15 @@ nextflow_process {
                     """
                         meta = [ id:'test' ] // meta map
                         input[0] = [ meta,
-                                    file(params.test_data_mskcc['hla_bams']['test_hla_normal_bam'], checkIfExists: true),
-                                    file(params.test_data_mskcc['hla_bams']['test_hla_normal_bam_bai'], checkIfExists: true),
-                                    file(params.test_data_mskcc['hla_bams']['test_hla_tumor_bam'], checkIfExists: true),
-                                    file(params.test_data_mskcc['hla_bams']['test_hla_tumor_bam_bai'], checkIfExists: true)
+                                    file(params.test_data_mskcc['hla_bams']['test_hlaregion_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['hla_bams']['test_hlaregion_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['hla_bams']['test_tumor_hlaregion_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['hla_bams']['test_tumor_hlaregion_bam_bai'], checkIfExists: true)
                                     ]
                         input[1] = [
                                         meta,
-                                        file(params.test_data_mskcc['hla_bams']['dbsnp_hla_vcf_gz'], checkIfExists: true),
-                                        file(params.test_data_mskcc['hla_bams']['dbsnp_hla_vcf_gz_tbi'], checkIfExists: true)
+                                        file(params.test_data_mskcc['hla_bams']['dbsnp_hla_chr_vcf_gz'], checkIfExists: true),
+                                        file(params.test_data_mskcc['hla_bams']['dbsnp_hla_chr_vcf_gz_tbi'], checkIfExists: true)
                                 ]
                     """
                 }
@@ -59,7 +59,7 @@ nextflow_process {
                 script "../../polysolver/main.nf"
                 process {
                     """
-                    input[0] = [[ id:'testNormal', single_end:false ], file(params.test_data_mskcc['hla_bams']['test_hla_normal_bam'], checkIfExists: true)]
+                    input[0] = [[ id:'test_hla_normal', single_end:false ], file(params.test_data_mskcc['hla_bams']['test_hlaregion_bam'], checkIfExists: true)]
                     input[1] = []
                     input[2] = []
                     input[3] = []
@@ -72,8 +72,10 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = [[ id:'testTumor', single_end:false ], file(params.test_data_mskcc['hla_bams']['test_hla_tumor_bam'], checkIfExists: true)]
-                input[1] = [[ id:'testNormal', single_end:false ], file(params.test_data_mskcc['hla_bams']['test_hla_normal_bam'], checkIfExists: true)]
+                input[0] = [[ id:'test_hla_tumor', single_end:false ], 
+                            file(params.test_data_mskcc['hla_bams']['test_tumor_hlaregion_bam'], checkIfExists: true)]
+                input[1] = [[ id:'test_hla_normal', single_end:false ],
+                              file(params.test_data_mskcc['hla_bams']['test_hlaregion_bam'], checkIfExists: true)]
                 input[2] = POLYSOLVER.out.hla
                 input[3] = FACETS.out.purity_out
                 
