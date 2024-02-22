@@ -11,8 +11,7 @@ process PVMAF_CONCAT {
         'ghcr.io/msk-access/postprocessing_variant_calls:0.2.7' }"
 
     input:
-    tuple val(meta), path(files)
-    path(header)
+    tuple val(meta), path(maf_files)
 
     output:
     tuple val(meta), path("*.maf"), emit: maf
@@ -24,12 +23,11 @@ process PVMAF_CONCAT {
     script:
     def args = task.ext.args ?: '-sep "tsv"'
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def flagFiles = files.collect { "-f $it" }.join(' ')
+    def flagFiles = maf_files.collect { "-f $it" }.join(' ')
     def output = prefix ? "${prefix}_combined.maf": 'multi_sample.maf'
     """
     pv maf concat \\
         $flagFiles \\
-        $header \\
         --output $output \\
         $args
 
@@ -43,7 +41,7 @@ process PVMAF_CONCAT {
     stub:
     def args = task.ext.args ?: '-sep "tsv"'
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def flagFiles = files.collect { "-f $it" }.join(' ')
+    def flagFiles = maf_files.collect { "-f $it" }.join(' ')
     def output = prefix ? "${prefix}_combined.maf": 'multi_sample.maf'
     """
     touch $output

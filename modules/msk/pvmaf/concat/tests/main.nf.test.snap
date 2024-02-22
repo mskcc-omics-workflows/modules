@@ -1,0 +1,64 @@
+{
+    "chr22maf - msk - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_combined.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_combined.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                ]
+            }
+        ],
+        "timestamp": "2024-02-22T11:14:02.022545"
+    },
+    "chr22maf - msk": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_combined.maf:md5,7b36c0fda7ebb28b27ddf51b7d2a09e8"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_combined.maf:md5,7b36c0fda7ebb28b27ddf51b7d2a09e8"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                ]
+            }
+        ],
+        "timestamp": "2024-02-22T11:13:53.795133"
+    }
+}
