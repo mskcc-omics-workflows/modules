@@ -1,0 +1,65 @@
+nextflow_process {
+
+    name "Test Process PVMAF_CONCAT"
+    script "../main.nf"
+    process "PVMAF_CONCAT"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "pvmaf"
+    tag "pvmaf/concat"
+
+    test("chr22maf - msk") {
+
+        when {
+            process {
+                """
+                
+                input[0] = [
+                            [ id:'chr22', patient:'test'], // meta map
+                            file(params.test_data_msk['chr22']['chr22maf'], checkIfExists: true),
+                            file(params.test_data_msk['chr22']['chr22maf'], checkIfExists: true)
+                        ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+
+            )
+        }
+
+    }
+
+    test("chr22maf - msk - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                
+                input[0] = [
+                            [ id:'chr22', patient:'test'], // meta map
+                            file(params.test_data_msk['chr22']['chr22maf'], checkIfExists: true),
+                            file(params.test_data_msk['chr22']['chr22maf'], checkIfExists: true)
+                        ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
