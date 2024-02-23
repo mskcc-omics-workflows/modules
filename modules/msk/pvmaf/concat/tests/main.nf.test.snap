@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                    "versions.yml:md5,c61c16c135e1cc470c79e7a579c4c76c"
                 ],
                 "maf": [
                     [
@@ -24,11 +24,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                    "versions.yml:md5,c61c16c135e1cc470c79e7a579c4c76c"
                 ]
             }
         ],
-        "timestamp": "2024-02-22T11:14:02.022545"
+        "timestamp": "2024-02-23T11:31:39.015292"
     },
     "chr22maf - msk": {
         "content": [
@@ -43,7 +43,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                    "versions.yml:md5,c61c16c135e1cc470c79e7a579c4c76c"
                 ],
                 "maf": [
                     [
@@ -55,10 +55,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,51f138945e3892c0811ec5e2200e378d"
+                    "versions.yml:md5,c61c16c135e1cc470c79e7a579c4c76c"
                 ]
             }
         ],
-        "timestamp": "2024-02-22T11:13:53.795133"
+        "timestamp": "2024-02-23T11:31:28.145005"
     }
 }
