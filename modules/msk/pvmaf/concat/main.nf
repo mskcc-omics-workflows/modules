@@ -7,8 +7,8 @@ process PVMAF_CONCAT {
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.7':
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.7' }"
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.8':
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.8' }"
 
     input:
     tuple val(meta), path(maf_files)
