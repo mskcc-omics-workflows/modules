@@ -1,0 +1,111 @@
+{
+    "illumina - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        "197.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        "197.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                ]
+            }
+        ],
+        "timestamp": "2024-02-12T11:27:25.169131"
+    },
+    "illumina - duplex and simplex, msk - maf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-DUPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7",
+                            "197-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,6f37d4e00ab92ce623bd286f6804f30a",
+                            "197-SIMPLEX-DUPLEX_genotyped.maf:md5,6d6c71cdf73e74c10fcb68e477a4455f",
+                            "197-SIMPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-DUPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7",
+                            "197-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,6f37d4e00ab92ce623bd286f6804f30a",
+                            "197-SIMPLEX-DUPLEX_genotyped.maf:md5,6d6c71cdf73e74c10fcb68e477a4455f",
+                            "197-SIMPLEX_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                ]
+            }
+        ],
+        "timestamp": "2024-02-12T11:27:17.612126"
+    },
+    "illumina - bam, msk - maf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-ORG-STD_genotyped.maf:md5,8a140bbb7af1c291e8597866fb9d6bb9",
+                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-ORG-STD_genotyped.maf:md5,8a140bbb7af1c291e8597866fb9d6bb9",
+                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                ]
+            }
+        ],
+        "timestamp": "2024-02-12T11:27:06.821575"
+    }
+}
