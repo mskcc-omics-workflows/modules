@@ -11,5 +11,8 @@
 * [gatk4_applybqsr](modules/gatk4_applybqsr.md)
 * [custom_splitfastqbylane](modules/custom_splitfastqbylane.md)
 * [mutect1](modules/mutect1.md)
+* [snppileup](modules/snppileup.md)
+
 ## Subworkflows
 * [bwa_markdup_bqsr](subworkflows/bwa_markdup_bqsr.md)
+
