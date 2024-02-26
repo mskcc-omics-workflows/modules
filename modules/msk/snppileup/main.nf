@@ -8,7 +8,7 @@ process SNPPILEUP {
 
     input:
 
-    tuple val(meta),  path(normal), path(normal_index), path(tumor),  path(tumor_index)
+    tuple val(meta),  path(normal), path(normal_index), path(tumor),  path(tumor_index), path(additional_bams, arity: '0..*'), path(additional_bam_index, arity: '0..*')
     tuple val(meta1), path(dbsnp),  path(dbsnp_index)
 
 
@@ -22,6 +22,7 @@ process SNPPILEUP {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def extra_bams = additional_bams ?: ''
 
     """
     /usr/bin/snp-pileup \
@@ -29,7 +30,8 @@ process SNPPILEUP {
         ${dbsnp} \
         ${prefix}.snp_pileup.gz \
         ${normal} \
-        ${tumor}
+        ${tumor} \
+        ${extra_bams}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
