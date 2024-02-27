@@ -9,7 +9,8 @@ process FACETS {
 
     input:
 
-    tuple val(meta), path(snp_pileup)  //  [ meta, ${prefix}.snp_pileup.gz]
+    tuple val(meta), path(snp_pileup), val(legacy_output_mode)  //  [ meta, ${prefix}.snp_pileup.gz, false]
+
 
     output:
     tuple val(meta), path("*_purity.seg")            , emit: purity_seg
@@ -34,12 +35,15 @@ process FACETS {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def legacy_output_arg = legacy_output_mode ? '--legacy-output TRUE' : ''
 
     """
     /usr/bin/facets-suite/run-facets-wrapper.R \
         ${args} \
+        ${legacy_output_arg} \
         --sample-id ${prefix} \
         --counts-file ${snp_pileup}
+    
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         facets_suite: \$(Rscript -e "packageVersion('facetsSuite')" | grep -oP "\\d+.\\d+.\\d+")
