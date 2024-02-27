@@ -57,4 +57,56 @@ nextflow_process {
 
     }
 
+    test("facets - pileup - legacy output stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file("stub_file"),
+                                    true
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("facets - pileup - output stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file("stub_file"),
+                                    false
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
 }
