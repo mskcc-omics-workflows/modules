@@ -165,7 +165,7 @@ jobs:
     if: |
       ${{ github.event_name == 'pull_request'
         && contains(github.event.pull_request.title, 'Module:') }}
-    needs: [nf-core-lint]
+    needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
       matrix:
@@ -206,7 +206,7 @@ jobs:
     if: |
       ${{ github.event_name == 'pull_request'
         && contains(github.event.pull_request.title, 'Subworkflow:') }}
-    needs: [nf-core-lint]
+    needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
       matrix:
