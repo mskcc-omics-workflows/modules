@@ -462,7 +462,8 @@ jobs:
         pytest,
         nf-test-changes,
         nf-test,
-        verify-markdown,
+        verify-markdown-module,
+        verify-markdown-subworkflow,
       ]
     if: always()
     steps:
