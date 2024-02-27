@@ -36,9 +36,7 @@ jobs:
         env:
           MODULE: ${{github.event.pull_request.title}}
         id: split
-        run: |
-          echo "${{github.event.pull_request.title}}"
-          echo "::set-output name=fragment::${MODULE##*:}"
+        run: echo "::set-output name=fragment::${MODULE##*:}"
       - name: Rename md file
         id: replace_slash
         run: |
@@ -59,7 +57,7 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: develop
+          branch: feature/${{ steps.split.outputs.fragment }}
           path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
       - name: Run convertor to verify only for new module
         if: ${{ github.event_name == 'pull_request' }}
