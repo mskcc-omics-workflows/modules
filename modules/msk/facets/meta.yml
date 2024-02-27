@@ -37,19 +37,19 @@ output:
       pattern: "*_purity.seg"
   - purity_rdata:
       type: file
-      description: The purity R data file
-      pattern: "*_purity.Rdata"
+      description: The purity R data file. This could be an .Rdata (legacy output) or .rds (original output)
+      pattern: "*_purity.?d*"
   - purity_png:
       type: file
-      description: The purity png file
-      pattern: "*_purity.CNCF.png"
+      description: The purity png file. In legacy output the file would match *.CNCF.png
+      pattern: "*_purity*png"
   - purity_out:
       type: file
-      description: The purity out file
+      description: The purity out file. Only in legacy output mode.
       pattern: "*_purity.out"
   - purity_cncf_txt:
       type: file
-      description: The purity cncf file
+      description: The purity cncf file. Only in legacy output mode.
       pattern: "*_purity.cncf.txt"
   - hisens_seg:
       type: file
@@ -57,19 +57,19 @@ output:
       pattern: "*_hisens.seg"
   - hisens_rdata:
       type: file
-      description: The hisens R data file
-      pattern: "*_hisens.Rdata"
+      description: The hisens R data file. This could be an .Rdata (legacy output) or .rds (original output)
+      pattern: "*_hisens.?d*"
   - hisens_png:
       type: file
-      description: The hisens png file
-      pattern: "*_hisens.CNCF.png"
+      description: The hisens png file. In legacy output the file would match *.CNCF.png
+      pattern: "*_hisens*png"
   - hisens_out:
       type: file
-      description: The hisense out file
+      description: The hisense out file. Only in legacy output mode.
       pattern: "*_hisens.out"
   - hisens_cncf_txt:
       type: file
-      description: The hisens cncf file
+      description: The hisens cncf file. Only in legacy output mode.
       pattern: "*_hisens.cncf.txt"
   - qc_txt:
       type: file
