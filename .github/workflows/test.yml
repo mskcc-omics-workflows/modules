@@ -402,10 +402,11 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: feature/${{ matrix.tags }}
-          path: modules/msk/${{ matrix.tags }}/meta.yml
+          branch: feature/${{ steps.split.outputs.fragment }}
+          path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
       - name: Run convertor to verify only for new module
         run: |
+          echo ${{ matrix.tags }}
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
 
