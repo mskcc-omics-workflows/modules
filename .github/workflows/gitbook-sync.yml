@@ -4,7 +4,7 @@ name: Meta Yaml to MD
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [develop, main, hotfix/gitbook-async]
+    branches: [develop, main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -126,13 +126,7 @@ jobs:
         with:
           branch: develop
           path: subworkflows/msk/${{ steps.split.outputs.fragment }}/meta.yml
-      - name: Run convertor to verify only for new subworkflow
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json
       - name: Run convertor to generate md file for new subworkflow
-        if: ${{ github.event_name == 'push' }}
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
@@ -142,9 +136,7 @@ jobs:
         with:
           files: subworkflows/${{ env.MD_NAME }}.md
       - name: Add to SUMMARY for subworkflows
-        if: |
-          ${{ github.event_name == 'push'
-            && (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
+        if: ${{ (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
           python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](subworkflows/${{ env.MD_NAME }}.md)" subworkflow > tmp_summary.md

@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, develop, hotfix/gitbook-async]
+    branches: [main, develop]
   merge_group:
     types: [checks_requested]
     branches: [main]
@@ -162,7 +162,7 @@ jobs:
   verify-markdown-module:
     runs-on: ubuntu-latest
     name: verify-markdown-module
-    if: ${{ contains(github.event.pull_request.title, 'Module:') }}
+    if: ${{ contains(github.event.pull_request.title, 'Module') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
@@ -201,7 +201,7 @@ jobs:
   verify-markdown-subworkflow:
     runs-on: ubuntu-latest
     name: verify-markdown-subworkflow
-    if: ${{ contains(github.event.pull_request.title, 'Subworkflow:') }}
+    if: ${{ contains(github.event.pull_request.title, 'Subworkflow') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
