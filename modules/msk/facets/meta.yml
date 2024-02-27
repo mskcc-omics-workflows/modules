@@ -29,6 +29,9 @@ input:
       type: file
       description: The pileup file
       pattern: "*.snp_pileup.gz"
+  - legacy_output_mode:
+      type: boolean
+      description: Flag to run Facets in legacy output mode
 
 output:
   - purity_seg:
