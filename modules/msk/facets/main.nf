@@ -13,21 +13,21 @@ process FACETS {
 
 
     output:
-    tuple val(meta), path("*_purity.seg")            , emit: purity_seg
-    tuple val(meta), path("*_purity.Rdata")          , emit: purity_rdata
-    tuple val(meta), path("*_purity.CNCF.png")       , emit: purity_png
-    tuple val(meta), path("*_purity.out")            , emit: purity_out
-    tuple val(meta), path("*_purity.cncf.txt")       , emit: purity_cncf_txt
-    tuple val(meta), path("*_hisens.seg")            , emit: hisens_seg
-    tuple val(meta), path("*_hisens.Rdata")          , emit: hisens_rdata
-    tuple val(meta), path("*_hisens.CNCF.png")       , emit: hisens_png
-    tuple val(meta), path("*_hisens.out")            , emit: hisens_out
-    tuple val(meta), path("*_hisens.cncf.txt")       , emit: hisens_cncf_txt
-    tuple val(meta), path("*.qc.txt")                , emit: qc_txt
-    tuple val(meta), path("*.gene_level.txt")        , emit: gene_level_txt
-    tuple val(meta), path("*.arm_level.txt")         , emit: arm_level_txt
-    tuple val(meta), path("*.txt")                   , emit: output_txt
-    path "versions.yml"                              , emit: versions
+    tuple val(meta), path("*_purity.seg")              , emit: purity_seg
+    tuple val(meta), path("*_purity.?d*")              , emit: purity_r_data
+    tuple val(meta), path("*_purity*png")              , emit: purity_png
+    tuple val(meta), path("*_purity.out")              , emit: purity_out, optional: true
+    tuple val(meta), path("*_purity.cncf.txt")         , emit: purity_cncf_txt, optional: true
+    tuple val(meta), path("*_hisens.seg")              , emit: hisens_seg
+    tuple val(meta), path("*_hisens.?d*")              , emit: hisens_r_data
+    tuple val(meta), path("*_hisens*png")              , emit: hisens_png
+    tuple val(meta), path("*_hisens.out")              , emit: hisens_out, optional: true
+    tuple val(meta), path("*_hisens.cncf.txt")         , emit: hisens_cncf_txt, optional: true
+    tuple val(meta), path("*.qc.txt")                  , emit: qc_txt
+    tuple val(meta), path("*.gene_level.txt")          , emit: gene_level_txt
+    tuple val(meta), path("*.arm_level.txt")           , emit: arm_level_txt
+    tuple val(meta), path("*.txt")                     , emit: output_txt
+    path "versions.yml"                                , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -59,13 +59,17 @@ process FACETS {
     """
     touch ${prefix}_purity.seg
     touch ${prefix}_purity.CNCF.png
+    touch ${prefix}_purity.png
     touch ${prefix}_purity.cncf.txt
     touch ${prefix}_purity.Rdata
+    touch ${prefix}_purity.rds
     touch ${prefix}_purity.out
     touch ${prefix}_hisens.seg
     touch ${prefix}_hisens.CNCF.png
+    touch ${prefix}_hisens.png
     touch ${prefix}_hisens.cncf.txt
     touch ${prefix}_hisens.Rdata
+    touch ${prefix}_hisens.rds
     touch ${prefix}_hisens.out
     touch ${prefix}.qc.txt
     touch ${prefix}.gene_level.txt
