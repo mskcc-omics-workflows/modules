@@ -1,0 +1,53 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "ppflagfixer"
+## TODO nf-core: Add a description of the module and list keywords
+description: pplag-fixer for a single bam file
+keywords:
+  - ppflag
+  - fixer
+  - bams
+tools:
+  - "htstools":
+      description: "Contains tools to process bam files for downstream copy number analysis."
+      homepage: "https://github.com/mskcc/htstools"
+      documentation: "https://github.com/mskcc/htstools" 
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample_name' ]`
+  
+  - process_bam:
+      type: file
+      description: Sorted BAM/CRAM/SAM file
+      pattern: "*.{bam,cram,sam}"
+
+  - process_bam_index:
+      type: file
+      description: "Index of the process bam file"
+      pattern: "*.bai"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample_name' ]`
+  
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - ppflag_bam:
+      type: file
+      description: Sorted BAM/CRAM/SAM file
+      pattern: "*.{bam,cram,sam}"
+
+authors:
+  - "@huyu335"
+maintainers:
+  - "@huyu335"
