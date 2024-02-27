@@ -92,14 +92,15 @@ To contribute to mskcc-omics-workflows, please follow the steps below:
 * **Step 3.** Update `meta.yml` file in the module / subworkflow folder for all metadata (description) about the module / subworkflow
 * **Step 4.** If there is in-house test datasets involved with the new module / subworkflow, please create a feature branch with the same name **feature/\<new\_module\_name or new\_subworflow\_name>** under [test-datasets](https://github.com/mskcc-omics-workflows/test-datasets) and upload with descriptive folder and file names. Please note the base branch should be the corresponding branch rather than master (see [above](contributing.md#test-data))
 * **Step 5.** If there is a need to upload the docker image associated with this new module / subworkflow, please use this [page](image-management/) to upload to JFrog
-* **Step 6.** Once local test is done, create PR to develop branch
-
-`RULES`: PR name standards: For new modules, please use "**Module:\<module\_name>**" (NO SPACE between "Module:" and the actual module name). For new subworkflows, please use "**Subworkflow:\<module\_name>**" (NO SPACE between "Subworkflow:" and the actual subworkflow name). This is used to convert the new `meta.yml` to markdown file and add into this [section](broken-reference)
-
+* **Step 6.** Once local test is done, create PR to develop branch. PR title should contain "**Module**" for new modules and "**Subworkflow**" for new subworkflows
 * **Step 7.** Once PR is created, an auto-testing will start run. Please make sure all the testing has passed. Meanwhile, a validation process will also start to verify the `meta.yml` file. If it fails in verifying, please fix it before moving forward
 * **Step 8.** After auto-testing is successfully done, assigned reviewers from reviewer team will review the code. We require at least 1 approval from the reviewer team.
 * **Step 9.** Create PR to corresponding branch for in-house datasets (if applicable)
-* **Step 10.** After approval, PR will be merged to develop branch. The release cycle is 2 weeks. You will see your module / subworkflow in main branch in 2 weeks, along with documentation in this main page
+* **Step 10.** After approval, PR will be merged to develop branch.&#x20;
+
+`RULES`: PR commit message standards: For new modules, please use "**Module:\<module\_name>**" (NO SPACE between "Module:" and the actual module name). For new subworkflows, please use "**Subworkflow:\<subworkflow\_name>**" (NO SPACE between "Subworkflow:" and the actual subworkflow name). This is used to convert the new `meta.yml` to markdown file and add into this [section](broken-reference)
+
+* **Release.** The release cycle is 2 weeks. You will see your module / subworkflow in main branch in 2 weeks, along with documentation in this main page
 
 
 
