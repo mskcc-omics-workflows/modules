@@ -374,10 +374,18 @@ jobs:
   verify-markdown:
     runs-on: ubuntu-latest
     name: verify-markdown
-    needs: [nf-test]
+    needs: [nf-core-lint]
     if: |
       ${{ github.event_name == 'pull_request'
         && contains(github.event.pull_request.title, 'Module:') }}
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
 
     steps:
       - name: setup python
@@ -402,8 +410,8 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: feature/${{ steps.split.outputs.fragment }}
-          path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
+          branch: feature/${{ matrix.tags }}
+          path: modules/msk/${{ matrix.tags }}/meta.yml
       - name: Run convertor to verify only for new module
         run: |
           echo ${{ matrix.tags }}
