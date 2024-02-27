@@ -162,9 +162,7 @@ jobs:
   verify-markdown-module:
     runs-on: ubuntu-latest
     name: verify-markdown-module
-    if: |
-      ${{ github.event_name == 'pull_request'
-        && contains(github.event.pull_request.title, 'Module:') }}
+    if: ${{ contains(github.event.pull_request.title, 'Module:') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
@@ -203,9 +201,7 @@ jobs:
   verify-markdown-subworkflow:
     runs-on: ubuntu-latest
     name: verify-markdown-subworkflow
-    if: |
-      ${{ github.event_name == 'pull_request'
-        && contains(github.event.pull_request.title, 'Subworkflow:') }}
+    if: ${{ contains(github.event.pull_request.title, 'Subworkflow:') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
