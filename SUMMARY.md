@@ -13,6 +13,7 @@
 * [mutect1](modules/mutect1.md)
 * [snppileup](modules/snppileup.md)
 * [ppflagfixer](modules/ppflagfixer.md)
+* [ppflagfixer](modules/ppflagfixer.md)
 
 ## Subworkflows
 * [bwa_markdup_bqsr](subworkflows/bwa_markdup_bqsr.md)
