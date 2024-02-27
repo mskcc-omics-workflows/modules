@@ -11,7 +11,7 @@ tools:
   - "htstools":
       description: "Contains tools to process bam files for downstream copy number analysis."
       homepage: "https://github.com/mskcc/htstools"
-      documentation: "https://github.com/mskcc/htstools" 
+      documentation: "https://github.com/mskcc/htstools"
 
 input:
   - meta:
@@ -19,7 +19,7 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample_name' ]`
-  
+
   - process_bam:
       type: file
       description: Sorted BAM/CRAM/SAM file
@@ -36,7 +36,7 @@ output:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample_name' ]`
-  
+
   - versions:
       type: file
       description: File containing software versions
