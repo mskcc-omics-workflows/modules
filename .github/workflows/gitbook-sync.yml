@@ -17,7 +17,7 @@ on:
 jobs:
   new_module:
     name: new module
-    if: ${{ contains( github.event.pull_request.title, 'Module:') }}
+    if: ${{ contains( github.event.head_commit.message, 'Module:') }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -34,7 +34,7 @@ jobs:
           ref: docs
       - name: Split branch name
         env:
-          MODULE: ${{github.event.pull_request.title}}
+          MODULE: ${{github.event.head_commit.message}}
         id: split
         run: echo "::set-output name=fragment::${MODULE##*:}"
       - name: Rename md file
@@ -55,24 +55,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ${{ github.workspace }}/requirements.txt
       - uses: jaywcjlove/github-action-read-file@main
-        id: cat_file_module_verify
-        with:
-          branch: feature/${{ steps.split.outputs.fragment }}
-          path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
-      - uses: jaywcjlove/github-action-read-file@main
-        id: cat_file_module_create
+        id: cat_file_module
         with:
           branch: develop
           path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
       - name: Run convertor to verify only for new module
         if: ${{ github.event_name == 'pull_request' }}
         run: |
-          echo '${{ steps.cat_file_module_verify.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
       - name: Run convertor to generate md file for new module
         if: ${{ github.event_name == 'push' }}
         run: |
-          echo '${{ steps.cat_file_module_create.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
       - name: Check file existence for modules
         id: check_module_files
@@ -101,7 +96,7 @@ jobs:
           cwd: "./"
   new_subworkflow:
     name: new subworkflow
-    if: ${{ contains( github.event.pull_request.title, 'Subworkflow:') }}
+    if: ${{ contains( github.event.head_commit.message, 'Subworkflow:') }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -118,7 +113,7 @@ jobs:
           ref: docs
       - name: Split branch name
         env:
-          SUBWORKFLOW: ${{github.event.pull_request.title}}
+          SUBWORKFLOW: ${{github.event.head_commit.message}}
         id: split
         run: echo "::set-output name=fragment::${SUBWORKFLOW##*:}"
       - name: Rename md file
