@@ -26,7 +26,7 @@ process FACETS {
     tuple val(meta), path("*.qc.txt")                  , emit: qc_txt
     tuple val(meta), path("*.gene_level.txt")          , emit: gene_level_txt
     tuple val(meta), path("*.arm_level.txt")           , emit: arm_level_txt
-    tuple val(meta), path("*.txt")                     , emit: output_txt
+    tuple val(meta), path("${meta.id}.txt")            , emit: output_txt, optional: true
     path "versions.yml"                                , emit: versions
 
     when:
@@ -74,6 +74,7 @@ process FACETS {
     touch ${prefix}.qc.txt
     touch ${prefix}.gene_level.txt
     touch ${prefix}.arm_level.txt
+    touch ${prefix}.txt
 
 
 

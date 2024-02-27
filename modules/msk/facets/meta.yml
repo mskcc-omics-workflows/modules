@@ -85,7 +85,7 @@ output:
       pattern: "*.arm_level.txt"
   - output_txt:
       type: file
-      description: The complete facets output file
+      description: The facets output log file. Format [id].txt
       pattern: "*.txt"
   - versions:
       type: file
