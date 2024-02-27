@@ -159,6 +159,84 @@ jobs:
         run: nf-core subworkflows lint ${{steps.remove_substring.outputs.subworkflow_names}}
         if: ${{ startsWith(matrix.tags, 'subworkflows/') }}
 
+  verify-markdown-module:
+    runs-on: ubuntu-latest
+    name: verify-markdown-module
+    if: ${{ contains(github.event.pull_request.title, 'Module') }}
+    needs: [pytest-changes, nf-test-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Download convertor from yml to md
+        run: |
+          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
+          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
+      - name: Give convertor permissions
+        run: chmod +x yaml_to_md.py
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ${{ github.workspace }}/requirements.txt
+      - uses: jaywcjlove/github-action-read-file@main
+        id: cat_file_module
+        with:
+          branch: feature/${{ matrix.tags }}
+          path: modules/msk/${{ matrix.tags }}/meta.yml
+      - name: Run convertor to verify only for new module
+        run: |
+          echo ${{ matrix.tags }}
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
+
+  verify-markdown-subworkflow:
+    runs-on: ubuntu-latest
+    name: verify-markdown-subworkflow
+    if: ${{ contains(github.event.pull_request.title, 'Subworkflow') }}
+    needs: [pytest-changes, nf-test-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Download convertor from yml to md
+        run: |
+          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
+          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
+      - name: Give convertor permissions
+        run: chmod +x yaml_to_md.py
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ${{ github.workspace }}/requirements.txt
+      - uses: jaywcjlove/github-action-read-file@main
+        id: cat_file_subworkflow
+        with:
+          branch: feature/${{ matrix.tags }}
+          path: subworkflows/msk/${{ matrix.tags }}/meta.yml
+      - name: Run convertor to verify for new subworkflow
+        run: |
+          echo ${{ matrix.tags }}
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json
+
   pytest:
     runs-on: ubuntu-latest
     name: pytest
@@ -286,6 +364,8 @@ jobs:
             tags: snppileup
           - profile: "conda"
             tags: mutect1
+          - profile: "conda"
+            tags: ppflagfixer
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
