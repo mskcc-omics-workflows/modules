@@ -36,7 +36,9 @@ jobs:
         env:
           MODULE: ${{github.event.pull_request.title}}
         id: split
-        run: echo "::set-output name=fragment::${MODULE##*:}"
+        run: |
+          echo "${{github.event.pull_request.title}}"
+          echo "::set-output name=fragment::${MODULE##*:}"
       - name: Rename md file
         id: replace_slash
         run: |
