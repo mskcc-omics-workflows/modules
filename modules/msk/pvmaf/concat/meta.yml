@@ -24,6 +24,10 @@ input:
       type: file
       description: list of maf files to concatenate
       pattern: "*.{maf}"
+  - header:
+      type: file
+      description: header file indicating the columns by which the mafs should be concatenated
+      pattern: "*.{txt}"
 
 output:
   #Only when we have meta
