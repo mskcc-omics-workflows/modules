@@ -25,8 +25,8 @@ process GENOMENEXUS {
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/vcf2maf:1.6.21':
-        'ghcr.io/msk-access/vcf2maf:1.6.21' }"
+        'ghcr.io/msk-access/vcf2maf:1.6.21-vep105':
+        'ghcr.io/msk-access/vcf2maf:1.6.21-vep105' }"
 
     input:
     // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
@@ -35,7 +35,7 @@ process GENOMENEXUS {
     //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
     // TODO nf-core: Where applicable please provide/convert compressed files as input/output
     //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(vcf)
+    tuple val(meta), path(vcf), path(ref_fasta)
     // keep adding the variables here for the tool.
     output:
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
@@ -60,15 +60,8 @@ process GENOMENEXUS {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    perl \\
-        /opt/vcf2maf-1.6.21/vcf2maf.pl \\
-        $args \\
-        --input_vcf ${prefix}.vcf \\
-        --output_maf ${prefix}.maf \\
-        --tumor-id ${meta.tumor_id} \\
-        --normal-id ${meta.normal_id} \\
-        --retain_info set,TYPE,FAILURE_REASON \\
-        --custom_enst /work/access/production/resources/msk-access/current/regions_of_interest/current/dmp_ACCESS-panelA-v1-isoform-overrides 
+    vcf2maf.pl $args --input_vcf ${prefix}.vcf --output_maf ${prefix}.maf --tumor-id ${meta.tumor_id} --normal-id ${meta.normal_id} --retain_info set,TYPE,FAILURE_REASON 
+    
     
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
