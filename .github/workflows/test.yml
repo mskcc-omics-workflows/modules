@@ -283,6 +283,8 @@ jobs:
           - profile: "conda"
             tags: polysolver
           - profile: "conda"
+            tags: snppileup
+          - profile: "conda"
             tags: mutect1
           - profile: "conda"
             tags: pvmaf/tag
