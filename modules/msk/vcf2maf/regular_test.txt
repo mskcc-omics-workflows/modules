@@ -1,0 +1,25 @@
+// regular test relies on local data, stored in regular_test.txt
+test("normal_tumor_sample1") {
+
+        when {
+            process {
+                """
+                
+                
+                input[0] = [
+                    [ id:'tumor.normal', case_id:'tumor', control_id:'normal' ], // meta map
+                    file("/Users/naidur/ACCESS/access_pipeline/test_data/test_data/MSK_data/C-2HXC96-P001-d01_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.DONOR22-TP_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.mutect.vcf", checkIfExists: true),
+                    file("/Users/naidur/ACCESS/access_pipeline/test_data/test_data/MSK_data/Homo_sapiens_assembly19.fasta", checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }

@@ -50,7 +50,7 @@ process VCF2MAF {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    touch ${prefix}.maf
+    echo "stub test" >> ${prefix}.maf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}": 
