@@ -29,6 +29,8 @@ Calculate snp pileups from a bam pair
 | tumor_index | file | Index of tumor bam file | *.bai |
 | dbsnp | file | The NCBI provided database vcf file on genetic variation | *.vcf.gz |
 | dbsnp_index | file | The index of the dbsnp vcf file | *.vcf.gz.tbi |
+| additional_bams | list | List of additional bams to include |  |
+| additional_bam_index | list | List of additional bam indexes to include |  |
 
 ## Outputs
 
