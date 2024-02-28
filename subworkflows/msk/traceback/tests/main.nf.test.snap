@@ -1,0 +1,37 @@
+{
+    "sarscov2 - bam - single_end": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            
+                        },
+                        "multi_sample_traceback.maf:md5,88a93a2e8c3e872c2f53005acdbfa125"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,1976e521186206f716b0eb74dd6cab1a",
+                    "versions.yml:md5,7445e74357fe659eee246160abd573e3",
+                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
+                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
+                ],
+                "maf": [
+                    [
+                        {
+                            
+                        },
+                        "multi_sample_traceback.maf:md5,88a93a2e8c3e872c2f53005acdbfa125"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1976e521186206f716b0eb74dd6cab1a",
+                    "versions.yml:md5,7445e74357fe659eee246160abd573e3",
+                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
+                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
+                ]
+            }
+        ],
+        "timestamp": "2024-02-28T13:34:46.228101"
+    }
+}

@@ -22,12 +22,38 @@ nextflow_workflow {
             workflow {
                 """
                 // TODO nf-core: define inputs of the workflow here. Example:
-                input[0] = [ [ id:'test', single_end:false ], // meta map
-                        file(params.test_data['sarscov2']['illumina']['test_single_end_bam'], checkIfExists: true)
-                        ]
-                input[1] = [ [ id:'genome' ],
-                        file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
-                        ]
+
+                input[0] = Channel.of(
+                    [[id:'s_C_FWD2FT_X009_d', patient: null],
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/s_C_FWD2FT_X009_d.rg.md.abra.printreads.bam'), 
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/s_C_FWD2FT_X009_d.rg.md.abra.printreads.bam.bai'), 
+                        [], [], [], []
+                    ],
+                    [[id:'s_C_FWD2FT_X008_d', patient: null],
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/s_C_FWD2FT_X009_d.rg.md.abra.printreads.bam'), 
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/s_C_FWD2FT_X009_d.rg.md.abra.printreads.bam.bai'), 
+                        [], [], [], []
+                    ],
+                    [[id:'C-8LCJE9-M001-d', patient:null], [], [],
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/C-8LCJE9-M001-d_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam'),
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/C-8LCJE9-M001-d_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam.bai'), 
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/C-8LCJE9-M001-d_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-simplex.bam'),
+                        file('/Users/ebuehler/Downloads/traceback_test/test_data/C-8LCJE9-M001-d_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-simplex.bam.bai')
+                    ])
+
+                input[1] = Channel.of([
+                    [patient: null], 
+                    [file('/Users/ebuehler/Downloads/traceback_test/test_data/s_C_FWD2FT_X009_d_data_mutations.txt'),
+                    file('/Users/ebuehler/Downloads/traceback_test/test_data/s_C_FWD2FT_X009_d_data_mutations_copy.txt'),
+                    file('/Users/ebuehler/Downloads/traceback_test/test_data/C-8LCJE9-M001-d.DONOR22-TP.combined-variants.vep_keptrmv_taggedHotspots_fillout_filtered.maf'),
+                    file('/Users/ebuehler/Downloads/traceback_test/test_data/P-0038647-T04-IM6_data_mutations.txt')]
+                    ])
+                input[2] = Channel.of([
+                    file('/Users/ebuehler/Downloads/traceback_test/Homo_sapiens_assembly19.fasta')
+                ])
+                input[3] = Channel.of([
+                    file('/Users/ebuehler/Downloads/traceback_test/Homo_sapiens_assembly19.fasta.fai')
+                ])
                 """
             }
         }
