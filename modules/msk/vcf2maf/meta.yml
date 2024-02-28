@@ -2,54 +2,55 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "vcf2maf"
 ## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: Module to employ use of vcf2maf.pl to convert input VCF with tumor/normal columns to MAF and add respective annotations.
 keywords:
-  - sort
-  - example
-  - genomics
+  - vcf
+  - maf
+  - convert
+  - annotate
+  - perl
 tools:
   - "vcf2maf":
-      ## TODO nf-core: Add a description and other details for the software below
       description: "Convert a VCF into a MAF where each variant is annotated to only one of all possible gene isoforms"
-      homepage: "None"
-      documentation: "None"
-      tool_dev_url: "None"
-      doi: ""
+      homepage: "https://github.com/msk-access/vcf2maf"
+      documentation: "https://github.com/msk-access/vcf2maf/blob/master/README.md"
       licence: ["Apache-2.0"]
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
   # Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
+        e.g. `[ id:'sample1.sample2', control_id:sample1, case_id:sample2 ]`
 
-  ## TODO nf-core: Delete / customise this example input
-  - bam:
+  - vcf:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Input VCF file with tumor and normal columns
+      pattern: "*.{vcf}"
 
-## TODO nf-core: Add a description of all of the variables used as output
+  - ref_fasta:
+      type: file
+      description: Input reference fasta file
+      pattern: "*.{fasta}"
+
 output:
   #Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
+        e.g. `[ id:'sample1.sample2', control_id:sample1, case_id:sample2 ]`
 
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
   ## TODO nf-core: Delete / customise this example output
-  - bam:
+  - maf:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Output MAF file
+      pattern: "*.{maf}"
 
 authors:
   - "@rnaidu"
