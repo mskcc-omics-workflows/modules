@@ -1,90 +1,72 @@
-// TODO nf-core: If in doubt look at other nf-core/modules to see how we are doing things! :)
-//               https://github.com/nf-core/modules/tree/master/modules/nf-core/
-//               You can also ask for help via your pull request or on the #modules channel on the nf-core Slack workspace:
-//               https://nf-co.re/join
-// TODO nf-core: A module file SHOULD only define input and output files as command-line parameters.
-//               All other parameters MUST be provided using the "task.ext" directive, see here:
-//               https://www.nextflow.io/docs/latest/process.html#ext
-//               where "task.ext" is a string.
-//               Any parameters that need to be evaluated in the context of a particular sample
-//               e.g. single-end/paired-end data MUST also be defined and evaluated appropriately.
-// TODO nf-core: Software that can be piped together SHOULD be added to separate module files
-//               unless there is a run-time, storage advantage in implementing in this way
-//               e.g. it's ok to have a single module for bwa to output BAM instead of SAM:
-//                 bwa mem | samtools view -B -T ref.fasta
-// TODO nf-core: Optional inputs are not currently supported by Nextflow. However, using an empty
-//               list (`[]`) instead of a file can be used to work around this issue.
 
 process VCF2MAF {
     tag "$meta.id"
-    label 'process_low'
+    label 'process_low' 
 
-    // TODO nf-core: List required Conda package(s).
-    //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-    //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
-    // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/vcf2maf:1.6.21--hdfd78af_0':
-        'biocontainers/vcf2maf:1.6.21--hdfd78af_0' }"
+        'ghcr.io/msk-access/vcf2maf:1.6.21-vep105':
+        'ghcr.io/msk-access/vcf2maf:1.6.21-vep105' }"
 
     input:
-    // TODO nf-core: Where applicable all sample-specific information e.g. "id", "single_end", "read_group"
-    //               MUST be provided as an input via a Groovy Map called "meta".
-    //               This information may not be required in some instances e.g. indexing reference genome files:
-    //               https://github.com/nf-core/modules/blob/master/modules/nf-core/bwa/index/main.nf
-    // TODO nf-core: Where applicable please provide/convert compressed files as input/output
-    //               e.g. "*.fastq.gz" and NOT "*.fastq", "*.bam" and NOT "*.sam" etc.
-    tuple val(meta), path(vcf)
 
+    tuple val(meta), path(vcf), path(ref_fasta)
+    
     output:
-    // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
+    
     tuple val(meta), path("*.maf"), emit: maf
-    // TODO nf-core: List additional required output channels/values here
-    path "versions.yml"           , emit: versions
+
 
     when:
     task.ext.when == null || task.ext.when
 
     script:
     def args = task.ext.args ?: ''
+    
     def prefix = task.ext.prefix ?: "${meta.id}"
-    // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
-    //               If the software is unable to output a version number on the command-line then it can be manually specified
-    //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
-    //               Each software used MUST provide the software name and version number in the YAML version file (versions.yml)
-    // TODO nf-core: It MUST be possible to pass additional parameters to the tool as a command-line string via the "task.ext.args" directive
-    // TODO nf-core: If the tool supports multi-threading then you MUST provide the appropriate parameter
-    //               using the Nextflow "task" variable e.g. "--threads $task.cpus"
-    // TODO nf-core: Please replace the example samtools command below with your module's command
-    // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
+   
     """
-    vcf2maf.py \\
-    --input-data ${vcf} \\
-    --output-directory . \\
-    $args \\
-    --tumor_id ${meta.case_id} \\
-    --normal_id ${meta.control_id}
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        vcf2maf: \$(samtools --version |& sed '1!d ; s/samtools //')
-    END_VERSIONS
+    vcf2maf.pl --input-vcf ${vcf} --output-maf ${prefix}.maf --ref-fasta ${ref_fasta} --vep-path /usr/local/bin
     """
-
+    
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
-    //               Have a look at the following examples:
-    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
-    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
-    """
-    touch ${prefix}.maf
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        vcf2maf: \$(samtools --version |& sed '1!d ; s/samtools //')
-    END_VERSIONS
+    """
+    vcf2maf.pl --buffer-size 5000 --maf-center mskcc.org --min-hom-vaf 0.7 --ncbi-build GRCh37 --normal-id ${meta.control_id} --retain-info set,TYPE,FAILURE_REASON,MUTECT --tumor-id ${meta.case_id} --vcf-normal-id ${meta.control_id} --vcf-tumor-id ${meta.case_id}  --input-vcf ${vcf} --output-maf ${prefix}.maf --ref-fasta ${ref_fasta} --vep-path /usr/local/bin
     """
 }
+
+// --input-vcf      Path to input file in VCF format
+//      --output-maf     Path to output MAF file
+//      --tmp-dir        Folder to retain intermediate VCFs after runtime [Default: Folder containing input VCF]
+//      --tumor-id       Tumor_Sample_Barcode to report in the MAF [TUMOR]
+//      --normal-id      Matched_Norm_Sample_Barcode to report in the MAF [NORMAL]
+//      --vcf-tumor-id   Tumor sample ID used in VCF's genotype columns [--tumor-id]
+//      --vcf-normal-id  Matched normal ID used in VCF's genotype columns [--normal-id]
+//      --custom-enst    List of custom ENST IDs that override canonical selection
+//      --vep-path       Folder containing the vep script [~/miniconda3/bin]
+//      --vep-data       VEP's base cache/plugin directory [~/.vep]
+//      --vep-forks      Number of forked processes to use when running VEP [4]
+//      --vep-custom     String to pass into VEP's --custom option []
+//      --vep-config     Config file to pass into VEP's --config option []
+//      --vep-overwrite  Allow VEP to overwrite output VCF if it exists
+//      --buffer-size    Number of variants VEP loads at a time; Reduce this for low memory systems [5000]
+//      --any-allele     When reporting co-located variants, allow mismatched variant alleles too
+//      --inhibit-vep    Skip running VEP, but extract VEP annotation in VCF if found
+//      --online         Use useastdb.ensembl.org instead of local cache (supports only GRCh38 VCFs listing <100 events)
+//      --ref-fasta      Reference FASTA file [~/.vep/homo_sapiens/102_GRCh37/Homo_sapiens.GRCh37.dna.toplevel.fa.gz]
+//      --max-subpop-af  Add FILTER tag common_variant if gnomAD reports any subpopulation AFs greater than this [0.0004]
+//      --species        Ensembl-friendly name of species (e.g. mus_musculus for mouse) [homo_sapiens]
+//      --ncbi-build     NCBI reference assembly of variants MAF (e.g. GRCm38 for mouse) [GRCh37]
+//      --cache-version  Version of offline cache to use with VEP (e.g. 75, 91, 102) [Default: Installed version]
+//      --maf-center     Variant calling center to report in MAF [.]
+//      --retain-info    Comma-delimited names of INFO fields to retain as extra columns in MAF []
+//      --retain-fmt     Comma-delimited names of FORMAT fields to retain as extra columns in MAF []
+//      --retain-ann     Comma-delimited names of annotations (within the VEP CSQ/ANN) to retain as extra columns in MAF []
+//      --min-hom-vaf    If GT undefined in VCF, minimum allele fraction to call a variant homozygous [0.7]
+//      --remap-chain    Chain file to remap variants to a different assembly before running VEP
+//      --verbose        Print more things to log progress
+//      --help           Print a brief help message and quit
+//      --man            Print the detailed manual

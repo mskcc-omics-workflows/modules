@@ -1,0 +1,56 @@
+{
+    "normal_tumor_sample1 - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "tumor.normal",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "tumor.normal.maf:md5,86418fcd8569c206c86cd13607458b6a"
+                    ]
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "tumor.normal",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "tumor.normal.maf:md5,86418fcd8569c206c86cd13607458b6a"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2024-02-28T12:18:52.950629"
+    },
+    "normal_tumor_sample1": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "tumor.normal",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "tumor.normal.maf:md5,31fa5c35e70476af23956f6ed1b929aa"
+                    ]
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "tumor.normal",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "tumor.normal.maf:md5,31fa5c35e70476af23956f6ed1b929aa"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2024-02-27T15:16:37.667592"
+    }
+}
