@@ -5,8 +5,8 @@ process VCF2MAF {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/vcf2maf:1.6.21':
-        'ghcr.io/msk-access/vcf2maf:1.6.21' }"
+        'ghcr.io/msk-access/vcf2maf:1.6.21-vep105':
+        'ghcr.io/msk-access/vcf2maf:1.6.21-vep105' }"
 
     input:
 
