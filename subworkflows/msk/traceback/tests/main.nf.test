@@ -12,8 +12,7 @@ nextflow_workflow {
     tag "genotypevariants/all"
     tag "pvmaf/concat"
     tag "pvmaf/tag"
-
-
+    
     test("standard and access bams - stub") {
         options "-stub"
         when {
@@ -41,6 +40,7 @@ nextflow_workflow {
                     )
                 input[2] = []
                 input[3] = []
+                input[4] = []
                 """
             }
         }

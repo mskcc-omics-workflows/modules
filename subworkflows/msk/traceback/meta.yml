@@ -29,6 +29,14 @@ input:
         The input channel containing maf files
         Structure: // channel: [[patient:null], [maf1,...,maf2] ]
       pattern: "*.{maf,txt,tsv}"
+  - header:
+      type: map
+      description: |
+        A map specifying header files to be used when concatenating the maf files.
+        initial: which columns to use when concatenating provided mafs
+        genotype: which columns to use when concatenating genotyped mafs 
+        Structure: // [initial: 'header.txt', genotype: 'header2.txt']
+      pattern: "*.{maf,txt,tsv}"
   - fasta:
       description: |
         A channel containing the reference FASTA file
