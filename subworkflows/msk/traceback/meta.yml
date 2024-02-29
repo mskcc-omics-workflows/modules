@@ -1,44 +1,51 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "traceback"
-## TODO nf-core: Add a description of the subworkflow and list keywords
-description: Sort SAM/BAM/CRAM file
+description: Genotype access and/or impact bams by a concatenated list of mafs. If patient ids are provided, access and/or impact bams are genotyped by concatenated mafs with matching patient ids.
 keywords:
-  - sort
+  - maf
   - bam
-  - sam
-  - cram
-## TODO nf-core: Add a list of the modules and/or subworkflows used in the subworkflow
+  - traceback
+  - impact
+  - access
+  - genotyping
 components:
-  - samtools/sort
-  - samtools/index
-## TODO nf-core: List all of the channels used as input with a description and their structure
+  - genotypevariants/all
+  - pvmaf/concat
+  - pvmaf/tag
+
 input:
-  - ch_bam:
+  - bams:
       type: file
       description: |
-        The input channel containing the BAM/CRAM/SAM files
-        Structure: [ val(meta), path(bam) ]
+        The input channel containing impact or access bams files
+        Structure: 
+        [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
+        or 
+        [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
       pattern: "*.{bam/cram/sam}"
-## TODO nf-core: List all of the channels used as output with a descriptions and their structure
+  - mafs:
+      type: file
+      description: |
+        The input channel containing maf files
+        Structure: // channel: [[patient:null], [maf1,...,maf2] ]
+      pattern: "*.{maf,txt,tsv}"
+  - fasta:
+      description: |
+        A channel containing the reference FASTA file
+        Structure: [ path(fasta) ]
+      pattern: "*.{fasta,fa}"
+  - fai:
+      description: |
+        A channel containing the index of the reference FASTA file
+        Structure: [ path(fai) ]
+      pattern: "*.{fai}"
 output:
-  - bam:
+  - maf:
       type: file
       description: |
-        Channel containing BAM files
-        Structure: [ val(meta), path(bam) ]
-      pattern: "*.bam"
-  - bai:
-      type: file
-      description: |
-        Channel containing indexed BAM (BAI) files
-        Structure: [ val(meta), path(bai) ]
-      pattern: "*.bai"
-  - csi:
-      type: file
-      description: |
-        Channel containing CSI files
-        Structure: [ val(meta), path(csi) ]
-      pattern: "*.csi"
+        Channel containing genotyped Maf file
+        Structure: [ val(meta), path(maf) ]
+      pattern: "*.maf"
   - versions:
       type: file
       description: |
