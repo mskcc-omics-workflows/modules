@@ -1,64 +1,5 @@
 {
-    "sarscov2 - bam - single_end": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "patient": "test1"
-                        },
-                        "test1_traceback.maf:md5,66eb307328c9e87fec4c0e69f075ad00"
-                    ],
-                    [
-                        {
-                            "patient": "test2"
-                        },
-                        "test2_traceback.maf:md5,f1ada1b73c71c4f0598bf0ace23b9713"
-                    ],
-                    [
-                        {
-                            "patient": "test3"
-                        },
-                        "test3_traceback.maf:md5,f2d3a63f488a352cc623e7af0cbf4929"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,1976e521186206f716b0eb74dd6cab1a",
-                    "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
-                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
-                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
-                ],
-                "maf": [
-                    [
-                        {
-                            "patient": "test1"
-                        },
-                        "test1_traceback.maf:md5,66eb307328c9e87fec4c0e69f075ad00"
-                    ],
-                    [
-                        {
-                            "patient": "test2"
-                        },
-                        "test2_traceback.maf:md5,f1ada1b73c71c4f0598bf0ace23b9713"
-                    ],
-                    [
-                        {
-                            "patient": "test3"
-                        },
-                        "test3_traceback.maf:md5,f2d3a63f488a352cc623e7af0cbf4929"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1976e521186206f716b0eb74dd6cab1a",
-                    "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
-                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
-                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
-                ]
-            }
-        ],
-        "timestamp": "2024-02-29T10:49:43.819809"
-    },
-    "sarscov2 - bam - single_end - stub": {
+    "standard and access bams - stub": {
         "content": [
             {
                 "0": [
@@ -77,6 +18,6 @@
                 ]
             }
         ],
-        "timestamp": "2024-02-29T11:26:12.77501"
+        "timestamp": "2024-02-29T12:13:33.934862"
     }
 }

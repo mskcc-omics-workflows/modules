@@ -14,7 +14,7 @@ nextflow_workflow {
     tag "pvmaf/tag"
 
 
-    test("sarscov2 - bam - single_end - stub") {
+    test("standard and access bams - stub") {
         options "-stub"
         when {
             workflow {
