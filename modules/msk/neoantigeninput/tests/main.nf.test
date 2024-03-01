@@ -27,7 +27,7 @@ nextflow_process {
                     ]
 
                 input[1] = [
-                    [ file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['test4_mutass_0_json'], checkIfExists: true)
                     ]

@@ -27,8 +27,8 @@ process NEOANTIGENINPUT {
     script:
     def args = task.ext.args ?: ''
     def id = task.ext.prefix ?: "${meta.id}"
-    def patientid =task.ext.cohort ?: "${meta.id}_patient"
-    def cohort =task.ext.cohort ?: "${meta.id}_cohort"
+    def patientid = task.ext.cohort ?: "${meta.id}_patient"
+    def cohort = task.ext.cohort ?: "${meta.id}_cohort"
     
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
     //               If the software is unable to output a version number on the command-line then it can be manually specified
