@@ -8,7 +8,7 @@ import argparse
 
 
 
-def main():
+def main(args):
     
     def makeChild(subTree):
         newsubtree = {'clone_id':int(subTree),
@@ -203,17 +203,19 @@ def parse_args():
     parser.add_argument("maf_file", help="Path to the MAF file")
     parser.add_argument("summary_file", help="Path to the summary file")
     parser.add_argument("mutation_file", help="Path to the mutation file")
-    parser.add_argument("tree_direcotry", help="Path to the tree directory containing json files")
+    parser.add_argument("tree_directory", help="Path to the tree directory containing json files")
     parser.add_argument("id", help="ID")
     parser.add_argument("patient_id", help="Patient ID")
     parser.add_argument("cohort", help="Cohort")
     parser.add_argument("HLA_genes", help="Path to the file containing HLA genes")
     parser.add_argument("--patient_data_file", help="Path to the optional file containing status, overall survival, and PFS")
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0')
+
     return parser.parse_args()
 
 def print_help():
-    print("Usage: python eval_phyloWGS.py <maf_file> <summary_file> <mutation_file> <id> <patient_id> <cohort> <HLA_genes> [--optional_file OPTIONAL_FILE]")
-    print("Example: python eval_phyloWGS.py file.maf summary_file.txt mutation_file.txt id patient_id cohort HLA_genes_file --optional_file optional_file.txt")
+    print("Usage: python eval_phyloWGS.py <maf_file> <summary_file> <mutation_file> <tree_directory> <id> <patient_id> <cohort> <HLA_genes> [--optional_file OPTIONAL_FILE]")
+    print("Example: python eval_phyloWGS.py file.maf summary_file.txt mutation_file.txt ./tree_directory/ id patient_id cohort HLA_genes_file --optional_file optional_file.txt")
     print("Arguments:")
     print("  maf_file\t\tPath to the MAF file")
     print("  summary_file\t\tPath to the summary file from PhyloWGS")
@@ -223,12 +225,14 @@ def print_help():
     print("  cohort\t\tCohort")
     print("  HLA_genes\t\tPath to the file containing HLA genes")
     print("  --optional_file\t(Optional) Path to the optional file containing status, overall survival, and PFS")
+    
 
 if __name__ == "__main__":
     args = parse_args()
     print("MAF File:", args.maf_file)
     print("Summary File:", args.summary_file)
     print("Mutation File:", args.mutation_file)
+    print("Tree directory:",args.tree_directory)
     print("ID:", args.id)
     print("Patient ID:", args.patient_id)
     print("Cohort:", args.cohort)
@@ -236,4 +240,4 @@ if __name__ == "__main__":
     if args.optional_file:
         print("Optional File:", args.optional_file)
         
-    main()
+    main(args)
