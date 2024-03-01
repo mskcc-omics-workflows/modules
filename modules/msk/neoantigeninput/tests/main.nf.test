@@ -23,16 +23,16 @@ nextflow_process {
                 
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_somatic_unfiltered_maf'], checkIfExists: true)
+                    file(params.test_data_base_msk['neoantigen']['temp_test_somatic_unfiltered_maf'], checkIfExists: true)
                     ]
 
                 input[1] = [
-                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['test4_mutass_0_json'], checkIfExists: true)
+                    file(params.test_data_base_msk['neoantigen']['test4_muts_json'], checkIfExists: true),
+                    file(params.test_data_base_msk['neoantigen']['test4_summ_json'], checkIfExists: true),
+                    file(params.test_data_base_msk['neoantigen']['test4_mutass_0_json'], checkIfExists: true)
                     ]
 
-                input[2] = [file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)]
+                input[2] = [file(params.test_data_base_msk['neoantigen']['winners_hla_txt'], checkIfExists: true)]
                 """
             }
         }
