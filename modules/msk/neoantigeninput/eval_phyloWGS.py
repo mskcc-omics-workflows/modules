@@ -2,8 +2,7 @@ import json
 import sys 
 import pandas as pd
 # TODO: Make sure vcflib is in path
-sys.path.insert(0,'/Users/orgeraj/Documents/GitHub/vcflib/')
-import vcflib
+
 import argparse
 
 
@@ -97,29 +96,29 @@ def main(args):
                 missense= 0
             
             if row['Variant_Type'] == 'SNP':
-                
-                chrom_pos_dict['id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2']]= {'id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
+                print( str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'])
+                chrom_pos_dict[str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2']]= {'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense}
                 
-                mutation_list.append({'id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
+                mutation_list.append({'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense})
             elif row['Variant_Type'] == 'DEL':
-                chrom_pos_dict['id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D']= {'id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D',
+                chrom_pos_dict[str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D']= {'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D',
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense}
                 
-                mutation_list.append({'id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D',
+                mutation_list.append({'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D',
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense})
                 
             elif row['Variant_Type'] == 'INS':
-                chrom_pos_dict['id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+'I'+'_'+row['Tumor_Seq_Allele2']]= {'id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
+                chrom_pos_dict[str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+'I'+'_'+row['Tumor_Seq_Allele2']]= {'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense}
                 
-                mutation_list.append({'id': row['Chromosome']+'_'+str(row['Start_Position'])+'_'+'I'+'_'+row['Tumor_Seq_Allele2'],
+                mutation_list.append({'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+'I'+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense})
                 
@@ -130,7 +129,7 @@ def main(args):
     outer_dict = {'id': args.id,
                 'sample_trees': []}
 
-
+    
     trees = summ_data['trees']
 
     for tree in trees:
@@ -172,7 +171,7 @@ def main(args):
     
 
 
-    if args.optional_file:
+    if args.patient_data_file:
         #TODO format optional input data, depending on format of inputted file.  I was imagining a tsv, but can be anything
         status = 0
         OS_tmp = 0
@@ -200,32 +199,31 @@ def main(args):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
-    parser.add_argument("maf_file", help="Path to the MAF file")
-    parser.add_argument("summary_file", help="Path to the summary file")
-    parser.add_argument("mutation_file", help="Path to the mutation file")
-    parser.add_argument("tree_directory", help="Path to the tree directory containing json files")
-    parser.add_argument("id", help="ID")
-    parser.add_argument("patient_id", help="Patient ID")
-    parser.add_argument("cohort", help="Cohort")
-    parser.add_argument("HLA_genes", help="Path to the file containing HLA genes")
+    parser.add_argument("--maf_file", required=True, help="Path to the MAF file")
+    parser.add_argument("--summary_file", required=True, help="Path to the summary file")
+    parser.add_argument("--mutation_file", required=True, help="Path to the mutation file")
+    parser.add_argument("--tree_directory", required=True, help="Path to the tree directory containing json files")
+    parser.add_argument("--id", required=True, help="ID")
+    parser.add_argument("--patient_id", required=True, help="Patient ID")
+    parser.add_argument("--cohort", required=True, help="Cohort")
+    parser.add_argument("--HLA_genes", required=True, help="Path to the file containing HLA genes")
     parser.add_argument("--patient_data_file", help="Path to the optional file containing status, overall survival, and PFS")
     parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0')
 
     return parser.parse_args()
 
 def print_help():
-    print("Usage: python eval_phyloWGS.py <maf_file> <summary_file> <mutation_file> <tree_directory> <id> <patient_id> <cohort> <HLA_genes> [--optional_file OPTIONAL_FILE]")
-    print("Example: python eval_phyloWGS.py file.maf summary_file.txt mutation_file.txt ./tree_directory/ id patient_id cohort HLA_genes_file --optional_file optional_file.txt")
+    print("Usage: python eval_phyloWGS.py --maf_file <maf_file> --summary_file <summary_file> --mutation_file <mutation_file> --tree_directory <tree_directory> --id <id> --patient_id <patient_id> --cohort <cohort> --HLA_genes <HLA_genes> [--patient_data_file <patient_data_file>]")
+    print("Example: python eval_phyloWGS.py --maf_file file.maf --summary_file summary_file.txt --mutation_file mutation_file.txt --tree_directory ./tree_directory/ --id id --patient_id patient_id --cohort cohort --HLA_genes HLA_genes_file --patient_data_file optional_file.txt")
     print("Arguments:")
-    print("  maf_file\t\tPath to the MAF file")
-    print("  summary_file\t\tPath to the summary file from PhyloWGS")
-    print("  mutation_file\t\tPath to the mutation file from PhyloWGS")
-    print("  id\t\t\tID")
-    print("  patient_id\t\tPatient ID")
-    print("  cohort\t\tCohort")
-    print("  HLA_genes\t\tPath to the file containing HLA genes")
-    print("  --optional_file\t(Optional) Path to the optional file containing status, overall survival, and PFS")
-    
+    print("  --maf_file\t\tPath to the MAF file")
+    print("  --summary_file\tPath to the summary file from PhyloWGS")
+    print("  --mutation_file\tPath to the mutation file from PhyloWGS")
+    print("  --id\t\t\tID")
+    print("  --patient_id\t\tPatient ID")
+    print("  --cohort\t\tCohort")
+    print("  --HLA_genes\t\tPath to the file containing HLA genes")
+    print("  --patient_data_file\t(Optional) Path to the optional file containing status, overall survival, and PFS")
 
 if __name__ == "__main__":
     args = parse_args()
@@ -237,7 +235,8 @@ if __name__ == "__main__":
     print("Patient ID:", args.patient_id)
     print("Cohort:", args.cohort)
     print("HLA Genes File:", args.HLA_genes)
-    if args.optional_file:
-        print("Optional File:", args.optional_file)
+    if args.patient_data_file:
+        print("patient_data_file File:", args.patient_data_file)
+        
         
     main(args)

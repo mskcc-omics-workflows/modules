@@ -3,16 +3,25 @@
         "content": [
             {
                 "0": [
-                    
+                    [
+                    {
+                    "id":"test",
+                    "single_end":false
+                    },
+                    "test_patient_test_.json:md5,fede76877e226402bf93ebeabcfb3660"]
                 ],
                 "1": [
-                    
+                    "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
                 ],
                 "json": [
-                    
+                    [{
+                    "id":"test",
+                    "single_end":false
+                    },
+                    "test_patient_test_.json:md5,fede76877e226402bf93ebeabcfb3660"]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
                 ]
             }
         ],

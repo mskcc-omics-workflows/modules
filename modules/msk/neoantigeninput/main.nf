@@ -40,13 +40,19 @@ process NEOANTIGENINPUT {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    ls./
-    python eval_phyloWGS.py ${inputMaf} ${phyloWGSsumm} ${phyloWGSmut} ./ ${id} ${patientid} ${cohort} ${hlaFile} ${args} 
+        ls ${phyloWGSfolder}
+        python3 /usr/bin/eval_phyloWGS.py --maf_file ${inputMaf} \
+        --summary_file ${phyloWGSsumm} \
+        --mutation_file ${phyloWGSmut} \
+        --tree_directory ${phyloWGSfolder} \
+        --id ${id} --patient_id ${patientid} \
+        --cohort ${cohort} --HLA_genes ${hlaFile} \
+        ${args}
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        neoantigeninput: \$(echo \$(python eval_phyloWGS.py -v))
-    END_VERSIONS
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            neoantigeninput: \$(echo \$(python3 /usr/bin/eval_phyloWGS.py -v))
+        END_VERSIONS
     """
 
     stub:
@@ -59,11 +65,11 @@ process NEOANTIGENINPUT {
     //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
     //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
     """
-    touch ${prefix}.bam
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        neoantigeninput: \$(echo \$(python eval_phyloWGS.py -v))
-    END_VERSIONS
+    
+        ${patientid}_${id}_.json
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            neoantigeninput: \$(echo \$(python3 /usr/bin/eval_phyloWGS.py -v))
+        END_VERSIONS
     """
 }

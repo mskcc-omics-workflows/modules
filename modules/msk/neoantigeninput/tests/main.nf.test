@@ -5,7 +5,6 @@ nextflow_process {
     name "Test Process NEOANTIGENINPUT"
     script "../main.nf"
     process "NEOANTIGENINPUT"
-    config "./nextflow.config"
 
     tag "modules"
     tag "modules_msk"
@@ -18,18 +17,21 @@ nextflow_process {
         // add the 'setup' method here.
         // You can find more information about how to use a 'setup' method in the docs (https://nf-co.re/docs/contributing/modules#steps-for-creating-nf-test-for-chained-modules).
         when {
+            params {
+                folderPath = 'tst'
+            }
+
             process {
                 """
 
-                file(params.folderPath).mkdirs()
-                0json_tmp = file(params.test_data_mskcc['neoantigen']['test4_mutass_0_json'], checkIfExists: true)
-                1json_tmp = file(params.test_data_mskcc['neoantigen']['test4_mutass_1_json'], checkIfExists: true)
                 
-                0json = 0json_tmp.copyTo(file("0.json"))
-                1json = 1json_tmp.copyTo(file("1.json"))
-
-                0json.moveTo(file(params.folderPath + "/0.json"))
-                1json.moveTo(file(params.folderPath + "/1.json"))
+                
+                file(params.folderPath).mkdirs()
+                originalFile = file(params.test_data_mskcc['neoantigen']['test4_mutass_0_json'], checkIfExists: true)
+                copy_1 = originalFile.copyTo(file("0.json"))
+                copy_2 = originalFile.copyTo(file("1.json"))
+                copy_1.moveTo(file(params.folderPath + "/0.json"))
+                copy_2.moveTo(file(params.folderPath + "/1.json"))
 
                 
                 input[0] = [
@@ -38,8 +40,8 @@ nextflow_process {
                     ]
 
                 input[1] = [
-                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
                     file(params.folderPath, checkIfExists: true)
                     ]
 
