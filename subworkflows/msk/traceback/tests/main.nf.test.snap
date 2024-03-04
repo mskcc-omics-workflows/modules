@@ -12,10 +12,10 @@
                     "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
                     "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
                 ],
-                "combined_genotype_maf": [
+                "genotyped_maf": [
                     
                 ],
-                "individual_geontype_mafs": [
+                "individual_genotyped_mafs": [
                     
                 ],
                 "versions": [
@@ -24,111 +24,6 @@
                 ]
             }
         ],
-        "timestamp": "2024-03-04T14:17:29.290228"
-    },
-    "sarscov2 - bam - single_end": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "patient": "test1"
-                        },
-                        [
-                            "s_C_FWD2FT_X008_d-ORG-STD_genotyped.maf:md5,2be69c042bc1bf8f22ad39355dbab9de",
-                            "s_C_FWD2FT_X009_d-ORG-STD_genotyped.maf:md5,2be69c042bc1bf8f22ad39355dbab9de"
-                        ],
-                        {
-                            "patient": "test2"
-                        },
-                        [
-                            "P-0038647-T04-IM6-ORG-STD_genotyped.maf:md5,8ff20da216b308d3b077909e3e9a92dd"
-                        ],
-                        {
-                            "patient": "test3"
-                        },
-                        [
-                            "C-8LCJE9-M001-d-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,8d1c582af4d677cb7740f88fa493f37e"
-                        ]
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "patient": "test1"
-                        },
-                        "test1_traceback.maf:md5,66eb307328c9e87fec4c0e69f075ad00"
-                    ],
-                    [
-                        {
-                            "patient": "test2"
-                        },
-                        "test2_traceback.maf:md5,f1ada1b73c71c4f0598bf0ace23b9713"
-                    ],
-                    [
-                        {
-                            "patient": "test3"
-                        },
-                        "test3_traceback.maf:md5,f2d3a63f488a352cc623e7af0cbf4929"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,1976e521186206f716b0eb74dd6cab1a",
-                    "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
-                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
-                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
-                ],
-                "combined_genotype_maf": [
-                    [
-                        {
-                            "patient": "test1"
-                        },
-                        "test1_traceback.maf:md5,66eb307328c9e87fec4c0e69f075ad00"
-                    ],
-                    [
-                        {
-                            "patient": "test2"
-                        },
-                        "test2_traceback.maf:md5,f1ada1b73c71c4f0598bf0ace23b9713"
-                    ],
-                    [
-                        {
-                            "patient": "test3"
-                        },
-                        "test3_traceback.maf:md5,f2d3a63f488a352cc623e7af0cbf4929"
-                    ]
-                ],
-                "individual_geontype_mafs": [
-                    [
-                        {
-                            "patient": "test1"
-                        },
-                        [
-                            "s_C_FWD2FT_X008_d-ORG-STD_genotyped.maf:md5,2be69c042bc1bf8f22ad39355dbab9de",
-                            "s_C_FWD2FT_X009_d-ORG-STD_genotyped.maf:md5,2be69c042bc1bf8f22ad39355dbab9de"
-                        ],
-                        {
-                            "patient": "test2"
-                        },
-                        [
-                            "P-0038647-T04-IM6-ORG-STD_genotyped.maf:md5,8ff20da216b308d3b077909e3e9a92dd"
-                        ],
-                        {
-                            "patient": "test3"
-                        },
-                        [
-                            "C-8LCJE9-M001-d-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,8d1c582af4d677cb7740f88fa493f37e"
-                        ]
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,1976e521186206f716b0eb74dd6cab1a",
-                    "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
-                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
-                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
-                ]
-            }
-        ],
-        "timestamp": "2024-03-04T14:54:46.814159"
+        "timestamp": "2024-03-04T16:25:14.45872"
     }
 }

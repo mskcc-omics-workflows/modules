@@ -66,7 +66,7 @@ workflow TRACEBACK {
     genotyped_maf = PVMAF_TAG.out.maf
 
     emit:
-    individual_geontype_mafs = individual_genotype
-    combined_genotype_maf = genotyped_maf                         // channel:[[patient:''], genotyped.maf]
+    individual_genotyped_mafs = individual_genotype
+    genotyped_maf = genotyped_maf                         // channel:[[patient:''], genotyped.maf]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
