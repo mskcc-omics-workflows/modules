@@ -19,7 +19,6 @@ workflow TRACEBACK {
     ch_versions = Channel.empty()
     
     // Concat Input Mafs
-    println header
     PVMAFCONCAT_INITIAL(mafs, header.initial)
     ch_versions = ch_versions.mix(PVMAFCONCAT_INITIAL.out.versions.first())
 
@@ -31,7 +30,7 @@ workflow TRACEBACK {
     .set{bam_list_maf}
 
     // genotype each bam combined maf, per patient if provided
-    GENOTYPEVARIANTS_ALL(bam_list_maf, reference.collect(), reference_fai.collect())
+    GENOTYPEVARIANTS_ALL(bam_list_maf, reference, reference_fai)
     ch_versions = ch_versions.mix(GENOTYPEVARIANTS_ALL.out.versions.first())
 
     // For impact, grab ORG-STD Maf from GENOTYPEVARIANTS_ALL
@@ -56,7 +55,7 @@ workflow TRACEBACK {
     .map{meta, files -> tuple('patient': meta['patient'], files )}
     .groupTuple()
     .set{all_genotype}
-
+    individual_genotype = all_genotype.collect()
     // concat gentoyped mafs, per patient if provided
     PVMAFCONCAT_GENOTYPE(all_genotype, header.genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
@@ -67,6 +66,7 @@ workflow TRACEBACK {
     genotyped_maf = PVMAF_TAG.out.maf
 
     emit:
-    maf = genotyped_maf                         // channel:[[patient:''], genotyped.maf]
+    individual_geontype_mafs = individual_genotype
+    combined_genotype_maf = genotyped_maf                         // channel:[[patient:''], genotyped.maf]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
