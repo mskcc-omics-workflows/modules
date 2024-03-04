@@ -40,8 +40,8 @@ process NEOANTIGENINPUT {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    ls ${tree_directory}
-    python eval_phyloWGS.py ${inputMaf} ${phyloWGSsumm} ${phyloWGSmut} ${tree_directory} ${id} ${patientid} ${cohort} ${hlaFile} ${args} 
+    ls./
+    python eval_phyloWGS.py ${inputMaf} ${phyloWGSsumm} ${phyloWGSmut} ./ ${id} ${patientid} ${cohort} ${hlaFile} ${args} 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
