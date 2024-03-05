@@ -1,8 +1,6 @@
 import json
 import sys 
 import pandas as pd
-# TODO: Make sure vcflib is in path
-
 import argparse
 
 
@@ -19,9 +17,8 @@ def main(args):
 
         if str(subTree) in trees[tree]['structure']:
             for item in trees[tree]['structure'][str(subTree)]:
-                # print(item)    
                 if str(subTree) in trees[tree]['structure']:
-                    
+                    #recusion occurs here
                     child_dict = makeChild(item)
                     newsubtree['children'].append(child_dict)
                     
@@ -46,7 +43,6 @@ def main(args):
             ssmli = []
             
             for ssm in treefile['mut_assignments'][str(subTree)]['ssms']:
-                print(mut_data['ssms'][ssm]['name'])
                 try:
                     ssmli.append(chrom_pos_dict[mut_data['ssms'][ssm]['name']]['id'])
                 except Exception as e:
