@@ -24,9 +24,8 @@ process PHYLOWGSPARSECNVS {
     """
     python2 \\
         /usr/bin/parser/parse_cnvs.py \\
-        -c 0 \\
-        -f facets \\
-        $facetsgenelevel
+        ${args} \\
+        ${facetsgenelevel}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
