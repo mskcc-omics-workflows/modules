@@ -4,8 +4,8 @@ process PHYLOWGSPARSECNVS {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'mskcc/phylowgs:v1.4-msk':
-        'mskcc/phylowgs:v1.4-msk' }"
+        'docker://mskcc/phylowgs:v1.4-msk':
+        'docker.io/mskcc/phylowgs:v1.4-msk' }"
 
     input:
     tuple val(meta), path(facetsgenelevel)
