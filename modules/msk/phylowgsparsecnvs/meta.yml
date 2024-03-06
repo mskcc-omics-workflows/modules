@@ -22,7 +22,7 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  - bam:
+  - facetsgenelevel:
       type: file
       description: single sample facets gene level output
       pattern: "*.{txt}"
