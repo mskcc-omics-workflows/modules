@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, neoantigen]
   merge_group:
     types: [checks_requested]
     branches: [main]
