@@ -6,16 +6,17 @@ nextflow_process {
 
     tag "modules"
     tag "modules_nfcore"
+    tag "modules_msk"
     tag "phylowgsparsecnvs"
 
-    test("neoantigen - phylo - gene_level") {
+    test("phylowgsparsecnvs - gene_level") {
 
         when {
             process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['facets_gene_level.txt'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['facets_gene_level_txt'], checkIfExists: true)
                     ]
                 """
             }
@@ -31,7 +32,7 @@ nextflow_process {
 
     }
 
-    test("neoantigen - phylo - gene_level") {
+    test("phylowgsparsecnvs - gene_level") {
 
         options "-stub"
 
