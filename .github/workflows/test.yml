@@ -285,6 +285,8 @@ jobs:
           - profile: "conda"
             tags: snppileup
           - profile: "conda"
+            tags: facets
+          - profile: "conda"
             tags: mutect1
     env:
       NXF_ANSI_LOG: false

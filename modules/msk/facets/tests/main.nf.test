@@ -1,0 +1,162 @@
+nextflow_process {
+
+    name "Test FACETS"
+    script "../main.nf"
+    process "FACETS"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "facets"
+    tag "snppileup"
+
+    test("facets - pileup - legacy output") {
+
+        setup {
+            run("SNPPILEUP"){
+                script "../../snppileup/main.nf"
+                process {
+                    """                
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true),
+                                    [],
+                                    []
+                                ]
+                    input[1] = [
+                                    meta,
+                                    file(params.test_data_mskcc['hg37']['dbsnp_138_b37_chr17_vcf_gz'], checkIfExists: true),
+                                    file(params.test_data_mskcc['hg37']['dbsnp_138_b37_chr17_vcf_gz_tbi'], checkIfExists: true)
+                               ]
+                    """
+                }
+
+            }
+        }
+
+        when {
+            process {
+                """                
+                meta = [ id:'test' ] // meta map
+                input[0] = SNPPILEUP.out.pileup.collect{ meta, pileup -> pileup }.map{ pileup -> [meta, pileup, true]}               
+
+                """
+                                
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("facets - pileup - output") {
+
+        setup {
+            run("SNPPILEUP"){
+                script "../../snppileup/main.nf"
+                process {
+                    """                
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true),
+                                    [],
+                                    []
+                                ]
+                    input[1] = [
+                                    meta,
+                                    file(params.test_data_mskcc['hg37']['dbsnp_138_b37_chr17_vcf_gz'], checkIfExists: true),
+                                    file(params.test_data_mskcc['hg37']['dbsnp_138_b37_chr17_vcf_gz_tbi'], checkIfExists: true)
+                               ]
+                    """
+                }
+
+            }
+        }
+
+        when {
+            process {
+                """                
+                meta = [ id:'test' ] // meta map
+                input[0] = SNPPILEUP.out.pileup.collect{ meta, pileup -> pileup }.map{ pileup -> [meta, pileup, false]}               
+
+                """
+                                
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("facets - pileup - legacy output stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file("stub_file"),
+                                    true
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("facets - pileup - output stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file("stub_file"),
+                                    false
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
