@@ -2,7 +2,6 @@ process PHYLOWGSPARSECNVS {
     tag "$meta.id"
     label 'process_low'
 
-    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'docker://mskcc/phylowgs:v1.4-msk':
         'docker.io/mskcc/phylowgs:v1.4-msk' }"
