@@ -11,6 +11,8 @@ Please follow nf-core's guides for contributing [modules](https://nf-co.re/docs/
 
 Additional recommendations for mskcc-omics-workflows are detailed below.
 
+###
+
 ### Module development
 
 Refer to nf-core's guide on [creating new modules](https://nf-co.re/docs/contributing/modules).
