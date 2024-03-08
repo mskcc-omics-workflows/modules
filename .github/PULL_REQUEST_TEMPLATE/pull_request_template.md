@@ -20,13 +20,13 @@ Closes #XXX <!-- If this PR fixes an issue, please link it here! -->
 - [ ] Feature branch is named `feature/<module_name>` for modules, or `feature/<subworkflow_name>` for subworkflows. For modules, if there is a subcommand use: `feature/<module_name>/<module_subcommand>`.
 - [ ] If you've fixed a bug or added code that should be tested, add tests!
 - [ ] If you've added a new tool - have you followed the module conventions in the [contribution docs](https://mskcc-omics-workflows.gitbook.io/omics-wf/GMaCKqX0TmAhUOoZmuc6).
-- [ ] Use [nf-core data](https://github.com/nf-core/test-datasets) if possible for nf-tests. If not, add test data to [mskcc-omics-workflows/test-datasets](https://github.com/mskcc-omics-workflows/test-datasets), following the repository guidelines, for nf-tests. Finally, if neither option is feasible, add only a stub nf-test.
+- [ ] Use [nf-core data](https://github.com/nf-core/test-datasets) if possible for nf-tests. If not, use or add test data to [mskcc-omics-workflows/test-datasets](https://github.com/mskcc-omics-workflows/test-datasets), following the repository guidelines, for nf-tests. Finally, if neither option is feasible, only add a stub nf-test.
 - [ ] Remove all TODO statements.
 - [ ] Emit the `versions.yml` file.
 - [ ] Follow the naming conventions.
 - [ ] Follow the parameters requirements.
 - [ ] Follow the input/output options guidelines.
-- [ ] Add a resource `label`
+- [ ] Add a resource `label`.
 - [ ] Use Jfrog if possible to fulfil software requirements.
 - Ensure that the test works with either Docker / Singularity. Conda CI tests can be quite flaky:
   - For modules:
