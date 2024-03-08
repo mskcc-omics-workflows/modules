@@ -8,7 +8,7 @@ These are the most common things requested on pull requests (PRs).
 
 Remember that PRs should be made against the master branch.
 
-Learn more about contributing: [gitbook](https://app.gitbook.com/o/Txb2lda7D1fX9CVuQbQ0/s/x32s1acwH78k3hruISMe/contributing)
+Learn more about contributing: [gitbook](https://mskcc-omics-workflows.gitbook.io/omics-wf/GMaCKqX0TmAhUOoZmuc6)
 -->
 
 ## PR checklist
@@ -26,8 +26,13 @@ Closes #XXX <!-- If this PR fixes an issue, please link it here! -->
 - [ ] Follow the parameters requirements.
 - [ ] Follow the input/output options guidelines.
 - [ ] Add a resource `label`
-- [ ] Use BioConda and BioContainers if possible to fulfil software requirements.
+- [ ] Use Jfrog if possible to fulfil software requirements.
 - Ensure that the test works with either Docker / Singularity. Conda CI tests can be quite flaky:
-  - [ ] `PROFILE=docker pytest --tag <MODULE> --symlink --keep-workflow-wd --git-aware`
-  - [ ] `PROFILE=singularity pytest --tag <MODULE> --symlink --keep-workflow-wd --git-aware`
-  - [ ] `PROFILE=conda pytest --tag <MODULE> --symlink --keep-workflow-wd --git-aware`
+  - For modules:
+    - [ ] `nf-core modules --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <MODULE> --profile docker`
+    - [ ] `nf-core modules --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <MODULE> --profile singularity`
+    - [ ] `nf-core modules --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <MODULE> --profile conda`
+  - For subworkflows:
+    - [ ] `nf-core subworkflows --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <subworkflow_branch> test <SUBWORKFLOW> --profile docker`
+    - [ ] `nf-core subworkflows --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <subworkflow_branch> test <SUBWORKFLOW> --profile singularity`
+    - [ ] `nf-core subworkflows --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <subworkflow_branch> test <SUBWORKFLOW> --profile conda`
