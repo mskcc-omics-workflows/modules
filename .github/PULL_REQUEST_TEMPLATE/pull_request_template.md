@@ -6,7 +6,7 @@ Many thanks for contributing to mskcc-omics-workflows/modules!
 Please fill in the appropriate checklist below (delete whatever is not relevant).
 These are the most common things requested on pull requests (PRs).
 
-Remember that PRs should be made against the master branch.
+Remember that PRs should be made against the develop branch.
 
 Learn more about contributing: [gitbook](https://mskcc-omics-workflows.gitbook.io/omics-wf/GMaCKqX0TmAhUOoZmuc6)
 -->
