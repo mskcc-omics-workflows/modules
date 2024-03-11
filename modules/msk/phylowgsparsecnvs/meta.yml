@@ -1,0 +1,49 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "phylowgsparsecnvs"
+description: parse cnvs from FACETS for input to phylowgs
+keywords:
+  - phylowgs
+  - CNVs
+  - FACETs
+tools:
+  - "phylowgsparsecnvs":
+      description: "parser to convert FACETs output to phylowgs expected input"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
+      tool_dev_url: "https://github.com/mskcc/phylowgs"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - facetsgenelevel:
+      type: file
+      description: single sample facets gene level output
+      pattern: "*.{txt}"
+
+## TODO nf-core: Add a description of all of the variables used as output
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  ## TODO nf-core: Delete / customise this example output
+  - bam:
+      type: file
+      description: Sorted BAM/CRAM/SAM file
+      pattern: "*.{bam,cram,sam}"
+
+authors:
+  - "@pintoa1-mskcc"
+maintainers:
+  - "@pintoa1-mskcc"
