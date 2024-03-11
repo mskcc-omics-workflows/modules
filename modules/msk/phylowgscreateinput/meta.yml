@@ -33,7 +33,7 @@ output:
       description: File containing software versions
       pattern: "versions.yml"
   - phylowgsinput:
-      type: 2 files
+      type: file
       description: cnv_data.txt and ssm_data.txt
       pattern: "*.txt"
 
