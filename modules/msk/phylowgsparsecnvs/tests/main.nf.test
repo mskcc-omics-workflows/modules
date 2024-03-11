@@ -1,0 +1,37 @@
+nextflow_process {
+
+    name "Test Process PHYLOWGSPARSECNVS"
+    script "../main.nf"
+    process "PHYLOWGSPARSECNVS"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "phylowgsparsecnvs"
+
+    test("phylowgsparsecnvs - txt") {
+
+        when {
+            process {
+                """                
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['facets_gene_level_txt'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+
+            )
+        }
+
+    }
+
+
+}
