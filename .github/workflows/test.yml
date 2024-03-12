@@ -290,6 +290,8 @@ jobs:
             tags: phylowgs/createinput
           - profile: "conda"
             tags: phylowgs/parsecnvs
+          - profile: "conda"
+            tags: phylowgs/multievolve
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
