@@ -1,2 +1,2 @@
-phylowgsparsecnvs:
+phylowgs/parsecnvs:
   - "modules/msk/phylowgs/parsecnvs/**"
