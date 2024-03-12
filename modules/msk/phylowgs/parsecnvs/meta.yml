@@ -24,24 +24,20 @@ input:
       description: single sample facets gene level output
       pattern: "*.{txt}"
 
-## TODO nf-core: Add a description of all of the variables used as output
 output:
-  #Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
-
+  - cnv:
+      type: file
+      description: converted cnv file for phylowgs upstream processing
+      pattern: "*.txt"
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
-  - bam:
-      type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
 
 authors:
   - "@pintoa1-mskcc"
