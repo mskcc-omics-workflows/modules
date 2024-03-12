@@ -1,0 +1,48 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "phylowgs_multievolve"
+description: Create trees from input from phylowgs_createinput
+keywords:
+  - phylowgs
+  - CNVs
+  - FACETs
+tools:
+  - "phylowgs_multievolve":
+      description: "Program to create trees from input from phylowgs_createinput"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
+      tool_dev_url: "https://github.com/mskcc/phylowgs"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - cnv_data:
+      type: file
+      description: copy number input data from phylowgs_createinput
+      pattern: "*.{txt}"
+  - ssm_data:
+      type: file
+      description: mutation input data from phylowgs_createinput
+      pattern: "*.{txt}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - trees:
+      type: file
+      description: Zip file containing the completed trees
+      pattern: "trees.zip"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@pintoa1-mskcc"
+maintainers:
+  - "@pintoa1-mskcc"
