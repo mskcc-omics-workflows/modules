@@ -1,15 +1,15 @@
 nextflow_process {
 
-    name "Test Process PHYLOWGSCREATEINPUT"
+    name "Test Process PHYLOWGS_CREATEINPUT"
     script "../main.nf"
-    process "PHYLOWGSCREATEINPUT"
+    process "PHYLOWGS_CREATEINPUT"
 
     tag "modules"
     tag "modules_nfcore"
-    tag "phylowgscreateinput"
+    tag "phylowgs_createinput"
 
     // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
-    test("PHYLOWGSCREATEINPUT - txt") {
+    test("PHYLOWGS_CREATEINPUT - txt") {
 
         when {
             process {

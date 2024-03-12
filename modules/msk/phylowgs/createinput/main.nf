@@ -1,4 +1,4 @@
-process PHYLOWGSCREATEINPUT {
+process PHYLOWGS_CREATEINPUT {
     tag "$meta.id"
     label 'process_low'
 

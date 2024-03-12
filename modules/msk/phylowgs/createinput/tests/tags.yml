@@ -1,2 +1,2 @@
-phylowgscreateinput:
-  - "modules/msk/phylowgscreateinput/**"
+phylowgs_createinput:
+  - "modules/msk/phylowgs/createinput/**"
