@@ -13,7 +13,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,71f53efef22d06969b865b3034a8bf67"
+                    "versions.yml:md5,c3b72d38e738af4cd177ddffac707596"
                 ],
                 "phylowgsinput": [
                     [
@@ -26,14 +26,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,71f53efef22d06969b865b3034a8bf67"
+                    "versions.yml:md5,c3b72d38e738af4cd177ddffac707596"
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-03-11T12:23:27.528815"
+        "timestamp": "2024-03-12T14:20:09.908861"
     }
 }

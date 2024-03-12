@@ -6,7 +6,8 @@ nextflow_process {
 
     tag "modules"
     tag "modules_nfcore"
-    tag "phylowgs_createinput"
+    tag "phylowgs"
+    tag "phylowgs/createinput"
 
     // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
     test("PHYLOWGS_CREATEINPUT - txt") {
