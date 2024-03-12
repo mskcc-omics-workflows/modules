@@ -1,16 +1,16 @@
 nextflow_process {
 
-    name "Test Process PHYLOWGSPARSECNVS"
+    name "Test Process PHYLOWGS_PARSECNVS"
     script "../main.nf"
-    process "PHYLOWGSPARSECNVS"
+    process "PHYLOWGS_PARSECNVS"
     config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfcore"
     tag "modules_msk"
-    tag "phylowgsparsecnvs"
+    tag "phylowgs_parsecnvs"
 
-    test("phylowgsparsecnvs - txt") {
+    test("phylowgs_parsecnvs - txt") {
 
         when {
             process {

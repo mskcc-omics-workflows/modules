@@ -1,4 +1,4 @@
-process PHYLOWGSPARSECNVS {
+process PHYLOWGS_PARSECNVS {
     tag "$meta.id"
     label 'process_low'
 
