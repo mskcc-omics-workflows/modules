@@ -8,7 +8,8 @@ nextflow_process {
     tag "modules"
     tag "modules_nfcore"
     tag "modules_msk"
-    tag "phylowgs_parsecnvs"
+    tag "phylowgs"
+    tag "phylowgs/parsecnvs"
 
     test("phylowgs_parsecnvs - txt") {
 
