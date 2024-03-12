@@ -1,0 +1,71 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "snppileup"
+description: Calculate snp pileups from a bam pair
+keywords:
+  - snp
+  - pileup
+  - bams
+  - dbsnp
+tools:
+  - "htstools":
+      description: "Contains tools to process bam files for downstream copy number analysis."
+      homepage: "https://github.com/mskcc/htstools"
+      documentation: "https://github.com/mskcc/htstools"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+  - meta1:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+  - normal:
+      type: file
+      description: "Normal bam file"
+      pattern: "*.bam"
+  - normal_index:
+      type: file
+      description: "Index of the normal bam file"
+      pattern: "*.bai"
+  - tumor:
+      type: file
+      description: "Tumor bam file"
+      pattern: "*.bam"
+  - tumor_index:
+      type: file
+      description: "Index of tumor bam file"
+      pattern: "*.bai"
+  - dbsnp:
+      type: file
+      description: The NCBI provided database vcf file on genetic variation
+      pattern: "*.vcf.gz"
+  - dbsnp_index:
+      type: file
+      description: The index of the dbsnp vcf file
+      pattern: "*.vcf.gz.tbi"
+  - additional_bams:
+      type: list
+      description: List of additional bams to include
+  - additional_bam_index:
+      type: list
+      description: List of additional bam indexes to include
+
+output:
+  - pileup:
+      type: file
+      description: The pileup file
+      pattern: "*.snp_pileup.gz"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"
