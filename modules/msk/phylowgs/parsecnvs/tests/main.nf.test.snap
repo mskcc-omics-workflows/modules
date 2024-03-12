@@ -1,5 +1,5 @@
 {
-    "phylowgsparsecnvs - txt": {
+    "phylowgs_parsecnvs - txt": {
         "content": [
             {
                 "0": [
@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,59b3e223572b67b72eb21c625003973d"
+                    "versions.yml:md5,df60c84922cc724370c4d4e8ecc76d48"
                 ],
                 "cnv": [
                     [
@@ -24,14 +24,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,59b3e223572b67b72eb21c625003973d"
+                    "versions.yml:md5,df60c84922cc724370c4d4e8ecc76d48"
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.1"
-        },
-        "timestamp": "2024-03-06T14:35:27.270866"
+        "timestamp": "2024-03-12T14:19:07.098378"
     }
 }

@@ -1,5 +1,5 @@
 ---
-name: "phylowgscreateinput"
+name: "phylowgs_createinput"
 channels:
   - conda-forge
   - bioconda

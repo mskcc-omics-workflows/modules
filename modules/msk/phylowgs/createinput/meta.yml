@@ -1,12 +1,12 @@
 ---
-name: "phylowgscreateinput"
+name: "phylowgs_createinput"
 description: Create input files for phylowgs
 keywords:
   - phylowgs
   - cnvs
   - parser
 tools:
-  - "phylowgscreateinput":
+  - "phylowgs_createinput":
       description: "create phylowgs expected input"
       homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
       tool_dev_url: "https://github.com/mskcc/phylowgs"

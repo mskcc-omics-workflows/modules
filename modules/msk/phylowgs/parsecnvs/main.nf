@@ -1,4 +1,4 @@
-process PHYLOWGSCREATEINPUT {
+process PHYLOWGS_PARSECNVS {
     tag "$meta.id"
     label 'process_low'
 
@@ -7,12 +7,11 @@ process PHYLOWGSCREATEINPUT {
         'docker.io/mskcc/phylowgs:v1.4-msk' }"
 
     input:
-    tuple val(meta), path(cnv) 
-    path(unfilteredmaf)
+    tuple val(meta), path(facetsgenelevel)
 
     output:
-    tuple val(meta), path("cnv_data.txt"), path("ssm_data.txt"), emit: phylowgsinput
-    path "versions.yml"                                        , emit: versions
+    tuple val(meta), path("cnvs.txt"), emit: cnv
+    path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -20,17 +19,16 @@ process PHYLOWGSCREATEINPUT {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    """ 
+
+    """
     python2 \\
-        /usr/bin/parser/create_phylowgs_inputs.py \\
-        --cnvs S1=${cnv} \\
+        /usr/bin/parser/parse_cnvs.py \\
         ${args} \\
-        --vcf-type S1=maf S1=${unfilteredmaf}
-    
+        ${facetsgenelevel}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        phylowgscreateinput: \$PHYLOWGS_TAG
+        phylowgs: \$PHYLOWGS_TAG
     END_VERSIONS
     """
 
@@ -38,11 +36,11 @@ process PHYLOWGSCREATEINPUT {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch cnv_data.txt
+    touch cnvs.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        phylowgscreateinput: \$PHYLOWGS_TAG
+        phylowgs: \$PHYLOWGS_TAG
     END_VERSIONS
     """
 }
