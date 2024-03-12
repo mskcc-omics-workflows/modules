@@ -30,7 +30,7 @@ process PHYLOWGS_CREATEINPUT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        phylowgscreateinput: \$PHYLOWGS_TAG
+        phylowgs: \$PHYLOWGS_TAG
     END_VERSIONS
     """
 
@@ -42,7 +42,7 @@ process PHYLOWGS_CREATEINPUT {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        phylowgscreateinput: \$PHYLOWGS_TAG
+        phylowgs: \$PHYLOWGS_TAG
     END_VERSIONS
     """
 }

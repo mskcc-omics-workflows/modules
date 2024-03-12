@@ -28,7 +28,7 @@ process PHYLOWGS_PARSECNVS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        phylowgsparsecnvs: \$PHYLOWGS_TAG
+        phylowgs: \$PHYLOWGS_TAG
     END_VERSIONS
     """
 
@@ -40,7 +40,7 @@ process PHYLOWGS_PARSECNVS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        phylowgsparsecnvs: \$PHYLOWGS_TAG
+        phylowgs: \$PHYLOWGS_TAG
     END_VERSIONS
     """
 }
