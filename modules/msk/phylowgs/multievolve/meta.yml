@@ -43,6 +43,6 @@ output:
       pattern: "versions.yml"
 
 authors:
-  - "@pintoa1-mskcc"
+  - "@nikhil"
 maintainers:
-  - "@pintoa1-mskcc"
+  - "@nikhil"
