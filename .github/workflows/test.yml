@@ -291,6 +291,8 @@ jobs:
           - profile: "conda"
             tags: phylowgs/parsecnvs
           - profile: "conda"
+            tags: phylowgs/multievolve
+          - profile: "conda"
             tags: phylowgs/writeresults
     env:
       NXF_ANSI_LOG: false
