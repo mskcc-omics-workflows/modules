@@ -25,7 +25,7 @@ nextflow_process {
                 
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
                     ]
 
                 input[1] = [
