@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "phylowgs_writeresults"
+description: Write results from trees from phylowgs_multievolve
+keywords:
+  - phylowgs
+  - CNVs
+  - FACETs
+tools:
+  - "phylowgs_writeresults":
+      description: "Write results from trees from phylowgs_multievolve"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
+      tool_dev_url: "https://github.com/mskcc/phylowgs"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - trees:
+      type: file
+      description: zip folder containing tree data from multievolve
+      pattern: "*.zip"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - summ:
+      type: file
+      description: Output file for JSON-formatted tree summaries
+      pattern: "*.summ.json.gz"
+  - muts:
+      type: file
+      description: Output file for JSON-formatted list of mutations
+      pattern: "*.muts.json.gz"
+  - mutass:
+      type: file
+      description: Output file for JSON-formatted list of SSMs and CNVs
+      pattern: "*.mutass.zip"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"
