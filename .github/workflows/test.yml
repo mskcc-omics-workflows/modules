@@ -363,6 +363,8 @@ jobs:
           - profile: "conda"
             tags: snppileup
           - profile: "conda"
+            tags: facets
+          - profile: "conda"
             tags: mutect1
           - profile: "conda"
             tags: ppflagfixer
