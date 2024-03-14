@@ -169,7 +169,8 @@ jobs:
       matrix:
         tags:
           [
-            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}"
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
           ]
     steps:
       - name: setup python
