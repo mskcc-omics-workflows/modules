@@ -60,13 +60,7 @@ process GENOMENEXUS {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    vcf2maf.pl $args --input_vcf ${prefix}.vcf \\
-    --output_maf ${prefix}.maf \\
-    --tumor-id ${meta.tumor_id} --normal-id ${meta.normal_id} \\
-    --retain_info set,TYPE,FAILURE_REASON \\
-    --ref-fasta ${ref_fasta} \\
-    --output-maf ${prefix.maf} \\
-    --vep-path /usr/local/bin
+    vcf2maf.pl 
     
     
     cat <<-END_VERSIONS > versions.yml
