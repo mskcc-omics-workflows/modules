@@ -162,7 +162,7 @@ jobs:
   verify-markdown-file:
     runs-on: ubuntu-latest
     name: verify-markdown-file
-    if: ${{ contains(github.event.pull_request.title, 'Module') }}
+    if: ${{ (needs.pytest-changes.outputs.modules != '[]') || (needs.nf-test-changes.outputs.modules != '[]') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
