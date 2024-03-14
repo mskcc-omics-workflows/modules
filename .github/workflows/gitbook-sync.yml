@@ -17,7 +17,6 @@ concurrency:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
   pytest-changes:
     name: pytest-changes
     runs-on: ubuntu-latest
@@ -139,11 +138,10 @@ jobs:
           message: "update summary for ${{ steps.split.outputs.fragment }}"
           add: "SUMMARY.md --force"
           cwd: "./"
-  
+
   new_subworkflow:
     name: new subworkflow
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
     runs-on: ubuntu-latest
     if: ${{ contains(github.event.pull_request.title, 'Subworkflow') }}
     needs: [pytest-changes, nf-test-changes]
