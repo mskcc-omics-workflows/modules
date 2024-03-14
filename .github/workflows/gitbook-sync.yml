@@ -62,7 +62,7 @@ jobs:
     name: new module
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.pull_request.title, 'Module') }}
+    if: ${{ contains( github.event.head_commit.message, 'Module') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
@@ -109,12 +109,13 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: develop
-          path: modules/msk/${{ steps.split.outputs.fragment }}/meta.yml
+          branch: feature/${{ matrix.tags }}
+          path: modules/msk/${{ matrix.tags }}/meta.yml
       - name: Run convertor to generate md file for new module
         run: |
+          echo ${{ matrix.tags }}
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ matrix.tags }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
@@ -143,7 +144,7 @@ jobs:
     name: new subworkflow
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: ${{ contains(github.event.pull_request.title, 'Subworkflow') }}
+    if: ${{ contains( github.event.head_commit.message, 'Subworkflow') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
@@ -190,12 +191,12 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_subworkflow
         with:
-          branch: develop
-          path: subworkflows/msk/${{ steps.split.outputs.fragment }}/meta.yml
+          branch: feature/${{ matrix.tags }}
+          path: subworkflows/msk/${{ matrix.tags }}/meta.yml
       - name: Run convertor to generate md file for new subworkflow
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ matrix.tags }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
       - name: Check file existence for subworkflows
         id: check_subworkflow_files
         uses: andstor/file-existence-action@v1
