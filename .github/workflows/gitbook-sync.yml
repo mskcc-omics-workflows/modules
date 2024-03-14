@@ -2,20 +2,77 @@ name: Meta Yaml to MD
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [develop, main]
+    branches: [main, hotfix/gitbook-sync]
+  pull_request:
+    branches: [main, develop]
+  merge_group:
+    types: [checks_requested]
+    branches: [main]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+
+  pytest-changes:
+    name: pytest-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'modules' output variable
+      modules: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      - uses: mirpedrol/paths-filter@main
+        id: filter
+        with:
+          filters: "tests/config/pytest_modules.yml"
+          token: ""
+
+  nf-test-changes:
+    name: nf-test-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'modules' output variable
+      modules: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      - name: Combine all tags.yml files
+        id: get_tags
+        run: find . -name "tags.yml" -not -path "./.github/*" -exec cat {} + > .github/tags.yml
+
+      - name: debug
+        run: cat .github/tags.yml
+
+      - uses: mirpedrol/paths-filter@main
+        id: filter
+        with:
+          filters: ".github/tags.yml"
+          token: ""
+
   new_module:
     name: new module
-    if: ${{ contains( github.event.head_commit.message, 'Module:') }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    if: ${{ contains(github.event.pull_request.title, 'Module') }}
+    needs: [pytest-changes, nf-test-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -82,11 +139,22 @@ jobs:
           message: "update summary for ${{ steps.split.outputs.fragment }}"
           add: "SUMMARY.md --force"
           cwd: "./"
+  
   new_subworkflow:
     name: new subworkflow
-    if: ${{ contains( github.event.head_commit.message, 'Subworkflow:') }}
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.pull_request.title, 'Subworkflow') }}
+    needs: [pytest-changes, nf-test-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
