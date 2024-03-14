@@ -48,6 +48,7 @@ process GENOMENEXUS {
 
     script:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args ?: ''
     // customized arguments - value goes in the nextflow.config
     def prefix = task.ext.prefix ?: "${meta.id}"
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
@@ -60,6 +61,33 @@ process GENOMENEXUS {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    vcf2maf.pl 
+    vcf2maf.pl $args --input_vcf ${prefix}.vcf \\
+    --output_maf ${prefix}.maf \\
+    $args2 --tumor-id --normal-id ${meta.normal_id} \\
+    --ref-fasta ${ref_fasta} \\
+    --output-maf ${prefix.maf} \\
+    --vep-path /usr/local/bin
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        vcf2maf: \$(echo \$(vcf2maf.pl --help'))
+    END_VERSIONS
+    """
+    // call variables with ${x}
+    stub:
+    def args = task.ext.args ?: ''
+    def args2 = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
+    //               Have a look at the following examples:
+    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
+    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
+    """
+    echo "tub test" >> ${prefix}.maf
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        vcf2maf: \$(echo \$(vcf2maf.pl --help'))
+    END_VERSIONS
     """
 }
