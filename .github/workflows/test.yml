@@ -169,7 +169,7 @@ jobs:
       matrix:
         tags:
           [
-            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}"
           ]
     steps:
       - name: setup python
@@ -189,7 +189,6 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: feature/${{ matrix.tags }}
           path: modules/msk/${{ matrix.tags }}/meta.yml
       - name: Write Module yaml to temp
         if: "${{ steps.cat_file_module.outputs.size} }}" != "0"
