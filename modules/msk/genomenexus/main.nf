@@ -41,7 +41,7 @@ process GENOMENEXUS {
     // TODO nf-core: Named file extensions MUST be emitted for ALL output channels
     tuple val(meta), path("*.maf"), emit: maf
     // TODO nf-core: List additional required output channels/values here
-    path "versions.yml"           , emit: versions
+    //path "versions.yml"           , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -61,27 +61,5 @@ process GENOMENEXUS {
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
     vcf2maf.pl 
-    
-    
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        vcf2maf: \$(vcf2maf.pl --help')
-    END_VERSIONS
-    """
-    // call variables with ${x}
-    stub:
-    def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
-    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
-    //               Have a look at the following examples:
-    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
-    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
-    """
-    touch ${prefix}.maf
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        genomenexus: \$(samtools --version |& sed '1!d ; s/samtools //')
-    END_VERSIONS
     """
 }
