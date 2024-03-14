@@ -32,6 +32,7 @@ This module wraps GetBaseCountsMultiSample, which calculates the base counts in 
 
 | Output | Type | Description | Pattern |
 |--------|------|-------------|---------|
+| meta | map | Groovy Map containing sample information e.g. `[ id:test, single_end:false ]`  |  |
 | versions | file | File containing software versions | versions.yml |
 | variant_file | file | base counts in multiple BAM files for all the sites in a given VCF file or MAF file | *.{vcf,maf} |
 
