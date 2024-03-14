@@ -62,7 +62,7 @@ jobs:
     name: new module
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    if: ${{ contains( github.event.head_commit.message, 'Module') }}
+    if: ${{ contains( matrix.tags, 'modules') }}
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
@@ -132,6 +132,7 @@ jobs:
         with:
           default_author: github_actions
           message: "update summary for ${{ matrix.tags }}"
+          pull: '--autostash'
           add: "SUMMARY.md --force"
           cwd: "./"
 
