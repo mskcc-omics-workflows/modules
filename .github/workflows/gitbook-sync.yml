@@ -17,13 +17,29 @@ concurrency:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  candidates:
-    name: candidates
+  pytest-candidates:
+    name: pytest-changes
     runs-on: ubuntu-latest
     outputs:
       # Expose matched filters as job 'modules' output variable
-      nftest: ${{ steps.filter.outputs.nftest.changes }}
-      pytest: ${{ steps.filter.outputs.pytest.changes }}
+      modules: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      - uses: mirpedrol/paths-filter@main
+        id: filter
+        with:
+          filters: "tests/config/pytest_modules.yml"
+          token: ""
+
+  nf-test-candidates:
+    name: nf-test-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'modules' output variable
+      modules: ${{ steps.filter.outputs.changes }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,29 +55,27 @@ jobs:
       - uses: mirpedrol/paths-filter@main
         id: filter
         with:
-          filters: |
-            nftest: ".github/tags.yml"
-            pytest: "tests/config/pytest_modules.yml"
+          filters: ".github/tags.yml"
           token: ""
 
   new_module:
     name: new module
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    needs: [candidates]
+    needs: [pytest-candidates, nf-test-candidates]
     strategy:
       fail-fast: false
       matrix:
         tags:
           [
-            "${{ fromJson(needs.candidates.outputs.nftest) }}",
-            "${{ fromJson(needs.candidates.outputs.pytest) }}",
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
           ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "${{needs.candidates.outputs.nftest}}"
+      - run: echo "${{needs.pytest-changes.outputs.modules}}"
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: setup python
         uses: actions/setup-python@v4
@@ -127,7 +141,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     if: ${{ contains( github.event.head_commit.message, 'Subworkflow') }}
-    needs: [candidates]
+    needs: [pytest-candidates, nf-test-candidates]
     strategy:
       fail-fast: false
       matrix:
