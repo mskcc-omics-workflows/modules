@@ -84,15 +84,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: docs
-      - name: Split branch name
-        env:
-          MODULE: ${{github.event.head_commit.message}}
-        id: split
-        run: echo "::set-output name=fragment::${MODULE##*:}"
       - name: Rename md file
         id: replace_slash
         run: |
-          FRAGMENT="${{ steps.split.outputs.fragment }}"
+          FRAGMENT="${{ matrix.tags }}"
           MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
           echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
           echo "${MD_NAME}"
@@ -115,7 +110,7 @@ jobs:
         run: |
           echo ${{ matrix.tags }}
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ matrix.tags }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
       - name: Check file existence for modules
         id: check_module_files
         uses: andstor/file-existence-action@v1
@@ -125,18 +120,18 @@ jobs:
         if: ${{ (steps.check_module_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ matrix.tags }}](modules/${{ matrix.tags }}.md)" module > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](modules/${{ env.MD_NAME }}.md)" module > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "add doc for ${{ steps.split.outputs.fragment }}"
+          message: "add doc for ${{ matrix.tags }}"
           add: "*/*.md --force"
           cwd: "./"
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "update summary for ${{ steps.split.outputs.fragment }}"
+          message: "update summary for ${{ matrix.tags }}"
           add: "SUMMARY.md --force"
           cwd: "./"
 
@@ -166,15 +161,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: docs
-      - name: Split branch name
-        env:
-          SUBWORKFLOW: ${{github.event.head_commit.message}}
-        id: split
-        run: echo "::set-output name=fragment::${SUBWORKFLOW##*:}"
       - name: Rename md file
         id: replace_slash
         run: |
-          FRAGMENT="${{ steps.split.outputs.fragment }}"
+          FRAGMENT="${{ matrix.tags }}"
           MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
           echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
           echo "${MD_NAME}"
@@ -196,7 +186,7 @@ jobs:
       - name: Run convertor to generate md file for new subworkflow
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ matrix.tags }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
       - name: Check file existence for subworkflows
         id: check_subworkflow_files
         uses: andstor/file-existence-action@v1
@@ -206,17 +196,17 @@ jobs:
         if: ${{ (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ matrix.tags }}](subworkflows/${{ matrix.tags }}.md)" subworkflow > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](subworkflows/${{ env.MD_NAME }}.md)" subworkflow > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "add doc for ${{ steps.split.outputs.fragment }}"
+          message: "add doc for ${{ env.MD_NAME }}"
           add: "*/*.md --force"
           cwd: "./"
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "update summary for ${{ steps.split.outputs.fragment }}"
+          message: "update summary for ${{ env.MD_NAME }}"
           add: "SUMMARY.md --force"
           cwd: "./"
