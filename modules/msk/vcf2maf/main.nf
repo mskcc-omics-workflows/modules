@@ -61,12 +61,10 @@ process vcf2maf {
     // TODO nf-core: Please replace the example samtools command below with your module's command
     // TODO nf-core: Please indent the command appropriately (4 spaces!!) to help with readability ;)
     """
-    vcf2maf.pl $args --input_vcf ${prefix}.vcf \\
+    vcf2maf.pl $args --input_vcf ${vcf} \\
     --output_maf ${prefix}.maf \\
-    $args2 --tumor-id --normal-id ${meta.normal_id} \\
-    --ref-fasta ${ref_fasta} \\
-    --output-maf ${prefix}.maf \\
-    --vep-path /usr/local/bin
+    --tumor-id ${meta.tumor_id} --normal-id ${meta.normal_id} \\
+    --ref-fasta ${ref_fasta} --vep-path /usr/local/bin
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
