@@ -65,7 +65,7 @@ process vcf2maf {
     --output_maf ${prefix}.maf \\
     $args2 --tumor-id --normal-id ${meta.normal_id} \\
     --ref-fasta ${ref_fasta} \\
-    --output-maf ${prefix.maf} \\
+    --output-maf ${prefix}.maf \\
     --vep-path /usr/local/bin
 
     cat <<-END_VERSIONS > versions.yml
