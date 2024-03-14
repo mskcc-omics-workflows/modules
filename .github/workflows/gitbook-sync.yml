@@ -68,8 +68,8 @@ jobs:
       matrix:
         tags:
           [
-            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
-            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+            "${{ fromJson(needs.pytest-candidates.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-candidates.outputs.modules) }}",
           ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
