@@ -206,7 +206,7 @@ jobs:
         if: ${{ (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ ${{ matrix.tags }} }}](subworkflows/${{ ${{ matrix.tags }} }}.md)" subworkflow > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ matrix.tags }}](subworkflows/${{ ${{ matrix.tags }} }}.md)" subworkflow > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
