@@ -12,9 +12,9 @@ process NETMHCPAN {
     path(hlaFile)
 
     output:
-    tuple val(meta), path("*.xls"), emit: xls
-    tuple val(meta), path("*netmhcpan.output"), emit: netmhcpanoutput
-    tuple val(meta), path("*_out/*.mutated_sequences.fa"), emit: mutatedSequences
+    tuple val(meta), path("*.MUT.xls"),path("*.WT.xls"), emit: xls
+    tuple val(meta), path("*.MUT.netmhcpan.output"), path("*.WT.netmhcpan.output"), emit: netmhcpanoutput
+    tuple val(meta), path("*_out/*.mutated_sequences.fa"), path("*_out/*.WT_sequences.fa"), emit: fastaSequences
     path "versions.yml"           , emit: versions
 
     when:
@@ -58,7 +58,10 @@ process NETMHCPAN {
     output_hla="\${output_hla:1}"
 
     echo \$output_hla
-    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.xls > ${prefix}.netmhcpan.output
+    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.MUT.xls > ${prefix}.MUT.netmhcpan.output
+
+    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.WT.xls > ${prefix}.WT.netmhcpan.output
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

@@ -32,10 +32,13 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions,
-                    process.out.mutatedSequences).match()
-                },
-                { assert process.out.xls[0][1] ==~ ".*/test.xls" },
-                { assert process.out.netmhcpanoutput[0][1] ==~ ".*/test.netmhcpan.output" }
+                    process.out.fastaSequences,
+                    file(process.out.xls[0][1]).name,
+                    file(process.out.xls[0][2]).name,
+                    file(process.out.netmhcpanoutput[0][1]).name,
+                    file(process.out.netmhcpanoutput[0][2]).name
+                    ).match()
+                }
             )
         }
 

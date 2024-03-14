@@ -10,14 +10,19 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.mutated_sequences.fa:md5,87c87ae7ccecadfad00e0fc6c4c01498"
+                    "test.mutated_sequences.fa:md5,74efe5d1fdca3c02b07704515c47e7dd",
+                    "test.WT_sequences.fa:md5,9743be25e7cffcf726f51567340e1f25"
                 ]
-            ]
+            ],
+            "test.MUT.xls",
+            "test.WT.xls",
+            "test.MUT.netmhcpan.output",
+            "test.WT.netmhcpan.output"
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "23.10.0"
         },
-        "timestamp": "2024-03-14T11:14:28.637237"
+        "timestamp": "2024-03-14T15:45:55.929566"
     }
 }
