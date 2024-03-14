@@ -4,7 +4,7 @@ nextflow_process {
 
     name "Test Process vcf2maf"
     script "../main.nf"
-    process "GENOMENEXUS"
+    process "vcf2maf"
 
     tag "modules"
     tag "modules_nfcore"
