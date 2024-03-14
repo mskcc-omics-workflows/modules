@@ -1,25 +1,23 @@
 {
-    "testy": {
+    "test_neoantigen": {
         "content": [
-            {
-                "0": [
-                    
-                ],
-                "1": [
-                    
-                ],
-                "bam": [
-                    
-                ],
-                "versions": [
-                    
+            [
+                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.mutated_sequences.fa:md5,87c87ae7ccecadfad00e0fc6c4c01498"
                 ]
-            }
+            ]
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "23.10.0"
         },
-        "timestamp": "2024-03-06T11:43:23.800921"
+        "timestamp": "2024-03-14T11:14:28.637237"
     }
 }

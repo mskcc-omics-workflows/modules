@@ -140,7 +140,7 @@ def main():
                 out_fa.write('>' + mut.identifier_key + '_mut\n')
                 out_fa.write(mut.mt_altered_aa + '\n')
                 out_fa.write('>' + mut.identifier_key + '_WT\n')
-                out_fa.write(mut.wt_aa + '\n')
+                out_fa.write(mut.wt_altered_aa + '\n')
 
                 ### write out WT/MT CDS + AA for debugging purposes
                 debug_out_fa.write('>' + mut.identifier_key + '_mut\n')
