@@ -191,7 +191,7 @@ jobs:
         id: cat_file_module
         with:
           path: modules/msk/${{ matrix.tags }}/meta.yml
-      - run echo "${{ steps.cat_file_module.outputs.size} }}"
+      - run: echo "${{ steps.cat_file_module.outputs.size} }}"
       - name: Write Module yaml to temp
         #if: "${{ steps.cat_file_module.outputs.size} }}" != "0"
         id: write_yml_module
