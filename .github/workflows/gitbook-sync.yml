@@ -109,7 +109,7 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: feature/${{ matrix.tags }}
+          branch: develop
           path: modules/msk/${{ matrix.tags }}/meta.yml
       - name: Run convertor to generate md file for new module
         run: |
@@ -120,12 +120,12 @@ jobs:
         id: check_module_files
         uses: andstor/file-existence-action@v1
         with:
-          files: modules/${{ env.MD_NAME }}.md
+          files: modules/${{ matrix.tags }}.md
       - name: Add to SUMMARY for modules
         if: ${{ (steps.check_module_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](modules/${{ env.MD_NAME }}.md)" module > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ matrix.tags }}](modules/${{ matrix.tags }}.md)" module > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
@@ -191,7 +191,7 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_subworkflow
         with:
-          branch: feature/${{ matrix.tags }}
+          branch: develop
           path: subworkflows/msk/${{ matrix.tags }}/meta.yml
       - name: Run convertor to generate md file for new subworkflow
         run: |
@@ -201,12 +201,12 @@ jobs:
         id: check_subworkflow_files
         uses: andstor/file-existence-action@v1
         with:
-          files: subworkflows/${{ env.MD_NAME }}.md
+          files: subworkflows/${{ matrix.tags }}.md
       - name: Add to SUMMARY for subworkflows
         if: ${{ (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](subworkflows/${{ env.MD_NAME }}.md)" subworkflow > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ ${{ matrix.tags }} }}](subworkflows/${{ ${{ matrix.tags }} }}.md)" subworkflow > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
