@@ -108,7 +108,7 @@ jobs:
         with:
           path: modules/msk/${{ matrix.tags }}/meta.yml
       - name: Write Module yaml to temp
-        if: "${{ steps.cat_file_module.outputs.size }}" != "0"
+        if: {{ steps.cat_file_module.outputs.size }}
         id: write_yml_module
         run: |
           echo "${{ steps.cat_file_module.outputs.size }}"
@@ -117,12 +117,12 @@ jobs:
           SUMMARY_TYPE="module"
           SUBWORKFLOW=""
       - uses: jaywcjlove/github-action-read-file@main
-        if: "${{ steps.cat_file_module.outputs.size }}" == "0"
+        if: {{ !steps.cat_file_module.outputs.size }}
         id: cat_file_subworkflow
         with:
           path: subworkflows/msk/${{ matrix.tags }}/meta.yml
       - name: Write Subworkflow yaml to temp
-        if: "${{ steps.cat_file_subworkflow.outputs.size }}" != "0"
+        if: {{ steps.cat_file_subworkflow.outputs.size }}
         id: write_yml_subworkflow
         run: |
           echo "${{ steps.cat_file_subworkflow.outputs.size }}"
