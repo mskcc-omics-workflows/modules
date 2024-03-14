@@ -190,13 +190,28 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: feature/${{ matrix.tags }}
           path: modules/msk/${{ matrix.tags }}/meta.yml
-      - name: Run convertor to verify only for new module
+      - name: Write Module yaml to temp
+        if: "${{ steps.cat_file_module.outputs.size} }}" != "0"
+        id: write_yml_module
+        run: |
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="modules"
+      - uses: jaywcjlove/github-action-read-file@main
+        if: "${{ steps.cat_file_module.outputs.size} }}" == "0"
+        id: cat_file_subworkflow
+        with:
+          path: subworkflows/msk/${{ matrix.tags }}/meta.yml
+      - name: Write Subworkflow yaml to temp
+        if: "${{ steps.cat_file_subworkflow.outputs.size} }}" != "0"
+        id: write_yml_subworkflow
+        run: |
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="subworkflows"
+      - name: Run convertor to verify yaml file
         run: |
           echo ${{ matrix.tags }}
-          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json
 
   verify-markdown-subworkflow:
     runs-on: ubuntu-latest
