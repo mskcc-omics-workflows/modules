@@ -25,8 +25,8 @@ nextflow_process {
                 
                 input[0] = [
                     [ id:'tumor.normal', case_id:'tumor', control_id:'normal' ], // meta map
-                    file("/Users/ksivaprakasam/Downloads/C-2HXC96-P001-d01_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.DONOR22-TP_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.mutect.vcf"], checkIfExists: true),
-                    file("/Users/ksivaprakasam/Downloads/Homo_sapiens_assembly19.fasta"], checkIfExists: true)
+                    file("/Users/ksivaprakasam/Downloads/C-2HXC96-P001-d01_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.DONOR22-TP_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.mutect.vcf", checkIfExists: true),
+                    file("/Users/ksivaprakasam/Downloads/Homo_sapiens_assembly19.fasta", checkIfExists: true)
                     ]
                 """
             }
