@@ -2,7 +2,7 @@
 // nf-core modules test genomenexus
 nextflow_process {
 
-    name "Test Process GENOMENEXUS"
+    name "Test Process vcf2maf"
     script "../main.nf"
     process "GENOMENEXUS"
 
@@ -24,7 +24,7 @@ nextflow_process {
                 // TODO nf-core: define inputs of the process here. Example:
                 
                 input[0] = [
-                    [ tumor_id:'test', normal_id:'normal', ], // meta map
+                    [ id:'tumor.normal', case_id:'tumor', control_id:'normal' ], // meta map
                     file("/Users/ksivaprakasam/Downloads/C-2HXC96-P001-d01_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.DONOR22-TP_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.mutect.vcf"], checkIfExists: true),
                     file("/Users/ksivaprakasam/Downloads/Homo_sapiens_assembly19.fasta"], checkIfExists: true)
                     ]
