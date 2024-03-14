@@ -32,6 +32,7 @@ jobs:
         id: filter
         with:
           filters: "tests/config/pytest_modules.yml"
+          list-files: 'json'
           token: ""
 
   nf-test-candidates:
@@ -56,10 +57,11 @@ jobs:
         id: filter
         with:
           filters: ".github/tags.yml"
+          list-files: 'json'
           token: ""
 
-  new_module:
-    name: new module
+  new_feature:
+    name: new feature
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     needs: [pytest-candidates, nf-test-candidates]
@@ -68,14 +70,13 @@ jobs:
       matrix:
         tags:
           [
-            "${{ fromJson(needs.pytest-candidates.outputs.modules) }}",
             "${{ fromJson(needs.nf-test-candidates.outputs.modules) }}",
           ]
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "${{needs.pytest-changes.outputs.modules}}"
+      - run: "${{ fromJson(needs.pytest-candidates.outputs.modules) }}"
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: setup python
         uses: actions/setup-python@v4
@@ -104,110 +105,51 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          branch: develop
           path: modules/msk/${{ matrix.tags }}/meta.yml
+      - name: Write Module yaml to temp
+        if: "${{ steps.cat_file_module.outputs.size} }}" != "0"
+        id: write_yml_module
+        run: |
+          echo "${{ steps.cat_file_module.outputs.size} }}"
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="modules"
+          SUMMARY_TYPE="module"
+          SUBWORKFLOW=""
+      - uses: jaywcjlove/github-action-read-file@main
+        if: "${{ steps.cat_file_module.outputs.size} }}" == "0"
+        id: cat_file_subworkflow
+        with:
+          path: subworkflows/msk/${{ matrix.tags }}/meta.yml
+      - name: Write Subworkflow yaml to temp
+        if: "${{ steps.cat_file_subworkflow.outputs.size} }}" != "0"
+        id: write_yml_subworkflow
+        run: |
+          echo "${{ steps.cat_file_subworkflow.outputs.size} }}"
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="subworkflows"
+          SUMMARY_TYPE="subworkflow"
+          SUBWORKFLOW="--subworkflows"
       - name: Run convertor to generate md file for new module
         run: |
           echo ${{ matrix.tags }}
-          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/modules/meta-schema.json
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
       - name: Check file existence for modules
-        id: check_module_files
+        id: check_files
         uses: andstor/file-existence-action@v1
         with:
-          files: modules/${{ matrix.tags }}.md
-      - name: Add to SUMMARY for modules
-        if: ${{ (steps.check_module_files.outputs.files_exists == 'false') }}
+          branch: docs
+          files: ${{ env.FEATURE_TYPE}}/${{ env.MD_NAME }}.md
+      - name: Add to SUMMARY for new features
+        if: ${{ (steps.check_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](modules/${{ env.MD_NAME }}.md)" module > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
           message: "add doc for ${{ matrix.tags }}"
+          add: '["*/*.md --force", "SUMMARY.md --force"]'
           add: "*/*.md --force"
           cwd: "./"
-      - uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "update summary for ${{ matrix.tags }}"
-          pull: '--autostash'
-          add: "SUMMARY.md --force"
-          cwd: "./"
 
-  new_subworkflow:
-    name: new subworkflow
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    if: ${{ contains( github.event.head_commit.message, 'Subworkflow') }}
-    needs: [pytest-candidates, nf-test-candidates]
-    strategy:
-      fail-fast: false
-      matrix:
-        tags:
-          [
-            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
-            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
-          ]
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10" # install the python version needed
-      - uses: actions/checkout@v4
-        with:
-          ref: docs
-      - name: Rename md file
-        id: replace_slash
-        run: |
-          FRAGMENT="${{ matrix.tags }}"
-          MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
-          echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
-          echo "${MD_NAME}"
-      - name: Download convertor from yml to md
-        run: |
-          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
-          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
-      - name: Give convertor permissions
-        run: chmod +x yaml_to_md.py
-      - name: Install python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r ${{ github.workspace }}/requirements.txt
-      - uses: jaywcjlove/github-action-read-file@main
-        id: cat_file_subworkflow
-        with:
-          branch: develop
-          path: subworkflows/msk/${{ matrix.tags }}/meta.yml
-      - name: Run convertor to generate md file for new subworkflow
-        run: |
-          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./subworkflows/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/subworkflows/meta-schema.json --subworkflows
-      - name: Check file existence for subworkflows
-        id: check_subworkflow_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: subworkflows/${{ matrix.tags }}.md
-      - name: Add to SUMMARY for subworkflows
-        if: ${{ (steps.check_subworkflow_files.outputs.files_exists == 'false') }}
-        run: |
-          curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](subworkflows/${{ env.MD_NAME }}.md)" subworkflow > tmp_summary.md
-          mv tmp_summary.md SUMMARY.md
-      - uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "add doc for ${{ env.MD_NAME }}"
-          add: "*/*.md --force"
-          cwd: "./"
-      - uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "update summary for ${{ env.MD_NAME }}"
-          add: "SUMMARY.md --force"
-          cwd: "./"
