@@ -26,7 +26,7 @@ process vcf2maf {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-   java -jar /snpEff/SnpSift.jar annotate  ${annotate_vcf} ${input_vcf} > ${prefix}.vcf
+   java -jar /snpEff/SnpSift.jar annotate  ${annotate_vcf} ${input_vcf}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
