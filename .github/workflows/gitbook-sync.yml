@@ -4,8 +4,6 @@ name: Meta Yaml to MD
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main, develop]
   merge_group:
     types: [checks_requested]
     branches: [main]
