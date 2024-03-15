@@ -117,7 +117,7 @@ jobs:
           SUMMARY_TYPE="module"
           SUBWORKFLOW=""
       - uses: jaywcjlove/github-action-read-file@main
-        if: ${{ steps.cat_file_module.outputs.size == ''}}
+        if: ${{ steps.cat_file_module.outputs.size == '' }}
         id: cat_file_subworkflow
         with:
           path: subworkflows/msk/${{ matrix.tags }}/meta.yml
@@ -151,6 +151,5 @@ jobs:
           default_author: github_actions
           message: "add doc for ${{ matrix.tags }}"
           add: '["*/*.md --force", "SUMMARY.md --force"]'
-          add: "*/*.md --force"
           cwd: "./"
 

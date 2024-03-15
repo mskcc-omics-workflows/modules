@@ -212,6 +212,7 @@ jobs:
       - name: Run convertor to verify yaml file
         run: |
           echo ${{ matrix.tags }}
+          echo ${{ env.FEATURE_TYPE }}
           python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json
 
   pytest:
