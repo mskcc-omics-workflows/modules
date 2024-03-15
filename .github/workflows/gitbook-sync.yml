@@ -3,7 +3,7 @@ name: Meta Yaml to MD
 # Controls when the workflow will run
 on:
   push:
-    branches: [main, hotfix/gitbook-sync]
+    branches: [main]
   pull_request:
     branches: [main, develop]
   merge_group:

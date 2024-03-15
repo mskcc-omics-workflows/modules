@@ -1,7 +1,7 @@
 name: Run tests
 on:
   push:
-    branches: [main, hotfix/gitbook-sync]
+    branches: [main]
   pull_request:
     branches: [main, develop]
   merge_group:
