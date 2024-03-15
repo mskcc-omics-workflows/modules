@@ -23,10 +23,11 @@ process vcf2maf {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args ?: ''
     // customized arguments - value goes in the nextflow.config
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    // def prefix = task.ext.prefix ?: "${meta.id}"
+    def case_sample_name = task.ext.prefix ?: "${meta.case_id}"
 
     """
-   java -jar /snpEff/SnpSift.jar annotate  ${annotate_vcf} ${input_vcf}
+   java -jar /snpEff/SnpSift.jar annotate  ${annotate_vcf} ${input_vcf} > ${case_sample_name}.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
