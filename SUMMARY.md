@@ -14,4 +14,3 @@
 * [snppileup](modules/snppileup.md)
 ## Subworkflows
 * [bwa_markdup_bqsr](subworkflows/bwa_markdup_bqsr.md)
-* [subworkflows_bwa_markdup_bqsr](subworkflows/subworkflows_bwa_markdup_bqsr.md)
