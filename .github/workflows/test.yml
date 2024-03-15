@@ -187,10 +187,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r ${{ github.workspace }}/requirements.txt
+          SW_NAME="${{ matrix.tags }}"
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
-          path: modules/msk/${{ matrix.tags }}/meta.yml
+          path: modules/msk/${{ env.SW_NAME }}/meta.yml
       - run: echo "${{ steps.cat_file_module.outputs.size }}"
       - name: Write Module yaml to temp
         if: ${{ steps.cat_file_module.outputs.size }}
@@ -198,11 +199,21 @@ jobs:
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           FEATURE_TYPE="modules"
+      - name: Update subworkflow ${{ matrix.tags }}
+        if: ${{ startsWith(matrix.tags, 'subworkflows/') }}
+        run: |
+          MATRIX_FRAGMENT="${{ matrix.tags }}"
+          SW_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows/\///g')
+      - name: Update module ${{ matrix.tags }}
+        if: ${{ startsWith(matrix.tags, 'modules/') }}
+        run: |
+          MATRIX_FRAGMENT="${{ matrix.tags }}"
+          SW_NAME=$(echo $MATRIX_FRAGMENT | sed 's/modules/\///g')
       - uses: jaywcjlove/github-action-read-file@main
         if: ${{ steps.cat_file_module.outputs.size == '' }}
         id: cat_file_subworkflow
         with:
-          path: subworkflows/msk/${{ matrix.tags }}/meta.yml
+          path: subworkflows/msk/${{ env.SW_NAME }}/meta.yml
       - name: Write Subworkflow yaml to temp
         if: ${{ steps.cat_file_subworkflow.outputs.size }}
         id: write_yml_subworkflow
