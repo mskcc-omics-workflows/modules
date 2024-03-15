@@ -187,7 +187,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r ${{ github.workspace }}/requirements.txt
-          SW_NAME=${{ matrix.tags }}
+      - name: Update ${{ matrix.tags }}
+        run: |
+          MATRIX_FRAGMENT="${{ matrix.tags }}"
+          SW_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows/\///g' | sed 's/modules/\///g')
+          echo "SW_NAME=$SW_NAME" >> $GITHUB_ENV
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
@@ -199,16 +203,7 @@ jobs:
         run: |
           echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
           FEATURE_TYPE="modules"
-      - name: Update subworkflow ${{ matrix.tags }}
-        if: ${{ startsWith(matrix.tags, 'subworkflows/') }}
-        run: |
-          MATRIX_FRAGMENT="${{ matrix.tags }}"
-          SW_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows/\///g')
-      - name: Update module ${{ matrix.tags }}
-        if: ${{ startsWith(matrix.tags, 'modules/') }}
-        run: |
-          MATRIX_FRAGMENT="${{ matrix.tags }}"
-          SW_NAME=$(echo $MATRIX_FRAGMENT | sed 's/modules/\///g')
+          echo "FEATURE_TYPE=$FEATURE_TYPE" >> $GITHUB_ENV
       - uses: jaywcjlove/github-action-read-file@main
         if: ${{ steps.cat_file_module.outputs.size == '' }}
         id: cat_file_subworkflow
@@ -220,6 +215,7 @@ jobs:
         run: |
           echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
           FEATURE_TYPE="subworkflows"
+          echo "FEATURE_TYPE=$FEATURE_TYPE" >> $GITHUB_ENV
       - name: Run convertor to verify yaml file
         run: |
           echo ${{ matrix.tags }}
