@@ -32,7 +32,6 @@ jobs:
         id: filter
         with:
           filters: "tests/config/pytest_modules.yml"
-          list-files: 'json'
           token: ""
 
   nf-test-candidates:
@@ -57,7 +56,6 @@ jobs:
         id: filter
         with:
           filters: ".github/tags.yml"
-          list-files: 'json'
           token: ""
 
   new_feature:
@@ -71,6 +69,7 @@ jobs:
       matrix:
         tags:
           [
+            "${{ fromJson(needs.pytest-candidates.outputs.modules) }}",
             "${{ fromJson(needs.nf-test-candidates.outputs.modules) }}",
           ]
 
@@ -163,4 +162,3 @@ jobs:
           message: "add doc for ${{ matrix.tags }}"
           add: '["*/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
-
