@@ -85,7 +85,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: docs
-      - name: Update ${{ matrix.tags }}
+      - name: Update name of ${{ matrix.tags }}
         run: |
           MATRIX_FRAGMENT="${{ matrix.tags }}"
           TEMP_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows\///g')
