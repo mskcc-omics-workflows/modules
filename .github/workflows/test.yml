@@ -190,7 +190,8 @@ jobs:
       - name: Update ${{ matrix.tags }}
         run: |
           MATRIX_FRAGMENT="${{ matrix.tags }}"
-          SW_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows/\///g' | sed 's/modules/\///g')
+          TEMP_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows\///g')
+          SW_NAME=$(echo $TEMP_NAME | sed 's/modules\///g')
           echo "SW_NAME=$SW_NAME" >> $GITHUB_ENV
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
