@@ -1,23 +1,20 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "netmhcpan"
-## TODO nf-core: Add a description of the module and list keywords
 description: write your description here
 keywords:
-  - sort
-  - example
+  - immune
+  - netmhcpan
   - genomics
 tools:
   - "netmhcpan":
-      ## TODO nf-core: Add a description and other details for the software below
-      description: ""
-      homepage: ""
-      documentation: ""
+      description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       tool_dev_url: ""
       doi: ""
       licence: 
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
   # Only when we have meta
   - meta:
@@ -25,14 +22,18 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
-  
-  ## TODO nf-core: Delete / customise this example input
-  - bam:
-      type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
 
-## TODO nf-core: Add a description of all of the variables used as output
+  - inputMaf:
+      type: file
+      description: Maf outputtted by Tempo that was run through phyloWGS
+      pattern: "*.{maf}"
+
+  - hlaFile:
+      type: file
+      description: HLA tsv outputtted by Polysolver
+      pattern: "winners.{tsv}"
+
+
 output:
   #Only when we have meta
   - meta:
@@ -45,11 +46,36 @@ output:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
-  - bam:
+
+  - MUTnetmhcpanXLS:
+    type: file
+    description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
+    pattern: "*.MUT.netmhcpan.output"
+
+  - WTnetmhcpanXLS:
+    type: file
+    description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+    pattern: "*.WT.xls"
+
+  - MUTnetmhcpanoutput:
+    type: file
+    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
+    pattern: "*.MUT.xls"
+
+  - WTnetmhcpanoutput:
+    type: file
+    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+    pattern: "*.WT.netmhcpan.output"
+
+  - MUTfasta:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: multi fasta file containing many sequences of mutated neoantigens 
+      pattern: "*_out/*.mutated_sequences.fa"
+
+  - WTfasta:
+      type: file
+      description: multi fasta file containing many sequences of wild type neoantigens 
+      pattern: "*_out/*.WT_sequences.fa"
 
 authors:
   - "@johnoooh"
