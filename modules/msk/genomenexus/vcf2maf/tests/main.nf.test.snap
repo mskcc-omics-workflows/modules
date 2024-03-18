@@ -1,0 +1,68 @@
+{
+    "vcf2maf - test": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.maf:md5,548723a34b74a614b654bc8abff855eb"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.maf:md5,548723a34b74a614b654bc8abff855eb"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-18T14:27:10.784961"
+    },
+    "vcf2maf - test - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-18T14:27:17.087584"
+    }
+}
