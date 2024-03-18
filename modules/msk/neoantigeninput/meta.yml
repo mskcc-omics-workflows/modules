@@ -42,12 +42,21 @@ input:
       description: Folder of mutations in trees output by PhyloWGS
       pattern: "./"
 
+  - mutNetMHCpan:
+    type: file
+    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
+    pattern: "./"
+
+  - mutNetMHCpan:
+    type: file
+    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+    pattern: "./"
+
   - hlaFile:
       type: file
       description: HLA tsv outputtted by Polysolver
       pattern: "winners.{tsv}"
 
-## TODO nf-core: Add a description of all of the variables used as output
 output:
   - meta:
       type: map
@@ -63,6 +72,16 @@ output:
       type: file
       description: output combined Json ready for input into the neoantigen pipeline
       pattern: "*.{json}"
+
+  - mutNetMHCpan:
+    type: file
+    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+    pattern: "./"
+
+  - hlaFile:
+      type: file
+      description: HLA tsv outputtted by Polysolver
+      pattern: "winners.{tsv}"
 
 authors:
   - "@johnoooh"
