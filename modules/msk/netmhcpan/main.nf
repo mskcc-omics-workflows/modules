@@ -51,6 +51,7 @@ process NETMHCPAN {
         # Replace the first '_', the next '_', and remaining '_' with '-', '*', and ':', respectively
         modified_value=\$(echo "\$truncated_value" | tr '[:lower:]' '[:upper:]' | sed 's/_/-/; s/_//; s/_/:/g')
         output_hla+=",\$modified_value"
+        
     done
 
     # Remove leading comma
