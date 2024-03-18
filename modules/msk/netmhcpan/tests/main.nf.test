@@ -8,7 +8,6 @@ nextflow_process {
     tag "modules_nfcore"
     tag "netmhcpan"
 
-    // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
     test("test_neoantigen") {
 
         when {
