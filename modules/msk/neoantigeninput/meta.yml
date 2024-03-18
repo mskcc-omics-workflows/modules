@@ -73,15 +73,6 @@ output:
       description: output combined Json ready for input into the neoantigen pipeline
       pattern: "*.{json}"
 
-  - mutNetMHCpan:
-    type: file
-    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
-    pattern: "./"
-
-  - hlaFile:
-      type: file
-      description: HLA tsv outputtted by Polysolver
-      pattern: "winners.{tsv}"
 
 authors:
   - "@johnoooh"
