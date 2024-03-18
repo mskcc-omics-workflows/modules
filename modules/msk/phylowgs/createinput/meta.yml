@@ -1,0 +1,43 @@
+---
+name: "phylowgs_createinput"
+description: Create input files for phylowgs
+keywords:
+  - phylowgs
+  - cnvs
+  - parser
+tools:
+  - "phylowgs_createinput":
+      description: "create phylowgs expected input"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
+      tool_dev_url: "https://github.com/mskcc/phylowgs"
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - cnv:
+      type: file
+      description: converted cnv file for phylowgs
+      pattern: "*.txt"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - phylowgsinput:
+      type: file
+      description: cnv_data.txt and ssm_data.txt
+      pattern: "*.txt"
+
+authors:
+  - "@pintoa1-mskcc"
+maintainers:
+  - "@pintoa1-mskcc"

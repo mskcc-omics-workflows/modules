@@ -1,0 +1,33 @@
+{
+    "phylowgs_parsecnvs - txt": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnvs.txt:md5,a2073057a3fe3ffa83ae3c6a6f00d4ab"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,df60c84922cc724370c4d4e8ecc76d48"
+                ],
+                "cnv": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnvs.txt:md5,a2073057a3fe3ffa83ae3c6a6f00d4ab"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,df60c84922cc724370c4d4e8ecc76d48"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-12T14:19:07.098378"
+    }
+}
