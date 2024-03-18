@@ -1,0 +1,39 @@
+{
+    "phylowgs_multievolve - zip": {
+        "content": [
+            "trees.zip"
+        ],
+        "timestamp": "2024-03-12T16:00:02.674725"
+    },
+    "phylowgs_multievolve - zip - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "trees.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c59eb3a1bb1625bd73cc04b6a61fc64c"
+                ],
+                "trees": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "trees.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c59eb3a1bb1625bd73cc04b6a61fc64c"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-12T16:00:08.427001"
+    }
+}

@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, neoantigen]
   merge_group:
     types: [checks_requested]
     branches: [main]
@@ -286,6 +286,14 @@ jobs:
             tags: snppileup
           - profile: "conda"
             tags: mutect1
+          - profile: "conda"
+            tags: phylowgs/createinput
+          - profile: "conda"
+            tags: phylowgs/parsecnvs
+          - profile: "conda"
+            tags: phylowgs/multievolve
+          - profile: "conda"
+            tags: phylowgs/writeresults
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
