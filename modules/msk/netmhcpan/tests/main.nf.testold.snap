@@ -10,8 +10,8 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.mutated_sequences.fa:md5,a998392759482f8a1c63c795cfd9e399",
-                    "test.WT_sequences.fa:md5,27e677ffa032a87934df4c62e9f15357"
+                    "test.mutated_sequences.fa:md5,74efe5d1fdca3c02b07704515c47e7dd",
+                    "test.WT_sequences.fa:md5,9743be25e7cffcf726f51567340e1f25"
                 ]
             ],
             "test.MUT.xls",
@@ -23,6 +23,6 @@
             "nf-test": "0.8.4",
             "nextflow": "23.10.0"
         },
-        "timestamp": "2024-03-17T22:17:33.67688"
+        "timestamp": "2024-03-17T20:33:01.532356"
     }
 }
