@@ -7,13 +7,13 @@ process NEOANTIGENINPUT {
     //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://orgeraj/neoantigeninputs:latest':
-        'docker.io/orgeraj/neoantigeninputs:latest' }"
+        'docker://mskcc/neoantigeninputs:latest':
+        'docker.io/mskcc/neoantigeninputs:latest' }"
 
     input:
     tuple val(meta), path(inputMaf)
     tuple path(phyloWGSsumm), path(phyloWGSmut), path(phyloWGSfolder)
-    tuple path(meta2), path(mutNetMHCpan), path(wtNetMHCpan)
+    tuple val(meta2), path(mutNetMHCpan), path(wtNetMHCpan)
     path(hlaFile)
 
     output:

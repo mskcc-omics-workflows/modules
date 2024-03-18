@@ -79,7 +79,7 @@ def main(args):
     
     chrom_pos_dict = {}  # Just used for mapping right now
     mutation_list = []  # Used as the output for mutations 
-    mutation_dict = [] # used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
+    mutation_dict = {} # used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
     
     
     mafdf = pd.read_csv(args.maf_file, delimiter='\t')
@@ -195,10 +195,10 @@ def main(args):
     netMHCpan_out_reformat(args.netMHCpan_MUT_input,True)
     netMHCpan_out_reformat(args.netMHCpan_WT_input,False)
     
+    print(mutation_dict)
     
-    
-    neoantigen_mut_in = pd.read_excel('netmHCpanoutput.MUT.tsv')
-    neoantigen_WT_in = pd.read_excel('netmHCpanoutput.WT.tsv')
+    neoantigen_mut_in = pd.read_csv('netmHCpanoutput.MUT.tsv',sep='\t')
+    neoantigen_WT_in = pd.read_csv('netmHCpanoutput.WT.tsv',sep='\t')
     
     def find_first_difference_index(str1, str2):
         min_length = min(len(str1), len(str2))
@@ -208,30 +208,31 @@ def main(args):
         # If no difference found in the common length, return the length of the shorter string
         return min_length
 
+    
     for (index_mut, row_mut), (index_WT, row_WT)in zip(neoantigen_mut_in.iterrows(), neoantigen_WT_in.iterrows()):
         #affinity cutoff... should it be variable configable?
         if row_mut['affinity']<500:
             
-            identity_no_label = row_mut['Identity'].split('_')[:-2]
-            
-            print(identity_no_label)
+
             
             
             mut_pos = find_first_difference_index(row_mut['peptide'],row_WT['peptide'])+1
             peplen = len(row_mut['peptide'])
-            mutID = mutation_dict[identity_no_label] #this is temporary it should be this format 1_154378139_C_G with the mutation in the name 
+            if row_mut['Identity'][-1] == '_':
+                row_mut['Identity'][:-1]
+            
             neo_dict = {
-            "id": mutID + '_' + str(mut_pos) + str(peplen) + '_' + row_mut['MHC'].split('-')[1].replace(':','').replace('*','') ,
-            "mutation_id": mutID,
+            "id": row_mut['Identity'] + '_' + str(peplen) + '_' + row_mut['MHC'].split('-')[1].replace(':','').replace('*','') ,
+            "mutation_id": row_mut['Identity'],
             "HLA_gene_id": row_mut['MHC'],
-            "sequence": row_mut['Peptide'],
-            "WT_sequence": row_WT['Peptide'],
+            "sequence": row_mut['peptide'],
+            "WT_sequence": row_WT['peptide'],
             "mutated_position": mut_pos,
             "Kd": float(row_mut['affinity']),
             "KdWT": float(row_WT['affinity'])
             }
-        
-        print(neo_dict) 
+            outer_dict['neoantigens'].append(neo_dict)
+        # print(neo_dict) 
         
         
         
