@@ -40,6 +40,14 @@ nextflow_process {
                     ]
 
                 input[2] = [file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)]
+                
+                input[3] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WTnetMHCpan'], checkIfExists: true)
+                    ]
+                
+
                 """
             }
         }

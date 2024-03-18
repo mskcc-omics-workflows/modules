@@ -13,6 +13,7 @@ process NEOANTIGENINPUT {
     input:
     tuple val(meta), path(inputMaf)
     tuple path(phyloWGSsumm), path(phyloWGSmut), path(phyloWGSfolder)
+    tuple path(meta2), path(mutNetMHCpan), path(wtNetMHCpan)
     path(hlaFile)
 
     output:
@@ -47,6 +48,8 @@ process NEOANTIGENINPUT {
         --tree_directory ${phyloWGSfolder} \
         --id ${id} --patient_id ${patientid} \
         --cohort ${cohort} --HLA_genes ${hlaFile} \
+        --netMHCpan_MUT_input ${mutNetMHCpan} \
+        --netMHCpan_WT_input ${wtNetMHCpan}
         ${args}
 
         cat <<-END_VERSIONS > versions.yml

@@ -77,8 +77,9 @@ def main(args):
         
         
     
-    chrom_pos_dict = {}
-    mutation_list = []
+    chrom_pos_dict = {}  # Just used for mapping right now
+    mutation_list = []  # Used as the output for mutations 
+    mutation_dict = [] # used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
     
     
     mafdf = pd.read_csv(args.maf_file, delimiter='\t')
@@ -100,6 +101,9 @@ def main(args):
                 mutation_list.append({'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense})
+                
+                mutation_dict[ str(row['Chromosome'])+'_'+str(row['Start_Position'])] = str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2']
+                
             elif row['Variant_Type'] == 'DEL':
                 chrom_pos_dict[str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D']= {'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D',
                                                                                 'gene': row['Hugo_Symbol'],
@@ -108,7 +112,8 @@ def main(args):
                 mutation_list.append({'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+'D',
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense})
-                
+                mutation_dict[ str(row['Chromosome'])+'_'+str(row['Start_Position'])] = str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2']
+            
             elif row['Variant_Type'] == 'INS':
                 chrom_pos_dict[str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+'I'+'_'+row['Tumor_Seq_Allele2']]= {'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
@@ -117,7 +122,7 @@ def main(args):
                 mutation_list.append({'id': str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+'I'+'_'+row['Tumor_Seq_Allele2'],
                                                                                 'gene': row['Hugo_Symbol'],
                                                                                 "missense": missense})
-                
+                mutation_dict[ str(row['Chromosome'])+'_'+str(row['Start_Position'])] = str(row['Chromosome'])+'_'+str(row['Start_Position'])+'_'+row['Reference_Allele']+'_'+row['Tumor_Seq_Allele2']
 
 
         
@@ -185,6 +190,58 @@ def main(args):
     outer_dict['patient'] = args.patient_id
     outer_dict['cohort']  = args.cohort
     
+    outer_dict['neoantigens'] = []
+    
+    netMHCpan_out_reformat(args.netMHCpan_MUT_input,True)
+    netMHCpan_out_reformat(args.netMHCpan_WT_input,False)
+    
+    
+    
+    neoantigen_mut_in = pd.read_excel('netmHCpanoutput.MUT.tsv')
+    neoantigen_WT_in = pd.read_excel('netmHCpanoutput.WT.tsv')
+    
+    def find_first_difference_index(str1, str2):
+        min_length = min(len(str1), len(str2))
+        for i in range(min_length):
+            if str1[i] != str2[i]:
+                return i
+        # If no difference found in the common length, return the length of the shorter string
+        return min_length
+
+    for (index_mut, row_mut), (index_WT, row_WT)in zip(neoantigen_mut_in.iterrows(), neoantigen_WT_in.iterrows()):
+        #affinity cutoff... should it be variable configable?
+        if row_mut['affinity']<500:
+            
+            identity_no_label = row_mut['Identity'].split('_')[:-2]
+            
+            print(identity_no_label)
+            
+            
+            mut_pos = find_first_difference_index(row_mut['peptide'],row_WT['peptide'])+1
+            peplen = len(row_mut['peptide'])
+            mutID = mutation_dict[identity_no_label] #this is temporary it should be this format 1_154378139_C_G with the mutation in the name 
+            neo_dict = {
+            "id": mutID + '_' + str(mut_pos) + str(peplen) + '_' + row_mut['MHC'].split('-')[1].replace(':','').replace('*','') ,
+            "mutation_id": mutID,
+            "HLA_gene_id": row_mut['MHC'],
+            "sequence": row_mut['Peptide'],
+            "WT_sequence": row_WT['Peptide'],
+            "mutated_position": mut_pos,
+            "Kd": float(row_mut['affinity']),
+            "KdWT": float(row_WT['affinity'])
+            }
+        
+        print(neo_dict) 
+        
+        
+        
+        
+
+    
+    
+    
+    
+    
 
     outjson = args.patient_id +'_' + args.id +'_' +'.json'
     with open(outjson, 'w') as tstout:
@@ -192,6 +249,37 @@ def main(args):
         # tstout.write(json.dumps(outer_dict))
     
 
+def netMHCpan_out_reformat(netMHCpanoutput,mut):
+    file_li = []
+    if mut==True:
+        outfilename='netmHCpanoutput.MUT.tsv'
+    else:
+        outfilename='netmHCpanoutput.WT.tsv'
+    with open(netMHCpanoutput, 'r') as file:
+        # data = file.read()
+        for line in file:
+                # Remove leading whitespace
+                line = line.lstrip()
+                print(line)
+                # Check if the line starts with a digit
+                if line == '':
+                    pass
+                elif line[0].isdigit():
+                    # Print or process the line as needed
+                    match=line.strip().replace(' <= WB','').replace(' <= SB','')  # strip to remove leading/trailing whitespace
+                    splititem = match.split()
+                    tab_separated_line = '\t'.join(splititem)
+                    file_li.append(tab_separated_line)
+                    
+                    
+    with open(outfilename, 'w') as file:
+        file.writelines('pos\tMHC\tpeptide\tcore\tOF\tGp\tGl\tIp\tIl\ticore\tIdentity\tscore_el\trank_el\tscore_ba\trank_ba\taffinity\n')
+        for item in file_li:
+            file.writelines(item)
+            file.writelines('\n')
+            
+          
+            
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
@@ -203,6 +291,9 @@ def parse_args():
     parser.add_argument("--patient_id", required=True, help="Patient ID")
     parser.add_argument("--cohort", required=True, help="Cohort")
     parser.add_argument("--HLA_genes", required=True, help="Path to the file containing HLA genes")
+    parser.add_argument("--netMHCpan_MUT_input", required=True, help="Path to the file containing MUT netmhcpan results")
+    parser.add_argument("--netMHCpan_WT_input", required=True, help="Path to the file containing WT netmhcpan results")
+
     parser.add_argument("--patient_data_file", help="Path to the optional file containing status, overall survival, and PFS")
     parser.add_argument('-v', '--version', action='version', version='%(prog)s 1.0')
 
@@ -219,7 +310,10 @@ def print_help():
     print("  --patient_id\t\tPatient ID")
     print("  --cohort\t\tCohort")
     print("  --HLA_genes\t\tPath to the file containing HLA genes")
+    print("  --netMHCpan_MUT_input\t\tPath to the file containing  MUT netmhcpan results")
+    print("  --netMHCpan_WT_input\t\tPath to the file containing  WT netmhcpan results")
     print("  --patient_data_file\t(Optional) Path to the optional file containing status, overall survival, and PFS")
+    
 
 if __name__ == "__main__":
     args = parse_args()
@@ -231,6 +325,7 @@ if __name__ == "__main__":
     print("Patient ID:", args.patient_id)
     print("Cohort:", args.cohort)
     print("HLA Genes File:", args.HLA_genes)
+    print("netMHCpan Files:", args.netMHCpan_MUT_input, args.netMHCpan_WT_input)
     if args.patient_data_file:
         print("patient_data_file File:", args.patient_data_file)
         
