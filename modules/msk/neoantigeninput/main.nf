@@ -2,8 +2,8 @@ process NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigeninputs:latest':
-        'docker.io/mskcc/neoantigeninputs:latest' }"
+        'docker://mskcc/neoantigeninputs:1.0.0':
+        'docker.io/mskcc/neoantigeninputs:1.0.0' }"
 
     input:
     tuple val(meta), path(inputMaf)
