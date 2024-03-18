@@ -11,11 +11,9 @@ keywords:
   - genomics
 tools:
   - "genomenexus":
-      
       description: "DSL2 module to perform a native conversion of VCF file type to MAF file type using the genomenexus suite of conversion and annotation tools."
       homepage: "https://github.com/genome-nexus"
-      documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md" 
-
+      documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
 
 input:
   # Only when we have meta
@@ -24,13 +22,11 @@ input:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', case_id:'tumor', control_id:'normal' ]`
-  
- 
+
   - vcf:
       type: file
       description: input VCF file
       pattern: "*.{vcf}"
-
 
 output:
   #Only when we have meta
@@ -39,12 +35,12 @@ output:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'test', case_id:'tumor', control_id:'normal' ]`
-  
+
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  
+
   - maf:
       type: file
       description: Output MAF file
