@@ -5,7 +5,7 @@ nextflow_process {
     process "NEOANTIGENINPUT"
 
     tag "modules"
-    tag "modules_msk"
+    tag "modules_nfcore"
     tag "neoantigeninput"
 
     test("neoantigen") {

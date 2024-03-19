@@ -9,6 +9,7 @@ keywords:
 tools:
   - neoantigeninput:
       description: "This module take several inputs to the Lukza neoantigen pipeline and combines them into a single json file ready for input into their pipeline"
+      documentation: "Use /usr/bin/eval_phyloWGS.py -h for Documentation"
       licence: ["MIT"]
 
 input:
