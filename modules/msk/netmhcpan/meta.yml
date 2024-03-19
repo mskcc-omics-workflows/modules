@@ -13,7 +13,7 @@ tools:
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       tool_dev_url: ""
       doi: ""
-      licence:
+      licence: ["MIT"]
 
 input:
   # Only when we have meta
