@@ -18,7 +18,7 @@ tools:
 input:
   - meta:
       type: map
-      description: |
+      description: 
         Groovy Map containing sample information.  Maybe cohort and patient_id as well? 
         e.g. `[ id:'sample1', single_end:false ]`
   
@@ -43,14 +43,16 @@ input:
       pattern: "./"
 
   - mutNetMHCpan:
-    type: file
+      type: file
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
+      pattern: ""./"
     description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
-    pattern: "./"
+    pattern: 
 
   - mutNetMHCpan:
-    type: file
-    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
-    pattern: "./"
+      type: file
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+      pattern: "./"
 
   - hlaFile:
       type: file
