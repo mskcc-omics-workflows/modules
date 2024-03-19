@@ -13,7 +13,7 @@ tools:
       documentation: ""
       tool_dev_url: ""
       doi: ""
-      licence:["MIT"]
+      licence: ["MIT"]
 
 input:
   - meta:
