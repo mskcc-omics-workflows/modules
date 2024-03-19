@@ -11,8 +11,6 @@ tools:
       description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
       homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      tool_dev_url: ""
-      doi: ""
       licence: ["MIT"]
 
 input:
