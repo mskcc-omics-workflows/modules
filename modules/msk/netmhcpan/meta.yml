@@ -13,7 +13,7 @@ tools:
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       tool_dev_url: ""
       doi: ""
-      licence: 
+      licence:
 
 input:
   # Only when we have meta
@@ -33,7 +33,6 @@ input:
       description: HLA tsv outputtted by Polysolver
       pattern: "winners.{tsv}"
 
-
 output:
   #Only when we have meta
   - meta:
@@ -41,7 +40,7 @@ output:
       description: |
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
-  
+
   - versions:
       type: file
       description: File containing software versions
@@ -49,32 +48,32 @@ output:
 
   - MUTnetmhcpanXLS:
       type: file
-      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
       pattern: "*.MUT.netmhcpan.output"
 
   - WTnetmhcpanXLS:
       type: file
-      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
       pattern: "*.WT.xls"
 
   - MUTnetmhcpanoutput:
       type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
       pattern: "*.MUT.xls"
 
   - WTnetmhcpanoutput:
       type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
       pattern: "*.WT.netmhcpan.output"
 
   - MUTfasta:
       type: file
-      description: multi fasta file containing many sequences of mutated neoantigens 
+      description: multi fasta file containing many sequences of mutated neoantigens
       pattern: "*_out/*.mutated_sequences.fa"
 
   - WTfasta:
       type: file
-      description: multi fasta file containing many sequences of wild type neoantigens 
+      description: multi fasta file containing many sequences of wild type neoantigens
       pattern: "*_out/*.WT_sequences.fa"
 
 authors:
