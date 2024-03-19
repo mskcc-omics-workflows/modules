@@ -18,7 +18,7 @@ tools:
 input:
   - meta:
       type: map
-      description: 
+      description: |
         Groovy Map containing sample information.  Maybe cohort and patient_id as well? 
         e.g. `[ id:'sample1', single_end:false ]`
   
