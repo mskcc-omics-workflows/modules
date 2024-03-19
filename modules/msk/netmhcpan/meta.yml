@@ -48,24 +48,24 @@ output:
       pattern: "versions.yml"
 
   - MUTnetmhcpanXLS:
-    type: file
-    description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
-    pattern: "*.MUT.netmhcpan.output"
+      type: file
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
+      pattern: "*.MUT.netmhcpan.output"
 
   - WTnetmhcpanXLS:
-    type: file
-    description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
-    pattern: "*.WT.xls"
+      type: file
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+      pattern: "*.WT.xls"
 
   - MUTnetmhcpanoutput:
-    type: file
-    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
-    pattern: "*.MUT.xls"
+      type: file
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens 
+      pattern: "*.MUT.xls"
 
   - WTnetmhcpanoutput:
-    type: file
-    description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
-    pattern: "*.WT.netmhcpan.output"
+      type: file
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens 
+      pattern: "*.WT.netmhcpan.output"
 
   - MUTfasta:
       type: file
