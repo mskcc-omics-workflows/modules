@@ -298,6 +298,8 @@ jobs:
             tags: netmhcpan
           - profile: "conda"
             tags: neoantigeninput
+          - profile: "conda"
+            tags: ignore_conda
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
