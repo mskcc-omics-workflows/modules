@@ -295,6 +295,8 @@ jobs:
           - profile: "conda"
             tags: phylowgs/writeresults
           - profile: "conda"
+            tags: netmhcpan
+          - profile: "conda"
             tags: neoantigeninput
     env:
       NXF_ANSI_LOG: false

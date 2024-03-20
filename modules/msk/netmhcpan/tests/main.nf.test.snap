@@ -1,0 +1,28 @@
+{
+    "test_neoantigen": {
+        "content": [
+            [
+                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.mutated_sequences.fa:md5,a998392759482f8a1c63c795cfd9e399",
+                    "test.WT_sequences.fa:md5,27e677ffa032a87934df4c62e9f15357"
+                ]
+            ],
+            "test.MUT.xls",
+            "test.WT.xls",
+            "test.MUT.netmhcpan.output",
+            "test.WT.netmhcpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.0"
+        },
+        "timestamp": "2024-03-17T22:17:33.67688"
+    }
+}
