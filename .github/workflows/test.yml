@@ -294,6 +294,8 @@ jobs:
             tags: phylowgs/multievolve
           - profile: "conda"
             tags: phylowgs/writeresults
+          - profile: "conda"
+            tags: netmhcpan
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
