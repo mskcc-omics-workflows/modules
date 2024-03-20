@@ -9,7 +9,6 @@ nextflow_process {
     tag "modules_msk"
     tag "neoantigenediting"
     tag "neoantigenediting/computeFitness"
-    tag "ignore_conda"
 
     test("neoantigenediting_computeFitness - json") {
 
