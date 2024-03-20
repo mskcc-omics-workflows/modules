@@ -1,0 +1,39 @@
+{
+    "neoantigenediting_aligntoIEDB - json - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "iedb_alignments_example.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,56650cd755164b7687e8a74b28eb058c"
+                ],
+                "iedb_alignment": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "iedb_alignments_example.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,56650cd755164b7687e8a74b28eb058c"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-20T16:22:22.308262"
+    },
+    "neoantigenediting_aligntoIEDB - json": {
+        "content": [
+            "iedb_alignments_3-OLTS.txt"
+        ],
+        "timestamp": "2024-03-20T16:22:16.805838"
+    }
+}
