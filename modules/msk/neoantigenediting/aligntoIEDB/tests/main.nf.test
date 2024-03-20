@@ -9,7 +9,6 @@ nextflow_process {
     tag "modules_msk"
     tag "neoantigenediting"
     tag "neoantigenediting/aligntoIEDB"
-    tag "ignore_conda"
 
     test("neoantigenediting_aligntoIEDB - json") {
 

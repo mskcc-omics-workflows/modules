@@ -299,7 +299,7 @@ jobs:
           - profile: "conda"
             tags: neoantigeninput
           - profile: "conda"
-            tags: ignore_conda
+            tags: neoantigenediting/aligntoIEDB
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
