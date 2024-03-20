@@ -1,34 +1,9 @@
 {
     "neoantigenediting_computeFitness - json": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "3_OLTS_primary_tumor_annotated.json:md5,0f0e50ba3cb33df2bcd5e39cf901dc2e"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,e535d03b1366a3bee2e96c63a942b180"
-                ],
-                "iedb_alignment": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "3_OLTS_primary_tumor_annotated.json:md5,0f0e50ba3cb33df2bcd5e39cf901dc2e"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,e535d03b1366a3bee2e96c63a942b180"
-                ]
-            }
+            "3_OLTS_primary_tumor_annotated.json"
         ],
-        "timestamp": "2024-03-20T15:42:51.713144"
+        "timestamp": "2024-03-20T15:58:08.710924"
     },
     "neoantigenediting_computeFitness - json - stub": {
         "content": [
@@ -45,7 +20,7 @@
                 "1": [
                     "versions.yml:md5,e535d03b1366a3bee2e96c63a942b180"
                 ],
-                "iedb_alignment": [
+                "annotated_output": [
                     [
                         {
                             "id": "test",
@@ -59,6 +34,6 @@
                 ]
             }
         ],
-        "timestamp": "2024-03-20T15:42:57.307963"
+        "timestamp": "2024-03-20T15:58:14.290682"
     }
 }

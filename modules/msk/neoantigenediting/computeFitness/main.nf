@@ -10,7 +10,7 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
     tuple val(meta),  path(patient_data)
     tuple val(meta1), path(alignment_file)
     output:
-    tuple val(meta), path("*_annotated.json")               , emit: iedb_alignment
+    tuple val(meta), path("*_annotated.json")               , emit: annotated_output
     path "versions.yml"                                     , emit: versions
 
     when:
