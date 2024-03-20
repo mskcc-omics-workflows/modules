@@ -50,7 +50,7 @@ nextflow_process {
                     ]
                 input[1] = [
                     [ id:'fasta', single_end:false ], // meta map,
-                    file('iedb_fasta')                
+                    file('iedb_fasta')                  
                     ]
                 """
             }
