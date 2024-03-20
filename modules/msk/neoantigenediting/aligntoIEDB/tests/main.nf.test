@@ -19,10 +19,7 @@ nextflow_process {
                     [ id:'test', single_end:false ], // meta map,
                     file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)                   
                     ]
-                input[1] = [
-                    [ id:'fasta', single_end:false ], // meta map,
-                    file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true)                 
-                    ]
+                input[1] = file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true)
                 """
             }
         }
@@ -48,10 +45,7 @@ nextflow_process {
                     [ id:'test', single_end:false ], // meta map,
                     file('patient_data')                   
                     ]
-                input[1] = [
-                    [ id:'fasta', single_end:false ], // meta map,
-                    file('iedb_fasta')                  
-                    ]
+                input[1] = file('iedb_fasta')
                 """
             }
         }
