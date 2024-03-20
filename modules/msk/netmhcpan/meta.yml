@@ -1,0 +1,80 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "netmhcpan"
+description: write your description here
+keywords:
+  - immune
+  - netmhcpan
+  - genomics
+tools:
+  - "netmhcpan":
+      description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+      licence: ["MIT"]
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - inputMaf:
+      type: file
+      description: Maf outputtted by Tempo that was run through phyloWGS
+      pattern: "*.{maf}"
+
+  - hlaFile:
+      type: file
+      description: HLA tsv outputtted by Polysolver
+      pattern: "winners.{tsv}"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - MUTnetmhcpanXLS:
+      type: file
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
+      pattern: "*.MUT.netmhcpan.output"
+
+  - WTnetmhcpanXLS:
+      type: file
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
+      pattern: "*.WT.xls"
+
+  - MUTnetmhcpanoutput:
+      type: file
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
+      pattern: "*.MUT.xls"
+
+  - WTnetmhcpanoutput:
+      type: file
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
+      pattern: "*.WT.netmhcpan.output"
+
+  - MUTfasta:
+      type: file
+      description: multi fasta file containing many sequences of mutated neoantigens
+      pattern: "*_out/*.mutated_sequences.fa"
+
+  - WTfasta:
+      type: file
+      description: multi fasta file containing many sequences of wild type neoantigens
+      pattern: "*_out/*.WT_sequences.fa"
+
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"

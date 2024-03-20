@@ -1,0 +1,46 @@
+nextflow_process {
+
+    name "Test Process NETMHCPAN"
+    script "../main.nf"
+    process "NETMHCPAN"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "netmhcpan"
+
+    test("test_neoantigen") {
+
+        when {
+            process {
+                """                
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
+                    ]
+
+                input[1] = [
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.fastaSequences,
+                    file(process.out.xls[0][1]).name,
+                    file(process.out.xls[0][2]).name,
+                    file(process.out.netmhcpanoutput[0][1]).name,
+                    file(process.out.netmhcpanoutput[0][2]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+}
