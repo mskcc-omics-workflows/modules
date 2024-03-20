@@ -1,0 +1,37 @@
+{
+    "neoantigen": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,cf2994cf0b8fdad159fb8e5191d5618e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,cf2994cf0b8fdad159fb8e5191d5618e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.0"
+        },
+        "timestamp": "2024-03-18T10:02:31.484326"
+    }
+}
