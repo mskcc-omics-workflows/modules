@@ -22,7 +22,12 @@ nextflow_process {
                     ]
                 input[1] = [
                     [ id:'fasta', single_end:false ], // meta map,
-                    file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true)                 
+                    file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true),
+                        [
+                            file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta_phr'], checkIfExists: true),
+                            file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta_pin'], checkIfExists: true),
+                            file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta_psq'], checkIfExists: true)
+                        ]                   
                     ]
                 """
             }
@@ -51,7 +56,12 @@ nextflow_process {
                     ]
                 input[1] = [
                     [ id:'fasta', single_end:false ], // meta map,
-                    file('iedb_fasta')                
+                    file('iedb_fasta'),
+                        [
+                            file('iedb_fasta_phr'),
+                            file('iedb_fasta_pin'),
+                            file('iedb_fasta_psq')
+                        ]                   
                     ]
                 """
             }
