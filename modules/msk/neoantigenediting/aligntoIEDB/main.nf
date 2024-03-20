@@ -8,7 +8,7 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
 
     input:
     tuple val(meta),  path(patient_data)
-    tuple val(meta1), path(iedb_fasta), path(iedb_fasta_index)
+    tuple val(meta1), path(iedb_fasta)
 
     output:
     tuple val(meta), path("iedb_alignments_*.txt")             , emit: iedb_alignment

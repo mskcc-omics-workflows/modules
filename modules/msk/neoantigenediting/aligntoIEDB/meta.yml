@@ -26,10 +26,6 @@ input:
       type: file
       description: IEDB epitopes used for analysis
       pattern: "*.fasta"
-  - iedb_fasta_index:
-      type: file
-      description: Index files for the fasta
-      pattern: "*.fasta.*"
 
 output:
   - meta:
