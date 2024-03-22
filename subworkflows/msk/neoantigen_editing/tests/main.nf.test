@@ -8,8 +8,8 @@ nextflow_workflow {
     tag "subworkflows_nfcore"
     tag "subworkflows/neoantigen_editing"
     tag "neoantigeninput"
-    tag "neoantigenediting/aligntoIEDB'"
-    tag "neoantigenediting/computeFitness'"
+    tag "neoantigenediting/aligntoIEDB"
+    tag "neoantigenediting/computeFitness"
 
 
     test("neoantigen - test") {
@@ -30,9 +30,13 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out).match()}
-                { assert snapshot(file(process.out.annotated_output[0][1]).name).match() }
+                { assert snapshot(
+                    workflow.out.versions,
+                    file(workflow.out.annotated_output[0][1]).name
+                    ).match()
+                }           
             )
+
         }
     }
 }
