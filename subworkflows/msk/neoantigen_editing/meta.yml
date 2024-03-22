@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "neoantigen_editing"
+description: Compute fitness and quality of the neoantigens
+keywords:
+  - neoantigenediting
+  - neoantigens
+  - fitness
+components:
+  - neoantigenediting/computefitness
+  - neoantigenediting/aligntoiedb
+input:
+  - neoantigenInput_ch:
+      type: file
+      description: |
+        The input channel containing the json formatted for NeoantigenEditing by the neoantigeninput module
+        Structure: [ val(meta), path(json) ]
+      pattern: "*.{json}"
+  - iedbfasta:
+      type: file
+      description: |
+        The input channel containing the IEDB fasta file
+        Structure: [ val(meta), path(fasta) ]
+      pattern: "*.{fasta}"
+output:
+  - json:
+      type: file
+      description: |
+        Channel containing annpotated json output with neoantigen quality
+        Structure: [ val(meta), [ annotated_json ] ]
+      pattern: "*.json"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"

@@ -1,0 +1,39 @@
+{
+    "neoantigen - test": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "3_OLTS_primary_tumor_annotated.json:md5,0f0e50ba3cb33df2bcd5e39cf901dc2e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,37984f930810748dc81d61b73680e10a",
+                    "versions.yml:md5,563eced4337e36c41c7450059792e907"
+                ],
+                "annotated_output": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "3_OLTS_primary_tumor_annotated.json:md5,0f0e50ba3cb33df2bcd5e39cf901dc2e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,37984f930810748dc81d61b73680e10a",
+                    "versions.yml:md5,563eced4337e36c41c7450059792e907"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.0"
+        },
+        "timestamp": "2024-03-22T09:47:19.310645"
+    }
+}
