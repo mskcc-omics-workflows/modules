@@ -159,6 +159,70 @@ jobs:
         run: nf-core subworkflows lint ${{steps.remove_substring.outputs.subworkflow_names}}
         if: ${{ startsWith(matrix.tags, 'subworkflows/') }}
 
+  verify-markdown-file:
+    runs-on: ubuntu-latest
+    name: verify-markdown-file
+    if: ${{ (needs.pytest-changes.outputs.modules != '[]') || (needs.nf-test-changes.outputs.modules != '[]') }}
+    needs: [pytest-changes, nf-test-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
+    steps:
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Download convertor from yml to md
+        run: |
+          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
+          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
+      - name: Give convertor permissions
+        run: chmod +x yaml_to_md.py
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ${{ github.workspace }}/requirements.txt
+      - name: Update ${{ matrix.tags }}
+        run: |
+          MATRIX_FRAGMENT="${{ matrix.tags }}"
+          TEMP_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows\///g')
+          SW_NAME=$(echo $TEMP_NAME | sed 's/modules\///g')
+          echo "SW_NAME=$SW_NAME" >> $GITHUB_ENV
+      - uses: jaywcjlove/github-action-read-file@main
+        id: cat_file_module
+        with:
+          path: modules/msk/${{ env.SW_NAME }}/meta.yml
+      - run: echo "${{ steps.cat_file_module.outputs.size }}"
+      - name: Write Module yaml to temp
+        if: ${{ steps.cat_file_module.outputs.size }}
+        id: write_yml_module
+        run: |
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="modules"
+          echo "FEATURE_TYPE=$FEATURE_TYPE" >> $GITHUB_ENV
+      - uses: jaywcjlove/github-action-read-file@main
+        if: ${{ steps.cat_file_module.outputs.size == '' }}
+        id: cat_file_subworkflow
+        with:
+          path: subworkflows/msk/${{ env.SW_NAME }}/meta.yml
+      - name: Write Subworkflow yaml to temp
+        if: ${{ steps.cat_file_subworkflow.outputs.size }}
+        id: write_yml_subworkflow
+        run: |
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="subworkflows"
+          echo "FEATURE_TYPE=$FEATURE_TYPE" >> $GITHUB_ENV
+      - name: Run convertor to verify yaml file
+        run: |
+          echo ${{ matrix.tags }}
+          echo ${{ env.FEATURE_TYPE }}
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json
+
   pytest:
     runs-on: ubuntu-latest
     name: pytest
@@ -288,6 +352,8 @@ jobs:
             tags: facets
           - profile: "conda"
             tags: mutect1
+          - profile: "conda"
+            tags: ppflagfixer
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
