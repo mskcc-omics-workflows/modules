@@ -6,14 +6,15 @@ process NEOANTIGENINPUT {
         'docker.io/mskcc/neoantigeninputs:1.0.1' }"
 
     input:
-    tuple val(meta), path(inputMaf)
-    tuple path(phyloWGSsumm), path(phyloWGSmut), path(phyloWGSfolder)
-    tuple val(meta2), path(mutNetMHCpan), path(wtNetMHCpan)
+    tuple val(meta),           path(inputMaf)
+    tuple path(phyloWGSsumm),  path(phyloWGSmut),   path(phyloWGSfolder)
+    tuple val(meta2),          path(mutNetMHCpan),  path(wtNetMHCpan)
     path(hlaFile)
 
     output:
-    tuple val(meta), path("*_.json"), emit: json
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("*_.json"),                                                  emit: json
+    tuple val(meta), path("*.MUT.tsv"), path("*.WT.tsv"),                              emit: netMHCpanreformatted
+    path "versions.yml",                                                               emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -49,7 +50,9 @@ process NEOANTIGENINPUT {
     def cohort =task.ext.cohort ?: "${meta.id}_cohort"
     """
     
-        ${patientid}_${id}_.json
+        touch ${patientid}_${id}_.json
+        touch ${patientid}.MUT.tsv
+        touch ${patientid}.WT.tsv
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
             neoantigeninput: \$(echo \$(python3 /usr/bin/eval_phyloWGS.py -v))
