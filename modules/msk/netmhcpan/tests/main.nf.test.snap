@@ -1,5 +1,5 @@
 {
-    "test_neoantigen": {
+    "netmhcpan - xls,output,fa": {
         "content": [
             [
                 "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
@@ -19,10 +19,28 @@
             "test.MUT.netmhcpan.output",
             "test.WT.netmhcpan.output"
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.0"
-        },
-        "timestamp": "2024-03-17T22:17:33.67688"
+        "timestamp": "2024-03-25T17:12:27.497605"
+    },
+    "test_neoantigen - xls,output,fa - stub": {
+        "content": [
+            [
+                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.mutated_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
+                    "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            "test.MUT.xls",
+            "test.WT.xls",
+            "test.MUT.netmhcpan.output",
+            "test.WT.netmhcpan.output"
+        ],
+        "timestamp": "2024-03-25T17:12:33.689236"
     }
 }

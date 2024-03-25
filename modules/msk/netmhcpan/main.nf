@@ -8,8 +8,8 @@ process NETMHCPAN {
         'docker.io/mskcc/netmhcpan:4.1-x' }"
 
     input:
-    tuple val(meta), path(inputMaf)
-    path(hlaFile)
+    tuple val(meta),  path(inputMaf)
+    tuple val(meta1), path(hlaFile)
 
     output:
     tuple val(meta), path("*.MUT.xls"),path("*.WT.xls"), emit: xls
@@ -75,10 +75,13 @@ process NETMHCPAN {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    touch ${prefix}.netmhcpan.output
-    touch ${prefix}.xls
+    touch ${prefix}.MUT.netmhcpan.output
+    touch ${prefix}.WT.netmhcpan.output
+    touch ${prefix}.MUT.xls
+    touch ${prefix}.WT.xls
     mkdir ${prefix}_out
     touch ${prefix}_out/${prefix}.mutated_sequences.fa
+    touch ${prefix}_out/${prefix}.WT_sequences.fa
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
