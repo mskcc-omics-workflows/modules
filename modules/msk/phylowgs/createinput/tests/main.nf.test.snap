@@ -1,4 +1,37 @@
 {
+    "PHYLOWGS_CREATEINPUT - txt - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "ssm_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c3b72d38e738af4cd177ddffac707596"
+                ],
+                "phylowgsinput": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "ssm_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c3b72d38e738af4cd177ddffac707596"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-25T17:17:53.138621"
+    },
     "PHYLOWGS_CREATEINPUT - txt": {
         "content": [
             {
@@ -30,6 +63,6 @@
                 ]
             }
         ],
-        "timestamp": "2024-03-12T14:20:09.908861"
+        "timestamp": "2024-03-25T17:17:47.497326"
     }
 }

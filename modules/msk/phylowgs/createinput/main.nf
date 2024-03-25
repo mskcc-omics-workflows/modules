@@ -8,7 +8,7 @@ process PHYLOWGS_CREATEINPUT {
 
     input:
     tuple val(meta), path(cnv) 
-    path(unfilteredmaf)
+    tuple val(meta1), path(unfilteredmaf)
 
     output:
     tuple val(meta), path("cnv_data.txt"), path("ssm_data.txt"), emit: phylowgsinput
@@ -39,6 +39,7 @@ process PHYLOWGS_CREATEINPUT {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch cnv_data.txt
+    touch ssm_data.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
