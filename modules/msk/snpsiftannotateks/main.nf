@@ -1,4 +1,4 @@
-process SNPSIFTANNOTATEKS {
+process SNPSIFTANNOTATEKS{
     tag "$meta.id"
     label 'process_low'
 
@@ -36,6 +36,7 @@ process SNPSIFTANNOTATEKS {
     """
 
     stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch ${prefix}.vcf
     cat <<-END_VERSIONS > versions.yml
