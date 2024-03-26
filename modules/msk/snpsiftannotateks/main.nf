@@ -27,7 +27,7 @@ process SNPSIFTANNOTATEKS{
         annotate \\
         $args \\
         $database \\
-        $vcf > ${prefix}.vcf
+        $vcf > ${prefix}_op.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
