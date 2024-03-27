@@ -7,8 +7,7 @@ process PHYLOWGS_CREATEINPUT {
         'docker.io/mskcc/phylowgs:v1.4-msk' }"
 
     input:
-    tuple val(meta), path(cnv) 
-    tuple val(meta1), path(unfilteredmaf)
+    tuple val(meta), path(unfilteredmaf), path(cnv)
 
     output:
     tuple val(meta), path("cnv_data.txt"), path("ssm_data.txt"), emit: phylowgsinput

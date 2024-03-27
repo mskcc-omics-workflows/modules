@@ -16,13 +16,9 @@ nextflow_process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['cnvs_txt'], checkIfExists: true)
                     ]
-                input[1] =  [
-                    [ id:'test', single_end:false ], // meta map 
-                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true)
-                    ]
-
                 """
             }
         }
@@ -45,13 +41,9 @@ nextflow_process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
+                    file('unfilteredmaf'),
                     file('cnvs_txt')
                     ]
-                input[1] =  [
-                    [ id:'test', single_end:false ], // meta map 
-                    file('unfilteredmaf')
-                    ]
-
                 """
             }
         }
