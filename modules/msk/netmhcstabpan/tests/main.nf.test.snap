@@ -1,0 +1,50 @@
+{
+    "test_neoantigen - output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,d1b3afd365748a44098c5642fad6c94a"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.mutated_sequences.fa:md5,a998392759482f8a1c63c795cfd9e399",
+                    "test.WT_sequences.fa:md5,27e677ffa032a87934df4c62e9f15357"
+                ]
+            ],
+            "test.MUT.netmhcpan.output",
+            "test.WT.netmhcpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.0"
+        },
+        "timestamp": "2024-03-27T12:50:08.590894"
+    },
+    "test_neoantigen - output,fa - stub": {
+        "content": [
+            [
+                "versions.yml:md5,5a1475e210a9889a27d87db2acb5e703"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.mutated_sequences.fa:md5,e9906f9f5e99d951038f78cc6217d43b",
+                    "test.WT_sequences.fa:md5,3b46893e0ed63a451ad40a645b5e350d"
+                ]
+            ],
+            "test.MUT.netmhcpan.output",
+            "test.WT.netmhcpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.0"
+        },
+        "timestamp": "2024-03-27T12:50:12.831267"
+    }
+}

@@ -1,19 +1,18 @@
-process NETMHCPAN {
+process NETMHCSTABPAN {
     tag "$meta.id"
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://orgeraj/netmhcstabpan:latest':
-        'docker.io/orgeraj/netmhcstabpan:latest' }"
+        'docker://mskcc/netmhcstabpan:1.0':
+        'docker.io/orgeramskccj/netmhcstabpan:1.0' }"
 
     input:
-    tuple val(meta), path(inputMaf)
-    path(hlaFile)
+    tuple val(meta), path(inputMaf), path(hlaFile)
+    
 
     output:
-    tuple val(meta), path("*.MUT.xls"),path("*.WT.xls"), emit: xls
-    tuple val(meta), path("*.MUT.netmhcpan.output"), path("*.WT.netmhcpan.output"), emit: netmhcpanoutput
+    tuple val(meta), path("*.MUT.netmhcpan.output"),       path("*.WT.netmhcpan.output"),   emit: netmhcstabpanoutput
     tuple val(meta), path("*_out/*.mutated_sequences.fa"), path("*_out/*.WT_sequences.fa"), emit: fastaSequences
     path "versions.yml"           , emit: versions
 
@@ -59,14 +58,15 @@ process NETMHCPAN {
     output_hla="\${output_hla:1}"
 
     echo \$output_hla
-    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.MUT.xls > ${prefix}.MUT.netmhcpan.output
+    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcpan.output
 
-    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.WT.xls > ${prefix}.WT.netmhcpan.output
+    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcpan.output
 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         netmhcpan: v4.1
+        netmhcstabpan: v1.0
     END_VERSIONS
 
     """
@@ -74,15 +74,23 @@ process NETMHCPAN {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def netMHCpan_version = '4.1'
+    def netMHCstabpan_version = '1.0'
     """
-    touch ${prefix}.netmhcpan.output
-    touch ${prefix}.xls
+    touch ${prefix}.MUT.netmhcpan.output
+    touch ${prefix}.WT.netmhcpan.output
     mkdir ${prefix}_out
-    touch ${prefix}_out/${prefix}.mutated_sequences.fa
+    touch ${prefix}_out/${prefix}.mutated_sequences.fa  
+    echo -e ">Mutpeptide \n HEHEHE" > ${prefix}_out/${prefix}.mutated_sequences.fa 
+
+    touch ${prefix}_out/${prefix}.WT_sequences.fa
+    echo -e ">WTpeptide \n HEKEHE" > ${prefix}_out/${prefix}.WT_sequences.fa
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         netmhcpan: v4.1
+        netmhcstabpan: v1.0
     END_VERSIONS
     """
 }
