@@ -19,9 +19,9 @@
             "test.MUT.netmhcpan.output",
             "test.WT.netmhcpan.output"
         ],
-        "timestamp": "2024-03-25T17:12:27.497605"
+        "timestamp": "2024-03-27T16:03:49.449294"
     },
-    "test_neoantigen - xls,output,fa - stub": {
+    "netmhcpan - xls,output,fa - stub": {
         "content": [
             [
                 "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
@@ -41,6 +41,6 @@
             "test.MUT.netmhcpan.output",
             "test.WT.netmhcpan.output"
         ],
-        "timestamp": "2024-03-25T17:12:33.689236"
+        "timestamp": "2024-03-27T16:05:06.65743"
     }
 }

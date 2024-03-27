@@ -8,8 +8,7 @@ process NETMHCPAN {
         'docker.io/mskcc/netmhcpan:4.1-x' }"
 
     input:
-    tuple val(meta),  path(inputMaf)
-    tuple val(meta1), path(hlaFile)
+    tuple val(meta),  path(inputMaf), path(hlaFile)
 
     output:
     tuple val(meta), path("*.MUT.xls"),path("*.WT.xls"), emit: xls

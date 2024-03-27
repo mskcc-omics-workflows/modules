@@ -15,11 +15,7 @@ nextflow_process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(file(params.test_data_mskcc['neoantigen']['temp_test_short_maf']), checkIfExists: true)
-                    ]
-
-                input[1] = [
-                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['temp_test_short_maf']), checkIfExists: true),
                     file(file(params.test_data_mskcc['neoantigen']['winners_hla_txt']), checkIfExists: true)
                     ]
 
@@ -44,7 +40,7 @@ nextflow_process {
 
     }
 
-    test("test_neoantigen - xls,output,fa - stub") {
+    test("netmhcpan - xls,output,fa - stub") {
 
         options "-stub"
 
@@ -53,11 +49,7 @@ nextflow_process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file('temp_test_short_maf')
-                    ]
-
-                input[1] = [
-                    [ id:'test', single_end:false ], // meta map
+                    file('temp_test_short_maf'),
                     file('winners_hla_txt')
                     ]
 
