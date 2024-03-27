@@ -1,0 +1,2 @@
+subworkflows/neoantigen_editing:
+  - subworkflows/msk/neoantigen_editing/**
