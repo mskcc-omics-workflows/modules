@@ -11,7 +11,7 @@ process PHYLOWGS_PARSECNVS {
 
     output:
     tuple val(meta), path("cnvs.txt"), emit: cnv
-    path "versions.yml"           , emit: versions
+    path "versions.yml"              , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
