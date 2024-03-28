@@ -15,8 +15,7 @@ nextflow_process {
 
         when {
             process {
-                """
-            input[0] = [
+                """input[0] = [
                             [ id:'chr22', patient:'test'], // meta map
                             file(params.test_data_mskcc['chr22']['chr22maf'], checkIfExists: true),
                             file(params.test_data_mskcc['chr22']['chr22maf'], checkIfExists: true)
@@ -44,9 +43,7 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                        [ id:'chr22', patient:'test'], // meta map
-                            file(params.test_data_mskcc['chr22']['chr22maf'], checkIfExists: true),
-                            file(params.test_data_mskcc['chr22']['chr22maf'], checkIfExists: true)
+                        [ id:'chr22', patient:'test'], file(params.test_data_mskcc['chr22']['chr22maf'], checkIfExists: true), file(params.test_data_mskcc['chr22']['chr22maf'], checkIfExists: true)
                         ]
                 input[1] = []
                 """
