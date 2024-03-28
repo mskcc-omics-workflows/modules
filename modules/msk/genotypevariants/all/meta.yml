@@ -66,10 +66,10 @@ output:
   - maf:
       type: file
       description: |
-        Genotyped mafs for each bam type (simplex, duplex, standard) provided 
+        Genotyped mafs for each bam type (simplex, duplex, standard) provided
         and a merged genotyped maf.
-        The maf(s) will be labelled with patient identifier, 
-        or sample identifier as the prefix, 
+        The maf(s) will be labelled with patient identifier,
+        or sample identifier as the prefix,
         and end with their type (standard, simplex, duplex).
         The sample identifier is prioritized.
       pattern: "*.{mafs}"
