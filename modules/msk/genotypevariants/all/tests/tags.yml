@@ -1,0 +1,2 @@
+genotypevariants/all:
+  - "modules/msk/genotypevariants/all/**"
