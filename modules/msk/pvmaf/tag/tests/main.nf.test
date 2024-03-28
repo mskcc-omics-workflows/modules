@@ -17,7 +17,6 @@ nextflow_process {
         when {
             process {
                 """
-                
                 input[0] = [
                             [ id:'chr22', patient:'test'], // meta map
                             file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
@@ -43,7 +42,6 @@ nextflow_process {
         when {
             process {
                 """
-                
                 input[0] = [
                             [ id:'chr22', patient:'test'], // meta map
                             file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),

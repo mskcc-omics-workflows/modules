@@ -19,8 +19,7 @@ input:
       description: |
         The input channel containing impact or access bams files
         Structure: 
-        [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
-        or 
+        [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []] or 
         [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
       pattern: "*.{bam/cram/sam}"
   - mafs:

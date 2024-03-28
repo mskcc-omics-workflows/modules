@@ -17,7 +17,6 @@ process PVMAF_TAG {
     output:
     tuple val(meta), path("*.maf"), emit: maf
     path "versions.yml"           , emit: versions
-
     when:
     task.ext.when == null || task.ext.when
 
@@ -46,7 +45,6 @@ process PVMAF_TAG {
     def output = prefix ? "${prefix}_${type}.maf": "multi_sample_${type}.maf"
     """
     touch $output
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         pv: \$( pv --version  )

@@ -7,8 +7,8 @@ workflow TRACEBACK {
 
     take:
     bams     // channel: [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
-             // or 
-             // channel: [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
+    // or 
+    // channel: [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
     mafs // channel: [[patient:null], [maf1,...,maf2] ]
     header // channel [initial: 'header.txt', genotype: 'header2.txt']
     reference // channel: [ file(reference) ]
@@ -17,7 +17,6 @@ workflow TRACEBACK {
     main:
 
     ch_versions = Channel.empty()
-    
     // Concat Input Mafs
     PVMAFCONCAT_INITIAL(mafs, header.initial)
     ch_versions = ch_versions.mix(PVMAFCONCAT_INITIAL.out.versions.first())

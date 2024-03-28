@@ -12,7 +12,6 @@ nextflow_workflow {
     tag "genotypevariants/all"
     tag "pvmaf/concat"
     tag "pvmaf/tag"
-    
     test("standard and access bams - stub") {
         options "-stub"
         when {
@@ -21,7 +20,7 @@ nextflow_workflow {
                 input[0] = Channel.of(
                     [[id:'sample1', patient: 'patient1'],
                         file('sample1.bam'), 
-                        file('sample1.bam.bai'), 
+                        file('sample1.bam.bai'),
                         [], [], [], []
                     ],
                     [[id:'sample2', patient:'patient2'], [], [],
@@ -35,7 +34,7 @@ nextflow_workflow {
                     [[patient: 'patient1'], 
                     [file('patient1.txt'),]
                     ],
-                    [[patient: 'patient2'], 
+                    [[patient: 'patient2'],
                     [file('patient2.maf'),]]
                     )
                 input[2] = []
