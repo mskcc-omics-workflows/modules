@@ -1,5 +1,5 @@
 include { NEOANTIGENEDITING_ALIGNTOIEDB      } from '../../../modules/msk/neoantigenediting/aligntoIEDB'
-include { NEOANTIGENEDITING_COMPUTEFITNESS   } from '../../../modules/msk/neoantigenediting/computeFitness'
+include { NEOANTIGENEDITING_COMPUTEFITNESS   } from '../../../modules/msk/neoantigenediting/computefitness'
 
 
 workflow NEOANTIGEN_EDITING {
