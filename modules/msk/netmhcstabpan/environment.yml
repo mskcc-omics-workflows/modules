@@ -6,4 +6,5 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - "YOUR-TOOL-HERE"
+  - "netmhcstabpan"
+  - "netmhcpan"

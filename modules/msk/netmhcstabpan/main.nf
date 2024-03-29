@@ -28,6 +28,7 @@ process NETMHCSTABPAN {
     def in_CDNA_file = task.ext.in_CDNA_file ?:"/usr/local/bin/Homo_sapiens.GRCh37.75.cdna.all.fa.gz"
     """
     mkdir ${prefix}_out
+
     python3 /usr/local/bin/generateMutFasta.py --sample_id ${prefix} \
     --output_dir ${prefix}_out \
     --maf_file ${inputMaf} \
@@ -35,9 +36,7 @@ process NETMHCSTABPAN {
     --CDNA_file ${in_CDNA_file}
     
     
-    
     cat ${hlaFile} | tr "\\t" "\\n" | grep -v "HLA" | tr "\\n" "," > massaged.winners.hla.txt
-
 
     input_string=`head -n 1 massaged.winners.hla.txt`
 
