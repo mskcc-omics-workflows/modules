@@ -26,7 +26,6 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
         --fasta ${iedb_fasta} \\
         --input ${patient_data}
     
-    echo "just testing this module change"
 
 
     cat <<-END_VERSIONS > versions.yml

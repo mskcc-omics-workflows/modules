@@ -10,7 +10,7 @@ nextflow_process {
     tag "neoantigenediting"
     tag "neoantigenediting/aligntoIEDB"
 
-    test("neoantigenediting_aligntoIEDB - json") {
+    test("neoantigenediting_aligntoiedb - json") {
 
         when {
             process {
@@ -34,7 +34,7 @@ nextflow_process {
 
     }
 
-    test("neoantigenediting_aligntoIEDB - json - stub") {
+    test("neoantigenediting_aligntoiedb - json - stub") {
 
         options "-stub"
 

@@ -1,2 +1,2 @@
-neoantigenediting/aligntoIEDB:
-  - "modules/msk/neoantigenediting/aligntoIEDB/**"
+neoantigenediting/aligntoiedb:
+  - "modules/msk/neoantigenediting/aligntoiedb/**"
