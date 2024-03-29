@@ -1,0 +1,2 @@
+subworkflows/phylowgs:
+  - subworkflows/msk/phylowgs/**

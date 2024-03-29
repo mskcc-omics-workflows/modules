@@ -8,21 +8,19 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "neoantigenediting"
-    tag "neoantigenediting/computeFitness"
+    tag "neoantigenediting/computefitness"
 
-    test("neoantigenediting_computeFitness - json") {
+    test("neoantigenediting_computefitness - json") {
 
         when {
             process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
-                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)                   
+                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)                    
                     ]
-                input[1] = [
-                    [ id:'test', single_end:false ], // meta map,
-                    file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)                  
-                    ]
+
                 """
             }
         }
@@ -37,7 +35,7 @@ nextflow_process {
 
     }
 
-    test("neoantigenediting_computeFitness - json - stub") {
+    test("neoantigenediting_computefitness - json - stub") {
 
         options "-stub"
 
@@ -46,12 +44,10 @@ nextflow_process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
-                    file('patient_data')                   
-                    ]
-                input[1] = [
-                    [ id:'test', single_end:false ], // meta map,
+                    file('patient_data'),
                     file('alignment_file')                  
                     ]
+
                 """
             }
         }

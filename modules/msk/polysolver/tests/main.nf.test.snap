@@ -28,6 +28,37 @@
                 ]
             }
         ],
-        "timestamp": "2023-12-13T00:23:12.779923"
+        "timestamp": "2024-03-25T17:28:23.33869"
+    },
+    "homo_sapiens - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                ],
+                "hla": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-25T17:28:29.809368"
     }
 }

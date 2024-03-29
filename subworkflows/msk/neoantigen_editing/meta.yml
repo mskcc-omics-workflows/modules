@@ -22,7 +22,7 @@ input:
         Structure: [ val(meta), path(fasta) ]
       pattern: "*.{fasta}"
 output:
-  - json:
+  - annotated_output:
       type: file
       description: |
         Channel containing annpotated json output with neoantigen quality

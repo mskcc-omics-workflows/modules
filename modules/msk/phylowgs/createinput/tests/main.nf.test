@@ -9,7 +9,6 @@ nextflow_process {
     tag "phylowgs"
     tag "phylowgs/createinput"
 
-    // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
     test("PHYLOWGS_CREATEINPUT - txt") {
 
         when {
@@ -17,12 +16,34 @@ nextflow_process {
                 """                
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['cnvs_txt'], checkIfExists: true)
                     ]
-                input[1] =  [ 
-                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true)
-                    ]
+                """
+            }
+        }
 
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("PHYLOWGS_CREATEINPUT - txt - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """                
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('unfilteredmaf'),
+                    file('cnvs_txt')
+                    ]
                 """
             }
         }
