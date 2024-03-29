@@ -15,8 +15,6 @@ workflow NEOANTIGEN_EDITING {
     NEOANTIGENEDITING_ALIGNTOIEDB (neoantigenInput_ch, iedbfasta)
     ch_versions = ch_versions.mix(NEOANTIGENEDITING_ALIGNTOIEDB.out.versions.first())
 
-    // NEOANTIGENEDITING_ALIGNTOIEDB.out.versions.view()
-    // NEOANTIGENEDITING_ALIGNTOIEDB.out.iedb_alignment.view()
     Channel.of(neoantigenInput_ch).set{ ch_input}
     ch_input.combine(NEOANTIGENEDITING_ALIGNTOIEDB.out.iedb_alignment, by: [0]).set{ ch_computeFitnessIn }
 
