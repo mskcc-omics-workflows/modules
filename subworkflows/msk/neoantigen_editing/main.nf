@@ -18,8 +18,6 @@ workflow NEOANTIGEN_EDITING {
     Channel.of(neoantigenInput_ch).set{ ch_input}
     ch_input.combine(NEOANTIGENEDITING_ALIGNTOIEDB.out.iedb_alignment, by: [0]).set{ ch_computeFitnessIn }
 
-    ch_computeFitnessIn.view()
-
     NEOANTIGENEDITING_COMPUTEFITNESS ( ch_computeFitnessIn )
 
     ch_versions = ch_versions.mix(NEOANTIGENEDITING_COMPUTEFITNESS.out.versions.first())
