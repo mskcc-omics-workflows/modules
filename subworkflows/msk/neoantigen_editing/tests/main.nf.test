@@ -9,7 +9,7 @@ nextflow_workflow {
     tag "subworkflows/neoantigen_editing"
     tag "neoantigeninput"
     tag "neoantigenediting/aligntoIEDB"
-    tag "neoantigenediting/computeFitness"
+    tag "neoantigenediting/computefitness"
 
 
     test("neoantigen - test") {
