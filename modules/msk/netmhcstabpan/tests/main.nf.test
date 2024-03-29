@@ -1,0 +1,73 @@
+nextflow_process {
+
+    name "Test Process NETMHCSTABPAN"
+    script "../main.nf"
+    process "NETMHCSTABPAN"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "netmhcpan"
+    tag "netmhcstabpan"
+
+    test("test_neoantigen - output,fa") {
+
+        when {
+            process {
+                """                
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.fastaSequences,
+                    file(process.out.netmhcstabpanoutput[0][1]).name,
+                    file(process.out.netmhcstabpanoutput[0][2]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+    test("test_neoantigen - output,fa - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """                
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('temp_test_short_maf'),
+                    file('winners_hla_txt')
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.fastaSequences,
+                    file(process.out.netmhcstabpanoutput[0][1]).name,
+                    file(process.out.netmhcstabpanoutput[0][2]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+}

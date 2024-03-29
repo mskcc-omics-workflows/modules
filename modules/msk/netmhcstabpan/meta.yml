@@ -1,0 +1,65 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "netmhcstabpan"
+description: Runs netMHCpan and netMHCstabpan and outputs STDout for mutated and wild type neoantigens"
+keywords:
+  - immune
+  - netmhcstabpan
+  - netMHCstabpan
+  - genomics
+tools:
+  - "netmhcstabpan":
+      description: " Runs netMHCstabpan and netMHCpan then outputs tsvs and STDout for mutated and wild type neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+      documentation: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+      licence: ["MIT"]
+
+  - "netmhcpan":
+      description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+      licence: ["MIT"]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - inputMaf:
+      type: file
+      description: Maf outputtted by Tempo that was run through phyloWGS
+      pattern: "*.{maf}"
+
+  - hlaFile:
+      type: file
+      description: HLA tsv outputtted by Polysolver
+      pattern: "winners.{tsv}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - fastaSequences:
+      type: file
+      description: Two multi fasta files containing many sequences of mutated and wildtype possible neoantigens
+      pattern: "*_out/*.mutated_sequences.fa,*_out/*.WT_sequences.fa"
+
+  - netmhcstabpanoutput:
+      type: file
+      description: STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated file of neoantigens. Neoantigen inputs contains a parser for this file
+      pattern: "**.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"
