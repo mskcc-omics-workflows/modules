@@ -8,9 +8,9 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "neoantigenediting"
-    tag "neoantigenediting/computeFitness"
+    tag "neoantigenediting/computefitness"
 
-    test("neoantigenediting_computeFitness - json") {
+    test("neoantigenediting_computefitness - json") {
 
         when {
             process {
@@ -35,7 +35,7 @@ nextflow_process {
 
     }
 
-    test("neoantigenediting_computeFitness - json - stub") {
+    test("neoantigenediting_computefitness - json - stub") {
 
         options "-stub"
 

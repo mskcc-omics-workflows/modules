@@ -1,11 +1,5 @@
 {
-    "neoantigenediting_computeFitness - json": {
-        "content": [
-            "3_OLTS_primary_tumor_annotated.json"
-        ],
-        "timestamp": "2024-03-20T15:58:08.710924"
-    },
-    "neoantigenediting_computeFitness - json - stub": {
+    "neoantigenediting_computefitness - json - stub": {
         "content": [
             {
                 "0": [
@@ -34,6 +28,12 @@
                 ]
             }
         ],
-        "timestamp": "2024-03-20T15:58:14.290682"
+        "timestamp": "2024-03-29T11:55:04.815802"
+    },
+    "neoantigenediting_computefitness - json": {
+        "content": [
+            "3_OLTS_primary_tumor_annotated.json"
+        ],
+        "timestamp": "2024-03-29T11:54:58.661569"
     }
 }

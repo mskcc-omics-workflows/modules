@@ -1,0 +1,2 @@
+neoantigenediting/computefitness:
+  - "modules/msk/neoantigenediting/computefitness/**"
