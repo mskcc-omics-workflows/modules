@@ -25,8 +25,6 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
         --alignment ${alignment_file} \\
         --input ${patient_data}
 
-    echo "just testing this module change"
-
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
