@@ -1,0 +1,42 @@
+nextflow_workflow {
+
+    name "Test Workflow NEOANTIGEN_EDITING"
+    script "../main.nf"
+    workflow "NEOANTIGEN_EDITING"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/neoantigen_editing"
+    tag "neoantigeninput"
+    tag "neoantigenediting/aligntoIEDB"
+    tag "neoantigenediting/computeFitness"
+
+
+    test("neoantigen - test") {
+
+        when {
+            workflow {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map,
+                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)                   
+                    ]
+                input[1] = file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true)
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    workflow.out.versions,
+                    file(workflow.out.annotated_output[0][1]).name
+                    ).match()
+                }           
+            )
+
+        }
+    }
+}

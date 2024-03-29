@@ -7,8 +7,8 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
         'docker.io/mskcc/neoantigenediting:1.2' }"
 
     input:
-    tuple val(meta),  path(patient_data)
-    tuple val(meta1), path(alignment_file)
+    tuple val(meta),  path(patient_data), path(alignment_file)
+    
     output:
     tuple val(meta), path("*_annotated.json")               , emit: annotated_output
     path "versions.yml"                                     , emit: versions
