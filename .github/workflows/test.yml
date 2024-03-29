@@ -305,6 +305,8 @@ jobs:
           - profile: "conda"
             tags: subworkflows/neoantigen_editing
           - profile: "conda"
+            tags: subworkflows/phylowgs
+          - profile: "conda"
             tags: netmhcstabpan
     env:
       NXF_ANSI_LOG: false

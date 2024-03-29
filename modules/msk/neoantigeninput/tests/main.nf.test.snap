@@ -1,5 +1,56 @@
 {
-    "neoantigen": {
+    "neoantigeninput - json,tsv - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test_patient.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test_patient.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
+                ]
+            }
+        ],
+        "timestamp": "2024-03-27T16:02:32.175238"
+    },
+    "neoantigeninput - json,tsv": {
         "content": [
             {
                 "0": [
@@ -12,6 +63,16 @@
                     ]
                 ],
                 "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "netmHCpanoutput.MUT.tsv:md5,df56a2a876a57406b02f8664c28296ec",
+                        "netmHCpanoutput.WT.tsv:md5,b1171286368f359f8bf854a7048e3e4c"
+                    ]
+                ],
+                "2": [
                     "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
                 ],
                 "json": [
@@ -23,15 +84,21 @@
                         "test_patient_test_.json:md5,cf2994cf0b8fdad159fb8e5191d5618e"
                     ]
                 ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "netmHCpanoutput.MUT.tsv:md5,df56a2a876a57406b02f8664c28296ec",
+                        "netmHCpanoutput.WT.tsv:md5,b1171286368f359f8bf854a7048e3e4c"
+                    ]
+                ],
                 "versions": [
                     "versions.yml:md5,1d342cf8b0f1e381e7b0cba890948d23"
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.0"
-        },
-        "timestamp": "2024-03-18T10:02:31.484326"
+        "timestamp": "2024-03-27T16:02:24.93302"
     }
 }
