@@ -8,7 +8,7 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "neoantigenediting"
-    tag "neoantigenediting/aligntoIEDB"
+    tag "neoantigenediting/aligntoiedb"
 
     test("neoantigenediting_aligntoiedb - json") {
 

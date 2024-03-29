@@ -1,4 +1,4 @@
-include { NEOANTIGENEDITING_ALIGNTOIEDB      } from '../../../modules/msk/neoantigenediting/aligntoIEDB'
+include { NEOANTIGENEDITING_ALIGNTOIEDB      } from '../../../modules/msk/neoantigenediting/aligntoiedb'
 include { NEOANTIGENEDITING_COMPUTEFITNESS   } from '../../../modules/msk/neoantigenediting/computefitness'
 
 
