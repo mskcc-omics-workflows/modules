@@ -354,6 +354,14 @@ jobs:
             tags: mutect1
           - profile: "conda"
             tags: ppflagfixer
+          - profile: "conda"
+            tags: pvmaf/tag
+          - profile: "conda"
+            tags: pvmaf/concat
+          - profile: "conda"
+            tags: genotypevariants/all
+          - profile: "conda"
+            tags: subworkflows/traceback
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
