@@ -8,15 +8,16 @@ keywords:
   - netMHCstabpan
   - genomics
 tools:
+  - "netmhcstabpan":
+      description: " Runs netMHCstabpan and netMHCpan then outputs tsvs and STDout for mutated and wild type neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+      documentation: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+      licence: ["MIT"]
+
   - "netmhcpan":
       description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
       homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      licence: ["MIT"]
-  - "netmhcstabpan":
-      description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
-      homepage: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
-      documentation: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
       licence: ["MIT"]
 
 input:
