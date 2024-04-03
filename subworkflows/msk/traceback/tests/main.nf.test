@@ -18,20 +18,14 @@ nextflow_workflow {
             workflow {
                 """
                 input[0] = Channel.of(
-                    [[id:'sample1', patient: 'patient1'],
-                        file('sample1.bam'), 
-                        file('sample1.bam.bai'),
-                        [], [], [], []
-                    ],
-                    [[id:'sample2', patient:'patient2'], [], [],
-                        file('sample2-duplex.bam'),
-                        file('sample2-duplex.bam.bai'), 
-                        file('sample2-simplex.bam'),
-                        file('sample2-simplex.bam.bai')
+                    [[id:'sample1', patient: 'patient1'],file('sample1.bam'),file('sample1.bam.bai'),[], [], [], []],[[id:'sample2', patient:'patient2'], [], [],
+                    file('sample2-duplex.bam'),
+                    file('sample2-duplex.bam.bai'),
+                    file('sample2-simplex.bam'),file('sample2-simplex.bam.bai')
                     ])
 
                 input[1] = Channel.of(
-                    [[patient: 'patient1'], 
+                    [[patient: 'patient1'],
                     [file('patient1.txt'),]
                     ],
                     [[patient: 'patient2'],

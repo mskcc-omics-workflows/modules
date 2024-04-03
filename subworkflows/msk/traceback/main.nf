@@ -6,8 +6,9 @@ include { GENOTYPEVARIANTS_ALL as GENOTYPEVARIANTS_ALL} from '../../../modules/m
 workflow TRACEBACK {
 
     take:
-    bams     // channel: [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
-    // or 
+    bams
+    // channel: [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
+    // or
     // channel: [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
     mafs // channel: [[patient:null], [maf1,...,maf2] ]
     header // channel [initial: 'header.txt', genotype: 'header2.txt']

@@ -17,10 +17,9 @@ input:
   - bams:
       type: channel
       description: |
-        The input channel containing impact or access bams files
-        Structure: 
-        [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []] or 
-        [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
+        The input channel containing impact or access bams files:
+        impact: [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
+        access: [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
       pattern: "*.{bam/cram/sam}"
   - mafs:
       type: channel
@@ -33,7 +32,7 @@ input:
       description: |
         A map specifying header files to be used when concatenating the maf files.
         initial: which columns to use when concatenating provided mafs
-        genotype: which columns to use when concatenating genotyped mafs 
+        genotype: which columns to use when concatenating genotyped mafs
         Structure: // [initial: 'header.txt', genotype: 'header2.txt']
       pattern: "*.{maf,txt,tsv}"
   - fasta:
