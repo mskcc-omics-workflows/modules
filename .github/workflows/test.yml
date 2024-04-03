@@ -173,6 +173,9 @@ jobs:
             "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
           ]
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
       - name: setup python
         uses: actions/setup-python@v4
         with:
@@ -193,9 +196,11 @@ jobs:
           TEMP_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows\///g')
           SW_NAME=$(echo $TEMP_NAME | sed 's/modules\///g')
           echo "SW_NAME=$SW_NAME" >> $GITHUB_ENV
+          echo $SW_NAME
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
+          branch: ${{ github.ref }}
           path: modules/msk/${{ env.SW_NAME }}/meta.yml
       - run: echo "${{ steps.cat_file_module.outputs.size }}"
       - name: Write Module yaml to temp
@@ -209,6 +214,7 @@ jobs:
         if: ${{ steps.cat_file_module.outputs.size == '' }}
         id: cat_file_subworkflow
         with:
+          branch: ${{ github.ref }}
           path: subworkflows/msk/${{ env.SW_NAME }}/meta.yml
       - name: Write Subworkflow yaml to temp
         if: ${{ steps.cat_file_subworkflow.outputs.size }}
@@ -354,6 +360,14 @@ jobs:
             tags: mutect1
           - profile: "conda"
             tags: ppflagfixer
+          - profile: "conda"
+            tags: pvmaf/tag
+          - profile: "conda"
+            tags: pvmaf/concat
+          - profile: "conda"
+            tags: genotypevariants/all
+          - profile: "conda"
+            tags: subworkflows/traceback
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
