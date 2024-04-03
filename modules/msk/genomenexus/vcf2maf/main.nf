@@ -24,9 +24,12 @@ process GENOMENEXUS_VCF2MAF {
 
     """
     python3 /annotation-tools/vcf2maf.py -i ${vcf} ${args}
-    sleep 3
+    
 
-    echo '"${task.process}": vcf2maf.py --help' > versions.yml
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+    vcf2maf.py v.1.0.3'
+    END_VERSION
     """
     stub:
     def args = task.ext.args ?: ''
@@ -37,9 +40,12 @@ process GENOMENEXUS_VCF2MAF {
     mkdir vcf2maf_output
     touch ${meta.id}.maf
     cp ${meta.id}.maf vcf2maf_output/
-    sleep 3
+    
 
 
-    echo '"${task.process}": vcf2maf.py --help' > versions.yml
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+    vcf2maf.py v.1.0.3'
+    END_VERSION
     """
 }
