@@ -26,10 +26,17 @@ process NEOANTIGENINPUT {
     
     """
         ls ${phyloWGSfolder}
+
+        gzip -d -c ${phyloWGSsumm} > ${id}.summ.json
+        gzip -d -c ${phyloWGSmut} > ${id}.mut.json
+
+        mkdir tree_dir
+        unzip ${phyloWGSfolder} -d  ./tree_dir
+
         python3 /usr/bin/eval_phyloWGS.py --maf_file ${inputMaf} \
-        --summary_file ${phyloWGSsumm} \
-        --mutation_file ${phyloWGSmut} \
-        --tree_directory ${phyloWGSfolder} \
+        --summary_file ${id}.summ.json \
+        --mutation_file ${id}.mut.json \
+        --tree_directory tree_dir \
         --id ${id} --patient_id ${patientid} \
         --cohort ${cohort} --HLA_genes ${hlaFile} \
         --netMHCpan_MUT_input ${mutNetMHCpan} \

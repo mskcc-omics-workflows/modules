@@ -17,13 +17,6 @@ nextflow_process {
 
             process {
                 """
-                
-                file(params.folderPath).mkdirs()
-                originalFile = file(params.test_data_mskcc['neoantigen']['test4_mutass_0_json'], checkIfExists: true)
-                copy_1 = originalFile.copyTo(file("0.json"))
-                copy_2 = originalFile.copyTo(file("1.json"))
-                copy_1.moveTo(file(params.folderPath + "/0.json"))
-                copy_2.moveTo(file(params.folderPath + "/1.json"))
 
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
@@ -35,7 +28,7 @@ nextflow_process {
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
-                    file(params.folderPath, checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['test4_mutass_zip'], checkIfExists: true)
                     ]
                 
                 input[2] = [
