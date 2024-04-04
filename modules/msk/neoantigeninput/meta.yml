@@ -80,7 +80,6 @@ output:
     description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the mutated antigens
     pattern: "*.{MUT.tsv}"
 
-
 authors:
   - "@johnoooh"
 maintainers:
