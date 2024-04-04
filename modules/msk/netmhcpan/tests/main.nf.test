@@ -18,7 +18,7 @@ nextflow_process {
                     file(file(params.test_data_mskcc['neoantigen']['temp_test_short_maf']), checkIfExists: true),
                     file(file(params.test_data_mskcc['neoantigen']['winners_hla_txt']), checkIfExists: true)
                     ]
-
+                input[1] = 'MUT'
                 """
             }
         }
@@ -30,9 +30,7 @@ nextflow_process {
                     process.out.versions,
                     process.out.fastaSequences,
                     file(process.out.xls[0][1]).name,
-                    file(process.out.xls[0][2]).name,
-                    file(process.out.netmhcpanoutput[0][1]).name,
-                    file(process.out.netmhcpanoutput[0][2]).name
+                    file(process.out.netmhcpanoutput[0][1]).name
                     ).match()
                 }
             )
@@ -53,6 +51,8 @@ nextflow_process {
                     file('winners_hla_txt')
                     ]
 
+                input[1] = 'MUT'
+
                 """
             }
         }
@@ -64,9 +64,7 @@ nextflow_process {
                     process.out.versions,
                     process.out.fastaSequences,
                     file(process.out.xls[0][1]).name,
-                    file(process.out.xls[0][2]).name,
-                    file(process.out.netmhcpanoutput[0][1]).name,
-                    file(process.out.netmhcpanoutput[0][2]).name
+                    file(process.out.netmhcpanoutput[0][1]).name
                     ).match()
                 }
             )
