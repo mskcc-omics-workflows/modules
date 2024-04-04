@@ -71,14 +71,14 @@ output:
       pattern: "*.{json}"
 
   - netMHCpanreformatted_WT:
-    type: file
-    description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the wild type antigens
-    pattern: "*.{WT.tsv}"
+      type: file
+      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the wild type antigens
+      pattern: "*.{WT.tsv}"
 
   - netMHCpanreformatted_WT:
-    type: file
-    description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the mutated antigens
-    pattern: "*.{MUT.tsv}"
+      type: file
+      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the mutated antigens
+      pattern: "*.{MUT.tsv}"
 
 authors:
   - "@johnoooh"
