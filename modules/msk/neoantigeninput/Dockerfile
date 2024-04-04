@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y libncurses5-dev \
@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y libncurses5-dev \
   libpng-dev \
   libjpeg8-dev \
   libfreetype6-dev \
+  unzip \
   g++
 
 RUN apt-get install -y git
@@ -32,8 +33,8 @@ RUN git clone https://github.com/Sentieon/vcflib.git /usr/bin/vcflib/
     
 
 RUN python3 -m pip install --upgrade pip && \
-    pip3 install numpy==1.15.4 && \
-    pip3 install pandas==0.23.4 
+    pip3 install numpy && \
+    pip3 install pandas 
 
 
 COPY eval_phyloWGS.py /usr/bin
