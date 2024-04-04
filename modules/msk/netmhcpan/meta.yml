@@ -31,6 +31,11 @@ input:
       description: HLA tsv outputtted by Polysolver
       pattern: "winners.{tsv}"
 
+  - inputType:
+      type: val
+      description: Allows netmhcpan to run in parallel. Should be 'MUT' or 'WT', it will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as an input. Running them in series is kicked off by putting in anything other than MUT or WT.
+      pattern: "*"
+
 output:
   #Only when we have meta
   - meta:
