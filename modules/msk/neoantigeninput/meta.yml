@@ -27,17 +27,17 @@ input:
   - phyloWGSsumm:
       type: file
       description: Summ json outputtted by phyloWGS
-      pattern: "*.{json}"
+      pattern: "*.{json.gz}"
 
   - phyloWGSmut:
       type: file
       description: Summary json outputtted by phyloWGS
-      pattern: "*.{json}"
+      pattern: "*.{json.gz}"
 
   - phyloWGSfolder:
       type: file
       description: Folder of mutations in trees output by PhyloWGS
-      pattern: "./"
+      pattern: ".{zip}"
 
   - mutNetMHCpan:
       type: file

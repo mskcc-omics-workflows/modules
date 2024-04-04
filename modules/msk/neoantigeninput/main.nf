@@ -2,8 +2,8 @@ process NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://orgeraj/neoantigeninputs:latest':
-        'docker.io/orgeraj/neoantigeninputs:latest' }"
+        'docker://mskcc/neoantigeninputs:1.0.3':
+        'docker.io/mskcc/neoantigeninputs:1.0.3' }"
 
     input:
     tuple val(meta),  path(inputMaf),      path(hlaFile)
@@ -25,18 +25,18 @@ process NEOANTIGENINPUT {
     def cohort = task.ext.cohort ?: "${meta.id}_cohort"
     
     """
-        ls ${phyloWGSfolder}
+        tree_folder_name=\$(basename -s .zip "${phyloWGSfolder}")
+        unzip ${phyloWGSfolder}
 
         gzip -d -c ${phyloWGSsumm} > ${id}.summ.json
         gzip -d -c ${phyloWGSmut} > ${id}.mut.json
 
-        mkdir tree_dir
-        unzip ${phyloWGSfolder} -d  ./tree_dir
+        
 
         python3 /usr/bin/eval_phyloWGS.py --maf_file ${inputMaf} \
         --summary_file ${id}.summ.json \
         --mutation_file ${id}.mut.json \
-        --tree_directory tree_dir \
+        --tree_directory \$tree_folder_name \
         --id ${id} --patient_id ${patientid} \
         --cohort ${cohort} --HLA_genes ${hlaFile} \
         --netMHCpan_MUT_input ${mutNetMHCpan} \
