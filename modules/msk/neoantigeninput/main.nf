@@ -2,8 +2,8 @@ process NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigeninputs:1.0.3':
-        'docker.io/mskcc/neoantigeninputs:1.0.3' }"
+        'docker://mskcc/neoantigeninputs:1.0.4':
+        'docker.io/mskcc/neoantigeninputs:1.0.4' }"
 
     input:
     tuple val(meta),  path(inputMaf),      path(hlaFile)
@@ -26,7 +26,8 @@ process NEOANTIGENINPUT {
     
     """
         tree_folder_name=\$(basename -s .zip "${phyloWGSfolder}")
-        unzip ${phyloWGSfolder}
+        mkdir \$tree_folder_name
+        unzip ${phyloWGSfolder} -d \$tree_folder_name
 
         gzip -d -c ${phyloWGSsumm} > ${id}.summ.json
         gzip -d -c ${phyloWGSmut} > ${id}.mut.json
