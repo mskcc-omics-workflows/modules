@@ -48,11 +48,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.0"
-        },
-        "timestamp": "2024-04-04T17:05:38.949118"
+        "timestamp": "2024-04-05T18:16:07.635268"
     },
     "neoantigeninput - json,tsv": {
         "content": [
@@ -63,7 +59,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,35faffcc545dd95218cd8f8d55768c61"
+                        "test_patient_test_.json:md5,4c08046a6f5826a3d51c221c6eef6348"
                     ]
                 ],
                 "1": [
@@ -85,7 +81,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,35faffcc545dd95218cd8f8d55768c61"
+                        "test_patient_test_.json:md5,4c08046a6f5826a3d51c221c6eef6348"
                     ]
                 ],
                 "netMHCpanreformatted": [
@@ -103,10 +99,6 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.0"
-        },
-        "timestamp": "2024-04-04T17:05:32.699247"
+        "timestamp": "2024-04-05T18:15:58.939665"
     }
 }
