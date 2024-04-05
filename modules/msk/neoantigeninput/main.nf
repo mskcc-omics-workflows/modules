@@ -37,12 +37,13 @@ process NEOANTIGENINPUT {
         python3 /usr/bin/eval_phyloWGS.py --maf_file ${inputMaf} \
         --summary_file ${id}.summ.json \
         --mutation_file ${id}.mut.json \
-        --tree_directory \$tree_folder_name \
+        --tree_directory \$tree_folder_name/\$tree_folder_name \
         --id ${id} --patient_id ${patientid} \
         --cohort ${cohort} --HLA_genes ${hlaFile} \
         --netMHCpan_MUT_input ${mutNetMHCpan} \
         --netMHCpan_WT_input ${wtNetMHCpan}
         ${args}
+        
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
