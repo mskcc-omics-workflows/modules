@@ -2,8 +2,8 @@ process NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigeninputs:1.0.3':
-        'docker.io/mskcc/neoantigeninputs:1.0.3' }"
+        'docker://mskcc/neoantigeninputs:1.0.4':
+        'docker.io/mskcc/neoantigeninputs:1.0.4' }"
 
     input:
     tuple val(meta),  path(inputMaf),      path(hlaFile)
@@ -26,7 +26,8 @@ process NEOANTIGENINPUT {
     
     """
         tree_folder_name=\$(basename -s .zip "${phyloWGSfolder}")
-        unzip ${phyloWGSfolder}
+        mkdir \$tree_folder_name
+        unzip ${phyloWGSfolder} -d \$tree_folder_name
 
         gzip -d -c ${phyloWGSsumm} > ${id}.summ.json
         gzip -d -c ${phyloWGSmut} > ${id}.mut.json
@@ -36,12 +37,13 @@ process NEOANTIGENINPUT {
         python3 /usr/bin/eval_phyloWGS.py --maf_file ${inputMaf} \
         --summary_file ${id}.summ.json \
         --mutation_file ${id}.mut.json \
-        --tree_directory \$tree_folder_name \
+        --tree_directory \$tree_folder_name/\$tree_folder_name \
         --id ${id} --patient_id ${patientid} \
         --cohort ${cohort} --HLA_genes ${hlaFile} \
         --netMHCpan_MUT_input ${mutNetMHCpan} \
         --netMHCpan_WT_input ${wtNetMHCpan}
         ${args}
+        
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":

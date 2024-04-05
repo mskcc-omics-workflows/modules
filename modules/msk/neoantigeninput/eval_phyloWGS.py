@@ -151,7 +151,7 @@ def main(args):
         outer_dict['sample_trees'].append(inner_sample_tree_dict)
 
 
-    outer_dict['Mutations'] = mutation_list
+    outer_dict['mutations'] = mutation_list
     
     #TODO format HLA_gene input data, depending on format inputted.  They should look like this A*02:01
     #this will be setup for polysolver winners output
