@@ -9,7 +9,7 @@ process NETMHCPAN {
 
     input:
     tuple val(meta),  path(inputMaf), path(hlaFile)
-    val inputType
+    each inputType
 
     output:
     tuple val(meta), path("*.xls"), emit: xls
