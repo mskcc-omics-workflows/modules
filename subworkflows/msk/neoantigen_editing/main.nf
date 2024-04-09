@@ -24,5 +24,5 @@ workflow NEOANTIGEN_EDITING {
 
     emit:
     annotated_output      = NEOANTIGENEDITING_COMPUTEFITNESS.out.annotated_output           // channel: [ val(meta), [ annotated_json ] ]
-    versions = ch_versions                     // channel: [ versions.yml ]
+    versions              = ch_versions                                                     // channel: [ versions.yml ]
 }
