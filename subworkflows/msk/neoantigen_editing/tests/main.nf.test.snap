@@ -1,5 +1,15 @@
 {
-    "neoantigen - test": {
+    "neoantigen_editing - json - stub": {
+        "content": [
+            [
+                "versions.yml:md5,37984f930810748dc81d61b73680e10a",
+                "versions.yml:md5,563eced4337e36c41c7450059792e907"
+            ],
+            "patient_data_annotated.json"
+        ],
+        "timestamp": "2024-04-09T09:14:44.684354"
+    },
+    "neoantigen_editing - json": {
         "content": [
             [
                 "versions.yml:md5,37984f930810748dc81d61b73680e10a",
@@ -7,10 +17,6 @@
             ],
             "3_OLTS_primary_tumor_annotated.json"
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.10.0"
-        },
-        "timestamp": "2024-03-22T14:44:00.937168"
+        "timestamp": "2024-04-09T09:14:35.621369"
     }
 }
