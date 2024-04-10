@@ -15,7 +15,7 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['facets_gene_level_txt'], checkIfExists: true)
@@ -40,7 +40,7 @@ nextflow_process {
 
     when {
         process {
-            """                
+            """
             input[0] = [
                 [ id:'test', single_end:false ], // meta map
                 file('facets_gene_level_txt')

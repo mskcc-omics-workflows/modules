@@ -19,13 +19,13 @@ process PHYLOWGS_CREATEINPUT {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    """ 
+    """
     python2 \\
         /usr/bin/parser/create_phylowgs_inputs.py \\
         --cnvs S1=${cnv} \\
         ${args} \\
         --vcf-type S1=maf S1=${unfilteredmaf}
-    
+
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

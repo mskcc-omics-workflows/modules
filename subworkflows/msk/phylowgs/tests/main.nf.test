@@ -7,7 +7,7 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_nfcore"
     tag "subworkflows_msk"
-    tag "subworkflows/phylowgs"   
+    tag "subworkflows/phylowgs"
     tag "phylowgs"
     tag "phylowgs/parsecnvs"
     tag "phylowgs/createinput"
@@ -35,8 +35,8 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(file(workflow.out.summ[0][1]).name,
-                                  file(workflow.out.muts[0][1]).name,
-                                  file(workflow.out.mutass[0][1]).name).match()
+                                    file(workflow.out.muts[0][1]).name,
+                                    file(workflow.out.mutass[0][1]).name).match()
                 }
             )
         }
@@ -62,13 +62,13 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success},
                 { assert snapshot(file(workflow.out.summ[0][1]).name,
-                                  file(workflow.out.muts[0][1]).name,
-                                  file(workflow.out.mutass[0][1]).name).match()
+                                    file(workflow.out.muts[0][1]).name,
+                                    file(workflow.out.mutass[0][1]).name).match()
                 }
 
             )
         }
     }
 
-    
+
 }
