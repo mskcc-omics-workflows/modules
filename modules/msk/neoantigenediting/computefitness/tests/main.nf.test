@@ -14,11 +14,11 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
                     file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)                    
+                    file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)
                     ]
 
                 """
@@ -41,11 +41,11 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
                     file('patient_data'),
-                    file('alignment_file')                  
+                    file('alignment_file')
                     ]
 
                 """

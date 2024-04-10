@@ -34,9 +34,9 @@ process NETMHCPAN {
     --maf_file ${inputMaf} \
     --CDS_file ${in_CDS_file} \
     --CDNA_file ${in_CDNA_file}
-    
-    
-    
+
+
+
     cat ${hlaFile} | tr "\\t" "\\n" | grep -v "HLA" | tr "\\n" "," > massaged.winners.hla.txt
 
 
@@ -48,11 +48,11 @@ process NETMHCPAN {
 
         # Append the transformed item to the output string
         truncated_value=\$(echo "\$item" | cut -c 1-11)
-        
+
         # Replace the first '_', the next '_', and remaining '_' with '-', '*', and ':', respectively
         modified_value=\$(echo "\$truncated_value" | tr '[:lower:]' '[:upper:]' | sed 's/_/-/; s/_//; s/_/:/g')
         output_hla+=",\$modified_value"
-        
+
     done
 
     # Remove leading comma
@@ -66,7 +66,7 @@ process NETMHCPAN {
         # Execute MUT command
         /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.MUT.xls > ${prefix}.MUT.netmhcpan.output
     elif [ "$inputType" == "WT" ]; then
-        # Execute WT 
+        # Execute WT
         /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.WT.xls > ${prefix}.WT.netmhcpan.output
     else
         # By default do both.

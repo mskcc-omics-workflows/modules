@@ -25,7 +25,7 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
     python3 /usr/bin/align_neoantigens_to_IEDB.py \\
         --fasta ${iedb_fasta} \\
         --input ${patient_data}
-    
+
 
 
     cat <<-END_VERSIONS > versions.yml
