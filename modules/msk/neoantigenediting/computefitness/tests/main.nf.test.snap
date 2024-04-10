@@ -1,6 +1,9 @@
 {
     "neoantigenediting_computefitness - json - stub": {
         "content": [
+            [
+                "versions.yml:md5,e535d03b1366a3bee2e96c63a942b180"
+            ],
             {
                 "0": [
                     [
@@ -28,12 +31,15 @@
                 ]
             }
         ],
-        "timestamp": "2024-04-10T12:08:14.142044"
+        "timestamp": "2024-04-10T12:19:41.537529"
     },
     "neoantigenediting_computefitness - json": {
         "content": [
+            [
+                "versions.yml:md5,e535d03b1366a3bee2e96c63a942b180"
+            ],
             "3_OLTS_primary_tumor_annotated.json"
         ],
-        "timestamp": "2024-04-10T12:08:07.77067"
+        "timestamp": "2024-04-10T12:19:34.754948"
     }
 }
