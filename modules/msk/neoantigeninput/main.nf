@@ -27,7 +27,7 @@ process NEOANTIGENINPUT {
     """
         tree_folder_name=\$(basename -s .zip "${phyloWGSfolder}")
         mkdir \$tree_folder_name
-        unzip ${phyloWGSfolder}
+        unzip ${phyloWGSfolder} -d \$tree_folder_name
         gzip -d -c ${phyloWGSsumm} > ${id}.summ.json
         gzip -d -c ${phyloWGSmut} > ${id}.mut.json
 
