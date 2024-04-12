@@ -20,6 +20,8 @@ nextflow_process {
                     file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)
                     ]
 
+                input[1] = ['MUT']
+
                 """
             }
         }
@@ -51,6 +53,8 @@ nextflow_process {
                     file('temp_test_short_maf'),
                     file('winners_hla_txt')
                     ]
+                
+                input[1] = ['MUT']
                 """
             }
         }
