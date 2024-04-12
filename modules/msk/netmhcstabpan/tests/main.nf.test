@@ -32,8 +32,7 @@ nextflow_process {
                 { assert snapshot(
                     process.out.versions,
                     process.out.fastaSequences,
-                    file(process.out.netmhcstabpanoutput[0][1]).name,
-                    file(process.out.netmhcstabpanoutput[0][2]).name
+                    file(process.out.netmhcstabpanoutput[0][1]).name
                     ).match()
                 }
             )
@@ -65,8 +64,7 @@ nextflow_process {
                 { assert snapshot(
                     process.out.versions,
                     process.out.fastaSequences,
-                    file(process.out.netmhcstabpanoutput[0][1]).name,
-                    file(process.out.netmhcstabpanoutput[0][2]).name
+                    file(process.out.netmhcstabpanoutput[0][1]).name
                     ).match()
                 }
             )
