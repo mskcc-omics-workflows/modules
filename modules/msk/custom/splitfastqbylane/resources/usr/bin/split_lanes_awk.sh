@@ -36,3 +36,4 @@ if [ ! -z ${read2} ] ; then
     echo "processing read2"
     a 2 ${read2} ${prefix}
 fi
+
