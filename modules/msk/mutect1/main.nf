@@ -3,7 +3,7 @@ process MUTECT1 {
     label 'process_low'
     shell '/bin/sh'
 
-   
+
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'ghcr.io/msk-access/mutect1:1.1.5':
         'ghcr.io/msk-access/mutect1:1.1.5' }"
@@ -13,10 +13,10 @@ process MUTECT1 {
     tuple path(bed_file), path(fasta_file), path(fasta_index_file), path(fasta_dict_file)
 
     output:
-    
+
     tuple val(meta), path("*.mutect.vcf"), emit: mutect_vcf
     tuple val(meta), path("*.mutect.txt"), emit: standard_mutect_output
-    
+
     path "versions.yml"           , emit: versions
 
     when:
@@ -29,7 +29,7 @@ process MUTECT1 {
     def control_sample_name = task.ext.prefix ?: "${meta.control_id}"
     def bed_file = bed_file ? "--intervals ${bed_file}" : ''
 
-    
+
     """
     java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /opt/mutect/muTect-1.1.5.jar -T MuTect \
         ${args} \
@@ -42,10 +42,10 @@ process MUTECT1 {
         ${args2} \
         --out ${case_sample_name}.${control_sample_name}.mutect.txt \
         --vcf ${case_sample_name}.${control_sample_name}.mutect.vcf
-    
+
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}": 
+    "${task.process}":
         mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
     END_VERSIONS
     """
@@ -62,7 +62,7 @@ process MUTECT1 {
     touch ${case_sample_name}.${control_sample_name}.mutect.txt
     touch ${case_sample_name}.${control_sample_name}.mutect.vcf
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}": 
+    "${task.process}":
         mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
     END_VERSIONS
     """
