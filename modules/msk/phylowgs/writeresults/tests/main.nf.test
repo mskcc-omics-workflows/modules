@@ -14,7 +14,7 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
                     file(params.test_data_mskcc['neoantigen']['trees'], checkIfExists: true)
@@ -26,9 +26,10 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(file(process.out.summ[0][1]).name,
-                                  file(process.out.muts[0][1]).name,
-                                  file(process.out.mutass[0][1]).name).match()
+                { assert snapshot(process.out.versions,
+                                file(process.out.summ[0][1]).name,
+                                file(process.out.muts[0][1]).name,
+                                file(process.out.mutass[0][1]).name).match()
                 }
 
             )
@@ -42,7 +43,7 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
                     file('tree_data')
@@ -54,9 +55,10 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(file(process.out.summ[0][1]).name,
-                                  file(process.out.muts[0][1]).name,
-                                  file(process.out.mutass[0][1]).name).match()
+                { assert snapshot(process.out.versions,
+                                file(process.out.summ[0][1]).name,
+                                file(process.out.muts[0][1]).name,
+                                file(process.out.mutass[0][1]).name).match()
                 }
 
             )

@@ -16,7 +16,7 @@ input:
   - meta:
       type: map
       description: |
-        Groovy Map containing sample information.  Maybe cohort and patient_id as well? 
+        Groovy Map containing sample information.  Maybe cohort and patient_id as well?
         e.g. `[ id:'sample1', single_end:false ]`
 
   - inputMaf:
@@ -27,17 +27,17 @@ input:
   - phyloWGSsumm:
       type: file
       description: Summ json outputtted by phyloWGS
-      pattern: "*.{json}"
+      pattern: "*.{json.gz}"
 
   - phyloWGSmut:
       type: file
       description: Summary json outputtted by phyloWGS
-      pattern: "*.{json}"
+      pattern: "*.{json.gz}"
 
   - phyloWGSfolder:
       type: file
       description: Folder of mutations in trees output by PhyloWGS
-      pattern: "./"
+      pattern: ".{zip}"
 
   - mutNetMHCpan:
       type: file
@@ -69,6 +69,16 @@ output:
       type: file
       description: output combined Json ready for input into the neoantigen pipeline
       pattern: "*.{json}"
+
+  - netMHCpanreformatted_WT:
+      type: file
+      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the wild type antigens
+      pattern: "*.{WT.tsv}"
+
+  - netMHCpanreformatted_WT:
+      type: file
+      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the mutated antigens
+      pattern: "*.{MUT.tsv}"
 
 authors:
   - "@johnoooh"

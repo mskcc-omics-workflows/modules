@@ -12,16 +12,16 @@ nextflow_workflow {
     tag "neoantigenediting/computefitness"
 
 
-    test("neoantigen - test") {
+    test("neoantigen_editing - json") {
 
         when {
             workflow {
                 """
-                input[0] = [
+                input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map,
-                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)                   
-                    ]
-                input[1] = file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)
+                    ])
+                input[1] = Channel.value(file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true))
 
                 """
             }
@@ -34,9 +34,39 @@ nextflow_workflow {
                     workflow.out.versions,
                     file(workflow.out.annotated_output[0][1]).name
                     ).match()
-                }           
+                }
             )
 
+        }
+    }
+
+    test("neoantigen_editing - json - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map,
+                    file('patient_data')
+                    ])
+                input[1] = Channel.value(file('iedb_fasta'))
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(
+                    workflow.out.versions,
+                    file(workflow.out.annotated_output[0][1]).name
+                    ).match()
+                }
+
+            )
         }
     }
 }

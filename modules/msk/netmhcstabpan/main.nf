@@ -11,6 +11,7 @@ process NETMHCSTABPAN {
     tuple val(meta), path(inputMaf), path(hlaFile)
     each inputType
 
+
     output:
     tuple val(meta), path("*.netmhcstabpan.output"),   emit: netmhcstabpanoutput
     tuple val(meta), path("*_out/*.mutated_sequences.fa"), path("*_out/*.WT_sequences.fa"), emit: fastaSequences
@@ -34,8 +35,8 @@ process NETMHCSTABPAN {
     --maf_file ${inputMaf} \
     --CDS_file ${in_CDS_file} \
     --CDNA_file ${in_CDNA_file}
-    
-    
+
+
     cat ${hlaFile} | tr "\\t" "\\n" | grep -v "HLA" | tr "\\n" "," > massaged.winners.hla.txt
 
     input_string=`head -n 1 massaged.winners.hla.txt`
@@ -46,11 +47,11 @@ process NETMHCSTABPAN {
 
         # Append the transformed item to the output string
         truncated_value=\$(echo "\$item" | cut -c 1-11)
-        
+
         # Replace the first '_', the next '_', and remaining '_' with '-', '*', and ':', respectively
         modified_value=\$(echo "\$truncated_value" | tr '[:lower:]' '[:upper:]' | sed 's/_/-/; s/_//; s/_/:/g')
         output_hla+=",\$modified_value"
-        
+
     done
 
     # Remove leading comma
@@ -86,8 +87,8 @@ process NETMHCSTABPAN {
     """
     touch ${prefix}.MUT.netmhcstabpan.output
     mkdir ${prefix}_out
-    touch ${prefix}_out/${prefix}.mutated_sequences.fa  
-    echo -e ">Mutpeptide \n HEHEHE" > ${prefix}_out/${prefix}.mutated_sequences.fa 
+    touch ${prefix}_out/${prefix}.mutated_sequences.fa
+    echo -e ">Mutpeptide \n HEHEHE" > ${prefix}_out/${prefix}.mutated_sequences.fa
 
     touch ${prefix}_out/${prefix}.WT_sequences.fa
     echo -e ">WTpeptide \n HEKEHE" > ${prefix}_out/${prefix}.WT_sequences.fa

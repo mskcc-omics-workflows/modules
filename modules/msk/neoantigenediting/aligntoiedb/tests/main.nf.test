@@ -14,10 +14,10 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
-                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)                   
+                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)
                     ]
                 input[1] = file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true)
                 """
@@ -27,7 +27,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(file(process.out.iedb_alignment[0][1]).name).match() }
+                { assert snapshot(process.out.versions,file(process.out.iedb_alignment[0][1]).name).match() }
 
             )
         }
@@ -40,10 +40,10 @@ nextflow_process {
 
         when {
             process {
-                """                
+                """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map,
-                    file('patient_data')                   
+                    file('patient_data')
                     ]
                 input[1] = file('iedb_fasta')
                 """
@@ -53,7 +53,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(process.out.versions,process.out).match() }
 
             )
         }

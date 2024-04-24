@@ -9,10 +9,11 @@ process NETMHCPAN {
 
     input:
     tuple val(meta),  path(inputMaf), path(hlaFile)
+    each inputType
 
     output:
-    tuple val(meta), path("*.MUT.xls"),path("*.WT.xls"), emit: xls
-    tuple val(meta), path("*.MUT.netmhcpan.output"), path("*.WT.netmhcpan.output"), emit: netmhcpanoutput
+    tuple val(meta), path("*.xls"), emit: xls
+    tuple val(meta), path("*.netmhcpan.output"), emit: netmhcpanoutput
     tuple val(meta), path("*_out/*.mutated_sequences.fa"), path("*_out/*.WT_sequences.fa"), emit: fastaSequences
     path "versions.yml"           , emit: versions
 
@@ -25,6 +26,7 @@ process NETMHCPAN {
     def netMHCpan_version = '4.1'
     def in_CDS_file = task.ext.in_CDS_file ?: "/usr/local/bin/Homo_sapiens.GRCh37.75.cds.all.fa.gz"
     def in_CDNA_file = task.ext.in_CDNA_file ?:"/usr/local/bin/Homo_sapiens.GRCh37.75.cdna.all.fa.gz"
+
     """
     mkdir ${prefix}_out
     python3 /usr/local/bin/generateMutFasta.py --sample_id ${prefix} \
@@ -32,9 +34,9 @@ process NETMHCPAN {
     --maf_file ${inputMaf} \
     --CDS_file ${in_CDS_file} \
     --CDNA_file ${in_CDNA_file}
-    
-    
-    
+
+
+
     cat ${hlaFile} | tr "\\t" "\\n" | grep -v "HLA" | tr "\\n" "," > massaged.winners.hla.txt
 
 
@@ -46,11 +48,11 @@ process NETMHCPAN {
 
         # Append the transformed item to the output string
         truncated_value=\$(echo "\$item" | cut -c 1-11)
-        
+
         # Replace the first '_', the next '_', and remaining '_' with '-', '*', and ':', respectively
         modified_value=\$(echo "\$truncated_value" | tr '[:lower:]' '[:upper:]' | sed 's/_/-/; s/_//; s/_/:/g')
         output_hla+=",\$modified_value"
-        
+
     done
 
     # Remove leading comma
@@ -58,9 +60,23 @@ process NETMHCPAN {
     output_hla="\${output_hla:1}"
 
     echo \$output_hla
-    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.MUT.xls > ${prefix}.MUT.netmhcpan.output
 
-    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.WT.xls > ${prefix}.WT.netmhcpan.output
+
+    if [ "$inputType" == "MUT" ]; then
+        # Execute MUT command
+        /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.MUT.xls > ${prefix}.MUT.netmhcpan.output
+    elif [ "$inputType" == "WT" ]; then
+        # Execute WT
+        /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.WT.xls > ${prefix}.WT.netmhcpan.output
+    else
+        # By default do both.
+        /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.MUT.xls > ${prefix}.MUT.netmhcpan.output
+        /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.WT.xls > ${prefix}.WT.netmhcpan.output
+
+    fi
+
+
+
 
 
     cat <<-END_VERSIONS > versions.yml
@@ -75,9 +91,7 @@ process NETMHCPAN {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     touch ${prefix}.MUT.netmhcpan.output
-    touch ${prefix}.WT.netmhcpan.output
     touch ${prefix}.MUT.xls
-    touch ${prefix}.WT.xls
     mkdir ${prefix}_out
     touch ${prefix}_out/${prefix}.mutated_sequences.fa
     touch ${prefix}_out/${prefix}.WT_sequences.fa

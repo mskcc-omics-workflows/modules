@@ -1,18 +1,24 @@
 {
     "phylowgs_writeresults - zip - stub": {
         "content": [
+            [
+                "versions.yml:md5,e0d3dcfdb528c969019c6c8adc9ef807"
+            ],
             "test.summ.json.gz",
             "test.muts.json.gz",
             "test.mutass.zip"
         ],
-        "timestamp": "2024-03-13T11:54:43.555107"
+        "timestamp": "2024-04-10T12:15:06.568348"
     },
     "phylowgs_writeresults - zip": {
         "content": [
+            [
+                "versions.yml:md5,e0d3dcfdb528c969019c6c8adc9ef807"
+            ],
             "test.summ.json.gz",
             "test.muts.json.gz",
             "test.mutass.zip"
         ],
-        "timestamp": "2024-03-13T11:54:36.208283"
+        "timestamp": "2024-04-10T12:15:00.703473"
     }
 }

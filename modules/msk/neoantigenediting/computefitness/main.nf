@@ -8,7 +8,7 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
 
     input:
     tuple val(meta),  path(patient_data), path(alignment_file)
-    
+
     output:
     tuple val(meta), path("*_annotated.json")               , emit: annotated_output
     path "versions.yml"                                     , emit: versions
@@ -36,7 +36,7 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    
+
     touch patient_data_annotated.json
 
     cat <<-END_VERSIONS > versions.yml
