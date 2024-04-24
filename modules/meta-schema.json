@@ -27,10 +27,16 @@
                 "type": "string"
             }
         },
+        "maintainers": {
+            "type": "array",
+            "description": "Maintainers of the module",
+            "items": {
+                "type": "string"
+            }
+        },
         "input": {
             "type": "array",
             "description": "Input channels for the module",
-
             "items": {
                 "type": "object",
                 "patternProperties": {
@@ -40,7 +46,7 @@
                             "type": {
                                 "type": "string",
                                 "description": "Type of the input channel",
-                                "enum": ["map", "file", "directory", "string", "integer", "float"]
+                                "enum": ["map", "file", "directory", "string", "integer", "float", "boolean", "list"]
                             },
                             "description": {
                                 "type": "string",
@@ -53,6 +59,14 @@
                             "default": {
                                 "type": ["string", "number", "boolean", "array", "object"],
                                 "description": "Default value for the input channel"
+                            },
+                            "enum": {
+                                "type": "array",
+                                "description": "List of allowed values for the input channel",
+                                "items": {
+                                    "type": ["string", "number", "boolean", "array", "object"]
+                                },
+                                "uniqueItems": true
                             }
                         },
                         "required": ["type", "description"]
@@ -72,7 +86,7 @@
                             "type": {
                                 "type": "string",
                                 "description": "Type of the output channel",
-                                "enum": ["map", "file", "directory", "string", "integer", "float"]
+                                "enum": ["map", "file", "directory", "string", "integer", "float", "boolean", "list"]
                             },
                             "description": {
                                 "type": "string",
@@ -81,6 +95,14 @@
                             "pattern": {
                                 "type": "string",
                                 "description": "Pattern of the input channel, given in Java glob syntax"
+                            },
+                            "enum": {
+                                "type": "array",
+                                "description": "List of allowed values for the output channel",
+                                "items": {
+                                    "type": ["string", "number", "boolean", "array", "object"]
+                                },
+                                "uniqueItems": true
                             }
                         },
                         "required": ["type", "description"]
@@ -109,7 +131,7 @@
                             "documentation": {
                                 "type": "string",
                                 "description": "Documentation of the tool",
-                                "pattern": "^(http|https)://.*$"
+                                "pattern": "^(http|https|ftp)://.*$"
                             },
                             "tool_dev_url": {
                                 "type": "string",
@@ -117,25 +139,43 @@
                                 "pattern": "^(http|https)://.*$"
                             },
                             "doi": {
-                                "type": "string",
                                 "description": "DOI of the tool",
-                                "pattern": "^10.\\d{4,9}\\/[^,]+$"
+                                "anyOf": [
+                                    {
+                                        "type": "string",
+                                        "pattern": "^10\\.\\d{4,9}\\/[^,]+$"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "enum": ["no DOI available"]
+                                    }
+                                ]
                             },
                             "licence": {
-                                "type": ["array", "string"],
-                                "description": "Licence of the tool",
+                                "type": "array",
                                 "items": {
                                     "type": "string"
                                 },
-                                "uniqueItems": true
+                                "description": "Licence of the tool",
+                                "minItems": 1,
+                                "uniqueItems": true,
+                                "message": "Licence must be an array of one or more entries, e.g. [\"MIT\"]"
                             }
                         },
                         "required": ["description"],
                         "anyOf": [
-                            { "required": ["homepage"] },
-                            { "required": ["documentation"] },
-                            { "required": ["tool_dev_url"] },
-                            { "required": ["doi"] }
+                            {
+                                "required": ["homepage"]
+                            },
+                            {
+                                "required": ["documentation"]
+                            },
+                            {
+                                "required": ["tool_dev_url"]
+                            },
+                            {
+                                "required": ["doi"]
+                            }
                         ]
                     }
                 }
