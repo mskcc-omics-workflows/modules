@@ -14,14 +14,13 @@
                     "test.WT_sequences.fa:md5,27e677ffa032a87934df4c62e9f15357"
                 ]
             ],
-            "test.MUT.netmhcpan.output",
-            "test.WT.netmhcpan.output"
+            "test.MUT.netmhcstabpan.output"
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "23.10.0"
         },
-        "timestamp": "2024-03-27T12:50:08.590894"
+        "timestamp": "2024-04-12T16:08:44.682631"
     },
     "test_neoantigen - output,fa - stub": {
         "content": [
@@ -38,13 +37,12 @@
                     "test.WT_sequences.fa:md5,3b46893e0ed63a451ad40a645b5e350d"
                 ]
             ],
-            "test.MUT.netmhcpan.output",
-            "test.WT.netmhcpan.output"
+            "test.MUT.netmhcstabpan.output"
         ],
         "meta": {
             "nf-test": "0.8.4",
             "nextflow": "23.10.0"
         },
-        "timestamp": "2024-03-27T12:50:12.831267"
+        "timestamp": "2024-04-12T16:08:48.863936"
     }
 }
