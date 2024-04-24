@@ -4,15 +4,16 @@ process NETMHCSTABPAN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/netmhcstabpan:1.0':
-        'docker.io/mskcc/netmhcstabpan:1.0' }"
+        'docker://mskcc/netmhcstabpan:1.0.1':
+        'docker.io/mskcc/netmhcstabpan:1.0.1' }"
 
     input:
     tuple val(meta), path(inputMaf), path(hlaFile)
+    each inputType
 
 
     output:
-    tuple val(meta), path("*.MUT.netmhcpan.output"),       path("*.WT.netmhcpan.output"),   emit: netmhcstabpanoutput
+    tuple val(meta), path("*.netmhcstabpan.output"),   emit: netmhcstabpanoutput
     tuple val(meta), path("*_out/*.mutated_sequences.fa"), path("*_out/*.WT_sequences.fa"), emit: fastaSequences
     path "versions.yml"           , emit: versions
 
@@ -57,10 +58,18 @@ process NETMHCSTABPAN {
     output_hla="\${output_hla:1}"
 
     echo \$output_hla
-    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcpan.output
 
-    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -BA 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcpan.output
-
+    if [ "$inputType" == "MUT" ]; then
+        # Execute MUT command
+        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcstabpan.output
+    elif [ "$inputType" == "WT" ]; then
+        # Execute WT 
+        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcstabpan.output
+    else
+        # By default do both.
+        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcstabpan.output
+        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcstabpan.output
+    fi
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -76,8 +85,7 @@ process NETMHCSTABPAN {
     def netMHCpan_version = '4.1'
     def netMHCstabpan_version = '1.0'
     """
-    touch ${prefix}.MUT.netmhcpan.output
-    touch ${prefix}.WT.netmhcpan.output
+    touch ${prefix}.MUT.netmhcstabpan.output
     mkdir ${prefix}_out
     touch ${prefix}_out/${prefix}.mutated_sequences.fa
     echo -e ">Mutpeptide \n HEHEHE" > ${prefix}_out/${prefix}.mutated_sequences.fa
