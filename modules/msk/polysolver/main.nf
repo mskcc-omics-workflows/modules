@@ -30,7 +30,7 @@ process POLYSOLVER {
     def format_param      = format ?: "STDFQ"
     """
     cp /home/polysolver/scripts/shell_call_hla_type .
-    sed -i "171s/TMP_DIR=.*/TMP_DIR=nf-scratch/" shell_call_hla_type 
+    sed -i "171s/TMP_DIR=.*/TMP_DIR=nf-scratch/" shell_call_hla_type
     bash shell_call_hla_type \\
         ${bam} \\
         Unknown \\
