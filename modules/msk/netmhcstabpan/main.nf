@@ -63,7 +63,7 @@ process NETMHCSTABPAN {
         # Execute MUT command
         /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcstabpan.output
     elif [ "$inputType" == "WT" ]; then
-        # Execute WT 
+        # Execute WT
         /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcstabpan.output
     else
         # By default do both.
