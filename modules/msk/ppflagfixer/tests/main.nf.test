@@ -1,0 +1,87 @@
+nextflow_process {
+
+    name "Test PPFLAGFIXER"
+    script "../main.nf"
+    process "PPFLAGFIXER"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "ppflagfixer"
+
+    test("ppflagfixer - normal bam") {
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true)
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("ppflagfixer - tumor bam") {
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true)
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("ppflagfixer - bam - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                    meta = [ id:'test' ] // meta map
+                    input[0] = [
+                                    meta,
+                                    file("stub_file"),
+                                    file("stub_file1")
+                                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
