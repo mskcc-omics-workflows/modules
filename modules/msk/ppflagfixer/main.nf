@@ -39,7 +39,6 @@ process PPFLAGFIXER {
 
     """
     echo "stub test" >> ppflag.${prefix}.bam
-    
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
