@@ -41,6 +41,19 @@ That being said, testing through nf-core/tools is preferable as it checks snapsh
 
 All modules in mskcc-omics-workflows/modules should have a [`stub`](https://www.nextflow.io/docs/latest/process.html#stub) block to facilitate easier testing. This is not required in nf-core/modules repository or for nf-core/tools compatibility, but this feature makes it easier to quickly prototype workflow logic without using the real commands.
 
+#### Ignoring Conda Tests
+
+While mskcc-omics-workflows/modules encourages contributors to provide conda support for their modules, it is often not desirable or difficult to include for certain modules.\
+\
+In this case, the `environment.yml` can be left un-changed. And, the module of interest should be added to the [exclude block](https://github.com/mskcc-omics-workflows/modules/blob/main/.github/workflows/test.yml#L333-L343) in the `test.yml` gitaction. This tells the test git-action to skip the conda tests for the specified module.&#x20;
+
+For example, a module named `example_module` would have the following section in the exclude block:
+
+```
+      - profile: "conda"
+        tags: example_module
+```
+
 ### Subworkflow development
 
 Refer to nf-core's guide on [creating new subworkflows](https://nf-co.re/tools#create-a-new-subworkflow).
