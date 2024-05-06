@@ -37,9 +37,9 @@ workflow NETMHCSTABANDPAN {
     ch_versions = ch_versions.mix(NEOANTIGENUTILS_GENERATEMUTFASTA.out.versions)
 
     ch_netmhcinput = createNETMHCInput(NEOANTIGENUTILS_GENERATEMUTFASTA.out.wt_fasta,
-                                       NEOANTIGENUTILS_GENERATEMUTFASTA.out.mut_fasta,
-                                       NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring
-                                       )
+                                        NEOANTIGENUTILS_GENERATEMUTFASTA.out.mut_fasta,
+                                        NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring
+                                        )
 
 
     NETMHCPAN( ch_netmhcinput )
