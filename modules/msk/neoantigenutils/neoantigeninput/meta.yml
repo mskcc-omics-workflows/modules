@@ -1,16 +1,16 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigeninput"
+name: "neoantigenutils_neoantigeninput"
 description: This module take several inputs to the Lukza neoantigen pipeline and combines them into a single json file ready for input into their pipeline
 keywords:
   - neoantigen
   - aggregate
   - genomics
 tools:
-  - neoantigeninput:
-      description: "This module take several inputs to the Lukza neoantigen pipeline and combines them into a single json file ready for input into their pipeline"
-      documentation: "https://github.com/LukszaLab/NeoantigenEditing"
-      licence: ["MIT"]
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: ""
+      licence: [""]
 
 input:
   - meta:
@@ -41,13 +41,13 @@ input:
 
   - mutNetMHCpan:
       type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
-      pattern: "./"
+      description: tsv formatted output from netMHCpan with the mutated neoantigens .
+      pattern: ".{tsv}"
 
   - wtNetMHCpan:
       type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
-      pattern: "./"
+      description: tsv formatted STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
+      pattern: ".{tsv}"
 
   - hlaFile:
       type: file
@@ -70,17 +70,9 @@ output:
       description: output combined Json ready for input into the neoantigen pipeline
       pattern: "*.{json}"
 
-  - netMHCpanreformatted_WT:
-      type: file
-      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the wild type antigens
-      pattern: "*.{WT.tsv}"
-
-  - netMHCpanreformatted_WT:
-      type: file
-      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan.  This containes the mutated antigens
-      pattern: "*.{MUT.tsv}"
-
 authors:
   - "@johnoooh"
+  - "@nikhil"
 maintainers:
   - "@johnoooh"
+  - "@nikhil"
