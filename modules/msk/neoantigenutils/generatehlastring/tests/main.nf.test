@@ -1,0 +1,65 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_GENERATEHLASTRING"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_GENERATEHLASTRING"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/generatehlastring"
+
+    test("neoantigenutils_generatehlastring - hla - string") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+
+    test("neoantigenutils_generatehlastring - hla - string - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('winners_hla_txt')
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

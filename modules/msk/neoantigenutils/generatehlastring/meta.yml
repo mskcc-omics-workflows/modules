@@ -1,0 +1,49 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neoantigenutils_generatehlastring"
+description: Generate the hla string for netmhc tools
+keywords:
+  - neoantigen
+  - string
+  - netmhc
+  - hla
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: ""
+      licence: [""]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information.
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - inputHLA:
+      type: file
+      description: Winners HLA file from polysolver
+      pattern: "*.{hla.txt}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - hlastring:
+      type: string
+      description: HLA string to use for netmhc tool input
+
+authors:
+  - "@johnoooh"
+  - "@nikhil"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"
