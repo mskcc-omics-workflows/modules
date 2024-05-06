@@ -9,7 +9,7 @@ keywords:
 tools:
   - neoantigen_utils:
       description: "Collection of helper scripts for neoantigen processing"
-      documentation: ""
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
       licence: [""]
 
 input:
