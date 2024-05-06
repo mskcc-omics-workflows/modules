@@ -1,4 +1,4 @@
-process NEOANTIGENUTILS_GENERATEHLASTRING{
+process NEOANTIGENUTILS_GENERATEHLASTRING {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
