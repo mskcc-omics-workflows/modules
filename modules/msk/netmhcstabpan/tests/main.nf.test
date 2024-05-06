@@ -6,22 +6,19 @@ nextflow_process {
 
     tag "modules"
     tag "modules_nfcore"
-    tag "netmhcpan"
     tag "netmhcstabpan"
 
-    test("test_neoantigen - output,fa") {
+    test("netmhcstabpan - MUT - xls,output,fa") {
 
         when {
             process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)
+                    file(file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    "MUT"
                     ]
-
-                input[1] = ['MUT']
-
                 """
             }
         }
@@ -31,7 +28,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions,
-                    process.out.fastaSequences,
+                    process.out.netmhcstabpanoutput[0][0],
                     file(process.out.netmhcstabpanoutput[0][1]).name
                     ).match()
                 }
@@ -40,20 +37,49 @@ nextflow_process {
 
     }
 
-    test("test_neoantigen - output,fa - stub") {
+    test("netmhcstabpan - WT - xls,output,fa") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['WT_sequence_fa']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    "WT"
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.netmhcstabpanoutput[0][0],
+                    file(process.out.netmhcstabpanoutput[0][1]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+    test("netmhcstabpan - xls,output,fa - stub") {
 
         options "-stub"
 
         when {
             process {
+
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file('temp_test_short_maf'),
-                    file('winners_hla_txt')
+                    file('MUT_sequence_fa'),
+                    "HLA",
+                    "MUT"
                     ]
-                
-                input[1] = ['MUT']
                 """
             }
         }
@@ -63,7 +89,7 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions,
-                    process.out.fastaSequences,
+                    process.out.netmhcstabpanoutput[0][0],
                     file(process.out.netmhcstabpanoutput[0][1]).name
                     ).match()
                 }
@@ -71,5 +97,6 @@ nextflow_process {
         }
 
     }
+
 
 }

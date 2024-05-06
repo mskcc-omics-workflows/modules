@@ -32,10 +32,9 @@ input:
       description: Maf outputtted by Tempo that was run through phyloWGS
       pattern: "*.{maf}"
 
-  - hlaFile:
-      type: file
-      description: HLA tsv outputtted by Polysolver
-      pattern: "winners.{tsv}"
+  - hlaString:
+      type: string
+      description: HLA in string format. e.g. HLA-A24:02
 
   - inputType:
       type: string
@@ -54,17 +53,14 @@ output:
       description: File containing software versions
       pattern: "versions.yml"
 
-  - fastaSequences:
-      type: file
-      description: Two multi fasta files containing many sequences of mutated and wildtype possible neoantigens
-      pattern: "*_out/*.mutated_sequences.fa,*_out/*.WT_sequences.fa"
-
   - netmhcstabpanoutput:
       type: file
-      description: STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated file of neoantigens. Neoantigen inputs contains a parser for this file
-      pattern: "**.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+      description: STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated file of neoantigens. Neoantigenutils contains a parser for this file
+      pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
 
 authors:
   - "@johnoooh"
+  - "@nikhil"
 maintainers:
   - "@johnoooh"
+  - "@nikhil"
