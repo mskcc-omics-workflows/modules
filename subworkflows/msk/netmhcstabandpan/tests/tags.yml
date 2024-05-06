@@ -1,0 +1,2 @@
+subworkflows/netmhcstabandpan:
+  - subworkflows/msk/netmhcstabandpan/**
