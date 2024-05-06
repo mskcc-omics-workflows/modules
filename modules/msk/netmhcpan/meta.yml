@@ -49,37 +49,19 @@ output:
       description: File containing software versions
       pattern: "versions.yml"
 
-  - MUTnetmhcpanXLS:
+  - xls:
       type: file
-      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
-      pattern: "*.MUT.netmhcpan.output"
+      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This contains the MUT or WT antigens
+      pattern: "*.xls"
 
-  - WTnetmhcpanXLS:
+  - netmhcpanoutput:
       type: file
-      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
-      pattern: "*.WT.xls"
-
-  - MUTnetmhcpanoutput:
-      type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the mutated neoantigens
-      pattern: "*.MUT.xls"
-
-  - WTnetmhcpanoutput:
-      type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
-      pattern: "*.WT.netmhcpan.output"
-
-  - MUTfasta:
-      type: file
-      description: multi fasta file containing many sequences of mutated neoantigens
-      pattern: "*_out/*.mutated_sequences.fa"
-
-  - WTfasta:
-      type: file
-      description: multi fasta file containing many sequences of wild type neoantigens
-      pattern: "*_out/*.WT_sequences.fa"
+      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This contains either the MUT or WT neoantigens. Neoantigenutils contains a parser for this file.
+      pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
 
 authors:
   - "@johnoooh"
+  - "@nikhil"
 maintainers:
   - "@johnoooh"
+  - "@nikhil"
