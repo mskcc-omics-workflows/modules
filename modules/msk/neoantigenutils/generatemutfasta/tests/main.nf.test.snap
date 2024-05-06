@@ -1,0 +1,100 @@
+{
+    "neoantigenutils_generatemutfasta - maf - fasta": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT_sequences.fa:md5,7a47413a2edac98feed97efb91ded177"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT_sequences.fa:md5,c08415f431610ec7a97da348899a646b"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                ],
+                "mut_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT_sequences.fa:md5,7a47413a2edac98feed97efb91ded177"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                ],
+                "wt_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT_sequences.fa:md5,c08415f431610ec7a97da348899a646b"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2024-05-02T09:15:42.536455"
+    },
+    "neoantigenutils_generatemutfasta - maf - fasta - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                ],
+                "mut_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                ],
+                "wt_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2024-05-02T09:16:04.310748"
+    }
+}

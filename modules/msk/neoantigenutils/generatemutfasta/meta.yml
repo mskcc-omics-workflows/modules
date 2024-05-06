@@ -1,0 +1,69 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neoantigenutils_generatemutfasta"
+description: Generate the mutation fasta for netmhc tools
+keywords:
+  - neoantigen
+  - fasta
+  - netmhc
+  - mutation
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: ""
+      licence: [""]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information.
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - inputMaf:
+      type: file
+      description: Maf outputtted by Tempo that was run through phyloWGS
+      pattern: "*.{maf}"
+
+  - cds:
+      type: file
+      description: coding sequence resource fasta
+      pattern: "*.{cds.all.fa.gz}"
+
+  - cdna:
+      type: file
+      description: cDNA resource fasta
+      pattern: "*.{cdna.all.fa.gz}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - json:
+      type: file
+      description: output combined Json ready for input into the neoantigen pipeline
+      pattern: "*.{json}"
+
+  - mut_fasta:
+      type: file
+      description: Mutated fasta sequence
+      pattern: "*.{MUT_sequences.fa}"
+
+  - wt_fasta:
+      type: file
+      description: Wildtype fasta sequence
+      pattern: "*.{WT_sequences.fa}"
+
+authors:
+  - "@johnoooh"
+  - "@nikhil"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"
