@@ -1,7 +1,7 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "neoantigenutils_formatnetmhcpan"
-description: Takes the stadard out of netmhcpan tools and converts them to a tsv for downstream processing
+description: Takes the standard out of netmhcpan tools and converts them to a tsv for downstream processing
 keywords:
   - neoantigen
   - tsv
