@@ -4,8 +4,8 @@ process NETMHCSTABPAN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/netmhcstabpan:1.0.1':
-        'docker.io/mskcc/netmhcstabpan:1.0.1' }"
+        'docker://mskcc/netmhctools:1.0.0':
+        'docker.io/mskcc/netmhctools:1.0.0' }"
 
     input:
     tuple val(meta), path(inputFasta), val(hlaString), val(inputType)
