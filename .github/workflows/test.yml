@@ -392,8 +392,6 @@ jobs:
             tags: neoantigenutils/neoantigeninput
           - profile: "conda"
             tags: subworkflows/netmhcstabandpan
-          - profile: "singularity"
-            tags: subworkflows/netmhcstabandpan
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
