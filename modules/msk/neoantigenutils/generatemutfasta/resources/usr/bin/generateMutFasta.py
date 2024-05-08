@@ -63,9 +63,6 @@ def main():
         "-v", "--version", action="version", version="%(prog)s {}".format(VERSION)
     )
 
-    # tst command
-    # python3 generateMutFasta.py --sample_id test --output_dir out --maf_file /Users/orgeraj/Documents/GitHub/test-datasets_msk/neoantigen/temp_test_somatic_unfiltered.maf --hla_file /Users/orgeraj/Documents/GitHub/test-datasets_msk/neoantigen/winners.hla.txt
-
     args = parser.parse_args()
 
     maf_file = str(args.maf_file)
