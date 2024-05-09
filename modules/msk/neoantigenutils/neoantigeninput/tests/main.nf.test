@@ -1,14 +1,15 @@
 nextflow_process {
 
-    name "Test Process NEOANTIGENINPUT"
+    name "Test Process NEOANTIGENUTILS_NEOANTIGENINPUT"
     script "../main.nf"
-    process "NEOANTIGENINPUT"
+    process "NEOANTIGENUTILS_NEOANTIGENINPUT"
 
     tag "modules"
     tag "modules_nfcore"
-    tag "neoantigeninput"
+    tag "neoantigenutils"
+    tag "neoantigenutils/neoantigeninput"
 
-    test("neoantigeninput - json,tsv") {
+    test("neoantigenutils_neoantigeninput - json,tsv") {
 
         when {
             params {
@@ -33,8 +34,8 @@ nextflow_process {
 
                 input[2] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['WTnetMHCpan'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan_tsv'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WTnetMHCpan_tsv'], checkIfExists: true)
                     ]
 
                 """
@@ -51,7 +52,7 @@ nextflow_process {
     }
 
 
-    test("neoantigeninput - json,tsv - stub") {
+    test("neoantigenutils_neoantigeninput - json,tsv - stub") {
 
         options "-stub"
 
@@ -78,8 +79,8 @@ nextflow_process {
 
                 input[2] = [
                     [ id:'test', single_end:false ], // meta map
-                    file('MUTnetMHCpan'),
-                    file('WTnetMHCpan')
+                    file('MUTnetMHCpan.tsv'),
+                    file('WTnetMHCpan.tsv')
                     ]
 
                 """

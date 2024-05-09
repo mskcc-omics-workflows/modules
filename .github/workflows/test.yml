@@ -382,6 +382,16 @@ jobs:
             tags: netmhcstabpan
           - profile: "conda"
             tags: ppflagfixer
+          - profile: "conda"
+            tags: neoantigenutils/generatemutfasta
+          - profile: "conda"
+            tags: neoantigenutils/formatnetmhcpan
+          - profile: "conda"
+            tags: neoantigenutils/generatehlastring
+          - profile: "conda"
+            tags: neoantigenutils/neoantigeninput
+          - profile: "conda"
+            tags: subworkflows/netmhcstabandpan
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}

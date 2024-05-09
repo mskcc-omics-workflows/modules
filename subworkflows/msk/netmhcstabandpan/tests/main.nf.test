@@ -1,0 +1,83 @@
+nextflow_workflow {
+
+    name "Test Subworkflow NETMHCSTABANDPAN"
+    script "../main.nf"
+    workflow "NETMHCSTABANDPAN"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows_msk"
+    tag "subworkflows/netmhcstabandpan"
+    tag "netmhcstabandpan"
+    tag "neoantigenutils/generatehlastring"
+    tag "neoantigenutils/generatemutfasta"
+    tag "netmhcpan"
+    tag "netmhcstabpan"
+    tag "neoantigenutils/formatnetmhcpan"
+
+    test("netmhcstabandpan - tsv,xls,fa") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    ])
+                input[1] = Channel.value([
+                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ])
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out.tsv[0][1],
+                                    file(workflow.out.xls[0][1]).name,
+                                    workflow.out.mut_fasta[0][1],
+                                    workflow.out.wt_fasta[0][1]
+                                ).match()
+                }
+            )
+        }
+    }
+
+    test("netmhcstabandpan - tsv,xls,fa - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('temp_test_maf'),
+                    file('winners_hla_txt'),
+                    ])
+                input[1] = Channel.value([
+                    file('cds'),
+                    file('cdna')
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out.tsv[0][1],
+                                  file(workflow.out.xls[0][1]).name,
+                                  workflow.out.mut_fasta[0][1],
+                                  workflow.out.wt_fasta[0][1]
+                                ).match()
+                }
+
+            )
+        }
+    }
+}

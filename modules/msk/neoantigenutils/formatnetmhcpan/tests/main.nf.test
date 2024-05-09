@@ -1,0 +1,132 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_FORMATNETMHCPAN"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_FORMATNETMHCPAN"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/formatnetmhcpan"
+
+    test("neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', typeMut: true, fromStab: false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("neoantigenutils_formatnetmhcpan - output(WT,netmhcpan) - tsv") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', typeMut: false, fromStab: false], // meta map
+                    file(params.test_data_mskcc['neoantigen']['WTnetMHCpan'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+        test("neoantigenutils_formatnetmhcpan - output(MUT,netmhcpanstab) - tsv") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', typeMut: true, fromStab: true ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['MUTnetMHCpanstab'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("neoantigenutils_formatnetmhcpan - output(WT,netmhcpanstab) - tsv") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', typeMut: false, fromStab: false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['WTnetMHCpanstab'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+}
+    test("neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', typeMut: true, fromStab: false ], // meta map
+                    file('MUTnetMHCpan')
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

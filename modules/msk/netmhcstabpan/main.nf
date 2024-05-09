@@ -4,18 +4,16 @@ process NETMHCSTABPAN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/netmhcstabpan:1.0.1':
-        'docker.io/mskcc/netmhcstabpan:1.0.1' }"
+        'docker://mskcc/netmhctools:1.0.0':
+        'docker.io/mskcc/netmhctools:1.0.0' }"
 
     input:
-    tuple val(meta), path(inputMaf), path(hlaFile)
-    each inputType
+    tuple val(meta), path(inputFasta), val(hlaString), val(inputType)
 
 
     output:
-    tuple val(meta), path("*.netmhcstabpan.output"),   emit: netmhcstabpanoutput
-    tuple val(meta), path("*_out/*.mutated_sequences.fa"), path("*_out/*.WT_sequences.fa"), emit: fastaSequences
-    path "versions.yml"           , emit: versions
+    tuple val(output_meta), path("*.netmhcstabpan.output"),   emit: netmhcstabpanoutput
+    path "versions.yml",                                      emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -23,53 +21,13 @@ process NETMHCSTABPAN {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def netMHCpan_version = '4.1'
-    def netMHCstabpan_version = '1.0'
-    def in_CDS_file = task.ext.in_CDS_file ?: "/usr/local/bin/Homo_sapiens.GRCh37.75.cds.all.fa.gz"
-    def in_CDNA_file = task.ext.in_CDNA_file ?:"/usr/local/bin/Homo_sapiens.GRCh37.75.cdna.all.fa.gz"
+    def hla = hlaString.trim()
+    output_meta = meta.clone()
+    output_meta.typeMut = inputType == "MUT" ? true : false
+    output_meta.fromStab = true
     """
-    mkdir ${prefix}_out
 
-    python3 /usr/local/bin/generateMutFasta.py --sample_id ${prefix} \
-    --output_dir ${prefix}_out \
-    --maf_file ${inputMaf} \
-    --CDS_file ${in_CDS_file} \
-    --CDNA_file ${in_CDNA_file}
-
-
-    cat ${hlaFile} | tr "\\t" "\\n" | grep -v "HLA" | tr "\\n" "," > massaged.winners.hla.txt
-
-    input_string=`head -n 1 massaged.winners.hla.txt`
-
-    IFS=',' read -ra items <<< "\$input_string"
-
-    for item in "\${items[@]}"; do
-
-        # Append the transformed item to the output string
-        truncated_value=\$(echo "\$item" | cut -c 1-11)
-
-        # Replace the first '_', the next '_', and remaining '_' with '-', '*', and ':', respectively
-        modified_value=\$(echo "\$truncated_value" | tr '[:lower:]' '[:upper:]' | sed 's/_/-/; s/_//; s/_/:/g')
-        output_hla+=",\$modified_value"
-
-    done
-
-    # Remove leading comma
-    output_hla="\${output_hla:1}"
-
-    echo \$output_hla
-
-    if [ "$inputType" == "MUT" ]; then
-        # Execute MUT command
-        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcstabpan.output
-    elif [ "$inputType" == "WT" ]; then
-        # Execute WT
-        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcstabpan.output
-    else
-        # By default do both.
-        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.mutated_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.MUT.netmhcstabpan.output
-        /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ./${prefix}_out/${prefix}.WT_sequences.fa -a \$output_hla -l 9,10 -inptype 0 > ${prefix}.WT.netmhcstabpan.output
-    fi
+    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -82,16 +40,11 @@ process NETMHCSTABPAN {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def netMHCpan_version = '4.1'
-    def netMHCstabpan_version = '1.0'
+    output_meta = meta.clone()
+    output_meta.typeMut = inputType == "MUT" ? true : false
+    output_meta.fromStab = true
     """
     touch ${prefix}.MUT.netmhcstabpan.output
-    mkdir ${prefix}_out
-    touch ${prefix}_out/${prefix}.mutated_sequences.fa
-    echo -e ">Mutpeptide \n HEHEHE" > ${prefix}_out/${prefix}.mutated_sequences.fa
-
-    touch ${prefix}_out/${prefix}.WT_sequences.fa
-    echo -e ">WTpeptide \n HEKEHE" > ${prefix}_out/${prefix}.WT_sequences.fa
 
 
     cat <<-END_VERSIONS > versions.yml

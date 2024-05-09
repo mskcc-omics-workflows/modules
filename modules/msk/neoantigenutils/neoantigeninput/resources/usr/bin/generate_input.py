@@ -1,7 +1,10 @@
+#!/usr/bin/env python3
+
 import json
-import sys
 import pandas as pd
 import argparse
+
+VERSION = 1.5
 
 
 def main(args):
@@ -302,13 +305,10 @@ def main(args):
 
     outer_dict["neoantigens"] = []
 
-    netMHCpan_out_reformat(args.netMHCpan_MUT_input, True)
-    netMHCpan_out_reformat(args.netMHCpan_WT_input, False)
-
     print(mutation_dict)
 
-    neoantigen_mut_in = pd.read_csv("netmHCpanoutput.MUT.tsv", sep="\t")
-    neoantigen_WT_in = pd.read_csv("netmHCpanoutput.WT.tsv", sep="\t")
+    neoantigen_mut_in = pd.read_csv(args.netMHCpan_MUT_input, sep="\t")
+    neoantigen_WT_in = pd.read_csv(args.netMHCpan_WT_input, sep="\t")
 
     def find_first_difference_index(str1, str2):
         min_length = min(len(str1), len(str2))
@@ -354,39 +354,6 @@ def main(args):
         # tstout.write(json.dumps(outer_dict))
 
 
-def netMHCpan_out_reformat(netMHCpanoutput, mut):
-    file_li = []
-    if mut == True:
-        outfilename = "netmHCpanoutput.MUT.tsv"
-    else:
-        outfilename = "netmHCpanoutput.WT.tsv"
-    with open(netMHCpanoutput, "r") as file:
-        # data = file.read()
-        for line in file:
-            # Remove leading whitespace
-            line = line.lstrip()
-            print(line)
-            # Check if the line starts with a digit
-            if line == "":
-                pass
-            elif line[0].isdigit():
-                # Print or process the line as needed
-                match = (
-                    line.strip().replace(" <= WB", "").replace(" <= SB", "")
-                )  # strip to remove leading/trailing whitespace
-                splititem = match.split()
-                tab_separated_line = "\t".join(splititem)
-                file_li.append(tab_separated_line)
-
-    with open(outfilename, "w") as file:
-        file.writelines(
-            "pos\tMHC\tpeptide\tcore\tOF\tGp\tGl\tIp\tIl\ticore\tIdentity\tscore_el\trank_el\tscore_ba\trank_ba\taffinity\n"
-        )
-        for item in file_li:
-            file.writelines(item)
-            file.writelines("\n")
-
-
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
     parser.add_argument("--maf_file", required=True, help="Path to the MAF file")
@@ -422,33 +389,11 @@ def parse_args():
         "--patient_data_file",
         help="Path to the optional file containing status, overall survival, and PFS",
     )
-    parser.add_argument("-v", "--version", action="version", version="%(prog)s 1.0")
+    parser.add_argument(
+        "-v", "--version", action="version", version="%(prog)s {}".format(VERSION)
+    )
 
     return parser.parse_args()
-
-
-def print_help():
-    print(
-        "Usage: python eval_phyloWGS.py --maf_file <maf_file> --summary_file <summary_file> --mutation_file <mutation_file> --tree_directory <tree_directory> --id <id> --patient_id <patient_id> --cohort <cohort> --HLA_genes <HLA_genes> [--patient_data_file <patient_data_file>]"
-    )
-    print(
-        "Example: python eval_phyloWGS.py --maf_file file.maf --summary_file summary_file.txt --mutation_file mutation_file.txt --tree_directory ./tree_directory/ --id id --patient_id patient_id --cohort cohort --HLA_genes HLA_genes_file --patient_data_file optional_file.txt"
-    )
-    print("Arguments:")
-    print("  --maf_file\t\tPath to the MAF file")
-    print("  --summary_file\tPath to the summary file from PhyloWGS")
-    print("  --mutation_file\tPath to the mutation file from PhyloWGS")
-    print("  --id\t\t\tID")
-    print("  --patient_id\t\tPatient ID")
-    print("  --cohort\t\tCohort")
-    print("  --HLA_genes\t\tPath to the file containing HLA genes")
-    print(
-        "  --netMHCpan_MUT_input\t\tPath to the file containing  MUT netmhcpan results"
-    )
-    print("  --netMHCpan_WT_input\t\tPath to the file containing  WT netmhcpan results")
-    print(
-        "  --patient_data_file\t(Optional) Path to the optional file containing status, overall survival, and PFS"
-    )
 
 
 if __name__ == "__main__":

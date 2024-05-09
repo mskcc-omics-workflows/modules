@@ -1,0 +1,64 @@
+{
+    "neoantigenutils_neoantigeninput - json,tsv - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                ]
+            }
+        ],
+        "timestamp": "2024-04-30T14:36:21.287099"
+    },
+    "neoantigenutils_neoantigeninput - json,tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,4c08046a6f5826a3d51c221c6eef6348"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,4c08046a6f5826a3d51c221c6eef6348"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                ]
+            }
+        ],
+        "timestamp": "2024-04-30T14:36:14.247161"
+    }
+}

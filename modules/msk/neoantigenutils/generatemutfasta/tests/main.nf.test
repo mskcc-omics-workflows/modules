@@ -1,0 +1,84 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_GENERATEMUTFASTA"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_GENERATEMUTFASTA"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/generatemutfasta"
+
+    test("neoantigenutils_generatemutfasta - maf - fasta") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_maf'], checkIfExists: true)
+                    ]
+
+                input[1] = [
+                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+
+    test("neoantigenutils_generatemutfasta - maf - fasta - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_maf'], checkIfExists: true)
+                    ]
+
+                input[1] = [
+                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

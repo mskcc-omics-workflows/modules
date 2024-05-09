@@ -1,0 +1,173 @@
+{
+    "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": true,
+                            "fromStab": false
+                        },
+                        "test_netmHCpanoutput.MUT.tsv:md5,df56a2a876a57406b02f8664c28296ec"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": true,
+                            "fromStab": false
+                        },
+                        "test_netmHCpanoutput.MUT.tsv:md5,df56a2a876a57406b02f8664c28296ec"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ]
+            }
+        ],
+        "timestamp": "2024-05-03T14:04:17.726581"
+    },
+    "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": true,
+                            "fromStab": false
+                        },
+                        [
+                            "test.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": true,
+                            "fromStab": false
+                        },
+                        [
+                            "test.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ]
+            }
+        ],
+        "timestamp": "2024-05-03T14:04:50.028307"
+    },
+    "neoantigenutils_formatnetmhcpan - output(WT,netmhcpan) - tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": false,
+                            "fromStab": false
+                        },
+                        "test_netmHCpanoutput.WT.tsv:md5,b1171286368f359f8bf854a7048e3e4c"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": false,
+                            "fromStab": false
+                        },
+                        "test_netmHCpanoutput.WT.tsv:md5,b1171286368f359f8bf854a7048e3e4c"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ]
+            }
+        ],
+        "timestamp": "2024-05-03T14:04:26.207311"
+    },
+    "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpanstab) - tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": true,
+                            "fromStab": true
+                        },
+                        "test_netmHCstabpanoutput.MUT.tsv:md5,3ac38bcde4e7eb60a8c5ceae62e9406a"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": true,
+                            "fromStab": true
+                        },
+                        "test_netmHCstabpanoutput.MUT.tsv:md5,3ac38bcde4e7eb60a8c5ceae62e9406a"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ]
+            }
+        ],
+        "timestamp": "2024-05-03T14:04:34.612955"
+    },
+    "neoantigenutils_formatnetmhcpan - output(WT,netmhcpanstab) - tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": false,
+                            "fromStab": false
+                        },
+                        "test_netmHCpanoutput.WT.tsv:md5,b03b3d7c05711c76637e83098ba2ca1d"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ],
+                "netMHCpanreformatted": [
+                    [
+                        {
+                            "id": "test",
+                            "typeMut": false,
+                            "fromStab": false
+                        },
+                        "test_netmHCpanoutput.WT.tsv:md5,b03b3d7c05711c76637e83098ba2ca1d"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2c02f5f3103ee1532c27f7f3b873a578"
+                ]
+            }
+        ],
+        "timestamp": "2024-05-03T14:04:42.805889"
+    }
+}

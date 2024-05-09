@@ -1,0 +1,23 @@
+{
+    "netmhcstabandpan - tsv,xls,fa": {
+        "content": [
+            "test_netmHCpanoutput.WT.tsv:md5,999150ad55c787f58236bdef21314b2a",
+            "test.WT.xls",
+            "test.MUT_sequences.fa:md5,7a47413a2edac98feed97efb91ded177",
+            "test.WT_sequences.fa:md5,c08415f431610ec7a97da348899a646b"
+        ],
+        "timestamp": "2024-05-03T14:34:52.242668"
+    },
+    "netmhcstabandpan - tsv,xls,fa - stub": {
+        "content": [
+            [
+                "test.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "test.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+            ],
+            "test.MUT.xls",
+            "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
+            "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+        ],
+        "timestamp": "2024-05-03T14:20:18.673949"
+    }
+}

@@ -1,9 +1,9 @@
-process NEOANTIGENINPUT {
+process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigeninputs:1.0.4':
-        'docker.io/mskcc/neoantigeninputs:1.0.4' }"
+        'docker://mskcc/neoantigen-utils-base:1.0.0':
+        'docker.io/mskcc/neoantigen-utils-base:1.0.0' }"
 
     input:
     tuple val(meta),  path(inputMaf),      path(hlaFile)
@@ -12,7 +12,6 @@ process NEOANTIGENINPUT {
 
     output:
     tuple val(meta), path("*_.json"),                                                  emit: json
-    tuple val(meta), path("*.MUT.tsv"), path("*.WT.tsv"),                              emit: netMHCpanreformatted
     path "versions.yml",                                                               emit: versions
 
     when:
@@ -33,7 +32,7 @@ process NEOANTIGENINPUT {
 
 
 
-        python3 /usr/bin/eval_phyloWGS.py --maf_file ${inputMaf} \
+        generate_input.py --maf_file ${inputMaf} \
         --summary_file ${id}.summ.json \
         --mutation_file ${id}.mut.json \
         --tree_directory \$tree_folder_name \
@@ -46,7 +45,7 @@ process NEOANTIGENINPUT {
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            neoantigeninput: \$(echo \$(python3 /usr/bin/eval_phyloWGS.py -v))
+            neoantigeninput: \$(echo \$(generate_input.py -v))
         END_VERSIONS
     """
 
@@ -58,11 +57,10 @@ process NEOANTIGENINPUT {
     """
 
         touch ${patientid}_${id}_.json
-        touch ${patientid}.MUT.tsv
-        touch ${patientid}.WT.tsv
+
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            neoantigeninput: \$(echo \$(python3 /usr/bin/eval_phyloWGS.py -v))
+            neoantigeninput: \$(echo \$(generate_input.py -v))
         END_VERSIONS
     """
 }
