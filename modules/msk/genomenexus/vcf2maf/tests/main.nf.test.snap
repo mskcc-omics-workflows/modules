@@ -11,7 +11,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                    "versions.yml:md5,b1a43c7cc1b8d21445939e1caed26f13"
                 ],
                 "maf": [
                     [
@@ -22,11 +22,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                    "versions.yml:md5,b1a43c7cc1b8d21445939e1caed26f13"
                 ]
             }
         ],
-        "timestamp": "2024-04-04T11:13:02.236599"
+        "timestamp": "2024-05-13T13:14:29.070436"
     },
     "vcf2maf - test - stub": {
         "content": [
@@ -40,7 +40,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                    "versions.yml:md5,b1a43c7cc1b8d21445939e1caed26f13"
                 ],
                 "maf": [
                     [
@@ -51,10 +51,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,be138e69e7d397111abf449ed08cf9cb"
+                    "versions.yml:md5,b1a43c7cc1b8d21445939e1caed26f13"
                 ]
             }
         ],
-        "timestamp": "2024-04-04T11:13:08.715899"
+        "timestamp": "2024-05-13T13:01:32.359015"
     }
 }
