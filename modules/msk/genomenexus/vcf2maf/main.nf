@@ -2,7 +2,6 @@ process GENOMENEXUS_VCF2MAF {
     tag "$meta.id"
     label 'process_low'
 
-    conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'ghcr.io/msk-access/genomenexus:vcf2maf_lite':
         'ghcr.io/msk-access/genomenexus:vcf2maf_lite' }"
@@ -21,12 +20,10 @@ process GENOMENEXUS_VCF2MAF {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     
-
     """
     python3 /vcf2maf-lite/vcf2maf_lite.py -i ${vcf} ${args}
     
-
-    echo '"${task.process}": vcf2maf_lite.py --help' > versions.yml
+    echo '"${task.process}": vcf2maf_lite.py v.0.0.1' > versions.yml
     """
     stub:
     def args = task.ext.args ?: ''
@@ -38,8 +35,6 @@ process GENOMENEXUS_VCF2MAF {
     touch ${meta.id}.maf
     cp ${meta.id}.maf vcf2maf_output/
     
-
-
-    echo '"${task.process}": vcf2maf_lite.py --help' > versions.yml
+    echo '"${task.process}": vcf2maf_lite.py v.0.0.1' > versions.yml
     """
 }
