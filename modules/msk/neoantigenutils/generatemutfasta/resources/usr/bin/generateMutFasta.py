@@ -143,13 +143,13 @@ def main():
                 mut.generate_translated_sequences(max(peptide_lengths))
 
             if len(mut.mt_altered_aa) > 5:
-                out_fa.write(">" + mut.identifier_key + "_mut\n")
+                out_fa.write(">" + mut.identifier_key + "_M\n")
                 out_fa.write(mut.mt_altered_aa + "\n")
-                out_WT_fa.write(">" + mut.identifier_key + "_WT\n")
+                out_WT_fa.write(">" + mut.identifier_key + "_W\n")
                 out_WT_fa.write(mut.wt_altered_aa + "\n")
 
                 ### write out WT/MT CDS + AA for debugging purposes
-                debug_out_fa.write(">" + mut.identifier_key + "_mut\n")
+                debug_out_fa.write(">" + mut.identifier_key + "_M\n")
                 debug_out_fa.write("mt_altered_aa: " + mut.mt_altered_aa + "\n")
                 debug_out_fa.write("wt_full_cds: " + mut.wt_cds + "\n")
                 debug_out_fa.write("wt_full_aa: " + mut.wt_aa + "\n")
@@ -318,14 +318,62 @@ class mutation(object):
         self.cds_seq = cds_seq
         self.cdna_seq = cdna_seq
         self.predicted_neopeptides = binding_predictions([])
+        
+        
+        
+        ##ENCODING FASTA ID FOR USE IN MATCHING LATER
+        ALPHABET= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+        variant_type_map = {
+        "Missense_Mutation": "M",
+        "Nonsense_Mutation": "X",
+        "Silent_Mutation": "S",
+        "Frame_shift_Ins": "I+",
+        "Frame_shift_Del": "I-",
+        "In_Frame_Ins": "If",
+        "In_Frame_Del": "Id",
+        "Splice_Site": "Sp",
+        "Other": "O",
+        }
+        
+        position= int(self.maf_row["Start_Position"][0:2])
+        
+        if position < 10:
+            encoded_position = ALPHABET[position]
+        elif position < 100:
+            encoded_position = ALPHABET[position]//4
+            
+        sum_remaining = sum(int(d) for d in str(self.maf_row["Start_Position"][2:]))
+        
+        encoded_position = encoded_position + ALPHABET[sum_remaining%26]
+        
+        if self.maf_row["Tumor_Seq_Allele2"] == '-':
+            #handles deletion
+            if len(self.maf_row["Reference_Allele"]) > 3:
+                Allele2code= self.maf_row["Reference_Allele"][0:3]
+            else:
+                Allele2code= self.maf_row["Reference_Allele"]
+            
+        
+        elif len(self.maf_row["Tumor_Seq_Allele2"])>1:
+            #handles INS and DNP
+            if len(self.maf_row["Tumor_Seq_Allele2"]) > 3:
+                Allele2code = self.maf_row["Tumor_Seq_Allele2"][0:3]
+            else:
+                Allele2code = self.maf_row["Tumor_Seq_Allele2"]
+                
+        else:
+            # SNPs
+            Allele2code = self.maf_row["Tumor_Seq_Allele2"]
+                
+            
+        
         self.identifier_key = (
             str(self.maf_row["Chromosome"])
-            + "_"
-            + str(self.maf_row["Start_Position"])
-            + "-"
-            + self.maf_row["Reference_Allele"]
-            + "_"
-            + self.maf_row["Tumor_Seq_Allele2"]
+            + encoded_position
+            + "_" 
+            + variant_type_map[self.maf_row["Variant_Classification"]]
+            + Allele2code
         )
 
     ### Check if the variant_classification is among those that can generate a neoantigen
