@@ -9,7 +9,6 @@ process PVMAF_CONCAT {
 
     input:
     tuple val(meta), path(maf_files)
-    path(header)
 
 
     output:
@@ -24,11 +23,9 @@ process PVMAF_CONCAT {
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
     def flagFiles = maf_files.collect { "-f $it" }.join(' ')
     def output = prefix ? "${prefix}_combined.maf": 'multi_sample.maf'
-    def header = header ?"-h $header" : ''
     """
     pv maf concat \\
         $flagFiles \\
-        $header \\
         --output $output \\
         $args
 
@@ -44,7 +41,6 @@ process PVMAF_CONCAT {
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
     def flagFiles = maf_files.collect { "-f $it" }.join(' ')
     def output = prefix ? "${prefix}_combined.maf": 'multi_sample.maf'
-    def header = header ?"-h $header" : ''
     """
     touch $output
 
