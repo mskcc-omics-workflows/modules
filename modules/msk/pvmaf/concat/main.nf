@@ -4,8 +4,8 @@ process PVMAF_CONCAT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.8':
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.8' }"
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0':
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0' }"
 
     input:
     tuple val(meta), path(maf_files)
