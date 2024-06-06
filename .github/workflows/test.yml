@@ -353,6 +353,8 @@ jobs:
           - profile: "conda"
             tags: mutect1
           - profile: "conda"
+            tags: genomenexus/vcf2maf
+          - profile: "conda"
             tags: ppflagfixer
     env:
       NXF_ANSI_LOG: false
