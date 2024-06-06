@@ -1,0 +1,50 @@
+{
+    "test normal ": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "annotated_maf": [
+                    
+                ],
+                "versions": [
+                    
+                ]
+            }
+        ],
+        "timestamp": "2024-05-30T13:48:22.813927"
+    },
+    "test normal - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d25b13e79d5daa80cf8811eebe815133"
+                ],
+                "annotated_maf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d25b13e79d5daa80cf8811eebe815133"
+                ]
+            }
+        ],
+        "timestamp": "2024-05-30T13:54:30.876733"
+    }
+}
