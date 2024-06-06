@@ -2,7 +2,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     tag "$meta.id"
     label 'process_high'
 
-    
+
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.3':
         'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.3' }"
@@ -20,7 +20,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    
+
     """
     java -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar --filename ${input_maf} --output-filename ${meta.id}_annotated.maf
 
@@ -29,11 +29,11 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
         genomenexus: \$(samtools --version |& sed '1!d ; s/samtools //')
     END_VERSIONS
     """
-    
+
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    
+
     """
     touch ${meta.id}_annotated.maf
 
