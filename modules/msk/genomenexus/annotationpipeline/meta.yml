@@ -2,18 +2,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "genomenexus_annotationpipeline"
 
-description: DSL2 module to annotate a MAF file type using the genomenexus suite of conversion and annotation tools.
+description: DSL2 module to perform annotation of a MAF file type using the genomenexus suite of conversion and annotation tools.
 keywords:
-  - sort
-  - example
+  - annotate
+  - vcf
+  - maf
+  - genomenexus
   - genomics
 tools:
   - "genomenexus":
-
-      description: "DSL2 module to annotate a MAF file type using the genomenexus suite of conversion and annotation tools."
-      homepage: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline"
-      documentation: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline/blob/master/README.md"
-      licence:
+      description: "DSL2 module to perform an annotation of MAF file type using the genomenexus suite of conversion and annotation tools."
+      homepage: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline/"
+      documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
 
 input:
   # Only when we have meta
@@ -21,7 +21,7 @@ input:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1' ]`
+        e.g. `[ id:'test' ]`
 
   - input_maf:
       type: file
@@ -34,15 +34,16 @@ output:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1' ]`
+        e.g. `[ id:'test' ]`
 
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
+
   - maf:
       type: file
-      description: output MAF file
+      description: Output annotated MAF file
       pattern: "*.{maf}"
 
 authors:

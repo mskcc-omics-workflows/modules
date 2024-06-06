@@ -9,6 +9,7 @@ nextflow_process {
 
     tag "modules"
     tag "modules_nfcore"
+    tag "modules_msk"
     tag "genomenexus"
     tag "genomenexus/vcf2maf"
 
