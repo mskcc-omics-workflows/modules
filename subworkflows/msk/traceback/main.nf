@@ -63,7 +63,7 @@ workflow TRACEBACK {
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
 
-    // Tag with traceback columns aka combine ref stats from access and impact
+    // // Tag with traceback columns aka combine ref stats from access and impact
     PVMAF_TAG(PVMAFCONCAT_GENOTYPE.out.maf, 'traceback')
     ch_versions = ch_versions.mix(PVMAF_TAG.out.versions.first())
     genotyped_maf = PVMAF_TAG.out.maf
