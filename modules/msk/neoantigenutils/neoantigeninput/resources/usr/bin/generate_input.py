@@ -83,11 +83,12 @@ def main(args):
         mut_data = json.load(f)
 
     chrom_pos_dict = {}  # Just used for mapping right now
-    mutation_list = []  # Used as the output for mutations
-    mutation_dict = (
-        {}
-    )  # used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
+    mutation_list  = []  # Used as the output for mutations
+    mutation_dict  = {}  # Used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
 
+    
+    
+    
     mafdf = pd.read_csv(args.maf_file, delimiter="\t")
 
     for index, row in mafdf.iterrows():
@@ -143,7 +144,7 @@ def main(args):
                 )
 
                 mutation_dict[
-                    str(row["Chromosome"]) + "_" + str(row["Start_Position"])
+                    makeID(row)
                 ] = (
                     str(row["Chromosome"])
                     + "_"
@@ -189,7 +190,7 @@ def main(args):
                     }
                 )
                 mutation_dict[
-                    str(row["Chromosome"]) + "_" + str(row["Start_Position"])
+                    makeID(row)
                 ] = (
                     str(row["Chromosome"])
                     + "_"
@@ -235,7 +236,7 @@ def main(args):
                     }
                 )
                 mutation_dict[
-                    str(row["Chromosome"]) + "_" + str(row["Start_Position"])
+                    makeID(row)
                 ] = (
                     str(row["Chromosome"])
                     + "_"
@@ -354,6 +355,64 @@ def main(args):
         # tstout.write(json.dumps(outer_dict))
 
 
+def makeID(maf_row):
+    ##ENCODING FASTA ID FOR USE IN MATCHING LATER
+    ALPHABET= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+    variant_type_map = {
+    "Missense_Mutation": "M",
+    "Nonsense_Mutation": "X",
+    "Silent_Mutation": "S",
+    "Frame_shift_Ins": "I+",
+    "Frame_shift_Del": "I-",
+    "In_Frame_Ins": "If",
+    "In_Frame_Del": "Id",
+    "Splice_Site": "Sp",
+    "Other": "O",
+    }
+    
+    position= int(maf_row["Start_Position"][0:2])
+    
+    if position < 10:
+        encoded_position = ALPHABET[position]
+    elif position < 100:
+        encoded_position = ALPHABET[position]//4
+        
+    sum_remaining = sum(int(d) for d in str(maf_row["Start_Position"][2:]))
+    
+    encoded_position = encoded_position + ALPHABET[sum_remaining%26]
+    
+    if maf_row["Tumor_Seq_Allele2"] == '-':
+        #handles deletion
+        if len(maf_row["Reference_Allele"]) > 3:
+            Allele2code= maf_row["Reference_Allele"][0:3]
+        else:
+            Allele2code= maf_row["Reference_Allele"]
+        
+    
+    elif len(maf_row["Tumor_Seq_Allele2"])>1:
+        #handles INS and DNP
+        if len(maf_row["Tumor_Seq_Allele2"]) > 3:
+            Allele2code = maf_row["Tumor_Seq_Allele2"][0:3]
+        else:
+            Allele2code = maf_row["Tumor_Seq_Allele2"]
+            
+    else:
+        # SNPs
+        Allele2code = maf_row["Tumor_Seq_Allele2"]
+            
+        
+    
+    identifier_key = (
+        str(maf_row["Chromosome"])
+        + encoded_position
+        + "_" 
+        + variant_type_map[maf_row["Variant_Classification"]]
+        + Allele2code
+    )
+    
+    return identifier_key
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
     parser.add_argument("--maf_file", required=True, help="Path to the MAF file")
@@ -411,3 +470,5 @@ if __name__ == "__main__":
         print("patient_data_file File:", args.patient_data_file)
 
     main(args)
+
+
