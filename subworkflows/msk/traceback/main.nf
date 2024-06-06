@@ -31,7 +31,6 @@ workflow TRACEBACK {
     .set{bam_list_maf}
 
 
-    
     // genotype each bam combined maf, per patient if provided
     GENOTYPEVARIANTS_ALL(bam_list_maf, reference, reference_fai)
     ch_versions = ch_versions.mix(GENOTYPEVARIANTS_ALL.out.versions.first())
@@ -63,8 +62,8 @@ workflow TRACEBACK {
     PVMAFCONCAT_GENOTYPE(all_genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
-    
-    // // Tag with traceback columns aka combine ref stats from access and impact
+
+    // Tag with traceback columns aka combine ref stats from access and impact
     PVMAF_TAG(PVMAFCONCAT_GENOTYPE.out.maf, 'traceback')
     ch_versions = ch_versions.mix(PVMAF_TAG.out.versions.first())
     genotyped_maf = PVMAF_TAG.out.maf
