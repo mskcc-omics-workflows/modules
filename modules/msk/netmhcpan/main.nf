@@ -27,7 +27,7 @@ process NETMHCPAN {
     output_meta.fromStab = false
 
     """
-    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 1 -BA 1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.${inputType}.xls > ${prefix}.${inputType}.netmhcpan.output
+    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 0 -BA 1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.${inputType}.xls > ${prefix}.${inputType}.netmhcpan.output
 
 
     cat <<-END_VERSIONS > versions.yml

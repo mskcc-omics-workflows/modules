@@ -27,7 +27,7 @@ process NETMHCSTABPAN {
     output_meta.fromStab = true
     """
 
-    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s 1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
+    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s -1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
