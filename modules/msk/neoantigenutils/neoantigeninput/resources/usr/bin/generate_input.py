@@ -363,6 +363,7 @@ def makeID(maf_row):
     "Missense_Mutation": "M",
     "Nonsense_Mutation": "X",
     "Silent_Mutation": "S",
+    "Silent": "S",
     "Frame_shift_Ins": "I+",
     "Frame_shift_Del": "I-",
     "In_Frame_Ins": "If",
@@ -370,17 +371,23 @@ def makeID(maf_row):
     "Splice_Site": "Sp",
     "Other": "O",
     }
-    
-    position= int(maf_row["Start_Position"][0:2])
-    
-    if position < 10:
-        encoded_position = ALPHABET[position]
-    elif position < 100:
-        encoded_position = ALPHABET[position]//4
+    position= int(str(maf_row["Start_Position"])[0:2])
         
-    sum_remaining = sum(int(d) for d in str(maf_row["Start_Position"][2:]))
+    if position < 26:
+        encoded_start = ALPHABET[position]
+    elif position < 100:
+        encoded_start = ALPHABET[position//4]
+
+    position= int(str(maf_row["Start_Position"])[0:2])
     
-    encoded_position = encoded_position + ALPHABET[sum_remaining%26]
+    if position < 26:
+        encoded_end = ALPHABET[position]
+    elif position < 100:
+        encoded_end = ALPHABET[position//4]
+        
+    sum_remaining = sum(int(d) for d in str(maf_row["Start_Position"])[2:-2])
+    
+    encoded_position = encoded_start + ALPHABET[sum_remaining%26] + encoded_end
     
     if maf_row["Tumor_Seq_Allele2"] == '-':
         #handles deletion
@@ -403,14 +410,23 @@ def makeID(maf_row):
             
         
     
-    identifier_key = (
+    if maf_row["Variant_Classification"] in variant_type_map: 
+        identifier_key = (
         str(maf_row["Chromosome"])
         + encoded_position
         + "_" 
         + variant_type_map[maf_row["Variant_Classification"]]
         + Allele2code
-    )
-    
+        )
+    else:
+            
+        identifier_key = (
+            str(maf_row["Chromosome"])
+            + encoded_position
+            + "_" 
+            + "SY"
+            + Allele2code
+        )
     return identifier_key
 
 def parse_args():
@@ -470,5 +486,3 @@ if __name__ == "__main__":
         print("patient_data_file File:", args.patient_data_file)
 
     main(args)
-
-

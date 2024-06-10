@@ -328,24 +328,52 @@ class mutation(object):
         "Missense_Mutation": "M",
         "Nonsense_Mutation": "X",
         "Silent_Mutation": "S",
+        "Silent": "S",
         "Frame_shift_Ins": "I+",
         "Frame_shift_Del": "I-",
         "In_Frame_Ins": "If",
         "In_Frame_Del": "Id",
         "Splice_Site": "Sp",
-        "Other": "O",
         }
         
-        position= int(self.maf_row["Start_Position"][0:2])
+        position= int(str(self.maf_row["Start_Position"])[0:2])
         
-        if position < 10:
-            encoded_position = ALPHABET[position]
+        if position < 26:
+            encoded_start = ALPHABET[position]
         elif position < 100:
-            encoded_position = ALPHABET[position]//4
-            
-        sum_remaining = sum(int(d) for d in str(self.maf_row["Start_Position"][2:]))
+
+            encoded_start = ALPHABET[position//4]
+
+        position= int(str(self.maf_row["Start_Position"])[0:2])
         
-        encoded_position = encoded_position + ALPHABET[sum_remaining%26]
+        if position < 26:
+            encoded_end = ALPHABET[position]
+        elif position < 100:
+
+            encoded_end = ALPHABET[position//4]
+            
+        sum_remaining = sum(int(d) for d in str(self.maf_row["Start_Position"])[2:-2])
+        
+        encoded_position = encoded_start + ALPHABET[sum_remaining%26] + encoded_end
+        
+        if self.maf_row["Tumor_Seq_Allele2"] == '-':
+            #handles deletion
+            if len(self.maf_row["Reference_Allele"]) > 3:
+                Allele2code= self.maf_row["Reference_Allele"][0:3]
+            else:
+                Allele2code= self.maf_row["Reference_Allele"]
+            
+        
+        elif len(self.maf_row["Tumor_Seq_Allele2"])>1:
+            #handles INS and DNP
+            if len(self.maf_row["Tumor_Seq_Allele2"]) > 3:
+                Allele2code = self.maf_row["Tumor_Seq_Allele2"][0:3]
+            else:
+                Allele2code = self.maf_row["Tumor_Seq_Allele2"]
+                
+        else:
+            # SNPs
+            Allele2code = self.maf_row["Tumor_Seq_Allele2"]
         
         if self.maf_row["Tumor_Seq_Allele2"] == '-':
             #handles deletion
@@ -368,14 +396,24 @@ class mutation(object):
                 
             
         
-        self.identifier_key = (
+        if self.maf_row["Variant_Classification"] in variant_type_map: 
+            self.identifier_key = (
             str(self.maf_row["Chromosome"])
             + encoded_position
             + "_" 
             + variant_type_map[self.maf_row["Variant_Classification"]]
             + Allele2code
-        )
-
+            )
+        else:
+                
+            self.identifier_key = (
+                str(self.maf_row["Chromosome"])
+                + encoded_position
+                + "_" 
+                + "SY"
+                + Allele2code
+            )
+        print(self.identifier_key)
     ### Check if the variant_classification is among those that can generate a neoantigen
     def is_non_syn(self):
         types = [

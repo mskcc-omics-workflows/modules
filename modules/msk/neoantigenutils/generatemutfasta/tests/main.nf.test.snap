@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,7a47413a2edac98feed97efb91ded177"
+                        "test.MUT_sequences.fa:md5,9bb7536bd0d043be2ff61a39c03bcaed"
                     ]
                 ],
                 "1": [
@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,c08415f431610ec7a97da348899a646b"
+                        "test.WT_sequences.fa:md5,637031132b829838d4b8bb6c4e261250"
                     ]
                 ],
                 "2": [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,7a47413a2edac98feed97efb91ded177"
+                        "test.MUT_sequences.fa:md5,9bb7536bd0d043be2ff61a39c03bcaed"
                     ]
                 ],
                 "versions": [
@@ -41,12 +41,16 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,c08415f431610ec7a97da348899a646b"
+                        "test.WT_sequences.fa:md5,637031132b829838d4b8bb6c4e261250"
                     ]
                 ]
             }
         ],
-        "timestamp": "2024-05-02T09:15:42.536455"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-07T14:58:06.112821"
     },
     "neoantigenutils_generatemutfasta - maf - fasta - stub": {
         "content": [
@@ -95,6 +99,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-05-02T09:16:04.310748"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-07T14:58:15.852969"
     }
 }
