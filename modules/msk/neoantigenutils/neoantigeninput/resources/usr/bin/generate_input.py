@@ -306,7 +306,7 @@ def main(args):
 
     outer_dict["neoantigens"] = []
 
-    print(mutation_dict)
+    # print(mutation_dict)
 
     neoantigen_mut_in = pd.read_csv(args.netMHCpan_MUT_input, sep="\t")
     neoantigen_WT_in = pd.read_csv(args.netMHCpan_WT_input, sep="\t")
@@ -319,6 +319,99 @@ def main(args):
         # If no difference found in the common length, return the length of the shorter string
         return min_length
 
+
+    WTdict = {}
+    
+    for index_WT,row_WT in neoantigen_WT_in.iterrows():
+        
+        id =  row_WT["Identity"][:-2]
+        + "_"
+        + str(len(row_WT["peptide"]))
+        + "_"
+        + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+        + "_"
+        + row_WT['pos']
+        
+        WTdict[id] = {'affinity' : row_WT['affinity'], 
+                      'peptide'  : row_WT['peptide']}
+        
+        #This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
+        WTdict[row_WT["Identity"][:-2]] = {'affinity' : row_WT['affinity'], 
+                                            'peptide' : row_WT['peptide']}
+        
+    
+    
+    for index_mut,row_mut in neoantigen_mut_in.iterrows():
+        if row_mut["affinity"] < 500:
+            peplen = len(row_mut["peptide"])
+            matchfound=False
+            
+            #first find match in WT 
+            WTid =  row_mut["Identity"][:-2]
+            + "_"
+            + str(len(row_mut["peptide"]))
+            + "_"
+            + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            + "_"
+            + row_mut['pos']
+            
+            if WTid in WTdict:
+                #match
+                matchfound = True
+                
+            else:
+                i=1
+                while matchfound==False:
+                    WTid =  row_mut["Identity"][:-2]
+                    + "_"
+                    + str(len(row_mut["peptide"]))
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                    + "_"
+                    + str(int(row_mut['pos'])-i)
+                    
+                    if WTid in WTdict:
+                        matchfound = True
+                    elif i > int(row_mut['pos']):
+                        #last resort
+                        print("Error matching WT and Mut netmhcpan outputs, using WT pos 0 as default")
+                        print(row_mut["Identity"][:-2])
+                        WTid =  row_mut["Identity"][:-2]
+                        + "_"
+                        + str(len(row_mut["peptide"]))
+                        + "_"
+                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                        + "_"
+                        + "0"
+                        matchfound = True
+                    else:
+                        i+=1
+            
+            if matchfound==True:
+                mut_pos = (
+                        find_first_difference_index(row_mut["peptide"], WTdict[WTid]["peptide"]) + 1
+                    )
+                    
+                neo_dict = {
+                    "id": row_mut["Identity"]
+                        + "_"
+                        + str(peplen)
+                        + "_"
+                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                        + "_"
+                        + row_mut['pos'],
+                    "mutation_id": row_mut["Identity"],
+                    "HLA_gene_id": row_mut["MHC"],
+                    "sequence": row_mut["peptide"],
+                    "WT_sequence": WTdict[WTid]["peptide"],
+                    "mutated_position": mut_pos,
+                    "Kd": float(row_mut["affinity"]),
+                    "KdWT": float(WTdict[WTid]["affinity"])
+                }
+                outer_dict["neoantigens"].append(neo_dict)
+                
+                
+        
     for (index_mut, row_mut), (index_WT, row_WT) in zip(
         neoantigen_mut_in.iterrows(), neoantigen_WT_in.iterrows()
     ):
@@ -334,17 +427,17 @@ def main(args):
 
             neo_dict = {
                 "id": row_mut["Identity"]
-                + "_"
-                + str(peplen)
-                + "_"
-                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
+                    + "_"
+                    + str(peplen)
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
                 "mutation_id": row_mut["Identity"],
                 "HLA_gene_id": row_mut["MHC"],
                 "sequence": row_mut["peptide"],
                 "WT_sequence": row_WT["peptide"],
                 "mutated_position": mut_pos,
                 "Kd": float(row_mut["affinity"]),
-                "KdWT": float(row_WT["affinity"]),
+                "KdWT": float(row_WT["affinity"])
             }
             outer_dict["neoantigens"].append(neo_dict)
         # print(neo_dict)
@@ -371,14 +464,17 @@ def makeID(maf_row):
     "Splice_Site": "Sp",
     "Other": "O",
     }
+    
+    12345
+    K
     position= int(str(maf_row["Start_Position"])[0:2])
-        
+    
     if position < 26:
         encoded_start = ALPHABET[position]
     elif position < 100:
         encoded_start = ALPHABET[position//4]
 
-    position= int(str(maf_row["Start_Position"])[0:2])
+    position= int(str(maf_row["Start_Position"])[:-2])
     
     if position < 26:
         encoded_end = ALPHABET[position]
@@ -417,6 +513,7 @@ def makeID(maf_row):
         + "_" 
         + variant_type_map[maf_row["Variant_Classification"]]
         + Allele2code
+        + "_M" #This indicates mutated. It is added in the generateMutFasta script as well but not in this function.  
         )
     else:
             
@@ -425,7 +522,8 @@ def makeID(maf_row):
             + encoded_position
             + "_" 
             + "SY"
-            + Allele2code
+            + Allele2code   
+            + "_M"
         )
     return identifier_key
 
