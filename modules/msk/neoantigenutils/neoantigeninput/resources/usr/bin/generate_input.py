@@ -324,13 +324,7 @@ def main(args):
     
     for index_WT,row_WT in neoantigen_WT_in.iterrows():
         
-        id =  row_WT["Identity"][:-2]
-        + "_"
-        + str(len(row_WT["peptide"]))
-        + "_"
-        + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
-        + "_"
-        + row_WT['pos']
+        id =  row_WT["Identity"][:-2] + "_" + str(len(row_WT["peptide"]))+ "_" + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(row_WT['pos'])
         
         WTdict[id] = {'affinity' : row_WT['affinity'], 
                       'peptide'  : row_WT['peptide']}
@@ -347,45 +341,28 @@ def main(args):
             matchfound=False
             
             #first find match in WT 
-            WTid =  row_mut["Identity"][:-2]
-            + "_"
-            + str(len(row_mut["peptide"]))
-            + "_"
-            + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-            + "_"
-            + row_mut['pos']
+            WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(row_mut['pos'])
             
             if WTid in WTdict:
                 #match
                 matchfound = True
                 
-            else:
-                i=1
-                while matchfound==False:
-                    WTid =  row_mut["Identity"][:-2]
-                    + "_"
-                    + str(len(row_mut["peptide"]))
-                    + "_"
-                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-                    + "_"
-                    + str(int(row_mut['pos'])-i)
+            # else:
+            # This will handle INDELS
+            #     i=1
+            #     while matchfound==False:
+            #         WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(int(row_mut['pos'])-i)
                     
-                    if WTid in WTdict:
-                        matchfound = True
-                    elif i > int(row_mut['pos']):
-                        #last resort
-                        print("Error matching WT and Mut netmhcpan outputs, using WT pos 0 as default")
-                        print(row_mut["Identity"][:-2])
-                        WTid =  row_mut["Identity"][:-2]
-                        + "_"
-                        + str(len(row_mut["peptide"]))
-                        + "_"
-                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-                        + "_"
-                        + "0"
-                        matchfound = True
-                    else:
-                        i+=1
+            #         if WTid in WTdict:
+            #             matchfound = True
+            #         elif i > int(row_mut['pos']):
+            #             #last resort
+            #             print("Error matching WT and Mut netmhcpan outputs, using WT pos 0 as default")
+            #             print(row_mut["Identity"][:-2])
+            #             WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + "0"
+            #             matchfound = True
+            #         else:
+            #             i+=1
             
             if matchfound==True:
                 mut_pos = (
@@ -399,7 +376,7 @@ def main(args):
                         + "_"
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                         + "_"
-                        + row_mut['pos'],
+                        + str(row_mut['pos']),
                     "mutation_id": row_mut["Identity"],
                     "HLA_gene_id": row_mut["MHC"],
                     "sequence": row_mut["peptide"],
@@ -410,37 +387,6 @@ def main(args):
                 }
                 outer_dict["neoantigens"].append(neo_dict)
                 
-                
-        
-    for (index_mut, row_mut), (index_WT, row_WT) in zip(
-        neoantigen_mut_in.iterrows(), neoantigen_WT_in.iterrows()
-    ):
-        # affinity cutoff... should it be variable configable?
-        if row_mut["affinity"] < 500:
-
-            mut_pos = (
-                find_first_difference_index(row_mut["peptide"], row_WT["peptide"]) + 1
-            )
-            peplen = len(row_mut["peptide"])
-            if row_mut["Identity"][-1] == "_":
-                row_mut["Identity"][:-1]
-
-            neo_dict = {
-                "id": row_mut["Identity"]
-                    + "_"
-                    + str(peplen)
-                    + "_"
-                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
-                "mutation_id": row_mut["Identity"],
-                "HLA_gene_id": row_mut["MHC"],
-                "sequence": row_mut["peptide"],
-                "WT_sequence": row_WT["peptide"],
-                "mutated_position": mut_pos,
-                "Kd": float(row_mut["affinity"]),
-                "KdWT": float(row_WT["affinity"])
-            }
-            outer_dict["neoantigens"].append(neo_dict)
-        # print(neo_dict)
 
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
     with open(outjson, "w") as tstout:
@@ -465,8 +411,7 @@ def makeID(maf_row):
     "Other": "O",
     }
     
-    12345
-    K
+    
     position= int(str(maf_row["Start_Position"])[0:2])
     
     if position < 26:
@@ -474,7 +419,7 @@ def makeID(maf_row):
     elif position < 100:
         encoded_start = ALPHABET[position//4]
 
-    position= int(str(maf_row["Start_Position"])[:-2])
+    position= int(str(maf_row["Start_Position"])[-2:])
     
     if position < 26:
         encoded_end = ALPHABET[position]
@@ -504,7 +449,6 @@ def makeID(maf_row):
         # SNPs
         Allele2code = maf_row["Tumor_Seq_Allele2"]
             
-        
     
     if maf_row["Variant_Classification"] in variant_type_map: 
         identifier_key = (

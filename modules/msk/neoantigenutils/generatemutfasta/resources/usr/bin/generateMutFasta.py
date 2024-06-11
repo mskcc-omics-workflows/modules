@@ -344,7 +344,7 @@ class mutation(object):
 
             encoded_start = ALPHABET[position//4]
 
-        position= int(str(self.maf_row["Start_Position"])[0:2])
+        position= int(str(self.maf_row["Start_Position"])[-2:])
         
         if position < 26:
             encoded_end = ALPHABET[position]

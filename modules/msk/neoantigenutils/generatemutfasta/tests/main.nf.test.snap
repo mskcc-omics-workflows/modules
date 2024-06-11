@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,9bb7536bd0d043be2ff61a39c03bcaed"
+                        "test.MUT_sequences.fa:md5,c236ca28e7c658b74377c19437d7c5ab"
                     ]
                 ],
                 "1": [
@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,637031132b829838d4b8bb6c4e261250"
+                        "test.WT_sequences.fa:md5,b1a6ea2978a6624c98112e8118658495"
                     ]
                 ],
                 "2": [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,9bb7536bd0d043be2ff61a39c03bcaed"
+                        "test.MUT_sequences.fa:md5,c236ca28e7c658b74377c19437d7c5ab"
                     ]
                 ],
                 "versions": [
@@ -41,7 +41,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,637031132b829838d4b8bb6c4e261250"
+                        "test.WT_sequences.fa:md5,b1a6ea2978a6624c98112e8118658495"
                     ]
                 ]
             }
@@ -50,7 +50,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-07T14:58:06.112821"
+        "timestamp": "2024-06-11T15:34:00.546613"
     },
     "neoantigenutils_generatemutfasta - maf - fasta - stub": {
         "content": [
@@ -103,6 +103,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-06-07T14:58:15.852969"
+        "timestamp": "2024-06-11T15:34:11.407096"
     }
 }
