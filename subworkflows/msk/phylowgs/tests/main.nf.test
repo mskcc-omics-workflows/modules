@@ -25,7 +25,7 @@ nextflow_workflow {
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['facets_gene_level_txt'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['facets_hisens_cncf_txt'], checkIfExists: true)
                     ])
                 """
             }
