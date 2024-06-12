@@ -1,5 +1,5 @@
 include { GENOMENEXUS_VCF2MAF      } from '../../../modules/msk/genomenexus/vcf2maf/main'
-include { GENOMENEXUS_ANNOTATIONPIPELINE     } from '../../../modules/msk/genomenexus/annotationpipeline/main'
+//include { GENOMENEXUS_ANNOTATIONPIPELINE     } from '../../../modules/msk/genomenexus/annotationpipeline/main'
 
 workflow GENOME_NEXUS {
 
