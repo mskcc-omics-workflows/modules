@@ -13,7 +13,7 @@ workflow GENOME_NEXUS {
     // TODO nf-core: substitute modules here for the modules of your subworkflow
 
     GENOMENEXUS_VCF2MAF ( ch_vcf )
-    ch_versions = ch_versions.mix(SAMTOOLS_SORT.out.versions.first())
+    ch_versions = ch_versions.mix(GENOMENEXUS_VCF2MAF.out.versions.first())
 
 
     emit:
