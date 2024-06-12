@@ -377,7 +377,7 @@ def main(args):
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                         + "_"
                         + str(row_mut['pos']),
-                    "mutation_id": row_mut["Identity"],
+                    "mutation_id": mutation_dict[row_mut["Identity"]],
                     "HLA_gene_id": row_mut["MHC"],
                     "sequence": row_mut["peptide"],
                     "WT_sequence": WTdict[WTid]["peptide"],
