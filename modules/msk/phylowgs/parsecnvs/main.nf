@@ -21,8 +21,7 @@ process PHYLOWGS_PARSECNVS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    python2 \\
-        /usr/bin/parser/parse_cnvs.py \\
+    parse_cnvs.py \\
         ${args} \\
         ${facetsgenelevel}
 
