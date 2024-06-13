@@ -4,12 +4,15 @@ import json
 import pandas as pd
 import argparse
 
-VERSION = 1.5
+VERSION = 1.6
 
 
 def main(args):
 
-    def makeChild(subTree):
+    def makeChild(subTree,start):
+        if start:
+            subTree=0
+
         newsubtree = {
             "clone_id": int(subTree),
             "clone_mutations": [],
@@ -21,25 +24,29 @@ def main(args):
 
         if str(subTree) in trees[tree]["structure"]:
             for item in trees[tree]["structure"][str(subTree)]:
-                if str(subTree) in trees[tree]["structure"]:
-                    # recusion occurs here
-                    child_dict = makeChild(item)
-                    newsubtree["children"].append(child_dict)
 
+                child_dict = makeChild(item,False)
+                
+                newsubtree["children"].append(child_dict)
+                
             try:
                 ssmli = []
-                for ssm in treefile["mut_assignments"][str(subTree)]["ssms"]:
-                    ssmli.append(chrom_pos_dict[mut_data["ssms"][ssm]["name"]]["id"])
+                if start:
+                    pass
+                else:
+                    for ssm in treefile["mut_assignments"][str(subTree)]["ssms"]:
+                        ssmli.append(chrom_pos_dict[mut_data["ssms"][ssm]["name"]]["id"])
                 newsubtree["clone_mutations"] = ssmli
                 newsubtree["X"] = trees[tree]["populations"][str(subTree)][
                     "cellular_prevalence"
                 ][0]
                 newsubtree["x"] = trees[tree]["populations"][str(subTree)][
                     "cellular_prevalence"
-                ][1]
+                ][0]
                 newsubtree["new_x"] = 0.0
             except Exception as e:
-                print("Error in adding new subtree. Error not in base case")
+                print("Error in adding new subtree. Error not in base case**")
+                print(subTree)
                 print(e)
                 pass
 
@@ -54,8 +61,9 @@ def main(args):
                 try:
                     ssmli.append(chrom_pos_dict[mut_data["ssms"][ssm]["name"]]["id"])
                 except Exception as e:
-                    print("Error in appending to mutation list. Error in base case")
+                    print("Error in appending to mutation list. Error in base case appending ssm to ssmli")
                     print(e)
+                    # print(str(subTree))
                     pass
 
             try:
@@ -65,13 +73,12 @@ def main(args):
                 ][0]
                 newsubtree["x"] = trees[tree]["populations"][str(subTree)][
                     "cellular_prevalence"
-                ][1]
+                ][0]
                 newsubtree["new_x"] = 0.0
             except Exception as e:
                 print("Error in adding new subtree. Error in base case")
                 print(e)
                 pass
-
             return newsubtree
 
     with open(args.summary_file, "r") as f:
@@ -83,32 +90,20 @@ def main(args):
         mut_data = json.load(f)
 
     chrom_pos_dict = {}  # Just used for mapping right now
-    mutation_list  = []  # Used as the output for mutations
-    mutation_dict  = {}  # Used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
+    mutation_list = []   # Used as the output for mutations
+    mutation_dict = {}   # Used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
 
-    
-    
-    
     mafdf = pd.read_csv(args.maf_file, delimiter="\t")
 
     for index, row in mafdf.iterrows():
-        if row["Variant_Type"] == "SNP":
+        if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DEL" or row["Variant_Type"] == "INS" or row["Variant_Type"] == "DNP":
             if row["Variant_Classification"] == "Missense_Mutation":
                 missense = 1
 
             else:
                 missense = 0
-
-            if row["Variant_Type"] == "SNP":
-                print(
-                    str(row["Chromosome"])
-                    + "_"
-                    + str(row["Start_Position"])
-                    + "_"
-                    + row["Reference_Allele"]
-                    + "_"
-                    + row["Tumor_Seq_Allele2"]
-                )
+            print(row["Variant_Type"])
+            if row["Variant_Type"] == "SNP" or  row["Variant_Type"] == "DNP":
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -159,7 +154,7 @@ def main(args):
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
-                    + str(row["Start_Position"])
+                    + str(row["Start_Position"]-1)
                     + "_"
                     + row["Reference_Allele"]
                     + "_"
@@ -194,14 +189,21 @@ def main(args):
                 ] = (
                     str(row["Chromosome"])
                     + "_"
-                    + str(row["Start_Position"])
+                    + str(row["Start_Position"]-1)
                     + "_"
                     + row["Reference_Allele"]
                     + "_"
-                    + row["Tumor_Seq_Allele2"]
+                    + "D"
                 )
 
             elif row["Variant_Type"] == "INS":
+                print(str(row["Chromosome"])
+                    + "_"
+                    + str(row["Start_Position"])
+                    + "_"
+                    + "I"
+                    + "_"
+                    + row["Tumor_Seq_Allele2"])
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -242,7 +244,7 @@ def main(args):
                     + "_"
                     + str(row["Start_Position"])
                     + "_"
-                    + row["Reference_Allele"]
+                    + "I"
                     + "_"
                     + row["Tumor_Seq_Allele2"]
                 )
@@ -254,21 +256,19 @@ def main(args):
     for tree in trees:
 
         inner_sample_tree_dict = {"topology": [], "score": trees[tree]["llh"]}
-
-        print(tree)
-
         with open("./" + args.tree_directory + "/" + str(tree) + ".json", "r") as f:
             # Load the JSON data into a dictionary
             treefile = json.load(f)
 
-        bigtree = makeChild(tree)
+        bigtree = makeChild(tree,True)
 
         inner_sample_tree_dict["topology"] = bigtree
 
         outer_dict["sample_trees"].append(inner_sample_tree_dict)
 
     outer_dict["mutations"] = mutation_list
-
+    
+    
     # TODO format HLA_gene input data, depending on format inputted.  They should look like this A*02:01
     # this will be setup for polysolver winners output
     def convert_polysolver_hla(polyHLA):
