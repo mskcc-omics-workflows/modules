@@ -3,8 +3,8 @@ process PHYLOWGS_PARSECNVS {
     label 'process_low'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/phylowgs:v1.4-msk':
-        'docker.io/mskcc/phylowgs:v1.4-msk' }"
+        'docker://mskcc/phylowgs:v1.5-msk':
+        'docker.io/mskcc/phylowgs:v1.5-msk' }"
 
     input:
     tuple val(meta), path(facetsgenelevel)
@@ -21,8 +21,7 @@ process PHYLOWGS_PARSECNVS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    python2 \\
-        /usr/bin/parser/parse_cnvs.py \\
+    parse_cnvs.py \\
         ${args} \\
         ${facetsgenelevel}
 

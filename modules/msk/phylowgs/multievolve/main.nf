@@ -3,8 +3,8 @@ process PHYLOWGS_MULTIEVOLVE {
     label 'process_high'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/phylowgs:v1.4-msk':
-        'docker.io/mskcc/phylowgs:v1.4-msk' }"
+        'docker://mskcc/phylowgs:v1.5-msk':
+        'docker.io/mskcc/phylowgs:v1.5-msk' }"
 
     input:
     tuple val(meta), path(cnv_data), path(ssm_data)

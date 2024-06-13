@@ -3,8 +3,8 @@ process PHYLOWGS_CREATEINPUT {
     label 'process_low'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/phylowgs:v1.4-msk':
-        'docker.io/mskcc/phylowgs:v1.4-msk' }"
+        'docker://mskcc/phylowgs:v1.5-msk':
+        'docker.io/mskcc/phylowgs:v1.5-msk' }"
 
     input:
     tuple val(meta), path(unfilteredmaf), path(cnv)
@@ -20,8 +20,7 @@ process PHYLOWGS_CREATEINPUT {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    python2 \\
-        /usr/bin/parser/create_phylowgs_inputs.py \\
+    create_phylowgs_inputs.py \\
         --cnvs S1=${cnv} \\
         ${args} \\
         --vcf-type S1=maf S1=${unfilteredmaf}
