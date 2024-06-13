@@ -13,7 +13,11 @@
             "test.WT.xls",
             "test.WT.netmhcpan.output"
         ],
-        "timestamp": "2024-05-03T13:49:45.932532"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T11:02:31.338253"
     },
     "netmhcpan - xls,output,fa - stub": {
         "content": [
@@ -29,7 +33,11 @@
             "test.MUT.xls",
             "test.MUT.netmhcpan.output"
         ],
-        "timestamp": "2024-05-03T13:49:54.704381"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T11:02:35.582061"
     },
     "netmhcpan - MUT - xls,output,fa": {
         "content": [
@@ -45,6 +53,10 @@
             "test.MUT.xls",
             "test.MUT.netmhcpan.output"
         ],
-        "timestamp": "2024-05-03T13:49:33.972805"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T11:02:12.753672"
     }
 }

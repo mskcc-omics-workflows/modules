@@ -12,7 +12,11 @@
             },
             "test.MUT.netmhcstabpan.output"
         ],
-        "timestamp": "2024-05-03T13:50:44.248587"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T11:11:05.586612"
     },
     "netmhcstabpan - xls,output,fa - stub": {
         "content": [
@@ -27,7 +31,11 @@
             },
             "test.MUT.netmhcstabpan.output"
         ],
-        "timestamp": "2024-05-03T13:53:19.42398"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T11:12:06.099529"
     },
     "netmhcstabpan - WT - xls,output,fa": {
         "content": [
@@ -42,6 +50,10 @@
             },
             "test.WT.netmhcstabpan.output"
         ],
-        "timestamp": "2024-05-03T13:51:05.084375"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T11:12:01.701587"
     }
 }

@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
                 ],
                 "json": [
                     [
@@ -24,11 +24,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
                 ]
             }
         ],
-        "timestamp": "2024-04-30T14:36:21.287099"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T10:50:43.430514"
     },
     "neoantigenutils_neoantigeninput - json,tsv": {
         "content": [
@@ -39,11 +43,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,4c08046a6f5826a3d51c221c6eef6348"
+                        "test_patient_test_.json:md5,f07a4f59d52ca2362a9201a33aaf267c"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
                 ],
                 "json": [
                     [
@@ -51,14 +55,18 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,4c08046a6f5826a3d51c221c6eef6348"
+                        "test_patient_test_.json:md5,f07a4f59d52ca2362a9201a33aaf267c"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,54385c6ea7fa3b5d2e8989b3eccd706f"
+                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
                 ]
             }
         ],
-        "timestamp": "2024-04-30T14:36:14.247161"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-13T10:50:36.907526"
     }
 }

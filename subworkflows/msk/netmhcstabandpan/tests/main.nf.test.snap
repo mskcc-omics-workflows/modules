@@ -1,12 +1,16 @@
 {
     "netmhcstabandpan - tsv,xls,fa": {
         "content": [
-            "test_netmHCpanoutput.WT.tsv:md5,999150ad55c787f58236bdef21314b2a",
+            "test_netmHCpanoutput.WT.tsv:md5,a1d7db1b6f116e96457f2fa60660558e",
             "test.WT.xls",
-            "test.MUT_sequences.fa:md5,7a47413a2edac98feed97efb91ded177",
-            "test.WT_sequences.fa:md5,c08415f431610ec7a97da348899a646b"
+            "test.MUT_sequences.fa:md5,7fdb7d3f0fe5a6f439ed294b612c2d70",
+            "test.WT_sequences.fa:md5,7595ed6cf0c98500b00c9ad027125b38"
         ],
-        "timestamp": "2024-05-03T14:34:52.242668"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-11T16:27:38.189273"
     },
     "netmhcstabandpan - tsv,xls,fa - stub": {
         "content": [
@@ -18,6 +22,10 @@
             "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
             "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
         ],
-        "timestamp": "2024-05-03T14:20:18.673949"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-06-11T16:27:49.026711"
     }
 }
