@@ -9,9 +9,9 @@ VERSION = 1.6
 
 def main(args):
 
-    def makeChild(subTree,start):
+    def makeChild(subTree, start):
         if start:
-            subTree=0
+            subTree = 0
 
         newsubtree = {
             "clone_id": int(subTree),
@@ -25,7 +25,7 @@ def main(args):
         if str(subTree) in trees[tree]["structure"]:
             for item in trees[tree]["structure"][str(subTree)]:
 
-                child_dict = makeChild(item,False)
+                child_dict = makeChild(item, False)
 
                 newsubtree["children"].append(child_dict)
 
@@ -35,7 +35,9 @@ def main(args):
                     pass
                 else:
                     for ssm in treefile["mut_assignments"][str(subTree)]["ssms"]:
-                        ssmli.append(chrom_pos_dict[mut_data["ssms"][ssm]["name"]]["id"])
+                        ssmli.append(
+                            chrom_pos_dict[mut_data["ssms"][ssm]["name"]]["id"]
+                        )
                 newsubtree["clone_mutations"] = ssmli
                 newsubtree["X"] = trees[tree]["populations"][str(subTree)][
                     "cellular_prevalence"
@@ -61,7 +63,9 @@ def main(args):
                 try:
                     ssmli.append(chrom_pos_dict[mut_data["ssms"][ssm]["name"]]["id"])
                 except Exception as e:
-                    print("Error in appending to mutation list. Error in base case appending ssm to ssmli")
+                    print(
+                        "Error in appending to mutation list. Error in base case appending ssm to ssmli"
+                    )
                     print(e)
                     # print(str(subTree))
                     pass
@@ -90,20 +94,27 @@ def main(args):
         mut_data = json.load(f)
 
     chrom_pos_dict = {}  # Just used for mapping right now
-    mutation_list = []   # Used as the output for mutations
-    mutation_dict = {}   # Used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
+    mutation_list = []  # Used as the output for mutations
+    mutation_dict = (
+        {}
+    )  # Used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
 
     mafdf = pd.read_csv(args.maf_file, delimiter="\t")
 
     for index, row in mafdf.iterrows():
-        if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DEL" or row["Variant_Type"] == "INS" or row["Variant_Type"] == "DNP":
+        if (
+            row["Variant_Type"] == "SNP"
+            or row["Variant_Type"] == "DEL"
+            or row["Variant_Type"] == "INS"
+            or row["Variant_Type"] == "DNP"
+        ):
             if row["Variant_Classification"] == "Missense_Mutation":
                 missense = 1
 
             else:
                 missense = 0
             print(row["Variant_Type"])
-            if row["Variant_Type"] == "SNP" or  row["Variant_Type"] == "DNP":
+            if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DNP":
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -138,9 +149,7 @@ def main(args):
                     }
                 )
 
-                mutation_dict[
-                    makeID(row)
-                ] = (
+                mutation_dict[makeID(row)] = (
                     str(row["Chromosome"])
                     + "_"
                     + str(row["Start_Position"])
@@ -154,7 +163,7 @@ def main(args):
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
-                    + str(row["Start_Position"]-1)
+                    + str(row["Start_Position"] - 1)
                     + "_"
                     + row["Reference_Allele"]
                     + "_"
@@ -184,12 +193,10 @@ def main(args):
                         "missense": missense,
                     }
                 )
-                mutation_dict[
-                    makeID(row)
-                ] = (
+                mutation_dict[makeID(row)] = (
                     str(row["Chromosome"])
                     + "_"
-                    + str(row["Start_Position"]-1)
+                    + str(row["Start_Position"] - 1)
                     + "_"
                     + row["Reference_Allele"]
                     + "_"
@@ -197,13 +204,15 @@ def main(args):
                 )
 
             elif row["Variant_Type"] == "INS":
-                print(str(row["Chromosome"])
+                print(
+                    str(row["Chromosome"])
                     + "_"
                     + str(row["Start_Position"])
                     + "_"
                     + "I"
                     + "_"
-                    + row["Tumor_Seq_Allele2"])
+                    + row["Tumor_Seq_Allele2"]
+                )
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -237,9 +246,7 @@ def main(args):
                         "missense": missense,
                     }
                 )
-                mutation_dict[
-                    makeID(row)
-                ] = (
+                mutation_dict[makeID(row)] = (
                     str(row["Chromosome"])
                     + "_"
                     + str(row["Start_Position"])
@@ -260,14 +267,13 @@ def main(args):
             # Load the JSON data into a dictionary
             treefile = json.load(f)
 
-        bigtree = makeChild(tree,True)
+        bigtree = makeChild(tree, True)
 
         inner_sample_tree_dict["topology"] = bigtree
 
         outer_dict["sample_trees"].append(inner_sample_tree_dict)
 
     outer_dict["mutations"] = mutation_list
-
 
     # TODO format HLA_gene input data, depending on format inputted.  They should look like this A*02:01
     # this will be setup for polysolver winners output
@@ -319,32 +325,46 @@ def main(args):
         # If no difference found in the common length, return the length of the shorter string
         return min_length
 
-
     WTdict = {}
 
-    for index_WT,row_WT in neoantigen_WT_in.iterrows():
+    for index_WT, row_WT in neoantigen_WT_in.iterrows():
 
-        id =  row_WT["Identity"][:-2] + "_" + str(len(row_WT["peptide"]))+ "_" + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(row_WT['pos'])
+        id = (
+            row_WT["Identity"][:-2]
+            + "_"
+            + str(len(row_WT["peptide"]))
+            + "_"
+            + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            + "_"
+            + str(row_WT["pos"])
+        )
 
-        WTdict[id] = {'affinity' : row_WT['affinity'],
-                      'peptide'  : row_WT['peptide']}
+        WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
 
-        #This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
-        WTdict[row_WT["Identity"][:-2]] = {'affinity' : row_WT['affinity'],
-                                            'peptide' : row_WT['peptide']}
+        # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
+        WTdict[row_WT["Identity"][:-2]] = {
+            "affinity": row_WT["affinity"],
+            "peptide": row_WT["peptide"],
+        }
 
-
-
-    for index_mut,row_mut in neoantigen_mut_in.iterrows():
+    for index_mut, row_mut in neoantigen_mut_in.iterrows():
         if row_mut["affinity"] < 500:
             peplen = len(row_mut["peptide"])
-            matchfound=False
+            matchfound = False
 
-            #first find match in WT
-            WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(row_mut['pos'])
+            # first find match in WT
+            WTid = (
+                row_mut["Identity"][:-2]
+                + "_"
+                + str(len(row_mut["peptide"]))
+                + "_"
+                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                + "_"
+                + str(row_mut["pos"])
+            )
 
             if WTid in WTdict:
-                #match
+                # match
                 matchfound = True
 
             # else:
@@ -364,29 +384,31 @@ def main(args):
             #         else:
             #             i+=1
 
-            if matchfound==True:
+            if matchfound == True:
                 mut_pos = (
-                        find_first_difference_index(row_mut["peptide"], WTdict[WTid]["peptide"]) + 1
+                    find_first_difference_index(
+                        row_mut["peptide"], WTdict[WTid]["peptide"]
                     )
+                    + 1
+                )
 
                 neo_dict = {
                     "id": row_mut["Identity"]
-                        + "_"
-                        + str(peplen)
-                        + "_"
-                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-                        + "_"
-                        + str(row_mut['pos']),
+                    + "_"
+                    + str(peplen)
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                    + "_"
+                    + str(row_mut["pos"]),
                     "mutation_id": mutation_dict[row_mut["Identity"]],
                     "HLA_gene_id": row_mut["MHC"],
                     "sequence": row_mut["peptide"],
                     "WT_sequence": WTdict[WTid]["peptide"],
                     "mutated_position": mut_pos,
                     "Kd": float(row_mut["affinity"]),
-                    "KdWT": float(WTdict[WTid]["affinity"])
+                    "KdWT": float(WTdict[WTid]["affinity"]),
                 }
                 outer_dict["neoantigens"].append(neo_dict)
-
 
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
     with open(outjson, "w") as tstout:
@@ -396,50 +418,75 @@ def main(args):
 
 def makeID(maf_row):
     ##ENCODING FASTA ID FOR USE IN MATCHING LATER
-    ALPHABET= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    ALPHABET = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+    ]
 
     variant_type_map = {
-    "Missense_Mutation": "M",
-    "Nonsense_Mutation": "X",
-    "Silent_Mutation": "S",
-    "Silent": "S",
-    "Frame_shift_Ins": "I+",
-    "Frame_shift_Del": "I-",
-    "In_Frame_Ins": "If",
-    "In_Frame_Del": "Id",
-    "Splice_Site": "Sp",
-    "Other": "O",
+        "Missense_Mutation": "M",
+        "Nonsense_Mutation": "X",
+        "Silent_Mutation": "S",
+        "Silent": "S",
+        "Frame_shift_Ins": "I+",
+        "Frame_shift_Del": "I-",
+        "In_Frame_Ins": "If",
+        "In_Frame_Del": "Id",
+        "Splice_Site": "Sp",
+        "Other": "O",
     }
 
-
-    position= int(str(maf_row["Start_Position"])[0:2])
+    position = int(str(maf_row["Start_Position"])[0:2])
 
     if position < 26:
         encoded_start = ALPHABET[position]
     elif position < 100:
-        encoded_start = ALPHABET[position//4]
+        encoded_start = ALPHABET[position // 4]
 
-    position= int(str(maf_row["Start_Position"])[-2:])
+    position = int(str(maf_row["Start_Position"])[-2:])
 
     if position < 26:
         encoded_end = ALPHABET[position]
     elif position < 100:
-        encoded_end = ALPHABET[position//4]
+        encoded_end = ALPHABET[position // 4]
 
     sum_remaining = sum(int(d) for d in str(maf_row["Start_Position"])[2:-2])
 
-    encoded_position = encoded_start + ALPHABET[sum_remaining%26] + encoded_end
+    encoded_position = encoded_start + ALPHABET[sum_remaining % 26] + encoded_end
 
-    if maf_row["Tumor_Seq_Allele2"] == '-':
-        #handles deletion
+    if maf_row["Tumor_Seq_Allele2"] == "-":
+        # handles deletion
         if len(maf_row["Reference_Allele"]) > 3:
-            Allele2code= maf_row["Reference_Allele"][0:3]
+            Allele2code = maf_row["Reference_Allele"][0:3]
         else:
-            Allele2code= maf_row["Reference_Allele"]
+            Allele2code = maf_row["Reference_Allele"]
 
-
-    elif len(maf_row["Tumor_Seq_Allele2"])>1:
-        #handles INS and DNP
+    elif len(maf_row["Tumor_Seq_Allele2"]) > 1:
+        # handles INS and DNP
         if len(maf_row["Tumor_Seq_Allele2"]) > 3:
             Allele2code = maf_row["Tumor_Seq_Allele2"][0:3]
         else:
@@ -449,15 +496,14 @@ def makeID(maf_row):
         # SNPs
         Allele2code = maf_row["Tumor_Seq_Allele2"]
 
-
     if maf_row["Variant_Classification"] in variant_type_map:
         identifier_key = (
-        str(maf_row["Chromosome"])
-        + encoded_position
-        + "_"
-        + variant_type_map[maf_row["Variant_Classification"]]
-        + Allele2code
-        + "_M" #This indicates mutated. It is added in the generateMutFasta script as well but not in this function.
+            str(maf_row["Chromosome"])
+            + encoded_position
+            + "_"
+            + variant_type_map[maf_row["Variant_Classification"]]
+            + Allele2code
+            + "_M"  # This indicates mutated. It is added in the generateMutFasta script as well but not in this function.
         )
     else:
 
@@ -470,6 +516,7 @@ def makeID(maf_row):
             + "_M"
         )
     return identifier_key
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
