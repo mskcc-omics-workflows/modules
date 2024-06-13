@@ -8,6 +8,7 @@ nextflow_process {
     tag "modules_nfcore"
     tag "neoantigenutils"
     tag "neoantigenutils/neoantigeninput"
+    tag "modules_msk"
 
     test("neoantigenutils_neoantigeninput - json,tsv") {
 

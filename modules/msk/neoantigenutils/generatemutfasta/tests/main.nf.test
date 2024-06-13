@@ -8,6 +8,7 @@ nextflow_process {
     tag "modules_nfcore"
     tag "neoantigenutils"
     tag "neoantigenutils/generatemutfasta"
+    tag "modules_msk"
 
     test("neoantigenutils_generatemutfasta - maf - fasta") {
 

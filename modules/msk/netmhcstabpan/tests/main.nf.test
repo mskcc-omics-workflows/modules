@@ -7,6 +7,7 @@ nextflow_process {
     tag "modules"
     tag "modules_nfcore"
     tag "netmhcstabpan"
+    tag "modules_msk"
 
     test("netmhcstabpan - MUT - xls,output,fa") {
 
