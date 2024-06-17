@@ -27,7 +27,7 @@ output:
       description: |
         Channel containing output converted and annotated MAF file
         Structure: [ val(meta), path(maf) ]
-    pattern: "*.maf"
+    pattern: "*.{maf}"
 
   - versions:
       type: file
