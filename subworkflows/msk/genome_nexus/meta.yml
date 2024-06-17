@@ -19,7 +19,6 @@ input:
       description: |
         The input channel containing the input VCF file
         Structure: [ val(meta), path(vcf) ]
-    pattern: "*.{vcf}"
 
 output:
   - maf:
