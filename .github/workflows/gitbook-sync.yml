@@ -74,6 +74,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: setup python
@@ -109,6 +112,7 @@ jobs:
       - uses: jaywcjlove/github-action-read-file@main
         id: cat_file_module
         with:
+          branch: ${{ github.ref }}
           path: modules/msk/${{ env.SW_NAME }}/meta.yml
       - name: Write Module yaml to temp
         if: ${{ steps.cat_file_module.outputs.size }}
@@ -126,6 +130,7 @@ jobs:
         if: ${{ steps.cat_file_module.outputs.size == '' }}
         id: cat_file_subworkflow
         with:
+          branch: ${{ github.ref }}
           path: subworkflows/msk/${{ env.SW_NAME }}/meta.yml
       - name: Write Subworkflow yaml to temp
         if: ${{ steps.cat_file_subworkflow.outputs.size }}
