@@ -9,7 +9,6 @@ keywords:
   - maf
   - genome_nexus
 
-
 components:
   - genomenexus/vcf2maf
   - genomenexus/annotationpipeline
@@ -20,7 +19,7 @@ input:
       description: |
         The input channel containing the input VCF file
         Structure: [ val(meta), path(vcf) ]
-      pattern: "*.{vcf}"
+    pattern: "*.{vcf}"
 
 output:
   - maf:
@@ -28,7 +27,7 @@ output:
       description: |
         Channel containing output converted and annotated MAF file
         Structure: [ val(meta), path(maf) ]
-      pattern: "*.maf"
+    pattern: "*.maf"
 
   - versions:
       type: file
