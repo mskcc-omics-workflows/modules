@@ -21,21 +21,22 @@ workflow TRACEBACK {
     PVMAFCONCAT_INITIAL(mafs)
     ch_versions = ch_versions.mix(PVMAFCONCAT_INITIAL.out.versions.first())
 
+    // get bams and mafs, grouping by patient if provided
+    PVMAFCONCAT_INITIAL.out.maf
+    .map {it -> [it[0].subMap('patient')[0], *it[1..-1]] }
+    .set{concat_maf}
 
-    maf = PVMAFCONCAT_INITIAL.out.maf
-    maf.map{ meta,maf -> maf}.set{just_maf}
     bams
-    .map { tuple( 'patient': it[0]['patient'], *it ) }
-    .combine( just_maf )
+    .map { it -> [it[0].subMap('patient')[0], it[0], *it[1..-1]] }
+    .combine(concat_maf, by:0)
     .map { it[1..-1] }
     .set{bam_list_maf}
-
 
     // genotype each bam combined maf, per patient if provided
     GENOTYPEVARIANTS_ALL(bam_list_maf, reference, reference_fai)
     ch_versions = ch_versions.mix(GENOTYPEVARIANTS_ALL.out.versions.first())
 
-    // // For impact, grab ORG-STD Maf from GENOTYPEVARIANTS_ALL
+    // For impact, grab ORG-STD Maf from GENOTYPEVARIANTS_ALL
     GENOTYPEVARIANTS_ALL.out.maf
     .transpose()
     .branch {
@@ -43,7 +44,7 @@ workflow TRACEBACK {
         }
     .set{split_genotype_imp}
 
-    // // For access, grab ORG-SIMPLEX-DUPLEX Maf from GENOTYPEVARIANTS_ALL
+    // For access, grab ORG-SIMPLEX-DUPLEX Maf from GENOTYPEVARIANTS_ALL
     GENOTYPEVARIANTS_ALL.out.maf
     .transpose()
     .branch {
@@ -51,7 +52,7 @@ workflow TRACEBACK {
         }
     .set{split_genotype_xs}
 
-    // // Combine impact and access mafs
+    // Combine impact and access mafs
     split_genotype_imp
     .concat(split_genotype_xs.genotyped)
     .map{meta, files -> tuple('patient': meta['patient'], files )}
@@ -62,8 +63,7 @@ workflow TRACEBACK {
     PVMAFCONCAT_GENOTYPE(all_genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
-
-    // // Tag with traceback columns aka combine ref stats from access and impact
+    // Tag with traceback columns aka combine ref stats from access and impact
     PVMAF_TAG(PVMAFCONCAT_GENOTYPE.out.maf, 'traceback')
     ch_versions = ch_versions.mix(PVMAF_TAG.out.versions.first())
     genotyped_maf = PVMAF_TAG.out.maf
