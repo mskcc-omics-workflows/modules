@@ -9,6 +9,7 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_nfcore"
     tag "subworkflows/genome_nexus"
+    tag "subworkflows_msk"
     
     tag "genomenexus"
     tag "genomenexus/vcf2maf"

@@ -1,44 +1,35 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
 name: "genome_nexus"
-## TODO nf-core: Add a description of the subworkflow and list keywords
-description: Sort SAM/BAM/CRAM file
+
+description: Subworkflow to perform conversion of VCF to MAF and annotation of said MAF file.
 keywords:
-  - sort
-  - bam
-  - sam
-  - cram
-## TODO nf-core: Add a list of the modules and/or subworkflows used in the subworkflow
+  - annotate
+  - convert
+  - vcf
+  - maf
+  - genome_nexus
+
+
 components:
-  - samtools/sort
-  - samtools/index
-## TODO nf-core: List all of the channels used as input with a description and their structure
+  - genomenexus/vcf2maf
+  - genomenexus/annotationpipeline
+
 input:
-  - ch_bam:
+  - ch_vcf:
       type: file
       description: |
-        The input channel containing the BAM/CRAM/SAM files
-        Structure: [ val(meta), path(bam) ]
-      pattern: "*.{bam/cram/sam}"
-## TODO nf-core: List all of the channels used as output with a descriptions and their structure
+        The input channel containing the input VCF file
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.{vcf}"
+
 output:
-  - bam:
+  - maf:
       type: file
       description: |
-        Channel containing BAM files
-        Structure: [ val(meta), path(bam) ]
-      pattern: "*.bam"
-  - bai:
-      type: file
-      description: |
-        Channel containing indexed BAM (BAI) files
-        Structure: [ val(meta), path(bai) ]
-      pattern: "*.bai"
-  - csi:
-      type: file
-      description: |
-        Channel containing CSI files
-        Structure: [ val(meta), path(csi) ]
-      pattern: "*.csi"
+        Channel containing output converted and annotated MAF file
+        Structure: [ val(meta), path(maf) ]
+      pattern: "*.maf"
+
   - versions:
       type: file
       description: |
