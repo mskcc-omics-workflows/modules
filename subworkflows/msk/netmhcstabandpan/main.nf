@@ -52,12 +52,7 @@ workflow NETMHCSTABANDPAN {
 
     merged_pan_and_stab = NETMHCPAN.out.netmhcpanoutput.mix(NETMHCSTABPAN.out.netmhcstabpanoutput)
 
-    merged_pan_and_stab.view()
-
-
     NEOANTIGENUTILS_FORMATNETMHCPAN( merged_pan_and_stab )
-
-    NEOANTIGENUTILS_FORMATNETMHCPAN.out.netMHCpanreformatted.view()
 
     ch_versions = ch_versions.mix( NEOANTIGENUTILS_FORMATNETMHCPAN.out.versions )
 
