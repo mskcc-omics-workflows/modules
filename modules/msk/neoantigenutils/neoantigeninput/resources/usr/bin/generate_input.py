@@ -226,7 +226,7 @@ def main(args):
                     + "_"
                     + str(row["Start_Position"])
                     + "_"
-                    + row["Reference_Allele"]
+                    + "I"
                     + "_"
                     + row["Tumor_Seq_Allele2"],
                     "gene": row["Hugo_Symbol"],
