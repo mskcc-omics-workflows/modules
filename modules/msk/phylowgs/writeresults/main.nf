@@ -25,6 +25,7 @@ process PHYLOWGS_WRITERESULTS {
     """
     python2 \\
         /usr/bin/write_results.py \\
+        ${args} \\
         --include-ssm-names \\
         ${prefix} \\
         ${trees} \\
