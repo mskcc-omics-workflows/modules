@@ -9,7 +9,7 @@
                     
                 ],
                 "2": [
-                    "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
+                    "versions.yml:md5,bb5f5880ef3572733a2349212e8ab549",
                     "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
                 ],
                 "genotyped_maf": [
@@ -19,11 +19,11 @@
                     
                 ],
                 "versions": [
-                    "versions.yml:md5,d8528dd2b53c5e8f814def1788328193",
+                    "versions.yml:md5,bb5f5880ef3572733a2349212e8ab549",
                     "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
                 ]
             }
         ],
-        "timestamp": "2024-05-30T10:09:46.931259"
+        "timestamp": "2024-06-18T13:38:00.215685"
     }
 }
