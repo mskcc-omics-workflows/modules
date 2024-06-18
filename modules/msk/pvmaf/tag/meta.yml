@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "pvmaf_tag"
+description: a flexible command for tagging maf files
+keywords:
+  - tagging
+  - maf
+  - msk-access
+tools:
+  - "pvmaf":
+      description: "provides a variety of commands for manipulating mafs."
+      homepage: "https://github.com/msk-access/postprocessing_variant_calls"
+      documentation: "https://cmo-ci.gitbook.io/postprocessing_variant_calls/"
+      licence: ["MIT"]
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', patient:'patient1' ]`
+
+  - maf:
+      type: file
+      description: Maf file with columns required for selected tagging type.
+      pattern: "*.{maf}"
+  - type:
+      type: string
+      description: The type of tagging to be performed.
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', patient:'patient1' ]`
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - maf:
+      type: file
+      description: tagged maf file.
+      pattern: "*.{maf}"
+
+authors:
+  - "@buehlere"
+maintainers:
+  - "@buehlere"
