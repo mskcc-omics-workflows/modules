@@ -107,9 +107,10 @@ class FacetsParser(CnvParser):
         with open(self._fc_filename) as facetf:
             reader = csv.DictReader(facetf, dialect="excel-tab")
             for record in reader:
-                cellularity = float(record["cf.em"])
-                if cellularity < 1:
-                    max_cellularity = max(max_cellularity, cellularity)
+                if record["cf.em"] != "NA":
+                    cellularity = float(record["cf.em"])
+                    if cellularity < 1:
+                        max_cellularity = max(max_cellularity, cellularity)
         if max_cellularity > 0:
             self._cellularity = max_cellularity
         else:
