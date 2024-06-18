@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
                 ],
                 "maf": [
                     [
@@ -24,11 +24,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
                 ]
             }
         ],
-        "timestamp": "2024-02-12T11:27:25.169131"
+        "timestamp": "2024-06-18T14:18:45.350503"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -48,7 +48,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
                 ],
                 "maf": [
                     [
@@ -65,11 +65,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
                 ]
             }
         ],
-        "timestamp": "2024-02-12T11:27:17.612126"
+        "timestamp": "2024-06-18T14:18:39.109687"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -87,7 +87,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
                 ],
                 "maf": [
                     [
@@ -102,10 +102,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b7680b263124563b4efc85c69b23ce3b"
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
                 ]
             }
         ],
-        "timestamp": "2024-02-12T11:27:06.821575"
+        "timestamp": "2024-06-18T14:18:29.181063"
     }
 }
