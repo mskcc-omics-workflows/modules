@@ -10,7 +10,7 @@ workflow GENOME_NEXUS {
 
     ch_versions = Channel.empty()
 
-    // TODO nf-core: substitute modules here for the modules of your subworkflow
+    
 
     GENOMENEXUS_VCF2MAF ( ch_vcf )
     ch_versions = ch_versions.mix(GENOMENEXUS_VCF2MAF.out.versions.first())
@@ -18,7 +18,7 @@ workflow GENOME_NEXUS {
 
 
     emit:
-    // TODO nf-core: edit emitted channels
+    
     maf      = GENOMENEXUS_VCF2MAF.out.maf           // channel: [ val(meta), [ maf ] ]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
