@@ -17,15 +17,15 @@ input:
   - bams:
       type: channel
       description: |
-        The input channel containing impact or access bams files:
-        impact: [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
-        access: [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
+        An input channel containing impact or access bams files:
+        impact: Channel.of([patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], [])
+        access: Channel.of([patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai])
       pattern: "*.{bam/cram/sam}"
   - mafs:
       type: channel
       description: |
-        The input channel containing maf files
-        Structure: // channel: [[patient:null], [maf1,...,maf2] ]
+        An input channel containing maf files
+        Structure: // channel: Channel.of([[patient:null, id:'sample'], [maf1,...,maf2]], [[patient:null, id:'sample'], [maf1,...,maf2] ]])
       pattern: "*.{maf,txt,tsv}"
   - fasta:
       type: file
@@ -43,13 +43,13 @@ output:
   - genotyped_maf:
       type: channel
       description: |
-        Channel containing genotyped maf file
+        Channel containing combined genotyped maf for all provided bams.
         Structure: [ val(meta), path(maf) ]
       pattern: "*.maf"
   - individual_genotyped_mafs:
       type: channel
       description: |
-        Channel containing a un-concatenated, genotyped mafs for each provided bam.
+        Channel containing genotyped mafs for each provided bam.
         Structure: [ val(meta), [maf,..,maf] ]
       pattern: "*.maf"
   - versions:
