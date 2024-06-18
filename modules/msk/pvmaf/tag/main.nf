@@ -2,13 +2,10 @@ process PVMAF_TAG {
     tag "$meta.id"
     label 'process_single'
 
-    // TODO nf-core: List required Conda package(s).
-    //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
-    //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.8':
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.8' }"
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0':
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0' }"
 
     input:
     tuple val(meta), path(maf)
