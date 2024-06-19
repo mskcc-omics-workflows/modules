@@ -3,8 +3,8 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigenediting:1.2':
-        'docker.io/mskcc/neoantigenediting:1.2' }"
+        'docker://mskcc/neoantigenediting:1.3':
+        'docker.io/mskcc/neoantigenediting:1.3' }"
 
     input:
     tuple val(meta),  path(patient_data), path(alignment_file)
@@ -21,7 +21,7 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    python3 /usr/bin/compute_fitness.py \\
+    compute_fitness.py \\
         --alignment ${alignment_file} \\
         --input ${patient_data}
 
