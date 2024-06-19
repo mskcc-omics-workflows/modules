@@ -361,7 +361,11 @@ jobs:
           - profile: "conda"
             tags: genomenexus/vcf2maf
           - profile: "conda"
+            tags: genomenexus/annotationpipeline
+          - profile: "conda"
             tags: ppflagfixer
+          - profile: "conda"
+            tags: subworkflows/genome_nexus
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
