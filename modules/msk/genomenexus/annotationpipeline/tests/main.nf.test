@@ -22,7 +22,7 @@ nextflow_process {
                 
                 input[0] = [
                     [ id:'test'], // meta map
-                    file("/home/naidur/test_data/mod.maf", checkIfExists: true)
+                    file(params.test_data_mskcc['genome_nexus']['test_maf'], checkIfExists: true)
                     ]
                 """
             }
@@ -50,7 +50,7 @@ nextflow_process {
                 
                 input[0] = [
                     [ id:'test'], // meta map
-                    file("/home/naidur/test_data/mod.maf", checkIfExists: true)
+                    file(params.test_data_mskcc['genome_nexus']['test_maf'], checkIfExists: true)
                     ]
                 """
             }

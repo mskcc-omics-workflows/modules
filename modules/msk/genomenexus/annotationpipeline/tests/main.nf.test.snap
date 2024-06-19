@@ -7,26 +7,26 @@
                         {
                             "id": "test"
                         },
-                        "test_annotated.maf:md5,2ee9d72ce52d27f0561fa31f379b504c"
+                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,403412f305672f72411c2a724ef31065"
+                    "versions.yml:md5,ba8e0e0a8770c17f5dc628b1d17f3202"
                 ],
                 "annotated_maf": [
                     [
                         {
                             "id": "test"
                         },
-                        "test_annotated.maf:md5,2ee9d72ce52d27f0561fa31f379b504c"
+                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,403412f305672f72411c2a724ef31065"
+                    "versions.yml:md5,ba8e0e0a8770c17f5dc628b1d17f3202"
                 ]
             }
         ],
-        "timestamp": "2024-06-19T10:58:34.530102"
+        "timestamp": "2024-06-19T12:21:19.274234"
     },
     "test normal - stub": {
         "content": [
@@ -40,7 +40,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,15801410a279b69ee051470fbbe18ba5"
+                    "versions.yml:md5,507c62060d47df88b244759b08b98124"
                 ],
                 "annotated_maf": [
                     [
@@ -51,10 +51,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,15801410a279b69ee051470fbbe18ba5"
+                    "versions.yml:md5,507c62060d47df88b244759b08b98124"
                 ]
             }
         ],
-        "timestamp": "2024-06-19T10:58:41.137171"
+        "timestamp": "2024-06-19T12:21:26.234424"
     }
 }
