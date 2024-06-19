@@ -3,8 +3,8 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigenediting:1.2':
-        'docker.io/mskcc/neoantigenediting:1.2' }"
+        'docker://mskcc/neoantigenediting:1.3':
+        'docker.io/mskcc/neoantigenediting:1.3 ' }"
 
     input:
     tuple val(meta),  path(patient_data)
@@ -22,7 +22,7 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    python3 /usr/bin/align_neoantigens_to_IEDB.py \\
+    align_neoantigens_to_IEDB.py \\
         --fasta ${iedb_fasta} \\
         --input ${patient_data}
 
