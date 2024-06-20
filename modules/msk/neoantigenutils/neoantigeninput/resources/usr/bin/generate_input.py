@@ -3,7 +3,9 @@
 import json
 import pandas as pd
 import argparse
-
+from Bio import pairwise2
+from Bio.pairwise2 import format_alignment
+    
 VERSION = 1.6
 
 
@@ -342,10 +344,33 @@ def main(args):
         WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
 
         # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
-        WTdict[row_WT["Identity"][:-2]] = {
-            "affinity": row_WT["affinity"],
-            "peptide": row_WT["peptide"],
-        }
+        
+        if row_WT["Identity"][:-2] not in WTdict: 
+                
+            WTdict[row_WT["Identity"][:-2] + str(len(row_WT["peptide"])) + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")] = {
+                {row_WT["peptide"]:id},  #This is a dict so we can match the peptide with the ID later
+                "affinity": row_WT["affinity"],
+                
+            }
+        else:
+            
+            WTdict[row_WT["Identity"][:-2]][0][row_WT["peptide"]]=id
+            
+    
+
+    def find_most_similar_string(target, strings):
+        max_score = -1
+        most_similar_string = None
+        
+        for s in strings:
+            alignments = pairwise2.align.globalxx(target, s)
+            score = alignments[0][2]  # The third element is the score
+            
+            if score > max_score:
+                max_score = score
+                most_similar_string = s
+        
+        return most_similar_string, max_score
 
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
         if row_mut["affinity"] < 500:
@@ -367,22 +392,38 @@ def main(args):
                 # match
                 matchfound = True
 
-            # else:
-            # This will handle INDELS
-            #     i=1
-            #     while matchfound==False:
-            #         WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(int(row_mut['pos'])-i)
+            else:
+                if "-" in row_mut["Identity"] or "+" in row_mut["Identity"] and indelLen: 
+                    # Means there is a frame shift and we don't need to do a analysis of 5' end and 3' end as 3' end is no longer recognizeable/comparable to the WT sequence at all
+                    # We can just move the windows along together. There will likely be little to no match with the WT peptides. 
+                    pass
+                
+                else:
+                    best_pepmatch, match_score = find_most_similar_string(row_mut["peptide"],list(WTdict[WTid[:-2]][0].keys()))
+                    WTid = WTdict[WTid[:-2]][0][best_pepmatch]
+                    matchfound=True
+                    
+                
+                    
+                    
+                    
+            # This will handle INDELS/SVS
+                # i=1 
+                # while matchfound==False:
+                #     WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(int(row_mut['pos'])-i)
 
-            #         if WTid in WTdict:
-            #             matchfound = True
-            #         elif i > int(row_mut['pos']):
-            #             #last resort
-            #             print("Error matching WT and Mut netmhcpan outputs, using WT pos 0 as default")
-            #             print(row_mut["Identity"][:-2])
-            #             WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + "0"
-            #             matchfound = True
-            #         else:
-            #             i+=1
+                #     if WTid in WTdict:
+                #         matchfound = True
+                        
+                        
+                #     elif i > int(row_mut['pos']):
+                #         #last resort
+                #         print("Error matching WT and Mut netmhcpan outputs, using WT pos 0 as default")
+                #         print(row_mut["Identity"][:-2])
+                #         WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + "0"
+                #         matchfound = True
+                #     else:
+                #         i+=1
 
             if matchfound == True:
                 mut_pos = (
