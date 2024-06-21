@@ -1,33 +1,4 @@
 {
-    "vcf2maf - test": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.maf:md5,548723a34b74a614b654bc8abff855eb"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,c60e8688d2d8110c4621c279a710a890"
-                ],
-                "maf": [
-                    [
-                        {
-                            "id": "test"
-                        },
-                        "test.maf:md5,548723a34b74a614b654bc8abff855eb"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,c60e8688d2d8110c4621c279a710a890"
-                ]
-            }
-        ],
-        "timestamp": "2024-06-19T10:53:51.519768"
-    },
     "vcf2maf - test - stub": {
         "content": [
             {
