@@ -11,11 +11,7 @@
                     ]
                 ],
                 "1": [
-<<<<<<< HEAD
-                    "versions.yml:md5,82b5a18a55b6cc07ccfc694cb07bba73"
-=======
                     "versions.yml:md5,acbbc27d0907e4627e3027778fc192b2"
->>>>>>> b663b7bc18e971bc21ba8e7114a3a5ffd37c5d89
                 ],
                 "annotated_maf": [
                     [
@@ -26,19 +22,11 @@
                     ]
                 ],
                 "versions": [
-<<<<<<< HEAD
-                    "versions.yml:md5,82b5a18a55b6cc07ccfc694cb07bba73"
-                ]
-            }
-        ],
-        "timestamp": "2024-06-21T11:44:56.390635"
-=======
                     "versions.yml:md5,acbbc27d0907e4627e3027778fc192b2"
                 ]
             }
         ],
         "timestamp": "2024-06-19T13:07:39.083468"
->>>>>>> b663b7bc18e971bc21ba8e7114a3a5ffd37c5d89
     },
     "test normal - stub": {
         "content": [
@@ -52,11 +40,7 @@
                     ]
                 ],
                 "1": [
-<<<<<<< HEAD
-                    "versions.yml:md5,e0a3a9bd8c3985475b2024b58cecd9f6"
-=======
                     "versions.yml:md5,9f6533adfabcb8ca11ef3b3a7b07c3ab"
->>>>>>> b663b7bc18e971bc21ba8e7114a3a5ffd37c5d89
                 ],
                 "annotated_maf": [
                     [
@@ -67,18 +51,10 @@
                     ]
                 ],
                 "versions": [
-<<<<<<< HEAD
-                    "versions.yml:md5,e0a3a9bd8c3985475b2024b58cecd9f6"
-                ]
-            }
-        ],
-        "timestamp": "2024-06-21T11:36:03.799062"
-=======
                     "versions.yml:md5,9f6533adfabcb8ca11ef3b3a7b07c3ab"
                 ]
             }
         ],
         "timestamp": "2024-06-19T13:07:43.47263"
->>>>>>> b663b7bc18e971bc21ba8e7114a3a5ffd37c5d89
     }
 }
