@@ -26,7 +26,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: \$(samtools --version |& sed '1!d ; s/samtools //')
+        genomenexus: 'annotationpipeline'
     END_VERSIONS
     """
 
@@ -39,7 +39,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: \$(samtools --version |& sed '1!d ; s/samtools //')
+        genomenexus: 'annotationpipeline'
     END_VERSIONS
     """
 }
