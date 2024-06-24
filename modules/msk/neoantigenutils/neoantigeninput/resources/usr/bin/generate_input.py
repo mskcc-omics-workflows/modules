@@ -480,7 +480,7 @@ def main(args):
                 + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
             )
                 
-            if WTid in WTdict and ('M' == IDsplit[1][0] and 'SP' not in row_mut["Identity"] and 'SY' not in row_mut["Identity"]):
+            if WTid in WTdict and ('M' == IDsplit[1][0] and 'Sp' not in row_mut["Identity"]):
                 # match
                 
                 matchfound = True
@@ -499,9 +499,9 @@ def main(args):
                     best_pepmatch,best_pepmatch2 , first_AA_same, first_AA_same_score, match_score = find_most_similar_string(row_mut["peptide"],list(WTdict[noposID]['peptides'].keys()))
                     
                     # if 'If' in row_mut["Identity"] or 'Id' in row_mut["Identity"] or 'I+' in row_mut["Identity"] or 'I-' in row_mut["Identity"]  or 'SY' in row_mut["Identity"] :
-                    # print(row_mut["Identity"])
-                    # print((row_mut["peptide"],list(WTdict[noposID]['peptides'].keys())))
-                    # print(best_pepmatch,best_pepmatch2)     
+                    print(row_mut["Identity"])
+                    print((row_mut["peptide"],list(WTdict[noposID]['peptides'].keys())))
+                    print(best_pepmatch,best_pepmatch2)     
                     
                         
                     if best_pepmatch == row_mut["peptide"]:
@@ -511,6 +511,7 @@ def main(args):
                         
                     elif (best_pepmatch[0] != row_mut["peptide"][0] and best_pepmatch2[0] == row_mut["peptide"][0]) or (best_pepmatch[-1] != row_mut["peptide"][0-1] and best_pepmatch2[-1] == row_mut["peptide"][-1]):
                         # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this. 
+                        # In a case 
                         best_pepmatch = best_pepmatch2
                         
                     WTid = WTdict[noposID]['peptides'][best_pepmatch]
