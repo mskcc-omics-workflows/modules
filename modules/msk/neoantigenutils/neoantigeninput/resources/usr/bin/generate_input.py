@@ -5,9 +5,57 @@ import pandas as pd
 import argparse
 from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
+import numpy as np
     
 VERSION = 1.6
 
+def load_blosum62_mat():
+    raw_blosum62_mat_str = """
+    A  R  N  D  C  Q  E  G  H  I  L  K  M  F  P  S  T  W  Y  V  B  Z  X  *
+A  4 -1 -2 -2  0 -1 -1  0 -2 -1 -1 -1 -1 -2 -1  1  0 -3 -2  0 -2 -1  0 -4
+R -1  5  0 -2 -3  1  0 -2  0 -3 -2  2 -1 -3 -2 -1 -1 -3 -2 -3 -1  0 -1 -4
+N -2  0  6  1 -3  0  0  0  1 -3 -3  0 -2 -3 -2  1  0 -4 -2 -3  3  0 -1 -4
+D -2 -2  1  6 -3  0  2 -1 -1 -3 -4 -1 -3 -3 -1  0 -1 -4 -3 -3  4  1 -1 -4
+C  0 -3 -3 -3  9 -3 -4 -3 -3 -1 -1 -3 -1 -2 -3 -1 -1 -2 -2 -1 -3 -3 -2 -4
+Q -1  1  0  0 -3  5  2 -2  0 -3 -2  1  0 -3 -1  0 -1 -2 -1 -2  0  3 -1 -4
+E -1  0  0  2 -4  2  5 -2  0 -3 -3  1 -2 -3 -1  0 -1 -3 -2 -2  1  4 -1 -4
+G  0 -2  0 -1 -3 -2 -2  6 -2 -4 -4 -2 -3 -3 -2  0 -2 -2 -3 -3 -1 -2 -1 -4
+H -2  0  1 -1 -3  0  0 -2  8 -3 -3 -1 -2 -1 -2 -1 -2 -2  2 -3  0  0 -1 -4
+I -1 -3 -3 -3 -1 -3 -3 -4 -3  4  2 -3  1  0 -3 -2 -1 -3 -1  3 -3 -3 -1 -4
+L -1 -2 -3 -4 -1 -2 -3 -4 -3  2  4 -2  2  0 -3 -2 -1 -2 -1  1 -4 -3 -1 -4
+K -1  2  0 -1 -3  1  1 -2 -1 -3 -2  5 -1 -3 -1  0 -1 -3 -2 -2  0  1 -1 -4
+M -1 -1 -2 -3 -1  0 -2 -3 -2  1  2 -1  5  0 -2 -1 -1 -1 -1  1 -3 -1 -1 -4
+F -2 -3 -3 -3 -2 -3 -3 -3 -1  0  0 -3  0  6 -4 -2 -2  1  3 -1 -3 -3 -1 -4
+P -1 -2 -2 -1 -3 -1 -1 -2 -2 -3 -3 -1 -2 -4  7 -1 -1 -4 -3 -2 -2 -1 -2 -4
+S  1 -1  1  0 -1  0  0  0 -1 -2 -2  0 -1 -2 -1  4  1 -3 -2 -2  0  0  0 -4
+T  0 -1  0 -1 -1 -1 -1 -2 -2 -1 -1 -1 -1 -2 -1  1  5 -2 -2  0 -1 -1  0 -4
+W -3 -3 -4 -4 -2 -2 -3 -2 -2 -3 -2 -3 -1  1 -4 -3 -2 11  2 -3 -4 -3 -2 -4
+Y -2 -2 -2 -3 -2 -1 -2 -3  2 -1 -1 -2 -1  3 -3 -2 -2  2  7 -1 -3 -2 -1 -4
+V  0 -3 -3 -3 -1 -2 -2 -3 -3  3  1 -2  1 -1 -2 -2  0 -3 -1  4 -3 -2 -1 -4
+B -2 -1  3  4 -3  0  1 -1  0 -3 -4  0 -3 -3 -2  0 -1 -4 -3 -3  4  1 -1 -4
+Z -1  0  0  1 -3  3  4 -2  0 -3 -3  1 -1 -3 -1  0 -1 -3 -2 -2  1  4 -1 -4
+X  0 -1 -1 -1 -2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -2  0  0 -2 -1 -1 -1 -1 -1 -4
+* -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4  1
+"""
+    amino_acids = "ACDEFGHIKLMNPQRSTVWY"
+    blosum62_mat_str_list = [
+        l.split() for l in raw_blosum62_mat_str.strip().split("\n")
+    ]
+    blosum_aa_order = [blosum62_mat_str_list[0].index(aa) for aa in amino_acids]
+
+    blosum62_mat = np.zeros((len(amino_acids), len(amino_acids)))
+    for i, bl_ind in enumerate(blosum_aa_order):
+        blosum62_mat[i] = np.array(
+            [int(x) for x in blosum62_mat_str_list[bl_ind + 1][1:]]
+        )[blosum_aa_order]
+    blosum62 = {
+        (aaA, aaB): blosum62_mat[i, j]
+        for i, aaA in enumerate(amino_acids)
+        for j, aaB in enumerate(amino_acids)
+    }
+    return blosum62
+
+blosum62 = load_blosum62_mat()
 
 def main(args):
 
@@ -109,6 +157,7 @@ def main(args):
             or row["Variant_Type"] == "DEL"
             or row["Variant_Type"] == "INS"
             or row["Variant_Type"] == "DNP"
+            or row["Variant_Type"] == "TNP"
         ):
             if row["Variant_Classification"] == "Missense_Mutation":
                 missense = 1
@@ -116,7 +165,7 @@ def main(args):
             else:
                 missense = 0
             print(row["Variant_Type"])
-            if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DNP":
+            if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DNP" or row["Variant_Type"] == "TNP":
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -341,72 +390,134 @@ def main(args):
             + str(row_WT["pos"])
         )
 
+        noposID = (
+            row_WT["Identity"][:-2]
+            + "_"
+            + str(len(row_WT["peptide"]))
+            + "_"
+            + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+        )
+        
         WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
 
         # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
         
-        if row_WT["Identity"][:-2] not in WTdict: 
-                
-            WTdict[row_WT["Identity"][:-2] + str(len(row_WT["peptide"])) + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")] = {
-                {row_WT["peptide"]:id},  #This is a dict so we can match the peptide with the ID later
-                "affinity": row_WT["affinity"],
-                
+        if noposID not in WTdict: 
+            WTdict[noposID] = {
+                'peptides' : {row_WT["peptide"]:id},  #This is a dict so we can match the peptide with the ID later
+                "affinity": row_WT["affinity"]   
             }
+                
         else:
-            
-            WTdict[row_WT["Identity"][:-2]][0][row_WT["peptide"]]=id
+            # print(WTdict[noposID]['peptides'])
+            WTdict[noposID]['peptides'][row_WT["peptide"]]=id
             
     
 
     def find_most_similar_string(target, strings):
         max_score = -1
+        max_score2 = -2
         most_similar_string = None
+        most_similar_string2 = None
+        first_AA_same = None
+        first_AA_same_score = -1
         
         for s in strings:
+            # from Bio.SubsMat import MatrixInfo as matlist
+            
             alignments = pairwise2.align.globalxx(target, s)
+            # alignments = pairwise2.align.globalxx(target, s, matrix, ) 
             score = alignments[0][2]  # The third element is the score
             
-            if score > max_score:
-                max_score = score
-                most_similar_string = s
+            if score > max_score2:
+                
+                if score > max_score:
+                    max_score2 = max_score
+                    most_similar_string2 = most_similar_string
+                    max_score = score
+                    most_similar_string = s
+                    
+                else:
+                    max_score2 = score
+                    most_similar_string2 = s
+                    
+            if target[0]==s[0]:
+                if score > first_AA_same_score:
+                    first_AA_same = s
+                    first_AA_same_score = score
         
-        return most_similar_string, max_score
-
+        return most_similar_string, most_similar_string2, first_AA_same, first_AA_same_score, max_score
+    
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
-        if row_mut["affinity"] < 500:
+        IDsplit = row_mut["Identity"].split('_')
+        if row_mut["affinity"]< 500: 
             peplen = len(row_mut["peptide"])
             matchfound = False
-
+            # print(row_mut["Identity"])
+            
+            IDsplit = row_mut["Identity"].split('_')
+            
+            if (IDsplit[1][0] == "S" and IDsplit[1][1] != 'p') :
+                #If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
+                continue
+            
             # first find match in WT
             WTid = (
                 row_mut["Identity"][:-2]
                 + "_"
-                + str(len(row_mut["peptide"]))
+                + str(peplen)
                 + "_"
                 + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                 + "_"
                 + str(row_mut["pos"])
             )
-
-            if WTid in WTdict:
+            
+            noposID = (
+                row_mut["Identity"][:-2]
+                + "_"
+                + str(peplen)
+                + "_"
+                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            )
+                
+            if WTid in WTdict and ('M' == IDsplit[1][0] and 'SP' not in row_mut["Identity"] and 'SY' not in row_mut["Identity"]):
                 # match
+                
                 matchfound = True
+                best_pepmatch = WTdict[WTid]["peptide"]
+                # print(row_mut["Identity"])
 
             else:
-                if "-" in row_mut["Identity"] or "+" in row_mut["Identity"] and indelLen: 
+                if "-" in row_mut["Identity"] or "+" in row_mut["Identity"] and WTid in WTdict: 
                     # Means there is a frame shift and we don't need to do a analysis of 5' end and 3' end as 3' end is no longer recognizeable/comparable to the WT sequence at all
                     # We can just move the windows along together. There will likely be little to no match with the WT peptides. 
-                    pass
+                    matchfound = True
+                    best_pepmatch = WTdict[WTid]["peptide"]
+                    # print(mutation_dict[row_mut["Identity"]])
                 
                 else:
-                    best_pepmatch, match_score = find_most_similar_string(row_mut["peptide"],list(WTdict[WTid[:-2]][0].keys()))
-                    WTid = WTdict[WTid[:-2]][0][best_pepmatch]
+                    best_pepmatch,best_pepmatch2 , first_AA_same, first_AA_same_score, match_score = find_most_similar_string(row_mut["peptide"],list(WTdict[noposID]['peptides'].keys()))
+                    
+                    # if 'If' in row_mut["Identity"] or 'Id' in row_mut["Identity"] or 'I+' in row_mut["Identity"] or 'I-' in row_mut["Identity"]  or 'SY' in row_mut["Identity"] :
+                    # print(row_mut["Identity"])
+                    # print((row_mut["peptide"],list(WTdict[noposID]['peptides'].keys())))
+                    # print(best_pepmatch,best_pepmatch2)     
+                    
+                        
+                    if best_pepmatch == row_mut["peptide"]:
+                        #it seems this can happen where the row_mut is actually the canonical sequence. 
+                        # In this case we don't want to report the peptide as a neoantigen, its not neo
+                        continue
+                        
+                    elif (best_pepmatch[0] != row_mut["peptide"][0] and best_pepmatch2[0] == row_mut["peptide"][0]) or (best_pepmatch[-1] != row_mut["peptide"][0-1] and best_pepmatch2[-1] == row_mut["peptide"][-1]):
+                        # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this. 
+                        best_pepmatch = best_pepmatch2
+                        
+                    WTid = WTdict[noposID]['peptides'][best_pepmatch]
+                    
                     matchfound=True
                     
-                
-                    
-                    
-                    
+                                       
             # This will handle INDELS/SVS
                 # i=1 
                 # while matchfound==False:
@@ -428,7 +539,7 @@ def main(args):
             if matchfound == True:
                 mut_pos = (
                     find_first_difference_index(
-                        row_mut["peptide"], WTdict[WTid]["peptide"]
+                        row_mut["peptide"], best_pepmatch #WTdict[WTid]["peptide"]
                     )
                     + 1
                 )
@@ -444,7 +555,7 @@ def main(args):
                     "mutation_id": mutation_dict[row_mut["Identity"]],
                     "HLA_gene_id": row_mut["MHC"],
                     "sequence": row_mut["peptide"],
-                    "WT_sequence": WTdict[WTid]["peptide"],
+                    "WT_sequence": best_pepmatch ,#WTdict[WTid]["peptide"],
                     "mutated_position": mut_pos,
                     "Kd": float(row_mut["affinity"]),
                     "KdWT": float(WTdict[WTid]["affinity"]),
@@ -497,8 +608,7 @@ def makeID(maf_row):
         "Frame_shift_Del": "I-",
         "In_Frame_Ins": "If",
         "In_Frame_Del": "Id",
-        "Splice_Site": "Sp",
-        "Other": "O",
+        "Splice_Site": "Sp"
     }
 
     position = int(str(maf_row["Start_Position"])[0:2])
