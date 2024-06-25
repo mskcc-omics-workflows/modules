@@ -48,6 +48,12 @@ input:
       type: file
       description: The index of the dbsnp vcf file
       pattern: "*.vcf.gz.tbi"
+  - additional_bams:
+      type: list
+      description: List of additional bams to include
+  - additional_bam_index:
+      type: list
+      description: List of additional bam indexes to include
 
 output:
   - pileup:

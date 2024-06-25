@@ -1,3 +1,0 @@
-subworkflows/bwa_markdup_bqsr:
-  - subworkflows/msk/bwa_markdup_bqsr/**
-  - tests/subworkflows/msk/bwa_markdup_bqsr/**

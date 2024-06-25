@@ -1,0 +1,163 @@
+name: Meta Yaml to MD
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [main]
+  merge_group:
+    types: [checks_requested]
+    branches: [main]
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  pytest-changes:
+    name: pytest-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'modules' output variable
+      modules: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      # TODO: change back to using dorny/paths-filter when https://github.com/dorny/paths-filter/pull/133 is implemented
+      - uses: mirpedrol/paths-filter@main
+        id: filter
+        with:
+          filters: "tests/config/pytest_modules.yml"
+          token: ""
+
+  nf-test-changes:
+    name: nf-test-changes
+    runs-on: ubuntu-latest
+    outputs:
+      # Expose matched filters as job 'modules' output variable
+      modules: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # To retrieve the preceding commit.
+
+      - name: Combine all tags.yml files
+        id: get_tags
+        run: find . -name "tags.yml" -not -path "./.github/*" -exec cat {} + > .github/tags.yml
+
+      - name: debug
+        run: cat .github/tags.yml
+
+      # TODO: change back to using dorny/paths-filter when https://github.com/dorny/paths-filter/pull/133 is implemented
+      - uses: mirpedrol/paths-filter@main
+        id: filter
+        with:
+          filters: ".github/tags.yml"
+          token: ""
+
+  new_feature:
+    name: new feature
+    runs-on: ubuntu-latest
+    if: ${{ (needs.pytest-changes.outputs.modules != '[]') || (needs.nf-test-changes.outputs.modules != '[]') }}
+    needs: [pytest-changes, nf-test-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        tags:
+          [
+            "${{ fromJson(needs.pytest-changes.outputs.modules) }}",
+            "${{ fromJson(needs.nf-test-changes.outputs.modules) }}",
+          ]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10" # install the python version needed
+      - uses: actions/checkout@v4
+        with:
+          ref: docs
+      - name: Update name of ${{ matrix.tags }}
+        run: |
+          MATRIX_FRAGMENT="${{ matrix.tags }}"
+          TEMP_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows\///g')
+          SW_NAME=$(echo $TEMP_NAME | sed 's/modules\///g')
+          echo "SW_NAME=$SW_NAME" >> $GITHUB_ENV
+      - name: Rename md file
+        id: replace_slash
+        run: |
+          FRAGMENT="${{ env.SW_NAME }}"
+          MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
+          echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
+          echo "${MD_NAME}"
+      - name: Download convertor from yml to md
+        run: |
+          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
+          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
+      - name: Give convertor permissions
+        run: chmod +x yaml_to_md.py
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ${{ github.workspace }}/requirements.txt
+      - uses: jaywcjlove/github-action-read-file@main
+        id: cat_file_module
+        with:
+          path: modules/msk/${{ env.SW_NAME }}/meta.yml
+      - name: Write Module yaml to temp
+        if: ${{ steps.cat_file_module.outputs.size }}
+        id: write_yml_module
+        run: |
+          echo "${{ steps.cat_file_module.outputs.size }}"
+          echo '${{ steps.cat_file_module.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="modules"
+          SUMMARY_TYPE="module"
+          SUBWORKFLOW=""
+          echo "FEATURE_TYPE=$FEATURE_TYPE" >> $GITHUB_ENV
+          echo "SUMMARY_TYPE=$SUMMARY_TYPE" >> $GITHUB_ENV
+          echo "SUBWORKFLOW=$SUBWORKFLOW" >> $GITHUB_ENV
+      - uses: jaywcjlove/github-action-read-file@main
+        if: ${{ steps.cat_file_module.outputs.size == '' }}
+        id: cat_file_subworkflow
+        with:
+          path: subworkflows/msk/${{ env.SW_NAME }}/meta.yml
+      - name: Write Subworkflow yaml to temp
+        if: ${{ steps.cat_file_subworkflow.outputs.size }}
+        id: write_yml_subworkflow
+        run: |
+          echo "${{ steps.cat_file_subworkflow.outputs.size }}"
+          echo '${{ steps.cat_file_subworkflow.outputs.content }}' > ${{ github.workspace }}/temp.yml
+          FEATURE_TYPE="subworkflows"
+          SUMMARY_TYPE="subworkflow"
+          SUBWORKFLOW="--subworkflows"
+          echo "FEATURE_TYPE=$FEATURE_TYPE" >> $GITHUB_ENV
+          echo "SUMMARY_TYPE=$SUMMARY_TYPE" >> $GITHUB_ENV
+          echo "SUBWORKFLOW=$SUBWORKFLOW" >> $GITHUB_ENV
+      - name: Run convertor to generate md file for new module
+        run: |
+          echo ${{ matrix.tags }}
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./modules/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
+      - name: Check file existence for modules
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          branch: docs
+          files: ${{ env.FEATURE_TYPE}}/${{ env.MD_NAME }}.md
+      - name: Add to SUMMARY for new features
+        if: ${{ (steps.check_files.outputs.files_exists == 'false') }}
+        run: |
+          curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
+          mv tmp_summary.md SUMMARY.md
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "add doc for ${{ matrix.tags }}"
+          add: '["*/*.md --force", "SUMMARY.md --force"]'
+          cwd: "./"
