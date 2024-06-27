@@ -84,7 +84,12 @@ Creating a custom configuration file for a subworkflow in a Nextflow pipeline is
 
 Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test\_data\_guidelines). An alternative source of data specific to MSKCC is currently available [here](https://github.com/mskcc-omics-workflows/test-datasets).
 
-In-house test datasets should always be as small as possible. Master branch is not used to store any test data, instead, different types of branches will host corresponding data files. For example, [bam\_files](https://github.com/mskcc-omics-workflows/test-datasets/tree/bam\_files) branch is used to store downsized BAM files (with specified sources), while [hg37](https://github.com/mskcc-omics-workflows/test-datasets/tree/hg37) branch is for hg37 related reference files. If there is a need to upload to this dataset repository, please make a PR to the corresponding branch. If test data files do not fit the existing branches, please contact in advance.
+In-house test datasets should always be as small as possible. Master branch is not used to store any test data, instead, different types of branches will host corresponding data files. For example, [argos](https://github.com/mskcc-omics-workflows/test-datasets/tree/argos) contains test datasets for MSK Argos Pipeline, while [hg37](https://github.com/mskcc-omics-workflows/test-datasets/tree/hg37) branch is for hg37 related reference files.
+
+* If there is a new test dataset fitting in existing branches, please make a PR to the corresponding branch.
+* If test data files do not fit the existing branches, please create a new feature branch and once they are ready, contact our Reviewer team to do final review and create official branch.
+
+For more description on how to contribute to the repository, please visit [README](https://github.com/mskcc-omics-workflows/test-datasets/blob/master/README.md).
 
 ### When to contribute to mskcc-omics-workflows
 
