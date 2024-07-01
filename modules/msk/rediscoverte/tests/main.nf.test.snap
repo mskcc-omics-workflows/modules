@@ -20,7 +20,7 @@
                 ]
             }
         ],
-        "timestamp": "2024-06-26T17:51:24.021017"
+        "timestamp": "2024-07-01T13:16:16.083084"
     },
     "rna - fastq": {
         "content": [
@@ -57,7 +57,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,4076bab52aba97b983f5c3f04e959aa6"
+                    "versions.yml:md5,2ca34b922d21d432437a6ca0e5546234"
                 ],
                 "rollup": [
                     [
@@ -91,10 +91,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,4076bab52aba97b983f5c3f04e959aa6"
+                    "versions.yml:md5,2ca34b922d21d432437a6ca0e5546234"
                 ]
             }
         ],
-        "timestamp": "2024-06-26T17:51:17.757304"
+        "timestamp": "2024-07-01T13:16:09.400759"
     }
 }
