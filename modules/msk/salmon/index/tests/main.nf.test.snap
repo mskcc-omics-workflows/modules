@@ -2,19 +2,19 @@
     "rna - fastq - stub": {
         "content": [
             [
-                "versions.yml:md5,9e0955fa0389d932f86ce66eb8e692a6"
+                "versions.yml:md5,3192b5ea8153bdf0e2c3139a92abcac3"
             ],
             129
         ],
-        "timestamp": "2024-06-27T17:31:07.26541"
+        "timestamp": "2024-07-01T12:49:41.296711"
     },
     "rna - fastq": {
         "content": [
             [
-                "versions.yml:md5,9e0955fa0389d932f86ce66eb8e692a6"
+                "versions.yml:md5,3192b5ea8153bdf0e2c3139a92abcac3"
             ],
             129
         ],
-        "timestamp": "2024-06-27T17:30:59.662895"
+        "timestamp": "2024-07-01T12:49:34.347766"
     }
 }
