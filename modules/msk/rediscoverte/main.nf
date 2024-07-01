@@ -29,11 +29,11 @@ process REDISCOVERTE {
     ls -1 *.quant.sf | awk -F. '{print \$1\"\\t\"\$0}' >> REdiscoverTE.tsv
 
     rollup.R \\
-		--metadata=REdiscoverTE.tsv \\
-		--datadir=rollup_annotation \\
-		--nozero --threads=${threads} \\
+        --metadata=REdiscoverTE.tsv \\
+        --datadir=rollup_annotation \\
+        --nozero --threads=${threads} \\
         ${args} \\
-		--outdir=REdiscoverTE_rollup
+        --outdir=REdiscoverTE_rollup
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
