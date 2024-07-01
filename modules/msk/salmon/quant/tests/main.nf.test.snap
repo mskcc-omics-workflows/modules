@@ -1,0 +1,22 @@
+{
+    "rna - fastq - stub": {
+        "content": [
+            [
+                "versions.yml:md5,6d0c92b7638e05c2385e21f67be1a5f4"
+            ],
+            "test.quant.sf",
+            2
+        ],
+        "timestamp": "2024-06-28T13:18:39.004848"
+    },
+    "rna - fastq": {
+        "content": [
+            [
+                "versions.yml:md5,6d0c92b7638e05c2385e21f67be1a5f4"
+            ],
+            "test.quant.sf",
+            2
+        ],
+        "timestamp": "2024-06-28T13:18:28.714343"
+    }
+}

@@ -1,0 +1,59 @@
+nextflow_process {
+
+    name "Test Process SALMON_INDEX"
+    script "../main.nf"
+    process "SALMON_INDEX"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "salmon"
+    tag "salmon/index"
+
+     test("rna - fastq") {
+
+        when {
+            process {
+                """
+                input = [
+                    file(params.test_data_mskcc['rediscoverte']['rollup_part_19_fa_gz'], checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.index[0]).name
+                ).match() }
+            )
+        }
+
+    }
+
+     test("rna - fastq - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                    input = [file('rollup_part_19_fa_gz')]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.index[0]).name
+                ).match() }
+            )
+        }
+
+    }
+
+}
