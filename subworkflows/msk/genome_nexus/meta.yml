@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "genome_nexus"
+
+description: Subworkflow to perform conversion of VCF to MAF and annotation of said MAF file.
+keywords:
+  - annotate
+  - convert
+  - vcf
+  - maf
+  - genome_nexus
+
+components:
+  - genomenexus/vcf2maf
+  - genomenexus/annotationpipeline
+
+input:
+  - ch_vcf:
+      type: file
+      description: |
+        The input channel containing the input VCF file
+        Structure: [ val(meta), path(vcf) ]
+
+output:
+  - maf:
+      type: file
+      description: |
+        Channel containing output converted and annotated MAF file
+        Structure: [ val(meta), path(maf) ]
+
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@rnaidu"
+maintainers:
+  - "@rnaidu"

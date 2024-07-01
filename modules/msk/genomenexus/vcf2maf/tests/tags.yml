@@ -1,0 +1,2 @@
+genomenexus/vcf2maf:
+  - "modules/msk/genomenexus/vcf2maf/**"

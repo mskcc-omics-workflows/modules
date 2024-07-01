@@ -1,0 +1,2 @@
+subworkflows/genome_nexus:
+  - subworkflows/msk/genome_nexus/**

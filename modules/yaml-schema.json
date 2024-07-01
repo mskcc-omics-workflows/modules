@@ -40,7 +40,14 @@
                             "type": {
                                 "type": "string",
                                 "description": "Type of the input channel",
-                                "enum": ["map", "file", "directory", "string", "integer", "float"]
+                                "enum": [
+                                    "map",
+                                    "file",
+                                    "directory",
+                                    "string",
+                                    "integer",
+                                    "float"
+                                ]
                             },
                             "description": {
                                 "type": "string",
@@ -51,7 +58,13 @@
                                 "description": "Pattern of the input channel, given in Java glob syntax"
                             },
                             "default": {
-                                "type": ["string", "number", "boolean", "array", "object"],
+                                "type": [
+                                    "string",
+                                    "number",
+                                    "boolean",
+                                    "array",
+                                    "object"
+                                ],
                                 "description": "Default value for the input channel"
                             }
                         },
@@ -72,7 +85,14 @@
                             "type": {
                                 "type": "string",
                                 "description": "Type of the output channel",
-                                "enum": ["map", "file", "directory", "string", "integer", "float"]
+                                "enum": [
+                                    "map",
+                                    "file",
+                                    "directory",
+                                    "string",
+                                    "integer",
+                                    "float"
+                                ]
                             },
                             "description": {
                                 "type": "string",
@@ -142,5 +162,12 @@
             }
         }
     },
-    "required": ["name", "description", "keywords", "authors", "output", "tools"]
+    "required": [
+        "name",
+        "description",
+        "keywords",
+        "authors",
+        "output",
+        "tools"
+    ]
 }
