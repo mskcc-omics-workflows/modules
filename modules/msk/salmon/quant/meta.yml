@@ -26,30 +26,17 @@ input:
         Multiple single-end fastqs or pairs of paired-end fastqs are
         handled.
   - index:
-      type: directory
-      description: Folder containing the star index files
-  - gtf:
       type: file
-      description: GTF of the reference transcriptome
-  - transcript_fasta:
-      type: file
-      description: Fasta file of the reference transcriptome
-  - alignment_mode:
-      type: boolean
-      description: whether to run salmon in alignment mode
-  - lib_type:
-      type: string
-      description: |
-        Override library type inferred based on strandedness defined in meta object
+      description: The index file
 output:
   - results:
       type: directory
       description: Folder containing the quantification results for a specific sample
-      pattern: "${prefix}"
-  - json_info:
+      pattern: "${prefix}.salmon.quant"
+  - quant:
       type: file
-      description: File containing meta information from Salmon quant
-      pattern: "*info.json"
+      description: File containing the sample quantification results
+      pattern: "${meta.id}.quant.sf"
   - versions:
       type: file
       description: File containing software versions

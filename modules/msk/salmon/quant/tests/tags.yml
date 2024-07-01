@@ -1,2 +1,2 @@
 salmon/quant:
-  - modules/nf-core/salmon/quant/**
+  - modules/msk/salmon/quant/**
