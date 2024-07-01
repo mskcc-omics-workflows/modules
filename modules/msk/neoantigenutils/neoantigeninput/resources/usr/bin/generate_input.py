@@ -7,55 +7,7 @@ from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
 import numpy as np
     
-VERSION = 1.6
-
-def load_blosum62_mat():
-    raw_blosum62_mat_str = """
-    A  R  N  D  C  Q  E  G  H  I  L  K  M  F  P  S  T  W  Y  V  B  Z  X  *
-A  4 -1 -2 -2  0 -1 -1  0 -2 -1 -1 -1 -1 -2 -1  1  0 -3 -2  0 -2 -1  0 -4
-R -1  5  0 -2 -3  1  0 -2  0 -3 -2  2 -1 -3 -2 -1 -1 -3 -2 -3 -1  0 -1 -4
-N -2  0  6  1 -3  0  0  0  1 -3 -3  0 -2 -3 -2  1  0 -4 -2 -3  3  0 -1 -4
-D -2 -2  1  6 -3  0  2 -1 -1 -3 -4 -1 -3 -3 -1  0 -1 -4 -3 -3  4  1 -1 -4
-C  0 -3 -3 -3  9 -3 -4 -3 -3 -1 -1 -3 -1 -2 -3 -1 -1 -2 -2 -1 -3 -3 -2 -4
-Q -1  1  0  0 -3  5  2 -2  0 -3 -2  1  0 -3 -1  0 -1 -2 -1 -2  0  3 -1 -4
-E -1  0  0  2 -4  2  5 -2  0 -3 -3  1 -2 -3 -1  0 -1 -3 -2 -2  1  4 -1 -4
-G  0 -2  0 -1 -3 -2 -2  6 -2 -4 -4 -2 -3 -3 -2  0 -2 -2 -3 -3 -1 -2 -1 -4
-H -2  0  1 -1 -3  0  0 -2  8 -3 -3 -1 -2 -1 -2 -1 -2 -2  2 -3  0  0 -1 -4
-I -1 -3 -3 -3 -1 -3 -3 -4 -3  4  2 -3  1  0 -3 -2 -1 -3 -1  3 -3 -3 -1 -4
-L -1 -2 -3 -4 -1 -2 -3 -4 -3  2  4 -2  2  0 -3 -2 -1 -2 -1  1 -4 -3 -1 -4
-K -1  2  0 -1 -3  1  1 -2 -1 -3 -2  5 -1 -3 -1  0 -1 -3 -2 -2  0  1 -1 -4
-M -1 -1 -2 -3 -1  0 -2 -3 -2  1  2 -1  5  0 -2 -1 -1 -1 -1  1 -3 -1 -1 -4
-F -2 -3 -3 -3 -2 -3 -3 -3 -1  0  0 -3  0  6 -4 -2 -2  1  3 -1 -3 -3 -1 -4
-P -1 -2 -2 -1 -3 -1 -1 -2 -2 -3 -3 -1 -2 -4  7 -1 -1 -4 -3 -2 -2 -1 -2 -4
-S  1 -1  1  0 -1  0  0  0 -1 -2 -2  0 -1 -2 -1  4  1 -3 -2 -2  0  0  0 -4
-T  0 -1  0 -1 -1 -1 -1 -2 -2 -1 -1 -1 -1 -2 -1  1  5 -2 -2  0 -1 -1  0 -4
-W -3 -3 -4 -4 -2 -2 -3 -2 -2 -3 -2 -3 -1  1 -4 -3 -2 11  2 -3 -4 -3 -2 -4
-Y -2 -2 -2 -3 -2 -1 -2 -3  2 -1 -1 -2 -1  3 -3 -2 -2  2  7 -1 -3 -2 -1 -4
-V  0 -3 -3 -3 -1 -2 -2 -3 -3  3  1 -2  1 -1 -2 -2  0 -3 -1  4 -3 -2 -1 -4
-B -2 -1  3  4 -3  0  1 -1  0 -3 -4  0 -3 -3 -2  0 -1 -4 -3 -3  4  1 -1 -4
-Z -1  0  0  1 -3  3  4 -2  0 -3 -3  1 -1 -3 -1  0 -1 -3 -2 -2  1  4 -1 -4
-X  0 -1 -1 -1 -2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -2  0  0 -2 -1 -1 -1 -1 -1 -4
-* -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4 -4  1
-"""
-    amino_acids = "ACDEFGHIKLMNPQRSTVWY"
-    blosum62_mat_str_list = [
-        l.split() for l in raw_blosum62_mat_str.strip().split("\n")
-    ]
-    blosum_aa_order = [blosum62_mat_str_list[0].index(aa) for aa in amino_acids]
-
-    blosum62_mat = np.zeros((len(amino_acids), len(amino_acids)))
-    for i, bl_ind in enumerate(blosum_aa_order):
-        blosum62_mat[i] = np.array(
-            [int(x) for x in blosum62_mat_str_list[bl_ind + 1][1:]]
-        )[blosum_aa_order]
-    blosum62 = {
-        (aaA, aaB): blosum62_mat[i, j]
-        for i, aaA in enumerate(amino_acids)
-        for j, aaB in enumerate(amino_acids)
-    }
-    return blosum62
-
-blosum62 = load_blosum62_mat()
+VERSION = 1.7
 
 def main(args):
 
@@ -153,6 +105,7 @@ def main(args):
 
     for index, row in mafdf.iterrows():
         if (
+            #We
             row["Variant_Type"] == "SNP"
             or row["Variant_Type"] == "DEL"
             or row["Variant_Type"] == "INS"
@@ -412,8 +365,6 @@ def main(args):
             # print(WTdict[noposID]['peptides'])
             WTdict[noposID]['peptides'][row_WT["peptide"]]=id
             
-    
-
     def find_most_similar_string(target, strings):
         max_score = -1
         max_score2 = -2
@@ -509,33 +460,14 @@ def main(args):
                         # In this case we don't want to report the peptide as a neoantigen, its not neo
                         continue
                         
-                    elif (best_pepmatch[0] != row_mut["peptide"][0] and best_pepmatch2[0] == row_mut["peptide"][0]) or (best_pepmatch[-1] != row_mut["peptide"][0-1] and best_pepmatch2[-1] == row_mut["peptide"][-1]):
+                    elif (best_pepmatch[0] != row_mut["peptide"][0] and best_pepmatch2[0] == row_mut["peptide"][0]) or (best_pepmatch[-1] != row_mut["peptide"][-1] and best_pepmatch2[-1] == row_mut["peptide"][-1]):
                         # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this. 
-                        # In a case 
+                        # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
                         best_pepmatch = best_pepmatch2
                         
                     WTid = WTdict[noposID]['peptides'][best_pepmatch]
                     
                     matchfound=True
-                    
-                                       
-            # This will handle INDELS/SVS
-                # i=1 
-                # while matchfound==False:
-                #     WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + str(int(row_mut['pos'])-i)
-
-                #     if WTid in WTdict:
-                #         matchfound = True
-                        
-                        
-                #     elif i > int(row_mut['pos']):
-                #         #last resort
-                #         print("Error matching WT and Mut netmhcpan outputs, using WT pos 0 as default")
-                #         print(row_mut["Identity"][:-2])
-                #         WTid =  row_mut["Identity"][:-2] + "_" + str(len(row_mut["peptide"])) + "_" + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "") + "_" + "0"
-                #         matchfound = True
-                #     else:
-                #         i+=1
 
             if matchfound == True:
                 mut_pos = (
