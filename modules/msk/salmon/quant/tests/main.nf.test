@@ -5,6 +5,7 @@ nextflow_process {
     process "SALMON_QUANT"
     tag "modules"
     tag "modules_nfcore"
+    tag "modules_msk"
     tag "salmon"
     tag "salmon/quant"
     tag "salmon/index"
