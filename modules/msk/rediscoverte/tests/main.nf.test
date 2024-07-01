@@ -1,0 +1,65 @@
+// TODO nf-core: Once you have added the required tests, please run the following command to build this file:
+// nf-core modules test rediscoverte
+nextflow_process {
+
+    name "Test Process REDISCOVERTE"
+    script "../main.nf"
+    process "REDISCOVERTE"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "rediscoverte"
+
+    test("rna - fastq") {
+
+        when {
+            process {
+                """
+                input = [
+                    file(params.test_data_mskcc['rediscoverte']['quant_sf'], checkIfExists: true),
+                    file(params.test_data_mskcc['rediscoverte']['rmsk_annotation_subsampled_RDS'], checkIfExists: true),
+                    file(params.test_data_mskcc['rediscoverte']['repName_repFamily_repClass_map_tsv'], checkIfExists: true),
+                    file(params.test_data_mskcc['rediscoverte']['GENCODE_V26_Basic_Gene_Annotation_md5_RDS'], checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("rna - fastq - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+
+                input = [
+                    file('quant_sf'),
+                    file('rmsk_annotation_subsampled_RDS'),
+                    file('repName_repFamily_repClass_map_tsv'),
+                    file('GENCODE_V26_Basic_Gene_Annotation_md5_RDS')
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

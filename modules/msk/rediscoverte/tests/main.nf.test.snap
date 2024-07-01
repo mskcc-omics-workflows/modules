@@ -1,0 +1,100 @@
+{
+    "rna - fastq - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "abc.RDS:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2ca34b922d21d432437a6ca0e5546234"
+                ],
+                "rollup": [
+                    [
+                        "abc.RDS:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2ca34b922d21d432437a6ca0e5546234"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-26T17:51:24.021017"
+    },
+    "rna - fastq": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GENE_1_raw_counts.RDS:md5,f5ac77f8dcf054aec3836246fe2f5659",
+                        "GENE_2_counts_normalized.RDS:md5,e7a7d004b033a0ddca28d24c4470ab60",
+                        "GENE_3_TPM.RDS:md5,f5ac77f8dcf054aec3836246fe2f5659",
+                        "RE_all_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_all_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_all_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_all_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_all_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_all_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_exon_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_exon_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intergenic_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intergenic_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intron_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intron_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,4076bab52aba97b983f5c3f04e959aa6"
+                ],
+                "rollup": [
+                    [
+                        "GENE_1_raw_counts.RDS:md5,f5ac77f8dcf054aec3836246fe2f5659",
+                        "GENE_2_counts_normalized.RDS:md5,e7a7d004b033a0ddca28d24c4470ab60",
+                        "GENE_3_TPM.RDS:md5,f5ac77f8dcf054aec3836246fe2f5659",
+                        "RE_all_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_all_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_all_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_all_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_all_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_all_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_exon_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_exon_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_exon_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intergenic_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intergenic_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intergenic_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intron_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_repFamily_1_raw_counts.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8",
+                        "RE_intron_repFamily_2_counts_normalized.RDS:md5,48d176fefee059f711fb56c3999118ca",
+                        "RE_intron_repFamily_3_TPM.RDS:md5,01c79e6246f1e0f4ad927f0cc1f69ad8"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,4076bab52aba97b983f5c3f04e959aa6"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-26T17:51:17.757304"
+    }
+}
