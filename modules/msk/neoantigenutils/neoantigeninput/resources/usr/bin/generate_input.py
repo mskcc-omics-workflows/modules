@@ -350,21 +350,19 @@ def main(args):
             + "_"
             + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
         )
-        
         WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
 
         # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
-        
-        if noposID not in WTdict: 
+        if noposID not in WTdict:
             WTdict[noposID] = {
                 'peptides' : {row_WT["peptide"]:id},  #This is a dict so we can match the peptide with the ID later
-                "affinity": row_WT["affinity"]   
+                "affinity": row_WT["affinity"]
             }
-                
+
         else:
             # print(WTdict[noposID]['peptides'])
             WTdict[noposID]['peptides'][row_WT["peptide"]]=id
-            
+
     def find_most_similar_string(target, strings):
         max_score = -1
         max_score2 = -2
@@ -372,46 +370,39 @@ def main(args):
         most_similar_string2 = None
         first_AA_same = None
         first_AA_same_score = -1
-        
+
         for s in strings:
-            # from Bio.SubsMat import MatrixInfo as matlist
-            
             alignments = pairwise2.align.globalxx(target, s)
-            # alignments = pairwise2.align.globalxx(target, s, matrix, ) 
             score = alignments[0][2]  # The third element is the score
-            
+
             if score > max_score2:
-                
+
                 if score > max_score:
                     max_score2 = max_score
                     most_similar_string2 = most_similar_string
                     max_score = score
                     most_similar_string = s
-                    
+
                 else:
                     max_score2 = score
                     most_similar_string2 = s
-                    
+
             if target[0]==s[0]:
                 if score > first_AA_same_score:
                     first_AA_same = s
                     first_AA_same_score = score
-        
+
         return most_similar_string, most_similar_string2, first_AA_same, first_AA_same_score, max_score
-    
+
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
         IDsplit = row_mut["Identity"].split('_')
-        if row_mut["affinity"]< 500: 
+        if row_mut["affinity"]< 500:
             peplen = len(row_mut["peptide"])
             matchfound = False
-            # print(row_mut["Identity"])
-            
             IDsplit = row_mut["Identity"].split('_')
-            
             if (IDsplit[1][0] == "S" and IDsplit[1][1] != 'p') :
                 #If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
                 continue
-            
             # first find match in WT
             WTid = (
                 row_mut["Identity"][:-2]
@@ -422,7 +413,7 @@ def main(args):
                 + "_"
                 + str(row_mut["pos"])
             )
-            
+
             noposID = (
                 row_mut["Identity"][:-2]
                 + "_"
@@ -430,43 +421,34 @@ def main(args):
                 + "_"
                 + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
             )
-                
+
             if WTid in WTdict and ('M' == IDsplit[1][0] and 'Sp' not in row_mut["Identity"]):
                 # match
-                
                 matchfound = True
                 best_pepmatch = WTdict[WTid]["peptide"]
-                # print(row_mut["Identity"])
 
             else:
-                if "-" in row_mut["Identity"] or "+" in row_mut["Identity"] and WTid in WTdict: 
+                if "-" in row_mut["Identity"] or "+" in row_mut["Identity"] and WTid in WTdict:
                     # Means there is a frame shift and we don't need to do a analysis of 5' end and 3' end as 3' end is no longer recognizeable/comparable to the WT sequence at all
-                    # We can just move the windows along together. There will likely be little to no match with the WT peptides. 
+                    # We can just move the windows along together. There will likely be little to no match with the WT peptides.
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
                     # print(mutation_dict[row_mut["Identity"]])
-                
+
                 else:
                     best_pepmatch,best_pepmatch2 , first_AA_same, first_AA_same_score, match_score = find_most_similar_string(row_mut["peptide"],list(WTdict[noposID]['peptides'].keys()))
-                    
-                    # if 'If' in row_mut["Identity"] or 'Id' in row_mut["Identity"] or 'I+' in row_mut["Identity"] or 'I-' in row_mut["Identity"]  or 'SY' in row_mut["Identity"] :
-                    print(row_mut["Identity"])
-                    print((row_mut["peptide"],list(WTdict[noposID]['peptides'].keys())))
-                    print(best_pepmatch,best_pepmatch2)     
-                    
-                        
+
                     if best_pepmatch == row_mut["peptide"]:
-                        #it seems this can happen where the row_mut is actually the canonical sequence. 
+                        #it seems this can happen where the row_mut is actually the canonical sequence.
                         # In this case we don't want to report the peptide as a neoantigen, its not neo
                         continue
-                        
+
                     elif (best_pepmatch[0] != row_mut["peptide"][0] and best_pepmatch2[0] == row_mut["peptide"][0]) or (best_pepmatch[-1] != row_mut["peptide"][-1] and best_pepmatch2[-1] == row_mut["peptide"][-1]):
-                        # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this. 
+                        # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this.
                         # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
                         best_pepmatch = best_pepmatch2
-                        
+
                     WTid = WTdict[noposID]['peptides'][best_pepmatch]
-                    
                     matchfound=True
 
             if matchfound == True:
