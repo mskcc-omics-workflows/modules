@@ -24,6 +24,7 @@ process SALMON_INDEX {
         index \\
         --threads $threads \\
         -t $transcriptome_fasta \\
+        ${args} \\
         -i salmon
 
     cat <<-END_VERSIONS > versions.yml

@@ -33,6 +33,7 @@ process SALMON_QUANT {
         --unmatedReads ${reads} \\
         --validateMappings \\
         -o ${prefix}.salmon.quant \\
+        ${args} \\
         --threads ${threads}
 
     cp ${prefix}.salmon.quant/quant.sf ${prefix}.quant.sf
