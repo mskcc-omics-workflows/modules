@@ -67,4 +67,3 @@ def join_maf_with_cnv(maf,cnv) {
         return merged
 
 }
-

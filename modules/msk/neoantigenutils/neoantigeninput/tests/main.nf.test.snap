@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ],
                 "json": [
                     [
@@ -24,11 +24,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ]
             }
         ],
-        "timestamp": "2024-06-17T13:50:42.639559"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:08:47.586409668"
     },
     "neoantigenutils_neoantigeninput - json,tsv": {
         "content": [
@@ -43,7 +47,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ],
                 "json": [
                     [
@@ -55,10 +59,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,b1ca72058f4fe0026162655cee0b19cf"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ]
             }
         ],
-        "timestamp": "2024-06-17T13:50:36.39929"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:08:31.862365529"
     }
 }

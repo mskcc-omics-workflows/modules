@@ -57,4 +57,3 @@ process SNPPILEUP {
     END_VERSIONS
     """
 }
-
