@@ -39,7 +39,7 @@ class EpitopeDistance(object):
     def __init__(
         self,
         model_file=os.path.join(
-            os.path.dirname(__file__), "data", "epitope_distance_model_parameters.json"
+            os.path.dirname(__file__), "distance_data", "epitope_distance_model_parameters.json"
         ),
         amino_acids="ACDEFGHIKLMNPQRSTVWY",
     ):
