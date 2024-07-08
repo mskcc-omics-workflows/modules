@@ -132,8 +132,7 @@ class FacetsParser(CnvParser):
                     and str.isdigit(record["cf.em"].replace(".", "", 1))
                 ):
                     cnv["cellular_prevalence"] = (
-                        float(record["cf.em"]) * self._cellularity
-                    )
+                        float(record["cf.em"]))
                     cnv["minor_cn"] = int(record["lcn.em"])
                     cnv["major_cn"] = int(record["tcn.em"]) - cnv["minor_cn"]
                     chrom = record["chrom"]
