@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, develop, neoantigen]
+    branches: [main, develop]
   merge_group:
     types: [checks_requested]
     branches: [main]
@@ -392,6 +392,12 @@ jobs:
             tags: neoantigenutils/neoantigeninput
           - profile: "conda"
             tags: subworkflows/netmhcstabandpan
+          - profile: "conda"
+            tags: salmon/index
+          - profile: "conda"
+            tags: salmon/quant
+          - profile: "conda"
+            tags: rediscoverte
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
