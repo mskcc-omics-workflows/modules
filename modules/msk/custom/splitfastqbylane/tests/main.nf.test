@@ -5,6 +5,7 @@ nextflow_process {
     process "CUSTOM_SPLITFASTQBYLANE"
 
     tag "modules"
+    tag "modules_msk"
     tag "modules_nfcore"
     tag "custom"
     tag "custom/splitfastqbylane"

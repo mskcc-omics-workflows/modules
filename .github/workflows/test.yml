@@ -368,6 +368,11 @@ jobs:
             tags: genotypevariants/all
           - profile: "conda"
             tags: subworkflows/traceback
+            tags: salmon/index
+          - profile: "conda"
+            tags: salmon/quant
+          - profile: "conda"
+            tags: rediscoverte
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}
