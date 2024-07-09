@@ -12,6 +12,7 @@ process PVMAF_TAGTRACEBACK {
 
     input:
     tuple val(meta), path(maf)
+    val(sample_sheets)
 
     output:
     tuple val(meta), path("*.maf"), emit: maf
@@ -22,7 +23,7 @@ process PVMAF_TAGTRACEBACK {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def sampleFiles = task.ext.sample_sheets ? task.ext.sample_sheets.collect { file -> "-sheet $file" }.join(' ') : ''
+    def sampleFiles = sample_sheets ? task.ext.sample_sheets.collect { file -> "-sheet $file" }.join(' ') : ''
     def output = prefix ? "${prefix}_traceback.maf": "multi_sample_traceback.maf"
 
     """

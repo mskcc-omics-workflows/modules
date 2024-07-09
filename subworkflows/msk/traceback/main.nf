@@ -1,6 +1,5 @@
 include { PVMAF_CONCAT as PVMAFCONCAT_INITIAL} from '../../../modules/msk/pvmaf/concat'
 include { PVMAF_CONCAT as PVMAFCONCAT_GENOTYPE} from '../../../modules/msk/pvmaf/concat'
-include { PVMAF_TAGTRACEBACK                      } from '../../../modules/msk/pvmaf/tagtraceback'
 include { GENOTYPEVARIANTS_ALL as GENOTYPEVARIANTS_ALL} from '../../../modules/msk/genotypevariants/all'
 
 workflow TRACEBACK {
@@ -65,10 +64,7 @@ workflow TRACEBACK {
     PVMAFCONCAT_GENOTYPE(all_genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
-    // Tag with traceback columns aka combine ref stats from access and impact
-    PVMAF_TAGTRACEBACK(PVMAFCONCAT_GENOTYPE.out.maf)
-    ch_versions = ch_versions.mix(PVMAF_TAGTRACEBACK.out.versions.first())
-    genotyped_maf = PVMAF_TAGTRACEBACK.out.maf
+    genotyped_maf = PVMAFCONCAT_GENOTYPE.out.maf
 
     emit:
     individual_genotyped_mafs = individual_genotype
