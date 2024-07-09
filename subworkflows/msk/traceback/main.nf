@@ -13,12 +13,12 @@ workflow TRACEBACK {
     mafs // channel: [[patient:null], [maf1,...,maf2] ]
     reference // file(reference)
     reference_fai // file(reference.fai)
-    samplesheets // [path(samplesheet_input), path(samplesheet_aux), ..., path(sample_sheet_etc)]
-
 
     main:
 
+    // declare versions channel
     ch_versions = Channel.empty()
+
     // Concat Input Mafs
     PVMAFCONCAT_INITIAL(mafs)
     ch_versions = ch_versions.mix(PVMAFCONCAT_INITIAL.out.versions.first())
@@ -66,7 +66,7 @@ workflow TRACEBACK {
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
     // Tag with traceback columns aka combine ref stats from access and impact
-    PVMAF_TAGTRACEBACK(PVMAFCONCAT_GENOTYPE.out.maf, samplesheets)
+    PVMAF_TAGTRACEBACK(PVMAFCONCAT_GENOTYPE.out.maf)
     ch_versions = ch_versions.mix(PVMAF_TAGTRACEBACK.out.versions.first())
     genotyped_maf = PVMAF_TAGTRACEBACK.out.maf
 

@@ -20,7 +20,6 @@ nextflow_process {
                             [ id:'chr22', patient:'test'], // meta map
                             file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
                         ]
-                input[1] = []
                 """
             }
         }
@@ -44,7 +43,6 @@ nextflow_process {
                 input[0] = [
                             [ id:'chr22', patient:'test'], file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
                         ]
-                input[1] = []
                 """
             }
         }
