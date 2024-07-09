@@ -23,7 +23,7 @@ process PVMAF_TAGTRACEBACK {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def sampleFiles = sample_sheets ? task.ext.sample_sheets.collect { file -> "-sheet $file" }.join(' ') : ''
+    def sampleFiles = sample_sheets ? sample_sheets.collect { file -> "-sheet $file" }.join(' ') : ''
     def output = prefix ? "${prefix}_traceback.maf": "multi_sample_traceback.maf"
 
     """
