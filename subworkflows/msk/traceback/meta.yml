@@ -11,7 +11,7 @@ keywords:
 components:
   - genotypevariants/all
   - pvmaf/concat
-  - pvmaf/tag
+  - pvmaf/tagtraceback
 
 input:
   - bams:
