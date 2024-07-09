@@ -361,7 +361,7 @@ jobs:
           - profile: "conda"
             tags: ppflagfixer
           - profile: "conda"
-            tags: pvmaf/tag
+            tags: pvmaf/tagtraceback
           - profile: "conda"
             tags: pvmaf/concat
           - profile: "conda"
