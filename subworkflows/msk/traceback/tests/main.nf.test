@@ -11,7 +11,7 @@ nextflow_workflow {
     tag "subworkflows/traceback"
     tag "genotypevariants/all"
     tag "pvmaf/concat"
-    tag "pvmaf/tag"
+    tag "pvmaf/tagtraceback"
     test("standard and access bams - stub") {
         options "-stub"
         when {
