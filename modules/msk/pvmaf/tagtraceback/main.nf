@@ -1,15 +1,18 @@
-process PVMAF_TAG {
+process PVMAF_TAGTRACEBACK {
     tag "$meta.id"
     label 'process_single'
-
+    //ghcr.io/msk-access/postprocessing_variant_calls:0.2.8
+    // TODO nf-core: List required Conda package(s).
+    //               Software MUST be pinned to channel (i.e. "bioconda"), version (i.e. "1.10").
+    //               For Conda, the build (i.e. "h9402c20_2") must be EXCLUDED to support installation on different operating systems.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0':
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0' }"
+        'ghcr.io/msk-access/postprocessing_variant_calls:type_traceback_0.0.7':
+        'ghcr.io/msk-access/postprocessing_variant_calls:type_traceback_0.0.7' }"
 
     input:
     tuple val(meta), path(maf)
-    val(type)
+    path(sample_sheets)
 
     output:
     tuple val(meta), path("*.maf"), emit: maf
@@ -20,12 +23,13 @@ process PVMAF_TAG {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def output = prefix ? "${prefix}_${type}.maf": "multi_sample_${type}.maf"
+    def sampleFiles = sample_sheets.collect { file -> "-sheet $file" }.join(' ')
+    def output = prefix ? "${prefix}_traceback.maf": "multi_sample_traceback.maf"
 
     """
-    pv maf tag \\
-    $type \\
+    pv maf tag traceback \\
     -m $maf \\
+    $sampleFiles \\
     --output $output \\
     $args
 
@@ -39,7 +43,7 @@ process PVMAF_TAG {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def output = prefix ? "${prefix}_${type}.maf": "multi_sample_${type}.maf"
+    def output = prefix ? "${prefix}_traceback.maf": "multi_sample_traceback.maf"
     """
     touch $output
     cat <<-END_VERSIONS > versions.yml

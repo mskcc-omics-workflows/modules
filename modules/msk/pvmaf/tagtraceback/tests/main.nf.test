@@ -1,15 +1,15 @@
 nextflow_process {
 
-    name "Test Process PVMAF_TAG"
+    name "Test Process PVMAF_TAGTRACEBACK"
     script "../main.nf"
-    process "PVMAF_TAG"
+    process "PVMAF_TAGTRACEBACK"
     config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfcore"
     tag "modules_msk"
     tag "pvmaf"
-    tag "pvmaf/tag"
+    tag "pvmaf/tagtraceback"
 
     test("chr22mafstandard - msk - traceback") {
 
@@ -20,7 +20,7 @@ nextflow_process {
                             [ id:'chr22', patient:'test'], // meta map
                             file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
                         ]
-                input[1] = 'traceback'
+                input[1] = []
                 """
             }
         }
@@ -44,7 +44,7 @@ nextflow_process {
                 input[0] = [
                             [ id:'chr22', patient:'test'], file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
                         ]
-                input[1] = 'traceback'
+                input[1] = []
                 """
             }
         }
