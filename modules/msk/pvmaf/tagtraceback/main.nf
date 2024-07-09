@@ -12,7 +12,7 @@ process PVMAF_TAGTRACEBACK {
 
     input:
     tuple val(meta), path(maf)
-    val(sample_sheets)
+    path(sample_sheets)
 
     output:
     tuple val(meta), path("*.maf"), emit: maf
