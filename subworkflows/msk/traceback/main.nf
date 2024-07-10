@@ -6,10 +6,10 @@ workflow TRACEBACK {
 
     take:
     bams
-    // channel: [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
+    // [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
     // or
-    // channel: [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
-    mafs // channel: [[patient:null], [maf1,...,maf2] ]
+    // [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
+    mafs // [[patient:null], [maf1,...,maf2] ]
     reference // file(reference)
     reference_fai // file(reference.fai)
 
@@ -60,6 +60,7 @@ workflow TRACEBACK {
     .groupTuple()
     .set{all_genotype}
     individual_genotype = all_genotype.collect()
+
     // concat gentoyped mafs, per patient if provided
     PVMAFCONCAT_GENOTYPE(all_genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())

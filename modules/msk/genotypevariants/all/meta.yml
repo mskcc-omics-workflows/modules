@@ -65,7 +65,7 @@ output:
         e.g. `[ id:'sample1', patient:'patient_1' ]`
   - maf:
       type: file
-      description: Genotyped mafs for each bam provided and a merged genotyped maf. The maf(s) will be labelled with patient identifier or sample identifier as the prefix, and end with the type of bam (duplex, simplex, or standard). The sample identifier is prioritized.
+      description: Genotyped maf for each bam provided and a merged genotyped maf. The mafs will be labelled with patient identifier or sample identifier as the prefix, and end with the type of bam (duplex, simplex, or standard). The sample identifier is prioritized.
       pattern: "*.{mafs}"
   - versions:
       type: file

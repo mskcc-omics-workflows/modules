@@ -10,8 +10,8 @@ process PVMAF_TAGTRACEBACK {
         'ghcr.io/msk-access/postprocessing_variant_calls:type_traceback_0.0.7' }"
 
     input:
-    tuple val(meta), path(maf)
-    path(sample_sheets)
+    tuple val(meta), path(maf) // [ id:'sample1', patient:'patient1' ], *.maf
+    path(sample_sheets) // [samplesheet_1, ..., samplesheet_n]
 
     output:
     tuple val(meta), path("*.maf"), emit: maf

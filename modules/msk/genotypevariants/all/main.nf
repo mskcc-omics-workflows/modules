@@ -9,6 +9,9 @@ process GENOTYPEVARIANTS_ALL {
         'ghcr.io/msk-access/genotype_variants:0.3.8' }"
 
     input:
+    // [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
+    // or
+    // [[patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai]
     tuple val(meta), path(bam_standard), path(bai_standard), path(bam_duplex), path(bai_duplex), path(bam_simplex), path(bai_simplex), path(maf)
     path(fasta)
     path(fai)

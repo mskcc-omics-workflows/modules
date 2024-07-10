@@ -8,7 +8,7 @@ process PVMAF_CONCAT {
         'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0' }"
 
     input:
-    tuple val(meta), path(maf_files)
+    tuple val(meta), path(maf_files) // [ id:'sample1', patient:'patient1' ], [maf_1, ... maf_n]
 
 
     output:

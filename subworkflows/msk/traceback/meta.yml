@@ -41,15 +41,15 @@ input:
       pattern: "*.{fai}"
 output:
   - genotyped_maf:
-      type: channel
+      type: map
       description: |
-        Channel containing combined genotyped maf for all provided bams.
+        Groovy Map containing combined genotyped maf for all provided bams.
         Structure: [ val(meta), path(maf) ]
       pattern: "*.maf"
   - individual_genotyped_mafs:
-      type: channel
+      type: map
       description: |
-        Channel containing genotyped mafs for each provided bam.
+        Groovy Map containing genotyped mafs for each provided bam.
         Structure: [ val(meta), [maf,..,maf] ]
       pattern: "*.maf"
   - versions:
