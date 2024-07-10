@@ -33,7 +33,6 @@ input:
         Used to add fillout type information to provided maf.
         See Nucleovar for more info: https://github.com/mskcc-omics-workflows/nucleovar/blob/main/README.md.
 
-
 output:
   #Only when we have meta
   - meta:
