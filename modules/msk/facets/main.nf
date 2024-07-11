@@ -43,7 +43,7 @@ process FACETS {
         ${legacy_output_arg} \
         --sample-id ${prefix} \
         --counts-file ${snp_pileup}
-    
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         facets_suite: \$(Rscript -e "packageVersion('facetsSuite')" | grep -oP "\\d+.\\d+.\\d+")
