@@ -11,7 +11,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,d11163e0a6bf41b0a3de47036e5f90e3"
+                    "versions.yml:md5,815fc0a26cfc0264610ea9a427212526"
                 ],
                 "annotated_maf": [
                     [
@@ -22,10 +22,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,d11163e0a6bf41b0a3de47036e5f90e3"
+                    "versions.yml:md5,815fc0a26cfc0264610ea9a427212526"
                 ]
             }
         ],
-        "timestamp": "2024-06-24T13:11:46.963057"
+        "timestamp": "2024-07-11T12:19:52.556138"
     }
 }

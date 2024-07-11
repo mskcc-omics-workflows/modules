@@ -4,8 +4,8 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.3':
-        'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.3' }"
+        'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.5':
+        'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.5' }"
 
     input:
     tuple val(meta), path(input_maf)
@@ -26,7 +26,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotationpipeline'
+        genomenexus: 'annotation pipeline version 1.0.3'
     END_VERSIONS
     """
 
@@ -39,7 +39,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotationpipeline'
+        genomenexus: 'annotation pipeline version 1.0.3'
     END_VERSIONS
     """
 }
