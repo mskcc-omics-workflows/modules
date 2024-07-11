@@ -1,0 +1,79 @@
+nextflow_process {
+
+    name "Test Process SALMON_QUANT"
+    script "../main.nf"
+    process "SALMON_QUANT"
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "salmon"
+    tag "salmon/quant"
+    tag "salmon/index"
+
+    setup {
+        run("SALMON_INDEX") {
+            script "../../../salmon/index/main.nf"
+            process {
+                """
+                input = [file(params.test_data_mskcc['rediscoverte']['rollup_part_19_fa_gz'], checkIfExists: true)]
+                """
+            }
+        }
+    }
+
+    test("rna - fastq") {
+
+        when {
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end: true ], // meta map
+                    [ file(params.test_data_mskcc['rediscoverte']['input_R1_fq_gz'], checkIfExists: true) ]
+                ])
+                input[1] = SALMON_INDEX.out.index
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.quant[0][1]).name,
+                    process.out.results[0].size()
+                ).match() }
+            )
+        }
+
+    }
+
+    test("rna - fastq - stub") {
+        options "-stub"
+        when {
+            process {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end: true ], // meta map
+                    [ file('input_R1_fq_gz') ]
+                ])
+                input[1] = SALMON_INDEX.out.index
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    file(process.out.quant[0][1]).name,
+                    process.out.results[0].size()
+                ).match() }
+            )
+        }
+
+    }
+
+
+}
