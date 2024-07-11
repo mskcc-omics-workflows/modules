@@ -366,6 +366,11 @@ jobs:
             tags: ppflagfixer
           - profile: "conda"
             tags: subworkflows/genome_nexus
+          - profile: "conda"
+            tags: salmon/quant
+          - profile: "conda"
+            tags: rediscoverte
+
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}

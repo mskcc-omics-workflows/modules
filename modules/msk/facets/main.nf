@@ -87,4 +87,3 @@ process FACETS {
     END_VERSIONS
     """
 }
-
