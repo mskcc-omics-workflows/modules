@@ -1,0 +1,31 @@
+{
+    "test normal ": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,815fc0a26cfc0264610ea9a427212526"
+                ],
+                "annotated_maf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,815fc0a26cfc0264610ea9a427212526"
+                ]
+            }
+        ],
+        "timestamp": "2024-07-11T12:19:52.556138"
+    }
+}
