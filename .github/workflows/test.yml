@@ -355,22 +355,9 @@ jobs:
           - profile: "conda"
             tags: snppileup
           - profile: "conda"
-            tags: facets
-          - profile: "conda"
             tags: mutect1
           - profile: "conda"
-            tags: genomenexus/vcf2maf
-          - profile: "conda"
-            tags: genomenexus/annotationpipeline
-          - profile: "conda"
-            tags: ppflagfixer
-          - profile: "conda"
-            tags: subworkflows/genome_nexus
-          - profile: "conda"
-            tags: salmon/quant
-          - profile: "conda"
-            tags: rediscoverte
-
+            tags: vcf2maf
     env:
       NXF_ANSI_LOG: false
       SENTIEON_LICENSE_BASE64: ${{ secrets.SENTIEON_LICENSE_BASE64 }}

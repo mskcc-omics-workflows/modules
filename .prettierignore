@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 includes/Maven_Pro/
 
 # gitignore
@@ -16,3 +17,8 @@ __pycache__
 *.pyc
 .github/renovate.json5
 .github/workflows/update_summary.py
+=======
+# Ignore artifacts:
+build
+coverage
+>>>>>>> 97011e750a9ac77c5c2162933ebf363d465ff9a2
