@@ -1,0 +1,31 @@
+{
+    "vcf2maf - test - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c60e8688d2d8110c4621c279a710a890"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c60e8688d2d8110c4621c279a710a890"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-24T11:56:07.276674"
+    }
+}
