@@ -91,6 +91,5 @@ def createNETMHCInput(wt_fasta, mut_fasta, hla) {
                 new Tuple(it[1][0], it[1][1],it[2][1],"WT")
             }
         merged = merged_mut.mix(merged_wt)
-
         return merged
 }
