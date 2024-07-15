@@ -31,7 +31,7 @@ process NETMHCSTABPAN {
 
     """
 
-    /usr/local/bin/netMHCstabpan-${NETMHCPAN_VERSION}/netMHCstabpan \
+    /usr/local/bin/netMHCstabpan-${NETMHCSTABPAN_VERSION}/netMHCstabpan \
     -s -1 \
     -f ${inputFasta} \
     -a ${hla} \
