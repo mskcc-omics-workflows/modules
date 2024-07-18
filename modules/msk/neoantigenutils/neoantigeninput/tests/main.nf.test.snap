@@ -1,5 +1,5 @@
 {
-    "homo_sapiens - bam": {
+    "neoantigenutils_neoantigeninput - json,tsv - stub": {
         "content": [
             {
                 "0": [
@@ -8,29 +8,33 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ],
-                "hla": [
+                "json": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ]
             }
         ],
-        "timestamp": "2024-03-25T17:28:23.33869"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:08:47.586409668"
     },
-    "homo_sapiens - bam - stub": {
+    "neoantigenutils_neoantigeninput - json,tsv": {
         "content": [
             {
                 "0": [
@@ -39,26 +43,30 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_patient_test_.json:md5,a4442316ba2b6f404b8eb42dd6558eae"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ],
-                "hla": [
+                "json": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_patient_test_.json:md5,a4442316ba2b6f404b8eb42dd6558eae"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,4815d54ee3ae0778628a1e51b4b21d9b"
                 ]
             }
         ],
-        "timestamp": "2024-03-25T17:28:29.809368"
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-01T16:08:31.862365529"
     }
 }

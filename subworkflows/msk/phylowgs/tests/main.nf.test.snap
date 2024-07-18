@@ -1,0 +1,18 @@
+{
+    "phylowgs - gz": {
+        "content": [
+            "test.summ.json.gz",
+            "test.muts.json.gz",
+            "test.mutass.zip"
+        ],
+        "timestamp": "2024-03-28T19:55:03.638169"
+    },
+    "phylowgs - gz - stub": {
+        "content": [
+            "test.summ.json.gz",
+            "test.muts.json.gz",
+            "test.mutass.zip"
+        ],
+        "timestamp": "2024-03-28T19:55:13.404789"
+    }
+}

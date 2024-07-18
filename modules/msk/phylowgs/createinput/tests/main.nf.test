@@ -1,27 +1,25 @@
 nextflow_process {
 
-    name "Test Process POLYSOLVER"
+    name "Test Process PHYLOWGS_CREATEINPUT"
     script "../main.nf"
-    process "POLYSOLVER"
+    process "PHYLOWGS_CREATEINPUT"
 
     tag "modules"
     tag "modules_nfcore"
     tag "modules_msk"
-    tag "polysolver"
+    tag "phylowgs"
+    tag "phylowgs/createinput"
 
-    test("homo_sapiens - bam") {
+    test("PHYLOWGS_CREATEINPUT - txt") {
 
         when {
             process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data['homo_sapiens']['illumina']['test_paired_end_sorted_bam'], checkIfExists: true)
-                ]
-                input[1] = []
-                input[2] = []
-                input[3] = []
-                input[4] = []
+                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cnvs_txt'], checkIfExists: true)
+                    ]
                 """
             }
         }
@@ -35,7 +33,7 @@ nextflow_process {
 
     }
 
-    test("homo_sapiens - bam - stub") {
+    test("PHYLOWGS_CREATEINPUT - txt - stub") {
 
         options "-stub"
 
@@ -44,12 +42,9 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file('test_paired_end_sorted_bam')
-                ]
-                input[1] = []
-                input[2] = []
-                input[3] = []
-                input[4] = []
+                    file('unfilteredmaf'),
+                    file('cnvs_txt')
+                    ]
                 """
             }
         }

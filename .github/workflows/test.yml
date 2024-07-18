@@ -359,6 +359,42 @@ jobs:
           - profile: "conda"
             tags: mutect1
           - profile: "conda"
+            tags: phylowgs/createinput
+          - profile: "conda"
+            tags: phylowgs/parsecnvs
+          - profile: "conda"
+            tags: phylowgs/multievolve
+          - profile: "conda"
+            tags: phylowgs/writeresults
+          - profile: "conda"
+            tags: netmhcpan
+          - profile: "conda"
+            tags: neoantigeninput
+          - profile: "conda"
+            tags: neoantigenediting/aligntoIEDB
+          - profile: "conda"
+            tags: neoantigenediting/computeFitness
+          - profile: "conda"
+            tags: subworkflows/neoantigen_editing
+          - profile: "conda"
+            tags: subworkflows/phylowgs
+          - profile: "conda"
+            tags: netmhcstabpan
+          - profile: "conda"
+            tags: ppflagfixer
+          - profile: "conda"
+            tags: neoantigenutils/generatemutfasta
+          - profile: "conda"
+            tags: neoantigenutils/formatnetmhcpan
+          - profile: "conda"
+            tags: neoantigenutils/generatehlastring
+          - profile: "conda"
+            tags: neoantigenutils/neoantigeninput
+          - profile: "conda"
+            tags: subworkflows/netmhcstabandpan
+          - profile: "conda"
+            tags: salmon/index
+          - profile: "conda"
             tags: genomenexus/vcf2maf
           - profile: "conda"
             tags: genomenexus/annotationpipeline

@@ -1,5 +1,5 @@
 {
-    "homo_sapiens - bam": {
+    "neoantigenutils_generatehlastring - hla - string - stub": {
         "content": [
             {
                 "0": [
@@ -8,29 +8,29 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                        "HLA-test:01,HLA-test2:02\n"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
                 ],
-                "hla": [
+                "hlastring": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                        "HLA-test:01,HLA-test2:02\n"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
                 ]
             }
         ],
-        "timestamp": "2024-03-25T17:28:23.33869"
+        "timestamp": "2024-04-30T09:36:22.811416"
     },
-    "homo_sapiens - bam - stub": {
+    "neoantigenutils_generatehlastring - hla - string": {
         "content": [
             {
                 "0": [
@@ -39,26 +39,26 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02\n"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
                 ],
-                "hla": [
+                "hlastring": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02\n"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
                 ]
             }
         ],
-        "timestamp": "2024-03-25T17:28:29.809368"
+        "timestamp": "2024-04-30T09:36:16.803412"
     }
 }

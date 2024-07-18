@@ -1,5 +1,5 @@
 {
-    "homo_sapiens - bam": {
+    "phylowgs_parsecnvs - txt": {
         "content": [
             {
                 "0": [
@@ -8,29 +8,29 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                        "cnvs.txt:md5,2f7b4d8ceff8a9505c4b69e2b1e9ccc7"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,3fad79b7762271d747946e18f665089c"
                 ],
-                "hla": [
+                "cnv": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,34a1d26df0879e3dc4d36bd8067e4d69"
+                        "cnvs.txt:md5,2f7b4d8ceff8a9505c4b69e2b1e9ccc7"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,3fad79b7762271d747946e18f665089c"
                 ]
             }
         ],
-        "timestamp": "2024-03-25T17:28:23.33869"
+        "timestamp": "2024-07-08T12:15:00.257251"
     },
-    "homo_sapiens - bam - stub": {
+    "phylowgs_parsecnvs - txt - stub": {
         "content": [
             {
                 "0": [
@@ -39,26 +39,26 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "cnvs.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,3fad79b7762271d747946e18f665089c"
                 ],
-                "hla": [
+                "cnv": [
                     [
                         {
                             "id": "test",
                             "single_end": false
                         },
-                        "test.hla.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "cnvs.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,60ce7b8e5d89d0b6ea3e01dc9a032fd6"
+                    "versions.yml:md5,3fad79b7762271d747946e18f665089c"
                 ]
             }
         ],
-        "timestamp": "2024-03-25T17:28:29.809368"
+        "timestamp": "2024-07-08T12:15:19.111149"
     }
 }

@@ -1,0 +1,9 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
+name: "neoantigenediting_computefitness"
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - "NEOANTIGENEDITING"
