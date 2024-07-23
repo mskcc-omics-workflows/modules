@@ -1,0 +1,2 @@
+subworkflows/bedtools:
+  - subworkflows/msk/bedtools/**
