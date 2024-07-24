@@ -14,7 +14,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-24T16:27:23.623613"
+        "timestamp": "2024-07-24T16:38:50.233572"
     },
     "neoantigenutils_convertannotjson - output(test) - tsv - stub": {
         "content": [
@@ -31,6 +31,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-07-24T16:27:28.129098"
+        "timestamp": "2024-07-24T16:38:54.587514"
     }
 }

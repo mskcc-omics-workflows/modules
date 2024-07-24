@@ -30,7 +30,7 @@ def main():
     parser.add_argument("--json_file", help="Path to the annotated JSON file")
     parser.add_argument("--output_file", help="Path to the output TSV file")
     parser.add_argument(
-        "-v", "--version", action="version", version="%(prog)s v{}".format(VERSION)
+        "-v", "--version", action="version", version="v{}".format(VERSION)
     )
     args = parser.parse_args()
 
