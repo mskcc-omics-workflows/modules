@@ -25,7 +25,7 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            convertannotjson: \$(echo \$(CONVERTANNOTJSON.py -v))
+            convertannotjson: \$(echo \$(convertannotjson.py -v))
         END_VERSIONS
     """
 
