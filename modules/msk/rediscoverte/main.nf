@@ -1,5 +1,5 @@
 process REDISCOVERTE {
-    tag "Sample(s) - ${files(quant).size()}"
+    tag "Sample(s) - ${[quant].flatten().size()}"
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?

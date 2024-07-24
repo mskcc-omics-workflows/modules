@@ -1,0 +1,64 @@
+{
+    "neoantigenutils_generatehlastring - hla - string - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "HLA-test:01,HLA-test2:02\n"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
+                ],
+                "hlastring": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "HLA-test:01,HLA-test2:02\n"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
+                ]
+            }
+        ],
+        "timestamp": "2024-04-30T09:36:22.811416"
+    },
+    "neoantigenutils_generatehlastring - hla - string": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02\n"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
+                ],
+                "hlastring": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02\n"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,85e2db7a93782eb39ae80340a9728de2"
+                ]
+            }
+        ],
+        "timestamp": "2024-04-30T09:36:16.803412"
+    }
+}

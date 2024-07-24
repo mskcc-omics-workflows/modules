@@ -1,0 +1,68 @@
+{
+    "PHYLOWGS_CREATEINPUT - txt - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "ssm_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                ],
+                "phylowgsinput": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "ssm_data.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-11T18:00:07.554362"
+    },
+    "PHYLOWGS_CREATEINPUT - txt": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,9228c0a7bce478e06db5d4304be3dbf7",
+                        "ssm_data.txt:md5,055b7b5359a50eefd86fc85fcc023c6f"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                ],
+                "phylowgsinput": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,9228c0a7bce478e06db5d4304be3dbf7",
+                        "ssm_data.txt:md5,055b7b5359a50eefd86fc85fcc023c6f"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-11T18:00:00.11222"
+    }
+}

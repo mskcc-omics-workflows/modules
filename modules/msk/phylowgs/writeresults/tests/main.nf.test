@@ -1,0 +1,70 @@
+nextflow_process {
+
+    name "Test Process PHYLOWGS_WRITERESULTS"
+    script "../main.nf"
+    process "PHYLOWGS_WRITERESULTS"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "phylowgs"
+    tag "phylowgs/writeresults"
+
+    test("phylowgs_writeresults - zip") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map,
+                    file(params.test_data_mskcc['neoantigen']['trees'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions,
+                                file(process.out.summ[0][1]).name,
+                                file(process.out.muts[0][1]).name,
+                                file(process.out.mutass[0][1]).name).match()
+                }
+
+            )
+        }
+
+    }
+
+    test("phylowgs_writeresults - zip - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map,
+                    file('tree_data')
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions,
+                                file(process.out.summ[0][1]).name,
+                                file(process.out.muts[0][1]).name,
+                                file(process.out.mutass[0][1]).name).match()
+                }
+
+            )
+        }
+
+    }
+
+
+}
