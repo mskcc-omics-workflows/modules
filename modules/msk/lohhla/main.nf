@@ -6,19 +6,14 @@ process LOHHLA {
         'mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/lohhla:0.0.1' }"
 
     input:
-    tuple val(meta),
-        path(bamTumor),
-        path(bamNormal),
-        path(winnersHla), // HLA output from polysolver or other hla caller.
-        path(purityOut) // purityOut is from FACETS run
+    tuple val(meta), path(bamTumor), path(bamNormal), path(winnersHla), path(purityOut) // purityOut is from FACETS run
 
     output:
-    tuple val(meta), path("*.DNA.HLAlossPrediction_CI.txt"), emit: prediction
-    tuple val(meta), path("*DNA.IntegerCPN_CI.txt")        , emit: integercpn
-    tuple val(meta), path("*.pdf")                         , emit: pdf
-    tuple val(meta), path("*.RData")                       , emit: rdata
-    path  "versions.yml"                                   , emit: versions
-
+    tuple val(meta), path("*.DNA.HLAlossPrediction_CI.txt")               , emit: prediction
+    tuple val(meta), path("*DNA.IntegerCPN_CI.txt")                       , emit: integercpn
+    tuple val(meta), path("*.pdf")                         , optional:true, emit: pdf
+    tuple val(meta), path("*.RData")                       , optional:true, emit: rdata
+    path("versions.yml")                                                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -26,14 +21,12 @@ process LOHHLA {
     script:
     def args              = task.ext.args ?: ''
     def prefix            = task.ext.prefix ?: "${meta.id}"
-    def prefixTumor       = task.ext.prefix ?: "${meta.tumor_id}"
-    def prefixNormal      = task.ext.prefix ?: "${meta.normal_id}"
+    def prefixTumor       = task.ext.prefix ?: "${meta.tumor_id ?: meta.id}"
+    def prefixNormal      = task.ext.prefix ?: "${meta.normal_id ?: meta.id}"
     def outputPrefix      = task.ext.prefix ?: "${prefixTumor}__${prefixNormal}"
-    def hlaFasta          =  "/lohhla/data/abc_complete.fasta"
+    def hlaFasta          = "/lohhla/data/abc_complete.fasta"
     def hlaDat            = "/lohhla/data/hla.dat"
-
     """
-
     samtools index -b ${bamTumor}
     samtools index -b ${bamNormal}
 
@@ -55,7 +48,7 @@ process LOHHLA {
         --hlaPath massaged.winners.hla.txt \\
         --gatkDir /picard-tools \\
         --novoDir /opt/conda/bin \\
-        $args 
+        $args
 
     if [[ -f ${outputPrefix}.*.DNA.HLAlossPrediction_CI.txt ]]
     then
@@ -89,10 +82,11 @@ process LOHHLA {
     """
 
     stub:
-    def args = task.ext.args ?: ''
-    def prefixTumor       = task.ext.prefix ?: "${metaT.id}"
-    def prefixNormal      = task.ext.prefix ?: "${metaN.id}"
-    def outputPrefix      = task.ext.prefix ?: "${prefixTumor}_${prefixNormal}"
+    def args              = task.ext.args ?: ''
+    def prefix            = task.ext.prefix ?: "${meta.id}"
+    def prefixTumor       = task.ext.prefix ?: "${meta.tumor_id ?: meta.id}"
+    def prefixNormal      = task.ext.prefix ?: "${meta.normal_id ?: meta.id}"
+    def outputPrefix      = task.ext.prefix ?: "${prefixTumor}__${prefixNormal}"
     """
     touch ${outputPrefix}.DNA.HLAlossPrediction_CI.txt
     touch ${outputPrefix}.DNA.IntegerCPN_CI.txt

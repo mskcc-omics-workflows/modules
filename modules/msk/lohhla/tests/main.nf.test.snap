@@ -1,25 +1,156 @@
 {
-    "homo_sapiens - bam": {
+    "stub": {
         "content": [
             {
                 "0": [
-                    
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        "test_hla__test_hla.DNA.HLAlossPrediction_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
                 "1": [
-                    
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        "test_hla__test_hla.DNA.IntegerCPN_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
                 ],
-                "lohhlaOutput": [
-                    
+                "2": [
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        "test_hla__test_hla.HLA.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        [
+                            "test_hla__test_hla.hla_a.tmp.data.plots.RData:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_hla__test_hla.hla_b.tmp.data.plots.RData:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_hla__test_hla.hla_c.tmp.data.plots.RData:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,f3caa23f6a246ce5fdc3021c31ccc5ae"
+                ],
+                "integercpn": [
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        "test_hla__test_hla.DNA.IntegerCPN_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "pdf": [
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        "test_hla__test_hla.HLA.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "prediction": [
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        "test_hla__test_hla.DNA.HLAlossPrediction_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "rdata": [
+                    [
+                        {
+                            "id": "test_hla"
+                        },
+                        [
+                            "test_hla__test_hla.hla_a.tmp.data.plots.RData:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_hla__test_hla.hla_b.tmp.data.plots.RData:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test_hla__test_hla.hla_c.tmp.data.plots.RData:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
                 ],
                 "versions": [
-                    
+                    "versions.yml:md5,f3caa23f6a246ce5fdc3021c31ccc5ae"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.8.4",
-            "nextflow": "23.10.0"
+            "nextflow": "23.10.1"
         },
-        "timestamp": "2024-02-05T15:53:37.351433"
+        "timestamp": "2024-07-12T18:21:59.059169"
+    },
+    "homo_sapiens - bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test_hla",
+                            "single_end": false
+                        },
+                        "test_hla__test_hla.DNA.HLAlossPrediction_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test_hla",
+                            "single_end": false
+                        },
+                        "test_hla__test_hla.DNA.IntegerCPN_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    
+                ],
+                "3": [
+                    
+                ],
+                "4": [
+                    "versions.yml:md5,aaaf018a5ada92678b89b6497c013ab6"
+                ],
+                "integercpn": [
+                    [
+                        {
+                            "id": "test_hla",
+                            "single_end": false
+                        },
+                        "test_hla__test_hla.DNA.IntegerCPN_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "pdf": [
+                    
+                ],
+                "prediction": [
+                    [
+                        {
+                            "id": "test_hla",
+                            "single_end": false
+                        },
+                        "test_hla__test_hla.DNA.HLAlossPrediction_CI.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "rdata": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,aaaf018a5ada92678b89b6497c013ab6"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.10.1"
+        },
+        "timestamp": "2024-07-12T18:21:51.776514"
     }
 }
