@@ -6,10 +6,10 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
         'docker.io/mskcc/neoantigen-utils-base:1.0.0' }"
 
     input:
-    tuple val(meta),  path(netmhcPanOutput)
+    tuple val(meta),  path(annotatedJSON)
 
     output:
-    tuple val(meta), path("*.tsv"),              emit: netMHCpanreformatted
+    tuple val(meta), path("*.tsv"),              emit: neoantigenTSV
     path "versions.yml",                         emit: versions
 
     when:
@@ -19,13 +19,13 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-        convertannotjson.py \
+        python3 convertannotjson.py \
             --json_file ${annotatedJSON} \
             --output_file ${prefix}_neoantigens.tsv 
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            convertannotjson: \$(echo \$(convertannotjson.py -v))
+            convertannotjson: \$(echo \$(python3 convertannotjson.py -v))
         END_VERSIONS
     """
 
@@ -38,7 +38,7 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            convertannotjson: \$(echo \$(convertannotjson.py -v))
+            convertannotjson: \$(echo \$(python3 convertannotjson.py -v))
         END_VERSIONS
     """
 }

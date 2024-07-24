@@ -1,0 +1,31 @@
+{
+    "neoantigenutils_convertannotjson - output(test) - tsv": {
+        "content": [
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-24T15:23:57.237219"
+    },
+    "neoantigenutils_convertannotjson - output(test) - tsv - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test_neoantigens.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-07-24T15:21:24.513922"
+    }
+}
