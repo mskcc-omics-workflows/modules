@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigenutils_formatnetmhcpan"
+name: "neoantigenutils_convertannotjson"
 description: Takes the output of the neoantigen ediitng subworkflow and converts the annotated neoantigens to tsv format.
 keywords:
   - neoantigen
@@ -17,21 +17,19 @@ input:
       type: map
       description: |
         Groovy Map containing sample information.
-        typeMut indicated if a mutated fasta was used
-        fromStab indicates if the output was from netmhcstabpan
-        e.g. `[ id:'sample1', typeMut: false, fromStab: false ]`
+        e.g. `[ id:'sample1']`
 
   - annotatedjson:
       type: file
       description: Json annotated by the neoantigenediting subworkflow
-      pattern: "*.{output}"
+      pattern: "*annotated.json"
 
 output:
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
+        e.g. `[ id:'sample1']`
 
   - versions:
       type: file
@@ -44,7 +42,6 @@ output:
 
 authors:
   - "@johnoooh"
-  - "@nikhil"
 maintainers:
   - "@johnoooh"
   - "@nikhil"

@@ -19,13 +19,13 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-        python3 convertannotjson.py \
+        convertannotjson.py \
             --json_file ${annotatedJSON} \
             --output_file ${prefix}_neoantigens.tsv 
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            convertannotjson: \$(echo \$(python3 convertannotjson.py -v))
+            convertannotjson: \$(echo \$(CONVERTANNOTJSON.py -v))
         END_VERSIONS
     """
 
@@ -38,7 +38,7 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            convertannotjson: \$(echo \$(python3 convertannotjson.py -v))
+            convertannotjson: \$(echo \$(convertannotjson.py -v))
         END_VERSIONS
     """
 }

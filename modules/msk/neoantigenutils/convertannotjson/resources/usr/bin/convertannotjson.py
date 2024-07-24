@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import json
 import argparse
 
@@ -26,8 +27,8 @@ def process_json_file(json_file_path,output_file_path):
 
 def main():
     parser = argparse.ArgumentParser(description="Process an annotated JSON file and output TSV format.")
-    parser.add_argument("json_file", help="Path to the annotated JSON file")
-    parser.add_argument("output_file", help="Path to the output TSV file")
+    parser.add_argument("--json_file", help="Path to the annotated JSON file")
+    parser.add_argument("--output_file", help="Path to the output TSV file")
     parser.add_argument(
         "-v", "--version", action="version", version="%(prog)s v{}".format(VERSION)
     )
