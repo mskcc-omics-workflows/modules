@@ -1,0 +1,61 @@
+nextflow_process {
+
+    name "Test Process PVMAF_TAGTRACEBACK"
+    script "../main.nf"
+    process "PVMAF_TAGTRACEBACK"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "pvmaf"
+    tag "pvmaf/tagtraceback"
+
+    test("chr22mafstandard - msk - traceback") {
+
+
+        when {
+            process {
+                """input[0] = [
+                            [ id:'chr22', patient:'test'], // meta map
+                            file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
+                        ]
+                    input[1] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("chr22mafstandard - msk - traceback - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                            [ id:'chr22', patient:'test'], file(params.test_data_mskcc['chr22']['chr22mafstandard'], checkIfExists: true),
+                        ]
+                input[1] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

@@ -401,6 +401,16 @@ jobs:
           - profile: "conda"
             tags: ppflagfixer
           - profile: "conda"
+            tags: pvmaf/tagtraceback
+          - profile: "conda"
+            tags: pvmaf/concat
+          - profile: "conda"
+            tags: genotypevariants/all
+          - profile: "conda"
+            tags: subworkflows/traceback
+          - profile: "conda"
+            tags: salmon/index
+          - profile: "conda"
             tags: subworkflows/genome_nexus
           - profile: "conda"
             tags: salmon/quant
