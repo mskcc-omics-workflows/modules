@@ -21,7 +21,7 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
     """
         convertannotjson.py \
             --json_file ${annotatedJSON} \
-            --output_file ${prefix}_neoantigens.tsv 
+            --output_file ${prefix}_neoantigens.tsv
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":

@@ -37,7 +37,7 @@ output:
       pattern: "versions.yml"
   - neoantigenTSV:
       type: file
-      description: A reformatted file of neoantigens, now in TSV format! 
+      description: A reformatted file of neoantigens, now in TSV format!
       pattern: "*.{tsv}"
 
 authors:
