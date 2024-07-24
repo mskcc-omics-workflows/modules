@@ -19,7 +19,7 @@ input:
         Groovy Map containing sample information.
         e.g. `[ id:'sample1']`
 
-  - annotatedjson:
+  - annotatedJSON:
       type: file
       description: Json annotated by the neoantigenediting subworkflow
       pattern: "*annotated.json"
