@@ -1,0 +1,51 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neoantigenutils_formatnetmhcpan"
+description: Takes the standard out of netmhcpan tools and converts them to a tsv for downstream processing
+keywords:
+  - neoantigen
+  - tsv
+  - peptides
+  - netmhc
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
+      licence: [""]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information.
+        typeMut indicated if a mutated fasta was used
+        fromStab indicates if the output was from netmhcstabpan
+        e.g. `[ id:'sample1', typeMut: false, fromStab: false ]`
+
+  - netmhcOutput:
+      type: file
+      description: Maf outputtted by Tempo that was run through phyloWGS
+      pattern: "*.{output}"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - netMHCpanreformatted:
+      type: file
+      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan or netmhcstabpan.  This contains the wild type antigens
+      pattern: "*.{tsv}"
+
+authors:
+  - "@johnoooh"
+  - "@nikhil"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"

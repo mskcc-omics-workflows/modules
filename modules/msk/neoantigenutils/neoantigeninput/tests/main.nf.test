@@ -1,0 +1,100 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_NEOANTIGENINPUT"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_NEOANTIGENINPUT"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/neoantigeninput"
+    tag "modules_msk"
+
+    test("neoantigenutils_neoantigeninput - json,tsv") {
+
+        when {
+            params {
+                folderPath = 'tst'
+            }
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true)
+                    ]
+
+                input[1] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test4_mutass_zip'], checkIfExists: true)
+                    ]
+
+                input[2] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan_tsv'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WTnetMHCpan_tsv'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+
+    test("neoantigenutils_neoantigeninput - json,tsv - stub") {
+
+        options "-stub"
+
+        when {
+            params {
+                folderPath = 'tst'
+            }
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('temp_test_maf'),
+                    file('winners_hla_txt')
+                    ]
+
+                input[1] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('test4_summ_json'),
+                    file('test4_muts_json'),
+                    file(params.folderPath)
+                    ]
+
+                input[2] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUTnetMHCpan.tsv'),
+                    file('WTnetMHCpan.tsv')
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

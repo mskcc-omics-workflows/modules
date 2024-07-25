@@ -1,0 +1,65 @@
+nextflow_process {
+
+    name "Test Process PHYLOWGS_MULTIEVOLVE"
+    script "../main.nf"
+    process "PHYLOWGS_MULTIEVOLVE"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "phylowgs"
+    tag "phylowgs/multievolve"
+
+    test("phylowgs_multievolve - zip") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map,
+                    file(params.test_data_mskcc['neoantigen']['cnv_data'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['ssm_data'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(file(process.out.trees[0][1]).name).match() }
+
+            )
+        }
+
+    }
+
+    test("phylowgs_multievolve - zip - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map,
+                    file('cnv_data'),
+                    file('ssm_data')
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+
+            )
+        }
+
+    }
+
+
+}
