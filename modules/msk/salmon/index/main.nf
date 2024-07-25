@@ -1,6 +1,6 @@
 process SALMON_INDEX {
     tag "${file(transcriptome_fasta).name}"
-    label "process_medium"
+    label "process_high"
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'docker://mskcc/salmon:0.14.0' :
