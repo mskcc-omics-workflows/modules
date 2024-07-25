@@ -1,0 +1,8 @@
+---
+name: "phylowgs_createinput"
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - "PHYLOWGS"

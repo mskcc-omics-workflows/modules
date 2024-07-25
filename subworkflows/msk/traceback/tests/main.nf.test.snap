@@ -1,0 +1,29 @@
+{
+    "standard and access bams - stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    "versions.yml:md5,bb5f5880ef3572733a2349212e8ab549",
+                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
+                ],
+                "genotyped_maf": [
+                    
+                ],
+                "individual_genotyped_mafs": [
+                    
+                ],
+                "versions": [
+                    "versions.yml:md5,bb5f5880ef3572733a2349212e8ab549",
+                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-18T13:38:00.215685"
+    }
+}

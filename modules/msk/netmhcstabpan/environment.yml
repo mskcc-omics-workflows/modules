@@ -1,0 +1,10 @@
+name: netmhcstabpan
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - netmhcpan
+  - netmhcstabpan
