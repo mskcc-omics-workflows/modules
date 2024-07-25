@@ -1,0 +1,101 @@
+{
+    "ppflagfixer - normal bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "ppflag.test.bam:md5,d25c13205b1d33c5c4b12999fc839d86"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                ],
+                "ppflag_bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "ppflag.test.bam:md5,d25c13205b1d33c5c4b12999fc839d86"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.04.2"
+        },
+        "timestamp": "2024-02-26T23:05:23.642445"
+    },
+    "ppflagfixer - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "ppflag.test.bam:md5,3d77e3e110a219d3495d44e243450313"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                ],
+                "ppflag_bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "ppflag.test.bam:md5,3d77e3e110a219d3495d44e243450313"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.04.2"
+        },
+        "timestamp": "2024-02-26T23:06:14.360871"
+    },
+    "ppflagfixer - tumor bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "ppflag.test.bam:md5,d05041f7678abb654e5d349ec430b131"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                ],
+                "ppflag_bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "ppflag.test.bam:md5,d05041f7678abb654e5d349ec430b131"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "23.04.2"
+        },
+        "timestamp": "2024-02-26T23:06:08.243018"
+    }
+}
