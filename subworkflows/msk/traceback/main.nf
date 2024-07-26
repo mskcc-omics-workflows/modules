@@ -41,7 +41,7 @@ workflow TRACEBACK {
     GENOTYPEVARIANTS_ALL.out.maf
     .transpose()
     .branch {
-        genotyped: it[1] =~ /.*STANDARD_genotyped.maf/
+        genotyped: it[1] =~ /.*ORG-STD_genotyped.maf/
         }
     .set{split_genotype_imp}
 
