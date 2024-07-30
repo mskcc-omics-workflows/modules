@@ -1,0 +1,64 @@
+{
+    "chr22mafstandard - msk - traceback": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_traceback.maf:md5,23ca5bc6918acfd84b98fdce78bc008b"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,aabbb21415be8383794da07e3b15b062"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_traceback.maf:md5,23ca5bc6918acfd84b98fdce78bc008b"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,aabbb21415be8383794da07e3b15b062"
+                ]
+            }
+        ],
+        "timestamp": "2024-07-09T10:15:08.586507"
+    },
+    "chr22mafstandard - msk - traceback - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_traceback.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,aabbb21415be8383794da07e3b15b062"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "chr22",
+                            "patient": "test"
+                        },
+                        "test_traceback.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,aabbb21415be8383794da07e3b15b062"
+                ]
+            }
+        ],
+        "timestamp": "2024-07-09T10:16:09.337412"
+    }
+}

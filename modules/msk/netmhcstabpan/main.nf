@@ -25,14 +25,23 @@ process NETMHCSTABPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = true
+
+    def NETMHCPAN_VERSION = "4.1"
+    def NETMHCSTABPAN_VERSION = "1.0"
+
     """
 
-    /usr/local/bin/netMHCstabpan-1.0/netMHCstabpan -s -1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
+    /usr/local/bin/netMHCstabpan-${NETMHCSTABPAN_VERSION}/netMHCstabpan \
+    -s -1 \
+    -f ${inputFasta} \
+    -a ${hla} \
+    -l 9,10 \
+    -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        netmhcpan: v4.1
-        netmhcstabpan: v1.0
+        netmhcpan: v${NETMHCPAN_VERSION}
+        netmhcstabpan: v${NETMHCSTABPAN_VERSION}
     END_VERSIONS
 
     """
@@ -43,14 +52,17 @@ process NETMHCSTABPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = true
+    def NETMHCPAN_VERSION = "4.1"
+    def NETMHCSTABPAN_VERSION = "1.0"
+
     """
     touch ${prefix}.MUT.netmhcstabpan.output
 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        netmhcpan: v4.1
-        netmhcstabpan: v1.0
+        netmhcpan: v${NETMHCPAN_VERSION}
+        netmhcstabpan: v${NETMHCSTABPAN_VERSION}
     END_VERSIONS
     """
 }

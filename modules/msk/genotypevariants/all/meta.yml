@@ -1,0 +1,78 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "genotypevariants_all"
+description: write your description here
+keywords:
+  - genotype
+  - bams
+  - maf
+tools:
+  - "genotypevariants":
+      description: "module supports genotyping and merging small variants (SNV and INDELS)."
+      documentation: "https://genotype-variants.readthedocs.io/en/latest/"
+      licence: ["MIT"]
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', patient:'patient_1' ]`
+  - bam_standard:
+      type: file
+      description: Full path to standard bam file.
+      pattern: "*.{bam}"
+  - bai_standard:
+      type: file
+      description: Requires the standard .bai file is present at same location as the bam file.
+      pattern: "*.{bai}"
+  - bam_duplex:
+      type: file
+      description: Full path to duplex bam file.
+      pattern: "*.{bam}"
+  - bai_duplex:
+      type: file
+      description: Requires the duplex .bai file is present at same location as the bam file.
+      pattern: "*.{bai}"
+  - bam_simplex:
+      type: file
+      description: Full path to simplex bam file.
+      pattern: "*.{bam}"
+  - bai_simplex:
+      type: file
+      description: Requires the simplex .bai file is present at same location as the bam file.
+      pattern: "*.{bai}"
+  - maf:
+      type: file
+      description: Full path to small variants input file in MAF format
+      pattern: "*.{maf}"
+  - fasta:
+      type: file
+      description: The reference fasta file
+      pattern: "*.fasta"
+  - fai:
+      type: file
+      description: Index of reference fasta file
+      pattern: "*.fasta.fai"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', patient:'patient_1' ]`
+  - maf:
+      type: file
+      description: Genotyped maf for each bam provided and a merged genotyped maf. The mafs will be labelled with patient identifier or sample identifier as the prefix, and end with the type of bam (duplex, simplex, or standard). The sample identifier is prioritized.
+      pattern: "*.{mafs}"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+authors:
+  - "@buehlere"
+maintainers:
+  - "@buehlere"

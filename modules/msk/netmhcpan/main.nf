@@ -25,14 +25,25 @@ process NETMHCPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
+    def NETMHCPAN_VERSION = "4.1"
 
     """
-    /usr/local/bin/netMHCpan-4.1/netMHCpan -s 0 -BA 1 -f ${inputFasta} -a ${hla} -l 9,10 -inptype 0 -xls -xlsfile ${prefix}.${inputType}.xls > ${prefix}.${inputType}.netmhcpan.output
+    /usr/local/bin/netMHCpan-${NETMHCPAN_VERSION}/netMHCpan \
+    -s 0 \
+    -BA 1 \
+    -f ${inputFasta} \
+    -a ${hla} \
+    -l 9,10 \
+    -inptype 0 \
+    -xls \
+    ${args} \
+    -xlsfile \
+    ${prefix}.${inputType}.xls > ${prefix}.${inputType}.netmhcpan.output
 
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        netmhcpan: v4.1
+        netmhcpan: v${NETMHCPAN_VERSION}
     END_VERSIONS
 
     """
@@ -40,6 +51,7 @@ process NETMHCPAN {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def NETMHCPAN_VERSION = "4.1"
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
@@ -49,7 +61,7 @@ process NETMHCPAN {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        netmhcpan: v4.1
+        netmhcpan: v${NETMHCPAN_VERSION}
     END_VERSIONS
     """
 }

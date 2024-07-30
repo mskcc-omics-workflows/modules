@@ -1,7 +1,7 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "neoantigenediting_aligntoiedb"
-description: Align neoantigens to the IEDB resource
+description: Align neoantigens to the IEDB file
 keywords:
   - neoantigenediting
   - neoantigens

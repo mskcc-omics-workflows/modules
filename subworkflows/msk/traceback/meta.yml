@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "traceback"
+description: Genotype access and/or impact bams by a concatenated list of mafs. If patient ids are provided, access and/or impact bams are genotyped by concatenated mafs with matching patient ids.
+keywords:
+  - maf
+  - bam
+  - traceback
+  - impact
+  - access
+  - genotyping
+components:
+  - genotypevariants/all
+  - pvmaf/concat
+  - pvmaf/tagtraceback
+
+input:
+  - bams:
+      type: channel
+      description: |
+        An input channel containing impact or access bams files:
+        impact: Channel.of([patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], [])
+        access: Channel.of([patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai])
+      pattern: "*.{bam/cram/sam}"
+  - mafs:
+      type: channel
+      description: |
+        An input channel containing maf files
+        Structure: // channel: Channel.of([[patient:null, id:'sample'], [maf1,...,maf2]], [[patient:null, id:'sample'], [maf1,...,maf2] ]])
+      pattern: "*.{maf,txt,tsv}"
+  - fasta:
+      type: file
+      description: |
+        A file containing the reference FASTA file
+        Structure: path(fasta)
+      pattern: "*.{fasta,fa}"
+  - fai:
+      type: file
+      description: |
+        A file containing the index of the reference FASTA file
+        Structure: path(fai)
+      pattern: "*.{fai}"
+output:
+  - genotyped_maf:
+      type: map
+      description: |
+        Groovy Map containing combined genotyped maf for all provided bams.
+        Structure: [ val(meta), path(maf) ]
+      pattern: "*.maf"
+  - individual_genotyped_mafs:
+      type: map
+      description: |
+        Groovy Map containing genotyped mafs for each provided bam.
+        Structure: [ val(meta), [maf,..,maf] ]
+      pattern: "*.maf"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@buehlere"
+maintainers:
+  - "@buehlere"
