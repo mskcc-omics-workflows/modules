@@ -30,11 +30,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-13T12:57:40.919561"
+        "timestamp": "2024-07-30T13:46:27.878268"
     },
     "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv - stub": {
         "content": [
@@ -46,10 +42,7 @@
                             "typeMut": true,
                             "fromStab": false
                         },
-                        [
-                            "test.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "test.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                        ]
+                        "test.MUT.PAN.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -62,10 +55,7 @@
                             "typeMut": true,
                             "fromStab": false
                         },
-                        [
-                            "test.MUT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "test.WT.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
-                        ]
+                        "test.MUT.PAN.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -73,11 +63,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-13T12:58:01.264912"
+        "timestamp": "2024-07-30T13:47:05.72509"
     },
     "neoantigenutils_formatnetmhcpan - output(WT,netmhcpan) - tsv": {
         "content": [
@@ -110,11 +96,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-13T12:57:46.381516"
+        "timestamp": "2024-07-30T13:46:37.183992"
     },
     "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpanstab) - tsv": {
         "content": [
@@ -147,11 +129,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-13T12:57:51.691253"
+        "timestamp": "2024-07-30T13:46:47.110076"
     },
     "neoantigenutils_formatnetmhcpan - output(WT,netmhcpanstab) - tsv": {
         "content": [
@@ -184,10 +162,6 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-13T12:57:56.882818"
+        "timestamp": "2024-07-30T13:46:56.841519"
     }
 }
