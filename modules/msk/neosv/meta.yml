@@ -1,0 +1,63 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neosv"
+description: write your description here
+keywords:
+  - immune
+  - neosv
+  - genomics
+tools:
+  - "neosv":
+      description: " Runs a modified version of NeoSV and outputs two multifastas.  One for mutated and another for wild type neoantigens"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-03005-9"
+      documentation: "https://github.com/ysbioinfo/NeoSV"
+      licence: ["MIT"]
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - inputBedpe:
+      type: file
+      description: Bedpe output by Tempo 
+      pattern: "*.{bedpe}"
+
+  - hlaFile:
+      type: file
+      description: HLA tsv outputtted by Polysolver
+      pattern: "winners.{tsv}"
+
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - mutOut:
+      type: file
+      description: Mutated SV sequences in a multifasta
+      pattern: "*.net.in.txt"
+
+  - wtOut:
+      type: file
+      description: WT sequences in a multifasta
+      pattern: "*.WT.net.in.txt"
+
+authors:
+  - "@johnoooh"
+  - "@nikhil"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"
