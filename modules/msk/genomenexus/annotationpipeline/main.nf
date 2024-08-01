@@ -22,11 +22,11 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    java -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar --filename ${input_maf} --output-filename ${meta.id}_annotated.maf
+    java -Xms${task.memory.toMega()/4}m -Xmx${task.memory.toGiga()}g -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar --filename ${input_maf} --output-filename ${meta.id}_annotated.maf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotation pipeline version 1.0.3'
+        genomenexus: 'annotation pipeline version 1.0.5'
     END_VERSIONS
     """
 
@@ -39,7 +39,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotation pipeline version 1.0.3'
+        genomenexus: 'annotation pipeline version 1.0.5'
     END_VERSIONS
     """
 }
