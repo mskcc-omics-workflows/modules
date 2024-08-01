@@ -1,2 +1,2 @@
-netmhcpan:
-  - "modules/msk/netmhcpan/**"
+neosv:
+  - "modules/msk/neosv/**"
