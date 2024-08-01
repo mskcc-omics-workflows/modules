@@ -9,7 +9,7 @@ nextflow_process {
     tag "neosv"
     tag "modules_msk"
 
-    test("netmhcpan - MUT - xls,output,fa") {
+    test("neosv - fa") {
 
         when {
             process {
@@ -17,7 +17,12 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file(file(params.test_data_mskcc['neoantigen']['svbedpe']), checkIfExists: true),
-                    HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02,
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02"
+                    ]
+
+                input[1] = [
+                    file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
                     ]
                 """
             }
@@ -38,7 +43,7 @@ nextflow_process {
     }
 
 
-    test("netmhcpan - xls,output,fa - stub") {
+    test("neosv - fa - stub") {
 
         options "-stub"
 
@@ -48,9 +53,9 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sequence_fa'),
-                    "HLA",
-                    "MUT"
+                    "HLA"
                     ]
+                input[1] = [file('gtf'), file('cdna')]
                 """
             }
         }
@@ -61,7 +66,7 @@ nextflow_process {
                 { assert snapshot(
                     process.out.versions,
                     process.out.mutOut,
-                    process.out.wtOut,
+                    process.out.wtOut
                     ).match()
                 }
             )

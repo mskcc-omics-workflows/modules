@@ -26,10 +26,10 @@ input:
       description: Bedpe output by Tempo 
       pattern: "*.{bedpe}"
 
-  - hlaFile:
-      type: file
-      description: HLA tsv outputtted by Polysolver
-      pattern: "winners.{tsv}"
+  - hlaString:
+      type: string
+      description: HLA string made by generatehlastring.   It is comma separated
+      
 
 
 output:
