@@ -1,0 +1,62 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_CONVERTANNOTJSON"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_CONVERTANNOTJSON"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/convertannotjson"
+    tag "modules_msk"
+
+    test("neoantigenutils_convertannotjson - output(test) - tsv") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test'], // meta map
+                    file(params.test_data_mskcc['neoantigen']['test_annotated'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match()}
+            )
+        }
+
+    }
+
+    test("neoantigenutils_convertannotjson - output(test) - tsv - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test'], // meta map
+                    file('test_annotated')
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

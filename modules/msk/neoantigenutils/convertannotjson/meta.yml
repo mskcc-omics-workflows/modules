@@ -1,0 +1,47 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neoantigenutils_convertannotjson"
+description: Takes the output of the neoantigen ediitng subworkflow and converts the annotated neoantigens to tsv format.
+keywords:
+  - neoantigen
+  - tsv
+  - peptides
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
+      licence: [""]
+
+input:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information.
+        e.g. `[ id:'sample1']`
+
+  - annotatedJSON:
+      type: file
+      description: Json annotated by the neoantigenediting subworkflow
+      pattern: "*annotated.json"
+
+output:
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1']`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - neoantigenTSV:
+      type: file
+      description: A reformatted file of neoantigens, now in TSV format!
+      pattern: "*.{tsv}"
+
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"
