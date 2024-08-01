@@ -1,0 +1,68 @@
+{
+    "neosv - fa": {
+        "content": [
+            [
+                "versions.yml:md5,1d203387ca616b0fa7b43ad9181a3375"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    [
+                        "test.WT.net.in.txt:md5,3d77da8c6bdee052f90513e2fcb1a7d2",
+                        "test.net.in.txt:md5,a430deb859b1032e1d4b3c2f1382590b"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.WT.net.in.txt:md5,3d77da8c6bdee052f90513e2fcb1a7d2"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-08-01T15:39:03.198012307"
+    },
+    "neosv - fa - stub": {
+        "content": [
+            [
+                "versions.yml:md5,b970b6b530af12cc2f05bba7747125ee"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    [
+                        "test.WT.net.in.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "test.net.in.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.WT.net.in.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.8.4",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-08-01T15:39:11.612310798"
+    }
+}
