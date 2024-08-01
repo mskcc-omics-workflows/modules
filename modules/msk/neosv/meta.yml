@@ -23,13 +23,13 @@ input:
 
   - inputBedpe:
       type: file
-      description: Bedpe output by Tempo 
+      description: Bedpe output by Tempo
       pattern: "*.{bedpe}"
 
   - hlaString:
       type: string
       description: HLA string made by generatehlastring.   It is comma separated
-      
+
   - gtf:
       type: file
       description: Ensemble gtf resource file
