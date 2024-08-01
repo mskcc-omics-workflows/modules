@@ -10,7 +10,7 @@ process NEOSV {
     input:
     tuple val(meta),  path(inputBedpe), val(hlaString)
     tuple path(gtf),  path(cdna)
-    
+
     output:
     tuple val(meta),       path("*.net.in.txt"),               emit: mutOut
     tuple val(meta),       path("*.WT.net.in.txt"),            emit: wtOut
