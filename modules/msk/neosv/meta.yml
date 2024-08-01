@@ -30,7 +30,15 @@ input:
       type: string
       description: HLA string made by generatehlastring.   It is comma separated
       
+  - gtf:
+      type: file
+      description: Ensemble gtf resource file
+      pattern: "*.{gtf.gz}"
 
+  - cdna:
+      type: file
+      description: cDNA resource fasta
+      pattern: "*.{cdna.all.fa.gz}"
 
 output:
   #Only when we have meta
