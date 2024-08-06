@@ -1,13 +1,14 @@
 nextflow_process {
 
-    name "Test Process IGV_SNAPHSHOT"
+    name "Test Process IGV_SNAPSHOT"
     script "../main.nf"
-    process "IGV_SNAPHSHOT"
+    process "IGV_SNAPSHOT"
 
     tag "modules"
     tag "modules_nfcore"
+    tag "modules_msk"
     tag "igv"
-    tag "igv/snaphshot"
+    tag "igv_snapshot"
 
     test("chr22 - bam, vcf") {
 

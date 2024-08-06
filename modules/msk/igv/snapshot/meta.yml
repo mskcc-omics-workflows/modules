@@ -1,6 +1,6 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "igv_snapshot"
+name: "IGV_SNAPSHOT"
 description: a module to run IGV screenshot
 keywords:
   - sort
@@ -12,7 +12,12 @@ tools:
       homepage: "https://igv.org/"
       documentation: "https://igv.org/doc/desktop/#QuickStart/"
       tool_dev_url: "https://github.com/igvteam/igv"
-      licence: ['MIT']
+      licence: ["MIT"]
+  - "igv snapshot":
+      description: "A python package to generate and execute IGV screenshot script."
+      documentation: "https://github.com/msk-access/igv_snapshot/blob/main/README.md"
+      tool_dev_url: "https://github.com/msk-access/igv_snapshot"
+      licence: ["MIT"]
 
 input:
   # Only when we have meta

@@ -1,4 +1,4 @@
-process IGV_SNAPHSHOT {
+process IGV_SNAPSHOT {
     tag "$meta.id"
     label 'process_single'
 
