@@ -1,0 +1,63 @@
+nextflow_process {
+
+    name "Test Process IGV_SNAPHSHOT"
+    script "../main.nf"
+    process "IGV_SNAPHSHOT"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "igv"
+    tag "igv/snaphshot"
+
+    test("chr22 - bam, vcf") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'C-9M47TU-L001-d'], // meta map
+                    file(params.test_data_mskcc['chr22']['chr22bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['chr22']['chr22bam_bai'], checkIfExists: true),
+                    file(params.test_data_mskcc['chr22']['chr22vcf'], checkIfExists: true)
+
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("sarscov2 - bam - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'C-9M47TU-L001-d'], // meta map
+                    file(params.test_data_mskcc['chr22']['chr22bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['chr22']['chr22bam_bai'], checkIfExists: true),
+                    file(params.test_data_mskcc['chr22']['chr22vcf'], checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

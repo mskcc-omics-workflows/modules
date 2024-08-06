@@ -1,0 +1,57 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "igv_snapshot"
+description: a module to run IGV screenshot
+keywords:
+  - sort
+  - example
+  - genomics
+tools:
+  - "igv":
+      description: "Integrative Genomics Viewer. Fast, efficient, scalable visualization tool for genomics data and annotations."
+      homepage: "https://igv.org/"
+      documentation: "https://igv.org/doc/desktop/#QuickStart/"
+      tool_dev_url: "https://github.com/igvteam/igv"
+      licence: ['MIT']
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - bam:
+      type: file
+      description: BAM file with index.
+      pattern: "*.{bam,cram,sam}"
+  - bai:
+      type: file
+      description: BAM file index
+      pattern: "*.{bai}"
+  - variant_file:
+      type: file
+      description: Variant file of input BAM.
+      pattern: "*.{maf,vcf}"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+  - igv_screenshots:
+      type: directory
+      description: directory containing IGV screenshot for provided sample, and the bat script used to generate the screenshots.
+      pattern: "**igv_output/*"
+
+authors:
+  - "@buehlere"
+maintainers:
+  - "@buehlere"
