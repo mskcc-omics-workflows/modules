@@ -8,7 +8,7 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "igv"
-    tag "igv_snapshot"
+    tag "igv/snapshot"
 
     test("chr22 - bam, vcf") {
 
@@ -35,7 +35,7 @@ nextflow_process {
 
     }
 
-    test("sarscov2 - bam - stub") {
+    test("chr22 - bam, vcf - stub") {
 
         options "-stub"
 

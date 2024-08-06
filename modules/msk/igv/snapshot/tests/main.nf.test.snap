@@ -1,5 +1,5 @@
 {
-    "sarscov2 - bam - stub": {
+    "chr22 - bam, vcf - stub": {
         "content": [
             {
                 "0": [
@@ -14,9 +14,9 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,d28e665acecc254b456b2d904fea3021"
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
                 ],
-                "bam": [
+                "igv_screenshots": [
                     [
                         {
                             "id": "C-9M47TU-L001-d"
@@ -28,13 +28,13 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,d28e665acecc254b456b2d904fea3021"
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
                 ]
             }
         ],
-        "timestamp": "2024-08-06T16:13:42.379642"
+        "timestamp": "2024-08-06T17:08:44.477177"
     },
-    "sarscov2 - bam": {
+    "chr22 - bam, vcf": {
         "content": [
             {
                 "0": [
@@ -54,9 +54,9 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,d28e665acecc254b456b2d904fea3021"
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
                 ],
-                "bam": [
+                "igv_screenshots": [
                     [
                         {
                             "id": "C-9M47TU-L001-d"
@@ -73,10 +73,10 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,d28e665acecc254b456b2d904fea3021"
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
                 ]
             }
         ],
-        "timestamp": "2024-08-06T16:09:30.976474"
+        "timestamp": "2024-08-06T17:08:31.32318"
     }
 }
