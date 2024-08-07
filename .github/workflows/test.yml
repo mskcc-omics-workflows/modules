@@ -416,6 +416,8 @@ jobs:
             tags: salmon/quant
           - profile: "conda"
             tags: rediscoverte
+          - profile: "conda"
+            tags: igv/snapshot
 
     env:
       NXF_ANSI_LOG: false
