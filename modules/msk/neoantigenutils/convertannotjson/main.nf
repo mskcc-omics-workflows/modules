@@ -1,4 +1,4 @@
-process NEOANTIGENUTILS_FORMATNETMHCPAN {
+process NEOANTIGENUTILS_CONVERTANNOTJSON {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -6,10 +6,10 @@ process NEOANTIGENUTILS_FORMATNETMHCPAN {
         'docker.io/mskcc/neoantigen-utils-base:1.0.0' }"
 
     input:
-    tuple val(meta),  path(netmhcPanOutput)
+    tuple val(meta),  path(annotatedJSON)
 
     output:
-    tuple val(meta), path("*.tsv"),              emit: netMHCpanreformatted
+    tuple val(meta), path("*.tsv"),              emit: neoantigenTSV
     path "versions.yml",                         emit: versions
 
     when:
@@ -18,31 +18,27 @@ process NEOANTIGENUTILS_FORMATNETMHCPAN {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def netmhcOutputType = meta.typeMut ? "--type_MUT": ""
-    def netmhcOutputFrom = meta.fromStab ? "--from_STAB": ""
     """
-        format_netmhcpan_output.py \
-            --netMHCpan_output ${netmhcPanOutput} \
-            --id ${prefix} \
-            ${netmhcOutputType} \
-            ${netmhcOutputFrom}
+        convertannotjson.py \
+            --json_file ${annotatedJSON} \
+            --output_file ${prefix}_neoantigens.tsv
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            formatNetmhcpanOutput: \$(echo \$(format_netmhcpan_output.py -v))
+            convertannotjson: \$(echo \$(convertannotjson.py -v))
         END_VERSIONS
     """
 
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def netmhcOutputType = meta.typeMut ? "MUT": "WT"
-    def netmhcOutputFrom = meta.fromStab ? "STAB": "PAN"
     """
-        touch ${prefix}.${netmhcOutputType}.${netmhcOutputFrom}.tsv
+
+        touch ${prefix}_neoantigens.tsv
+
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
-            formatNetmhcpanOutput: \$(echo \$(format_netmhcpan_output.py -v))
+            convertannotjson: \$(echo \$(convertannotjson.py -v))
         END_VERSIONS
     """
 }
