@@ -1,0 +1,82 @@
+{
+    "chr22 - bam, vcf - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "C-9M47TU-L001-d"
+                        },
+                        [
+                            "test.bat:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
+                ],
+                "igv_screenshots": [
+                    [
+                        {
+                            "id": "C-9M47TU-L001-d"
+                        },
+                        [
+                            "test.bat:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "test.png:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
+                ]
+            }
+        ],
+        "timestamp": "2024-08-06T17:08:44.477177"
+    },
+    "chr22 - bam, vcf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "C-9M47TU-L001-d"
+                        },
+                        [
+                            "22_22127176_22127176.png:md5,fd9de31a371db4523f8a0982df749a09",
+                            "22_41565827_41565827.png:md5,1904ecf0b28baeee6e14e78543052a17",
+                            "22_41566406_41566406.png:md5,c77c48716ed2272f45b49c7852a74705",
+                            "22_41566413_41566413.png:md5,bfaf4189292aa0495e51c26ea33f64f7",
+                            "22_41566595_41566595.png:md5,2fca6b6e75fd4c533fb512d0cd11941b",
+                            "22_41566657_41566657.png:md5,fd49c1c6439206da9c15595921392d29",
+                            "IGV_snapshots.bat:md5,d2eaf7a013f62e5fe07f8a0ddf459ace"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
+                ],
+                "igv_screenshots": [
+                    [
+                        {
+                            "id": "C-9M47TU-L001-d"
+                        },
+                        [
+                            "22_22127176_22127176.png:md5,fd9de31a371db4523f8a0982df749a09",
+                            "22_41565827_41565827.png:md5,1904ecf0b28baeee6e14e78543052a17",
+                            "22_41566406_41566406.png:md5,c77c48716ed2272f45b49c7852a74705",
+                            "22_41566413_41566413.png:md5,bfaf4189292aa0495e51c26ea33f64f7",
+                            "22_41566595_41566595.png:md5,2fca6b6e75fd4c533fb512d0cd11941b",
+                            "22_41566657_41566657.png:md5,fd49c1c6439206da9c15595921392d29",
+                            "IGV_snapshots.bat:md5,d2eaf7a013f62e5fe07f8a0ddf459ace"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,870a90d9f64f5a5f5ec4cd474d69027c"
+                ]
+            }
+        ],
+        "timestamp": "2024-08-06T17:08:31.32318"
+    }
+}
