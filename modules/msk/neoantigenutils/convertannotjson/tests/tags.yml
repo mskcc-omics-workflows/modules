@@ -1,0 +1,2 @@
+neoantigenutils/convertannotjson:
+  - "modules/msk/neoantigenutils/convertannotjson/**"
