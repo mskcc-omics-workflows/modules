@@ -1,19 +1,19 @@
 {
     "netmhcstabandpan - tsv,xls,fa": {
         "content": [
-            "test_netmHCpanoutput.MUT.tsv:md5,a50e6cc2081a0b40b8b8e961e7144041",
-            "test.MUT_sequences.fa:md5,a75a9376a021f76f0288da94c52b638e",
+            "test_netmHCpanoutput.WT.tsv:md5,a94caad6e12d724d02634c316b863ba5",
+            "test.MUT_sequences.fa:md5,fc9a3f7760bc72beb0e74d1b851e80fd",
             "test.WT_sequences.fa:md5,7595ed6cf0c98500b00c9ad027125b38"
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-09T15:36:37.915714564"
+        "timestamp": "2024-08-21T15:25:46.377500667"
     },
     "netmhcstabandpan - tsv,xls,fa - stub": {
         "content": [
-            "test.MUT.PAN.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
+            "test.WT.PAN.tsv:md5,d41d8cd98f00b204e9800998ecf8427e",
             "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
             "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
         ],
@@ -21,6 +21,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-09T15:36:53.387749645"
+        "timestamp": "2024-08-21T15:25:59.508894582"
     }
 }
