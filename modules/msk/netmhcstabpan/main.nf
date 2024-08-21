@@ -8,7 +8,7 @@ process NETMHCSTABPAN {
         'docker.io/mskcc/netmhctools:1.0.0' }"
 
     input:
-    tuple val(meta), path(inputFasta), val(hlaString), val(inputType)
+    tuple val(meta),  path(inputFasta), path(inputSVFasta), val(hlaString), val(inputType)
 
 
     output:
@@ -30,6 +30,7 @@ process NETMHCSTABPAN {
     def NETMHCSTABPAN_VERSION = "1.0"
 
     """
+    cat ${inputSVFasta} >> ${inputFasta}
 
     /usr/local/bin/netMHCstabpan-${NETMHCSTABPAN_VERSION}/netMHCstabpan \
     -s -1 \

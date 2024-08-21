@@ -21,10 +21,15 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  - inputMaf:
+  - inputFasta:
       type: file
-      description: Maf outputtted by Tempo that was run through phyloWGS
-      pattern: "*.{maf}"
+      description: Multifasta containing Mutated peptides or Wildtype peptides generated from generatemutfasta
+      pattern: "*.{fa}"
+
+  - inputSVFasta:
+      type: file
+      description: Multifasta containing Mutated peptides or Wildtype peptides from NeoSV
+      pattern: "*.{fa}"
 
   - hlaFile:
       type: file
