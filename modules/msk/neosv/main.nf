@@ -22,7 +22,7 @@ process NEOSV {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def NEOSV_VERSION = 1.1
+    def NEOSV_VERSION = $NEOSV_TAG
 
     """
 
