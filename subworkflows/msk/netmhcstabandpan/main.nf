@@ -57,8 +57,6 @@ workflow NETMHCSTABANDPAN {
 
     ch_versions = ch_versions.mix( NEOANTIGENUTILS_FORMATNETMHCPAN.out.versions )
 
-
-
     emit:
 
     tsv        = NEOANTIGENUTILS_FORMATNETMHCPAN.out.netMHCpanreformatted     // channel: [ val(meta), [ tsv ] ]

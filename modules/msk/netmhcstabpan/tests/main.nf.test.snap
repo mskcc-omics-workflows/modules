@@ -1,0 +1,41 @@
+{
+    "netmhcstabpan - MUT - xls,output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,d1b3afd365748a44098c5642fad6c94a"
+            ],
+            "test.MUT.netmhcstabpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:39:26.248016139"
+    },
+    "netmhcstabpan - xls,output,fa - stub": {
+        "content": [
+            [
+                "versions.yml:md5,d1b3afd365748a44098c5642fad6c94a"
+            ],
+            "test.MUT.netmhcstabpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:39:43.371391693"
+    },
+    "netmhcstabpan - WT - xls,output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,d1b3afd365748a44098c5642fad6c94a"
+            ],
+            "test.WT.netmhcstabpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:39:35.411418505"
+    }
+}
