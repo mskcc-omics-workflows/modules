@@ -44,7 +44,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out.tsv[0][1],
+                { assert snapshot(file(workflow.out.tsv[0][1]).name,
                                     workflow.out.mut_fasta[0][1],
                                     workflow.out.wt_fasta[0][1]
                                 ).match()

@@ -1,7 +1,7 @@
 {
     "netmhcstabandpan - tsv,xls,fa": {
         "content": [
-            "test_netmHCpanoutput.WT.tsv:md5,a50e6cc2081a0b40b8b8e961e7144041",
+            "test_netmHCpanoutput.WT.tsv",
             "test.MUT_sequences.fa:md5,fc9a3f7760bc72beb0e74d1b851e80fd",
             "test.WT_sequences.fa:md5,7595ed6cf0c98500b00c9ad027125b38"
         ],
@@ -9,7 +9,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-26T11:11:55.087367676"
+        "timestamp": "2024-08-27T11:42:52.340143573"
     },
     "netmhcstabandpan - tsv,xls,fa - stub": {
         "content": [
@@ -21,6 +21,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-26T11:12:09.88410733"
+        "timestamp": "2024-08-27T11:43:05.369420725"
     }
 }

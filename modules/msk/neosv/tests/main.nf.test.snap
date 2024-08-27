@@ -11,8 +11,8 @@
                         "single_end": false
                     },
                     [
-                        "test.WT.net.in.txt:md5,3d77da8c6bdee052f90513e2fcb1a7d2",
-                        "test.net.in.txt:md5,a430deb859b1032e1d4b3c2f1382590b"
+                        "test.WT.net.in.txt:md5,dc236f5aa955bb6087c8e713d2c8d2f4",
+                        "test.net.in.txt:md5,646a1666817d924b926c0b3bd6f58af3"
                     ]
                 ]
             ],
@@ -22,15 +22,15 @@
                         "id": "test",
                         "single_end": false
                     },
-                    "test.WT.net.in.txt:md5,3d77da8c6bdee052f90513e2fcb1a7d2"
+                    "test.WT.net.in.txt:md5,dc236f5aa955bb6087c8e713d2c8d2f4"
                 ]
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-01T15:39:03.198012307"
+        "timestamp": "2024-08-27T11:59:59.477226567"
     },
     "neosv - fa - stub": {
         "content": [
@@ -60,9 +60,9 @@
             ]
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-01T15:39:11.612310798"
+        "timestamp": "2024-08-27T12:00:07.449738079"
     }
 }

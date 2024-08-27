@@ -16,7 +16,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-21T14:36:41.611278673"
+        "timestamp": "2024-08-27T12:55:39.076573488"
     },
     "netmhcpan - MUT - output,fa": {
         "content": [
@@ -29,7 +29,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-21T14:31:13.275796221"
+        "timestamp": "2024-08-27T12:52:14.285658675"
     },
     "netmhcpan - WT - output,fa": {
         "content": [
@@ -42,6 +42,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-08-21T14:36:30.473536612"
+        "timestamp": "2024-08-27T12:55:31.164087476"
     }
 }
