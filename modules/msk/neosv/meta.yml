@@ -1,7 +1,7 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "neosv"
-description: NEOSV is a program that takes a bedpe and outputs puntitave neoantiegns created from structural variants.  It has been modified so that it outputs fastas for later processing ny netmhcpan. 
+description: NEOSV is a program that takes a bedpe and outputs puntitave neoantiegns created from structural variants.  It has been modified so that it outputs fastas for later processing ny netmhcpan.
 keywords:
   - immune
   - neosv

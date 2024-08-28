@@ -58,7 +58,6 @@ input:
       type: file
       description: bedpe file containing SVs
       pattern: "winners.{tsv}"
-  
 
 output:
   - meta:
