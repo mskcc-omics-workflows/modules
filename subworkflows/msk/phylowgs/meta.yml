@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "phylowgs"
+description: Application for inferring subclonal composition and evolution from whole-genome and exome sequencing data
+keywords:
+  - CNVs
+  - FACETs
+  - mutations
+  - clones
+components:
+  - phylowgs/createinput
+  - phylowgs/parsecnvs
+  - phylowgs/multievolve
+  - phylowgs/writeresults
+input:
+  - ch_input_maf_and_genelevel:
+      type: file
+      description: |
+        The input channel containing the maf and FACETS genelevel files
+        Structure: [ val(meta), path(maf), path(genelevel) ]
+      pattern: "*.{maf/txt}"
+output:
+  - summ:
+      type: file
+      description: Output file for JSON-formatted tree summaries
+      pattern: "*.summ.json.gz"
+  - muts:
+      type: file
+      description: Output file for JSON-formatted list of mutations
+      pattern: "*.muts.json.gz"
+  - mutass:
+      type: file
+      description: Output file for JSON-formatted list of SSMs and CNVs
+      pattern: "*.mutass.zip"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"

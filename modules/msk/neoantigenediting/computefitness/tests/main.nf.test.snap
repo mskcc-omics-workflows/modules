@@ -1,0 +1,45 @@
+{
+    "neoantigenediting_computefitness - json - stub": {
+        "content": [
+            [
+                "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+            ],
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "patient_data_annotated.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+                ],
+                "annotated_output": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "patient_data_annotated.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+                ]
+            }
+        ],
+        "timestamp": "2024-06-19T14:54:10.949451"
+    },
+    "neoantigenediting_computefitness - json": {
+        "content": [
+            [
+                "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+            ],
+            "3_OLTS_primary_tumor_annotated.json"
+        ],
+        "timestamp": "2024-06-19T14:54:04.735114"
+    }
+}

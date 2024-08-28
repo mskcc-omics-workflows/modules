@@ -1,0 +1,74 @@
+nextflow_workflow {
+
+    name "Test Subworkflow PHYLOWGS"
+    script "../main.nf"
+    workflow "PHYLOWGS"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows_msk"
+    tag "subworkflows/phylowgs"
+    tag "phylowgs"
+    tag "phylowgs/parsecnvs"
+    tag "phylowgs/createinput"
+    tag "phylowgs/multievolve"
+    tag "phylowgs/writeresults"
+
+    config "./nextflow.config"
+
+
+    test("phylowgs - gz") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['facets_hisens_cncf_txt'], checkIfExists: true)
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(file(workflow.out.summ[0][1]).name,
+                                    file(workflow.out.muts[0][1]).name,
+                                    file(workflow.out.mutass[0][1]).name).match()
+                }
+            )
+        }
+    }
+
+    test("phylowgs - gz - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('unfilteredmaf'),
+                    file('facets_gene_level_txt')
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(file(workflow.out.summ[0][1]).name,
+                                    file(workflow.out.muts[0][1]).name,
+                                    file(workflow.out.mutass[0][1]).name).match()
+                }
+
+            )
+        }
+    }
+
+
+}

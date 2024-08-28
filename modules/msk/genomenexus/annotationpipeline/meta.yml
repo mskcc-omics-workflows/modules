@@ -1,0 +1,52 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "genomenexus_annotationpipeline"
+
+description: Second module in genome nexus java pipeline to perform annotation of a MAF file type using the genomenexus suite of conversion and annotation tools. Genome Nexus is a comprehensive one-stop resource for fast, automated and high-throughput annotation and interpretation of genetic variants in cancer. Genome Nexus integrates information from a variety of existing resources, including databases that convert DNA changes to protein changes, predict the functional effects of protein mutations, and contain information about mutation frequencies, gene function, variant effects, and clinical actionability.
+keywords:
+  - annotate
+  - vcf
+  - maf
+  - genomenexus
+  - genomics
+tools:
+  - "genomenexus":
+      description: "Second module in genome nexus java pipeline to perform an annotation of MAF file type using the genomenexus suite of conversion and annotation tools. Genome Nexus is a comprehensive one-stop resource for fast, automated and high-throughput annotation and interpretation of genetic variants in cancer. Genome Nexus integrates information from a variety of existing resources, including databases that convert DNA changes to protein changes, predict the functional effects of protein mutations, and contain information about mutation frequencies, gene function, variant effects, and clinical actionability."
+      homepage: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline/"
+      documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test' ]`
+
+  - input_maf:
+      type: file
+      description: input MAF file
+      pattern: "*.{maf}"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'test' ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - maf:
+      type: file
+      description: Output annotated MAF file
+      pattern: "*.{maf}"
+
+authors:
+  - "@rnaidu"
+maintainers:
+  - "@rnaidu"

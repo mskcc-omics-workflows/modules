@@ -21,10 +21,10 @@ nextflow_process {
                     meta = [ id:'test' ] // meta map
                     input[0] = [
                                     meta,
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam'], checkIfExists: true),
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_normal_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true),
                                     [],
                                     []
                                 ]
@@ -69,10 +69,10 @@ nextflow_process {
                     meta = [ id:'test' ] // meta map
                     input[0] = [
                                     meta,
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam'], checkIfExists: true),
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
-                                    file(params.test_data_mskcc['bam_files']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_normal_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_normal_bam_bai'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_tumor_bam'], checkIfExists: true),
+                                    file(params.test_data_mskcc['argos']['test_argos_sample_1_tumor_bam_bai'], checkIfExists: true),
                                     [],
                                     []
                                 ]

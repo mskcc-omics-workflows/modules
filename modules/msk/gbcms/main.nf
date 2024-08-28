@@ -4,15 +4,15 @@ process GBCMS {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'ghcr.io/msk-access/gbcms:1.2.5':
         'ghcr.io/msk-access/gbcms:1.2.5' }"
-    
+
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)
-    path(fasta) 
+    path(fasta)
     path(fastafai)
 
     output:
-     tuple val(meta), path('*.{vcf,maf}') , emit: variant_file
-     tuple val(meta), path("versions.yml")   , emit: versions
+    tuple val(meta), path('*.{vcf,maf}') , emit: variant_file
+    tuple val(meta), path("versions.yml")   , emit: versions
 
     when:
         task.ext.when == null || task.ext.when
@@ -22,14 +22,14 @@ process GBCMS {
     }
     def args = task.ext.args ?: ''
     def sample = meta.sample
-    // determine if input file is a maf of vcf 
+    // determine if input file is a maf of vcf
 
     def input_ext = variant_file.getExtension()
     def variant_input = ''
-    
+
     if(input_ext == 'maf') {
         variant_input = '--maf ' + variant_file
-    } 
+    }
     if(input_ext == 'vcf'){
             variant_input = '--vcf ' + variant_file
     }
@@ -42,9 +42,9 @@ process GBCMS {
     ${variant_input} \\
     --output ${output} \\
     --bam $sample:${bam} $args
-    
+
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}": 
+    "${task.process}":
         GetBaseCountsMultiSample: \$(echo \$(GetBaseCountsMultiSample --help) | grep -oP '[0-9]\\.[0-9]\\.[0-9]')
     END_VERSIONS
     """
@@ -56,7 +56,7 @@ process GBCMS {
 
     touch variant_file.maf
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}": 
+    "${task.process}":
         GetBaseCountsMultiSample:  1.2.5
     END_VERSIONS
     """

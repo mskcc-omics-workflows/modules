@@ -48,7 +48,7 @@ process SNPPILEUP {
     """
     echo "stub test" >> ${prefix}.snp_pileup
     gzip ${prefix}.snp_pileup
-    
+
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')

@@ -1,0 +1,2 @@
+pvmaf/concat:
+  - "modules/msk/pvmaf/concat/**"

@@ -1,0 +1,2 @@
+salmon/index:
+  - "modules/msk/salmon/index/**"
