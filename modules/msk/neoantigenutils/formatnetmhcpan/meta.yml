@@ -38,6 +38,7 @@ output:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
+
   - netMHCpanreformatted:
       type: file
       description: A reformatted file of neoantigens and their binding affinities output by netmhcpan or netmhcstabpan.  This contains the wild type antigens

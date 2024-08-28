@@ -31,10 +31,9 @@ input:
       description: Multifasta containing Mutated peptides or Wildtype peptides from NeoSV
       pattern: "*.{fa}"
 
-  - hlaFile:
-      type: file
-      description: HLA tsv outputtted by Polysolver
-      pattern: "winners.{tsv}"
+  - hlaString:
+      type: string
+      description: HLA string formatted by generatehlastring.  Typically a comma separated string of HLAs.
 
   - inputType:
       type: string
