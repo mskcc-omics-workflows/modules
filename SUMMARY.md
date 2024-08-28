@@ -18,3 +18,4 @@
 * [traceback](subworkflows/traceback.md)
 * [neoantigen_editing](subworkflows/neoantigen_editing.md)
 * [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
+* [genome_nexus](subworkflows/genome_nexus.md)
