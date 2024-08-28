@@ -3,7 +3,7 @@ name: Meta Yaml to MD
 # Controls when the workflow will run
 on:
   push:
-    branches: [main, hotfix/git-commit-race-condition]
+    branches: [main]
   merge_group:
     types: [checks_requested]
     branches: [main]
