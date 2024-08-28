@@ -11,7 +11,7 @@ workflow NETMHCSTABANDPAN {
     ch_maf_and_hla         // channel: [ val(meta), maf, hla ]
     ch_cds_and_cdna        // channel: [ cfs, cdna]
     ch_neosv_out
-    
+
     main:
 
     ch_versions = Channel.empty()
@@ -71,6 +71,7 @@ def createNETMHCInput(wt_fasta, mut_fasta, hla, sv_fastas) {
             .map{
                 new Tuple(it[0],it)
                 }
+
         wt_fasta_channel = wt_fasta
             .map{
                 new Tuple(it[0],it)
@@ -85,7 +86,7 @@ def createNETMHCInput(wt_fasta, mut_fasta, hla, sv_fastas) {
             .map{
                 new Tuple(it[0],it[2])
                 }
-                
+
         hla_channel = hla
             .map{
                 new Tuple(it[0],it[1])

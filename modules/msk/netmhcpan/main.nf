@@ -28,7 +28,6 @@ process NETMHCPAN {
 
     """
     cat ${inputSVFasta} >> ${inputFasta}
-    
     /usr/local/bin/netMHCpan-${NETMHCPAN_VERSION}/netMHCpan \
     -s 0 \
     -BA 1 \
