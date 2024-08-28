@@ -164,5 +164,11 @@ jobs:
         with:
           default_author: github_actions
           message: "add doc for ${{ matrix.tags }}"
+          pull: '--rebase'
+          cwd: "./"
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "add doc for ${{ matrix.tags }}"
           add: '["*/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
