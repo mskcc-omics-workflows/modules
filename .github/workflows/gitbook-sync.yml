@@ -155,7 +155,6 @@ jobs:
           branch: docs
           files: ${{ env.FEATURE_TYPE}}/${{ env.MD_NAME }}.md
       - name: Add to SUMMARY for new features
-        if: ${{ (steps.check_files.outputs.files_exists == 'false') }}
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
           python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
