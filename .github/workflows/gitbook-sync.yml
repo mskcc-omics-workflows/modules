@@ -3,7 +3,7 @@ name: Meta Yaml to MD
 # Controls when the workflow will run
 on:
   push:
-    branches: [main]
+    branches: [main, hotfix/git-commit-race-condition]
   merge_group:
     types: [checks_requested]
     branches: [main]
@@ -164,7 +164,7 @@ jobs:
         with:
           default_author: github_actions
           message: "add doc for ${{ matrix.tags }}"
-          pull: '--rebase'
+          pull: "--rebase"
           cwd: "./"
       - uses: EndBug/add-and-commit@v9
         with:
