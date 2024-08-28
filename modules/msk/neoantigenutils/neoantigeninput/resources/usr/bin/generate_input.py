@@ -118,7 +118,6 @@ def main(args):
 
             else:
                 missense = 0
-            print(row["Variant_Type"])
             if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DNP" or row["Variant_Type"] == "TNP":
                 chrom_pos_dict[
                     str(row["Chromosome"])
@@ -209,15 +208,15 @@ def main(args):
                 )
 
             elif row["Variant_Type"] == "INS":
-                print(
-                    str(row["Chromosome"])
-                    + "_"
-                    + str(row["Start_Position"])
-                    + "_"
-                    + "I"
-                    + "_"
-                    + row["Tumor_Seq_Allele2"]
-                )
+                # print(
+                #     str(row["Chromosome"])
+                #     + "_"
+                #     + str(row["Start_Position"])
+                #     + "_"
+                #     + "I"
+                #     + "_"
+                #     + row["Tumor_Seq_Allele2"]
+                # )
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -341,7 +340,6 @@ def main(args):
         id = ""
         wtsvid=""
         IDsplit = row_WT["Identity"].split('_')
-        # print(IDsplit)
         if len(IDsplit[0]) < 3:
             #it is from neoSV
             IDsplit = row_WT["Identity"].split("_")
@@ -369,7 +367,6 @@ def main(args):
                 }
 
             else:
-                # print(WTdict[noposID]['peptides'])
                 WTdict[noposID]['peptides'][row_WT["peptide"]]=id
 
         else:
@@ -400,11 +397,7 @@ def main(args):
                 }
 
             else:
-                # print(WTdict[noposID]['peptides'])
                 WTdict[noposID]['peptides'][row_WT["peptide"]]=id
-
-        if 'WFI' in noposID:
-            print(noposID)
 
     def find_most_similar_string(target, strings):
         max_score = -1
@@ -444,12 +437,10 @@ def main(args):
         if row_mut["affinity"]< 500:
             peplen = len(row_mut["peptide"])
             matchfound = False
-            # print(row_mut)
             if (IDsplit[1][0] == "S" and IDsplit[1][1] != 'p')  :
                 #If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
                 continue
             if row_mut["Identity"].count("_") == 1:
-                # print(IDsplit)
                 #its an SV
                 SV = True
                 WTid = (IDsplit[0]
@@ -505,7 +496,6 @@ def main(args):
                     #Here we take care of frameshifted peptides
                     frameshift=True
                     best_pepmatch,best_pepmatch2 , first_AA_same, first_AA_same_score, match_score = find_most_similar_string(row_mut["peptide"],list(WTdict[noposID]['peptides'].keys()))
-                    print((best_pepmatch,best_pepmatch2))
                     if best_pepmatch == row_mut["peptide"] or best_pepmatch2== row_mut["peptide"]:
                         #it seems this can happen where the row_mut is actually the canonical sequence.
                         # In this case we don't want to report the peptide as a neoantigen, its not neo
@@ -517,7 +507,6 @@ def main(args):
                         best_pepmatch = best_pepmatch2
 
                     WTid = WTdict[noposID]['peptides'][best_pepmatch]
-                    # print((WTid,'bestpepmatch',best_pepmatch,WTdict[noposID]['peptides']))
                     matchfound=True
 
             if matchfound == True:
@@ -570,7 +559,6 @@ def main(args):
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
     with open(outjson, "w") as tstout:
         json.dump(outer_dict, tstout, indent=1)
-        # tstout.write(json.dumps(outer_dict))
 
 
 def makeID(maf_row):
@@ -771,7 +759,6 @@ def bedpe_load(filepath):
             bedpe = BedpeFormat(chrom1, pos1, strand1, chrom2, pos2, strand2,sv_bedpe_id)
             bedpe_list.append(bedpe)
             bedpedict[custom_id] = bedpe
-            # print(id)
 
     return bedpe_list, bedpedict
 
