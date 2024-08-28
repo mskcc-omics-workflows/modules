@@ -346,12 +346,12 @@ def main(args):
             #it is from neoSV
             IDsplit = row_WT["Identity"].split("_")
             wtsvid = (IDsplit[0]+IDsplit[1][0:7]
-                      +'_'
-                      + str(len(row_WT["peptide"]))
-                      +'_'
-                      + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
-                      +'_'
-                      + str(row_WT["pos"])
+                        +'_'
+                        + str(len(row_WT["peptide"]))
+                        +'_'
+                        + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                        +'_'
+                        + str(row_WT["pos"])
             )
             noposID = (
                 IDsplit[0]+"_"+IDsplit[1][0:7]
@@ -453,14 +453,14 @@ def main(args):
                 #its an SV
                 SV = True
                 WTid = (IDsplit[0]
-                      +IDsplit[1][0:8]
-                      +'_'
-                      + str(len(row_mut["peptide"]))
-                      +'_'
-                      + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-                      +'_'
-                      + str(row_mut["pos"])
-                      )
+                        + IDsplit[1][0:8]
+                        + '_'
+                        + str(len(row_mut["peptide"]))
+                        + '_'
+                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                        + '_'
+                        + str(row_mut["pos"])
+                        )
                 noposID = (
                     IDsplit[0]+"_"+IDsplit[1][0:8]
                     + "_"
