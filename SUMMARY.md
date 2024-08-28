@@ -16,3 +16,4 @@
 ## Subworkflows
 * [bwa_markdup_bqsr](subworkflows/bwa_markdup_bqsr.md)
 * [traceback](subworkflows/traceback.md)
+* [neoantigen_editing](subworkflows/neoantigen_editing.md)
