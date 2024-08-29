@@ -8,10 +8,9 @@ process NETMHCPAN {
         'docker.io/mskcc/netmhctools:1.0.0' }"
 
     input:
-    tuple val(meta),  path(inputFasta), val(hlaString), val(inputType)
+    tuple val(meta),  path(inputFasta), path(inputSVFasta), val(hlaString), val(inputType)
 
     output:
-    tuple val(output_meta),       path("*.xls"),               emit: xls
     tuple val(output_meta),       path("*.netmhcpan.output"),  emit: netmhcpanoutput
     path "versions.yml",                                       emit: versions
 
@@ -28,6 +27,7 @@ process NETMHCPAN {
     def NETMHCPAN_VERSION = "4.1"
 
     """
+    cat ${inputSVFasta} >> ${inputFasta}
     /usr/local/bin/netMHCpan-${NETMHCPAN_VERSION}/netMHCpan \
     -s 0 \
     -BA 1 \
@@ -57,7 +57,6 @@ process NETMHCPAN {
     output_meta.fromStab = false
     """
     touch ${prefix}.MUT.netmhcpan.output
-    touch ${prefix}.MUT.xls
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

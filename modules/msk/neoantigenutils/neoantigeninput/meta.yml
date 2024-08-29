@@ -54,6 +54,11 @@ input:
       description: HLA tsv outputtted by Polysolver
       pattern: "winners.{tsv}"
 
+  - inputBedpe:
+      type: file
+      description: bedpe file containing SVs
+      pattern: "winners.{tsv}"
+
 output:
   - meta:
       type: map
