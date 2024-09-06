@@ -9,7 +9,7 @@
                             "typeMut": true,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.MUT.tsv:md5,7f00f2df190fe801700b626b72dfdb99"
+                        "test_netmHCpanoutput.MUT.tsv:md5,26f40dde35f53f5ced8a251f59dcc77f"
                     ]
                 ],
                 "1": [
@@ -22,7 +22,7 @@
                             "typeMut": true,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.MUT.tsv:md5,7f00f2df190fe801700b626b72dfdb99"
+                        "test_netmHCpanoutput.MUT.tsv:md5,26f40dde35f53f5ced8a251f59dcc77f"
                     ]
                 ],
                 "versions": [
@@ -30,7 +30,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-07-30T13:46:27.878268"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:37:30.153345025"
     },
     "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv - stub": {
         "content": [
@@ -63,7 +67,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-07-30T13:47:05.72509"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:38:06.423945648"
     },
     "neoantigenutils_formatnetmhcpan - output(WT,netmhcpan) - tsv": {
         "content": [
@@ -75,7 +83,7 @@
                             "typeMut": false,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.WT.tsv:md5,a1d7db1b6f116e96457f2fa60660558e"
+                        "test_netmHCpanoutput.WT.tsv:md5,0ef95cf63ee0b8faa8e9d85413e48943"
                     ]
                 ],
                 "1": [
@@ -88,7 +96,7 @@
                             "typeMut": false,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.WT.tsv:md5,a1d7db1b6f116e96457f2fa60660558e"
+                        "test_netmHCpanoutput.WT.tsv:md5,0ef95cf63ee0b8faa8e9d85413e48943"
                     ]
                 ],
                 "versions": [
@@ -96,7 +104,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-07-30T13:46:37.183992"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:37:39.559652073"
     },
     "neoantigenutils_formatnetmhcpan - output(MUT,netmhcpanstab) - tsv": {
         "content": [
@@ -129,7 +141,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-07-30T13:46:47.110076"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:37:48.839508094"
     },
     "neoantigenutils_formatnetmhcpan - output(WT,netmhcpanstab) - tsv": {
         "content": [
@@ -162,6 +178,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-07-30T13:46:56.841519"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-21T15:37:57.894905711"
     }
 }
