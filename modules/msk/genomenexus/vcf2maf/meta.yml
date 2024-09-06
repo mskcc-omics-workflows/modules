@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "genomenexus_vcf2maf"
 
-description: First module in genome nexus java pipeline to perform a native conversion of VCF file type to MAF file type using the genomenexus suite of conversion and annotation tools. Genome Nexus is a comprehensive one-stop resource for fast, automated and high-throughput annotation and interpretation of genetic variants in cancer. Genome Nexus integrates information from a variety of existing resources, including databases that convert DNA changes to protein changes, predict the functional effects of protein mutations, and contain information about mutation frequencies, gene function, variant effects, and clinical actionability.
+description: DSL2 module to perform a native conversion of VCF file type to MAF file type using the genomenexus suite of conversion and annotation tools.
 keywords:
   - convert
   - vcf
@@ -11,7 +11,7 @@ keywords:
   - genomics
 tools:
   - "genomenexus":
-      description: "First module in genome nexus java pipeline to perform a native conversion of VCF file type to MAF file type using the genomenexus suite of conversion and annotation tools. Genome Nexus is a comprehensive one-stop resource for fast, automated and high-throughput annotation and interpretation of genetic variants in cancer. Genome Nexus integrates information from a variety of existing resources, including databases that convert DNA changes to protein changes, predict the functional effects of protein mutations, and contain information about mutation frequencies, gene function, variant effects, and clinical actionability."
+      description: "DSL2 module to perform a native conversion of VCF file type to MAF file type using the genomenexus suite of conversion and annotation tools."
       homepage: "https://github.com/genome-nexus"
       documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
 

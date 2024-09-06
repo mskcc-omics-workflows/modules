@@ -17,7 +17,7 @@ workflow GENOME_NEXUS {
 
 
     emit:
-    maf      = GENOMENEXUS_VCF2MAF.out.maf           // channel: [ val(meta), [ maf ] ]
+    maf      = GENOMENEXUS_ANNOTATIONPIPELINE.out.annotated_maf           // channel: [ val(meta), [ maf ] ]
     versions = ch_versions                     // channel: [ versions.yml ]
 }
 

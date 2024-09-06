@@ -10,19 +10,19 @@ nextflow_workflow {
     tag "subworkflows_nfcore"
     tag "subworkflows/genome_nexus"
     tag "subworkflows_msk"
-    
+
     tag "genomenexus"
     tag "genomenexus/vcf2maf"
     tag "genomenexus/annotationpipeline"
 
 
-    
+
     test("test - vcf - normal") {
 
         when {
             workflow {
                 """
-                
+
                 input[0] = [ [ id:'test' ], // meta map
                         file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true)
                         ]
@@ -33,7 +33,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success}
-                
+
             )
         }
     }
