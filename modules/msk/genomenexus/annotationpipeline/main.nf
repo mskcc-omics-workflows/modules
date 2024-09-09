@@ -26,7 +26,7 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotationpipeline'
+        genomenexus: 'annotationpipeline version 1.0.4'
     END_VERSIONS
     """
 
