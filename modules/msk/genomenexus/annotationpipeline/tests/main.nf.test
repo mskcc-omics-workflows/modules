@@ -12,17 +12,17 @@ nextflow_process {
     tag "genomenexus"
     tag "genomenexus/annotationpipeline"
 
-    
+
     test("test normal ") {
 
 
         when {
             process {
                 """
-                
+
                 input[0] = [
-                    [ id:'test'], // meta map
-                    file(params.test_data_mskcc['genome_nexus']['test_maf'], checkIfExists: true)
+                    [ id:'test',case_id:'sample1',control_id:'sample2'], // meta map
+                    file(params.test_data_mskcc['genome_nexus']['sample2_sample1_annotated_maf'], checkIfExists: true)
                     ]
                 """
             }
@@ -32,13 +32,13 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert snapshot(process.out).match() }
-                
+
             )
         }
 
     }
 
-    
+
     test("test normal - stub") {
 
         options "-stub"
@@ -46,11 +46,11 @@ nextflow_process {
         when {
             process {
                 """
-                
-                
+
+
                 input[0] = [
-                    [ id:'test'], // meta map
-                    file(params.test_data_mskcc['genome_nexus']['test_maf'], checkIfExists: true)
+                    [ id:'test',case_id:'sample1',control_id:'sample2'], // meta map
+                    file(params.test_data_mskcc['genome_nexus']['sample2_sample1_annotated_maf'], checkIfExists: true)
                     ]
                 """
             }
@@ -59,7 +59,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success }
-                
+
             )
         }
 

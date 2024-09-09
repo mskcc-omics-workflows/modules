@@ -10,7 +10,7 @@ process GENOMENEXUS_VCF2MAF {
     tuple val(meta), path(vcf)
 
     output:
-    tuple val(meta), path("vcf2maf_output/${meta.id}.maf"), emit: maf
+    tuple val(meta), path("vcf2maf_output/${meta.control_id}_${meta.case_id}_annotated.maf"), emit: maf
     path "versions.yml"           , emit: versions
 
     when:
@@ -30,8 +30,8 @@ process GENOMENEXUS_VCF2MAF {
     """
 
     mkdir vcf2maf_output
-    touch ${meta.id}.maf
-    cp ${meta.id}.maf vcf2maf_output/
+    touch ${meta.control_id}_${meta.case_id}_annotated.maf
+    cp ${meta.control_id}_${meta.case_id}_annotated.maf vcf2maf_output/
     echo '"${task.process}": vcf2maf_lite.py v.0.0.1' > versions.yml
     """
 }

@@ -5,9 +5,11 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
                         },
-                        "test.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "sample2_sample1_annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -16,9 +18,11 @@
                 "maf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
                         },
-                        "test.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "sample2_sample1_annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -26,6 +30,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-06-24T11:56:07.276674"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-06T15:02:51.827835038"
     }
 }

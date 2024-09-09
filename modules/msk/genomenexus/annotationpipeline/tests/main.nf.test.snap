@@ -5,27 +5,35 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
                         },
-                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                        "sample2_sample1_annotated.maf:md5,1a6973c12313853c23a7d99d84dc3167"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,faa1aee6ca139f0b49241579881c42e2"
+                    "versions.yml:md5,f0b525b535c5b271f5325cef7920e3ec"
                 ],
                 "annotated_maf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
                         },
-                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                        "sample2_sample1_annotated.maf:md5,1a6973c12313853c23a7d99d84dc3167"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,faa1aee6ca139f0b49241579881c42e2"
+                    "versions.yml:md5,f0b525b535c5b271f5325cef7920e3ec"
                 ]
             }
         ],
-        "timestamp": "2024-07-25T11:12:27.03495"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-09T16:13:43.282868154"
     }
 }
