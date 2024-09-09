@@ -13,7 +13,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,d11163e0a6bf41b0a3de47036e5f90e3"
+                    "versions.yml:md5,f0b525b535c5b271f5325cef7920e3ec"
                 ],
                 "annotated_maf": [
                     [
@@ -26,7 +26,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,d11163e0a6bf41b0a3de47036e5f90e3"
+                    "versions.yml:md5,f0b525b535c5b271f5325cef7920e3ec"
                 ]
             }
         ],
@@ -34,6 +34,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-06T15:28:18.523233295"
+        "timestamp": "2024-09-09T16:13:43.282868154"
     }
 }
