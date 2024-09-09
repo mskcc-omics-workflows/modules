@@ -16,17 +16,15 @@
                 },
                 {
                     "enum": ["bioconda"]
-                },
-                {
-                    "enum": ["defaults"]
                 }
             ],
-            "minItems": 3
+            "minItems": 2
         },
         "dependencies": {
             "type": "array",
             "items": {
-                "type": "string"
+                "type": "string",
+                "pattern": "^.[^><]=[^><].$"
             }
         }
     },
