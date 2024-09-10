@@ -10,14 +10,14 @@ nextflow_process {
     tag "modules_msk"
     tag "mutect1"
 
-    
+
     test("normal_tumor") {
 
         when {
             process {
                 """
-                
-                
+
+
                 input[0] = [
                     [case_id: 'tumor',control_id:  'normal'],
                     file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
@@ -54,8 +54,8 @@ nextflow_process {
         when {
             process {
                 """
-                
-                
+
+
                 input[0] = [
                     [case_id: 'tumor',control_id:  'normal'],
                     file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
