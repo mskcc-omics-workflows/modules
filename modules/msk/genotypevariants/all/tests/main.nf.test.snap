@@ -8,7 +8,12 @@
                             "id": "197",
                             "patient": "c-id"
                         },
-                        "197.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        [
+                            "197_1-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197_1-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197_1-SIMPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
                     ]
                 ],
                 "1": [
@@ -20,7 +25,12 @@
                             "id": "197",
                             "patient": "c-id"
                         },
-                        "197.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        [
+                            "197_1-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197_1-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197_1-SIMPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        ]
                     ]
                 ],
                 "versions": [
@@ -28,7 +38,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-06-18T14:18:45.350503"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T11:58:46.097293807"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -69,7 +83,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-06-18T14:18:39.109687"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T11:55:11.015859223"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -106,6 +124,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-07-26T16:18:25.671112"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T11:55:01.704001165"
     }
 }
