@@ -61,11 +61,13 @@ workflow TRACEBACK {
     .set{all_genotype}
     individual_genotype = all_genotype.collect()
 
+
     // concat gentoyped mafs, per patient if provided
     PVMAFCONCAT_GENOTYPE(all_genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
     genotyped_maf = PVMAFCONCAT_GENOTYPE.out.maf
+
 
     emit:
     individual_genotyped_mafs = individual_genotype

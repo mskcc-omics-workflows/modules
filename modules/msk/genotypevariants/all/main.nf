@@ -1,12 +1,12 @@
 process GENOTYPEVARIANTS_ALL {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_medium'
 
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/genotype_variants:0.3.8':
-        'ghcr.io/msk-access/genotype_variants:0.3.8' }"
+        'ghcr.io/msk-access/genotype_variants:0.3.9':
+        'ghcr.io/msk-access/genotype_variants:0.3.9' }"
 
     input:
     // [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
@@ -55,7 +55,10 @@ process GENOTYPEVARIANTS_ALL {
     def patient = "${meta.patient}"
 
     """
-    touch ${prefix}.maf
+    touch ${prefix}-DUPLEX_genotyped.maf
+    touch ${prefix}-ORG-SIMPLEX-DUPLEX_genotyped.maf
+    touch ${prefix}-SIMPLEX-DUPLEX_genotyped.maf
+    touch ${prefix}-SIMPLEX_genotyped.maf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
