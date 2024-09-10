@@ -5,8 +5,8 @@ process GENOTYPEVARIANTS_ALL {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/genotype_variants:0.3.8':
-        'ghcr.io/msk-access/genotype_variants:0.3.8' }"
+        'ghcr.io/msk-access/genotype_variants:0.3.9':
+        'ghcr.io/msk-access/genotype_variants:0.3.9' }"
 
     input:
     // [[patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], []]
