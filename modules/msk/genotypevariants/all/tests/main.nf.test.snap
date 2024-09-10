@@ -42,7 +42,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T13:58:41.77021999"
+        "timestamp": "2024-09-10T14:22:34.70808041"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -83,7 +83,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T13:58:23.532124748"
+        "timestamp": "2024-09-10T14:22:17.675627581"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -128,6 +128,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T13:58:33.357797352"
+        "timestamp": "2024-09-10T14:22:26.794720235"
     }
 }
