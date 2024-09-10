@@ -42,7 +42,48 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T11:58:46.097293807"
+        "timestamp": "2024-09-10T12:26:33.218701111"
+    },
+    "illumina - bam, msk - maf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-ORG-STD_genotyped.maf:md5,e430edb08476cf771fdb608b646ccfb7",
+                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "197",
+                            "patient": "c-id"
+                        },
+                        [
+                            "197-ORG-STD_genotyped.maf:md5,e430edb08476cf771fdb608b646ccfb7",
+                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
+                        ]
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T12:26:15.839290052"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -87,47 +128,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T11:55:11.015859223"
-    },
-    "illumina - bam, msk - maf": {
-        "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "197",
-                            "patient": "c-id"
-                        },
-                        [
-                            "197-ORG-STD_genotyped.maf:md5,e430edb08476cf771fdb608b646ccfb7",
-                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
-                        ]
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
-                ],
-                "maf": [
-                    [
-                        {
-                            "id": "197",
-                            "patient": "c-id"
-                        },
-                        [
-                            "197-ORG-STD_genotyped.maf:md5,e430edb08476cf771fdb608b646ccfb7",
-                            "197-STANDARD_genotyped.maf:md5,6c0649cfd70ceb0587827f48bf93caf7"
-                        ]
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,55fd807cb50fcc6611e6d352b86e4704"
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-09-10T11:55:01.704001165"
+        "timestamp": "2024-09-10T12:26:25.446092565"
     }
 }
