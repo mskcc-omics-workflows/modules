@@ -8,15 +8,15 @@
                             "patient": "patient1"
                         },
                         [
-                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ],
                         {
                             "patient": "patient2"
                         },
                         [
-                            "sample2_2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample2_4-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "sample2_4-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "sample2_2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
                 ],
@@ -59,15 +59,15 @@
                             "patient": "patient1"
                         },
                         [
-                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ],
                         {
                             "patient": "patient2"
                         },
                         [
-                            "sample2_2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample2_4-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "sample2_4-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "sample2_2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
                 ],
@@ -78,6 +78,6 @@
                 ]
             }
         ],
-        "timestamp": "2024-09-10T12:53:40.872894"
+        "timestamp": "2024-09-10T12:59:51.170776"
     }
 }
