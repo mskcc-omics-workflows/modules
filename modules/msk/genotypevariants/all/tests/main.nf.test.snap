@@ -38,11 +38,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-09-10T12:26:33.218701111"
+        "timestamp": "2024-09-10T12:53:57.943611"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -79,11 +75,7 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-09-10T12:26:15.839290052"
+        "timestamp": "2024-09-10T12:53:47.047491"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -124,10 +116,6 @@
                 ]
             }
         ],
-        "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-09-10T12:26:25.446092565"
+        "timestamp": "2024-09-10T12:53:53.477394"
     }
 }
