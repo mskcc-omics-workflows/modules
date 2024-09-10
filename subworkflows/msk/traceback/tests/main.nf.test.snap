@@ -1,87 +1,12 @@
 {
     "standard and access bams - stub": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "patient": "patient2"
-                        },
-                        [
-                            "sample2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                        ],
-                        {
-                            "patient": "patient1"
-                        },
-                        [
-                            "sample1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                        ]
-                    ]
-                ],
-                "1": [
-                    [
-                        {
-                            "patient": "patient1"
-                        },
-                        "patient1_combined.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "patient": "patient2"
-                        },
-                        "patient2_combined.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "2": [
-                    "versions.yml:md5,bb5f5880ef3572733a2349212e8ab549",
-                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
-                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
-                ],
-                "genotyped_maf": [
-                    [
-                        {
-                            "patient": "patient1"
-                        },
-                        "patient1_combined.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ],
-                    [
-                        {
-                            "patient": "patient2"
-                        },
-                        "patient2_combined.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "individual_genotyped_mafs": [
-                    [
-                        {
-                            "patient": "patient2"
-                        },
-                        [
-                            "sample2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample2-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                        ],
-                        {
-                            "patient": "patient1"
-                        },
-                        [
-                            "sample1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
-                        ]
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,bb5f5880ef3572733a2349212e8ab549",
-                    "versions.yml:md5,eccf6469bf87401135602b460cb4ec6c",
-                    "versions.yml:md5,f31415b0aae41057f59e929b99af930f"
-                ]
-            }
+            
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T18:38:28.13221369"
+        "timestamp": "2024-09-10T18:59:54.138840673"
     }
 }
