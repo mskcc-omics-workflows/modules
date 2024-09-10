@@ -9,10 +9,10 @@
                             "patient": "c-id"
                         },
                         [
-                            "197_1-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "197_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "197_1-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "197_1-SIMPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "197-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197-SIMPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
                 ],
@@ -26,10 +26,10 @@
                             "patient": "c-id"
                         },
                         [
-                            "197_1-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "197_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "197_1-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "197_1-SIMPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "197-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "197-SIMPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ]
                     ]
                 ],
@@ -42,7 +42,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T14:22:34.70808041"
+        "timestamp": "2024-09-10T18:33:45.583973403"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -83,7 +83,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T14:22:17.675627581"
+        "timestamp": "2024-09-10T18:33:27.603672746"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -128,6 +128,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2024-09-10T14:22:26.794720235"
+        "timestamp": "2024-09-10T18:33:37.478400329"
     }
 }

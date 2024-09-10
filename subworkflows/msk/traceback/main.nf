@@ -53,6 +53,8 @@ workflow TRACEBACK {
         }
     .set{split_genotype_xs}
 
+    
+
     // Combine impact and access mafs
     split_genotype_imp
     .concat(split_genotype_xs.genotyped)
