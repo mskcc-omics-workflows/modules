@@ -8,8 +8,8 @@
                             "patient": "patient1"
                         },
                         [
-                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ],
                         {
                             "patient": "patient2"
@@ -59,8 +59,8 @@
                             "patient": "patient1"
                         },
                         [
-                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
-                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                            "sample1_1-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e",
+                            "sample1_3-ORG-SIMPLEX-DUPLEX_genotyped.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
                         ],
                         {
                             "patient": "patient2"
@@ -78,6 +78,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-09-10T12:59:51.170776"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T13:42:06.684852907"
     }
 }

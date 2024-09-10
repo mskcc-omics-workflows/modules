@@ -38,7 +38,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-09-10T12:53:57.943611"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T13:40:24.949125557"
     },
     "illumina - bam, msk - maf": {
         "content": [
@@ -75,7 +79,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-09-10T12:53:47.047491"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T13:40:08.654746873"
     },
     "illumina - duplex and simplex, msk - maf": {
         "content": [
@@ -116,6 +124,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-09-10T12:53:53.477394"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T13:40:17.507186157"
     }
 }
