@@ -1,5 +1,4 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "phylowgs_multievolve"
 description: Create trees from input from phylowgs_createinput
 keywords:
