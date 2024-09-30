@@ -1,9 +1,7 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mskcc-omics-workflows/modules/refs/heads/main/modules/environment-schema.json
-name: "phylowgs_multievolve"
 channels:
   - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - "PHYLOWGS"
+  - "PHYLOWGS=NA"
