@@ -33,7 +33,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - trees:
+      - chains/trees.zip:
           type: file
           description: Zip file containing the completed trees
           pattern: "trees.zip"
