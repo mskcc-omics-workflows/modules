@@ -1,4 +1,5 @@
 ---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mskcc-omics-workflows/modules/refs/heads/main/modules/meta-schema.json
 name: "phylowgs_multievolve"
 description: Create trees from input from phylowgs_createinput
 keywords:
@@ -20,11 +21,11 @@ input:
   - cnv_data:
       type: file
       description: copy number input data from phylowgs_createinput
-      pattern: "*.txt"
+      pattern: "*.{txt}"
   - ssm_data:
       type: file
       description: mutation input data from phylowgs_createinput
-      pattern: "*.txt"
+      pattern: "*.{txt}"
 
 output:
   - meta:
