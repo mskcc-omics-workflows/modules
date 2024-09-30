@@ -1,5 +1,4 @@
 ---
-name: "phylowgs_multievolve"
 channels:
   - conda-forge
   - bioconda

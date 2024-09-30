@@ -20,11 +20,11 @@ input:
   - cnv_data:
       type: file
       description: copy number input data from phylowgs_createinput
-      pattern: "*.{txt}"
+      pattern: "*.txt"
   - ssm_data:
       type: file
       description: mutation input data from phylowgs_createinput
-      pattern: "*.{txt}"
+      pattern: "*.txt"
 
 output:
   - meta:
