@@ -1,14 +1,15 @@
 process PVMAF_TAGTRACEBACK {
     tag "$meta.id"
     label 'process_single'
+
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/postprocessing_variant_calls:type_traceback_0.0.7':
-        'ghcr.io/msk-access/postprocessing_variant_calls:type_traceback_0.0.7' }"
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.6':
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.6' }"
 
     input:
-    tuple val(meta), path(maf) // [ id:'sample1', patient:'patient1' ], *.maf
-    path(sample_sheets) // [samplesheet_1, ..., samplesheet_n]
+    tuple val(meta), path(maf)
+    path(sample_sheets)
 
     output:
     tuple val(meta), path("*.maf"), emit: maf
