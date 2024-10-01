@@ -2,46 +2,46 @@
 name: "pvmaf_concat"
 description: a flexible command for concatenating maf files
 keywords:
-- sort
-- example
-- genomics
+  - sort
+  - example
+  - genomics
 tools:
-- "pvmaf":
-    description: "provides a variety of commands for manipulating mafs."
-    homepage: "https://github.com/msk-access/postprocessing_variant_calls"
-    documentation: "https://cmo-ci.gitbook.io/postprocessing_variant_calls/"
-    licence: ["MIT"]
-    identifier: ''
+  - "pvmaf":
+      description: "provides a variety of commands for manipulating mafs."
+      homepage: "https://github.com/msk-access/postprocessing_variant_calls"
+      documentation: "https://cmo-ci.gitbook.io/postprocessing_variant_calls/"
+      licence: ["MIT"]
+      identifier: ""
 
 input:
   # Only when we have meta
-- - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', patient:'patient1' ]`
-  - maf_files:
-      type: file
-      description: list of maf files to concatenate
-      pattern: "*.{maf}"
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', patient:'patient1' ]`
+    - maf_files:
+        type: file
+        description: list of maf files to concatenate
+        pattern: "*.{maf}"
 output:
   #Only when we have meta
-- maf:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', patient:'patient1' ]`
-  - '*.maf':
-      type: file
-      description: concatenated maf file
-      pattern: "*.{maf}"
-- versions:
-  - versions.yml:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
+  - maf:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', patient:'patient1' ]`
+      - "*.maf":
+          type: file
+          description: concatenated maf file
+          pattern: "*.{maf}"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
-- "@buehlere"
+  - "@buehlere"
 maintainers:
-- "@buehlere"
+  - "@buehlere"
