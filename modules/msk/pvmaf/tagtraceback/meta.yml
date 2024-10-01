@@ -25,13 +25,9 @@ input:
       type: file
       description: Maf file with columns required for selected tagging type.
       pattern: "*.{maf}"
-
-  - path(sample_sheets):
-      type: file
-      description: |
-        Samplesheet with `sample_id` and `type` columns.
-        Used to add fillout type information to provided maf.
-        See Nucleovar for more info: https://github.com/mskcc-omics-workflows/nucleovar/blob/main/README.md.
+  - type:
+      type: string
+      description: The type of tagging to be performed.
 
 output:
   #Only when we have meta
@@ -46,7 +42,7 @@ output:
       pattern: "versions.yml"
   - maf:
       type: file
-      description: tagged traceback maf.
+      description: tagged maf file.
       pattern: "*.{maf}"
 
 authors:
