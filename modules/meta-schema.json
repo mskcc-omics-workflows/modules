@@ -145,7 +145,16 @@
                         "type": {
                             "type": "string",
                             "description": "Type of the channel element",
-                            "enum": ["map", "file", "directory", "string", "integer", "float", "boolean", "list"]
+                            "enum": [
+                                "map",
+                                "file",
+                                "directory",
+                                "string",
+                                "integer",
+                                "float",
+                                "boolean",
+                                "list"
+                            ]
                         },
                         "description": {
                             "type": "string",
@@ -159,7 +168,13 @@
                             "type": "array",
                             "description": "List of allowed values for the channel",
                             "items": {
-                                "type": ["string", "number", "boolean", "array", "object"]
+                                "type": [
+                                    "string",
+                                    "number",
+                                    "boolean",
+                                    "array",
+                                    "object"
+                                ]
                             },
                             "uniqueItems": true
                         },
@@ -183,5 +198,12 @@
             }
         }
     },
-    "required": ["name", "description", "keywords", "authors", "output", "tools"]
+    "required": [
+        "name",
+        "description",
+        "keywords",
+        "authors",
+        "output",
+        "tools"
+    ]
 }
