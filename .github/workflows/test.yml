@@ -182,8 +182,8 @@ jobs:
           python-version: "3.10"
       - name: Download convertor from yml to md
         run: |
-          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/yaml_to_md.py
-          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/requirements.txt
+          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/yaml_to_md.py
+          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/requirements.txt
       - name: Give convertor permissions
         run: chmod +x yaml_to_md.py
       - name: Install python packages
@@ -227,7 +227,7 @@ jobs:
         run: |
           echo ${{ matrix.tags }}
           echo ${{ env.FEATURE_TYPE }}
-          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json
+          python ${{ github.workspace }}/yaml_to_md.py validate --yaml-file ${{ github.workspace }}/temp.yml --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json
 
   pytest:
     runs-on: ubuntu-latest
