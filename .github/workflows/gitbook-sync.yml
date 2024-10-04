@@ -147,7 +147,7 @@ jobs:
       - name: Run convertor to generate md file for new module
         run: |
           echo ${{ matrix.tags }}
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.1/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
       - name: Check file existence for modules
         id: check_files
         uses: andstor/file-existence-action@v1
