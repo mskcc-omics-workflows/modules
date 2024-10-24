@@ -2,7 +2,7 @@
 
 ### Pipeline Development
 
-When developing a pipeline for the MSKCC community, we recommend hosting the pipeline repository in MSKCC github spaces. Please consider [https://github.com/mskcc/,](https://github.com/mskcc/,) [https://github.com/mskcc-omics-workflows/](https://github.com/mskcc-omics-workflows/) or [https://github.mskcc.org/ ](https://github.mskcc.org/)for hosting your code. Existing nf-core documentation is catered towards users who are developing pipelines for the broader nf-core user community, and below is our adaptation for the MSKCC community.
+When developing a pipeline for the MSKCC community, we recommend hosting the pipeline repository in MSKCC github spaces. Please consider the [MSKCC Omics Workflows ](https://github.com/mskcc-omics-workflows/)organization for hosting your pipeline. Existing nf-core documentation is catered towards users who are developing pipelines for the broader nf-core user community, and below are the adaptation for the MSKCC community.
 
 #### Creating a pipeline
 
@@ -11,14 +11,14 @@ To create a pipeline from scratch that follows nf-core standards, start by [crea
 ```
 nf-core create mypipeline
 ## follow prompts 
-cd nf-core-mypipeline
+cd msk/mypipeline
 git remote add origin https://github.com/mskcc-omics-workflows/mypipeline.git
 git push --all origin
 ```
 
 > _**For mskcc-omics-workflows users:**_
 >
-> The pipeline will be generated with the `nf-core` prefix. There is currently no option to change how the template is generated to use a different prefix, but content can be edited manually.
+> The pipeline will be generated with prefix. We suggest using the msk prefix when following the prompts
 
 Three branches will populate automatically in your git repository:
 
@@ -48,38 +48,35 @@ nf-core modules \
 
 To see the list of available modules from msk, use the following command:
 
+{% code overflow="wrap" %}
 ```
-nf-core modules \
-  --git-remote git@github.com:mskcc-omics-workflows/modules.git \
-  list \
-  remote
+nf-core modules --git-remote git@github.com:mskcc-omics-workflows/modules.git -b main list remote
 ```
+{% endcode %}
 
 To see the list of available subworkflows, replace `modules` in the above commands with `subworkflows`.
 
 To install the `gbcms` module that is available from msk, use the following command:
 
+{% code overflow="wrap" %}
 ```
-nf-core modules \
-  --git-remote git@github.com:mskcc-omics-workflows/modules.git \
-  install \
-  gbcms
+nf-core modules --git-remote git@github.com:mskcc-omics-workflows/modules.git -b main install gbcms
 ```
+{% endcode %}
 
 The folder `modules/msk/gbcms` will appear in your local repository and the file `modules.json` will be modified to reflect the change to your local modules, which can be committed and added to your git development branch. To update the module, use the following command:
 
+{% code overflow="wrap" %}
 ```
-nf-core modules \
-  --git-remote git@github.com:mskcc-omics-workflows/modules.git \
-  update \
-  gbcms
+nf-core modules --git-remote git@github.com:mskcc-omics-workflows/modules.git -b main update gbcms
 ```
+{% endcode %}
 
-If a component is not in the nf-core or msk modules repositories, consider one of the following three options:
+If a component is not in the nf-core or msk modules repositories, consider one of the following options:
 
-1. Create local components using `nf-core modules create` or `nf-core subworkflows create` commands. In a pipeline repository, this will create files under the `modules/local/` or `subworkflows/local/` folders, respectively.
-2. Contribute a module or subworkflow to the mskcc-omics-workflows/modules repository by following the Contributing guidelines, then installing the component into your pipeline
-3. Contribute a module or subworkflow to the mskcc-omics-workflows/modules repository by following nf-core's contributing guidelines, then installing the component into your pipeline.
+1. Create the module as local component using `nf-core modules create`
+2. Contribute the component to mskcc-omics-workflows/modules repository by following the [Contributing](contributing.md) and then installing.
+3. Contribute the component to the nf-core/modules repository by following [nf-core's guidelines](https://nf-co.re/docs/usage/getting\_started/introduction) and then installing.&#x20;
 
 > _**For mskcc-omics-workflows users:**_&#x20;
 >
