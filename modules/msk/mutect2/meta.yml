@@ -68,7 +68,7 @@ output:
 
       - "*.vcf":
           type: file
-          description: Output VCF Variant Caller File 
+          description: Output VCF Variant Caller File
           pattern: "*.{vcf}"
           ontologies:
 
