@@ -417,7 +417,7 @@ jobs:
           - profile: "conda"
             tags: rediscoverte
           - profile: "conda"
-            tags: neosv
+            tags: igv/snapshot
 
     env:
       NXF_ANSI_LOG: false

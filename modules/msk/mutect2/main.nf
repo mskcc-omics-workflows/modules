@@ -6,8 +6,8 @@ process MUTECT2 {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/broadinstitute/gatk:79faa25a14645d585ed3fcfab63fac4e8bbb15d2':
-        'ghcr.io/broadinstitute/gatk:79faa25a14645d585ed3fcfab63fac4e8bbb15d2' }"
+        'https://depot.galaxyproject.org/singularity/gatk4:4.5.0.0--py36hdfd78af_0':
+        'biocontainers/gatk4:4.5.0.0--py36hdfd78af_0' }"
 
     input:
     tuple val(meta), path(case_bam), path(control_bam), path(case_bai), path(control_bai)
@@ -30,7 +30,7 @@ process MUTECT2 {
     """
     gatk "Mutect2" \\
     -R ${fasta_file} \\
-    -I ${tumor_bam} \\
+    -I ${case_bam} \\
     -I ${control_bam} \\
     -tumor ${case_sample_name} \\
     -normal ${control_sample_name} \\

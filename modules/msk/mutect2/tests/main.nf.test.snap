@@ -1,0 +1,64 @@
+{
+    "mutect2 - vcf - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.mutect2.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mutect2_vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.mutect2.vcf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-10-29T13:29:18.808923827"
+    },
+    "mutect2 - test - vcf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.mutect2.vcf:md5,657ba36c270271c7946dfbe46ddadb16"
+                    ]
+                ],
+                "mutect2_vcf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "tumor",
+                            "control_id": "normal"
+                        },
+                        "test.mutect2.vcf:md5,657ba36c270271c7946dfbe46ddadb16"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-10-29T13:47:42.404427021"
+    }
+}

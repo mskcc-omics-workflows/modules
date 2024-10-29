@@ -1,0 +1,2 @@
+mutect2:
+  - "modules/msk/mutect2/**"
