@@ -2,7 +2,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "mutect2"
 
-description: This module wraps GATK MuTect2 software, which generates VCF files and standard output from case-control sample BAM files, BED file coordinates, and a reference fasta.
+description: This module wraps GATK 4.5.0 MuTect2 software, which generates VCF files and standard output from case-control sample BAM files, BED file coordinates, and a reference fasta.
 keywords:
   - vcf
   - case-control
