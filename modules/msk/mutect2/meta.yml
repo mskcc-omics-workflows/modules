@@ -54,7 +54,7 @@ input:
       pattern: "*.{dict}"
 
   - fasta_index_file:
-      type: file
+      type: array
       description: Input reference fasta index file
       pattern: "*.{fasta.fai}"
 
