@@ -2,8 +2,6 @@ process MUTECT2 {
     tag "$meta.id"
     label 'process_high'
 
-
-
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'https://depot.galaxyproject.org/singularity/gatk4:4.5.0.0--py36hdfd78af_0':
