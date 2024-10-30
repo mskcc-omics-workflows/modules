@@ -1,68 +1,71 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "mutect2"
 
-description: This module wraps GATK 4.5.0 MuTect2 software, which generates VCF files
+description:
+  This module wraps GATK 4.5.0 MuTect2 software, which generates VCF files
   and standard output from case-control sample BAM files, BED file coordinates, and
   a reference fasta.
 keywords:
-- vcf
-- case-control
-- bams
+  - vcf
+  - case-control
+  - bams
 tools:
-- "mutect2":
-    description: "Generates MuTect2 VCF file and standard output for case-control
-      sample BAM files."
-    homepage: "https://gatk.broadinstitute.org/hc/en-us/articles/360037593851-Mutect2"
+  - "mutect2":
+      description:
+        "Generates MuTect2 VCF file and standard output for case-control
+        sample BAM files."
+      homepage: "https://gatk.broadinstitute.org/hc/en-us/articles/360037593851-Mutect2"
 
-    identifier: ""
+      identifier: ""
 input:
   # Only when we have meta
-- - meta:
-      type: map
-      description: Groovy Map containing sample information e.g. `[ tumor_id:'tumor_sample',
-        normal_id:'normal_sample' ]`
-  - case_bam:
-      type: file
-      description: Case sample BAM file
-      pattern: "*.{bam}"
-  - control_bam:
-      type: file
-      description: Control sample BAM file
-      pattern: "*.{bam}"
-  - case_bai:
-      type: file
-      description: Case sample BAM index file
-      pattern: "*.{bai}"
-  - control_bai:
-      type: file
-      description: Control sample BAM index file
-      pattern: "*.{bai}"
-- - bed_file:
-      type: file
-      description: Input BED file
-      pattern: "*.{bed}"
-  - fasta_file:
-      type: file
-      description: Input reference fasta file
-      pattern: "*.{fasta}"
-  - fasta_index_file:
-      type: list
-      description: Input reference fasta index file
-      pattern: "*.{fasta.fai}"
-  - fasta_dict_file:
-      type: file
-      description: Input reference fasta dictionary file
-      pattern: "*.{dict}"
+  - - meta:
+        type: map
+        description:
+          Groovy Map containing sample information e.g. `[ tumor_id:'tumor_sample',
+          normal_id:'normal_sample' ]`
+    - case_bam:
+        type: file
+        description: Case sample BAM file
+        pattern: "*.{bam}"
+    - control_bam:
+        type: file
+        description: Control sample BAM file
+        pattern: "*.{bam}"
+    - case_bai:
+        type: file
+        description: Case sample BAM index file
+        pattern: "*.{bai}"
+    - control_bai:
+        type: file
+        description: Control sample BAM index file
+        pattern: "*.{bai}"
+  - - bed_file:
+        type: file
+        description: Input BED file
+        pattern: "*.{bed}"
+    - fasta_file:
+        type: file
+        description: Input reference fasta file
+        pattern: "*.{fasta}"
+    - fasta_index_file:
+        type: list
+        description: Input reference fasta index file
+        pattern: "*.{fasta.fai}"
+    - fasta_dict_file:
+        type: file
+        description: Input reference fasta dictionary file
+        pattern: "*.{dict}"
 output:
   #Only when we have meta
-- mutect2_vcf:
-  - meta:
-      type: map
-      description: Output meta map
-  - "*.mutect2.vcf":
-      type: file
-      description: Output MuTect2 generated VCF file
+  - mutect2_vcf:
+      - meta:
+          type: map
+          description: Output meta map
+      - "*.mutect2.vcf":
+          type: file
+          description: Output MuTect2 generated VCF file
 authors:
-- "@rnaidu"
+  - "@rnaidu"
 maintainers:
-- "@rnaidu"
+  - "@rnaidu"
