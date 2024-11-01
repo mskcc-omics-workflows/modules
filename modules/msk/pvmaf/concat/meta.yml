@@ -21,7 +21,7 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', patient:'patient1' ]`
   - maf_files:
-      type: file
+      type: tuple
       description: list of maf files to concatenate
       pattern: "*.{maf}"
 
