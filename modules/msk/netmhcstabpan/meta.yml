@@ -1,7 +1,8 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "netmhcstabpan"
-description: Runs netMHCpan and netMHCstabpan and outputs STDout for mutated and wild type neoantigens"
+description:
+  Runs netMHCpan and netMHCstabpan and outputs STDout for mutated and wild
+  type neoantigens"
 keywords:
   - immune
   - netmhcstabpan
@@ -9,60 +10,71 @@ keywords:
   - genomics
 tools:
   - "netmhcstabpan":
-      description: " Runs netMHCstabpan and netMHCpan then outputs tsvs and STDout for mutated and wild type neoantigens"
+      description:
+        " Runs netMHCstabpan and netMHCpan then outputs tsvs and STDout for
+        mutated and wild type neoantigens"
       homepage: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
       licence: ["MIT"]
+      identifier: ""
 
   - "netmhcpan":
-      description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
+      description:
+        " Runs netMHCpan and outputs tsvs and STDout for mutated and wild
+        type neoantigens"
       homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       licence: ["MIT"]
+      identifier: ""
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - inputFasta:
-      type: file
-      description: Multifasta containing Mutated peptides or Wildtype peptides generated from generatemutfasta
-      pattern: "*.{fa}"
-
-  - inputSVFasta:
-      type: file
-      description: Multifasta containing Mutated peptides or Wildtype peptides from NeoSV
-      pattern: "*.{fa}"
-
-  - hlaString:
-      type: string
-      description: HLA in string format. e.g. HLA-A24:02
-
-  - inputType:
-      type: string
-      description: Allows netmhcstabpan to run in parallel. Should be 'MUT' or 'WT', it will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as an input. Running them in series is kicked off by putting in anything other than MUT or WT.
-      pattern: "*"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - inputFasta:
+        type: file
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides generated
+          from generatemutfasta
+        pattern: "*.{fa}"
+    - inputSVFasta:
+        type: file
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides from
+          NeoSV
+        pattern: "*.{fa}"
+    - hlaString:
+        type: string
+        description: HLA in string format. e.g. HLA-A24:02
+    - inputType:
+        type: string
+        description:
+          Allows netmhcstabpan to run in parallel. Should be 'MUT' or 'WT',
+          it will kick off two jobs. make a Channel.Of('MUT','WT') outside the module
+          as an input. Running them in series is kicked off by putting in anything other
+          than MUT or WT.
+        pattern: "*"
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
   - netmhcstabpanoutput:
-      type: file
-      description: STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated file of neoantigens. Neoantigenutils contains a parser for this file
-      pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
-
+      - output_meta:
+          type: file
+          description:
+            STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated
+            file of neoantigens. Neoantigenutils contains a parser for this file
+          pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
+      - "*.netmhcstabpan.output":
+          type: file
+          description:
+            STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated
+            file of neoantigens. Neoantigenutils contains a parser for this file
+          pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@johnoooh"
   - "@nikhil"
