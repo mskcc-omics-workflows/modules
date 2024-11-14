@@ -1,14 +1,14 @@
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "netmhcpan"
-description: write your description here
+name: "netmhcpan4"
+description: Predicts binding of neoantigen peptides
 keywords:
   - immune
   - netmhcpan
   - genomics
 tools:
   - "netmhcpan":
-      description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
+      description: "Runs netMHCpan and outputs tsvs and STDout for mutated and wild type neoantigens"
       homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
       licence: ["MIT"]
@@ -51,12 +51,12 @@ output:
 
   - xls:
       type: file
-      description: TSV/XLS file of netMHCpan.  A poorly formated file of neoantigens.  This contains the MUT or WT antigens
+      description: TSV/XLS file of netMHCpan. A poorly formated file of neoantigens. This contains the MUT or WT antigens
       pattern: "*.xls"
 
   - netmhcpanoutput:
       type: file
-      description: STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This contains either the MUT or WT neoantigens. Neoantigenutils contains a parser for this file.
+      description: STDOUT file of netMHCpan. A poorly formated file of neoantigens. This contains either the MUT or WT neoantigens. Neoantigenutils contains a parser for this file.
       pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
 
 authors:

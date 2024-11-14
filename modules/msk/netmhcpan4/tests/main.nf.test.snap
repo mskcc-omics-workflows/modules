@@ -1,5 +1,5 @@
 {
-    "netmhcpan - WT - xls,output,fa": {
+    "netmhcpan4 - WT - xls,output,fa": {
         "content": [
             [
                 "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
@@ -19,7 +19,7 @@
         },
         "timestamp": "2024-06-13T11:02:31.338253"
     },
-    "netmhcpan - xls,output,fa - stub": {
+    "netmhcpan4 - xls,output,fa - stub": {
         "content": [
             [
                 "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
@@ -39,7 +39,7 @@
         },
         "timestamp": "2024-06-13T11:02:35.582061"
     },
-    "netmhcpan - MUT - xls,output,fa": {
+    "netmhcpan4 - MUT - xls,output,fa": {
         "content": [
             [
                 "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
