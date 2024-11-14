@@ -1,0 +1,39 @@
+{
+    "vcf2maf - test - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
+                        },
+                        "sample2_sample1_annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,c60e8688d2d8110c4621c279a710a890"
+                ],
+                "maf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
+                        },
+                        "sample2_sample1_annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,c60e8688d2d8110c4621c279a710a890"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-06T15:02:51.827835038"
+    }
+}

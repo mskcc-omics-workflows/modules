@@ -1,0 +1,12 @@
+{
+    "standard and access bams - stub": {
+        "content": [
+            
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-09-10T18:59:54.138840673"
+    }
+}

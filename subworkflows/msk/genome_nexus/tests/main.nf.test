@@ -1,0 +1,42 @@
+
+// nf-core subworkflows test genome_nexus
+nextflow_workflow {
+
+    name "Test Subworkflow GENOME_NEXUS"
+    script "../main.nf"
+    workflow "GENOME_NEXUS"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows/genome_nexus"
+    tag "subworkflows_msk"
+
+    tag "genomenexus"
+    tag "genomenexus/vcf2maf"
+    tag "genomenexus/annotationpipeline"
+
+
+
+    test("test - vcf - normal") {
+
+        when {
+            workflow {
+                """
+
+                input[0] = [ [ id:'test',case_id:'sample1',control_id:'sample2'], // meta map
+                        file(params.test_data_mskcc['genome_nexus']['sample2_sample1_annotated_vcf'], checkIfExists: true)
+                        ]
+                """
+            }
+        }
+
+    
+
+        then {
+            assertAll(
+                { assert workflow.success}
+
+            )
+        }
+    }
+}

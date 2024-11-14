@@ -4,11 +4,11 @@ def update_summary(origin: str, new_feature: str, feature_type: str):
     out_summary = ""
     with open(origin, 'r') as f:
         for line in f.readlines():
-        if feature_type == "module" and line.startswith("## Subworkflows"):
-            out_summary += new_feature + '\n\n'
-        if line.strip():
-            out_summary += line
-    if feature_type == "subworkflow":
+            if feature_type == "module" and line.startswith("## Subworkflows") and new_feature not in out_summary:
+                out_summary += new_feature + '\n\n'
+            if line.strip():
+                out_summary += line
+    if feature_type == "subworkflow" and new_feature not in out_summary:
         out_summary += new_feature
     return out_summary
 

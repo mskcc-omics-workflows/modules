@@ -7,15 +7,40 @@
             {
                 "id": "test",
                 "single_end": false,
-                "typeMut": false,
+                "typeMut": true,
                 "fromStab": false
             },
-            "test.WT.xls",
+            "test.MUT.netmhcpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-27T12:55:39.076573488"
+    },
+    "netmhcpan - MUT - output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+            ],
+            "test.MUT.netmhcpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-08-27T12:52:14.285658675"
+    },
+    "netmhcpan - WT - output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+            ],
             "test.WT.netmhcpan.output"
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
         "timestamp": "2024-06-13T11:02:31.338253"
     },

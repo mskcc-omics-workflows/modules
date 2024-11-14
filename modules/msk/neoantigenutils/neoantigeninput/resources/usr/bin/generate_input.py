@@ -3,6 +3,7 @@
 import json
 import pandas as pd
 import argparse
+import os
 from Bio import pairwise2
 import numpy as np
 
@@ -116,11 +117,15 @@ def main(args):
 
             else:
                 missense = 0
+<<<<<<< HEAD
             if (
                 row["Variant_Type"] == "SNP"
                 or row["Variant_Type"] == "DNP"
                 or row["Variant_Type"] == "TNP"
             ):
+=======
+            if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DNP" or row["Variant_Type"] == "TNP":
+>>>>>>> 9973f9fbe1650b6467004c14e2f795c36f1339e5
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -210,6 +215,18 @@ def main(args):
                 )
 
             elif row["Variant_Type"] == "INS":
+<<<<<<< HEAD
+=======
+                # print(
+                #     str(row["Chromosome"])
+                #     + "_"
+                #     + str(row["Start_Position"])
+                #     + "_"
+                #     + "I"
+                #     + "_"
+                #     + row["Tumor_Seq_Allele2"]
+                # )
+>>>>>>> 9973f9fbe1650b6467004c14e2f795c36f1339e5
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -309,6 +326,15 @@ def main(args):
 
     outer_dict["neoantigens"] = []
 
+<<<<<<< HEAD
+=======
+    if args.bedpe_file:
+        bedpe_list, bedpe_dict = bedpe_load(args.bedpe_file)
+
+
+    bedpe_match_dict = {}
+
+>>>>>>> 9973f9fbe1650b6467004c14e2f795c36f1339e5
     neoantigen_mut_in = pd.read_csv(args.netMHCpan_MUT_input, sep="\t")
     neoantigen_WT_in = pd.read_csv(args.netMHCpan_WT_input, sep="\t")
 
@@ -321,17 +347,47 @@ def main(args):
         return min_length
 
     WTdict = {}
-
+    SVWTdict = {}
     for index_WT, row_WT in neoantigen_WT_in.iterrows():
+        noposID = ""
+        id = ""
+        wtsvid=""
+        IDsplit = row_WT["Identity"].split('_')
+        if len(IDsplit[0]) < 3:
+            #it is from neoSV
+            IDsplit = row_WT["Identity"].split("_")
+            wtsvid = (IDsplit[0]+IDsplit[1][0:7]
+                        +'_'
+                        + str(len(row_WT["peptide"]))
+                        +'_'
+                        + str(row_WT["pos"])
+                        + '_'
+                        + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            )
+            noposID = (
+                IDsplit[0]+"_"+IDsplit[1][0:7]
+                + "_"
+                + str(len(row_WT["peptide"]))
+                + "_"
+                + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            )
+            WTdict[wtsvid] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
+            id = wtsvid
+            if noposID not in WTdict:
+                WTdict[noposID] = {
+                    'peptides' : {row_WT["peptide"]:id},  #This is a dict so we can match the peptide with the actual ID later
+                    "affinity": row_WT["affinity"]
+                }
 
         id = (
             row_WT["Identity"][:-2]
             + "_"
             + str(len(row_WT["peptide"]))
             + "_"
-            + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
-            + "_"
             + str(row_WT["pos"])
+            + "_"
+            + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+
         )
 
         noposID = (
@@ -362,22 +418,23 @@ def main(args):
         most_similar_string2 = None
         first_AA_same = None
         first_AA_same_score = -1
-
+        len_target = len(target)
         for s in strings:
-            alignments = pairwise2.align.globalxx(target, s)
-            score = alignments[0][2]  # The third element is the score
+            if len(s) == len_target:
+                alignments = pairwise2.align.globalxx(target, s)
+                score = alignments[0][2]  # The third element is the score
 
-            if score > max_score2:
+                if score > max_score2:
 
-                if score > max_score:
-                    max_score2 = max_score
-                    most_similar_string2 = most_similar_string
-                    max_score = score
-                    most_similar_string = s
+                    if score > max_score:
+                        max_score2 = max_score
+                        most_similar_string2 = most_similar_string
+                        max_score = score
+                        most_similar_string = s
 
-                else:
-                    max_score2 = score
-                    most_similar_string2 = s
+                    else:
+                        max_score2 = score
+                        most_similar_string2 = s
 
             if target[0] == s[0]:
                 if score > first_AA_same_score:
@@ -407,9 +464,10 @@ def main(args):
                 + "_"
                 + str(peplen)
                 + "_"
-                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-                + "_"
                 + str(row_mut["pos"])
+                + "_"
+                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+
             )
 
             noposID = (
@@ -426,6 +484,7 @@ def main(args):
                 # match
                 matchfound = True
                 best_pepmatch = WTdict[WTid]["peptide"]
+                frameshift=False
 
             else:
                 if (
@@ -497,7 +556,6 @@ def main(args):
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
     with open(outjson, "w") as tstout:
         json.dump(outer_dict, tstout, indent=1)
-        # tstout.write(json.dumps(outer_dict))
 
 
 def makeID(maf_row):
@@ -600,10 +658,140 @@ def makeID(maf_row):
         )
     return identifier_key
 
+class VariantCallingFormat(object):
+    """
+    Class for storing SV information in VCF format,
+    all components are in string format
+    """
 
+    def __init__(self, chrom, pos, ref, alt):
+        self.chrom = chrom
+        self.pos = pos
+        self.ref = ref
+        self.alt = alt
+
+
+    def __str__(self):
+        return "%s(chrom = %s, pos = %s, ref = %s, alt = %s)" % (
+            self.__class__.__name__,
+            self.chrom,
+            self.pos,
+            self.ref,
+            self.alt
+        )
+
+    def __repr__(self):
+        return "%s(%s, %s, %s, %s)" % (
+            self.__class__.__name__,
+            self.chrom,
+            self.pos,
+            self.ref,
+            self.alt
+        )
+
+class BedpeFormat(object):
+    """
+    Class for storing SV information in BEDPE format,
+    all components are in string format
+    """
+
+    def __init__(self, chrom1, pos1, strand1, chrom2, pos2, strand2,id):
+        self.chrom1 = chrom1
+        self.pos1 = pos1
+        self.strand1 = strand1
+        self.chrom2 = chrom2
+        self.pos2 = pos2
+        self.strand2 = strand2
+        self.id = id
+
+    def __str__(self):
+        return "%s(chrom1 = %s, pos1 = %s, strand1 = %s, chrom2 = %s, pos2 = %s, strand2 = %s, id = %s)" % (
+            self.__class__.__name__,
+            self.chrom1,
+            self.pos1,
+            self.strand1,
+            self.chrom2,
+            self.pos2,
+            self.strand2,
+            self.id
+        )
+
+    def __repr__(self):
+        return "%s(%s, %s, %s, %s, %s, %s, %s)" % (
+            self.__class__.__name__,
+            self.chrom1,
+            self.pos1,
+            self.strand1,
+            self.chrom2,
+            self.pos2,
+            self.strand2,
+            self.id
+        )
+
+def bedpe_load(filepath):
+    """
+    :param filepath: the absolute path of a BEDPE file
+    :return: a list of BEDPE objects
+    """
+    bedpe_list = []
+    bedpedict = {}
+    filename = os.path.basename(filepath)
+    line_num = 0
+    print("Loading SVs from {0}.".format(filename))
+    with open(filepath, 'r') as f:
+        header = next(f)
+        header = header.rstrip().split('\t')
+        for line in f:
+            line_num += 1
+            tmpline = line.rstrip().split("\t")
+            chrom1 = tmpline[header.index('chrom1')].replace('chr', '')
+            pos1 = tmpline[header.index('start1')]
+            chrom2 = tmpline[header.index('chrom2')].replace('chr', '')
+            pos2 = tmpline[header.index('start2')]
+            strand1 = tmpline[header.index('strand1')]
+            strand2 = tmpline[header.index('strand2')]
+            svclass = tmpline[header.index('svclass')]
+            sv_bedpe_id = tmpline[header.index('sv_id')]
+            custom_id = makeID_bedpe(chrom1,pos1,svclass)
+            bedpe = BedpeFormat(chrom1, pos1, strand1, chrom2, pos2, strand2,sv_bedpe_id)
+            bedpe_list.append(bedpe)
+            bedpedict[custom_id] = bedpe
+
+    return bedpe_list, bedpedict
+
+def makeID_bedpe(chrom1,pos1,svclass):
+    ##ENCODING FASTA ID FOR USE IN MATCHING LATER
+    ALPHABET= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+    position= int(str(pos1)[0:2])
+
+    if position < 26:
+        encoded_start = ALPHABET[position]
+    elif position < 100:
+        encoded_start = ALPHABET[position//4]
+
+    position= int(str(pos1)[-2:])
+
+    if position < 26:
+        encoded_end = ALPHABET[position]
+    elif position < 100:
+        encoded_end = ALPHABET[position//4]
+    sum_remaining = sum(int(d) for d in str(pos1)[2:-2])
+
+    encoded_position = encoded_start + ALPHABET[sum_remaining%26] + encoded_end
+
+    identifier_key = (
+        str(chrom1)
+        + "_"
+        + encoded_position
+        + "V" #This indicates structural variant. It is added in the generateMutFasta script as well but not in this function.
+        )
+
+    return identifier_key
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
     parser.add_argument("--maf_file", required=True, help="Path to the MAF file")
+    parser.add_argument("--bedpe_file", required=False, help="Path to the bedpe file")
     parser.add_argument(
         "--summary_file", required=True, help="Path to the summary file"
     )

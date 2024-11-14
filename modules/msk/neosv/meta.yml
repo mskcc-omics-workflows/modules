@@ -1,0 +1,71 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neosv"
+description: NEOSV is a program that takes a bedpe and outputs puntitave neoantiegns created from structural variants.  It has been modified so that it outputs fastas for later processing ny netmhcpan.
+keywords:
+  - immune
+  - neosv
+  - genomics
+tools:
+  - "neosv":
+      description: " Runs a modified version of NeoSV and outputs two multifastas.  One for mutated and another for wild type neoantigens"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-03005-9"
+      documentation: "https://github.com/ysbioinfo/NeoSV"
+      licence: ["MIT"]
+
+input:
+  # Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - inputBedpe:
+      type: file
+      description: Bedpe output by Tempo or SV caller
+      pattern: "*.{bedpe}"
+
+  - hlaString:
+      type: string
+      description: HLA string made by generatehlastring.   It is comma separated
+
+  - gtf:
+      type: file
+      description: Ensemble gtf resource file
+      pattern: "*.{gtf.gz}"
+
+  - cdna:
+      type: file
+      description: cDNA resource fasta
+      pattern: "*.{cdna.all.fa.gz}"
+
+output:
+  #Only when we have meta
+  - meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+
+  - mutOut:
+      type: file
+      description: Mutated SV sequences in a multifasta
+      pattern: "*.net.in.txt"
+
+  - wtOut:
+      type: file
+      description: WT sequences in a multifasta
+      pattern: "*.WT.net.in.txt"
+
+authors:
+  - "@johnoooh"
+  - "@nikhil"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"

@@ -17,6 +17,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file(file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa']), checkIfExists: true),
+                    file(file(params.test_data_mskcc['neoantigen']['svfa']), checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     "MUT"
                     ]
@@ -29,8 +30,6 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions,
-                    process.out.netmhcpanoutput[0][0],
-                    file(process.out.xls[0][1]).name,
                     file(process.out.netmhcpanoutput[0][1]).name
                     ).match()
                 }
@@ -47,6 +46,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file(file(params.test_data_mskcc['neoantigen']['WT_sequence_fa']), checkIfExists: true),
+                    file(file(params.test_data_mskcc['neoantigen']['wtsvfa']), checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     "WT"
                     ]
@@ -59,8 +59,6 @@ nextflow_process {
                 { assert process.success },
                 { assert snapshot(
                     process.out.versions,
-                    process.out.netmhcpanoutput[0][0],
-                    file(process.out.xls[0][1]).name,
                     file(process.out.netmhcpanoutput[0][1]).name
                     ).match()
                 }
@@ -81,6 +79,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sequence_fa'),
+                    file('svfa'),
                     "HLA",
                     "MUT"
                     ]
@@ -94,7 +93,6 @@ nextflow_process {
                 { assert snapshot(
                     process.out.versions,
                     process.out.netmhcpanoutput[0][0],
-                    file(process.out.xls[0][1]).name,
                     file(process.out.netmhcpanoutput[0][1]).name
                     ).match()
                 }

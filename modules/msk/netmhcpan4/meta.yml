@@ -21,15 +21,19 @@ input:
         Groovy Map containing sample information
         e.g. `[ id:'sample1', single_end:false ]`
 
-  - inputMaf:
+  - inputFasta:
       type: file
-      description: Maf outputtted by Tempo that was run through phyloWGS
-      pattern: "*.{maf}"
+      description: Multifasta containing Mutated peptides or Wildtype peptides generated from generatemutfasta
+      pattern: "*.{fa}"
 
-  - hlaFile:
+  - inputSVFasta:
       type: file
-      description: HLA tsv outputtted by Polysolver
-      pattern: "winners.{tsv}"
+      description: Multifasta containing Mutated peptides or Wildtype peptides from NeoSV
+      pattern: "*.{fa}"
+
+  - hlaString:
+      type: string
+      description: HLA string formatted by generatehlastring.  Typically a comma separated string of HLAs.
 
   - inputType:
       type: string
