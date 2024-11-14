@@ -1,0 +1,106 @@
+nextflow_process {
+
+    name "Test Process NETMHCPAN3"
+    script "../main.nf"
+    process "NETMHCPAN3"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "netmhcpan3"
+    tag "modules_msk"
+
+    test("netmhcpan3 - MUT - xls,output,fa") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    "MUT"
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.netmhcpanoutput[0][0],
+                    file(process.out.xls[0][1]).name,
+                    file(process.out.netmhcpanoutput[0][1]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+    test("netmhcpan3 - WT - xls,output,fa") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['WT_sequence_fa']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    "WT"
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.netmhcpanoutput[0][0],
+                    file(process.out.xls[0][1]).name,
+                    file(process.out.netmhcpanoutput[0][1]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+
+
+    test("netmhcpan3 - xls,output,fa - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sequence_fa'),
+                    "HLA",
+                    "MUT"
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.netmhcpanoutput[0][0],
+                    file(process.out.xls[0][1]).name,
+                    file(process.out.netmhcpanoutput[0][1]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+}
