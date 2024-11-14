@@ -20,10 +20,12 @@ process NEOANTIGENUTILS_FORMATNETMHCPAN {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def netmhcOutputType = meta.typeMut ? "--type_MUT": ""
     def netmhcOutputFrom = meta.fromStab ? "--from_STAB": ""
+
     """
         format_netmhcpan_output.py \
             --netMHCpan_output ${netmhcPanOutput} \
             --id ${prefix} \
+            ${args} \
             ${netmhcOutputType} \
             ${netmhcOutputFrom}
 
@@ -36,10 +38,10 @@ process NEOANTIGENUTILS_FORMATNETMHCPAN {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def netmhcOutputType = meta.typeMut ? "MUT": "WT"
+    def netmhcOutputFrom = meta.fromStab ? "STAB": "PAN"
     """
-
-        touch ${prefix}.MUT.tsv
-        touch ${prefix}.WT.tsv
+        touch ${prefix}.${netmhcOutputType}.${netmhcOutputFrom}.tsv
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
             formatNetmhcpanOutput: \$(echo \$(format_netmhcpan_output.py -v))
