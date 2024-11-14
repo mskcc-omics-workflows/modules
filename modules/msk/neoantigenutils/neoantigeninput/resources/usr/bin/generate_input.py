@@ -69,7 +69,6 @@ def main(args):
                         "Error in appending to mutation list. Error in base case appending ssm to ssmli"
                     )
                     print(e)
-                    # print(str(subTree))
                     pass
 
             try:
@@ -211,15 +210,6 @@ def main(args):
                 )
 
             elif row["Variant_Type"] == "INS":
-                print(
-                    str(row["Chromosome"])
-                    + "_"
-                    + str(row["Start_Position"])
-                    + "_"
-                    + "I"
-                    + "_"
-                    + row["Tumor_Seq_Allele2"]
-                )
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -319,8 +309,6 @@ def main(args):
 
     outer_dict["neoantigens"] = []
 
-    # print(mutation_dict)
-
     neoantigen_mut_in = pd.read_csv(args.netMHCpan_MUT_input, sep="\t")
     neoantigen_WT_in = pd.read_csv(args.netMHCpan_WT_input, sep="\t")
 
@@ -365,7 +353,6 @@ def main(args):
             }
 
         else:
-            # print(WTdict[noposID]['peptides'])
             WTdict[noposID]["peptides"][row_WT["peptide"]] = id
 
     def find_most_similar_string(target, strings):
@@ -450,7 +437,6 @@ def main(args):
                     # We can just move the windows along together. There will likely be little to no match with the WT peptides.
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
-                    # print(mutation_dict[row_mut["Identity"]])
 
                 else:
                     (
