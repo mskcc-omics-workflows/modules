@@ -481,9 +481,9 @@ def main(args):
                     + "_"
                     + str(peplen)
                     + "_"
-                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                    + str(row_mut["pos"])
                     + "_"
-                    + str(row_mut["pos"]),
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
                     "mutation_id": mutation_dict[row_mut["Identity"]],
                     "HLA_gene_id": row_mut["MHC"],
                     "sequence": row_mut["peptide"],
