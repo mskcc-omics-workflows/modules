@@ -40,11 +40,10 @@ for file in $METAS; do
     path="$path/**"
 
     # Extract authors from the YAML file
-    #authors=$(yq '.authors | .[]' "$file" | sed 's/^//')
     authors=$(yq -r '.authors[]' "$file")
 
-    # Remove quotes from authors
-    authors=$(echo "$authors" | sed 's/"//g')
+    # Remove quotes from authors and concatenate them into a single line
+    authors=$(echo "$authors" | sed 's/"//g' | tr '\n' ' ' | sed 's/[[:space:]]*$//')
 
     # Append the path and authors to the output file
     if [ -n "$authors" ]; then
