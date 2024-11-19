@@ -5,7 +5,7 @@
 # formats it into the CODEOWNERS file for use in a GitHub repository.
 
 # Get all of the meta.yml files
-METAS=$(fd meta.yml)
+METAS=$(fdfind meta.yml)
 
 # Define the output file path
 output_file=".github/CODEOWNERS-tmp"
