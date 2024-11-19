@@ -23,10 +23,10 @@ jobs:
       - name: Commit CODEOWNERS changes
         uses: EndBug/add-and-commit@v9.1.4
         with:
-          add: '.github/CODEOWNERS'
-          message: 'Update CODEOWNERS file'
-          author_name: 'github-actions'
-          author_email: 'github-actions@github.com'
+          add: ".github/CODEOWNERS"
+          message: "Update CODEOWNERS file"
+          author_name: "github-actions"
+          author_email: "github-actions@github.com"
           ref: ${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
