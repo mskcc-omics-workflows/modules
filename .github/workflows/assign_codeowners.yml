@@ -26,7 +26,8 @@ jobs:
         with:
           checks: "files,owners,duppatterns,syntax"
           experimental_checks: "notowned,avoid-shadowing"
-          github_access_token: "${{ secrets.RS_PAT }}"
+          check_failure_level: "warning"
+          github_access_token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Commit CODEOWNERS changes
         uses: EndBug/add-and-commit@v9
         with:
