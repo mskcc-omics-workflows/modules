@@ -1,2 +1,40 @@
 # Review from a member of the review-team is required
 * @mskcc-omics-workflows/reviewers
+./modules/msk/custom/splitfastqbylane/** @anoronh4
+./modules/msk/facets/** @nikhil
+./modules/msk/gatk4/applybqsr/** @yocra3
+./modules/msk/gbcms/** @buehlere
+./modules/msk/genomenexus/annotationpipeline/** @rnaidu
+./modules/msk/genomenexus/vcf2maf/** @rnaidu
+./modules/msk/genotypevariants/all/** @buehlere
+./modules/msk/mutect1/** @rnaidu
+./modules/msk/neoantigenediting/aligntoiedb/** @nikhil
+./modules/msk/neoantigenediting/computefitness/** @nikhil
+./modules/msk/neoantigenutils/convertannotjson/** @johnoooh
+./modules/msk/neoantigenutils/formatnetmhcpan/** @johnoooh
+./modules/msk/neoantigenutils/generatehlastring/** @johnoooh
+./modules/msk/neoantigenutils/generatemutfasta/** @johnoooh
+./modules/msk/neoantigenutils/neoantigeninput/** @johnoooh
+./modules/msk/neosv/** @johnoooh
+./modules/msk/netmhcpan/** @johnoooh
+./modules/msk/netmhcstabpan/** @johnoooh
+./modules/msk/phylowgs/createinput/** @pintoa1-mskcc
+./modules/msk/phylowgs/multievolve/** @nikhil
+./modules/msk/phylowgs/parsecnvs/** @pintoa1-mskcc
+./modules/msk/phylowgs/writeresults/** @nikhil
+./modules/msk/polysolver/** @anoronh4
+./modules/msk/ppflagfixer/** @huyu335
+./modules/msk/pvmaf/concat/** @buehlere
+./modules/msk/pvmaf/tagtraceback/** @buehlere
+./modules/msk/rediscoverte/** @nikhil
+./modules/msk/salmon/index/** @kevinmenden
+./modules/msk/salmon/quant/** @kevinmenden
+./modules/msk/snppileup/** @nikhil
+./subworkflows/msk/genome_nexus/** @rnaidu
+./subworkflows/msk/neoantigen_editing/** @johnoooh
+./subworkflows/msk/netmhcstabandpan/** @nikhil
+./subworkflows/msk/phylowgs/** @nikhil
+./subworkflows/msk/traceback/** @buehlere
+@FriederikeHanssen
+@drpatelh
+@nikhil
