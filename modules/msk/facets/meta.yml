@@ -40,114 +40,140 @@ input:
 output:
   - purity_seg:
       - meta:
-          type: file
-          description: The purity seg file
-          pattern: "*_purity.seg"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_purity.seg":
           type: file
           description: The purity seg file
           pattern: "*_purity.seg"
   - purity_r_data:
-      - meta: {}
-      - "*_purity.?d*": {}
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_purity.?d*":
+          type: file
+          description: The purity R data file
+          pattern: "*_purity.?d*"
   - purity_png:
       - meta:
-          type: file
-          description: The purity png file. In legacy output the file would match *.CNCF.png
-          pattern: "*_purity*png"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_purity*png":
           type: file
           description: The purity png file. In legacy output the file would match *.CNCF.png
           pattern: "*_purity*png"
   - purity_out:
       - meta:
-          type: file
-          description: The purity out file. Only in legacy output mode.
-          pattern: "*_purity.out"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_purity.out":
           type: file
           description: The purity out file. Only in legacy output mode.
           pattern: "*_purity.out"
   - purity_cncf_txt:
       - meta:
-          type: file
-          description: The purity cncf file. Only in legacy output mode.
-          pattern: "*_purity.cncf.txt"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_purity.cncf.txt":
           type: file
           description: The purity cncf file. Only in legacy output mode.
           pattern: "*_purity.cncf.txt"
   - hisens_seg:
       - meta:
-          type: file
-          description: The hisens seg file
-          pattern: "*_hisens.seg"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_hisens.seg":
           type: file
           description: The hisens seg file
           pattern: "*_hisens.seg"
   - hisens_r_data:
-      - meta: {}
-      - "*_hisens.?d*": {}
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_hisens.?d*":
+          type: file
+          description: The hisens R data file
+          pattern: "*_hisens.?d*"
   - hisens_png:
       - meta:
-          type: file
-          description: The hisens png file. In legacy output the file would match *.CNCF.png
-          pattern: "*_hisens*png"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_hisens*png":
           type: file
           description: The hisens png file. In legacy output the file would match *.CNCF.png
           pattern: "*_hisens*png"
   - hisens_out:
       - meta:
-          type: file
-          description: The hisense out file. Only in legacy output mode.
-          pattern: "*_hisens.out"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_hisens.out":
           type: file
           description: The hisense out file. Only in legacy output mode.
           pattern: "*_hisens.out"
   - hisens_cncf_txt:
       - meta:
-          type: file
-          description: The hisens cncf file. Only in legacy output mode.
-          pattern: "*_hisens.cncf.txt"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*_hisens.cncf.txt":
           type: file
           description: The hisens cncf file. Only in legacy output mode.
           pattern: "*_hisens.cncf.txt"
   - qc_txt:
       - meta:
-          type: file
-          description: The qc file
-          pattern: "*.qc.txt"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*.qc.txt":
           type: file
           description: The qc file
           pattern: "*.qc.txt"
   - gene_level_txt:
       - meta:
-          type: file
-          description: The gene level file
-          pattern: "*.gene_level.txt"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*.gene_level.txt":
           type: file
           description: The gene level file
           pattern: "*.gene_level.txt"
   - arm_level_txt:
       - meta:
-          type: file
-          description: The arm level file
-          pattern: "*.arm_level.txt"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - "*.arm_level.txt":
           type: file
           description: The arm level file
           pattern: "*.arm_level.txt"
   - output_txt:
       - meta:
-          type: file
-          description: The facets output log file. Format [id].txt
-          pattern: "*.txt"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
       - ${meta.id}.txt:
           type: file
           description: The facets output log file. Format [id].txt

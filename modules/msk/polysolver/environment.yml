@@ -3,7 +3,5 @@
 channels:
   - conda-forge
   - bioconda
-  - defaults
-  - compbiocore
 dependencies:
   - "compbiocore::hla-polysolver=1.0.0"

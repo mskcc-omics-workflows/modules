@@ -24,7 +24,11 @@ input:
         type: file
         description: Patient data consisting of mutation, neoantigen, and tree information
         pattern: "*.json"
-    - alignment_file: {}
+    - alignment_file:
+        type: file
+        description: IEDB alignment file
+        pattern: "iedb_alignments_*.txt"
+
 output:
   - annotated_output:
       - meta:

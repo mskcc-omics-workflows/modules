@@ -23,7 +23,12 @@ input:
           typeMut indicated if a mutated fasta was used
           fromStab indicates if the output was from netmhcstabpan
           e.g. `[ id:'sample1', typeMut: false, fromStab: false ]`
-    - netmhcPanOutput: {}
+    - netmhcPanOutput:
+        type: file
+        description:
+          STDOUT file of netMHCstabpan or netMHC runs for MUT and WT.  A poorly formated
+          file of neoantigens.
+        pattern: "*.WT.*.output,*.MUT.*.output"
 output:
   - netMHCpanreformatted:
       - meta:

@@ -17,7 +17,10 @@ input:
         description: |
           Groovy Map containing sample information
           e.g. `[ id:'sample1', single_end:false ]`
-    - unfilteredmaf: {}
+    - unfilteredmaf:
+        type: file
+        description: unfiltered maf file with read counts
+        pattern: "*.maf"
     - cnv:
         type: file
         description: converted cnv file for phylowgs

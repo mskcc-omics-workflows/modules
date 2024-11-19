@@ -32,7 +32,11 @@ input:
         type: file
         description: HLA tsv outputtted by Polysolver
         pattern: "winners.{tsv}"
-  - - meta2: {}
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
+          e.g. `[ id:'sample1', single_end:false ]`
     - phyloWGSsumm:
         type: file
         description: Summ json outputtted by phyloWGS
@@ -45,7 +49,11 @@ input:
         type: file
         description: Folder of mutations in trees output by PhyloWGS
         pattern: ".{zip}"
-  - - meta3: {}
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
+          e.g. `[ id:'sample1', single_end:false ]`
     - mutNetMHCpan:
         type: file
         description:

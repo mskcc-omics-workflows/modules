@@ -51,12 +51,10 @@ output:
   #Only when we have meta
   - netmhcpanoutput:
       - output_meta:
-          type: file
-          description:
-            STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This
-            contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
-            for this file.
-          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
       - "*.netmhcpan.output":
           type: file
           description:

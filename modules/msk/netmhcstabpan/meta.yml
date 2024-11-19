@@ -18,15 +18,6 @@ tools:
       licence: ["MIT"]
       identifier: ""
 
-  - "netmhcpan":
-      description:
-        " Runs netMHCpan and outputs tsvs and STDout for mutated and wild
-        type neoantigens"
-      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      licence: ["MIT"]
-      identifier: ""
-
 input:
   - - meta:
         type: map
@@ -59,11 +50,10 @@ input:
 output:
   - netmhcstabpanoutput:
       - output_meta:
-          type: file
-          description:
-            STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated
-            file of neoantigens. Neoantigenutils contains a parser for this file
-          pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
       - "*.netmhcstabpan.output":
           type: file
           description:
