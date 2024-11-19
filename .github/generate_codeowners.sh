@@ -45,6 +45,9 @@ for file in $METAS; do
     # Remove quotes from authors and concatenate them into a single line
     authors=$(echo "$authors" | sed 's/"//g' | tr '\n' ' ' | sed 's/[[:space:]]*$//')
 
+    # Append the specific author to the authors list
+    authors="$authors @mskcc-omics-workflows/reviewers"
+
     # Append the path and authors to the output file
     if [ -n "$authors" ]; then
         log "Adding to output: $path $authors"
