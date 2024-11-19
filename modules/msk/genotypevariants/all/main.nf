@@ -39,7 +39,6 @@ process GENOTYPEVARIANTS_ALL {
     $bams_standard \\
     $bam_liquid \\
     $sample \\
-    -t $task.cpus \\
     $args
 
     cat <<-END_VERSIONS > versions.yml

@@ -28,7 +28,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-02-23T11:31:39.015292"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-10-01T12:18:30.061693329"
     },
     "chr22maf - msk": {
         "content": [
@@ -39,7 +43,7 @@
                             "id": "chr22",
                             "patient": "test"
                         },
-                        "test_combined.maf:md5,7b36c0fda7ebb28b27ddf51b7d2a09e8"
+                        "test_combined.maf:md5,e1d7d2ecaf53ce75908ad49b25289f32"
                     ]
                 ],
                 "1": [
@@ -51,7 +55,7 @@
                             "id": "chr22",
                             "patient": "test"
                         },
-                        "test_combined.maf:md5,7b36c0fda7ebb28b27ddf51b7d2a09e8"
+                        "test_combined.maf:md5,e1d7d2ecaf53ce75908ad49b25289f32"
                     ]
                 ],
                 "versions": [
@@ -59,6 +63,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-02-23T11:31:28.145005"
+        "meta": {
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.2"
+        },
+        "timestamp": "2024-10-01T12:18:20.94747798"
     }
 }

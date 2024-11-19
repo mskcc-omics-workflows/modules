@@ -25,9 +25,8 @@ input:
         description: Maf file with columns required for selected tagging type.
         pattern: "*.{maf}"
   - - sample_sheets:
-        type: file
-        description: Sample BAMs
-        pattern: "*.{csv}"
+        type: list
+        description: array holding the two samplesheets mandatory for running nucleovar, (pipeline_input and aux_bams)
 output:
   #Only when we have meta
   - maf:
@@ -38,7 +37,7 @@ output:
             e.g. `[ id:'sample1', patient:'patient1' ]`
       - "*.maf":
           type: file
-          description: tagged traceback maf.
+          description: tagged maf file.
           pattern: "*.{maf}"
   - versions:
       - versions.yml:
