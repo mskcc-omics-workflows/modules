@@ -1,7 +1,8 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "neoantigenutils_formatnetmhcpan"
-description: Takes the standard out of netmhcpan tools and converts them to a tsv for downstream processing
+description:
+  Takes the standard out of netmhcpan tools and converts them to a tsv
+  for downstream processing
 keywords:
   - neoantigen
   - tsv
@@ -12,38 +13,40 @@ tools:
       description: "Collection of helper scripts for neoantigen processing"
       documentation: "https://github.com/mskcc-omics-workflows/modules"
       licence: [""]
+      identifier: ""
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information.
-        typeMut indicated if a mutated fasta was used
-        fromStab indicates if the output was from netmhcstabpan
-        e.g. `[ id:'sample1', typeMut: false, fromStab: false ]`
-
-  - netmhcOutput:
-      type: file
-      description: Maf outputtted by Tempo that was run through phyloWGS
-      pattern: "*.{output}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          typeMut indicated if a mutated fasta was used
+          fromStab indicates if the output was from netmhcstabpan
+          e.g. `[ id:'sample1', typeMut: false, fromStab: false ]`
+    - netmhcPanOutput:
+        type: file
+        description:
+          STDOUT file of netMHCstabpan or netMHC runs for MUT and WT.  A poorly formated
+          file of neoantigens.
+        pattern: "*.WT.*.output,*.MUT.*.output"
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
   - netMHCpanreformatted:
-      type: file
-      description: A reformatted file of neoantigens and their binding affinities output by netmhcpan or netmhcstabpan.  This contains the wild type antigens
-      pattern: "*.{tsv}"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.tsv":
+          type: file
+          description:
+            A reformatted file of neoantigens and their binding affinities
+            output by netmhcpan or netmhcstabpan.  This contains the wild type antigens
+          pattern: "*.{tsv}"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@johnoooh"
   - "@nikhil"

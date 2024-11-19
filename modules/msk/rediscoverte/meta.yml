@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "rediscoverte"
 description: Quantify genome-wide TE expression in RNA sequencing data
@@ -8,44 +7,46 @@ keywords:
   - expression
 tools:
   - "rediscoverte":
-      description: "a computational method for quantifying genome-wide TE expression in RNA sequencing data"
+      description:
+        "a computational method for quantifying genome-wide TE expression
+        in RNA sequencing data"
       homepage: "https://github.com/ucsffrancislab/REdiscoverTE"
       documentation: "https://github.com/ucsffrancislab/REdiscoverTE"
       doi: "10.1038/s41467-019-13035-2"
       licence: ["GPL-3.0"]
+      identifier: ""
 
 input:
-  - quant:
-      type: list
-      description: quant file list
-      items:
+  - - quant:
+        type: list
+        description: quant file list
+        items:
+          type: file
+          description: quant file
+          pattern: "*.quant.sf"
+  - - rmsk_annotation:
         type: file
-        description: quant file
-        pattern: "*.quant.sf"
-  - rmsk_annotation:
-      type: file
-      description: rmsk annotation file
-      pattern: "*.RDS"
-  - repName_repFamily_repClass_map:
-      type: file
-      description: rep map file
-      pattern: "*.tsv"
-  - genecode_annotation:
-      type: file
-      description: genecode annotation file
-      pattern: "*.RDS"
-
+        description: rmsk annotation file
+        pattern: "*.RDS"
+  - - repName_repFamily_repClass_map:
+        type: file
+        description: rep map file
+        pattern: "*.tsv"
+  - - genecode_annotation:
+        type: file
+        description: genecode annotation file
+        pattern: "*.RDS"
 output:
   - rollup:
-      type: directory
-      description: Directory containing results
-      pattern: "REdiscoverTE_rollup"
-
+      - REdiscoverTE_rollup:
+          type: directory
+          description: Directory containing results
+          pattern: "REdiscoverTE_rollup"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@nikhil"
 maintainers:
