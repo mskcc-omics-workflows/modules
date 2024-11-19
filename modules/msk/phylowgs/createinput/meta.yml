@@ -1,4 +1,3 @@
----
 name: "phylowgs_createinput"
 description: Create input files for phylowgs
 keywords:
@@ -11,32 +10,41 @@ tools:
       homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
       tool_dev_url: "https://github.com/mskcc/phylowgs"
 
+      identifier: ""
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  - cnv:
-      type: file
-      description: converted cnv file for phylowgs
-      pattern: "*.txt"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - unfilteredmaf:
+        type: file
+        description: unfiltered maf file with read counts
+        pattern: "*.maf"
+    - cnv:
+        type: file
+        description: converted cnv file for phylowgs
+        pattern: "*.txt"
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
   - phylowgsinput:
-      type: file
-      description: cnv_data.txt and ssm_data.txt
-      pattern: "*.txt"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - cnv_data.txt:
+          type: file
+          description: cnv_data.txt and ssm_data.txt
+          pattern: "*.txt"
+      - ssm_data.txt:
+          type: file
+          description: cnv_data.txt and ssm_data.txt
+          pattern: "*.txt"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@pintoa1-mskcc"
 maintainers:
