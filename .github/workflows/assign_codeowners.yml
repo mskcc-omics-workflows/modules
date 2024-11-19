@@ -20,17 +20,10 @@ jobs:
           chmod +x .github/generate_codeowners.sh
           ./.github/generate_codeowners.sh
 
-      - name: Pull before committing CODEOWNERS changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "pull changes before adding new CODEOWNERS FILE"
-          pull: "--rebase"
-          cwd: "./"
       - name: Commit CODEOWNERS changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "Update CODEOWNERS file"
-          add: '["CODEOWNERS --force"]'
-          cwd: "./"
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
+          git add .github/CODEOWNERS
+          git commit -m "Update CODEOWNERS file" || echo "No changes to commit"
+          git push
