@@ -24,7 +24,7 @@ jobs:
       - name: Commit CODEOWNERS changes
         uses: EndBug/add-and-commit@v9
         with:
-          add: ".github/CODEOWNERS"
+          add: '[".github/CODEOWNERS --force"]'
           message: "Update CODEOWNERS file"
-          committer_name: GitHub Actions
-          committer_email: actions@github.com
+          default_author: github_actions
+          cwd: "./"
