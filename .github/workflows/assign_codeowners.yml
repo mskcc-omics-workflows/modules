@@ -1,11 +1,11 @@
-name: Assign Code Owners
+name: Assign and Update Code Owners
 
 on:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  assign:
+  update-codeowners:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,3 +19,18 @@ jobs:
         run: |
           chmod +x .github/generate_codeowners.sh
           ./.github/generate_codeowners.sh
+
+      - name: Pull before committing CODEOWNERS changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "pull changes before adding new CODEOWNERS FILE"
+          pull: "--rebase"
+          cwd: "./"
+      - name: Commit CODEOWNERS changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "Update CODEOWNERS file"
+          add: '["CODEOWNERS --force"]'
+          cwd: "./"
