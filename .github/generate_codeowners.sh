@@ -40,7 +40,8 @@ for file in $METAS; do
     path="$path/**"
 
     # Extract authors from the YAML file
-    authors=$(yq '.authors | .[]' "$file" | sed 's/^//')
+    #authors=$(yq '.authors | .[]' "$file" | sed 's/^//')
+    authors=$(yq -r '.authors[]' "$file")
 
     # Remove quotes from authors
     authors=$(echo "$authors" | sed 's/"//g')
