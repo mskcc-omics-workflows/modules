@@ -1,4 +1,4 @@
-process NETMHCPAN3 {
+process NETMHC3 {
     tag "$meta.id"
     label 'process_medium'
 
@@ -12,7 +12,7 @@ process NETMHCPAN3 {
 
     output:
     tuple val(output_meta),       path("*.xls"),               emit: xls
-    tuple val(output_meta),       path("*.netmhcpan.output"),  emit: netmhcpanoutput
+    tuple val(output_meta),       path("*.netmhc.output"),  emit: netmhcoutput
     tuple val(output_meta),       path("hla_*.txt"),           emit: netmhc_hla_files
     path "versions.yml",                                       emit: versions
 
@@ -26,7 +26,7 @@ process NETMHCPAN3 {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
-    def NETMHCPAN_VERSION = "3.4"
+    def NETMHC_VERSION = "3.4"
 
     """
     HLA_ACCEPTED=\$(trim_hla.py --hla ${hla})
@@ -36,11 +36,11 @@ process NETMHCPAN3 {
     -s \
     -l 9 \
     --xls=${prefix}.${inputType}.xls \
-    ${inputFasta} > ${prefix}.${inputType}.netmhcpan.output
+    ${inputFasta} > ${prefix}.${inputType}.netmhc.output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
+        netmhc: v${NETMHC_VERSION}
     END_VERSIONS
 
     """
@@ -48,17 +48,17 @@ process NETMHCPAN3 {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def NETMHCPAN_VERSION = "3.4"
+    def NETMHC_VERSION = "3.4"
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
     """
-    touch ${prefix}.MUT.netmhcpan.output
+    touch ${prefix}.MUT.netmhc.output
     touch ${prefix}.MUT.xls
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
+        netmhc: v${NETMHC_VERSION}
     END_VERSIONS
     """
 }
