@@ -1,0 +1,21 @@
+name: Assign Code Owners
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install yq
+        run: |
+          sudo snap install yq
+
+      - name: Run generate_codeowners.sh
+        run: |
+          chmod +x .github/generate_codeowners.sh
+          ./.github/generate_codeowners.sh
