@@ -4,4 +4,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - "YYOUR-TOOL=HERE"
+  - "YOUR-TOOL=HERE"
