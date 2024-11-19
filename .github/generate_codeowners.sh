@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
-# Get all of the meta.yaml files
+# This script generates a CODEOWNERS file from meta.yml files
+# It extracts the "authors" array from each meta.yml file and
+# formats it into the CODEOWNERS file for use in a GitHub repository.
+
+# Get all of the meta.yml files
 METAS=$(fd meta.yml)
 
 # Define the output file path
 output_file=".github/CODEOWNERS-tmp"
-rm $output_file
+
+# Check if the output file already exists before attempting to remove it
+if [ -f "$output_file" ]; then
+    rm "$output_file"
+fi
 
 # Use yq to extract the "authors" array and convert it to a .gitignore format
 for file in $METAS; do
@@ -14,13 +22,29 @@ for file in $METAS; do
     # Add a double star to the end of the path
     path="$path/**"
 
+    # Extract authors from the YAML file
     authors=$(yq '.authors | .[]' "$file" | sed 's/^//')
+
     # Remove quotes from authors
     authors=$(echo "$authors" | sed 's/"//g')
-    echo "$path" $authors >> $output_file
+
+    # Append the path and authors to the output file
+    echo "$path $authors" >> "$output_file"
 done
 
-# Generate it from scratch
-cat ".github/manual_CODEOWNERS" > ".github/CODEOWNERS"
-# Remove duplicate lines and then sort and only print the line not the common part
-cat "$output_file" | sort | uniq  >> ".github/CODEOWNERS"
+# Generate the CODEOWNERS file from a manual template
+if [ -f ".github/manual_CODEOWNERS" ]; then
+    cat ".github/manual_CODEOWNERS" > ".github/CODEOWNERS"
+else
+    echo "Warning: .github/manual_CODEOWNERS file not found."
+fi
+
+# Remove duplicate lines, sort, and append to the CODEOWNERS file
+if [ -f "$output_file" ]; then
+    cat "$output_file" | sort | uniq >> ".github/CODEOWNERS"
+fi
+
+# Clean up by removing the temporary output file if it exists
+if [ -f "$output_file" ]; then
+    rm "$output_file"
+fi
