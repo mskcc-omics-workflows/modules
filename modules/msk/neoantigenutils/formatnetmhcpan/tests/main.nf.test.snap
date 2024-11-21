@@ -9,7 +9,7 @@
                             "typeMut": true,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.MUT.tsv:md5,26f40dde35f53f5ced8a251f59dcc77f"
+                        "test_netmhcpan.output.MUT.tsv:md5,26f40dde35f53f5ced8a251f59dcc77f"
                     ]
                 ],
                 "1": [
@@ -22,7 +22,7 @@
                             "typeMut": true,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.MUT.tsv:md5,26f40dde35f53f5ced8a251f59dcc77f"
+                        "test_netmhcpan.output.MUT.tsv:md5,26f40dde35f53f5ced8a251f59dcc77f"
                     ]
                 ],
                 "versions": [
@@ -83,7 +83,7 @@
                             "typeMut": false,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.WT.tsv:md5,0ef95cf63ee0b8faa8e9d85413e48943"
+                        "test_netmhcpan.output.WT.tsv:md5,0ef95cf63ee0b8faa8e9d85413e48943"
                     ]
                 ],
                 "1": [
@@ -96,7 +96,7 @@
                             "typeMut": false,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.WT.tsv:md5,0ef95cf63ee0b8faa8e9d85413e48943"
+                        "test_netmhcpan.output.WT.tsv:md5,0ef95cf63ee0b8faa8e9d85413e48943"
                     ]
                 ],
                 "versions": [
@@ -120,7 +120,7 @@
                             "typeMut": true,
                             "fromStab": true
                         },
-                        "test_netmHCstabpanoutput.MUT.tsv:md5,246eb723691371ad49bd080071475740"
+                        "test_netmhcstabpan.output.MUT.tsv:md5,246eb723691371ad49bd080071475740"
                     ]
                 ],
                 "1": [
@@ -133,7 +133,7 @@
                             "typeMut": true,
                             "fromStab": true
                         },
-                        "test_netmHCstabpanoutput.MUT.tsv:md5,246eb723691371ad49bd080071475740"
+                        "test_netmhcstabpan.output.MUT.tsv:md5,246eb723691371ad49bd080071475740"
                     ]
                 ],
                 "versions": [
@@ -157,7 +157,7 @@
                             "typeMut": false,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.WT.tsv:md5,b95a6624d4010eb6517ca880a13e670d"
+                        "test_netmhcpan.output.WT.tsv:md5,b95a6624d4010eb6517ca880a13e670d"
                     ]
                 ],
                 "1": [
@@ -170,7 +170,7 @@
                             "typeMut": false,
                             "fromStab": false
                         },
-                        "test_netmHCpanoutput.WT.tsv:md5,b95a6624d4010eb6517ca880a13e670d"
+                        "test_netmhcpan.output.WT.tsv:md5,b95a6624d4010eb6517ca880a13e670d"
                     ]
                 ],
                 "versions": [

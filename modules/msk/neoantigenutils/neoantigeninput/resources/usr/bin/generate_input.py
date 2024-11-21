@@ -5,6 +5,7 @@ import pandas as pd
 import argparse
 import os
 from Bio import pairwise2
+from Bio.pairwise2 import format_alignment
 import numpy as np
 
 VERSION = 1.7
@@ -70,6 +71,7 @@ def main(args):
                         "Error in appending to mutation list. Error in base case appending ssm to ssmli"
                     )
                     print(e)
+                    # print(str(subTree))
                     pass
 
             try:
@@ -117,15 +119,11 @@ def main(args):
 
             else:
                 missense = 0
-<<<<<<< HEAD
             if (
                 row["Variant_Type"] == "SNP"
                 or row["Variant_Type"] == "DNP"
                 or row["Variant_Type"] == "TNP"
             ):
-=======
-            if row["Variant_Type"] == "SNP" or row["Variant_Type"] == "DNP" or row["Variant_Type"] == "TNP":
->>>>>>> 9973f9fbe1650b6467004c14e2f795c36f1339e5
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -215,8 +213,6 @@ def main(args):
                 )
 
             elif row["Variant_Type"] == "INS":
-<<<<<<< HEAD
-=======
                 # print(
                 #     str(row["Chromosome"])
                 #     + "_"
@@ -226,7 +222,6 @@ def main(args):
                 #     + "_"
                 #     + row["Tumor_Seq_Allele2"]
                 # )
->>>>>>> 9973f9fbe1650b6467004c14e2f795c36f1339e5
                 chrom_pos_dict[
                     str(row["Chromosome"])
                     + "_"
@@ -326,15 +321,11 @@ def main(args):
 
     outer_dict["neoantigens"] = []
 
-<<<<<<< HEAD
-=======
     if args.bedpe_file:
         bedpe_list, bedpe_dict = bedpe_load(args.bedpe_file)
 
-
     bedpe_match_dict = {}
 
->>>>>>> 9973f9fbe1650b6467004c14e2f795c36f1339e5
     neoantigen_mut_in = pd.read_csv(args.netMHCpan_MUT_input, sep="\t")
     neoantigen_WT_in = pd.read_csv(args.netMHCpan_WT_input, sep="\t")
 
@@ -351,65 +342,77 @@ def main(args):
     for index_WT, row_WT in neoantigen_WT_in.iterrows():
         noposID = ""
         id = ""
-        wtsvid=""
-        IDsplit = row_WT["Identity"].split('_')
+        wtsvid = ""
+        IDsplit = row_WT["Identity"].split("_")
         if len(IDsplit[0]) < 3:
-            #it is from neoSV
+            # it is from neoSV
             IDsplit = row_WT["Identity"].split("_")
-            wtsvid = (IDsplit[0]+IDsplit[1][0:7]
-                        +'_'
-                        + str(len(row_WT["peptide"]))
-                        +'_'
-                        + str(row_WT["pos"])
-                        + '_'
-                        + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            wtsvid = (
+                IDsplit[0]
+                + IDsplit[1][0:7]
+                + "_"
+                + str(len(row_WT["peptide"]))
+                + "_"
+                + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                + "_"
+                + str(row_WT["pos"])
             )
             noposID = (
-                IDsplit[0]+"_"+IDsplit[1][0:7]
+                IDsplit[0]
+                + "_"
+                + IDsplit[1][0:7]
                 + "_"
                 + str(len(row_WT["peptide"]))
                 + "_"
                 + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
             )
-            WTdict[wtsvid] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
+            WTdict[wtsvid] = {
+                "affinity": row_WT["affinity"],
+                "peptide": row_WT["peptide"],
+            }
             id = wtsvid
             if noposID not in WTdict:
                 WTdict[noposID] = {
-                    'peptides' : {row_WT["peptide"]:id},  #This is a dict so we can match the peptide with the actual ID later
-                    "affinity": row_WT["affinity"]
+                    "peptides": {
+                        row_WT["peptide"]: id
+                    },  # This is a dict so we can match the peptide with the actual ID later
+                    "affinity": row_WT["affinity"],
                 }
 
-        id = (
-            row_WT["Identity"][:-2]
-            + "_"
-            + str(len(row_WT["peptide"]))
-            + "_"
-            + str(row_WT["pos"])
-            + "_"
-            + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
-
-        )
-
-        noposID = (
-            row_WT["Identity"][:-2]
-            + "_"
-            + str(len(row_WT["peptide"]))
-            + "_"
-            + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
-        )
-        WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
-
-        # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
-        if noposID not in WTdict:
-            WTdict[noposID] = {
-                "peptides": {
-                    row_WT["peptide"]: id
-                },  # This is a dict so we can match the peptide with the ID later
-                "affinity": row_WT["affinity"],
-            }
+            else:
+                WTdict[noposID]["peptides"][row_WT["peptide"]] = id
 
         else:
-            WTdict[noposID]["peptides"][row_WT["peptide"]] = id
+            id = (
+                row_WT["Identity"][:-2]
+                + "_"
+                + str(len(row_WT["peptide"]))
+                + "_"
+                + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                + "_"
+                + str(row_WT["pos"])
+            )
+
+            noposID = (
+                row_WT["Identity"][:-2]
+                + "_"
+                + str(len(row_WT["peptide"]))
+                + "_"
+                + row_WT["MHC"].split("-")[1].replace(":", "").replace("*", "")
+            )
+            WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
+
+            # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
+            if noposID not in WTdict:
+                WTdict[noposID] = {
+                    "peptides": {
+                        row_WT["peptide"]: id
+                    },  # This is a dict so we can match the peptide with the ID later
+                    "affinity": row_WT["affinity"],
+                }
+
+            else:
+                WTdict[noposID]["peptides"][row_WT["peptide"]] = id
 
     def find_most_similar_string(target, strings):
         max_score = -1
@@ -436,10 +439,10 @@ def main(args):
                         max_score2 = score
                         most_similar_string2 = s
 
-            if target[0] == s[0]:
-                if score > first_AA_same_score:
-                    first_AA_same = s
-                    first_AA_same_score = score
+                if target[0] == s[0]:
+                    if score > first_AA_same_score:
+                        first_AA_same = s
+                        first_AA_same_score = score
 
         return (
             most_similar_string,
@@ -451,53 +454,82 @@ def main(args):
 
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
         IDsplit = row_mut["Identity"].split("_")
+        SV = False
         if row_mut["affinity"] < 500:
             peplen = len(row_mut["peptide"])
             matchfound = False
-            IDsplit = row_mut["Identity"].split("_")
             if IDsplit[1][0] == "S" and IDsplit[1][1] != "p":
                 # If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
                 continue
-            # first find match in WT
-            WTid = (
-                row_mut["Identity"][:-2]
-                + "_"
-                + str(peplen)
-                + "_"
-                + str(row_mut["pos"])
-                + "_"
-                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-
-            )
-
-            noposID = (
-                row_mut["Identity"][:-2]
-                + "_"
-                + str(peplen)
-                + "_"
-                + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
-            )
-
-            if WTid in WTdict and (
-                "M" == IDsplit[1][0] and "Sp" not in row_mut["Identity"]
+            if row_mut["Identity"].count("_") == 1:
+                # its an SV
+                SV = True
+                WTid = (
+                    IDsplit[0]
+                    + IDsplit[1][0:8]
+                    + "_"
+                    + str(len(row_mut["peptide"]))
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                    + "_"
+                    + str(row_mut["pos"])
+                )
+                noposID = (
+                    IDsplit[0]
+                    + "_"
+                    + IDsplit[1][0:8]
+                    + "_"
+                    + str(len(row_mut["peptide"]))
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                )
+                # this part makes the dict that matches this to the bedpe
+                bedpe_match_dict[row_mut["Identity"]] = (
+                    IDsplit[0] + "_" + IDsplit[1][0:4]
+                )
+            else:
+                # first find match in WT
+                WTid = (
+                    row_mut["Identity"][:-2]
+                    + "_"
+                    + str(peplen)
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                    + "_"
+                    + str(row_mut["pos"])
+                )
+                noposID = (
+                    row_mut["Identity"][:-2]
+                    + "_"
+                    + str(peplen)
+                    + "_"
+                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                )
+            if (
+                WTid in WTdict
+                and ("M" == IDsplit[1][0] and "Sp" not in row_mut["Identity"])
+                or SV == False
             ):
                 # match
                 matchfound = True
                 best_pepmatch = WTdict[WTid]["peptide"]
-                frameshift=False
+                frameshift = False
 
             else:
                 if (
                     "-" in row_mut["Identity"]
                     or "+" in row_mut["Identity"]
                     and WTid in WTdict
+                    or SV == False
                 ):
                     # Means there is a frame shift and we don't need to do a analysis of 5' end and 3' end as 3' end is no longer recognizeable/comparable to the WT sequence at all
                     # We can just move the windows along together. There will likely be little to no match with the WT peptides.
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
-
+                    frameshift = False
                 else:
+                    # Here we take care of frameshifted peptides
+                    frameshift = True
                     (
                         best_pepmatch,
                         best_pepmatch2,
@@ -507,8 +539,10 @@ def main(args):
                     ) = find_most_similar_string(
                         row_mut["peptide"], list(WTdict[noposID]["peptides"].keys())
                     )
-
-                    if best_pepmatch == row_mut["peptide"]:
+                    if (
+                        best_pepmatch == row_mut["peptide"]
+                        or best_pepmatch2 == row_mut["peptide"]
+                    ):
                         # it seems this can happen where the row_mut is actually the canonical sequence.
                         # In this case we don't want to report the peptide as a neoantigen, its not neo
                         continue
@@ -535,22 +569,46 @@ def main(args):
                     + 1
                 )
 
-                neo_dict = {
-                    "id": row_mut["Identity"]
-                    + "_"
-                    + str(peplen)
-                    + "_"
-                    + str(row_mut["pos"])
-                    + "_"
-                    + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
-                    "mutation_id": mutation_dict[row_mut["Identity"]],
-                    "HLA_gene_id": row_mut["MHC"],
-                    "sequence": row_mut["peptide"],
-                    "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
-                    "mutated_position": mut_pos,
-                    "Kd": float(row_mut["affinity"]),
-                    "KdWT": float(WTdict[WTid]["affinity"]),
-                }
+                if frameshift:
+                    mut_pos = "Frameshifted peptide"
+
+                if SV:
+                    neo_dict = {
+                        "id": row_mut["Identity"]
+                        + "_"
+                        + str(peplen)
+                        + "_"
+                        + str(row_mut["pos"])
+                        + "_"
+                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
+                        ,
+                        "mutation_id": bedpe_dict[
+                            bedpe_match_dict[row_mut["Identity"]]
+                        ].id,
+                        "HLA_gene_id": row_mut["MHC"],
+                        "sequence": row_mut["peptide"],
+                        "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
+                        "mutated_position": mut_pos,
+                        "Kd": float(row_mut["affinity"]),
+                        "KdWT": float(WTdict[WTid]["affinity"]),
+                    }
+                else:
+                    neo_dict = {
+                        "id": row_mut["Identity"]
+                        + "_"
+                        + str(peplen)
+                        + "_"
+                        + str(row_mut["pos"])
+                        + "_"
+                        + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
+                        "mutation_id": mutation_dict[row_mut["Identity"]],
+                        "HLA_gene_id": row_mut["MHC"],
+                        "sequence": row_mut["peptide"],
+                        "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
+                        "mutated_position": mut_pos,
+                        "Kd": float(row_mut["affinity"]),
+                        "KdWT": float(WTdict[WTid]["affinity"]),
+                    }
                 outer_dict["neoantigens"].append(neo_dict)
 
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
@@ -658,6 +716,7 @@ def makeID(maf_row):
         )
     return identifier_key
 
+
 class VariantCallingFormat(object):
     """
     Class for storing SV information in VCF format,
@@ -670,14 +729,13 @@ class VariantCallingFormat(object):
         self.ref = ref
         self.alt = alt
 
-
     def __str__(self):
         return "%s(chrom = %s, pos = %s, ref = %s, alt = %s)" % (
             self.__class__.__name__,
             self.chrom,
             self.pos,
             self.ref,
-            self.alt
+            self.alt,
         )
 
     def __repr__(self):
@@ -686,8 +744,9 @@ class VariantCallingFormat(object):
             self.chrom,
             self.pos,
             self.ref,
-            self.alt
+            self.alt,
         )
+
 
 class BedpeFormat(object):
     """
@@ -695,7 +754,7 @@ class BedpeFormat(object):
     all components are in string format
     """
 
-    def __init__(self, chrom1, pos1, strand1, chrom2, pos2, strand2,id):
+    def __init__(self, chrom1, pos1, strand1, chrom2, pos2, strand2, id):
         self.chrom1 = chrom1
         self.pos1 = pos1
         self.strand1 = strand1
@@ -705,15 +764,18 @@ class BedpeFormat(object):
         self.id = id
 
     def __str__(self):
-        return "%s(chrom1 = %s, pos1 = %s, strand1 = %s, chrom2 = %s, pos2 = %s, strand2 = %s, id = %s)" % (
-            self.__class__.__name__,
-            self.chrom1,
-            self.pos1,
-            self.strand1,
-            self.chrom2,
-            self.pos2,
-            self.strand2,
-            self.id
+        return (
+            "%s(chrom1 = %s, pos1 = %s, strand1 = %s, chrom2 = %s, pos2 = %s, strand2 = %s, id = %s)"
+            % (
+                self.__class__.__name__,
+                self.chrom1,
+                self.pos1,
+                self.strand1,
+                self.chrom2,
+                self.pos2,
+                self.strand2,
+                self.id,
+            )
         )
 
     def __repr__(self):
@@ -725,8 +787,9 @@ class BedpeFormat(object):
             self.chrom2,
             self.pos2,
             self.strand2,
-            self.id
+            self.id,
         )
+
 
 def bedpe_load(filepath):
     """
@@ -738,56 +801,88 @@ def bedpe_load(filepath):
     filename = os.path.basename(filepath)
     line_num = 0
     print("Loading SVs from {0}.".format(filename))
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         header = next(f)
-        header = header.rstrip().split('\t')
+        header = header.rstrip().split("\t")
         for line in f:
             line_num += 1
             tmpline = line.rstrip().split("\t")
-            chrom1 = tmpline[header.index('chrom1')].replace('chr', '')
-            pos1 = tmpline[header.index('start1')]
-            chrom2 = tmpline[header.index('chrom2')].replace('chr', '')
-            pos2 = tmpline[header.index('start2')]
-            strand1 = tmpline[header.index('strand1')]
-            strand2 = tmpline[header.index('strand2')]
-            svclass = tmpline[header.index('svclass')]
-            sv_bedpe_id = tmpline[header.index('sv_id')]
-            custom_id = makeID_bedpe(chrom1,pos1,svclass)
-            bedpe = BedpeFormat(chrom1, pos1, strand1, chrom2, pos2, strand2,sv_bedpe_id)
+            chrom1 = tmpline[header.index("chrom1")].replace("chr", "")
+            pos1 = tmpline[header.index("start1")]
+            chrom2 = tmpline[header.index("chrom2")].replace("chr", "")
+            pos2 = tmpline[header.index("start2")]
+            strand1 = tmpline[header.index("strand1")]
+            strand2 = tmpline[header.index("strand2")]
+            svclass = tmpline[header.index("svclass")]
+            sv_bedpe_id = tmpline[header.index("sv_id")]
+            custom_id = makeID_bedpe(chrom1, pos1, svclass)
+            bedpe = BedpeFormat(
+                chrom1, pos1, strand1, chrom2, pos2, strand2, sv_bedpe_id
+            )
             bedpe_list.append(bedpe)
             bedpedict[custom_id] = bedpe
 
     return bedpe_list, bedpedict
 
-def makeID_bedpe(chrom1,pos1,svclass):
-    ##ENCODING FASTA ID FOR USE IN MATCHING LATER
-    ALPHABET= ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-    position= int(str(pos1)[0:2])
+def makeID_bedpe(chrom1, pos1, svclass):
+    ##ENCODING FASTA ID FOR USE IN MATCHING LATER
+    ALPHABET = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+    ]
+
+    position = int(str(pos1)[0:2])
 
     if position < 26:
         encoded_start = ALPHABET[position]
     elif position < 100:
-        encoded_start = ALPHABET[position//4]
+        encoded_start = ALPHABET[position // 4]
 
-    position= int(str(pos1)[-2:])
+    position = int(str(pos1)[-2:])
 
     if position < 26:
         encoded_end = ALPHABET[position]
     elif position < 100:
-        encoded_end = ALPHABET[position//4]
+        encoded_end = ALPHABET[position // 4]
     sum_remaining = sum(int(d) for d in str(pos1)[2:-2])
 
-    encoded_position = encoded_start + ALPHABET[sum_remaining%26] + encoded_end
+    encoded_position = encoded_start + ALPHABET[sum_remaining % 26] + encoded_end
 
     identifier_key = (
         str(chrom1)
         + "_"
         + encoded_position
-        + "V" #This indicates structural variant. It is added in the generateMutFasta script as well but not in this function.
-        )
+        + "V"  # This indicates structural variant. It is added in the generateMutFasta script as well but not in this function.
+    )
 
     return identifier_key
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
     parser.add_argument("--maf_file", required=True, help="Path to the MAF file")

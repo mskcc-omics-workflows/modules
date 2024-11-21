@@ -34,16 +34,21 @@ STAB_PAN_HEADER = [
 NETMHC3_HEADER = ["pos", "peptide", "score_el", "affinity", "Identity", "MHC"]
 
 
-def netMHCpan_out_reformat(netMHCpanoutput, mut, stab, netmhc3, prefix):
+def netMHCpan_out_reformat(netMHCoutput, mut, stab, netmhc3, prefix):
     file_li = []
     stab_prefix = ""
     type_prefix = "WT"
+    pan_prefix = "pan"
     if stab:
         stab_prefix = "stab"
     if mut:
         type_prefix = "MUT"
-    outfilename = "{}_netmHC{}panoutput.{}.tsv".format(prefix, stab_prefix, type_prefix)
-    with open(netMHCpanoutput, "r") as file:
+    if netmhc3:
+        pan_prefix = ""
+    outfilename = "{}_netmhc{}{}.output.{}.tsv".format(
+        prefix, pan_prefix, stab_prefix, type_prefix
+    )
+    with open(netMHCoutput, "r") as file:
         # data = file.read()
         for line in file:
             # Remove leading whitespace
@@ -88,7 +93,7 @@ def parse_args():
         help="Output is from netmhcstab",
     )
     parser.add_argument(
-        "--from_NETMHCPAN3",
+        "--from_NETMHC3",
         action="store_true",
         help="Output is from the older netmhc version 3.4",
     )
