@@ -12,8 +12,8 @@ process NETMHC3 {
 
     output:
     tuple val(output_meta),       path("*.xls"),               emit: xls
-    tuple val(output_meta),       path("*.netmhc.output"),  emit: netmhcoutput
-    tuple val(output_meta),       path("hla_*.txt"),           emit: netmhc_hla_files
+    tuple val(output_meta),       path("*.netmhc.output"),     emit: netmhcoutput
+    tuple val(output_meta),       path("*.hla_*.txt"),           emit: netmhc_hla_files
     path "versions.yml",                                       emit: versions
 
     when:
@@ -26,6 +26,7 @@ process NETMHC3 {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
+    output_meta.typePan = false
     def NETMHC_VERSION = "3.4"
 
     """
@@ -37,6 +38,9 @@ process NETMHC3 {
     -l 9 \
     --xls=${prefix}.${inputType}.xls \
     ${inputFasta} > ${prefix}.${inputType}.netmhc.output
+
+    mv hla_accepted.txt ${prefix}.hla_accepted.txt
+    mv hla_rejected.txt ${prefix}.hla_rejected.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -52,9 +56,12 @@ process NETMHC3 {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
+    output_meta.typePan = false
     """
     touch ${prefix}.MUT.netmhc.output
     touch ${prefix}.MUT.xls
+    touch ${prefix}.hla_accepted.txt
+    touch ${prefix}.hla_rejected.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

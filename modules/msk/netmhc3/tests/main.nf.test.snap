@@ -1,62 +1,65 @@
 {
+    "netmhc3 - xls,output,fa - stub": {
+        "content": [
+            [
+                "versions.yml:md5,41df6059e67545fe2fe2734514557bb7"
+            ],
+            {
+                "id": "test",
+                "single_end": false,
+                "typeMut": true,
+                "fromStab": false,
+                "typePan": false
+            },
+            "test.MUT.xls",
+            "test.MUT.netmhc.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2024-11-21T10:38:26.592697"
+    },
     "netmhc3 - WT - xls,output,fa": {
         "content": [
             [
-                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+                "versions.yml:md5,41df6059e67545fe2fe2734514557bb7"
             ],
             {
                 "id": "test",
                 "single_end": false,
                 "typeMut": false,
-                "fromStab": false
+                "fromStab": false,
+                "typePan": false
             },
             "test.WT.xls",
             "test.WT.netmhc.output"
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-06-13T11:02:31.338253"
-    },
-    "netmhc3 - xls,output,fa - stub": {
-        "content": [
-            [
-                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
-            ],
-            {
-                "id": "test",
-                "single_end": false,
-                "typeMut": true,
-                "fromStab": false
-            },
-            "test.MUT.xls",
-            "test.MUT.netmhc.output"
-        ],
-        "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
-        },
-        "timestamp": "2024-06-13T11:02:35.582061"
+        "timestamp": "2024-11-21T10:38:23.460325"
     },
     "netmhc3 - MUT - xls,output,fa": {
         "content": [
             [
-                "versions.yml:md5,35ec563839ee27410cf9f8d134c6e8e5"
+                "versions.yml:md5,41df6059e67545fe2fe2734514557bb7"
             ],
             {
                 "id": "test",
                 "single_end": false,
                 "typeMut": true,
-                "fromStab": false
+                "fromStab": false,
+                "typePan": false
             },
             "test.MUT.xls",
             "test.MUT.netmhc.output"
         ],
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "24.04.2"
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-06-13T11:02:12.753672"
+        "timestamp": "2024-11-21T10:37:19.144708"
     }
 }
