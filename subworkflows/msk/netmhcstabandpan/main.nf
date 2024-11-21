@@ -1,6 +1,6 @@
 include { NEOANTIGENUTILS_GENERATEHLASTRING  } from '../../../modules/msk/neoantigenutils/generatehlastring/main'
 include { NEOANTIGENUTILS_GENERATEMUTFASTA  } from '../../../modules/msk/neoantigenutils/generatemutfasta/main'
-include { NETMHCPAN } from '../../../modules/msk/netmhcpan/main'
+include { NETMHCPAN4 } from '../../../modules/msk/netmhcpan4/main'
 include { NETMHCSTABPAN } from '../../../modules/msk/netmhcstabpan/main'
 include { NEOANTIGENUTILS_FORMATNETMHCPAN } from '../../../modules/msk/neoantigenutils/formatnetmhcpan/main'
 
@@ -43,15 +43,15 @@ workflow NETMHCSTABANDPAN {
                                         ch_neosv_out
                                         )
 
-    NETMHCPAN( ch_netmhcinput )
+    NETMHCPAN4( ch_netmhcinput )
 
-    ch_versions = ch_versions.mix(NETMHCPAN.out.versions)
+    ch_versions = ch_versions.mix(NETMHCPAN4.out.versions)
 
     NETMHCSTABPAN( ch_netmhcinput )
 
     ch_versions = ch_versions.mix(NETMHCSTABPAN.out.versions)
 
-    merged_pan_and_stab = NETMHCPAN.out.netmhcpanoutput.mix(NETMHCSTABPAN.out.netmhcstabpanoutput)
+    merged_pan_and_stab = NETMHCPAN4.out.netmhcpanoutput.mix(NETMHCSTABPAN.out.netmhcstabpanoutput)
 
     NEOANTIGENUTILS_FORMATNETMHCPAN( merged_pan_and_stab )
 
