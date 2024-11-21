@@ -24,6 +24,7 @@ process NETMHCPAN4 {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
+    output_meta.typePan = true
     def NETMHCPAN_VERSION = "4.1"
 
     """
@@ -55,6 +56,7 @@ process NETMHCPAN4 {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
+    output_meta.typePan = true
     """
     touch ${prefix}.MUT.netmhcpan.output
 

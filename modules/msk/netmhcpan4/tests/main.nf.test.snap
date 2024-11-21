@@ -8,7 +8,8 @@
                 "id": "test",
                 "single_end": false,
                 "typeMut": true,
-                "fromStab": false
+                "fromStab": false,
+                "typePan": true
             },
             "test.MUT.netmhcpan.output"
         ],
@@ -53,7 +54,8 @@
                 "id": "test",
                 "single_end": false,
                 "typeMut": true,
-                "fromStab": false
+                "fromStab": false,
+                "typePan": true
             },
             "test.MUT.xls",
             "test.MUT.netmhcpan.output"
@@ -73,7 +75,8 @@
                 "id": "test",
                 "single_end": false,
                 "typeMut": true,
-                "fromStab": false
+                "fromStab": false,
+                "typePan": true
             },
             "test.MUT.xls",
             "test.MUT.netmhcpan.output"
