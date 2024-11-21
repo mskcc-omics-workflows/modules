@@ -367,7 +367,7 @@ jobs:
           - profile: "conda"
             tags: phylowgs/writeresults
           - profile: "conda"
-            tags: netmhcpan
+            tags: netmhcpan4
           - profile: "conda"
             tags: neoantigeninput
           - profile: "conda"
@@ -418,6 +418,8 @@ jobs:
             tags: rediscoverte
           - profile: "conda"
             tags: neosv
+          - profile: "conda"
+            tags: netmhc3
 
     env:
       NXF_ANSI_LOG: false
