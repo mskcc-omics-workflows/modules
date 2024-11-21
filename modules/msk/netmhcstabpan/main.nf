@@ -25,6 +25,7 @@ process NETMHCSTABPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = true
+    output_meta.typePan = true
 
     def NETMHCPAN_VERSION = "4.1"
     def NETMHCSTABPAN_VERSION = "1.0"
@@ -53,6 +54,7 @@ process NETMHCSTABPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = true
+    output_meta.typePan = true
     def NETMHCPAN_VERSION = "4.1"
     def NETMHCSTABPAN_VERSION = "1.0"
 
