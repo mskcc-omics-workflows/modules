@@ -1,2 +1,37 @@
 # Review from a member of the review-team is required
 * @mskcc-omics-workflows/reviewers
+./modules/msk/custom/splitfastqbylane/** @anoronh4 @mskcc-omics-workflows/reviewers
+./modules/msk/facets/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/gatk4/applybqsr/** @yocra3 @FriederikeHanssen @mskcc-omics-workflows/reviewers
+./modules/msk/gbcms/** @buehlere @mskcc-omics-workflows/reviewers
+./modules/msk/genomenexus/annotationpipeline/** @rnaidu @mskcc-omics-workflows/reviewers
+./modules/msk/genomenexus/vcf2maf/** @rnaidu @mskcc-omics-workflows/reviewers
+./modules/msk/genotypevariants/all/** @buehlere @mskcc-omics-workflows/reviewers
+./modules/msk/mutect1/** @rnaidu @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenediting/aligntoiedb/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenediting/computefitness/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenutils/convertannotjson/** @johnoooh @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenutils/formatnetmhcpan/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenutils/generatehlastring/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenutils/generatemutfasta/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/neoantigenutils/neoantigeninput/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/neosv/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/netmhcpan/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/netmhcstabpan/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/phylowgs/createinput/** @pintoa1-mskcc @mskcc-omics-workflows/reviewers
+./modules/msk/phylowgs/multievolve/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/phylowgs/parsecnvs/** @pintoa1-mskcc @mskcc-omics-workflows/reviewers
+./modules/msk/phylowgs/writeresults/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/polysolver/** @anoronh4 @mskcc-omics-workflows/reviewers
+./modules/msk/ppflagfixer/** @huyu335 @mskcc-omics-workflows/reviewers
+./modules/msk/pvmaf/concat/** @buehlere @mskcc-omics-workflows/reviewers
+./modules/msk/pvmaf/tagtraceback/** @buehlere @mskcc-omics-workflows/reviewers
+./modules/msk/rediscoverte/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/salmon/index/** @kevinmenden @drpatelh @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/salmon/quant/** @kevinmenden @drpatelh @mskcc-omics-workflows/reviewers
+./modules/msk/snppileup/** @nikhil @mskcc-omics-workflows/reviewers
+./subworkflows/msk/genome_nexus/** @rnaidu @mskcc-omics-workflows/reviewers
+./subworkflows/msk/neoantigen_editing/** @johnoooh @mskcc-omics-workflows/reviewers
+./subworkflows/msk/netmhcstabandpan/** @nikhil @mskcc-omics-workflows/reviewers
+./subworkflows/msk/phylowgs/** @nikhil @mskcc-omics-workflows/reviewers
+./subworkflows/msk/traceback/** @buehlere @mskcc-omics-workflows/reviewers
