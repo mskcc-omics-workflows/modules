@@ -43,7 +43,6 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
         --netMHCpan_WT_input ${wtNetMHCpan} \
         ${args}
 
-
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
             neoantigeninput: \$(echo \$(generate_input.py -v))

@@ -399,24 +399,6 @@ class mutation(object):
             # SNPs
             Allele2code = self.maf_row["Tumor_Seq_Allele2"]
 
-        if self.maf_row["Tumor_Seq_Allele2"] == "-":
-            # handles deletion
-            if len(self.maf_row["Reference_Allele"]) > 3:
-                Allele2code = self.maf_row["Reference_Allele"][0:3]
-            else:
-                Allele2code = self.maf_row["Reference_Allele"]
-
-        elif len(self.maf_row["Tumor_Seq_Allele2"]) > 1:
-            # handles INS and DNP
-            if len(self.maf_row["Tumor_Seq_Allele2"]) > 3:
-                Allele2code = self.maf_row["Tumor_Seq_Allele2"][0:3]
-            else:
-                Allele2code = self.maf_row["Tumor_Seq_Allele2"]
-
-        else:
-            # SNPs
-            Allele2code = self.maf_row["Tumor_Seq_Allele2"]
-
         if self.maf_row["Variant_Classification"] in variant_type_map:
             self.identifier_key = (
                 str(self.maf_row["Chromosome"])
@@ -434,7 +416,6 @@ class mutation(object):
                 + "SY"
                 + Allele2code
             )
-        print(self.identifier_key)
 
     ### Check if the variant_classification is among those that can generate a neoantigen
     def is_non_syn(self):

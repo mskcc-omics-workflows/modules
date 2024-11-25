@@ -1,0 +1,104 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "netmhc3"
+description: Predicts binding of neoantigen peptides
+keywords:
+  - immune
+  - netmhc
+  - genomics
+tools:
+  - "netmhc3":
+      description:
+        "Runs netMHC and outputs tsvs and STDout for mutated and wild type
+        neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/netmhc-4.1/"
+      documentation: "https://services.healthtech.dtu.dk/services/netmhc-4.1/"
+      licence: ["MIT"]
+      identifier: ""
+
+input:
+  # Only when we have meta
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - inputFasta:
+        type: file
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides generated
+          from generatemutfasta
+        pattern: "*.{fa}"
+    - inputSVFasta:
+        type: file
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides from
+          NeoSV
+        pattern: "*.{fa}"
+    - hlaString:
+        type: string
+        description:
+          HLA string formatted by generatehlastring.  Typically a comma separated
+          string of HLAs.
+    - inputType:
+        type: string
+        description:
+          Allows netmhc to run in parallel. Should be 'MUT' or 'WT', it
+          will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as
+          an input. Running them in series is kicked off by putting in anything other
+          than MUT or WT.
+        pattern: "WT,MUT"
+output:
+  #Only when we have meta
+  - netmhcoutput:
+      - output_meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.netmhc.output":
+          type: file
+          description:
+            STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This
+            contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
+            for this file.
+          pattern: "*.WT.netmhc.output,*.MUT.netmhc.output"
+
+  - xls:
+      - output_meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.xls":
+          type: file
+          description:
+            XLS file of netMHC. A poorly formated file of neoantigens. This
+            contains the MUT or WT antigens
+          pattern: "*.WT.xls,*.MUT.xls"
+
+  - netmhc_hla_files:
+      - output_meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.hla_*.txt":
+          type: file
+          description:
+            STDOUT file of netMHC.  A poorly formated file of neoantigens.  This
+            contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
+            for this file.
+          pattern: "*.hla_accepted.txt,*.hla_rejected.txt"
+
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+
+authors:
+  - "@johnoooh"
+  - "@nikhil"
+maintainers:
+  - "@johnoooh"
+  - "@nikhil"

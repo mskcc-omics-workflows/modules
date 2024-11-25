@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "netmhcpan"
-description: write your description here
+name: "netmhcpan4"
+description: Predicts binding of neoantigen peptides
 keywords:
   - immune
   - netmhcpan
@@ -46,21 +46,31 @@ input:
           will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as
           an input. Running them in series is kicked off by putting in anything other
           than MUT or WT.
-        pattern: "*"
+        pattern: "WT,MUT"
 output:
   #Only when we have meta
+  - xls:
+      - output_meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.xls":
+          type: file
+          description: XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens
+          pattern: "*.WT.xls,*.MUT.xls"
   - netmhcpanoutput:
       - output_meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
+          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
       - "*.netmhcpan.output":
-          type: file
-          description:
-            STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This
-            contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
-            for this file.
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
           pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
   - versions:
       - versions.yml:
