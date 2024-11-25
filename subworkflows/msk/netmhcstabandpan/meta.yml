@@ -9,7 +9,7 @@ keywords:
 components:
   - neoantigenutils/generatehlastring
   - neoantigenutils/generatemutfasta
-  - netmhc
+  - netmhc3
   - netmhcpan4
   - netmhcstabpan
   - neoantigenutils/formatnetmhcpan
