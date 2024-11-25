@@ -64,8 +64,7 @@ output:
             e.g. `[ id:'sample1', single_end:false ]`
       - "*.xls":
           type: file
-          description:
-            XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens
+          description: XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens
           pattern: "*.WT.xls,*.MUT.xls"
 
   - netmhc_hla_files:
