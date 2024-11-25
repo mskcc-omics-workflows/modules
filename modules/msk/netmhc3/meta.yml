@@ -42,7 +42,7 @@ input:
     - inputType:
         type: string
         description:
-          Allows netmhcpan to run in parallel. Should be 'MUT' or 'WT', it
+          Allows netmhc to run in parallel. Should be 'MUT' or 'WT', it
           will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as
           an input. Running them in series is kicked off by putting in anything other
           than MUT or WT.
@@ -85,7 +85,7 @@ output:
       - "*.hla_*.txt":
           type: file
           description:
-            STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This
+            STDOUT file of netMHC.  A poorly formated file of neoantigens.  This
             contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
             for this file.
           pattern: "*.hla_accepted.txt,*.hla_rejected.txt"
