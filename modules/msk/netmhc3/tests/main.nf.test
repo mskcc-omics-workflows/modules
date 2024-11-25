@@ -6,7 +6,7 @@ nextflow_process {
 
     tag "modules"
     tag "modules_nfcore"
-    tag "netmhcpan4"
+    tag "netmhc3"
     tag "modules_msk"
 
     test("netmhc3 - MUT,SV - xls,output,fa") {

@@ -11,7 +11,8 @@ nextflow_workflow {
     tag "netmhcstabandpan"
     tag "neoantigenutils/generatehlastring"
     tag "neoantigenutils/generatemutfasta"
-    tag "netmhcpan"
+    tag "netmhc3"
+    tag "netmhcpan4"
     tag "netmhcstabpan"
     tag "neoantigenutils/formatnetmhcpan"
 

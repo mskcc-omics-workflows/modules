@@ -2,74 +2,73 @@
 name: "netmhcpan4"
 description: Predicts binding of neoantigen peptides
 keywords:
-  - immune
-  - netmhcpan
-  - genomics
+- immune
+- netmhcpan
+- genomics
 tools:
-  - "netmhcpan":
-      description:
-        " Runs netMHCpan and outputs tsvs and STDout for mutated and wild
-        type neoantigens"
-      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      licence: ["MIT"]
-      identifier: biotools:netmhcpan
+- "netmhcpan":
+    description: " Runs netMHCpan and outputs tsvs and STDout for mutated and wild
+      type neoantigens"
+    homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+    documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
+    licence: ["MIT"]
+    identifier: biotools:netmhcpan
 
 input:
   # Only when we have meta
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:'sample1', single_end:false ]`
-    - inputFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides generated
-          from generatemutfasta
-        pattern: "*.{fa}"
-    - inputSVFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides from
-          NeoSV
-        pattern: "*.{fa}"
-    - hlaString:
-        type: string
-        description:
-          HLA string formatted by generatehlastring.  Typically a comma separated
-          string of HLAs.
-    - inputType:
-        type: string
-        description:
-          Allows netmhcpan to run in parallel. Should be 'MUT' or 'WT', it
-          will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as
-          an input. Running them in series is kicked off by putting in anything other
-          than MUT or WT.
-        pattern: "WT,MUT"
+- -
+    meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+  - inputFasta:
+      type: file
+      description: Multifasta containing Mutated peptides or Wildtype peptides generated
+        from generatemutfasta
+      pattern: "*.{fa}"
+  - inputSVFasta:
+      type: file
+      description: Multifasta containing Mutated peptides or Wildtype peptides from
+        NeoSV
+      pattern: "*.{fa}"
+  - hlaString:
+      type: string
+      description: HLA string formatted by generatehlastring.  Typically a comma separated
+        string of HLAs.
+  - inputType:
+      type: string
+      description: Allows netmhcpan to run in parallel. Should be 'MUT' or 'WT', it
+        will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as
+        an input. Running them in series is kicked off by putting in anything other
+        than MUT or WT.
+      pattern: "WT,MUT"
 output:
   #Only when we have meta
-  - netmhcpanoutput:
-      - output_meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:'sample1', single_end:false ]`
-      - "*.netmhcpan.output":
-          type: file
-          description:
-            STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This
-            contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
-            for this file.
-          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
+- xls:
+  - output_meta: {}
+  - '*.xls': {}
+- netmhcpanoutput:
+  - output_meta:
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+      pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+  - '*.netmhcpan.output':
+      type: map
+      description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'sample1', single_end:false ]`
+      pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+- versions:
+  - versions.yml:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
 authors:
-  - "@johnoooh"
-  - "@nikhil"
+- "@johnoooh"
+- "@nikhil"
 maintainers:
-  - "@johnoooh"
-  - "@nikhil"
+- "@johnoooh"
+- "@nikhil"
