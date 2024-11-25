@@ -50,8 +50,16 @@ input:
 output:
   #Only when we have meta
   - xls:
-      - output_meta: {}
-      - "*.xls": {}
+      - output_meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.xls":
+          type: file
+          description:
+            XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens
+          pattern: "*.WT.xls,*.MUT.xls"
   - netmhcpanoutput:
       - output_meta:
           type: map

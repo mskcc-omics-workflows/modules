@@ -28,7 +28,12 @@ input:
           Multifasta containing Mutated peptides or Wildtype peptides generated
           from generatemutfasta
         pattern: "*.{fa}"
-    - inputSVFasta: {}
+    - inputSVFasta:
+        type: file
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides from
+          NeoSV
+        pattern: "*.{fa}"
     - hlaString:
         type: string
         description:
