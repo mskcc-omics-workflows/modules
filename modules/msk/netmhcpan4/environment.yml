@@ -4,6 +4,5 @@ name: "netmhcpan4"
 channels:
   - conda-forge
   - bioconda
-  - defaults
 dependencies:
-  - "NETMHCPAN4"
+  - "YOUR-TOOL=HERE"

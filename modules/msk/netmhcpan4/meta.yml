@@ -46,7 +46,7 @@ input:
           will kick off two jobs. make a Channel.Of('MUT','WT') outside the module as
           an input. Running them in series is kicked off by putting in anything other
           than MUT or WT.
-        pattern: "*"
+        pattern: "WT,MUT"
 output:
   #Only when we have meta
   - netmhcpanoutput:
