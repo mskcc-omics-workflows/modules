@@ -15,9 +15,29 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T11:29:22.688222"
+        "timestamp": "2024-11-25T09:20:13.007454444"
+    },
+    "netmhcstabpan - WT,SV - xls,output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,d1b3afd365748a44098c5642fad6c94a"
+            ],
+            {
+                "id": "test",
+                "single_end": false,
+                "typeMut": false,
+                "fromStab": true,
+                "typePan": true
+            },
+            "test.WT.netmhcstabpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-11-25T09:15:21.840510308"
     },
     "netmhcstabpan - xls,output,fa - stub": {
         "content": [
@@ -35,9 +55,9 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T11:36:00.621649"
+        "timestamp": "2024-11-25T09:25:26.180428087"
     },
     "netmhcstabpan - WT - xls,output,fa": {
         "content": [
@@ -55,8 +75,28 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.1"
         },
-        "timestamp": "2024-11-21T11:35:57.31425"
+        "timestamp": "2024-11-25T09:25:21.015015849"
+    },
+    "netmhcstabpan - MUT,SV - xls,output,fa": {
+        "content": [
+            [
+                "versions.yml:md5,d1b3afd365748a44098c5642fad6c94a"
+            ],
+            {
+                "id": "test",
+                "single_end": false,
+                "typeMut": true,
+                "fromStab": true,
+                "typePan": true
+            },
+            "test.MUT.netmhcstabpan.output"
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.1"
+        },
+        "timestamp": "2024-11-25T09:09:53.461848085"
     }
 }
