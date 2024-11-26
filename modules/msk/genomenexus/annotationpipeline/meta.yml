@@ -38,9 +38,12 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'test' ]`
-      - ${meta.control_id}_${meta.case_id}_annotated.maf:
-          type: file
-          description: Annotated MAF file
+          pattern: "*_annotated.{maf}"
+      - "*.maf":
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test' ]`
           pattern: "*_annotated.{maf}"
   - versions:
       - versions.yml:
