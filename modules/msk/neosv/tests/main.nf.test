@@ -1,0 +1,77 @@
+nextflow_process {
+
+    name "Test Process NEOSV"
+    script "../main.nf"
+    process "NEOSV"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neosv"
+    tag "modules_msk"
+
+    test("neosv - fa") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['svbedpe']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02"
+                    ]
+
+                input[1] = [
+                    file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.mutOut,
+                    process.out.wtOut,
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+
+    test("neosv - fa - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sequence_fa'),
+                    "HLA"
+                    ]
+                input[1] = [file('gtf'), file('cdna')]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.mutOut,
+                    process.out.wtOut
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+}

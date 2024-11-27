@@ -19,13 +19,11 @@ process PHYLOWGS_MULTIEVOLVE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def threads = task.cpus * 2
 
     """
     python2 \\
         /usr/bin/multievolve.py  \\
         ${args} \\
-        --num-chains ${threads} \\
         --ssms ${ssm_data} \\
         --cnvs ${cnv_data}
 

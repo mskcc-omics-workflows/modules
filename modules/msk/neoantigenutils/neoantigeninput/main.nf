@@ -6,7 +6,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
         'docker.io/mskcc/neoantigen-utils-base:1.1.0' }"
 
     input:
-    tuple val(meta),  path(inputMaf),      path(hlaFile)
+    tuple val(meta),  path(inputMaf),      path(inputBedpe),    path(hlaFile)
     tuple val(meta2), path(phyloWGSsumm),  path(phyloWGSmut),   path(phyloWGSfolder)
     tuple val(meta3), path(mutNetMHCpan),  path(wtNetMHCpan)
 
@@ -33,15 +33,15 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
 
 
         generate_input.py --maf_file ${inputMaf} \
+        --bedpe_file ${inputBedpe} \
         --summary_file ${id}.summ.json \
         --mutation_file ${id}.mut.json \
         --tree_directory \$tree_folder_name \
         --id ${id} --patient_id ${patientid} \
         --cohort ${cohort} --HLA_genes ${hlaFile} \
         --netMHCpan_MUT_input ${mutNetMHCpan} \
-        --netMHCpan_WT_input ${wtNetMHCpan}
+        --netMHCpan_WT_input ${wtNetMHCpan} \
         ${args}
-
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":

@@ -27,12 +27,12 @@ workflow TRACEBACK {
     .map {it -> [it[0].subMap('patient')[0], *it[1..-1]] }
     .set{concat_maf}
 
+
     bams
     .map { it -> [it[0].subMap('patient')[0], it[0], *it[1..-1]] }
     .combine(concat_maf, by:0)
     .map { it[1..-1] }
     .set{bam_list_maf}
-
     // genotype each bam combined maf, per patient if provided
     GENOTYPEVARIANTS_ALL(bam_list_maf, reference, reference_fai)
     ch_versions = ch_versions.mix(GENOTYPEVARIANTS_ALL.out.versions.first())
@@ -53,6 +53,8 @@ workflow TRACEBACK {
         }
     .set{split_genotype_xs}
 
+
+
     // Combine impact and access mafs
     split_genotype_imp
     .concat(split_genotype_xs.genotyped)
@@ -61,11 +63,13 @@ workflow TRACEBACK {
     .set{all_genotype}
     individual_genotype = all_genotype.collect()
 
+
     // concat gentoyped mafs, per patient if provided
     PVMAFCONCAT_GENOTYPE(all_genotype)
     ch_versions = ch_versions.mix(PVMAFCONCAT_GENOTYPE.out.versions.first())
 
     genotyped_maf = PVMAFCONCAT_GENOTYPE.out.maf
+
 
     emit:
     individual_genotyped_mafs = individual_genotype

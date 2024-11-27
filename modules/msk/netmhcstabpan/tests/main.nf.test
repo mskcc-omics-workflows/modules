@@ -9,6 +9,66 @@ nextflow_process {
     tag "netmhcstabpan"
     tag "modules_msk"
 
+    test("netmhcstabpan - MUT,SV - xls,output,fa") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa']), checkIfExists: true),
+                    file(file(params.test_data_mskcc['neoantigen']['svfa']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    "MUT"
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.netmhcstabpanoutput[0][0],
+                    file(process.out.netmhcstabpanoutput[0][1]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+    test("netmhcstabpan - WT,SV - xls,output,fa") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(file(params.test_data_mskcc['neoantigen']['WT_sequence_fa']), checkIfExists: true),
+                    file(file(params.test_data_mskcc['neoantigen']['svfa']), checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    "WT"
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.versions,
+                    process.out.netmhcstabpanoutput[0][0],
+                    file(process.out.netmhcstabpanoutput[0][1]).name
+                    ).match()
+                }
+            )
+        }
+
+    }
+
     test("netmhcstabpan - MUT - xls,output,fa") {
 
         when {
@@ -17,6 +77,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file(file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa']), checkIfExists: true),
+                    [],
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     "MUT"
                     ]
@@ -46,6 +107,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file(file(params.test_data_mskcc['neoantigen']['WT_sequence_fa']), checkIfExists: true),
+                    [],
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     "WT"
                     ]
@@ -67,6 +129,7 @@ nextflow_process {
 
     }
 
+
     test("netmhcstabpan - xls,output,fa - stub") {
 
         options "-stub"
@@ -78,6 +141,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sequence_fa'),
+                    file('svfa'),
                     "HLA",
                     "MUT"
                     ]

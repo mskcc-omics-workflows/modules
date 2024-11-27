@@ -5,27 +5,31 @@
                 "0": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
                         },
-                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                        "test-annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,faa1aee6ca139f0b49241579881c42e2"
+                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
                 ],
                 "annotated_maf": [
                     [
                         {
-                            "id": "test"
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
                         },
-                        "test_annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                        "test-annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,faa1aee6ca139f0b49241579881c42e2"
+                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
                 ]
             }
         ],
-        "timestamp": "2024-07-25T11:12:27.03495"
+        "timestamp": "2024-11-26T16:50:32.331962"
     }
 }

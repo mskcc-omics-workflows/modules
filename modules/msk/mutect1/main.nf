@@ -33,12 +33,12 @@ process MUTECT1 {
     """
     java -Xmx28g -Xms256m -XX:-UseGCOverheadLimit -jar /opt/mutect/muTect-1.1.5.jar -T MuTect \
         ${args} \
-        --input_file:normal ${control_bam} \
         --input_file:tumor ${case_bam} \
+        --input_file:normal ${control_bam} \
         --intervals ${bed_file} \
-        --normal_sample_name ${control_sample_name} \
-        --reference_sequence ${fasta_file} \
         --tumor_sample_name ${case_sample_name} \
+        --reference_sequence ${fasta_file} \
+        --normal_sample_name ${control_sample_name} \
         ${args2} \
         --out ${case_sample_name}.${control_sample_name}.mutect.txt \
         --vcf ${case_sample_name}.${control_sample_name}.mutect.vcf

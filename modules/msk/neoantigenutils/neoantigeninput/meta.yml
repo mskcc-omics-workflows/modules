@@ -1,7 +1,8 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "neoantigenutils_neoantigeninput"
-description: This module take several inputs to the Lukza neoantigen pipeline and combines them into a single json file ready for input into their pipeline
+description:
+  This module take several inputs to the Lukza neoantigen pipeline and
+  combines them into a single json file ready for input into their pipeline
 keywords:
   - neoantigen
   - aggregate
@@ -11,65 +12,76 @@ tools:
       description: "Collection of helper scripts for neoantigen processing"
       documentation: "https://github.com/mskcc-omics-workflows/modules"
       licence: [""]
+      identifier: ""
 
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information.  Maybe cohort and patient_id as well?
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - inputMaf:
-      type: file
-      description: Maf outputtted by Tempo that was run through phyloWGS
-      pattern: "*.{maf}"
-
-  - phyloWGSsumm:
-      type: file
-      description: Summ json outputtted by phyloWGS
-      pattern: "*.{json.gz}"
-
-  - phyloWGSmut:
-      type: file
-      description: Summary json outputtted by phyloWGS
-      pattern: "*.{json.gz}"
-
-  - phyloWGSfolder:
-      type: file
-      description: Folder of mutations in trees output by PhyloWGS
-      pattern: ".{zip}"
-
-  - mutNetMHCpan:
-      type: file
-      description: tsv formatted output from netMHCpan with the mutated neoantigens .
-      pattern: ".{tsv}"
-
-  - wtNetMHCpan:
-      type: file
-      description: tsv formatted STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This containes the wild type antigens
-      pattern: ".{tsv}"
-
-  - hlaFile:
-      type: file
-      description: HLA tsv outputtted by Polysolver
-      pattern: "winners.{tsv}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
+          e.g. `[ id:'sample1', single_end:false ]`
+    - inputMaf:
+        type: file
+        description: Maf outputtted by Tempo that was run through phyloWGS
+        pattern: "*.{maf}"
+    - inputBedpe:
+        type: file
+        description: bedpe file containing SVs
+        pattern: "winners.{tsv}"
+    - hlaFile:
+        type: file
+        description: HLA tsv outputtted by Polysolver
+        pattern: "winners.{tsv}"
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
+          e.g. `[ id:'sample1', single_end:false ]`
+    - phyloWGSsumm:
+        type: file
+        description: Summ json outputtted by phyloWGS
+        pattern: "*.{json.gz}"
+    - phyloWGSmut:
+        type: file
+        description: Summary json outputtted by phyloWGS
+        pattern: "*.{json.gz}"
+    - phyloWGSfolder:
+        type: file
+        description: Folder of mutations in trees output by PhyloWGS
+        pattern: ".{zip}"
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
+          e.g. `[ id:'sample1', single_end:false ]`
+    - mutNetMHCpan:
+        type: file
+        description:
+          tsv formatted output from netMHCpan with the mutated neoantigens
+          .
+        pattern: ".{tsv}"
+    - wtNetMHCpan:
+        type: file
+        description:
+          tsv formatted STDOUT file of netMHCpan.  A poorly formated file
+          of neoantigens.  This containes the wild type antigens
+        pattern: ".{tsv}"
 output:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
   - json:
-      type: file
-      description: output combined Json ready for input into the neoantigen pipeline
-      pattern: "*.{json}"
-
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_.json":
+          type: file
+          description: output combined Json ready for input into the neoantigen pipeline
+          pattern: "*.{json}"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@johnoooh"
   - "@nikhil"

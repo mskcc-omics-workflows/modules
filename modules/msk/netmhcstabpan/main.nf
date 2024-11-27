@@ -4,11 +4,11 @@ process NETMHCSTABPAN {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/netmhctools:1.0.0':
-        'docker.io/mskcc/netmhctools:1.0.0' }"
+        'docker://mskcc/netmhctools:1.1.0':
+        'docker.io/mskcc/netmhctools:1.1.0' }"
 
     input:
-    tuple val(meta), path(inputFasta), val(hlaString), val(inputType)
+    tuple val(meta),  path(inputFasta), path(inputSVFasta, arity: '0..*'), val(hlaString), val(inputType)
 
 
     output:
@@ -25,11 +25,20 @@ process NETMHCSTABPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = true
+    output_meta.typePan = true
 
     def NETMHCPAN_VERSION = "4.1"
     def NETMHCSTABPAN_VERSION = "1.0"
+    
+    def tmpDir = "netmhc-tmp"
+    def tmpDirFullPath = "\$PWD/${tmpDir}/"  // must set full path to tmp directories for netMHC and netMHCpan to work; for some reason doesn't work with /scratch, so putting them in the process workspace
 
     """
+    export TMPDIR=${tmpDirFullPath}
+    mkdir -p ${tmpDir}
+    chmod 777 ${tmpDir}
+    
+    cat ${inputSVFasta} >> ${inputFasta}
 
     /usr/local/bin/netMHCstabpan-${NETMHCSTABPAN_VERSION}/netMHCstabpan \
     -s -1 \
@@ -52,6 +61,7 @@ process NETMHCSTABPAN {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = true
+    output_meta.typePan = true
     def NETMHCPAN_VERSION = "4.1"
     def NETMHCSTABPAN_VERSION = "1.0"
 

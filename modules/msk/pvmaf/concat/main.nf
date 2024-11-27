@@ -4,11 +4,11 @@ process PVMAF_CONCAT {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0':
-        'ghcr.io/msk-access/postprocessing_variant_calls:0.3.0' }"
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.6':
+        'ghcr.io/msk-access/postprocessing_variant_calls:0.2.6' }"
 
     input:
-    tuple val(meta), path(maf_files) // [ id:'sample1', patient:'patient1' ], [maf_1, ... maf_n]
+    tuple val(meta), path(maf_files, stageAs: "*?-ORG-SIMPLEX-DUPLEX_genotyped.maf")// [ id:'sample1', patient:'patient1' ], [maf_1, ... maf_n]
 
 
     output:

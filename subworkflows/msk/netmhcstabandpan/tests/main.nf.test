@@ -11,9 +11,88 @@ nextflow_workflow {
     tag "netmhcstabandpan"
     tag "neoantigenutils/generatehlastring"
     tag "neoantigenutils/generatemutfasta"
-    tag "netmhcpan"
+    tag "netmhc3"
+    tag "netmhcpan4"
     tag "netmhcstabpan"
     tag "neoantigenutils/formatnetmhcpan"
+
+    test("netmhcstabandpan - SV - tsv,xls,fa") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    ])
+
+                input[1] = Channel.value([
+                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ])
+
+                input[2] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['svfa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['wtsvfa'], checkIfExists: true)
+                    ])
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(file(workflow.out.tsv[0][1]).name,
+                                    workflow.out.mut_fasta[0][1],
+                                    workflow.out.wt_fasta[0][1]
+                                ).match()
+                }
+            )
+        }
+    }
+
+    test("netmhcstabandnetmhc3 - SV - tsv,xls,fa") {
+
+        config "./nextflow.config"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    ])
+
+                input[1] = Channel.value([
+                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ])
+
+                input[2] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['svfa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['wtsvfa'], checkIfExists: true)
+                    ])
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(file(workflow.out.tsv[0][1]).name,
+                                    workflow.out.mut_fasta[0][1],
+                                    workflow.out.wt_fasta[0][1]
+                                ).match()
+                }
+            )
+        }
+    }
 
     test("netmhcstabandpan - tsv,xls,fa") {
 
@@ -25,9 +104,16 @@ nextflow_workflow {
                     file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
                     ])
+
                 input[1] = Channel.value([
                     file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ])
+
+                input[2] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    [],
+                    []
                     ])
 
                 """
@@ -37,8 +123,47 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out.tsv[0][1],
-                                    file(workflow.out.xls[0][1]).name,
+                { assert snapshot(file(workflow.out.tsv[0][1]).name,
+                                    workflow.out.mut_fasta[0][1],
+                                    workflow.out.wt_fasta[0][1]
+                                ).match()
+                }
+            )
+        }
+    }
+
+    test("netmhcstabandnetmhc3 - tsv,xls,fa") {
+
+        config "./nextflow.config"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    ])
+
+                input[1] = Channel.value([
+                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ])
+
+                input[2] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    [],
+                    []
+                    ])
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(file(workflow.out.tsv[0][1]).name,
                                     workflow.out.mut_fasta[0][1],
                                     workflow.out.wt_fasta[0][1]
                                 ).match()
@@ -57,11 +182,18 @@ nextflow_workflow {
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file('temp_test_maf'),
-                    file('winners_hla_txt'),
+                    file('winners_hla_txt')
                     ])
+
                 input[1] = Channel.value([
                     file('cds'),
                     file('cdna')
+                    ])
+
+                input[2] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('svMfa'),
+                    file('svWfa')
                     ])
                 """
             }
@@ -70,8 +202,7 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(workflow.out.tsv[0][1],
-                                  file(workflow.out.xls[0][1]).name,
+                { assert snapshot(file(workflow.out.tsv[0][1][1]).name,
                                   workflow.out.mut_fasta[0][1],
                                   workflow.out.wt_fasta[0][1]
                                 ).match()
