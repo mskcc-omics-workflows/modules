@@ -28,8 +28,8 @@
 ./modules/msk/pvmaf/concat/** @buehlere @mskcc-omics-workflows/reviewers
 ./modules/msk/pvmaf/tagtraceback/** @buehlere @mskcc-omics-workflows/reviewers
 ./modules/msk/rediscoverte/** @nikhil @mskcc-omics-workflows/reviewers
-./modules/msk/salmon/index/** @kevinmenden @drpatelh @nikhil @mskcc-omics-workflows/reviewers
-./modules/msk/salmon/quant/** @kevinmenden @drpatelh @mskcc-omics-workflows/reviewers
+./modules/msk/salmon/index/** @nikhil @mskcc-omics-workflows/reviewers
+./modules/msk/salmon/quant/** @nikhil @mskcc-omics-workflows/reviewers
 ./modules/msk/snppileup/** @nikhil @mskcc-omics-workflows/reviewers
 ./subworkflows/msk/genome_nexus/** @rnaidu @mskcc-omics-workflows/reviewers
 ./subworkflows/msk/neoantigen_editing/** @johnoooh @mskcc-omics-workflows/reviewers
