@@ -8,7 +8,7 @@ from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
 import numpy as np
 
-VERSION = 1.7
+VERSION = 1.8
 
 
 def main(args):
@@ -343,10 +343,11 @@ def main(args):
         noposID = ""
         id = ""
         wtsvid = ""
-        IDsplit = row_WT["Identity"].split("_")
+        row_WT_identity = trim_id(row_WT["Identity"])
+        IDsplit = row_WT_identity.split("_")
         if len(IDsplit[0]) < 3:
             # it is from neoSV
-            IDsplit = row_WT["Identity"].split("_")
+            IDsplit = row_WT_identity.split("_")
             wtsvid = (
                 IDsplit[0]
                 + IDsplit[1][0:7]
@@ -384,7 +385,7 @@ def main(args):
 
         else:
             id = (
-                row_WT["Identity"][:-2]
+                row_WT_identity[:-2]
                 + "_"
                 + str(len(row_WT["peptide"]))
                 + "_"
@@ -394,7 +395,7 @@ def main(args):
             )
 
             noposID = (
-                row_WT["Identity"][:-2]
+                row_WT_identity[:-2]
                 + "_"
                 + str(len(row_WT["peptide"]))
                 + "_"
@@ -453,7 +454,8 @@ def main(args):
         )
 
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
-        IDsplit = row_mut["Identity"].split("_")
+        row_MUT_identity = trim_id(row_mut["Identity"])
+        IDsplit = row_MUT_identity.split("_")
         SV = False
         if row_mut["affinity"] < 500:
             peplen = len(row_mut["peptide"])
@@ -461,7 +463,7 @@ def main(args):
             if IDsplit[1][0] == "S" and IDsplit[1][1] != "p":
                 # If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
                 continue
-            if row_mut["Identity"].count("_") == 1:
+            if row_MUT_identity.count("_") == 1:
                 # its an SV
                 SV = True
                 WTid = (
@@ -484,13 +486,13 @@ def main(args):
                     + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                 )
                 # this part makes the dict that matches this to the bedpe
-                bedpe_match_dict[row_mut["Identity"]] = (
+                bedpe_match_dict[row_MUT_identity] = (
                     IDsplit[0] + "_" + IDsplit[1][0:4]
                 )
             else:
                 # first find match in WT
                 WTid = (
-                    row_mut["Identity"][:-2]
+                    row_MUT_identity[:-2]
                     + "_"
                     + str(peplen)
                     + "_"
@@ -499,7 +501,7 @@ def main(args):
                     + str(row_mut["pos"])
                 )
                 noposID = (
-                    row_mut["Identity"][:-2]
+                    row_MUT_identity[:-2]
                     + "_"
                     + str(peplen)
                     + "_"
@@ -507,7 +509,7 @@ def main(args):
                 )
             if (
                 WTid in WTdict
-                and ("M" == IDsplit[1][0] and "Sp" not in row_mut["Identity"])
+                and ("M" == IDsplit[1][0] and "Sp" not in row_MUT_identity)
                 or SV == False
             ):
                 # match
@@ -517,8 +519,8 @@ def main(args):
 
             else:
                 if (
-                    "-" in row_mut["Identity"]
-                    or "+" in row_mut["Identity"]
+                    "-" in row_MUT_identity
+                    or "+" in row_MUT_identity
                     and WTid in WTdict
                     or SV == False
                 ):
@@ -574,7 +576,7 @@ def main(args):
 
                 if SV:
                     neo_dict = {
-                        "id": row_mut["Identity"]
+                        "id": row_MUT_identity
                         + "_"
                         + str(peplen)
                         + "_"
@@ -583,7 +585,7 @@ def main(args):
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                         ,
                         "mutation_id": bedpe_dict[
-                            bedpe_match_dict[row_mut["Identity"]]
+                            bedpe_match_dict[row_MUT_identity]
                         ].id,
                         "HLA_gene_id": row_mut["MHC"],
                         "sequence": row_mut["peptide"],
@@ -594,14 +596,14 @@ def main(args):
                     }
                 else:
                     neo_dict = {
-                        "id": row_mut["Identity"]
+                        "id": row_MUT_identity
                         + "_"
                         + str(peplen)
                         + "_"
                         + str(row_mut["pos"])
                         + "_"
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
-                        "mutation_id": mutation_dict[row_mut["Identity"]],
+                        "mutation_id": mutation_dict[row_MUT_identity],
                         "HLA_gene_id": row_mut["MHC"],
                         "sequence": row_mut["peptide"],
                         "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
@@ -614,6 +616,15 @@ def main(args):
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
     with open(outjson, "w") as tstout:
         json.dump(outer_dict, tstout, indent=1)
+
+# Sometimes the id is set as .*_M_1 and we want to make sure its _M, otherwise it will not match
+def trim_id(id_string):
+    if "_M_" in id_string:
+        return id_string.partition("_M_")[0]+"_M"
+    elif "_V_" in id_string:
+        return id_string.partition("_V_")[0]+"_V"
+    else:
+        return id_string
 
 
 def makeID(maf_row):
@@ -941,3 +952,4 @@ if __name__ == "__main__":
         print("patient_data_file File:", args.patient_data_file)
 
     main(args)
+
