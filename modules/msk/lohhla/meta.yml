@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "lohhla"
 ## TODO nf-core: Add a description of the module and list keywords
@@ -10,55 +9,86 @@ keywords:
 tools:
   - "lohhla":
       ## TODO nf-core: Add a description and other details for the software below
-      description: "A computational tool to evaluate HLA loss using next-generation sequencing data."
-      homepage: "None"
-      documentation: "None"
-      tool_dev_url: "None"
-      doi: "https://doi.org/10.1016/j.cell.2017.10.001"
+      description:
+        "A computational tool to evaluate HLA loss using next-generation\
+        \ sequencing data."
+      homepage: "https://github.com/mskcc/lohhla"
+      documentation: "https://github.com/mskcc/lohhla"
+      tool_dev_url: "https://github.com/mskcc/lohhla"
+      doi: "10.1016/j.cell.2017.10.001"
       licence: ["UNKNOWN"]
+      identifier: ""
 
 ## TODO nf-core: Add a description of all of the variables used as input
 input:
-  # Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
-  - Tumor bam:
-      type: file
-      description: Sorted BAM file
-      pattern: "*.{bam}"
-  - Tumor bam:
-      type: file
-      description: Sorted BAM file
-      pattern: "*.{bam}"
-  - Tumor bam:
-      type: file
-      description: Sorted BAM file
-      pattern: "*.{bam}"
-
-## TODO nf-core: Add a description of all of the variables used as output
+  - - meta:
+        type: map
+        description: Groovy Map containing sample information
+    - bamTumor:
+        type: file
+        description: Sorted tumor BAM file
+        pattern: "*.{bam}"
+    - bamNormal:
+        type: file
+        description: Sorted normal BAM file
+        pattern: "*.{bam}"
+    - winnersHla:
+        type: file
+        description: hla calls matching polysolver output format
+        pattern: "*.hla.txt"
+    - purityOut:
+        type: file
+        description: facets purityOut
+        pattern: "*_purity.out"
 output:
-  #Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'sample1', single_end:false ]`
-
+  - prediction:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', case_id:'sample1', control_id:'sample1normal', single_end:false ]`
+      - "*.DNA.HLAlossPrediction_CI.txt":
+          type: file
+          description: "Prediction of which HLA allele is subject to loss"
+          pattern: "*.DNA.HLAlossPrediction_CI.txt"
+  - integercpn:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', case_id:'sample1', control_id:'sample1normal', single_end:false ]`
+      - "*DNA.IntegerCPN_CI.txt":
+          type: file
+          description: "Support file for HLA loss prediction"
+          pattern: "*DNA.IntegerCPN_CI.txt"
+  - pdf:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', case_id:'sample1', control_id:'sample1normal', single_end:false ]`
+      - "*.pdf":
+          type: file
+          description: ""
+          pattern: "*.pdf"
+  - rdata:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', case_id:'sample1', control_id:'sample1normal', single_end:false ]`
+      - "*.RData":
+          type: file
+          description: ""
+          pattern: "*.RData"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
-  - bam:
-      type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@johnoooh"
+  - "@anoronh4"
 maintainers:
   - "@johnoooh"
+  - "@anoronh4"
