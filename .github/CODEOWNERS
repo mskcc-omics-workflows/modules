@@ -8,6 +8,7 @@
 ./modules/msk/genomenexus/vcf2maf/** @rnaidu @mskcc-omics-workflows/reviewers
 ./modules/msk/genotypevariants/all/** @buehlere @mskcc-omics-workflows/reviewers
 ./modules/msk/mutect1/** @rnaidu @mskcc-omics-workflows/reviewers
+./modules/msk/mutect2/** @rnaidu @mskcc-omics-workflows/reviewers
 ./modules/msk/neoantigenediting/aligntoiedb/** @nikhil @mskcc-omics-workflows/reviewers
 ./modules/msk/neoantigenediting/computefitness/** @nikhil @mskcc-omics-workflows/reviewers
 ./modules/msk/neoantigenutils/convertannotjson/** @johnoooh @mskcc-omics-workflows/reviewers

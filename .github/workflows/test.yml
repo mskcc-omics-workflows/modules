@@ -359,6 +359,8 @@ jobs:
           - profile: "conda"
             tags: mutect1
           - profile: "conda"
+            tags: mutect2
+          - profile: "conda"
             tags: phylowgs/createinput
           - profile: "conda"
             tags: phylowgs/parsecnvs
