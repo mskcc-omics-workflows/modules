@@ -27,7 +27,7 @@ Closes #XXX <!-- If this PR fixes an issue, please link it here! -->
 - [ ] Follow the parameters requirements.
 - [ ] Follow the input/output options guidelines.
 - [ ] Add a resource `label`.
-- [ ] Use Jfrog if possible to fulfil software requirements.
+- [ ] Use Jfrog if possible to fulfill software requirements.
 - Ensure that the test works with either Docker / Singularity. Conda CI tests can be quite flaky:
   - For modules:
     - [ ] `nf-core modules --git-remote https://github.com/mskcc-omics-workflows/modules.git -b <module_branch> test <MODULE> --profile docker`
