@@ -9,11 +9,11 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-17T11:05:29.465425713"
+        "timestamp": "2024-12-17T15:32:48.122038795"
     },
     "netmhcstabandpan - tsv,xls,fa - stub": {
         "content": [
-            "j",
+            "h",
             "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e",
             "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
         ],
@@ -21,7 +21,7 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-17T11:06:27.567900754"
+        "timestamp": "2024-12-17T15:33:59.951435808"
     },
     "netmhcstabandnetmhc3 - SV - tsv,xls,fa": {
         "content": [
@@ -33,20 +33,19 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-17T11:04:24.11780427"
+        "timestamp": "2024-12-17T15:31:41.007610492"
     },
     "netmhcstabandpan - SV - tsv,xls,fa": {
         "content": [
             "test_netmhcpan.output.WT.tsv",
-            "test.MUT_sequences.fa:md5,fc9a3f7760bc72beb0e74d1b851e80fd",
-            "test.WT_sequences.fa:md5,7595ed6cf0c98500b00c9ad027125b38"
-
+            "test.MUT_sequences.fa:md5,118b48df96c7217675b9f9ac14309a25",
+            "test.WT_sequences.fa:md5,bb7dfff23ae47cf64ec4854ee48ec78d"
         ],
         "meta": {
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-17T11:01:41.788941356"
+        "timestamp": "2024-12-17T15:29:06.330489514"
     },
     "netmhcstabandnetmhc3 - tsv,xls,fa": {
         "content": [
@@ -58,6 +57,6 @@
             "nf-test": "0.9.0",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-17T11:06:13.800807658"
+        "timestamp": "2024-12-17T15:33:45.014740679"
     }
 }
