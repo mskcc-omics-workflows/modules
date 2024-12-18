@@ -1,74 +1,74 @@
 exclude:
-  - tags: "nf-test"
-  - profile: "conda"
-    tags: gbcms
-  - profile: "conda"
-    tags: polysolver
-  - profile: "conda"
-    tags: snppileup
-  - profile: "conda"
-    tags: facets
-  - profile: "conda"
-    tags: mutect1
-  - profile: "conda"
-    tags: phylowgs/createinput
-  - profile: "conda"
-    tags: phylowgs/parsecnvs
-  - profile: "conda"
-    tags: phylowgs/multievolve
-  - profile: "conda"
-    tags: phylowgs/writeresults
-  - profile: "conda"
-    tags: netmhcpan4
-  - profile: "conda"
-    tags: neoantigeninput
-  - profile: "conda"
-    tags: neoantigenediting/aligntoIEDB
-  - profile: "conda"
-    tags: neoantigenediting/computeFitness
-  - profile: "conda"
-    tags: subworkflows/neoantigen_editing
-  - profile: "conda"
-    tags: subworkflows/phylowgs
-  - profile: "conda"
-    tags: netmhcstabpan
-  - profile: "conda"
-    tags: ppflagfixer
-  - profile: "conda"
-    tags: neoantigenutils/generatemutfasta
-  - profile: "conda"
-    tags: neoantigenutils/formatnetmhcpan
-  - profile: "conda"
-    tags: neoantigenutils/generatehlastring
-  - profile: "conda"
-    tags: neoantigenutils/neoantigeninput
-  - profile: "conda"
-    tags: subworkflows/netmhcstabandpan
-  - profile: "conda"
-    tags: salmon/index
-  - profile: "conda"
-    tags: genomenexus/vcf2maf
-  - profile: "conda"
-    tags: genomenexus/annotationpipeline
-  - profile: "conda"
-    tags: ppflagfixer
-  - profile: "conda"
-    tags: pvmaf/tagtraceback
-  - profile: "conda"
-    tags: pvmaf/concat
-  - profile: "conda"
-    tags: genotypevariants/all
-  - profile: "conda"
-    tags: subworkflows/traceback
-  - profile: "conda"
-    tags: salmon/index
-  - profile: "conda"
-    tags: subworkflows/genome_nexus
-  - profile: "conda"
-    tags: salmon/quant
-  - profile: "conda"
-    tags: rediscoverte
-  - profile: "conda"
-    tags: neosv
-  - profile: "conda"
-    tags: netmhc3
+  - path: modules/msk/nf-test
+  - profile: conda
+    path: modules/msk/gbcms
+  - profile: conda
+    path: modules/msk/polysolver
+  - profile: conda
+    path: modules/msk/snppileup
+  - profile: conda
+    path: modules/msk/facets
+  - profile: conda
+    path: modules/msk/mutect1
+  - profile: conda
+    path: modules/msk/phylowgs/createinput
+  - profile: conda
+    path: modules/msk/phylowgs/parsecnvs
+  - profile: conda
+    path: modules/msk/phylowgs/multievolve
+  - profile: conda
+    path: modules/msk/phylowgs/writeresults
+  - profile: conda
+    path: modules/msk/netmhcpan4
+  - profile: conda
+    path: modules/msk/neoantigeninput
+  - profile: conda
+    path: modules/msk/neoantigenediting/aligntoIEDB
+  - profile: conda
+    path: modules/msk/neoantigenediting/computeFitness
+  - profile: conda
+    path: modules/msk/subworkflows/neoantigen_editing
+  - profile: conda
+    path: modules/msk/subworkflows/phylowgs
+  - profile: conda
+    path: modules/msk/netmhcstabpan
+  - profile: conda
+    path: modules/msk/ppflagfixer
+  - profile: conda
+    path: modules/msk/neoantigenutils/generatemutfasta
+  - profile: conda
+    path: modules/msk/neoantigenutils/formatnetmhcpan
+  - profile: conda
+    path: modules/msk/neoantigenutils/generatehlastring
+  - profile: conda
+    path: modules/msk/neoantigenutils/neoantigeninput
+  - profile: conda
+    path: modules/msk/subworkflows/netmhcstabandpan
+  - profile: conda
+    path: modules/msk/salmon/index
+  - profile: conda
+    path: modules/msk/genomenexus/vcf2maf
+  - profile: conda
+    path: modules/msk/genomenexus/annotationpipeline
+  - profile: conda
+    path: modules/msk/ppflagfixer
+  - profile: conda
+    path: modules/msk/pvmaf/tagtraceback
+  - profile: conda
+    path: modules/msk/pvmaf/concat
+  - profile: conda
+    path: modules/msk/genotypevariants/all
+  - profile: conda
+    path: modules/msk/subworkflows/traceback
+  - profile: conda
+    path: modules/msk/salmon/index
+  - profile: conda
+    path: modules/msk/subworkflows/genome_nexus
+  - profile: conda
+    path: modules/msk/salmon/quant
+  - profile: conda
+    path: modules/msk/rediscoverte
+  - profile: conda
+    path: modules/msk/neosv
+  - profile: conda
+    path: modules/msk/netmhc3
