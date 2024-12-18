@@ -9,15 +9,7 @@ on:
   merge_group:
     types: [checks_requested]
     branches: [master, develop]
-  workflow_dispatch:
-    inputs:
-      runners:
-        description: "Runners to test on"
-        type: choice
-        options:
-          - "ubuntu-latest"
-          - "self-hosted"
-        default: "self-hosted"
+  workflow_dispatch: {}
 
 # Cancel if a newer run is started
 concurrency:
@@ -62,7 +54,7 @@ jobs:
           echo ${{ steps.tags.outputs.subworkflows }}
 
   pytest:
-    runs-on: ${{ github.event.inputs.runners  || 'self-hosted' }}
+    runs-on: ubuntu-latest
     name: pytest
     needs: [pytest-changes]
     if: needs.pytest-changes.outputs.tags != '[]'
