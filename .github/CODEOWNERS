@@ -31,8 +31,8 @@
 ./modules/msk/salmon/index/** @nikhil @mskcc-omics-workflows/reviewers
 ./modules/msk/salmon/quant/** @nikhil @mskcc-omics-workflows/reviewers
 ./modules/msk/snppileup/** @nikhil @mskcc-omics-workflows/reviewers
-subworkflows/msk/genome_nexus/** @rnaidu @mskcc-omics-workflows/reviewers
-subworkflows/msk/neoantigen_editing/** @johnoooh @mskcc-omics-workflows/reviewers
-subworkflows/msk/netmhcstabandpan/** @nikhil @mskcc-omics-workflows/reviewers
-subworkflows/msk/phylowgs/** @nikhil @mskcc-omics-workflows/reviewers
-subworkflows/msk/traceback/** @buehlere @mskcc-omics-workflows/reviewers
+./subworkflows/msk/genome_nexus/** @rnaidu @mskcc-omics-workflows/reviewers
+./subworkflows/msk/neoantigen_editing/** @johnoooh @mskcc-omics-workflows/reviewers
+./subworkflows/msk/netmhcstabandpan/** @nikhil @mskcc-omics-workflows/reviewers
+./subworkflows/msk/phylowgs/** @nikhil @mskcc-omics-workflows/reviewers
+./subworkflows/msk/traceback/** @buehlere @mskcc-omics-workflows/reviewers
