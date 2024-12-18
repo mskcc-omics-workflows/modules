@@ -1,0 +1,74 @@
+exclude:
+  - tags: "nf-test"
+  - profile: "conda"
+    tags: gbcms
+  - profile: "conda"
+    tags: polysolver
+  - profile: "conda"
+    tags: snppileup
+  - profile: "conda"
+    tags: facets
+  - profile: "conda"
+    tags: mutect1
+  - profile: "conda"
+    tags: phylowgs/createinput
+  - profile: "conda"
+    tags: phylowgs/parsecnvs
+  - profile: "conda"
+    tags: phylowgs/multievolve
+  - profile: "conda"
+    tags: phylowgs/writeresults
+  - profile: "conda"
+    tags: netmhcpan4
+  - profile: "conda"
+    tags: neoantigeninput
+  - profile: "conda"
+    tags: neoantigenediting/aligntoIEDB
+  - profile: "conda"
+    tags: neoantigenediting/computeFitness
+  - profile: "conda"
+    tags: subworkflows/neoantigen_editing
+  - profile: "conda"
+    tags: subworkflows/phylowgs
+  - profile: "conda"
+    tags: netmhcstabpan
+  - profile: "conda"
+    tags: ppflagfixer
+  - profile: "conda"
+    tags: neoantigenutils/generatemutfasta
+  - profile: "conda"
+    tags: neoantigenutils/formatnetmhcpan
+  - profile: "conda"
+    tags: neoantigenutils/generatehlastring
+  - profile: "conda"
+    tags: neoantigenutils/neoantigeninput
+  - profile: "conda"
+    tags: subworkflows/netmhcstabandpan
+  - profile: "conda"
+    tags: salmon/index
+  - profile: "conda"
+    tags: genomenexus/vcf2maf
+  - profile: "conda"
+    tags: genomenexus/annotationpipeline
+  - profile: "conda"
+    tags: ppflagfixer
+  - profile: "conda"
+    tags: pvmaf/tagtraceback
+  - profile: "conda"
+    tags: pvmaf/concat
+  - profile: "conda"
+    tags: genotypevariants/all
+  - profile: "conda"
+    tags: subworkflows/traceback
+  - profile: "conda"
+    tags: salmon/index
+  - profile: "conda"
+    tags: subworkflows/genome_nexus
+  - profile: "conda"
+    tags: salmon/quant
+  - profile: "conda"
+    tags: rediscoverte
+  - profile: "conda"
+    tags: neosv
+  - profile: "conda"
+    tags: netmhc3
