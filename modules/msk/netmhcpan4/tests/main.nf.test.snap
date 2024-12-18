@@ -9,16 +9,16 @@
                 "single_end": false,
                 "typeMut": false,
                 "fromStab": false,
-                "typePan": true
+                "fromPan": true
             },
             "test.WT.xls",
             "test.WT.netmhcpan.output"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-25T10:29:28.616914826"
+        "timestamp": "2024-12-17T09:55:05.982792409"
     },
     "netmhcpan4 - MUT - xls,output,fa": {
         "content": [
@@ -30,16 +30,16 @@
                 "single_end": false,
                 "typeMut": true,
                 "fromStab": false,
-                "typePan": true
+                "fromPan": true
             },
             "test.MUT.xls",
             "test.MUT.netmhcpan.output"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-25T10:26:02.108432464"
+        "timestamp": "2024-12-17T09:50:25.440240126"
     },
     "netmhcpan4 - xls,output,fa - stub": {
         "content": [
@@ -57,10 +57,10 @@
             "test.MUT.netmhcpan.output"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-25T10:29:33.956254062"
+        "timestamp": "2024-12-17T09:55:12.561294254"
     },
     "netmhcpan4 - MUT,SV - xls,output,fa": {
         "content": [
@@ -72,16 +72,16 @@
                 "single_end": false,
                 "typeMut": true,
                 "fromStab": false,
-                "typePan": true
+                "fromPan": true
             },
             "test.MUT.xls",
             "test.MUT.netmhcpan.output"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-25T10:20:37.334041838"
+        "timestamp": "2024-12-17T09:42:24.952790532"
     },
     "netmhcpan4 - WT,SV - xls,output,fa": {
         "content": [
@@ -93,15 +93,15 @@
                 "single_end": false,
                 "typeMut": false,
                 "fromStab": false,
-                "typePan": true
+                "fromPan": true
             },
             "test.WT.xls",
             "test.WT.netmhcpan.output"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-11-25T10:24:39.739383639"
+        "timestamp": "2024-12-17T09:47:58.298355664"
     }
 }

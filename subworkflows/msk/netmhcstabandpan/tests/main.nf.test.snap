@@ -1,15 +1,15 @@
 {
     "netmhcstabandpan - tsv,xls,fa": {
         "content": [
-            "test_netmhc.output.WT.tsv",
+            "test_netmhcpan.output.WT.tsv",
             "test.MUT_sequences.fa:md5,7fdb7d3f0fe5a6f439ed294b612c2d70",
             "test.WT_sequences.fa:md5,7595ed6cf0c98500b00c9ad027125b38"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-02T17:16:20.890584183"
+        "timestamp": "2024-12-17T15:32:48.122038795"
     },
     "netmhcstabandpan - tsv,xls,fa - stub": {
         "content": [
@@ -18,10 +18,10 @@
             "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-02T17:17:10.765080369"
+        "timestamp": "2024-12-17T15:33:59.951435808"
     },
     "netmhcstabandnetmhc3 - SV - tsv,xls,fa": {
         "content": [
@@ -30,22 +30,22 @@
             "test.WT_sequences.fa:md5,bb7dfff23ae47cf64ec4854ee48ec78d"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-02T17:15:41.011763441"
+        "timestamp": "2024-12-17T15:31:41.007610492"
     },
     "netmhcstabandpan - SV - tsv,xls,fa": {
         "content": [
-            "test_netmhc.output.WT.tsv",
+            "test_netmhcpan.output.WT.tsv",
             "test.MUT_sequences.fa:md5,118b48df96c7217675b9f9ac14309a25",
             "test.WT_sequences.fa:md5,bb7dfff23ae47cf64ec4854ee48ec78d"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-02T17:14:23.137692552"
+        "timestamp": "2024-12-17T15:29:06.330489514"
     },
     "netmhcstabandnetmhc3 - tsv,xls,fa": {
         "content": [
@@ -54,9 +54,9 @@
             "test.WT_sequences.fa:md5,7595ed6cf0c98500b00c9ad027125b38"
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nf-test": "0.9.0",
+            "nextflow": "24.04.4"
         },
-        "timestamp": "2024-12-02T17:17:01.585453593"
+        "timestamp": "2024-12-17T15:33:45.014740679"
     }
 }
