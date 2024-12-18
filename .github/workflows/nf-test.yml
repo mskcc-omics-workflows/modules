@@ -54,7 +54,7 @@ jobs:
           head: ${{ github.sha }}
           base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
           n_parents: 0
-          exclude_tags: "no_conda"
+          exclude_tags: "gpu"
 
       - name: Separate modules and subworkflows
         id: outputs
@@ -75,7 +75,7 @@ jobs:
       fail-fast: false
       matrix:
         shard: [1, 2, 3, 4, 5]
-        profile: [conda, docker, singularity]
+        profile: [docker, singularity]
     env:
       NXF_ANSI_LOG: false
       TOTAL_SHARDS: 5

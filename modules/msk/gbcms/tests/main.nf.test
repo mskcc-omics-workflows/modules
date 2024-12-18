@@ -10,7 +10,6 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "gbcms"
-    tag "no_conda"
 
     test("sarscov2 illumina  paired-end [fastq]") {
 
