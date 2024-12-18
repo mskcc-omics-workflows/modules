@@ -54,7 +54,7 @@ jobs:
           head: ${{ github.sha }}
           base: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
           n_parents: 0
-          exclude_tags: "gpu"
+          exclude_tags: "no_conda"
 
       - name: Separate modules and subworkflows
         id: outputs
