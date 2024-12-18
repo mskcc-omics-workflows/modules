@@ -16,8 +16,6 @@ on:
         type: choice
         options:
           - "ubuntu-latest"
-          - "self-hosted"
-        default: "self-hosted"
 
 # Cancel if a newer run is started
 concurrency:
@@ -62,7 +60,7 @@ jobs:
           echo ${{ steps.tags.outputs.subworkflows }}
 
   pytest:
-    runs-on: ${{ github.event.inputs.runners  || 'self-hosted' }}
+    runs-on: ${{ github.event.inputs.runners }}
     name: pytest
     needs: [pytest-changes]
     if: needs.pytest-changes.outputs.tags != '[]'
