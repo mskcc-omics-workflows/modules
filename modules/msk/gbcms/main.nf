@@ -11,6 +11,7 @@ process GBCMS {
     path(fastafai)
 
     output:
+    // small change
     tuple val(meta), path('*.{vcf,maf}') , emit: variant_file
     tuple val(meta), path("versions.yml")   , emit: versions
 
