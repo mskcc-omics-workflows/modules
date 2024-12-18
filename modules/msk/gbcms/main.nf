@@ -26,6 +26,7 @@ process GBCMS {
 
     def input_ext = variant_file.getExtension()
     def variant_input = ''
+    def test = ''
 
     if(input_ext == 'maf') {
         variant_input = '--maf ' + variant_file
