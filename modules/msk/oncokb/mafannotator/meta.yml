@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "oncokb_mafannotator"
+description:
+  Takes a Maf and annotates it using OncoKB.
+keywords:
+  - oncokb
+  - maf
+  - annotation
+tools:
+  - oncokb:
+      description: "OncoKB is a precision oncology knowledge base that annotates the biological consequences and clinical implications (therapeutic, diagnostic, and prognostic) of genetic variants in cancer. In order to use this you must provide a config file containing your own oncoKB api key in the args."
+      documentation: "https://github.com/oncokb/oncokb-annotator"
+      licence: ["GNU"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:'sample1']`
+    - inputMaf:
+        type: file
+        description: MAF, perferrably annotated by vcf2maf. Required cols are listed in the docs.
+        pattern: "*annotated.json"
+output:
+  - oncokb_maf:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1']`
+      - "*.oncokb.maf":
+          type: file
+          description: A maf file annotated by oncokb
+          pattern: "*.{maf}"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"
+
