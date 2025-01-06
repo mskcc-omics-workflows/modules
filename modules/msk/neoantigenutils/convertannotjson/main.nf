@@ -35,6 +35,7 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
     """
 
         touch ${prefix}_neoantigens.tsv
+        touch test.tsv
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
