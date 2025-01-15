@@ -1,7 +1,8 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "facets"
-description: Algorithm to implement Fraction and Allele specific Copy number Estimate from Tumor/normal Sequencing.
+description:
+  Algorithm to implement Fraction and Allele specific Copy number Estimate
+  from Tumor/normal Sequencing.
 keywords:
   - facets
   - pileup
@@ -13,88 +14,175 @@ tools:
       homepage: "https://github.com/mskcc/facets-suite"
       documentation: "https://github.com/mskcc/facets-suite"
       licence: ["MIT"]
+      identifier: biotools:facets
   - "facets":
-      description: "Algorithm to implement Fraction and Allele specific Copy number Estimate from Tumor/normal Sequencing."
+      description:
+        "Algorithm to implement Fraction and Allele specific Copy number
+        Estimate from Tumor/normal Sequencing."
       homepage: "https://github.com/mskcc/facets"
       documentation: "https://github.com/mskcc/facets"
       doi: "10.1093/nar/gkw520"
 
+      identifier: biotools:facets
 input:
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'pair_id' ]`
-  - snp_pileup:
-      type: file
-      description: The pileup file
-      pattern: "*.snp_pileup.gz"
-  - legacy_output_mode:
-      type: boolean
-      description: Flag to run Facets in legacy output mode
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'pair_id' ]`
+    - snp_pileup:
+        type: file
+        description: The pileup file
+        pattern: "*.snp_pileup.gz"
+    - legacy_output_mode:
+        type: boolean
+        description: Flag to run Facets in legacy output mode
 output:
   - purity_seg:
-      type: file
-      description: The purity seg file
-      pattern: "*_purity.seg"
-  - purity_rdata:
-      type: file
-      description: The purity R data file. This could be an .Rdata (legacy output) or .rds (original output)
-      pattern: "*_purity.?d*"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_purity.seg":
+          type: file
+          description: The purity seg file
+          pattern: "*_purity.seg"
+  - purity_r_data:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_purity.?d*":
+          type: file
+          description: The purity R data file
+          pattern: "*_purity.?d*"
   - purity_png:
-      type: file
-      description: The purity png file. In legacy output the file would match *.CNCF.png
-      pattern: "*_purity*png"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_purity*png":
+          type: file
+          description: The purity png file. In legacy output the file would match *.CNCF.png
+          pattern: "*_purity*png"
   - purity_out:
-      type: file
-      description: The purity out file. Only in legacy output mode.
-      pattern: "*_purity.out"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_purity.out":
+          type: file
+          description: The purity out file. Only in legacy output mode.
+          pattern: "*_purity.out"
   - purity_cncf_txt:
-      type: file
-      description: The purity cncf file. Only in legacy output mode.
-      pattern: "*_purity.cncf.txt"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_purity.cncf.txt":
+          type: file
+          description: The purity cncf file. Only in legacy output mode.
+          pattern: "*_purity.cncf.txt"
   - hisens_seg:
-      type: file
-      description: The hisens seg file
-      pattern: "*_hisens.seg"
-  - hisens_rdata:
-      type: file
-      description: The hisens R data file. This could be an .Rdata (legacy output) or .rds (original output)
-      pattern: "*_hisens.?d*"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_hisens.seg":
+          type: file
+          description: The hisens seg file
+          pattern: "*_hisens.seg"
+  - hisens_r_data:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_hisens.?d*":
+          type: file
+          description: The hisens R data file
+          pattern: "*_hisens.?d*"
   - hisens_png:
-      type: file
-      description: The hisens png file. In legacy output the file would match *.CNCF.png
-      pattern: "*_hisens*png"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_hisens*png":
+          type: file
+          description: The hisens png file. In legacy output the file would match *.CNCF.png
+          pattern: "*_hisens*png"
   - hisens_out:
-      type: file
-      description: The hisense out file. Only in legacy output mode.
-      pattern: "*_hisens.out"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_hisens.out":
+          type: file
+          description: The hisense out file. Only in legacy output mode.
+          pattern: "*_hisens.out"
   - hisens_cncf_txt:
-      type: file
-      description: The hisens cncf file. Only in legacy output mode.
-      pattern: "*_hisens.cncf.txt"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*_hisens.cncf.txt":
+          type: file
+          description: The hisens cncf file. Only in legacy output mode.
+          pattern: "*_hisens.cncf.txt"
   - qc_txt:
-      type: file
-      description: The qc file
-      pattern: "*.qc.txt"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*.qc.txt":
+          type: file
+          description: The qc file
+          pattern: "*.qc.txt"
   - gene_level_txt:
-      type: file
-      description: The gene level file
-      pattern: "*.gene_level.txt"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*.gene_level.txt":
+          type: file
+          description: The gene level file
+          pattern: "*.gene_level.txt"
   - arm_level_txt:
-      type: file
-      description: The arm level file
-      pattern: "*.arm_level.txt"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*.arm_level.txt":
+          type: file
+          description: The arm level file
+          pattern: "*.arm_level.txt"
   - output_txt:
-      type: file
-      description: The facets output log file. Format [id].txt
-      pattern: "*.txt"
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - ${meta.id}.txt:
+          type: file
+          description: The facets output log file. Format [id].txt
+          pattern: "*.txt"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@nikhil"
 maintainers:

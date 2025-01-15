@@ -1,8 +1,9 @@
----
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "genomenexus_annotationpipeline"
 
-description: DSL2 module to perform annotation of a MAF file type using the genomenexus suite of conversion and annotation tools.
+description:
+  DSL2 module to perform annotation of a MAF file type using the genomenexus
+  suite of conversion and annotation tools.
 keywords:
   - annotate
   - vcf
@@ -11,41 +12,44 @@ keywords:
   - genomics
 tools:
   - "genomenexus":
-      description: "DSL2 module to perform an annotation of MAF file type using the genomenexus suite of conversion and annotation tools."
+      description:
+        "DSL2 module to perform an annotation of MAF file type using the
+        genomenexus suite of conversion and annotation tools."
       homepage: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline/"
       documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
 
+      identifier: ""
 input:
   # Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test' ]`
-
-  - input_maf:
-      type: file
-      description: input MAF file
-      pattern: "*.{maf}"
-
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test' ]`
+    - input_maf:
+        type: file
+        description: input MAF file
+        pattern: "*.{maf}"
 output:
   #Only when we have meta
-  - meta:
-      type: map
-      description: |
-        Groovy Map containing sample information
-        e.g. `[ id:'test' ]`
-
+  - annotated_maf:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test' ]`
+          pattern: "*_annotated.{maf}"
+      - "*.maf":
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test' ]`
+          pattern: "*_annotated.{maf}"
   - versions:
-      type: file
-      description: File containing software versions
-      pattern: "versions.yml"
-
-  - maf:
-      type: file
-      description: Output annotated MAF file
-      pattern: "*.{maf}"
-
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
   - "@rnaidu"
 maintainers:
