@@ -101,8 +101,8 @@ jobs:
           echo "${MD_NAME}"
       - name: Download convertor from yml to md
         run: |
-          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/yaml_to_md.py
-          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/requirements.txt
+          curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/yaml_to_md.py
+          curl -o ${{ github.workspace }}/requirements.txt https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/requirements.txt
       - name: Give convertor permissions
         run: chmod +x yaml_to_md.py
       - name: Install python packages
@@ -147,7 +147,7 @@ jobs:
       - name: Run convertor to generate md file for new module
         run: |
           echo ${{ matrix.tags }}
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.2/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
       - name: Check file existence for modules
         id: check_files
         uses: andstor/file-existence-action@v1
