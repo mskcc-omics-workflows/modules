@@ -457,7 +457,7 @@ def main(args):
         row_MUT_identity = trim_id(row_mut["Identity"])
         IDsplit = row_MUT_identity.split("_")
         SV = False
-        if row_mut["affinity"] < args.kD_cutoff:
+        if row_mut["affinity"] < float(args.kD_cutoff):
             peplen = len(row_mut["peptide"])
             matchfound = False
             if IDsplit[1][0] == "S" and IDsplit[1][1] != "p":
