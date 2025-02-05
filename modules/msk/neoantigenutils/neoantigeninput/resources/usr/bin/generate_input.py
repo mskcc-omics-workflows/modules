@@ -340,7 +340,7 @@ def main(args):
     WTdict = {}
     SVWTdict = {}
     for index_WT, row_WT in neoantigen_WT_in.iterrows():
-        noposID = ""
+        no_positon_ID = ""
         id = ""
         wtsvid = ""
         row_WT_identity = trim_id(row_WT["Identity"])
@@ -358,7 +358,7 @@ def main(args):
                 + "_"
                 + str(row_WT["pos"])
             )
-            noposID = (
+            no_positon_ID = (
                 IDsplit[0]
                 + "_"
                 + IDsplit[1][0:7]
@@ -372,8 +372,8 @@ def main(args):
                 "peptide": row_WT["peptide"],
             }
             id = wtsvid
-            if noposID not in WTdict:
-                WTdict[noposID] = {
+            if no_positon_ID not in WTdict:
+                WTdict[no_positon_ID] = {
                     "peptides": {
                         row_WT["peptide"]: id
                     },  # This is a dict so we can match the peptide with the actual ID later
@@ -381,7 +381,7 @@ def main(args):
                 }
 
             else:
-                WTdict[noposID]["peptides"][row_WT["peptide"]] = id
+                WTdict[no_positon_ID]["peptides"][row_WT["peptide"]] = id
 
         else:
             id = (
@@ -394,7 +394,7 @@ def main(args):
                 + str(row_WT["pos"])
             )
 
-            noposID = (
+            no_positon_ID = (
                 row_WT_identity[:-2]
                 + "_"
                 + str(len(row_WT["peptide"]))
@@ -404,8 +404,8 @@ def main(args):
             WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
 
             # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
-            if noposID not in WTdict:
-                WTdict[noposID] = {
+            if no_positon_ID not in WTdict:
+                WTdict[no_positon_ID] = {
                     "peptides": {
                         row_WT["peptide"]: id
                     },  # This is a dict so we can match the peptide with the ID later
@@ -413,7 +413,7 @@ def main(args):
                 }
 
             else:
-                WTdict[noposID]["peptides"][row_WT["peptide"]] = id
+                WTdict[no_positon_ID]["peptides"][row_WT["peptide"]] = id
 
     def find_most_similar_string(target, strings):
         max_score = -1
@@ -476,7 +476,7 @@ def main(args):
                     + "_"
                     + str(row_mut["pos"])
                 )
-                noposID = (
+                no_positon_ID = (
                     IDsplit[0]
                     + "_"
                     + IDsplit[1][0:8]
@@ -533,7 +533,7 @@ def main(args):
                         first_AA_same_score,
                         match_score,
                     ) = find_most_similar_string(
-                        row_mut["peptide"], list(WTdict[noposID]["peptides"].keys())
+                        row_mut["peptide"], list(WTdict[no_positon_ID]["peptides"].keys())
                     )
                     if (
                         best_pepmatch == row_mut["peptide"]
@@ -554,7 +554,7 @@ def main(args):
                         # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
                         best_pepmatch = best_pepmatch2
 
-                    WTid = WTdict[noposID]["peptides"][best_pepmatch]
+                    WTid = WTdict[no_positon_ID]["peptides"][best_pepmatch]
                     matchfound = True
 
             if matchfound == True and best_pepmatch != row_mut["peptide"]:
