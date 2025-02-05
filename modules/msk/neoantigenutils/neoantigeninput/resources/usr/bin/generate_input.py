@@ -8,7 +8,7 @@ from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
 import numpy as np
 
-VERSION = 1.8
+VERSION = 1.9
 
 
 def main(args):
@@ -522,7 +522,7 @@ def main(args):
                     best_pepmatch = WTdict[WTid]["peptide"]
                     
                 else:
-                    # Here we take care of INDELS and eveyrhting else
+                    # Here we take care of INDELS and everything else
 
                     if ("-" in IDsplit[1] or "+" in IDsplit[1]):
                         frameshift = True
