@@ -32,7 +32,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2025-02-05T14:07:49.603422669"
+        "timestamp": "2025-02-05T14:38:57.427385617"
     },
     "neoantigenutils_neoantigeninput - bedpe,json,tsv": {
         "content": [
@@ -67,7 +67,7 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2025-02-05T14:07:27.768140272"
+        "timestamp": "2025-02-05T14:38:35.2939696"
     },
     "neoantigenutils_neoantigeninput - json,tsv": {
         "content": [
@@ -102,6 +102,6 @@
             "nf-test": "0.8.4",
             "nextflow": "24.04.2"
         },
-        "timestamp": "2025-02-05T14:07:40.874130873"
+        "timestamp": "2025-02-05T14:38:48.778108545"
     }
 }

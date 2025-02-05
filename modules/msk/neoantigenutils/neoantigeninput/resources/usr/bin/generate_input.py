@@ -551,7 +551,7 @@ def main(args):
                         best_pepmatch[-1] != row_mut["peptide"][-1]
                         and best_pepmatch2[-1] == row_mut["peptide"][-1]
                     ):
-                        # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this.
+                        # We should preferentially match the first AA if we can.  Sometimes the pairwise alignment isnt the best at this so we do a little check here.
                         # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
                         best_pepmatch = best_pepmatch2
 
