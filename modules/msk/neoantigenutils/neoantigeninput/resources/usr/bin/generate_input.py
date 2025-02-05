@@ -460,6 +460,7 @@ def main(args):
         if row_mut["affinity"] < float(args.kD_cutoff):
             peplen = len(row_mut["peptide"])
             matchfound = False
+            frameshift= False
             if IDsplit[1][0] == "S" and IDsplit[1][1] != "p":
                 # If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
                 continue
@@ -519,12 +520,12 @@ def main(args):
                     #This block takes care of Missense mutations caused by polymorphisims
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
-                    frameshift = False
+                    
                 else:
                     # Here we take care of INDELS and eveyrhting else
 
                     if ("-" in IDsplit[1] or "+" in IDsplit[1]):
-                        frameshift = False
+                        frameshift = True
 
                     (
                         best_pepmatch,
