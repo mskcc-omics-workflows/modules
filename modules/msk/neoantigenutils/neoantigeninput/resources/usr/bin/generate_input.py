@@ -457,7 +457,7 @@ def main(args):
         row_MUT_identity = trim_id(row_mut["Identity"])
         IDsplit = row_MUT_identity.split("_")
         SV = False
-        if row_mut["affinity"] < 500:
+        if row_mut["affinity"] < args.kD_cutoff:
             peplen = len(row_mut["peptide"])
             matchfound = False
             if IDsplit[1][0] == "S" and IDsplit[1][1] != "p":
@@ -500,7 +500,7 @@ def main(args):
                     + "_"
                     + str(row_mut["pos"])
                 )
-                noposID = (
+                no_positon_ID = (
                     row_MUT_identity[:-2]
                     + "_"
                     + str(peplen)
@@ -508,30 +508,24 @@ def main(args):
                     + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                 )
             if (
-                WTid in WTdict
-                and ("M" == IDsplit[1][0] and "Sp" not in row_MUT_identity)
+                 ("M" == IDsplit[1][0] and "Sp" not in row_MUT_identity)
                 or SV == False
             ):
                 # match
-                matchfound = True
-                best_pepmatch = WTdict[WTid]["peptide"]
-                frameshift = False
-
-            else:
                 if (
-                    "-" in row_MUT_identity
-                    or "+" in row_MUT_identity
-                    and WTid in WTdict
-                    or SV == False
-                ):
-                    # Means there is a frame shift and we don't need to do a analysis of 5' end and 3' end as 3' end is no longer recognizeable/comparable to the WT sequence at all
-                    # We can just move the windows along together. There will likely be little to no match with the WT peptides.
+                    (WTid in WTdict)
+                    and IDsplit[1][0] != "I"
+                    ):
+                    #This block takes care of Missense mutations caused by polymorphisims
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
                     frameshift = False
                 else:
-                    # Here we take care of frameshifted peptides
-                    frameshift = True
+                    # Here we take care of INDELS and eveyrhting else
+
+                    if ("-" in IDsplit[1] or "+" in IDsplit[1]):
+                        frameshift = False
+
                     (
                         best_pepmatch,
                         best_pepmatch2,
@@ -563,7 +557,7 @@ def main(args):
                     WTid = WTdict[noposID]["peptides"][best_pepmatch]
                     matchfound = True
 
-            if matchfound == True:
+            if matchfound == True and best_pepmatch != row_mut["peptide"]:
                 mut_pos = (
                     find_first_difference_index(
                         row_mut["peptide"], best_pepmatch  # WTdict[WTid]["peptide"]
@@ -934,6 +928,10 @@ def parse_args():
         "-v", "--version", action="version", version="%(prog)s {}".format(VERSION)
     )
 
+    parser.add_argument(
+        "--kD_cutoff", default=500, help="Cutoff value for the kD, default is 500",
+    )
+
     return parser.parse_args()
 
 
@@ -948,6 +946,7 @@ if __name__ == "__main__":
     print("Cohort:", args.cohort)
     print("HLA Genes File:", args.HLA_genes)
     print("netMHCpan Files:", args.netMHCpan_MUT_input, args.netMHCpan_WT_input)
+    print("kD Cutoff Value:", args.kD_cutoff)
     if args.patient_data_file:
         print("patient_data_file File:", args.patient_data_file)
 
