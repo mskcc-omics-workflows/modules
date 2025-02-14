@@ -12,13 +12,7 @@
                     ]
                 ],
                 "1": [
-                    [
-                        {
-                            "id": "test",
-                            "sample": "197"
-                        },
-                        "versions.yml:md5,a94265ed3bc4b5631d85b9b9b5d2b7e5"
-                    ]
+                    "versions.yml:md5,a94265ed3bc4b5631d85b9b9b5d2b7e5"
                 ],
                 "variant_file": [
                     [
@@ -30,13 +24,7 @@
                     ]
                 ],
                 "versions": [
-                    [
-                        {
-                            "id": "test",
-                            "sample": "197"
-                        },
-                        "versions.yml:md5,a94265ed3bc4b5631d85b9b9b5d2b7e5"
-                    ]
+                    "versions.yml:md5,a94265ed3bc4b5631d85b9b9b5d2b7e5"
                 ]
             }
         ],
@@ -44,6 +32,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.3"
         },
-        "timestamp": "2024-12-18T13:34:21.989594"
+        "timestamp": "2025-02-13T17:19:51.302342"
     }
 }
