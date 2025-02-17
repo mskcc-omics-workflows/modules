@@ -7,6 +7,8 @@ import os
 from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
 import numpy as np
+from pyensembl.genome import Genome
+from pyensembl import EnsemblRelease
 
 VERSION = 1.9
 
@@ -326,6 +328,8 @@ def main(args):
 
     bedpe_match_dict = {}
 
+    ensembl = ensembl_load(args.release, args.gtffile, args.cdnafile, args.cachedir)
+    
     neoantigen_mut_in = pd.read_csv(args.netMHCpan_MUT_input, sep="\t")
     neoantigen_WT_in = pd.read_csv(args.netMHCpan_WT_input, sep="\t")
 
@@ -566,6 +570,10 @@ def main(args):
                     + 1
                 )
 
+                
+                chrom, pos = mutation_dict[row_mut["Identity"]].split("_")[0:2]
+                
+                
                 if frameshift:
                     mut_pos = "Frameshifted peptide"
 
@@ -889,6 +897,91 @@ def makeID_bedpe(chrom1, pos1, svclass):
     return identifier_key
 
 
+def get_exon_range(transcript):
+    """
+    :param transcript: transcript instance in pyensembl
+    :return: exon intervals of this transcript
+            from 5' to 3', exon 1, exon 2, ...
+            [start, end], start < end
+    """
+    exon_ranges = []
+    for exon in transcript.exons:
+        exon_ranges.append((exon.start, exon.end))
+    return exon_ranges
+
+def get_longest_transcript(transcripts):
+    """
+    :param transcripts: a list of Transcript(pyensembl) instances
+    :return: the longest transcript
+    """
+    transcripts = sorted(transcripts, key=lambda t: t.end-t.start)
+    transcript = transcripts[-1]
+    return transcript
+
+
+def get_transcript(chrom, pos, ensembl, complete=True):
+    """
+    :param chrom: chromosome with no chr
+    :param pos: position of mutation
+    :param ensembl: Genome instance in pyensembl
+    :param complete: only consider complete transcripts
+    :return: firstly return the longest complete transcript,
+            if there is no complete transcript and
+            complete = False, return the longest transcript
+    """
+    transcripts = ensembl.transcripts_at_locus(contig=str(chrom), position=int(pos))
+    transcripts_comp = [transcript for transcript in transcripts if transcript.complete]
+    if transcripts_comp:
+        return get_longest_transcript(transcripts_comp)
+    else:
+        if complete:
+            return None
+        else:
+            if transcripts:
+                return get_longest_transcript(transcripts)
+            else:
+                return None
+
+
+def ensembl_load(release, gtf_file, cdna_file, cache_dir):
+    """
+    :param release: the release number in EMSEMBL, could be custom
+    :param gtf_file: the path of gtf file if release == custom
+    :param cdna_file: the path of cdna file if release == custom
+    :param cache_dir: directory for pyensembl downloading
+    :return: a Genome class in pyensembl
+    """
+    if cache_dir:
+        os.environ['PYENSEMBL_CACHE_DIR'] = cache_dir
+    if release != 'custom':
+        ensembl = EnsemblRelease(int(release))
+        ensembl.download()
+        ensembl.index()
+    else:
+        ensembl = Genome(gtf_path_or_url=gtf_file,
+                         transcript_fasta_paths_or_urls=cdna_file,
+                         reference_name='User-defined',
+                         annotation_name='User-defined')
+        ensembl.index()
+    return ensembl
+
+
+def determine_NMD(chrom, pos, ensembl):
+    """
+    :param release: the release number in EMSEMBL, could be custom
+    :param gtf_file: the path of gtf file if release == custom
+    :param cdna_file: the path of cdna file if release == custom
+    :param cache_dir: directory for pyensembl downloading
+    :return: a Genome class in pyensembl
+    """
+    
+    transcript = determine_NMD(chrom, pos, ensembl)
+    
+    ranges = get_exon_range(transcript)
+    
+    print(ranges)
+    
+    
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
     parser.add_argument("--maf_file", required=True, help="Path to the MAF file")
@@ -904,6 +997,17 @@ def parse_args():
         required=True,
         help="Path to the tree directory containing json files",
     )
+    parser.add_argument('-r', '--release', dest='release', metavar='RELEASE', default='75',
+                        help='Which reference (ENSEMBL release) you want to use. Ensembl releases that'
+                             'correspond to hg18/NCBI36, hg19/GRCh37, hg38/GRCh38 are 54, 75, 95.'
+                             'If your data are from other species(custom), please download the gtf '
+                             'file and the cdna file from ENSEMBL website ftp://ftp.ensembl.org/pub'
+                             ' and specify them using --gtf-file and --cdna-file.')
+    parser.add_argument('-gf', '--gtf-file', dest='gtffile', metavar='GTF_FILE', default=None,
+                        help='GTF file for the reference.')
+    parser.add_argument('-cf', '--cdna-file', dest='cdnafile', metavar='CDNA_FILE', default=None,
+                        help='cDNA file for the reference.')
+                        
     parser.add_argument("--id", required=True, help="ID")
     parser.add_argument("--patient_id", required=True, help="Patient ID")
     parser.add_argument("--cohort", required=True, help="Cohort")

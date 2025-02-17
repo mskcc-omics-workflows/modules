@@ -9,6 +9,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tuple val(meta),  path(inputMaf),      path(inputBedpe, arity: '0..*'),    path(hlaFile)
     tuple val(meta2), path(phyloWGSsumm),  path(phyloWGSmut),   path(phyloWGSfolder)
     tuple val(meta3), path(mutNetMHCpan),  path(wtNetMHCpan)
+    tuple path(gtf),  path(cdna)
 
     output:
     tuple val(meta), path("*_.json"),                                                  emit: json

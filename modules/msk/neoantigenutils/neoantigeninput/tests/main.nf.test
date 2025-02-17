@@ -40,6 +40,11 @@ nextflow_process {
                     file(params.test_data_mskcc['neoantigen']['WTnetMHCpan_tsv'], checkIfExists: true)
                     ]
 
+                input[3] = [
+                    file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    ]
+
                 """
             }
         }
