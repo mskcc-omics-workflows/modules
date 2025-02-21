@@ -16,6 +16,7 @@
 * [neoantigenediting](modules/neoantigenediting/README.md)
   * [neoantigenediting\_aligntoiedb](modules/neoantigenediting/neoantigenediting\_aligntoiedb.md)
   * [neoantigenediting\_computefitness](modules/neoantigenediting/neoantigenediting\_computefitness.md)
+* [neoantigenutils](modules/neoantigenutils/README.md)
   * [neoantigenutils\_convertannotjson](modules/neoantigenediting/neoantigenutils\_convertannotjson.md)
   * [neoantigenutils\_formatnetmhcpan](modules/neoantigenediting/neoantigenutils\_formatnetmhcpan.md)
   * [neoantigenutils\_generatehlastring](modules/neoantigenediting/neoantigenutils\_generatehlastring.md)
@@ -49,7 +50,6 @@
 
 ## Subworkflows
 
-* [bwa\_markdup\_bqsr](subworkflows/bwa\_markdup\_bqsr.md)
 * [traceback](subworkflows/traceback.md)
 * [genome\_nexus](subworkflows/genome\_nexus.md)
 * [neoantigen\_editing](subworkflows/neoantigen\_editing.md)
