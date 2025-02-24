@@ -11,8 +11,8 @@ process GBCMS {
     path(fastafai)
 
     output:
-    tuple val(meta), path('*.{vcf,maf}') , emit: variant_file
-    tuple val(meta), path("versions.yml")   , emit: versions
+    tuple val(meta), path('*.{vcf,maf}'), emit: variant_file
+    path "versions.yml"                 , emit: versions
 
     when:
         task.ext.when == null || task.ext.when
@@ -26,6 +26,7 @@ process GBCMS {
 
     def input_ext = variant_file.getExtension()
     def variant_input = ''
+    def test = ''
 
     if(input_ext == 'maf') {
         variant_input = '--maf ' + variant_file

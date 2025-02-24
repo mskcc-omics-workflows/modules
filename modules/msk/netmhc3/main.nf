@@ -26,7 +26,7 @@ process NETMHC3 {
     output_meta = meta.clone()
     output_meta.typeMut = inputType == "MUT" ? true : false
     output_meta.fromStab = false
-    output_meta.typePan = false
+    output_meta.fromPan = false
     def NETMHC_VERSION = "3.4"
     def tmpDir = "netmhc-tmp"
     def tmpDirFullPath = "\$PWD/${tmpDir}/"  // must set full path to tmp directories for netMHC and netMHCpan to work; for some reason doesn't work with /scratch, so putting them in the process workspace

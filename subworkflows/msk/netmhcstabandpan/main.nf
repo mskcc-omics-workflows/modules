@@ -113,7 +113,7 @@ def createNETMHCInput(wt_fasta, mut_fasta, hla, sv_fastas) {
         merged_wt_fasta = wt_fasta_channel
             .join(wt_SVfasta_channel,by: 0)
 
-        merged_wt = merged_mut_fasta
+        merged_wt = merged_wt_fasta
             .join(hla_channel)
             .map{
                 new Tuple(it[1][0], it[1][1], it[2], it[3],"WT")
