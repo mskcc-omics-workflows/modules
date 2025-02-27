@@ -285,19 +285,23 @@ if __name__ == "__main__":
 
     """
 
-    a = 22.897590714815188
-    k = 1
-    w = 0.22402192838740312
-
     parser = argparse.ArgumentParser(prog="align_neoantigens_to_IEDB")
     parser.add_argument("--alignment", help="neoantigen alignment file", required=True)
     parser.add_argument("--input", help="patient_data file", required=True)
-
+    parser.add_argument("--a_param", help="weight corresponding to a", required=True, default = 22.897590714815188)
+    parser.add_argument("--k_param", help="weight corresponding to k", required=True, default = 1)
+    parser.add_argument("--w_param", help="weight corresponding to w", required=True, default = 0.22402192838740312)
+    
     args = parser.parse_args()
 
     alignment_file = args.alignment
     patient_file = args.input
 
+    a = float(args.a_param)
+    k = float(args.k_param)
+    w = float(args.w_param)
+    
+    
     epidist = EpitopeDistance()
 
     sample_file = patient_file

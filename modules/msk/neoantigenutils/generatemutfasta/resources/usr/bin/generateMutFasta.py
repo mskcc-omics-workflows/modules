@@ -350,15 +350,15 @@ class mutation(object):
         ]
 
         variant_type_map = {
-            "Missense_Mutation": "M",
-            "Nonsense_Mutation": "X",
-            "Silent_Mutation": "S",
-            "Silent": "S",
-            "Frame_shift_Ins": "I+",
-            "Frame_shift_Del": "I-",
-            "In_Frame_Ins": "If",
-            "In_Frame_Del": "Id",
-            "Splice_Site": "Sp",
+            "missense_mutation": "M",
+            "nonsense_nutation": "X",
+            "silent_mutation": "S",
+            "silent": "S",
+            "frame_shift_ins": "I+",
+            "frame_shift_del": "I-",
+            "in_frame_ins": "If",
+            "in_frame_del": "Id",
+            "splice_site": "Sp",
         }
 
         position = int(str(self.maf_row["Start_Position"])[0:2])
@@ -399,12 +399,12 @@ class mutation(object):
             # SNPs
             Allele2code = self.maf_row["Tumor_Seq_Allele2"]
 
-        if self.maf_row["Variant_Classification"] in variant_type_map:
+        if self.maf_row["Variant_Classification"].tolower() in variant_type_map:
             self.identifier_key = (
                 str(self.maf_row["Chromosome"])
                 + encoded_position
                 + "_"
-                + variant_type_map[self.maf_row["Variant_Classification"]]
+                + variant_type_map[(self.maf_row["Variant_Classification"]).tolower()]
                 + Allele2code
             )
         else:
