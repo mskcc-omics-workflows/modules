@@ -1,0 +1,107 @@
+{
+    "neoantigenutils_neoantigeninput - json,tsv - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2025-02-27T15:25:40.478669337"
+    },
+    "neoantigenutils_neoantigeninput - bedpe,json,tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,95c581e5ffe42f43f784724259cc4dad"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,95c581e5ffe42f43f784724259cc4dad"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2025-02-27T15:24:02.517728587"
+    },
+    "neoantigenutils_neoantigeninput - json,tsv": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,8ccf3ce47db062dde6ce8533fcf670f4"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                ],
+                "json": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_patient_test_.json:md5,8ccf3ce47db062dde6ce8533fcf670f4"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2025-02-27T15:25:30.48202429"
+    }
+}
