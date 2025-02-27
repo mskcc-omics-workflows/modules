@@ -10,7 +10,7 @@ def process_json_file(json_file_path,output_file_path):
         data = json.load(json_file)
 
     # Define the TSV header
-    tsv_header = ["id", "mutation_id", "HLA_gene_id", "sequence", "WT_sequence", "mutated_position", "Kd", "KdWT", "R", "logC", "logA", "quality", "NMD", "git_branch"]
+    tsv_header = ["id", "mutation_id", "Gene", "HLA_gene_id", "sequence", "WT_sequence", "mutated_position", "Kd", "KdWT", "R", "logC", "logA", "quality", "NMD", "git_branch"]
 
     # Convert JSON to TSV
     tsv_lines = []
