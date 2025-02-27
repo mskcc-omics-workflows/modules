@@ -32,7 +32,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2025-02-27T15:25:40.478669337"
+        "timestamp": "2025-02-27T16:22:40.801197833"
     },
     "neoantigenutils_neoantigeninput - bedpe,json,tsv": {
         "content": [
@@ -43,7 +43,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,95c581e5ffe42f43f784724259cc4dad"
+                        "test_patient_test_.json:md5,8d736aec9b477a6262d92d2eeb6c10fe"
                     ]
                 ],
                 "1": [
@@ -55,7 +55,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,95c581e5ffe42f43f784724259cc4dad"
+                        "test_patient_test_.json:md5,8d736aec9b477a6262d92d2eeb6c10fe"
                     ]
                 ],
                 "versions": [
@@ -67,7 +67,7 @@
             "nf-test": "0.9.2",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2025-02-27T15:24:02.517728587"
+        "timestamp": "2025-02-27T16:20:56.700540741"
     },
     "neoantigenutils_neoantigeninput - json,tsv": {
         "content": [
@@ -78,7 +78,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,8ccf3ce47db062dde6ce8533fcf670f4"
+                        "test_patient_test_.json:md5,22cd1c347494a9e06628605f6011ca1d"
                     ]
                 ],
                 "1": [
@@ -90,7 +90,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_.json:md5,8ccf3ce47db062dde6ce8533fcf670f4"
+                        "test_patient_test_.json:md5,22cd1c347494a9e06628605f6011ca1d"
                     ]
                 ],
                 "versions": [
@@ -102,6 +102,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.04.4"
         },
-        "timestamp": "2025-02-27T15:25:30.48202429"
+        "timestamp": "2025-02-27T16:22:30.30284769"
     }
 }

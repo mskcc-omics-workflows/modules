@@ -105,6 +105,7 @@ def main(args):
     mutation_dict = (
         {}
     )  # Used for matching mutation without the subsititution information from netMHCpan to phyloWGS output
+    gene_dict = {}
 
     mafdf = pd.read_csv(args.maf_file, delimiter="\t")
 
@@ -122,6 +123,8 @@ def main(args):
 
             else:
                 missense = 0
+                
+            
             if (
                 row["Variant_Type"] == "SNP"
                 or row["Variant_Type"] == "DNP"
@@ -603,10 +606,10 @@ def main(args):
                         else:
                             len_indel = 0
                         transcriptID = chrom_pos_dict[mutation_dict[row_MUT_identity]]["transcript"]
-                        NMD_dict[no_positon_ID] = determine_NMD(chrom, pos,transcriptID,num_windows,len_indel,ensembl)
+                        NMD_dict[no_positon_ID] = determine_NMD(chrom, pos,num_windows,len_indel,ensembl,transcriptID)
                         
                 else:
-                    NMD_dict[no_positon_ID] = False
+                    NMD_dict[no_positon_ID] = "False"
                     
                 if SV:
                     neo_dict = {
@@ -621,6 +624,7 @@ def main(args):
                         "mutation_id": bedpe_dict[
                             bedpe_match_dict[row_MUT_identity]
                         ].id,
+                        "Gene": chrom_pos_dict[mutation_dict[row_MUT_identity]]["gene"],
                         "HLA_gene_id": row_mut["MHC"],
                         "sequence": row_mut["peptide"],
                         "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
@@ -639,6 +643,7 @@ def main(args):
                         + "_"
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
                         "mutation_id": mutation_dict[row_MUT_identity],
+                        "Gene": chrom_pos_dict[mutation_dict[row_MUT_identity]]["gene"],
                         "HLA_gene_id": row_mut["MHC"],
                         "sequence": row_mut["peptide"],
                         "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
@@ -998,8 +1003,6 @@ def ensembl_load(release, gtf_file, cdna_file):
     return ensembl
 
 
-    
-
 
 def get_exons_from_transcriptID(transcriptid, ensembl, complete=True):
     """
@@ -1015,64 +1018,39 @@ def get_exons_from_transcriptID(transcriptid, ensembl, complete=True):
     for exonid in transcripts:
         exon = ensembl.exon_by_id(exonid)
         exon_ranges.append((exon.start, exon.end))
-        
-    print(exon_ranges)
-    # exit()
+
     return exon_ranges
     
     
     
-def determine_NMD(chrom, pos, transcriptID ,num_windows,len_indel, ensembl):
+def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
     """
-    :param release: the release number in EMSEMBL, could be custom
+    :param chrom: chromosome where alteration takes place
+    :param pos: position where alteration takes place
+    :pos transcriptID: transcriptID from the MAF.  If it isnt annotated, then use longest transcript
+    :num_windows: number of windows created by the peptide
+    :len_indel: Length of the indel.  Negative if del, positive if ins
     :param gtf_file: the path of gtf file if release == custom
     :param cdna_file: the path of cdna file if release == custom
-    :param cache_dir: directory for pyensembl downloading
-    :return: a Genome class in pyensembl
+    :return: NMD value
     """
     
-    #do these if maf was not annotated
-    # transcript = get_transcript(chrom, pos, ensembl)
-    # exon_ranges = get_exon_range(transcript)
-    
-    NMD = False
-    
-    #If maf contains transcript ID, do this
-    exon_ranges = get_exons_from_transcriptID(transcriptID,ensembl)
-    
-    
-    # print(ranges)
-    # if pos>ranges[-1] and pos<ranges[-1]:
-    #     # on the last exon
-    #     NMD = True
-    #     print(ranges[-1])
-    #     print(NMD)
-    #     print("on the last exon")
-                
-    # elif len(ranges) > 3:
-    #     #within 50 nt of the penultimate exon
-    #     if range == ranges[-3] and (ranges[-2][0] - pos) <= 50 :
-    #         NMD=True
-            
-    # elif range == ranges[1] and (ranges[-2][0] - pos) <= 50 :
-    # # less than 150 nt away from the start exon
-    #     pass
-    
-            
+    if transcriptID == None:
+        #do these if maf was not annotated
+        transcript = get_transcript(chrom, pos, ensembl)
+        exon_ranges = get_exon_range(transcript)
+    else:
+        exon_ranges = get_exons_from_transcriptID(transcriptID,ensembl)
+
+    NMD = "False"
+
     pos = int(pos)
     for i in range(0,len(exon_ranges)):
-        # print(exon_ranges[i][0])
-        # exon_ranges[i][0] = int(exon_ranges[i][0])
-        # exon_ranges[i][1] = int(exon_ranges[i][1])
-        
         if pos>exon_ranges[i][0] and pos<exon_ranges[i][1]:
             
-            print((exon_ranges[i][0],pos,exon_ranges[i][1]))
             exon_ranges_dist = [exon_ranges[p][1]-exon_ranges[p][0] for p in range(i,len(exon_ranges))]
             
-            mut_to_stop_dist = (num_windows*3)+len_indel+1 #300
-            # exon 100
-            # mut pos 950
+            mut_to_stop_dist = (num_windows*3)+len_indel+1 
             
             for d in range(i,len(exon_ranges_dist)):
                 if exon_ranges_dist[d] == exon_ranges_dist[i]:
@@ -1085,50 +1063,39 @@ def determine_NMD(chrom, pos, transcriptID ,num_windows,len_indel, ensembl):
                     
                     PTC_exon = exon_ranges[d] 
                     PTC_pos = exon_ranges[d][0] + mut_to_stop_dist
-                    print(("Found everything!",PTC_exon,PTC_pos,mut_to_stop_dist))
+                    # print(("Found everything!",PTC_exon,PTC_pos,mut_to_stop_dist))
                 else:
                     mut_to_stop_dist = mut_to_stop_dist - dist
-                    print((exon_ranges_dist[d],mut_to_stop_dist))
-                
-                   
-                    # break
-                    #50
+                    # print((exon_ranges_dist[d],mut_to_stop_dist))
+
     if PTC_exon == exon_ranges[-1]:
         # "on the last exon"
         NMD = "Last Exon"
-        print(exon_ranges[i][-1])
         print("on the last exon")
     else: 
         if exon_ranges[0][0] - PTC_pos < 150:
             # less than 150 nt away from the start exon
             NMD = "Start-proximal"
-            print((exon_ranges[0][0] , PTC_pos,exon_ranges[0][0] - PTC_pos))
-            print("less than 150 nt away from the start exon")
+            # print((exon_ranges[0][0] , PTC_pos,exon_ranges[0][0] - PTC_pos))
+            # print("less than 150 nt away from the start exon")
         else:
             if (PTC_exon[1] - PTC_exon[0]) > 407:
                 # in a long exon with more than 407 nt
                 NMD = "Long Exon"
                 print("in a long exon with more than 407 nt")
             else:
-                
-                # if len(exon_ranges) > 3:
-                    #  it is in the last 50 nt of the penultimate exon
-                    if PTC_exon == exon_ranges[-2] and (exon_ranges[-2][0] - PTC_pos) < 50 :
-                        NMD = "50nt Rule"
-                        print(num_windows)
-                        print(exon_ranges)
-                        print(("mut EXON:",exon_ranges[i]))
-                        print(("PTC EXON",PTC_exon))
-                        print(exon_ranges[i][-2:])
-                        print("within 50 nt of the penultimate exon")
-                    else:
-                        NMD = "Trigger NMD"
-                        
-                        
-            
-                    
-            
-    print(NMD)
+                #  it is in the last 50 nt of the penultimate exon
+                if PTC_exon == exon_ranges[-2] and (exon_ranges[-2][0] - PTC_pos) < 50 :
+                    NMD = "50nt Rule"
+                    # print(num_windows)
+                    # print(exon_ranges)
+                    # print(("mut EXON:",exon_ranges[i]))
+                    # print(("PTC EXON",PTC_exon))
+                    # print(exon_ranges[i][-2:])
+                    print("within 50 nt of the penultimate exon")
+                else:
+                    NMD = "Trigger NMD"
+
     return NMD
             
     
