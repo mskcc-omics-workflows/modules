@@ -72,8 +72,8 @@ def main():
     reference_cdna_file = str(args.CDNA_file)
     peptide_lengths = [9, 10, 11]
     sample_path_pfx = output_dir + "/" + sample_id
-    mutated_sequences_fa = sample_path_pfx + ".MUT_sequences.fa"
-    WT_sequences_fa = sample_path_pfx + ".WT_sequences.fa"
+    mutated_sequences_fa = sample_path_pfx + ".MUT.sequences.fa"
+    WT_sequences_fa = sample_path_pfx + ".WT.sequences.fa"
 
     mutations = []
     out_fa = open(mutated_sequences_fa, "w")
