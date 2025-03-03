@@ -399,12 +399,12 @@ class mutation(object):
             # SNPs
             Allele2code = self.maf_row["Tumor_Seq_Allele2"]
 
-        if self.maf_row["Variant_Classification"].tolower() in variant_type_map:
+        if self.maf_row["Variant_Classification"].lower() in variant_type_map:
             self.identifier_key = (
                 str(self.maf_row["Chromosome"])
                 + encoded_position
                 + "_"
-                + variant_type_map[(self.maf_row["Variant_Classification"]).tolower()]
+                + variant_type_map[(self.maf_row["Variant_Classification"]).lower()]
                 + Allele2code
             )
         else:
