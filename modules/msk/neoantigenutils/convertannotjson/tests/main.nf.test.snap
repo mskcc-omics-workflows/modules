@@ -44,7 +44,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e36ea44c5cc6130f40b1a100f7e84fb1"
+                    "versions.yml:md5,07818f514d7f8471de49a39923d6921e"
                 ],
                 "neoantigenTSV": [
                     [
@@ -55,14 +55,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e36ea44c5cc6130f40b1a100f7e84fb1"
+                    "versions.yml:md5,07818f514d7f8471de49a39923d6921e"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-27T16:28:14.595003828"
+        "timestamp": "2025-03-03T14:38:51.990917"
     }
 }

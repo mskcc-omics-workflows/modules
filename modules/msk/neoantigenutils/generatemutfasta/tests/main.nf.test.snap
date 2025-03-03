@@ -1,0 +1,84 @@
+{
+    "neoantigenutils_generatemutfasta - maf - fasta": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                ],
+                "mut_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                ],
+                "wt_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-03-03T14:38:12.297333"
+    },
+    "neoantigenutils_generatemutfasta - maf - fasta - stub": {
+        "content": [
+            {
+                "0": [
+                    
+                ],
+                "1": [
+                    
+                ],
+                "2": [
+                    
+                ],
+                "mut_fasta": [
+                    
+                ],
+                "versions": [
+                    
+                ],
+                "wt_fasta": [
+                    
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-03-03T14:38:18.632472"
+    }
+}

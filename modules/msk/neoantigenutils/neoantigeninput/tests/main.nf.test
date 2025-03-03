@@ -29,9 +29,9 @@ nextflow_process {
 
                 input[1] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['test4_mutass_zip'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['test_summ_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test_muts_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test_mutass_zip'], checkIfExists: true)
                     ]
 
                 input[2] = [
@@ -77,9 +77,9 @@ nextflow_process {
 
                 input[1] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['test4_summ_json'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['test4_muts_json'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['test4_mutass_zip'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['test_summ_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test_muts_json'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['test_mutass_zip'], checkIfExists: true)
                     ]
 
                 input[2] = [
@@ -128,8 +128,8 @@ nextflow_process {
 
                 input[1] = [
                     [ id:'test', single_end:false ], // meta map
-                    file('test4_summ_json'),
-                    file('test4_muts_json'),
+                    file('test_summ_json'),
+                    file('test_muts_json'),
                     file(params.folderPath)
                     ]
 

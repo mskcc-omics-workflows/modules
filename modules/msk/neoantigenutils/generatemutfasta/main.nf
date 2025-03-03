@@ -2,16 +2,16 @@ process NEOANTIGENUTILS_GENERATEMUTFASTA {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigen-utils-base:1.0.0':
-        'docker.io/mskcc/neoantigen-utils-base:1.0.0' }"
+        'docker://mskcc/neoantigen-utils-base:1.3.0':
+        'docker.io/mskcc/neoantigen-utils-base:1.3.0' }"
 
     input:
     tuple val(meta),  path(inputMaf)
     tuple path(cds),  path(cdna)
 
     output:
-    tuple val(meta), path("*_out/*.MUT_sequences.fa"),     emit: mut_fasta
-    tuple val(meta), path("*_out/*.WT_sequences.fa"),      emit: wt_fasta
+    tuple val(meta), path("*_out/*.MUT.sequences.fa"),     emit: mut_fasta
+    tuple val(meta), path("*_out/*.WT.sequences.fa"),      emit: wt_fasta
     path "versions.yml",                                   emit: versions
 
     when:
