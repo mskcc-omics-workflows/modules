@@ -7,30 +7,30 @@
                         {
                             "id": "test"
                         },
-                        "test_neoantigens.tsv:md5,59045a33fdaea426d3a8160802301455"
+                        "test_neoantigens.tsv:md5,38705f1ccbbeb9298037beb871e2e87c"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,e36ea44c5cc6130f40b1a100f7e84fb1"
+                    "versions.yml:md5,07818f514d7f8471de49a39923d6921e"
                 ],
                 "neoantigenTSV": [
                     [
                         {
                             "id": "test"
                         },
-                        "test_neoantigens.tsv:md5,59045a33fdaea426d3a8160802301455"
+                        "test_neoantigens.tsv:md5,38705f1ccbbeb9298037beb871e2e87c"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,e36ea44c5cc6130f40b1a100f7e84fb1"
+                    "versions.yml:md5,07818f514d7f8471de49a39923d6921e"
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.04.4"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2025-02-27T16:28:07.750284917"
+        "timestamp": "2025-03-03T15:54:28.541430188"
     },
     "neoantigenutils_convertannotjson - output(test) - tsv - stub": {
         "content": [
@@ -63,6 +63,6 @@
             "nf-test": "0.9.2",
             "nextflow": "24.10.4"
         },
-        "timestamp": "2025-03-03T14:38:51.990917"
+        "timestamp": "2025-03-03T15:40:34.220309133"
     }
 }
