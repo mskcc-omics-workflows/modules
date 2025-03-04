@@ -65,10 +65,6 @@ output:
             VCF file or MAF file
           pattern: "*.{vcf,maf}"
   - versions:
-      - meta:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
       - versions.yml:
           type: file
           description: File containing software versions

@@ -8,7 +8,7 @@ from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
 import numpy as np
 
-VERSION = 1.7
+VERSION = 1.9
 
 
 def main(args):
@@ -340,13 +340,14 @@ def main(args):
     WTdict = {}
     SVWTdict = {}
     for index_WT, row_WT in neoantigen_WT_in.iterrows():
-        noposID = ""
+        no_positon_ID = ""
         id = ""
         wtsvid = ""
-        IDsplit = row_WT["Identity"].split("_")
+        row_WT_identity = trim_id(row_WT["Identity"])
+        IDsplit = row_WT_identity.split("_")
         if len(IDsplit[0]) < 3:
             # it is from neoSV
-            IDsplit = row_WT["Identity"].split("_")
+            IDsplit = row_WT_identity.split("_")
             wtsvid = (
                 IDsplit[0]
                 + IDsplit[1][0:7]
@@ -357,7 +358,7 @@ def main(args):
                 + "_"
                 + str(row_WT["pos"])
             )
-            noposID = (
+            no_positon_ID = (
                 IDsplit[0]
                 + "_"
                 + IDsplit[1][0:7]
@@ -371,8 +372,8 @@ def main(args):
                 "peptide": row_WT["peptide"],
             }
             id = wtsvid
-            if noposID not in WTdict:
-                WTdict[noposID] = {
+            if no_positon_ID not in WTdict:
+                WTdict[no_positon_ID] = {
                     "peptides": {
                         row_WT["peptide"]: id
                     },  # This is a dict so we can match the peptide with the actual ID later
@@ -380,11 +381,11 @@ def main(args):
                 }
 
             else:
-                WTdict[noposID]["peptides"][row_WT["peptide"]] = id
+                WTdict[no_positon_ID]["peptides"][row_WT["peptide"]] = id
 
         else:
             id = (
-                row_WT["Identity"][:-2]
+                row_WT_identity[:-2]
                 + "_"
                 + str(len(row_WT["peptide"]))
                 + "_"
@@ -393,8 +394,8 @@ def main(args):
                 + str(row_WT["pos"])
             )
 
-            noposID = (
-                row_WT["Identity"][:-2]
+            no_positon_ID = (
+                row_WT_identity[:-2]
                 + "_"
                 + str(len(row_WT["peptide"]))
                 + "_"
@@ -403,8 +404,8 @@ def main(args):
             WTdict[id] = {"affinity": row_WT["affinity"], "peptide": row_WT["peptide"]}
 
             # This is used as last resort for the matching.  We will preferentially find the peptide matching in length as well as POS. Worst case we will default to the WT pos 0
-            if noposID not in WTdict:
-                WTdict[noposID] = {
+            if no_positon_ID not in WTdict:
+                WTdict[no_positon_ID] = {
                     "peptides": {
                         row_WT["peptide"]: id
                     },  # This is a dict so we can match the peptide with the ID later
@@ -412,7 +413,7 @@ def main(args):
                 }
 
             else:
-                WTdict[noposID]["peptides"][row_WT["peptide"]] = id
+                WTdict[no_positon_ID]["peptides"][row_WT["peptide"]] = id
 
     def find_most_similar_string(target, strings):
         max_score = -1
@@ -453,15 +454,17 @@ def main(args):
         )
 
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
-        IDsplit = row_mut["Identity"].split("_")
+        row_MUT_identity = trim_id(row_mut["Identity"])
+        IDsplit = row_MUT_identity.split("_")
         SV = False
-        if row_mut["affinity"] < 500:
+        if row_mut["affinity"] < float(args.kD_cutoff):
             peplen = len(row_mut["peptide"])
             matchfound = False
+            frameshift= False
             if IDsplit[1][0] == "S" and IDsplit[1][1] != "p":
                 # If it is a silent mutation.  Silent mutations can either be S or SY. These include intron mutations.  Splices can be Sp
                 continue
-            if row_mut["Identity"].count("_") == 1:
+            if row_MUT_identity.count("_") == 1:
                 # its an SV
                 SV = True
                 WTid = (
@@ -474,7 +477,7 @@ def main(args):
                     + "_"
                     + str(row_mut["pos"])
                 )
-                noposID = (
+                no_positon_ID = (
                     IDsplit[0]
                     + "_"
                     + IDsplit[1][0:8]
@@ -484,13 +487,13 @@ def main(args):
                     + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                 )
                 # this part makes the dict that matches this to the bedpe
-                bedpe_match_dict[row_mut["Identity"]] = (
+                bedpe_match_dict[row_MUT_identity] = (
                     IDsplit[0] + "_" + IDsplit[1][0:4]
                 )
             else:
                 # first find match in WT
                 WTid = (
-                    row_mut["Identity"][:-2]
+                    row_MUT_identity[:-2]
                     + "_"
                     + str(peplen)
                     + "_"
@@ -498,38 +501,32 @@ def main(args):
                     + "_"
                     + str(row_mut["pos"])
                 )
-                noposID = (
-                    row_mut["Identity"][:-2]
+                no_positon_ID = (
+                    row_MUT_identity[:-2]
                     + "_"
                     + str(peplen)
                     + "_"
                     + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                 )
             if (
-                WTid in WTdict
-                and ("M" == IDsplit[1][0] and "Sp" not in row_mut["Identity"])
+                 ("M" == IDsplit[1][0] and "Sp" not in row_MUT_identity)
                 or SV == False
             ):
                 # match
-                matchfound = True
-                best_pepmatch = WTdict[WTid]["peptide"]
-                frameshift = False
-
-            else:
                 if (
-                    "-" in row_mut["Identity"]
-                    or "+" in row_mut["Identity"]
-                    and WTid in WTdict
-                    or SV == False
-                ):
-                    # Means there is a frame shift and we don't need to do a analysis of 5' end and 3' end as 3' end is no longer recognizeable/comparable to the WT sequence at all
-                    # We can just move the windows along together. There will likely be little to no match with the WT peptides.
+                    (WTid in WTdict)
+                    and IDsplit[1][0] != "I"
+                    ):
+                    #This block takes care of Missense mutations caused by polymorphisims
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
-                    frameshift = False
+                    
                 else:
-                    # Here we take care of frameshifted peptides
-                    frameshift = True
+                    # Here we take care of INDELS and everything else
+
+                    if ("-" in IDsplit[1] or "+" in IDsplit[1]):
+                        frameshift = True
+
                     (
                         best_pepmatch,
                         best_pepmatch2,
@@ -537,7 +534,7 @@ def main(args):
                         first_AA_same_score,
                         match_score,
                     ) = find_most_similar_string(
-                        row_mut["peptide"], list(WTdict[noposID]["peptides"].keys())
+                        row_mut["peptide"], list(WTdict[no_positon_ID]["peptides"].keys())
                     )
                     if (
                         best_pepmatch == row_mut["peptide"]
@@ -554,14 +551,14 @@ def main(args):
                         best_pepmatch[-1] != row_mut["peptide"][-1]
                         and best_pepmatch2[-1] == row_mut["peptide"][-1]
                     ):
-                        # We should preferentially match the first AA if we can.  I have found that the pairwise alignment isnt always the best at this.
+                        # We should preferentially match the first AA if we can.  Sometimes the pairwise alignment isnt the best at this so we do a little check here.
                         # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
                         best_pepmatch = best_pepmatch2
 
-                    WTid = WTdict[noposID]["peptides"][best_pepmatch]
+                    WTid = WTdict[no_positon_ID]["peptides"][best_pepmatch]
                     matchfound = True
 
-            if matchfound == True:
+            if matchfound == True and best_pepmatch != row_mut["peptide"]:
                 mut_pos = (
                     find_first_difference_index(
                         row_mut["peptide"], best_pepmatch  # WTdict[WTid]["peptide"]
@@ -574,7 +571,7 @@ def main(args):
 
                 if SV:
                     neo_dict = {
-                        "id": row_mut["Identity"]
+                        "id": row_MUT_identity
                         + "_"
                         + str(peplen)
                         + "_"
@@ -583,7 +580,7 @@ def main(args):
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", "")
                         ,
                         "mutation_id": bedpe_dict[
-                            bedpe_match_dict[row_mut["Identity"]]
+                            bedpe_match_dict[row_MUT_identity]
                         ].id,
                         "HLA_gene_id": row_mut["MHC"],
                         "sequence": row_mut["peptide"],
@@ -594,14 +591,14 @@ def main(args):
                     }
                 else:
                     neo_dict = {
-                        "id": row_mut["Identity"]
+                        "id": row_MUT_identity
                         + "_"
                         + str(peplen)
                         + "_"
                         + str(row_mut["pos"])
                         + "_"
                         + row_mut["MHC"].split("-")[1].replace(":", "").replace("*", ""),
-                        "mutation_id": mutation_dict[row_mut["Identity"]],
+                        "mutation_id": mutation_dict[row_MUT_identity],
                         "HLA_gene_id": row_mut["MHC"],
                         "sequence": row_mut["peptide"],
                         "WT_sequence": best_pepmatch,  # WTdict[WTid]["peptide"],
@@ -614,6 +611,15 @@ def main(args):
     outjson = args.patient_id + "_" + args.id + "_" + ".json"
     with open(outjson, "w") as tstout:
         json.dump(outer_dict, tstout, indent=1)
+
+# Sometimes the id is set as .*_M_1 and we want to make sure its _M, otherwise it will not match
+def trim_id(id_string):
+    if "_M_" in id_string:
+        return id_string.partition("_M_")[0]+"_M"
+    elif "_V_" in id_string:
+        return id_string.partition("_V_")[0]+"_V"
+    else:
+        return id_string
 
 
 def makeID(maf_row):
@@ -923,6 +929,10 @@ def parse_args():
         "-v", "--version", action="version", version="%(prog)s {}".format(VERSION)
     )
 
+    parser.add_argument(
+        "--kD_cutoff", default=500, help="Cutoff value for the kD, default is 500",
+    )
+
     return parser.parse_args()
 
 
@@ -937,7 +947,9 @@ if __name__ == "__main__":
     print("Cohort:", args.cohort)
     print("HLA Genes File:", args.HLA_genes)
     print("netMHCpan Files:", args.netMHCpan_MUT_input, args.netMHCpan_WT_input)
+    print("kD Cutoff Value:", args.kD_cutoff)
     if args.patient_data_file:
         print("patient_data_file File:", args.patient_data_file)
 
     main(args)
+
