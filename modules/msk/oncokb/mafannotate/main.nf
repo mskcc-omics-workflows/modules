@@ -1,4 +1,4 @@
-process ONCOKB_MAFANNOTATOR {
+process ONCOKB_MAFANNOTATE {
     tag "$meta.id"
     label 'process_single'
     cache false
@@ -28,7 +28,10 @@ process ONCOKB_MAFANNOTATOR {
     -o ${prefix}.oncokb.maf \
     $args
 
-
+    cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            MafAnnotator: \$(echo \$(MafAnnotator.py -v))
+        END_VERSIONS
     """
 
     stub:

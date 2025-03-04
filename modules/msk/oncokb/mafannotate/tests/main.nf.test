@@ -2,15 +2,16 @@
 // nf-core modules test genomenexus/annotationpipeline
 nextflow_process {
 
-    name "Test Process ONCOKB_MAFANNOTATOR"
+    name "Test Process ONCOKB_MAFANNOTATE"
     script "../main.nf"
-    process "ONCOKB_MAFANNOTATOR"
+    process "ONCOKB_MAFANNOTATE"
+    config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfcore"
     tag "modules_msk"
     tag "oncokb"
-    tag "oncokb/mafannotator"
+    tag "oncokb/mafannotate"
 
 
     test("test") {
