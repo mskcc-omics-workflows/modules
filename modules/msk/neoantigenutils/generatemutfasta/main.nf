@@ -43,8 +43,8 @@ process NEOANTIGENUTILS_GENERATEMUTFASTA {
 
     """
         mkdir ${prefix}_out
-        touch ${prefix}_out/${prefix}.MUT_sequences.fa
-        touch ${prefix}_out/${prefix}.WT_sequences.fa
+        touch ${prefix}_out/${prefix}.MUT.sequences.fa
+        touch ${prefix}_out/${prefix}.WT.sequences.fa
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
             generateMutFasta: \$(echo \$(generateMutFasta.py -v))
