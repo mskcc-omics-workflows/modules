@@ -1,5 +1,3 @@
-
-// nf-core modules test genomenexus/annotationpipeline
 nextflow_process {
 
     name "Test Process ONCOKB_MAFANNOTATE"

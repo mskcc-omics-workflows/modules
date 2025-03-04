@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "oncokb_mafannotator"
+name: "oncokb_mafannotate"
 description:
   Takes a Maf and annotates it using OncoKB.
 keywords:
@@ -22,7 +22,7 @@ input:
     - inputMaf:
         type: file
         description: MAF, perferrably annotated by vcf2maf. Required cols are listed in the docs.
-        pattern: "*annotated.json"
+        pattern: "*.maf"
 output:
   - oncokb_maf:
       - meta:

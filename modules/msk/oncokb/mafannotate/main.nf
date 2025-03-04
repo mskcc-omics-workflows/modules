@@ -10,7 +10,7 @@ process ONCOKB_MAFANNOTATE {
     tuple val(meta),  path(inputMaf)
 
     output:
-    tuple val(meta), path("*oncokb.maf"),     emit: oncokb_maf
+    tuple val(meta), path("*.oncokb.maf"),     emit: oncokb_maf
     
     path "versions.yml",                                   emit: versions
 
