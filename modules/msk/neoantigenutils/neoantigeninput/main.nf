@@ -12,7 +12,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tuple path(gtf),  path(cdna)
 
     output:
-    tuple val(meta), path("*_*.json"),                                                  emit: json
+    tuple val(meta), path("*_input.json"),                                                  emit: json
     path "versions.yml",                                                               emit: versions
 
     when:
@@ -60,7 +60,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     def cohort =task.ext.cohort ?: "${meta.id}_cohort"
     """
 
-        touch ${patientid}_${id}.json
+        touch ${patientid}_${id}_input.json
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
