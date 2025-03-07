@@ -12,7 +12,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tuple path(gtf),  path(cdna)
 
     output:
-    tuple val(meta), path("*_*.json"),                                                  emit: json
+    tuple val(meta), path("*_input.json"),                                                  emit: json
     path "versions.yml",                                                               emit: versions
 
     when:

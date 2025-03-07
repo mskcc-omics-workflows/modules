@@ -654,7 +654,7 @@ def main(args):
                     }
                 outer_dict["neoantigens"].append(neo_dict)
 
-    outjson = args.patient_id + "_" + args.id + ".json"
+    outjson = args.patient_id + "_" + args.id + "_" + "input.json"
     with open(outjson, "w") as tstout:
         json.dump(outer_dict, tstout, indent=1)
 
