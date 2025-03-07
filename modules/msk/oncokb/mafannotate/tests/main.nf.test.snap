@@ -1,0 +1,39 @@
+{
+    "test": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
+                        },
+                        "test.oncokb.maf:md5,dd58c4431ec26cb47fb97236d063c6a5"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,030d3dd4facf29936752666113de5897"
+                ],
+                "oncokb_maf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
+                        },
+                        "test.oncokb.maf:md5,dd58c4431ec26cb47fb97236d063c6a5"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,030d3dd4facf29936752666113de5897"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.04.4"
+        },
+        "timestamp": "2025-03-03T13:18:05.707580942"
+    }
+}

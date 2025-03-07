@@ -1,0 +1,2 @@
+genomenexus/annotationpipeline:
+  - "modules/msk/oncokb/mafannotate/**"
