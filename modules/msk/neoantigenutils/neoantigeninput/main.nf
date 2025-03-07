@@ -60,7 +60,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     def cohort =task.ext.cohort ?: "${meta.id}_cohort"
     """
 
-        touch ${patientid}_${id}.json
+        touch ${patientid}_${id}_input.json
 
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
