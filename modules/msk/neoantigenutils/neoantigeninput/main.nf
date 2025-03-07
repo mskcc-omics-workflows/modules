@@ -11,7 +11,7 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tuple val(meta3), path(mutNetMHCpan),  path(wtNetMHCpan)
 
     output:
-    tuple val(meta), path("*_.json"),                                                  emit: json
+    tuple val(meta), path("*_input.json"),                                                  emit: json
     path "versions.yml",                                                               emit: versions
 
     when:
