@@ -99,6 +99,12 @@ jobs:
           MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
           echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
           echo "${MD_NAME}"
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "pull changes before adding doc for ${{ matrix.tags }}"
+          pull: "--rebase"
+          cwd: "./"
       - name: Download convertor from yml to md
         run: |
           curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/yaml_to_md.py
@@ -159,12 +165,6 @@ jobs:
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
           python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
-      - uses: EndBug/add-and-commit@v9
-        with:
-          default_author: github_actions
-          message: "pull changes before adding doc for ${{ matrix.tags }}"
-          pull: "--rebase"
-          cwd: "./"
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
