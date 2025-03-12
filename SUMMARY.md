@@ -59,5 +59,4 @@
 * [neoantigen\_editing](subworkflows/neoantigen\_editing.md)
 * [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
 * [phylowgs](subworkflows/phylowgs.md)
-* [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
 
