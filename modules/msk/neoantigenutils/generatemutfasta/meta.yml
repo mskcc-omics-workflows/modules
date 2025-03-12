@@ -38,20 +38,20 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - "*_out/*.MUT_sequences.fa":
+      - "*_out/*.MUT.sequences.fa":
           type: file
           description: Mutated fasta sequence
-          pattern: "*.{MUT_sequences.fa}"
+          pattern: "*.{MUT.sequences.fa}"
   - wt_fasta:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - "*_out/*.WT_sequences.fa":
+      - "*_out/*.WT.sequences.fa":
           type: file
           description: Wildtype fasta sequence
-          pattern: "*.{WT_sequences.fa}"
+          pattern: "*.{WT.sequences.fa}"
   - versions:
       - versions.yml:
           type: file
