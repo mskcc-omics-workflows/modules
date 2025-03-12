@@ -17,6 +17,7 @@
   * [neoantigenediting\_aligntoiedb](modules/neoantigenediting/neoantigenediting\_aligntoiedb.md)
   * [neoantigenediting\_computefitness](modules/neoantigenediting/neoantigenediting\_computefitness.md)
 * [neoantigenutils](modules/neoantigenutils/README.md)
+  * [neoantigenutils_formatnetmhcpan](modules/neoantigenutils_formatnetmhcpan.md)
   * [neoantigenutils_neoantigeninput](modules/neoantigenutils_neoantigeninput.md)
   * [neoantigenutils\_convertannotjson](modules/neoantigenediting/neoantigenutils\_convertannotjson.md)
   * [neoantigenutils\_formatnetmhcpan](modules/neoantigenediting/neoantigenutils\_formatnetmhcpan.md)
