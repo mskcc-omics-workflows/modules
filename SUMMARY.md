@@ -17,6 +17,7 @@
   * [neoantigenediting\_aligntoiedb](modules/neoantigenediting/neoantigenediting\_aligntoiedb.md)
   * [neoantigenediting\_computefitness](modules/neoantigenediting/neoantigenediting\_computefitness.md)
 * [neoantigenutils](modules/neoantigenutils/README.md)
+  * [neoantigenutils_neoantigeninput](modules/neoantigenutils_neoantigeninput.md)
   * [neoantigenutils\_convertannotjson](modules/neoantigenediting/neoantigenutils\_convertannotjson.md)
   * [neoantigenutils\_formatnetmhcpan](modules/neoantigenediting/neoantigenutils\_formatnetmhcpan.md)
   * [neoantigenutils\_generatehlastring](modules/neoantigenediting/neoantigenutils\_generatehlastring.md)
@@ -49,7 +50,6 @@
   * [phylowgs\_multievolve](modules/phylowgs/phylowgs\_multievolve.md)
 * [netmhc3](modules/netmhc3.md)
 * [netmhcpan4](modules/netmhcpan4.md)
-
 
 ## Subworkflows
 
