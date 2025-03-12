@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, fix/yaml-2-md-action]
   merge_group:
     types: [checks_requested]
     branches: [main]
