@@ -47,6 +47,8 @@
   * [phylowgs\_parsecnvs](modules/phylowgs/phylowgs\_parsecnvs.md)
   * [phylowgs\_writeresults](modules/phylowgs/phylowgs\_writeresults.md)
   * [phylowgs\_multievolve](modules/phylowgs/phylowgs\_multievolve.md)
+* [netmhc3](modules/netmhc3.md)
+
 
 ## Subworkflows
 
@@ -55,3 +57,4 @@
 * [neoantigen\_editing](subworkflows/neoantigen\_editing.md)
 * [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
 * [phylowgs](subworkflows/phylowgs.md)
+
