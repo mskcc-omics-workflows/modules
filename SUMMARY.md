@@ -48,6 +48,8 @@
   * [phylowgs\_writeresults](modules/phylowgs/phylowgs\_writeresults.md)
   * [phylowgs\_multievolve](modules/phylowgs/phylowgs\_multievolve.md)
 * [netmhc3](modules/netmhc3.md)
+* [netmhcpan4](modules/netmhcpan4.md)
+
 
 ## Subworkflows
 
