@@ -49,7 +49,6 @@
   * [phylowgs\_multievolve](modules/phylowgs/phylowgs\_multievolve.md)
 * [netmhc3](modules/netmhc3.md)
 
-
 ## Subworkflows
 
 * [traceback](subworkflows/traceback.md)
@@ -57,4 +56,5 @@
 * [neoantigen\_editing](subworkflows/neoantigen\_editing.md)
 * [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
 * [phylowgs](subworkflows/phylowgs.md)
+* [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
 

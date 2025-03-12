@@ -17,7 +17,8 @@ Run netmhcpan and netmhcstabpan in parallel.
 | ---------- |
 | neoantigenutils/generatehlastring |
 | neoantigenutils/generatemutfasta |
-| netmhcpan |
+| netmhc3 |
+| netmhcpan4 |
 | netmhcstabpan |
 | neoantigenutils/formatnetmhcpan |
 
