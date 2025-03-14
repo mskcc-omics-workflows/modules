@@ -1044,29 +1044,28 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
 
     NMD = "False"
 
-    pos = int(pos)
+    pos = int(pos) + 1
     for i in range(0,len(exon_ranges)):
-        if pos>exon_ranges[i][0] and pos<exon_ranges[i][1]:
-            
-            exon_ranges_dist = [exon_ranges[p][1]-exon_ranges[p][0] for p in range(i,len(exon_ranges))]
-            
+        if pos>=exon_ranges[i][0] and pos<=exon_ranges[i][1]:
+            print(f'{pos} in {exon_ranges[i]}, {exon_ranges[i][1]-exon_ranges[i][0]}')
+            exon_ranges_dist = [exon_ranges[p][1]-exon_ranges[p][0] for p in range(0,len(exon_ranges))]
             mut_to_stop_dist = (num_windows*3)+len_indel+1 
-            
+
             for d in range(i,len(exon_ranges_dist)):
                 if exon_ranges_dist[d] == exon_ranges_dist[i]:
                     dist = exon_ranges_dist[d] - (exon_ranges[i][1]-pos)
-                    
                 else:
                     dist = exon_ranges_dist[d]
-                
-                if exon_ranges_dist[d] - mut_to_stop_dist >= 0: 
-                    
+
+                if dist - mut_to_stop_dist >= 0: 
                     PTC_exon = exon_ranges[d] 
                     PTC_pos = exon_ranges[d][0] + mut_to_stop_dist
-                    # print(("Found everything!",PTC_exon,PTC_pos,mut_to_stop_dist))
+                    break
+                elif len(exon_ranges_dist)-1 == d and dist - mut_to_stop_dist < 0:
+                    PTC_exon = exon_ranges[d] 
+                    PTC_pos = exon_ranges[d][0] + mut_to_stop_dist
                 else:
                     mut_to_stop_dist = mut_to_stop_dist - dist
-                    # print((exon_ranges_dist[d],mut_to_stop_dist))
 
     if PTC_exon == exon_ranges[-1]:
         # "on the last exon"
@@ -1076,8 +1075,6 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
         if exon_ranges[0][0] - PTC_pos < 150:
             # less than 150 nt away from the start exon
             NMD = "Start-proximal"
-            # print((exon_ranges[0][0] , PTC_pos,exon_ranges[0][0] - PTC_pos))
-            # print("less than 150 nt away from the start exon")
         else:
             if (PTC_exon[1] - PTC_exon[0]) > 407:
                 # in a long exon with more than 407 nt
@@ -1087,11 +1084,6 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
                 #  it is in the last 50 nt of the penultimate exon
                 if PTC_exon == exon_ranges[-2] and (exon_ranges[-2][0] - PTC_pos) < 50 :
                     NMD = "50nt Rule"
-                    # print(num_windows)
-                    # print(exon_ranges)
-                    # print(("mut EXON:",exon_ranges[i]))
-                    # print(("PTC EXON",PTC_exon))
-                    # print(exon_ranges[i][-2:])
                     print("within 50 nt of the penultimate exon")
                 else:
                     NMD = "Trigger NMD"
@@ -1125,7 +1117,7 @@ def parse_args():
                         help='GTF file for the reference.')
     parser.add_argument('-cf', '--cdna-file', dest='cdna_file', metavar='CDNA_FILE', default=None,
                         help='cDNA file for the reference.')
-                        
+
     parser.add_argument("--id", required=True, help="ID")
     parser.add_argument("--patient_id", required=True, help="Patient ID")
     parser.add_argument("--cohort", required=True, help="Cohort")
