@@ -123,8 +123,7 @@ def main(args):
 
             else:
                 missense = 0
-                
-            
+
             if (
                 row["Variant_Type"] == "SNP"
                 or row["Variant_Type"] == "DNP"
@@ -463,9 +462,8 @@ def main(args):
             first_AA_same_score,
             max_score,
         )
-    
     NMD_dict = {}
-    
+
     for index_mut, row_mut in neoantigen_mut_in.iterrows():
         row_MUT_identity = trim_id(row_mut["Identity"])
         IDsplit = row_MUT_identity.split("_")
@@ -534,7 +532,7 @@ def main(args):
                     #This block takes care of Missense mutations caused by polymorphisims
                     matchfound = True
                     best_pepmatch = WTdict[WTid]["peptide"]
-                    
+
                 else:
                     # Here we take care of INDELS and everything else
 
@@ -579,24 +577,20 @@ def main(args):
                     + 1
                 )
 
-                
+
                 chrom, pos = mutation_dict[row_mut["Identity"]].split("_")[0:2]
-                
-                
-                
+
                 if frameshift:
                     mut_pos = "Frameshifted peptide"
                     num_windows = len(list(WTdict[no_positon_ID]["peptides"].keys()))
                     num_windows_li = len(list(WTdict[no_positon_ID]["peptides"].values()))
-                    # [pep.split(",") for pep in num_windows_li]
-                    
-                    # print(WTdict[no_positon_ID]["peptides"])
+
                     print("FRAMESHIFT")
-                    
+
                     if no_positon_ID in NMD_dict:
                         #NMD must only be calculated once per mutation
                         pass
-                    else:  
+                    else:
                         split_mutation_dict_ID = mutation_dict[row_MUT_identity].split("_")
                         print(split_mutation_dict_ID)
                         if split_mutation_dict_ID[2] == "I":
@@ -607,10 +601,10 @@ def main(args):
                             len_indel = 0
                         transcriptID = chrom_pos_dict[mutation_dict[row_MUT_identity]]["transcript"]
                         NMD_dict[no_positon_ID] = determine_NMD(chrom, pos,num_windows,len_indel,ensembl,transcriptID)
-                        
+
                 else:
                     NMD_dict[no_positon_ID] = "False"
-                    
+
                 if SV:
                     neo_dict = {
                         "id": row_MUT_identity
@@ -993,7 +987,7 @@ def ensembl_load(release, gtf_file, cdna_file):
     #     ensembl = EnsemblRelease(int(release))
     #     ensembl.download()
     #     ensembl.index()
-        
+
     # else:
     ensembl = Genome(gtf_path_or_url=gtf_file,
                         transcript_fasta_paths_or_urls=cdna_file,
@@ -1011,18 +1005,17 @@ def get_exons_from_transcriptID(transcriptid, ensembl, complete=True):
     :param complete: only consider complete transcripts
     :return: a list of tuples of exon ranges
     """
-    
+
     transcripts= ensembl.exon_ids_of_transcript_id(transcriptid)
-    
+
     exon_ranges = []
     for exonid in transcripts:
         exon = ensembl.exon_by_id(exonid)
         exon_ranges.append((exon.start, exon.end))
 
     return exon_ranges
-    
-    
-    
+
+
 def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
     """
     :param chrom: chromosome where alteration takes place
@@ -1034,7 +1027,7 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
     :param cdna_file: the path of cdna file if release == custom
     :return: NMD value
     """
-    
+
     if transcriptID == None:
         #do these if maf was not annotated
         transcript = get_transcript(chrom, pos, ensembl)
@@ -1044,40 +1037,37 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
 
     NMD = "False"
 
-    pos = int(pos)
+    pos = int(pos) + 1
     for i in range(0,len(exon_ranges)):
-        if pos>exon_ranges[i][0] and pos<exon_ranges[i][1]:
-            
-            exon_ranges_dist = [exon_ranges[p][1]-exon_ranges[p][0] for p in range(i,len(exon_ranges))]
-            
-            mut_to_stop_dist = (num_windows*3)+len_indel+1 
-            
+        if pos>=exon_ranges[i][0] and pos<=exon_ranges[i][1]:
+            print(f'{pos} in {exon_ranges[i]}, {exon_ranges[i][1]-exon_ranges[i][0]}')
+            exon_ranges_dist = [exon_ranges[p][1]-exon_ranges[p][0] for p in range(0,len(exon_ranges))]
+            mut_to_stop_dist = (num_windows*3)+len_indel+1
+
             for d in range(i,len(exon_ranges_dist)):
                 if exon_ranges_dist[d] == exon_ranges_dist[i]:
                     dist = exon_ranges_dist[d] - (exon_ranges[i][1]-pos)
-                    
                 else:
                     dist = exon_ranges_dist[d]
-                
-                if exon_ranges_dist[d] - mut_to_stop_dist >= 0: 
-                    
-                    PTC_exon = exon_ranges[d] 
+
+                if dist - mut_to_stop_dist >= 0:
+                    PTC_exon = exon_ranges[d]
                     PTC_pos = exon_ranges[d][0] + mut_to_stop_dist
-                    # print(("Found everything!",PTC_exon,PTC_pos,mut_to_stop_dist))
+                    break
+                elif len(exon_ranges_dist)-1 == d and dist - mut_to_stop_dist < 0:
+                    PTC_exon = exon_ranges[d]
+                    PTC_pos = exon_ranges[d][0] + mut_to_stop_dist
                 else:
                     mut_to_stop_dist = mut_to_stop_dist - dist
-                    # print((exon_ranges_dist[d],mut_to_stop_dist))
 
     if PTC_exon == exon_ranges[-1]:
         # "on the last exon"
         NMD = "Last Exon"
         print("on the last exon")
-    else: 
+    else:
         if exon_ranges[0][0] - PTC_pos < 150:
             # less than 150 nt away from the start exon
             NMD = "Start-proximal"
-            # print((exon_ranges[0][0] , PTC_pos,exon_ranges[0][0] - PTC_pos))
-            # print("less than 150 nt away from the start exon")
         else:
             if (PTC_exon[1] - PTC_exon[0]) > 407:
                 # in a long exon with more than 407 nt
@@ -1087,19 +1077,14 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
                 #  it is in the last 50 nt of the penultimate exon
                 if PTC_exon == exon_ranges[-2] and (exon_ranges[-2][0] - PTC_pos) < 50 :
                     NMD = "50nt Rule"
-                    # print(num_windows)
-                    # print(exon_ranges)
-                    # print(("mut EXON:",exon_ranges[i]))
-                    # print(("PTC EXON",PTC_exon))
-                    # print(exon_ranges[i][-2:])
                     print("within 50 nt of the penultimate exon")
                 else:
                     NMD = "Trigger NMD"
 
     return NMD
-            
-    
-    
+
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Process input files and parameters")
     parser.add_argument("--maf_file", required=True, help="Path to the MAF file")
@@ -1125,7 +1110,7 @@ def parse_args():
                         help='GTF file for the reference.')
     parser.add_argument('-cf', '--cdna-file', dest='cdna_file', metavar='CDNA_FILE', default=None,
                         help='cDNA file for the reference.')
-                        
+
     parser.add_argument("--id", required=True, help="ID")
     parser.add_argument("--patient_id", required=True, help="Patient ID")
     parser.add_argument("--cohort", required=True, help="Cohort")
