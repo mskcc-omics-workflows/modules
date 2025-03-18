@@ -592,7 +592,6 @@ def main(args):
                         pass
                     else:
                         split_mutation_dict_ID = mutation_dict[row_MUT_identity].split("_")
-                        print(split_mutation_dict_ID)
                         if split_mutation_dict_ID[2] == "I":
                             len_indel = len(split_mutation_dict_ID[3])
                         elif split_mutation_dict_ID[3] == "D":
@@ -1040,7 +1039,6 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
     pos = int(pos) + 1
     for i in range(0,len(exon_ranges)):
         if pos>=exon_ranges[i][0] and pos<=exon_ranges[i][1]:
-            print(f'{pos} in {exon_ranges[i]}, {exon_ranges[i][1]-exon_ranges[i][0]}')
             exon_ranges_dist = [exon_ranges[p][1]-exon_ranges[p][0] for p in range(0,len(exon_ranges))]
             mut_to_stop_dist = (num_windows*3)+len_indel+1
 
@@ -1063,7 +1061,6 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
     if PTC_exon == exon_ranges[-1]:
         # "on the last exon"
         NMD = "Last Exon"
-        print("on the last exon")
     else:
         if exon_ranges[0][0] - PTC_pos < 150:
             # less than 150 nt away from the start exon
@@ -1072,12 +1069,10 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
             if (PTC_exon[1] - PTC_exon[0]) > 407:
                 # in a long exon with more than 407 nt
                 NMD = "Long Exon"
-                print("in a long exon with more than 407 nt")
             else:
                 #  it is in the last 50 nt of the penultimate exon
                 if PTC_exon == exon_ranges[-2] and (exon_ranges[-2][0] - PTC_pos) < 50 :
                     NMD = "50nt Rule"
-                    print("within 50 nt of the penultimate exon")
                 else:
                     NMD = "Trigger NMD"
 
