@@ -578,7 +578,7 @@ def main(args):
                 )
 
 
-                chrom, pos = mutation_dict[row_mut["Identity"]].split("_")[0:2]
+                chrom, pos = mutation_dict[row_MUT_identity].split("_")[0:2]
 
                 if frameshift:
                     mut_pos = "Frameshifted peptide"
