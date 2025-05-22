@@ -536,20 +536,38 @@ class mutation(object):
         hgvsc = self.maf_row["HGVSc"]
         position, ref_allele, alt_allele, sequence, hgvsc_type = [-1, "", "", "", "ONP"]
 
+        ## start of mutated region in CDS
+        cds = re.search(self.cds_seq + ".*", self.cdna_seq).group()
+
         if re.match(r"^c\.(\d+).*([ATCG]+)>([ATCG]+)$", hgvsc):
             position, ref_allele, alt_allele = re.match(
                 r"^c\.(\d+).*(\w+)>(\w+)", hgvsc
             ).groups()
 
-        elif re.match(r"^c\.(\d+).*del([ATCG]+)ins([ATCG]+)$", hgvsc):
-            position, ref_allele, alt_allele = re.match(
-                r"^c\.(\d+).*del([ATCG]+)ins([ATCG]+)$", hgvsc
+        elif re.match(r"^c\.(\d+)_?(\d+)?.*del([ATCG]+)?ins([ATCG]+)$", hgvsc):
+            position,end_position,ref_allele, alt_allele = re.match(
+                r"^c\.(\d+)_?(\d+)?.*del([ATCG]+)?ins([ATCG]+)$", hgvsc
+            ).groups()
+            if not ref_allele:
+                if end_position:
+                    ref_allele = cds[int(position)-1:int(end_position)]
+                else:
+                    ref_allele = cds[int(position)-1]
+
+        elif re.match(r"^c\.(\d+)_?(\d+)?.*(ins)([ATCG]+)?$", hgvsc):
+            position,end_position, hgvsc_type, sequence = re.match(
+                r"^c\.(\d+)_?(\d+)?.*(ins)([ATCG]+)?$", hgvsc
             ).groups()
 
-        elif re.match(r"^c\.(\d+).*(dup|ins|del|inv)([ATCG]+)$", hgvsc):
-            position, hgvsc_type, sequence = re.match(
-                r"^c\.(\d+).*(dup|ins|del|inv)([ATCG]+)$", hgvsc
+        elif re.match(r"^c\.(\d+)_?(\d+)?.*(dup|del|inv)([ATCG]+)?$", hgvsc):
+            position,end_position, hgvsc_type, sequence = re.match(
+                r"^c\.(\d+)_?(\d+)?.*(dup|del|inv)([ATCG]+)?$", hgvsc
             ).groups()
+            if not sequence:
+                if end_position:
+                    sequence = cds[int(position)-1:int(end_position)]
+                else:
+                    sequence = cds[int(position)-1]
 
         else:
             sys.exit("Error: not one of the known HGVSc strings: " + hgvsc)
@@ -562,9 +580,6 @@ class mutation(object):
         elif hgvsc_type == "inv":
             ref_allele = sequence
             alt_allele = self.reverse_complement(sequence)
-
-        ## start of mutated region in CDS
-        cds = re.search(self.cds_seq + ".*", self.cdna_seq).group()
 
         seq_5p = cds[0:position]
         seq_3p = cds[position : len(cds)]
