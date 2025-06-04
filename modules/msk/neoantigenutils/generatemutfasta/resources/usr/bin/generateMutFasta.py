@@ -572,13 +572,13 @@ class mutation(object):
         else:
             sys.exit("Error: not one of the known HGVSc strings: " + hgvsc)
 
-        # We subtract one to align the position with a zero indexed list        
+        # We subtract one to align the position with a zero indexed list
         position = int(position) - 1
         if hgvsc_type == "dup":
             alt_allele = sequence
         elif hgvsc_type == "ins":
             # HGVS start_end format is (start,end], while one position is inclusive
-            position += 1            
+            position += 1
             alt_allele = sequence
         elif hgvsc_type == "del":
             ref_allele = sequence
