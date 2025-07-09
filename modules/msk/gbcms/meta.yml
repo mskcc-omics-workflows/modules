@@ -71,5 +71,3 @@ output:
           pattern: "versions.yml"
 authors:
   - "@buehlere"
-skip:
-  - conda
