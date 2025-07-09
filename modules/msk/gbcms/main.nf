@@ -22,7 +22,6 @@ process GBCMS {
     }
     def args = task.ext.args ?: ''
     def sample = meta.sample
-    // determine if input file is a maf of vcf
 
     def input_ext = variant_file.getExtension()
     def variant_input = ''
