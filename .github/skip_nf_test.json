@@ -31,7 +31,7 @@
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
         "modules/msk/salmon/quant",
-        "modules/msk/salmon/index",
+        "modules/msk/salmon/index"
     ],
     "docker": [
     ],
