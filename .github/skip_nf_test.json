@@ -3,6 +3,7 @@
         "msk/ppflagfixer",
         "msk/igv/screenshot",
         "msk/facets",
+        "msk/gbcms",
         "msk/neoantigenediting/computefitness",
         "msk/neoantigenediting/aligntoiedb",
         "msk/neoantigenutils/neoantigeninput",
