@@ -25,7 +25,8 @@
         "modules/msk/phylowgs/writeresults",
         "modules/msk/phylowgs/parsecnvs",
         "modules/msk/pvmaf/concat",
-        "modules/msk/pvmaf/tagtraceback"
+        "modules/msk/pvmaf/tagtraceback",
+        "subworkflows/msk/genome_nexus"
     ],
     "docker": [
     ],
