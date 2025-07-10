@@ -4,8 +4,8 @@ process CALCULATENOISE {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://ghcr.io/mikefeixu/sequence_qc:0.2.6' :
-        'ghcr.io/mikefeixu/sequence_qc:0.2.6' }"
+        'https://ghcr.io/msk-access/sequence_qc:0.2.5' :
+        'ghcr.io/msk-access/sequence_qc:0.2.5' }"
 
     input:
     tuple val(meta) , path(bam), path(bai), path(target_intervals)
