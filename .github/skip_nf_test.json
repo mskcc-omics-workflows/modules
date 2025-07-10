@@ -1,7 +1,6 @@
 {
     "conda": [
         "modules/msk/ppflagfixer",
-        "modules/msk/igv/screenshot",
         "modules/msk/facets",
         "modules/msk/gbcms",
         "modules/msk/neoantigenediting/computefitness",
@@ -19,8 +18,6 @@
         "modules/msk/genomenexus/vcf2maf",
         "modules/msk/rediscoverte",
         "modules/msk/netmhcpan4",
-        "modules/msk/polysolver",
-        "modules/msk/custom/splitfastqbylane",
         "modules/msk/netmhc3",
         "modules/msk/genotypevariants/all",
         "modules/msk/phylowgs/createinput",
@@ -28,9 +25,7 @@
         "modules/msk/phylowgs/writeresults",
         "modules/msk/phylowgs/parsecnvs",
         "modules/msk/pvmaf/concat",
-        "modules/msk/pvmaf/tagtraceback",
-        "modules/msk/salmon/quant",
-        "modules/msk/salmon/index"
+        "modules/msk/pvmaf/tagtraceback"
     ],
     "docker": [
     ],
