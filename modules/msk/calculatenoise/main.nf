@@ -4,7 +4,7 @@ process CALCULATENOISE {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://ghcr.io/msk-access/sequence_qc:0.2.5' :
+        'ghcr.io/msk-access/sequence_qc:0.2.5' :
         'ghcr.io/msk-access/sequence_qc:0.2.5' }"
 
     input:
