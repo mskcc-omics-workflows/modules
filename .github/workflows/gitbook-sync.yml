@@ -184,5 +184,10 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "add doc for ${{ matrix.tags }}" || echo "No changes to commit"
 
+      - name: Pull remote docs branch and rebase
+        run: |
+          git fetch origin docs
+          git rebase origin/docs
+
       - name: Push docs changes
         run: git push origin docs
