@@ -27,7 +27,7 @@ Predicts binding of neoantigen peptides
 | Output | Suboutput | Type | Description | Pattern |
 |--------|-----------|------|-------------|---------|
 | netmhcoutput | output_meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| netmhcoutput | *.netmhc.output | file | STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This contains either the MUT or WT neoantigens. Neoantigenutils contains a parser for this file. | *.WT.netmhc.output,*.MUT.netmhc.output |
+| netmhcoutput | *.netmhc.output | file | STDOUT file of netMHC.  A poorly formated file of neoantigens.  This contains either the MUT or WT neoantigens. Neoantigenutils contains a parser for this file. | *.WT.netmhc.output,*.MUT.netmhc.output |
 | xls | output_meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
 | xls | *.xls | file | XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens | *.WT.xls,*.MUT.xls |
 | netmhc_hla_files | output_meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
