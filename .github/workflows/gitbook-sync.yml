@@ -104,9 +104,12 @@ jobs:
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
-          message: "pull changes before adding doc for ${{ matrix.tags }}"
-          pull: "--rebase"
+          message: "add doc for ${{ matrix.tags }}"
+          add: '["*/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
+          pull: --rebase
+          push: true
+
       - name: Download convertor from yml to md
         run: |
           curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/yaml_to_md.py
