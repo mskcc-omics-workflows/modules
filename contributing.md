@@ -1,6 +1,6 @@
 # Contributing
 
-In the following sections, we will go over the specifics of how to contribute a module or sub-workflow to mskcc-omics-workflows. While not required, it will likely be helpful for the user to understand how our contributing guidelines mirror nf-core's, therefore we recommend reading [writing nf-core components](https://nf-co.re/docs/tutorials/nf-core\_components/components) while following along with this tutorial.&#x20;
+In the following sections, we will go over the specifics of how to contribute a module or sub-workflow to mskcc-omics-workflows. While not required, it will likely be helpful for the user to understand how our contributing guidelines mirror nf-core's, therefore we recommend reading [writing nf-core components](https://nf-co.re/docs/tutorials/nf-core_components/components) while following along with this tutorial.&#x20;
 
 ## Software Requirements
 
@@ -23,7 +23,7 @@ Then running:&#x20;
 
 ```
 cd modules
-git remote add upstream https://github.com/nf-core/modules.git
+git remote add upstream https://github.com/mskcc-omics-workflows/modules.git
 git checkout -b <module/subworkflow>
 ```
 
@@ -67,29 +67,29 @@ After creating the component, there are 3 files to modify:
     \
     In addition, a [`stub`](https://www.nextflow.io/docs/latest/process.html#stub) test is also required. Stub test enable users to provide a dummy script that mimics the execution of the real one in a quicker manner. It is a way to perform a dry-run of a module without data. An example is found in the [facets module](https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/facets/tests/main.nf.test). \
     \
-    Minimal test data required for your module may already exist within the [mskcc-omics-workflows/modules repository](https://github.com/mskcc-omics-workflows/modules/blob/develop/tests/config/test\_data.config) - see the [Test data section](contributing.md#test-data) for more info. Minimal test data is required unless the module cannot be run using a very small data set. In which case, a `stub` test may be accepted as a  workflows only test \
+    Minimal test data required for your module may already exist within the [mskcc-omics-workflows/modules repository](https://github.com/mskcc-omics-workflows/modules/blob/develop/tests/config/test_data.config) - see the [Test data section](contributing.md#test-data) for more info. Minimal test data is required unless the module cannot be run using a very small data set. In which case, a `stub` test may be accepted as a  workflows only test \
     \
-    Refer to the section [writing nf-test tests](https://nf-co.re/docs/tutorials/tests\_and\_test\_data/nf-test\_writing\_tests) for more information on how to write nf-tests.&#x20;
+    Refer to the section [writing nf-test tests](https://nf-co.re/docs/tutorials/tests_and_test_data/nf-test_writing_tests) for more information on how to write nf-tests.&#x20;
 {% endtab %}
 
 {% tab title="subworkflow" %}
 
 
-*   [`./subworkflow/msk/neoantigen_editing/main.nf`](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen\_editing/main.nf)
+*   [`./subworkflow/msk/neoantigen_editing/main.nf`](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen_editing/main.nf)
 
     This is the main script containing the `workflow` definition for the subworkflow. You will see an extensive number of `TODO` statements to help guide you to fill in the appropriate sections and to ensure that you adhere to the guidelines we have set for module submissions.
-*   [`./subworkflow/msk/neoantigen_editing/meta.yml`](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen\_editing/meta.yml)
+*   [`./subworkflow/msk/neoantigen_editing/meta.yml`](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen_editing/meta.yml)
 
     This file will be used to store general information about the subworkflow and author details. You will need to add a brief description of the files defined in the `input` and `output` section of the main script since these will be unique to each subworkflow.
-*   [`./subworkflow/msk/neoantigen_editing/tests/main.nf.test`](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen\_editing/tests/main.nf.test)
+*   [`./subworkflow/msk/neoantigen_editing/tests/main.nf.test`](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen_editing/tests/main.nf.test)
 
     Every subworkflow must have a test workflow. This file will define one or more Nextflow `workflow` definitions that will be used to unit test the output files created by the subworkflow. By default, one `workflow` definition will be added.\
     \
-    In addition, a [`stub`](https://www.nextflow.io/docs/latest/process.html#stub) test is also required. Stub test enable users to provide a dummy script that mimics the execution of the real one in a quicker manner. It is a way to perform a dry-run of a subworkflow without data. An example is found in the [neoantigen\_editing subworkflow](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen\_editing/tests/main.nf.test). Note that a stub test will only work for a subworkflow if every module in the subworkflow also has a stub test. This is why stub tests are required for all modules.\
+    In addition, a [`stub`](https://www.nextflow.io/docs/latest/process.html#stub) test is also required. Stub test enable users to provide a dummy script that mimics the execution of the real one in a quicker manner. It is a way to perform a dry-run of a subworkflow without data. An example is found in the [neoantigen\_editing subworkflow](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen_editing/tests/main.nf.test). Note that a stub test will only work for a subworkflow if every module in the subworkflow also has a stub test. This is why stub tests are required for all modules.\
     \
-    Minimal test data required for your module may already exist within the [mskcc-omics-workflows/modules repository](https://github.com/mskcc-omics-workflows/modules/blob/develop/tests/config/test\_data.config) - see the [Test data section](contributing.md#test-data) for more info. Minimal test data is required unless the module cannot be run using a very small data set. In which case, a `stub` test may be accepted as a  workflows only test \
+    Minimal test data required for your module may already exist within the [mskcc-omics-workflows/modules repository](https://github.com/mskcc-omics-workflows/modules/blob/develop/tests/config/test_data.config) - see the [Test data section](contributing.md#test-data) for more info. Minimal test data is required unless the module cannot be run using a very small data set. In which case, a `stub` test may be accepted as a  workflows only test \
     \
-    Refer to the section [writing nf-test tests](https://nf-co.re/docs/tutorials/tests\_and\_test\_data/nf-test\_writing\_tests) for more information on how to write nf-tests.&#x20;
+    Refer to the section [writing nf-test tests](https://nf-co.re/docs/tutorials/tests_and_test_data/nf-test_writing_tests) for more information on how to write nf-tests.&#x20;
 {% endtab %}
 {% endtabs %}
 
@@ -201,7 +201,7 @@ It also may be advantageous to get approval from another reviewer who is investe
 
 ### Test data
 
-Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test\_data\_guidelines). An alternative source of data specific to MSKCC is currently available [here](https://github.com/mskcc-omics-workflows/test-datasets).
+Testing workflows for modules and subworkflows should make use of test-data that is very small (aggressively sub-sampled) and reused from a centralized location whenever possible. Refer to nf-core's guide on using their [existing test data](https://nf-co.re/docs/contributing/test_data_guidelines). An alternative source of data specific to MSKCC is currently available [here](https://github.com/mskcc-omics-workflows/test-datasets).
 
 In-house test datasets should always be as small as possible. Master branch is not used to store any test data, instead, different types of branches will host corresponding data files. For example, [argos](https://github.com/mskcc-omics-workflows/test-datasets/tree/argos) contains test datasets for MSK Argos Pipeline, while [hg37](https://github.com/mskcc-omics-workflows/test-datasets/tree/hg37) branch is for hg37 related reference files.
 
@@ -210,7 +210,7 @@ In-house test datasets should always be as small as possible. Master branch is n
 
 For more description on how to contribute to the repository, please visit [README](https://github.com/mskcc-omics-workflows/test-datasets/blob/master/README.md).\
 \
-If the module cannot be run using a very small data set, then a [stub-run](https://www.nextflow.io/docs/edge/process.html#stub) must be used instead. A examples can be found in the [facets module](https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/facets/tests/main.nf.test) and the [neoantigen\_editing subworkflow](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen\_editing/tests/main.nf.test). Note that a stub test will only work for the subworkflow if every module in the subworkflow also has a stub test. This is why stub tests are required for all modules.
+If the module cannot be run using a very small data set, then a [stub-run](https://www.nextflow.io/docs/edge/process.html#stub) must be used instead. A examples can be found in the [facets module](https://github.com/mskcc-omics-workflows/modules/blob/develop/modules/msk/facets/tests/main.nf.test) and the [neoantigen\_editing subworkflow](https://github.com/mskcc-omics-workflows/modules/blob/develop/subworkflows/msk/neoantigen_editing/tests/main.nf.test). Note that a stub test will only work for the subworkflow if every module in the subworkflow also has a stub test. This is why stub tests are required for all modules.
 
 ## When to contribute
 
