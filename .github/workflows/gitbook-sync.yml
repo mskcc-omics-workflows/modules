@@ -88,6 +88,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: docs
+          fetch-depth: 0
       - name: Update name of ${{ matrix.tags }}
         run: |
           MATRIX_FRAGMENT="${{ matrix.tags }}"
@@ -101,20 +102,12 @@ jobs:
           MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
           echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
           echo "${MD_NAME}"
-
-      - name: Stage docs changes
-        run: |
-          git add "*/*.md" "SUMMARY.md"
-
-      - name: Commit docs changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "add doc for ${{ matrix.tags }}" || echo "No changes to commit"
-
-      - name: Push to docs
-        run: git push origin docs
-
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "pull changes before adding doc for ${{ matrix.tags }}"
+          pull: "--rebase"
+          cwd: "./"
       - name: Download convertor from yml to md
         run: |
           curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/yaml_to_md.py
@@ -184,8 +177,9 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "add doc for ${{ matrix.tags }}" || echo "No changes to commit"
 
-      - name: Pull remote docs branch and rebase
+      - name: Rebase on latest remote docs
         run: |
+          git remote set-url origin https://github.com/${{ github.repository }}.git
           git fetch origin docs
           git rebase origin/docs
 
