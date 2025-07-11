@@ -49,6 +49,7 @@
   * [salmon\_quant](modules/salmon/salmon\_quant.md)
 * [genotypevariants\_all](modules/genotypevariants\_all.md)
 * [phylowgs](modules/phylowgs/README.md)
+  * [phylowgs_createinput](modules/phylowgs_createinput.md)
   * [phylowgs\_createinput](modules/phylowgs/phylowgs\_createinput.md)
   * [phylowgs\_parsecnvs](modules/phylowgs/phylowgs\_parsecnvs.md)
   * [phylowgs\_writeresults](modules/phylowgs/phylowgs\_writeresults.md)
