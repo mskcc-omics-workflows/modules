@@ -29,7 +29,7 @@ This module take several inputs to the Lukza neoantigen pipeline and combines th
 | Output | Suboutput | Type | Description | Pattern |
 |--------|-----------|------|-------------|---------|
 | json | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| json | *_.json | file | output combined Json ready for input into the neoantigen pipeline | *.{json} |
+| json | *.json | file | output combined Json ready for input into the neoantigen pipeline | *.{json} |
 | versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
