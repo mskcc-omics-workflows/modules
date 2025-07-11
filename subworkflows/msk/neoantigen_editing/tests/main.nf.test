@@ -3,6 +3,7 @@ nextflow_workflow {
     name "Test Workflow NEOANTIGEN_EDITING"
     script "../main.nf"
     workflow "NEOANTIGEN_EDITING"
+    config "./nextflow.config"
 
     tag "subworkflows"
     tag "subworkflows_nfcore"

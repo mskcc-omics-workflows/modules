@@ -1,0 +1,39 @@
+{
+    "conda": [
+        "modules/msk/ppflagfixer",
+        "modules/msk/facets",
+        "modules/msk/gbcms",
+        "modules/msk/neoantigenediting/computefitness",
+        "modules/msk/neoantigenediting/aligntoiedb",
+        "modules/msk/neoantigenutils/neoantigeninput",
+        "modules/msk/neoantigenutils/convertannotjson",
+        "modules/msk/neoantigenutils/generatemutfasta",
+        "modules/msk/neoantigenutils/generatehlastring",
+        "modules/msk/neoantigenutils/formatnetmhcpan",
+        "modules/msk/neosv",
+        "modules/msk/mutect1",
+        "modules/msk/snppileup",
+        "modules/msk/netmhcstabpan",
+        "modules/msk/genomenexus/annotationpipeline",
+        "modules/msk/genomenexus/vcf2maf",
+        "modules/msk/rediscoverte",
+        "modules/msk/netmhcpan4",
+        "modules/msk/netmhc3",
+        "modules/msk/genotypevariants/all",
+        "modules/msk/phylowgs/createinput",
+        "modules/msk/phylowgs/multievolve",
+        "modules/msk/phylowgs/writeresults",
+        "modules/msk/phylowgs/parsecnvs",
+        "modules/msk/pvmaf/concat",
+        "modules/msk/pvmaf/tagtraceback",
+        "subworkflows/msk/genome_nexus",
+        "subworkflows/msk/neoantigen_editing",
+        "subworkflows/msk/netmhcstabandpan",
+        "subworkflows/msk/phylowgs",
+        "subworkflows/msk/traceback"
+    ],
+    "docker": [
+    ],
+    "singularity": [
+    ]
+}
