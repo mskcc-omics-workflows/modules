@@ -21,16 +21,14 @@ Compute fitness of the neoantigens
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| patient_data | file | Patient data consisting of mutation, neoantigen, and tree information | *.json |
-| alignment | file | IEDB alignment file | iedb_alignments_*.txt |
 
 ## Outputs
 
-| Output | Type | Description | Pattern |
-|--------|------|-------------|---------|
-| meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| annotated_output | file | Output containing neoantigen quality scores | *_annotated.json |
-| versions | file | File containing software versions | versions.yml |
+| Output | Suboutput | Type | Description | Pattern |
+|--------|-----------|------|-------------|---------|
+| annotated_output | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| annotated_output | *_annotated.json | file | Output containing neoantigen quality scores | *_annotated.json |
+| versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
 

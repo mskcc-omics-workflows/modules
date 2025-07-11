@@ -21,15 +21,14 @@ Takes the output of the neoantigen ediitng subworkflow and converts the annotate
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information. e.g. `[ id:sample1]`  |  |
-| annotatedJSON | file | Json annotated by the neoantigenediting subworkflow | *annotated.json |
 
 ## Outputs
 
-| Output | Type | Description | Pattern |
-|--------|------|-------------|---------|
-| meta | map | Groovy Map containing sample information e.g. `[ id:sample1]`  |  |
-| versions | file | File containing software versions | versions.yml |
-| neoantigenTSV | file | A reformatted file of neoantigens, now in TSV format! | *.{tsv} |
+| Output | Suboutput | Type | Description | Pattern |
+|--------|-----------|------|-------------|---------|
+| neoantigenTSV | meta | map | Groovy Map containing sample information e.g. `[ id:sample1]`  |  |
+| neoantigenTSV | *.tsv | file | A reformatted file of neoantigens, now in TSV format! | *.{tsv} |
+| versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
 

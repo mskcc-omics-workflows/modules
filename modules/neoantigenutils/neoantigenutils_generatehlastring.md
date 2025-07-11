@@ -22,15 +22,13 @@ Generate the hla string for netmhc tools
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information. e.g. `[ id:sample1, single_end:false ]`  |  |
-| inputHLA | file | Winners HLA file from polysolver | *.{hla.txt} |
 
 ## Outputs
 
-| Output | Type | Description | Pattern |
-|--------|------|-------------|---------|
-| meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| versions | file | File containing software versions | versions.yml |
-| hlastring | string | HLA string to use for netmhc tool input |  |
+| Output | Suboutput | Type | Description | Pattern |
+|--------|-----------|------|-------------|---------|
+| hlastring | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
 
