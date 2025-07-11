@@ -19,6 +19,7 @@ modules/msk/neosv/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/netmhc3/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/netmhcpan4/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/netmhcstabpan/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+modules/msk/oncokb/mafannotate/** @johnoooh @mskcc-omics-workflows/reviewers
 modules/msk/phylowgs/createinput/** @pintoa1-mskcc @mskcc-omics-workflows/reviewers
 modules/msk/phylowgs/multievolve/** @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/phylowgs/parsecnvs/** @pintoa1-mskcc @mskcc-omics-workflows/reviewers
