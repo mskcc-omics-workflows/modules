@@ -69,16 +69,16 @@ git push origin tag X.Y.Z
 
 Then, make the new release by navigating to the Releases section on GitHub:
 
-![alt text](image.png)
+![alt text](repo.png)
 
 Next, click Draft Release:
 
-![alt text](image-1.png)
+![alt text](releases.png)
 
 On the following page, select the tag X.Y.Z for release and make the Release title the same as the release tag, X.Y.Z. We can also write release notes here. I recommend using the Generate release notes and then manually editing them:
 
-![alt text](image-2.png)
+![alt text](draft_releases.png)
 
 Finally, we can scroll to the bottom and publish the release:
 
-![alt text](image-3.png)
+![alt text](publish.png)
