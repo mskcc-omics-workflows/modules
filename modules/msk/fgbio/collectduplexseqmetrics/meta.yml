@@ -1,0 +1,103 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "fgbio_collectduplexseqmetrics"
+## TODO nf-core: Add a description of the module and list keywords
+description: Collects a suite of metrics to QC duplex sequencing data.
+keywords:
+  - duplex
+  - sequencing
+  - genomics
+  - fgbio
+tools:
+  - "fgbio":
+      ## TODO nf-core: Add a description and other details for the software below
+      description: "A set of tools for working with genomic and high throughput sequencing data, including UMIs"
+      homepage: "None"
+      documentation: "None"
+      tool_dev_url: "None"
+      doi: ""
+      licence: ["MIT"]
+      identifier: biotools:fgbio
+
+## TODO nf-core: Add a description of all of the variables used as input
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. [ id:'test', single_end:false ]
+    - bam:
+        type: file
+        description: SAM/BAM/CRAM file
+        pattern: "*.{sam,bam,cram}"
+    - bai:
+        type: file
+        description: Optional SAM/BAM/CRAM file index
+        pattern: "*.{sai,bai,crai}"
+    - interval_list:
+        type: file
+        description: An interval file that contains the locations of the targets.
+        pattern: "*.{interval_list,bed,bed.gz}"
+
+## TODO nf-core: Add a description of all of the variables used as output
+output:
+  - family_sizes:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - ${prefix}.family_sizes.txt:
+          type: map
+          description: Metrics on the frequency of different types of families of different sizes.
+          pattern: "*.family_sizes.txt"
+  - duplex_family_sizes:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - ${prefix}.duplex_family_sizes.txt:
+          type: file
+          description: Metrics on the frequency of duplex tag families by the number of observations from each strand.
+          pattern: "*.duplex_family_sizes.txt"
+  - duplex_yield_metrics:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - ${prefix}.duplex_yield_metrics.txt:
+          type: file
+          description: Summary QC metrics produced using 5%, 10%, 15%...100% of the data.
+          pattern: "*.duplex_yield_metrics.txt"
+  - umi_counts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - ${prefix}.umi_counts.txt:
+          type: file
+          description: Metrics on the frequency of observations of UMIs within reads and tag families.
+          pattern: "*.umi_counts.txt"
+  - duplex_umi_counts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:'test', single_end:false ]
+      - ${prefix}.duplex_umi_counts.txt:
+          type: file
+          description: Metrics on the frequency of observations of duplex UMIs within reads and tag families.
+          pattern: "*.duplex_umi_counts.txt"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+
+authors:
+  - "@mikefeixu"
+maintainers:
+  - "@mikefeixu"
