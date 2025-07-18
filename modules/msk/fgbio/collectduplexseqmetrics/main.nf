@@ -22,8 +22,8 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
     // TODO nf-core: See section in main README for further information regarding finding and adding container addresses to the section below.
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker pull ghcr.io/msk-access/fgbio:1.2.0':
-        'docker pull ghcr.io/msk-access/fgbio:1.2.0' }"
+        'ghcr.io/msk-access/fgbio:1.2.0':
+        'ghcr.io/msk-access/fgbio:1.2.0' }"
 
     input:
     tuple val(meta) , path(bam), path(bai), path(interval_list)
@@ -46,7 +46,6 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
 
     """
     fgbio CollectDuplexSeqMetrics\\
-        -@ $task.cpus \\
         -i $bam \\
         -o ${prefix} \\
         -l $interval_list \\

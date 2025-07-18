@@ -19,9 +19,9 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['calculate_noise']['test_chr22_bam'], checkIfExists: true),
-                    file(params.test_data_mskcc['calculate_noise']['test_chr22_bam_bai'], checkIfExists: true),
-                    file(params.test_data_mskcc['calculate_noise']['test_bed'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam_bai'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_interval_list'], checkIfExists: true),
                     ]
                 """
             }
@@ -59,9 +59,9 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['calculate_noise']['test_chr22_bam'], checkIfExists: true),
-                    file(params.test_data_mskcc['calculate_noise']['test_chr22_bam_bai'], checkIfExists: true),
-                    file(params.test_data_mskcc['calculate_noise']['test_bed'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam_bai'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_interval_list'], checkIfExists: true),
                     ]
                 """
             }
