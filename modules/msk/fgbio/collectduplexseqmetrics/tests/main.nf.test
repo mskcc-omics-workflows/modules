@@ -19,25 +19,25 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam'], checkIfExists: true),
-                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam_bai'], checkIfExists: true),
-                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_interval_list'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['test_chr22_collapsed_grouped_bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['test_chr22_collapsed_grouped_bam_bai'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['test_chr22_interval_list'], checkIfExists: true)
                     ]
                 """
             }
         }
 
         then {
-            def size = path(process.out.family_sizes.txt[0][1]).size()
-            def lines = path(process.out.family_sizes.txt[0][1]).readLines()[0..1]
+            def size = path(process.out.family_size[0][1]).size()
+            def lines = path(process.out.family_sizes[0][1]).readLines()[0..1]
             assertAll(
                 { assert process.success },
                 { assert snapshot(
-                    file(process.out.family_sizes.txt[0][1]).name,
+                    file(process.out.family_sizes[0][1]).name,
                     size,
                     lines,
                     process.out.versions,
-                    file(process.out.family_sizes.txt[0][1]).name,
+                    file(process.out.family_sizes[0][1]).name,
                     file(process.out.duplex_family_sizes[0][1]).name,
                     file(process.out.duplex_yield_metrics[0][1]).name,
                     file(process.out.umi_counts[0][1]).name,
@@ -59,9 +59,9 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam'], checkIfExists: true),
-                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_collapsed_grouped_bam_bai'], checkIfExists: true),
-                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['chr22_interval_list'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['test_chr22_collapsed_grouped_bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['test_chr22_collapsed_grouped_bam_bai'], checkIfExists: true),
+                    file(params.test_data_mskcc['fgbio_collectduplexseqmetrics']['test_chr22_interval_list'], checkIfExists: true)
                     ]
                 """
             }

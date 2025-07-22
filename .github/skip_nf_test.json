@@ -3,6 +3,7 @@
         "modules/msk/calculatenoise",
         "modules/msk/ppflagfixer",
         "modules/msk/facets",
+        "modules/msk/fgbio/collectduplexseqmetrics",
         "modules/msk/gbcms",
         "modules/msk/neoantigenediting/computefitness",
         "modules/msk/neoantigenediting/aligntoiedb",
