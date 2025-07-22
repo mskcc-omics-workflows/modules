@@ -1,7 +1,4 @@
----
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "fgbio_collectduplexseqmetrics"
-## TODO nf-core: Add a description of the module and list keywords
 description: Collects a suite of metrics to QC duplex sequencing data.
 keywords:
   - duplex
@@ -10,7 +7,6 @@ keywords:
   - fgbio
 tools:
   - "fgbio":
-      ## TODO nf-core: Add a description and other details for the software below
       description: "A set of tools for working with genomic and high throughput sequencing data, including UMIs"
       homepage: "None"
       documentation: "None"
@@ -19,7 +15,6 @@ tools:
       licence: ["MIT"]
       identifier: biotools:fgbio
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
   - - meta:
         type: map
@@ -39,7 +34,6 @@ input:
         description: An interval file that contains the locations of the targets.
         pattern: "*.{interval_list,bed,bed.gz}"
 
-## TODO nf-core: Add a description of all of the variables used as output
 output:
   - family_sizes:
       - meta:
