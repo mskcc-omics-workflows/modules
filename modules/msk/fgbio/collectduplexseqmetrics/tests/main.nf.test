@@ -25,7 +25,7 @@ nextflow_process {
         }
 
         then {
-            def size = path(process.out.family_size[0][1]).size()
+            def size = path(process.out.family_sizes[0][1]).size()
             def lines = path(process.out.family_sizes[0][1]).readLines()[0..1]
             assertAll(
                 { assert process.success },

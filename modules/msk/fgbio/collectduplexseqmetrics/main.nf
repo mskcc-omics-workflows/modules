@@ -36,7 +36,7 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fgbio: \$(fgbio --version)
+        fgbio: \$(fgbio CollectDuplexSeqMetrics --version 2>&1 | grep -o 'Version:.*' | cut -f2- -d: | xargs)
     END_VERSIONS
     """
 
@@ -53,7 +53,7 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        fgbio: \$(fgbio --version)
+        fgbio: \$(fgbio CollectDuplexSeqMetrics --version 2>&1 | grep -o 'Version:.*' | cut -f2- -d: | xargs)
     END_VERSIONS
 
     """
