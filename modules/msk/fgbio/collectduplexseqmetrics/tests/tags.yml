@@ -1,0 +1,2 @@
+fgbio/collectduplexseqmetrics:
+  - "modules/msk/fgbio/collectduplexseqmetrics/**"
