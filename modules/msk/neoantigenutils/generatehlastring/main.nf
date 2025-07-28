@@ -2,8 +2,8 @@ process NEOANTIGENUTILS_GENERATEHLASTRING {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigen-utils-base:1.0.0':
-        'docker.io/mskcc/neoantigen-utils-base:1.0.0' }"
+        'docker://mskcc/neoantigen-utils-base:1.3.0':
+        'docker.io/mskcc/neoantigen-utils-base:1.3.0' }"
 
     input:
     tuple val(meta),  path(inputHLA)

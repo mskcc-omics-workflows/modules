@@ -205,7 +205,7 @@
                             "fromStab": true,
                             "fromPan": true
                         },
-                        "test_netmhcpanstab.output.MUT.tsv:md5,246eb723691371ad49bd080071475740"
+                        "test_netmhcstabpan.output.MUT.tsv:md5,f1745797f5dc9db19c6b8124a3a12b81"
                     ]
                 ],
                 "1": [
@@ -219,7 +219,7 @@
                             "fromStab": true,
                             "fromPan": true
                         },
-                        "test_netmhcpanstab.output.MUT.tsv:md5,246eb723691371ad49bd080071475740"
+                        "test_netmhcstabpan.output.MUT.tsv:md5,f1745797f5dc9db19c6b8124a3a12b81"
                     ]
                 ],
                 "versions": [
@@ -228,10 +228,10 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-12-17T14:46:10.256554716"
+        "timestamp": "2025-03-03T14:28:35.420434"
     },
     "neoantigenutils_formatnetmhcpan - output(WT,netmhcpanstab) - tsv": {
         "content": [
@@ -244,7 +244,7 @@
                             "fromStab": false,
                             "fromPan": true
                         },
-                        "test_netmhcpan.output.WT.tsv:md5,b95a6624d4010eb6517ca880a13e670d"
+                        "test_netmhcpan.output.WT.tsv:md5,da55aef51d69fcc86da81472920861ab"
                     ]
                 ],
                 "1": [
@@ -258,7 +258,7 @@
                             "fromStab": false,
                             "fromPan": true
                         },
-                        "test_netmhcpan.output.WT.tsv:md5,b95a6624d4010eb6517ca880a13e670d"
+                        "test_netmhcpan.output.WT.tsv:md5,da55aef51d69fcc86da81472920861ab"
                     ]
                 ],
                 "versions": [
@@ -267,9 +267,9 @@
             }
         ],
         "meta": {
-            "nf-test": "0.9.0",
-            "nextflow": "24.04.4"
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-12-17T14:46:17.955083074"
+        "timestamp": "2025-03-03T14:28:39.82547"
     }
 }

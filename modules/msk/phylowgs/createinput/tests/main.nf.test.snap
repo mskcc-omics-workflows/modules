@@ -30,7 +30,11 @@
                 ]
             }
         ],
-        "timestamp": "2024-06-11T18:00:07.554362"
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-03-03T15:59:43.605713284"
     },
     "PHYLOWGS_CREATEINPUT - txt": {
         "content": [
@@ -41,8 +45,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "cnv_data.txt:md5,9228c0a7bce478e06db5d4304be3dbf7",
-                        "ssm_data.txt:md5,055b7b5359a50eefd86fc85fcc023c6f"
+                        "cnv_data.txt:md5,1a3d26484389d5b3b35d20ac5e01f32c",
+                        "ssm_data.txt:md5,3a23e8d67f32ea13edb62882952f4122"
                     ]
                 ],
                 "1": [
@@ -54,8 +58,8 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "cnv_data.txt:md5,9228c0a7bce478e06db5d4304be3dbf7",
-                        "ssm_data.txt:md5,055b7b5359a50eefd86fc85fcc023c6f"
+                        "cnv_data.txt:md5,1a3d26484389d5b3b35d20ac5e01f32c",
+                        "ssm_data.txt:md5,3a23e8d67f32ea13edb62882952f4122"
                     ]
                 ],
                 "versions": [
@@ -63,6 +67,10 @@
                 ]
             }
         ],
-        "timestamp": "2024-06-11T18:00:00.11222"
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.4"
+        },
+        "timestamp": "2025-03-03T15:59:38.659729442"
     }
 }

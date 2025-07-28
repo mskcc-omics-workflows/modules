@@ -3,6 +3,7 @@ nextflow_process {
     name "Test Process NEOANTIGENEDITING_COMPUTEFITNESS"
     script "../main.nf"
     process "NEOANTIGENEDITING_COMPUTEFITNESS"
+    config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfcore"
@@ -20,6 +21,12 @@ nextflow_process {
                     file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)
                     ]
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map,
+                    file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)
+                    ]
+                
 
                 """
             }

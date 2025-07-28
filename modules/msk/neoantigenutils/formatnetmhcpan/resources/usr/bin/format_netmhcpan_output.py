@@ -46,7 +46,7 @@ def netMHCpan_out_reformat(netMHCoutput, mut, stab, netmhc3, prefix):
     if netmhc3:
         pan_prefix = ""
     outfilename = "{}_netmhc{}{}.output.{}.tsv".format(
-        prefix, pan_prefix, stab_prefix, type_prefix
+        prefix, stab_prefix, pan_prefix, type_prefix
     )
     with open(netMHCoutput, "r") as file:
         # data = file.read()

@@ -72,8 +72,8 @@ def main():
     reference_cdna_file = str(args.CDNA_file)
     peptide_lengths = [9, 10, 11]
     sample_path_pfx = output_dir + "/" + sample_id
-    mutated_sequences_fa = sample_path_pfx + ".MUT_sequences.fa"
-    WT_sequences_fa = sample_path_pfx + ".WT_sequences.fa"
+    mutated_sequences_fa = sample_path_pfx + ".MUT.sequences.fa"
+    WT_sequences_fa = sample_path_pfx + ".WT.sequences.fa"
 
     mutations = []
     out_fa = open(mutated_sequences_fa, "w")
@@ -350,15 +350,15 @@ class mutation(object):
         ]
 
         variant_type_map = {
-            "Missense_Mutation": "M",
-            "Nonsense_Mutation": "X",
-            "Silent_Mutation": "S",
-            "Silent": "S",
-            "Frame_shift_Ins": "I+",
-            "Frame_shift_Del": "I-",
-            "In_Frame_Ins": "If",
-            "In_Frame_Del": "Id",
-            "Splice_Site": "Sp",
+            "missense_mutation": "M",
+            "nonsense_nutation": "X",
+            "silent_mutation": "S",
+            "silent": "S",
+            "frame_shift_ins": "I+",
+            "frame_shift_del": "I-",
+            "in_frame_ins": "If",
+            "in_frame_del": "Id",
+            "splice_site": "Sp",
         }
 
         position = int(str(self.maf_row["Start_Position"])[0:2])
@@ -399,12 +399,12 @@ class mutation(object):
             # SNPs
             Allele2code = self.maf_row["Tumor_Seq_Allele2"]
 
-        if self.maf_row["Variant_Classification"] in variant_type_map:
+        if self.maf_row["Variant_Classification"].lower() in variant_type_map:
             self.identifier_key = (
                 str(self.maf_row["Chromosome"])
                 + encoded_position
                 + "_"
-                + variant_type_map[self.maf_row["Variant_Classification"]]
+                + variant_type_map[(self.maf_row["Variant_Classification"]).lower()]
                 + Allele2code
             )
         else:
@@ -536,35 +536,55 @@ class mutation(object):
         hgvsc = self.maf_row["HGVSc"]
         position, ref_allele, alt_allele, sequence, hgvsc_type = [-1, "", "", "", "ONP"]
 
+        ## start of mutated region in CDS
+        cds = re.search(self.cds_seq + ".*", self.cdna_seq).group()
+
         if re.match(r"^c\.(\d+).*([ATCG]+)>([ATCG]+)$", hgvsc):
             position, ref_allele, alt_allele = re.match(
                 r"^c\.(\d+).*(\w+)>(\w+)", hgvsc
             ).groups()
 
-        elif re.match(r"^c\.(\d+).*del([ATCG]+)ins([ATCG]+)$", hgvsc):
-            position, ref_allele, alt_allele = re.match(
-                r"^c\.(\d+).*del([ATCG]+)ins([ATCG]+)$", hgvsc
+        elif re.match(r"^c\.(\d+)_?(\d+)?.*del([ATCG]+)?ins([ATCG]+)$", hgvsc):
+            position,end_position,ref_allele, alt_allele = re.match(
+                r"^c\.(\d+)_?(\d+)?.*del([ATCG]+)?ins([ATCG]+)$", hgvsc
+            ).groups()
+            if not ref_allele:
+                if end_position:
+                    ref_allele = cds[int(position)-1:int(end_position)]
+                else:
+                    ref_allele = cds[int(position)-1]
+
+        elif re.match(r"^c\.(\d+)_?(\d+)?.*(ins)([ATCG]+)?$", hgvsc):
+            position,end_position, hgvsc_type, sequence = re.match(
+                r"^c\.(\d+)_?(\d+)?.*(ins)([ATCG]+)?$", hgvsc
             ).groups()
 
-        elif re.match(r"^c\.(\d+).*(dup|ins|del|inv)([ATCG]+)$", hgvsc):
-            position, hgvsc_type, sequence = re.match(
-                r"^c\.(\d+).*(dup|ins|del|inv)([ATCG]+)$", hgvsc
+        elif re.match(r"^c\.(\d+)_?(\d+)?.*(dup|del|inv)([ATCG]+)?$", hgvsc):
+            position,end_position, hgvsc_type, sequence = re.match(
+                r"^c\.(\d+)_?(\d+)?.*(dup|del|inv)([ATCG]+)?$", hgvsc
             ).groups()
+            if not sequence:
+                if end_position:
+                    sequence = cds[int(position)-1:int(end_position)]
+                else:
+                    sequence = cds[int(position)-1]
 
         else:
             sys.exit("Error: not one of the known HGVSc strings: " + hgvsc)
 
+        # We subtract one to align the position with a zero indexed list
         position = int(position) - 1
-        if hgvsc_type in "dup,ins":
+        if hgvsc_type == "dup":
+            alt_allele = sequence
+        elif hgvsc_type == "ins":
+            # HGVS start_end format is (start,end], while one position is inclusive
+            position += 1
             alt_allele = sequence
         elif hgvsc_type == "del":
             ref_allele = sequence
         elif hgvsc_type == "inv":
             ref_allele = sequence
             alt_allele = self.reverse_complement(sequence)
-
-        ## start of mutated region in CDS
-        cds = re.search(self.cds_seq + ".*", self.cdna_seq).group()
 
         seq_5p = cds[0:position]
         seq_3p = cds[position : len(cds)]

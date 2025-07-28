@@ -73,7 +73,7 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - "*_.json":
+      - "*.json":
           type: file
           description: output combined Json ready for input into the neoantigen pipeline
           pattern: "*.{json}"

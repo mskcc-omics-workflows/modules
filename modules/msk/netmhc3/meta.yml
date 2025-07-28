@@ -58,7 +58,7 @@ output:
       - "*.netmhc.output":
           type: file
           description:
-            STDOUT file of netMHCpan.  A poorly formated file of neoantigens.  This
+            STDOUT file of netMHC.  A poorly formated file of neoantigens.  This
             contains either the MUT or WT neoantigens. Neoantigenutils contains a parser
             for this file.
           pattern: "*.WT.netmhc.output,*.MUT.netmhc.output"

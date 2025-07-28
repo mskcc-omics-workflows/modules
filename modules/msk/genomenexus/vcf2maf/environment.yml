@@ -4,4 +4,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - "genomenexus=version"
+  - "YOUR-TOOL=HERE"

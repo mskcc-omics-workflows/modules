@@ -2,16 +2,16 @@ process NEOANTIGENUTILS_GENERATEMUTFASTA {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigen-utils-base:1.0.0':
-        'docker.io/mskcc/neoantigen-utils-base:1.0.0' }"
+        'docker://mskcc/neoantigen-utils-base:1.3.0':
+        'docker.io/mskcc/neoantigen-utils-base:1.3.0' }"
 
     input:
     tuple val(meta),  path(inputMaf)
     tuple path(cds),  path(cdna)
 
     output:
-    tuple val(meta), path("*_out/*.MUT_sequences.fa"),     emit: mut_fasta
-    tuple val(meta), path("*_out/*.WT_sequences.fa"),      emit: wt_fasta
+    tuple val(meta), path("*_out/*.MUT.sequences.fa"),     emit: mut_fasta
+    tuple val(meta), path("*_out/*.WT.sequences.fa"),      emit: wt_fasta
     path "versions.yml",                                   emit: versions
 
     when:
@@ -43,8 +43,8 @@ process NEOANTIGENUTILS_GENERATEMUTFASTA {
 
     """
         mkdir ${prefix}_out
-        touch ${prefix}_out/${prefix}.MUT_sequences.fa
-        touch ${prefix}_out/${prefix}.WT_sequences.fa
+        touch ${prefix}_out/${prefix}.MUT.sequences.fa
+        touch ${prefix}_out/${prefix}.WT.sequences.fa
         cat <<-END_VERSIONS > versions.yml
         "${task.process}":
             generateMutFasta: \$(echo \$(generateMutFasta.py -v))

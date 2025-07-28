@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,c236ca28e7c658b74377c19437d7c5ab"
+                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
                     ]
                 ],
                 "1": [
@@ -17,7 +17,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,b1a6ea2978a6624c98112e8118658495"
+                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
                     ]
                 ],
                 "2": [
@@ -29,7 +29,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,c236ca28e7c658b74377c19437d7c5ab"
+                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
                     ]
                 ],
                 "versions": [
@@ -41,16 +41,16 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,b1a6ea2978a6624c98112e8118658495"
+                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
                     ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-11-22T17:16:33.363826904"
+        "timestamp": "2025-03-03T15:41:55.31143705"
     },
     "neoantigenutils_generatemutfasta - maf - fasta - stub": {
         "content": [
@@ -61,7 +61,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -70,7 +70,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
@@ -82,7 +82,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
@@ -94,15 +94,15 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT_sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.1"
+            "nextflow": "24.10.4"
         },
-        "timestamp": "2024-11-22T17:16:40.580416341"
+        "timestamp": "2025-03-03T15:42:03.290988947"
     }
 }
