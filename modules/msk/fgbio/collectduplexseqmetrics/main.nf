@@ -8,7 +8,7 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
         'ghcr.io/msk-access/fgbio:1.2.0' }"
 
     input:
-    tuple val(meta) , path(bam), path(bai), path(interval_list)
+    tuple val(meta) , path(bam)
 
     output:
     tuple val(meta), path("${prefix}.family_sizes.txt"),            emit: family_sizes
@@ -30,7 +30,6 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
     fgbio CollectDuplexSeqMetrics\\
         -i $bam \\
         -o ${prefix} \\
-        -l $interval_list \\
         --duplex-umi-counts true \\
         $args
 
