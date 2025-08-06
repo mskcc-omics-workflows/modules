@@ -137,16 +137,26 @@ nf-core subworkflows --git-remote https://github.com/mskcc-omics-workflows/modul
 
 #### Ignoring Conda Tests
 
-While we encourage contributors to provide conda support for their modules, it is often not desirable or difficult to include.\
+While we encourage contributors to provide `conda` support for their modules, it is often not desirable or difficult to include.\
 \
-In this case, the `environment.yml` can be left un-changed. The module of interest should be added to the [exclude block](https://github.com/mskcc-omics-workflows/modules/blob/main/.github/workflows/test.yml#L349) in the `test.yml` gitaction. This tells the test git-action to skip the conda tests for the specified module.&#x20;
+In this case, the `environment.yml` can be left un-changed. The module of interest should be added to [skip\_nf\_test.json](https://github.com/mskcc-omics-workflows/modules/blob/main/.github/skip_nf_test.json). This tells the test git-action to skip the test for the specified module.&#x20;
 
-For example, a module named `example_module` can be skipped with the following:
+For example, the `conda` tests for module named `example_module` and a sub-workflow named `example_subworkflow` can be skipped with the following:
 
 ```
-      - profile: "conda"
-        tags: example_module
+{
+    "conda": [
+        "modules/msk/example_module",
+        "subworkflows/msk/example_subworkflow"
+    ],
+    "docker": [
+    ],
+    "singularity": [
+    ]
+}
 ```
+
+The same items can also be added to the `docker` and `singularity` keys to be skipped, but skipping these tests should be reserved for special cases.&#x20;
 
 ### Linting a component
 
