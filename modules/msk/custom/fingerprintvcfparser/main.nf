@@ -23,9 +23,9 @@ process CUSTOM_FINGERPRINTVCFPARSER {
     """
     parse_fingerprint_vcf.py \\
         --input ${vcf} \\
-	--output ${prefix}.fp.tsv \\
-	--samplename ${prefix} \\
-	$args
+        --output ${prefix}.fp.tsv \\
+        --samplename ${prefix} \\
+        $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -38,7 +38,7 @@ process CUSTOM_FINGERPRINTVCFPARSER {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     echo $args
-    
+
     touch ${prefix}.fp.tsv
 
     cat <<-END_VERSIONS > versions.yml
