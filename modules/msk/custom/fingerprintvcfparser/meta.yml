@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# # TODO nf-core: Add a description of the module and list keywords
+name: "custom_fingerprintvcfparser"
+description: write your description here
+keywords:
+- sort
+- example
+- genomics
+tools:
+## TODO nf-core: Add a description and other details for the software below
+- "custom":
+    description: "Pysam is a Python module for reading and manipulating SAM/BAM/VCF/BCF
+      files. It's a lightweight wrapper of the htslib C-API, the same one that powers
+      samtools, bcftools, and tabix."
+    homepage: "None"
+    documentation: "None"
+    tool_dev_url: "None"
+    doi: ""
+    licence: ['MIT']
+    identifier: biotools:pysam
+
+input:
+# TODO nf-core: Update the information obtained from bio.tools and make sure that it is correct
+  []
+output:
+# TODO nf-core: Update the information obtained from bio.tools and make sure that it is correct
+  versions: -
+    versions.yml:
+      type: file
+      description: File containing software versions
+      pattern: versions.yml
+      ontologies:
+      - edam: http://edamontology.org/format_3750  # YAML
+authors:
+- "@anoronh4"
+maintainers:
+- "@anoronh4"
