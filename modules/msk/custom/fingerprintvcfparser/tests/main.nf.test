@@ -14,6 +14,7 @@ nextflow_process {
 
     // TODO nf-core: Change the test name preferably indicating the test-data and file-format used
     test("sarscov2 - vcf") {
+        config "./nextflow.config"
         setup {
             run("GBCMS"){
                 script "../../../gbcms/main.nf"
