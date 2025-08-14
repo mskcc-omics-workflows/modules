@@ -35,7 +35,7 @@ process CUSTOM_FINGERPRINTVCFPARSER {
 
     stub:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = task.ext.prefix ?: "${meta.id}"
     """
     echo $args
 
