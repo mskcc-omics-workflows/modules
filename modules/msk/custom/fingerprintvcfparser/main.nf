@@ -11,7 +11,7 @@ process CUSTOM_FINGERPRINTVCFPARSER {
     tuple val(meta), path(vcf)
 
     output:
-    tuple val(meta), path("*.tsv"), emit: tsv
+    tuple val(meta), path("${prefix}.fp.tsv"), emit: tsv
     path "versions.yml"           , emit: versions
 
     when:
@@ -19,7 +19,7 @@ process CUSTOM_FINGERPRINTVCFPARSER {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = task.ext.prefix ?: "${meta.id}"
     """
     parse_fingerprint_vcf.py \\
         --input ${vcf} \\
