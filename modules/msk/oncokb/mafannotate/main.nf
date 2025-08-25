@@ -2,7 +2,7 @@ process ONCOKB_MAFANNOTATE {
     tag "$meta.id"
     label 'process_single'
 
-    secret 'ONCOKB_APIKEY'
+    secret 'ONCOKB_TOKEN'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'docker://orgeraj/oncokbtst:1.2':
         'docker.io/orgeraj/oncokbtst:1.2' }"
@@ -26,7 +26,7 @@ process ONCOKB_MAFANNOTATE {
     python3 /usr/bin/oncokb/MafAnnotator.py \
     -i ${inputMaf} \
     -o ${prefix}.oncokb.maf \
-    -b ${ONCOKB_APIKEY}
+    -b ${ONCOKB_TOKEN}
     $args
 
     cat <<-END_VERSIONS > versions.yml
