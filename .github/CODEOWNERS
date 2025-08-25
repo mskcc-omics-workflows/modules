@@ -1,5 +1,6 @@
 # Review from a member of the review-team is required
 * @mskcc-omics-workflows/reviewers
+modules/msk/calculatenoise/** @mikefeixu @mskcc-omics-workflows/reviewers
 modules/msk/custom/splitfastqbylane/** @anoronh4 @mskcc-omics-workflows/reviewers
 modules/msk/facets/** @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/gatk4/applybqsr/** @yocra3 @FriederikeHanssen @mskcc-omics-workflows/reviewers

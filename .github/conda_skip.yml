@@ -1,6 +1,8 @@
 exclude:
   - path: modules/msk/nf-test
   - profile: conda
+    path: modules/msk/calculatenoise
+  - profile: conda
     path: modules/msk/gbcms
   - profile: conda
     path: modules/msk/polysolver
