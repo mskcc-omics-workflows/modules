@@ -65,12 +65,12 @@ runs:
         python -m pip install cryptography
         nextflow secrets set SENTIEON_AUTH_DATA $(python3 tests/modules/nf-core/sentieon/license_message.py encrypt --key "$SENTIEON_ENCRYPTION_KEY" --message "$SENTIEON_LICENSE_MESSAGE")
 
-    - name: Set up nextflow secrets
+    - name: Set up nextflow ONCOKB secrets
       if: env.ONCOKB_TOKEN != '' 
       shell: bash
       run: |
         python -m pip install cryptography
-        nextflow secrets set ONCOKB_TOKEN $ONCOKB_APIKEY
+        nextflow secrets set ONCOKB_APIKEY $ONCOKB_APIKEY
 
 
       # TODO Skip failing conda tests and document their failures

@@ -12,8 +12,7 @@ process ONCOKB_MAFANNOTATE {
 
     output:
     tuple val(meta), path("*.oncokb.maf"),     emit: oncokb_maf
-    
-    path "versions.yml",                                   emit: versions
+    path "versions.yml",                       emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -27,7 +26,7 @@ process ONCOKB_MAFANNOTATE {
     python3 /usr/bin/oncokb/MafAnnotator.py \
     -i ${inputMaf} \
     -o ${prefix}.oncokb.maf \
-    -B ${ONCOKB_APIKEY}
+    -b ${ONCOKB_APIKEY}
     $args
 
     cat <<-END_VERSIONS > versions.yml
