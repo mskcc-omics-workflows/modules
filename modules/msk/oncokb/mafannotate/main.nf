@@ -4,8 +4,8 @@ process ONCOKB_MAFANNOTATE {
 
     secret 'ONCOKB_TOKEN'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://orgeraj/oncokbtst:1.2':
-        'docker.io/orgeraj/oncokbtst:1.2' }"
+        'ghcr.io/mskcc-omics-workflows/oncokb:3.4.1':
+        'ghcr.io/mskcc-omics-workflows/oncokb:3.4.1' }"
 
     input:
     tuple val(meta),  path(inputMaf)
