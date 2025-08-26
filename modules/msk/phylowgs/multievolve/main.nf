@@ -20,7 +20,7 @@ process PHYLOWGS_MULTIEVOLVE {
 
     """
     python2 \\
-        /usr/bin/multievolve.py  \\
+        /usr/bin/phylowgs/multievolve.py  \\
         ${args} \\
         --ssms ${ssm_data} \\
         --cnvs ${cnv_data}

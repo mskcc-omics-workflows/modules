@@ -22,7 +22,7 @@ process PHYLOWGS_WRITERESULTS {
 
     """
     python2 \\
-        /usr/bin/write_results.py \\
+        /usr/bin/phylowgs/write_results.py \\
         ${args} \\
         --include-ssm-names \\
         ${prefix} \\
