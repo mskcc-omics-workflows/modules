@@ -2,9 +2,7 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
     tag "$meta.id"
     label 'process_medium'
 
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigenediting:1.3':
-        'docker.io/mskcc/neoantigenediting:1.3' }"
+    container "ghcr.io/mskcc/neoantigen-pipeline/neoantigen-editing:1.3"
 
     input:
     tuple val(meta),  path(patient_data)

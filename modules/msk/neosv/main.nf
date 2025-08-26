@@ -3,9 +3,7 @@ process NEOSV {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/neoantigen-utils-base:1.3.0':
-        'docker.io/mskcc/neoantigen-utils-base:1.3.0' }"
+    container "ghcr.io/neoantigen-pipeline/neoantigen-utils-base:1.4.0"
 
     input:
     tuple val(meta),  path(inputBedpe), val(hlaString)
