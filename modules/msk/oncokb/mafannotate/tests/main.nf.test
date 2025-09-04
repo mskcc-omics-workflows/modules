@@ -3,7 +3,6 @@ nextflow_process {
     name "Test Process ONCOKB_MAFANNOTATE"
     script "../main.nf"
     process "ONCOKB_MAFANNOTATE"
-    // config "./nextflow.config"
 
     tag "modules"
     tag "modules_nfcore"
