@@ -28,10 +28,11 @@
         "modules/msk/phylowgs/parsecnvs",
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
-        "subworkflows/msk/genome_nexus"
+        "subworkflows/msk/genome_nexus",
+        "subworkflows/msk/netmhcstabandpan",
+        "subworkflows/msk/phylowgs",
+        "subworkflows/msk/neoantigen_editing"
     ],
-    "docker": [
-    ],
-    "singularity": [
-    ]
+    "docker": [],
+    "singularity": []
 }
