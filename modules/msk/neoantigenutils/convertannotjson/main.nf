@@ -1,7 +1,9 @@
 process NEOANTIGENUTILS_CONVERTANNOTJSON {
     tag "$meta.id"
     label 'process_single'
-    container "ghcr.io/neoantigen-pipeline/neoantigen-utils-base:1.4.0"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'docker://ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0':
+        'ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0' }"
 
     input:
     tuple val(meta),  path(annotatedJSON)

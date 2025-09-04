@@ -3,7 +3,9 @@ process NETMHC3 {
     label 'process_medium'
 
     conda "${moduleDir}/environment.yml"
-    container "ghcr.io/mskcc/neoantigen-pipeline/netmhctools:1.1.1"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'docker://ghcr.io/mskcc-omics-workflows/netmhctools:1.1.1':
+        'ghcr.io/mskcc-omics-workflows/netmhctools:1.1.1' }"
 
     input:
     tuple val(meta),  path(inputFasta), path(inputSVFasta, arity: '0..*'), val(hlaString), val(inputType)

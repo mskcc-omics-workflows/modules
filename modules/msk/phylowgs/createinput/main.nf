@@ -1,8 +1,9 @@
 process PHYLOWGS_CREATEINPUT {
     tag "$meta.id"
     label 'process_low'
-
-    container "ghcr.io/mskcc/neoantigen-pipeline/phylowgs:v1.5-msk"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5-msk':
+        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5-msk' }"
 
     input:
     tuple val(meta), path(unfilteredmaf), path(cnv)
