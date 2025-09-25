@@ -9,6 +9,7 @@ keywords:
   - loci
   - vcf
   - bam
+  - qc
 components:
   - gbcms
   - custom/fingerprintvcfparser

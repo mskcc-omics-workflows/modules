@@ -1,0 +1,108 @@
+nextflow_process {
+
+    name "Test Process CUSTOM_FINGERPRINTCONTAMINATION"
+    script "../main.nf"
+    process "CUSTOM_FINGERPRINTCONTAMINATION"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "custom"
+    tag "custom/fingerprintcontamination"
+    tag "gbcms"
+    tag "custom/fingerprintvcfparser"
+
+    test("sarscov2 - bam") {
+        setup {
+            run("GBCMS"){
+                script "../../../gbcms/main.nf"
+                process {
+                    """
+                    input[0] = [
+                                [ id:'test', sample:'test' ], // meta map
+                                file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
+                                file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
+                                file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
+                                "variant_file.vcf"
+                            ]
+                    input[1] = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
+                    input[2] = file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true)
+                    """
+                }
+            }
+            run("CUSTOM_FINGERPRINTVCFPARSER"){
+                script "../../fingerprintvcfparser/main.nf"
+                process {
+                    """
+                    input[0] = GBCMS.out.variant_file
+                    """
+                }
+            }
+        }
+
+        when {
+            process {
+                """
+                input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv.map{ meta, tsv -> [meta,tsv,[]]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("sarscov2 - bam - stub") {
+
+        options "-stub"
+
+        setup {
+            run("GBCMS"){
+                script "../../../gbcms/main.nf"
+                process {
+                    """
+                    input[0] = [
+                                [ id:'test', sample:'test' ], // meta map
+                                file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
+                                file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
+                                file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
+                                "variant_file.vcf"
+                            ]
+                    input[1] = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
+                    input[2] = file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true)
+                    """
+                }
+            }
+            run("CUSTOM_FINGERPRINTVCFPARSER"){
+                script "../../fingerprintvcfparser/main.nf"
+                process {
+                    """
+                    input[0] = GBCMS.out.variant_file
+                    """
+                }
+            }
+        }
+
+        when {
+            process {
+                """
+                input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv.map{ meta, tsv -> [meta,tsv,[]]}
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
