@@ -1,6 +1,8 @@
 {
     "conda": [
         "modules/msk/custom/fingerprintvcfparser",
+	"modules/msk/custom/fingerprintcontamination",
+	"modules/msk/custom/fingerprintcombine",
         "modules/msk/calculatenoise",
         "modules/msk/ppflagfixer",
         "modules/msk/facets",
