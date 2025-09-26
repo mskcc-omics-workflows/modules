@@ -1,5 +1,4 @@
 process CUSTOM_FINGERPRINTCOMBINE {
-    tag '$bam'
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
