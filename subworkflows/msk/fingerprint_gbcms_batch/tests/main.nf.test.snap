@@ -1,0 +1,25 @@
+{
+    "sarscov2 - bam - single_end": {
+        "content": [
+            {
+                "0": [
+                    "0DPfilter_ALL_FP.txt:md5,509d9f7c1d89b9f8e2825bcc4793da3a"
+                ],
+                "1": [
+                    "versions.yml:md5,bc54e025756d97cd9b14d51a3c9e3667"
+                ],
+                "combined_fp_tsv": [
+                    "0DPfilter_ALL_FP.txt:md5,509d9f7c1d89b9f8e2825bcc4793da3a"
+                ],
+                "versions": [
+                    "versions.yml:md5,bc54e025756d97cd9b14d51a3c9e3667"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.04.6"
+        },
+        "timestamp": "2025-09-25T23:49:26.050835746"
+    }
+}

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "fingerprint_gbcms_batch"
+description: "Subworkflow to combine and compare Fingerprint files from different samples"
+keywords:
+  - fingerprint
+  - qc
+  - liftover
+  - batch
+  - pool
+components:
+  - modules/msk/custom/fingerprintcombine
+input:
+  - ch_fp:
+      type: file
+      description: |
+        The input channel containing one fingerprint file per sample
+        Structure: [ val(meta), path(fp_tsv) ]
+      pattern: "*.fp.tsv"
+  - ch_liftover_loci_mapping:
+      type: file
+      description: |
+        The input channel containing the loci mapping file for liftover
+        Structure: [ path(loci_mapping.tsv) ]
+      pattern: "*.tsv"
+output:
+  - combined_fp_tsv:
+      type: file
+      description: |
+        Channel containing combined fingerprint TSV file
+        Structure: [ path(combined_fp_tsv) ]
+      pattern: "*DPfilter_ALL_FP.txt"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"
