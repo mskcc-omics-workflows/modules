@@ -6,6 +6,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
     take:
     ch_fp // channel: [ val(meta), [ bam ] ]
     ch_liftover_loci_mapping // channel: [ liftover_loci_mapping ]
+    default_genome
 
     main:
 
@@ -14,7 +15,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
 
     CUSTOM_FINGERPRINTCOMBINE(
         ch_fp
-            .map{ meta, tsv -> ["placeholder",tsv, meta.id, "hg19"] }
+            .map{ meta, tsv -> ["placeholder", tsv, meta.id, meta.genome ?: default_genome ] }
             .groupTuple(by:[0])
             .map{ placeholder, tsv, sampleid, genome -> [tsv, sampleid, genome] },
         ch_liftover_loci_mapping.first()
