@@ -8,12 +8,59 @@
                             "id": "test",
                             "sample": "test"
                         },
-                        "test.fp.tsv:md5,9fa9a081f17ee52f03463c96d46a23aa"
+                        "test.fp.tsv:md5,c467328eb3c7fb534b555b83b0227206"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.fp.tsv:md5,c3fbcee584048e9bc4fc93bc6ca487d2"
                     ]
                 ],
                 "1": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.contamination.tsv:md5,5b533c60b8eff1f4d2c5fe58a8262303"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.contamination.tsv:md5,2eb950d4d5e0f9b4f7ae53d41d22fb5f"
+                    ]
+                ],
+                "2": [
+                    "0DPfilter_ALL_FP.txt:md5,509d9f7c1d89b9f8e2825bcc4793da3a"
+                ],
+                "3": [
+                    "versions.yml:md5,16a7edd0fbcb47825904a8cb939c7620",
                     "versions.yml:md5,41ff30ed71b1d19e95a6095b9ac3ca94",
-                    "versions.yml:md5,4b4b3ad40aa1c2c3a002c0c347c385b8"
+                    "versions.yml:md5,4b4b3ad40aa1c2c3a002c0c347c385b8",
+                    "versions.yml:md5,4fb29c6ff25ce4e29f6cf293a70aa8e6"
+                ],
+                "combined_fp_tsv": [
+                    "0DPfilter_ALL_FP.txt:md5,509d9f7c1d89b9f8e2825bcc4793da3a"
+                ],
+                "contamination_tsv": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.contamination.tsv:md5,5b533c60b8eff1f4d2c5fe58a8262303"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.contamination.tsv:md5,2eb950d4d5e0f9b4f7ae53d41d22fb5f"
+                    ]
                 ],
                 "fp_tsv": [
                     [
@@ -21,12 +68,21 @@
                             "id": "test",
                             "sample": "test"
                         },
-                        "test.fp.tsv:md5,9fa9a081f17ee52f03463c96d46a23aa"
+                        "test.fp.tsv:md5,c467328eb3c7fb534b555b83b0227206"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.fp.tsv:md5,c3fbcee584048e9bc4fc93bc6ca487d2"
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,16a7edd0fbcb47825904a8cb939c7620",
                     "versions.yml:md5,41ff30ed71b1d19e95a6095b9ac3ca94",
-                    "versions.yml:md5,4b4b3ad40aa1c2c3a002c0c347c385b8"
+                    "versions.yml:md5,4b4b3ad40aa1c2c3a002c0c347c385b8",
+                    "versions.yml:md5,4fb29c6ff25ce4e29f6cf293a70aa8e6"
                 ]
             }
         ],
@@ -34,6 +90,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.04.6"
         },
-        "timestamp": "2025-08-14T19:50:44.771060618"
+        "timestamp": "2025-09-26T01:19:25.852151971"
     }
 }

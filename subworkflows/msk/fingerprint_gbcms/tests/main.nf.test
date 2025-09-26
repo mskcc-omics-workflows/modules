@@ -2,11 +2,13 @@ nextflow_workflow {
 
     name "Test Subworkflow FINGERPRINT_GBCMS"
     script "../main.nf"
+    config "./nextflow.config"
     workflow "FINGERPRINT_GBCMS"
 
     tag "subworkflows"
     tag "subworkflows_msk"
     tag "subworkflows/fingerprint_gbcms"
+    tag "subworkflows/fingerprint_gbcms_batch"
     tag "gbcms"
     tag "custom/fingerprintvcfparser"
 
@@ -15,20 +17,33 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
-                            [ id:'test', sample:'test' ], // meta map
-                            file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)
-                        ])
-                input[1] = Channel.of([
-                            [ id:'test', sample:'test' ], // meta map
-                            file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
-                        ])
-                input[2] = Channel.of([
-                            [:],
-                            file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true)
-                        ])
-                input[3] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true))
-                input[4] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true))
+                input[0] = Channel.of(
+                                [
+                                    [ id:'test', sample:'test' ], // meta map
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)
+                                ],
+                                [
+                                    [ id:'test2', sample:'test2' ], // meta map
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)
+                                ],
+                    )
+                input[1] = Channel.of(
+                                [
+                                    [ id:'test', sample:'test' ], // meta map
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true)
+                                ],
+                                [
+                                    [ id:'test2', sample:'test2' ], // meta map
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true)
+                                ],
+                    )
+                input[2] = Channel.empty()
+                input[3] = Channel.of(file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true))
+                input[4] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
+                input[5] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true))
+                input[6] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true))
+                input[7] = "hg19"
+                input[8] = true
                 """
             }
         }
