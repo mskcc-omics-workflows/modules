@@ -52,7 +52,7 @@ def minor_contamination(normal, tumor, depth_filter):
     return tumor_homozygous_filtered['MAF'].mean()
 
 def main():
-    parser = argparse.ArgumentParser(prog=sys.argv[0], description='Calculate major and minor contamination')
+    parser = argparse.ArgumentParser(prog=os.path.basename(sys.argv[0]), description='Calculate major and minor contamination')
 
     parser.add_argument('-t','--tumor',
                         required=True,
