@@ -1,0 +1,66 @@
+process CUSTOM_FINGERPRINTCOMBINE {
+    tag '$bam'
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'docker://community.wave.seqera.io/library/r-argparse_r-data.table_r-dplyr_r-plyr_r-tidyverse:8c0daffb3624cb66':
+        'community.wave.seqera.io/library/r-argparse_r-data.table_r-dplyr_r-plyr_r-tidyverse:8c0daffb3624cb66' }"
+        //'	oras://community.wave.seqera.io/library/r-argparse_r-data.table_r-dplyr_r-plyr_r-tidyverse:d96a65055f79744c':
+
+
+    input:
+    tuple path(fp_tsv), // list of paths to fingerprint TSV files
+        val(sample), // list of sample identifiers, one per TSV file, in the same order
+        val(genome_build) // list of genome builds, one per TSV file, in the same order
+    path(liftover_loci_mapping)
+
+    output:
+    path "*DPfilter_ALL_FP.txt", emit: combined_fp_tsv
+    path "versions.yml"        , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def args = task.ext.args ?: ''
+    """
+    declare -a fp_tsv_list
+    declare -a sample_list
+    declare -a genome_build_list
+    fp_tsv_list=(${fp_tsv.join(' ')})
+    sample_list=(${sample.join(' ')})
+    genome_build_list=(${genome_build.join(' ')})
+    echo -e "sample_id\tgenome_build\tfp_tsv" > input.tsv
+    for i in \$(seq 0 1 \$((\${#fp_tsv_list[@]}-1)) ) ; do
+        fp_tsv=\${fp_tsv_list[i]}
+        sample=\${sample_list[i]}
+        genome=\${genome_build_list[i]}
+        echo -e "\$sample\t\$genome\t\$fp_tsv"
+    done >> input.tsv
+
+    complete_FP_table.R \\
+        -i input.tsv \\
+        -l $liftover_loci_mapping \\
+        $args
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        complete_FP_table.R: 0.1.0
+    END_VERSIONS
+    """
+
+    stub:
+    def args = task.ext.args ?: ''
+
+    """
+    echo $args
+
+    touch XDPfilter_ALL_FP.txt
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        complete_FP_table.R: 0.1.0
+    END_VERSIONS
+    """
+}

@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+# # TODO nf-core: Add a description of the module and list keywords
+name: "custom_fingerprintcombine"
+description: |
+  A module to combine multiple fingerprint TSV files into a single comprehensive
+  table, with optional liftover of loci coordinates.
+keywords:
+- fingerprint
+- qc
+- loci
+- tsv
+- correlation
+tools:
+## TODO nf-core: Add a description and other details for the software below
+- "custom":
+    description: "A custom R script to combine fingerprint TSV files"
+    homepage: "https://github.com/mskcc-omics-workflows/modules/tree/main/modules/msk/custom/fingerprintcombine/meta.yml"
+
+input:
+  - - fp_tsv:
+        type: file
+        description: |
+          Fingerprint TSV files to be combined.
+          Structure: [ val(sample), val(genome_build), path(fp_tsv) ]
+    - sample:
+        type: string
+        description: Sample identifier corresponding to each fingerprint TSV file.
+    - genome_build:
+        type: string
+        description: Genome build (e.g., hg19, hg38) corresponding to each fingerprint TSV file.
+  - liftover_loci_mapping:
+      type: file
+      description: |
+        A TSV file mapping original loci to liftover loci.
+        Format: original_chr, original_pos, liftover_chr, liftover_pos
+      pattern: "*.tsv"
+output:
+  combined_fp_tsv:
+    - "*DPfilter_ALL_FP.txt":
+        type: file
+        description: Wide table combining all input fingerprint TSV files.
+        pattern: '*DPfilter_ALL_FP.txt'
+        ontologies:
+          - edam: http://edamontology.org/format_3750  # TSV
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: versions.yml
+        ontologies:
+          - edam: http://edamontology.org/format_3750  # YAML
+authors:
+- "@anoronh4"
+maintainers:
+- "@anoronh4"
