@@ -42,11 +42,7 @@ def get_coverage(file, depth_filter):
 
 def minor_contamination(normal, tumor, depth_filter):
     homozygous_sites = normal.index[normal['MAF'] < .10]
-
-    print(homozygous_sites)
-
     tumor_homozygous = tumor.loc[homozygous_sites]
-    print(tumor_homozygous)
     tumor_homozygous_filtered = get_coverage(tumor_homozygous, depth_filter)
 
     return tumor_homozygous_filtered['MAF'].mean()
@@ -83,7 +79,9 @@ def main():
     fields = ['Position', 'Alleles', 'Genotype', 'MAF']
 
     tumor = pd.read_csv(args.tumor, sep='\t',names=fields,header=0)
+    tumor = tumor[~tumor['Position'].str.contains('X|Y', na=False)]
     normal = pd.read_csv(args.normal, sep='\t',names=fields,header=0)
+    normal = normal[~normal['Position'].str.contains('X|Y', na=False)]
 
     major_contam = major_contamination(tumor, depth_filter=args.depthfilter)
     minor_contam = minor_contamination(normal, tumor, depth_filter=args.depthfilter)
