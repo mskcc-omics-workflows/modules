@@ -80,8 +80,10 @@ def main():
 
     tumor = pd.read_csv(args.tumor, sep='\t',names=fields,header=0)
     tumor = tumor[~tumor['Position'].str.contains('X|Y', na=False)]
+    tumor = tumor.set_index('Position')
     normal = pd.read_csv(args.normal, sep='\t',names=fields,header=0)
     normal = normal[~normal['Position'].str.contains('X|Y', na=False)]
+    normal = normal.set_index('Position')
 
     major_contam = major_contamination(tumor, depth_filter=args.depthfilter)
     minor_contam = minor_contamination(normal, tumor, depth_filter=args.depthfilter)
