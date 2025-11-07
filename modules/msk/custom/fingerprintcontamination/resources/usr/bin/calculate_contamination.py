@@ -42,7 +42,7 @@ def get_coverage(file, depth_filter):
 
 def minor_contamination(normal, tumor, depth_filter):
     homozygous_sites = normal.index[normal['MAF'] < .10]
-    tumor_homozygous = tumor.loc[homozygous_sites]
+    tumor_homozygous = tumor.loc[[i for i in homozygous_sites if i in tumor.index]]
     tumor_homozygous_filtered = get_coverage(tumor_homozygous, depth_filter)
 
     return tumor_homozygous_filtered['MAF'].mean()
