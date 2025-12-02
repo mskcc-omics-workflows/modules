@@ -26,7 +26,7 @@ process ONCOKB_MAFANNOTATE {
     python3 /usr/bin/oncokb/MafAnnotator.py \
     -i ${inputMaf} \
     -o ${prefix}.oncokb.maf \
-    -b ${ONCOKB_TOKEN}
+    -b "\$ONCOKB_TOKEN" \
     $args
 
     cat <<-END_VERSIONS > versions.yml
