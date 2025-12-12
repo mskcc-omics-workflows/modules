@@ -22,7 +22,6 @@ process NEOSV {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def NEOSV_VERSION = 0.0.4
 
     """
 
@@ -43,7 +42,7 @@ process NEOSV {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        NEOSV: ${NEOSV_VERSION}
+        NEOSV: \$NEOSV_TAG
     END_VERSIONS
 
     """
@@ -51,14 +50,13 @@ process NEOSV {
     stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def NEOSV_VERSION = 0.0.4
     """
     touch ${prefix}.SV.WT.fa
     touch ${prefix}.SV.MUT.fa
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        NEOSV: ${NEOSV_VERSION}
+        NEOSV: \$NEOSV_TAG
     END_VERSIONS
     """
 }
