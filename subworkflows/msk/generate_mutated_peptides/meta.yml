@@ -11,12 +11,27 @@ components:
   - generatemutfasta/1.2
   - neoantigenutils/generatemutfasta
 input:
-  - ch_maf:
-      type: file
-      description: |
-        The input containing the maf file
-        Structure: [ val(meta), path(maf)]
-      pattern: "*.{maf}"
+  - ch_maf_hla_sv:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - maf
+        type: file
+        description: |
+          The input containing the maf file
+        pattern: "*.{maf}"
+      - hla
+        type: file
+        description: |
+          The input containing the hla file
+        pattern: "*.{hla.txt}"
+      - sv
+        type: file
+        description: |
+          The input containing the sv file
+        pattern: "*.{bedpe}"
   - ref_fasta:
       type: file
       description: A gzipped Human fasta file, ideally compressed with bgzip
@@ -25,6 +40,15 @@ input:
       type: file
       description: Gff3 file representing human annotation
       pattern: "*.gff3"
+  - gtf:
+      type: file
+      description: Ensemble gtf resource file
+      pattern: "*.{gtf.gz}"
+  - cdna:
+      type: file
+      description: |
+        The resource channel containing the cdna file
+      pattern: "*.{fa.gz}"
 output:
   - mut_fasta:
       - meta:

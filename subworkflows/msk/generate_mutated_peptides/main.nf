@@ -1,23 +1,52 @@
 include { MUTALYZER_RETRIEVER } from '../../../modules/msk/mutalyzer/retriever/main'
-include { GENERATEMUTFASTA } from '../../../modules/msk/generatemutfasta/1.2/main'
+include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/1.2/main'
+include { NEOSV }               from '../../../modules/msk/neosv/main'
+include { NEOANTIGENUTILS_GENERATEHLASTRING } from '../../../modules/msk/neoantigenutils/generatehlastring/main'
 
 workflow GENERATE_MUTATED_PEPTIDES {
 
     take:
 
-    ch_maf         // channel: [ val(meta), maf ]
+    ch_maf_hla_sv         // channel: [ val(meta), maf, hla, sv ]
     ref_fasta
     gff3
+    gtf
+    cdna
 
     main:
 
     ch_versions = Channel.empty()
+
+    ch_maf = ch_maf_hla_sv
+                .map{
+                    new Tuple(it[0],it[1])
+                }
+
+    ch_hla = ch_maf_hla_sv
+                .map{
+                    new Tuple(it[0],it[2])
+                }
+
+    ch_sv = ch_maf_hla_sv
+                .map{
+                    new Tuple(it[0],it[3])
+                }
 
     ch_fasta_and_gff3 =  ref_fasta
                             .merge(gff3)
                             .map{
                                 new Tuple([ id:"mutalyzer_retriever_"+file(it[0]).name +"_"+ file(it[1]).name], it[0], it[1])
                             }
+
+    ch_gtf_and_cdna = gtf
+                            .merge(cdna)
+                            .map{
+                                new Tuple(it[0], it[1])
+                            }
+
+    NEOANTIGENUTILS_GENERATEHLASTRING( ch_hla )
+
+    ch_versions = ch_versions.mix(NEOANTIGENUTILS_GENERATEHLASTRING.out.versions)
 
     MUTALYZER_RETRIEVER( ch_fasta_and_gff3 )
 
@@ -27,10 +56,38 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     ch_versions = ch_versions.mix(GENERATEMUTFASTA.out.versions)
 
+    ch_neosv_input = createNEOSVInput( ch_sv , NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring )
+
+    NEOSV( ch_neosv_input, ch_gtf_and_cdna )
+
+    ch_versions = ch_versions.mix(NEOSV.out.versions)
+
     emit:
 
-    mut_fasta      = GENERATEMUTFASTA.out.mut_fasta               // channel: [ val(meta), [ *.MUT_sequences.fa ] ]
-    wt_fasta       = GENERATEMUTFASTA.out.wt_fasta                // channel: [ val(meta), [ *.WT_sequences.fa ] ]
-    mut_fasta_log  = GENERATEMUTFASTA.out.mut_fasta_log           // channel: [ val(meta), [ *_generate_mut_fasta.log ] ]
-    versions       = ch_versions                                  // channel: [ versions.yml ]
+    mut_fasta      = GENERATEMUTFASTA.out.mut_fasta                   // channel: [ val(meta), [ *.MUT_sequences.fa ] ]
+    wt_fasta       = GENERATEMUTFASTA.out.wt_fasta                    // channel: [ val(meta), [ *.WT_sequences.fa ] ]
+    mut_fasta_log  = GENERATEMUTFASTA.out.mut_fasta_log               // channel: [ val(meta), [ *_generate_mut_fasta.log ] ]
+    sv_mut_fasta   = NEOSV.out.sv_mut_fasta                           // channel: [ val(meta), [ *.SV.MUT.fa ] ]
+    sv_wt_fasta    = NEOSV.out.sv_wt_fasta                            // channel: [ val(meta), [ *.SV.WT.fa ] ]
+    hla_string     = NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring  // channel: [ val(meta), [ hla_string ] ]
+    versions       = ch_versions                                      // channel: [ versions.yml ]
+}
+
+def createNEOSVInput(sv_bedpe, hla_str) {
+        sv_bedpe_channel = sv_bedpe
+            .map{
+                new Tuple(it[0],it)
+                }
+
+        hla_str_channel = hla_str
+            .map{
+                new Tuple(it[0],it)
+                }
+
+        merged_sv_hla = sv_bedpe_channel
+            .join(hla_str_channel, by:0)
+            .map{
+                new Tuple(it[1][0], it[1][1], it[2][1])
+            }
+        return merged_sv_hla
 }
