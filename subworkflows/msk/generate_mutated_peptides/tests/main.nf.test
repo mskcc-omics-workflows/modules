@@ -1,0 +1,84 @@
+nextflow_workflow {
+
+    name "Test Subworkflow GENERATE_MUTATED_PEPTIDES"
+    script "../main.nf"
+    workflow "GENERATE_MUTATED_PEPTIDES"
+
+    tag "subworkflows"
+    tag "subworkflows_nfcore"
+    tag "subworkflows_msk"
+    tag "subworkflows/generate_mutated_peptides"
+    tag "mutalyzer/retriever"
+    tag "generatemutfasta/1.2"
+
+
+    test("generate_mutated_peptides - maf,fa,gff3 - fa,log") {
+
+        when {
+            workflow {
+                """
+
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true)
+                    ])
+
+                input[1] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
+                    )
+
+                input[2] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    )
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(  workflow.out.mut_fasta[0][1],
+                                    workflow.out.wt_fasta[0][1],
+                                    file(workflow.out.mut_fasta_log[0][1]).name
+                                ).match()
+                }
+            )
+        }
+    }
+
+    test("generate_mutated_peptides - maf,fa,gff3 - fa,log - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true)
+                    ])
+
+                input[1] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
+                    )
+
+                input[2] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    )
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out).match()}
+            )
+        }
+
+
+    }
+}

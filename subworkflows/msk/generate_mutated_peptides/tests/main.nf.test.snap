@@ -1,0 +1,87 @@
+{
+    "generate_mutated_peptides - maf,fa,gff3 - fa,log - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_generate_mut_fasta.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,2935160fac5bdce0d8ddee95ebff942b",
+                    "versions.yml:md5,fac6d8a78c437014495196ba202ee85a"
+                ],
+                "mut_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mut_fasta_log": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_generate_mut_fasta.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2935160fac5bdce0d8ddee95ebff942b",
+                    "versions.yml:md5,fac6d8a78c437014495196ba202ee85a"
+                ],
+                "wt_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-11T15:31:07.085045"
+    },
+    "generate_mutated_peptides - maf,fa,gff3 - fa,log": {
+        "content": [
+            "test.MUT.sequences.fa:md5,0a8a629883994fdda244eb7f4e265a37",
+            "test.WT.sequences.fa:md5,a7f92d45f2134e84a2aa3559b75a3e63",
+            "test_generate_mut_fasta.log"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-11T15:14:59.919817"
+    }
+}
