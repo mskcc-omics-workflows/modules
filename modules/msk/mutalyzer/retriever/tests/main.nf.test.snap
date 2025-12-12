@@ -1,0 +1,41 @@
+{
+    "MUTALYZER_RETRIEVER - bgzip fasta - tar": {
+        "content": [
+            [
+                "versions.yml:md5,03f8b4f0a527f3d4eb0f93aebf41774c"
+            ],
+            "test.tar.gz"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-19T15:47:30.148934"
+    },
+    "MUTALYZER_RETRIEVER - gzip fasta - tar": {
+        "content": [
+            [
+                "versions.yml:md5,03f8b4f0a527f3d4eb0f93aebf41774c"
+            ],
+            "test.tar.gz"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-19T15:48:41.373661"
+    },
+    "MUTALYZER_RETRIEVER - fasta - tar - stub": {
+        "content": [
+            [
+                "versions.yml:md5,03f8b4f0a527f3d4eb0f93aebf41774c"
+            ],
+            "test.tar.gz"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-19T15:48:45.850408"
+    }
+}

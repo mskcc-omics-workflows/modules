@@ -1,0 +1,68 @@
+{
+    "MUTALYZER_NORMALIZER - string - json": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "G.json:md5,104e85cd2a1822dad3dc770259470a54"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2ee7a7ac556f6c69636b740df44bd16c"
+                ],
+                "normalized_model": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "G.json:md5,104e85cd2a1822dad3dc770259470a54"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2ee7a7ac556f6c69636b740df44bd16c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-19T17:58:08.321356"
+    },
+    "MUTALYZER_NORMALIZER - string - json - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_example_hgvs.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,2ee7a7ac556f6c69636b740df44bd16c"
+                ],
+                "normalized_model": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test_example_hgvs.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,2ee7a7ac556f6c69636b740df44bd16c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
+        },
+        "timestamp": "2025-11-19T17:08:13.899085"
+    }
+}

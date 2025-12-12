@@ -1,0 +1,80 @@
+nextflow_process {
+
+    name "Test Process MUTALYZER_NORMALIZER"
+    script "../main.nf"
+    process "MUTALYZER_NORMALIZER"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "mutalyzer"
+    tag "mutalyzer/normalizer"
+    tag "modules_msk"
+
+    test("MUTALYZER_NORMALIZER - string - json") {
+
+        setup {
+            run("MUTALYZER_RETRIEVER"){
+                script "../../retriever/main.nf"
+                process {
+                """
+
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    ]
+
+                """
+                }
+
+            }
+        }
+
+        when {
+
+            process {
+                """
+                meta = [ id:'test' ]
+                test_hgvs_description = "ENST00000454563:c.100C>G"
+                input[0] = [ meta, test_hgvs_description ]
+                input[1] = MUTALYZER_RETRIEVER.out.mutalyzer_cache
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+
+    test("MUTALYZER_NORMALIZER - string - json - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+                meta = [ id:'test' ]
+                test_hgvs_description = "example_hgvs"
+                input[0] = [ meta, test_hgvs_description ]
+                input[1] = file("example_cache.tar.gz")
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

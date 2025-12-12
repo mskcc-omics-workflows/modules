@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "mutalyzer_retriever"
+description: Generate the mutalyzer cache from a genomic annotation data source
+keywords:
+  - annotation
+  - fasta
+  - gff3
+  - Ensembl
+  - RefSeq
+  - Mutalyzer
+tools:
+  - mutalyzer:
+      description: "A tool primarily designed to check descriptions of sequence variants according to the Human Genome Sequence Variation Society (HGVS) guidelines."
+      documentation: "https://mutalyzer.readthedocs.io/en/latest/"
+      licence: ["MIT"]
+      identifier: "mutalyzer"
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing resource information
+          e.g. `[ id:'resource_id' ]`
+    - fasta:
+        type: file
+        description: A gzipped Human fasta file, ideally compressed with bgzip
+        pattern: "*.{fa.gz,fasta.gz,fa.bgz}"
+    - gff3:
+        type: file
+        description: Gff3 file representing human annotation
+        pattern: "*.gff3"
+output:
+  - mutalyzer_cache:
+      - "*.tar.gz":
+          type: file
+          description: Mutatalyzer cache to use with the normalizer
+          pattern: "*.tar.gz"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"
+  - "@johnoooh"

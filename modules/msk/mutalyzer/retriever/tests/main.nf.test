@@ -1,0 +1,95 @@
+nextflow_process {
+
+    name "Test Process MUTALYZER_RETRIEVER"
+    script "../main.nf"
+    process "MUTALYZER_RETRIEVER"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "mutalyzer"
+    tag "mutalyzer/retriever"
+    tag "modules_msk"
+
+    test("MUTALYZER_RETRIEVER - bgzip fasta - tar") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_bgzip'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions, file(process.out.mutalyzer_cache[0]).name).match() }
+            )
+        }
+
+    }
+
+    test("MUTALYZER_RETRIEVER - gzip fasta - tar") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions, file(process.out.mutalyzer_cache[0]).name).match() }
+            )
+        }
+
+    }
+
+
+    test("MUTALYZER_RETRIEVER - fasta - tar - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file('fa_bgzip.gzip'),
+                    file('test.gff3')
+                    ]
+
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions, file(process.out.mutalyzer_cache[0]).name).match() }
+            )
+        }
+
+    }
+
+}
