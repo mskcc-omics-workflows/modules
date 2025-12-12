@@ -53,8 +53,8 @@ process NEOSV {
     def prefix = task.ext.prefix ?: "${meta.id}"
     def NEOSV_VERSION = 1.1
     """
-    touch ${prefix}.WT.net.in.txt
-    touch ${prefix}.net.in.txt
+    touch ${prefix}.SV.WT.fa
+    touch ${prefix}.SV.MUT.fa
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
