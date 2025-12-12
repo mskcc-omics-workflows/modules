@@ -1,0 +1,51 @@
+process GENERATEMUTFASTA {
+    tag "$meta.id"
+    label 'process_single'
+    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0"
+
+    input:
+    tuple val(meta),  path(inputMaf)
+    tuple path(cds),  path(cdna)
+
+    output:
+    tuple val(meta), path("*_out/*.MUT.sequences.fa"),     emit: mut_fasta
+    tuple val(meta), path("*_out/*.WT.sequences.fa"),      emit: wt_fasta
+    path "versions.yml",                                   emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+    mkdir ${prefix}_out
+
+    generateMutFasta.py --sample_id ${prefix} \
+    --output_dir ${prefix}_out \
+    --maf_file ${inputMaf} \
+    --CDS_file ${cds} \
+    --CDNA_file ${cdna}
+
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        generateMutFasta: \$(echo \$(generateMutFasta.py -v))
+    END_VERSIONS
+    """
+
+    stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+
+    """
+        mkdir ${prefix}_out
+        touch ${prefix}_out/${prefix}.MUT.sequences.fa
+        touch ${prefix}_out/${prefix}.WT.sequences.fa
+        cat <<-END_VERSIONS > versions.yml
+        "${task.process}":
+            generateMutFasta: \$(echo \$(generateMutFasta.py -v))
+        END_VERSIONS
+    """
+}

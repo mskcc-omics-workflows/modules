@@ -1,0 +1,104 @@
+{
+    "generatemutfasta_1.2 - maf - fasta": {
+        "content": [
+            [
+                "versions.yml:md5,825989b899b3a496c7a3e3560389a424"
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.MUT.sequences.fa:md5,0a8a629883994fdda244eb7f4e265a37"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "test",
+                        "single_end": false
+                    },
+                    "test.WT.sequences.fa:md5,a7f92d45f2134e84a2aa3559b75a3e63"
+                ]
+            ],
+            "test_generate_mut_fasta.log"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-11T13:44:38.71304"
+    },
+    "generatemutfasta_1.2 - maf - fasta - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_generate_mut_fasta.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    "versions.yml:md5,e653e8a2e136536d683b73afd3e0d00d"
+                ],
+                "mut_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "mut_fasta_log": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test_generate_mut_fasta.log:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,e653e8a2e136536d683b73afd3e0d00d"
+                ],
+                "wt_fasta": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-11T13:01:39.053153"
+    }
+}
