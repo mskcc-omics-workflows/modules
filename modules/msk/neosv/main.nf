@@ -12,9 +12,9 @@ process NEOSV {
     tuple path(gtf),  path(cdna)
 
     output:
-    tuple val(meta),       path("*.net.in.txt"),               emit: mutOut
-    tuple val(meta),       path("*.WT.net.in.txt"),            emit: wtOut
-    path "versions.yml",                                       emit: versions
+    tuple val(meta),       path("*.SV.MUT.fa"),           emit: mutOut
+    tuple val(meta),       path("*.SV.WT.fa"),            emit: wtOut
+    path "versions.yml",                                  emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -36,6 +36,9 @@ process NEOSV {
     --cdna-file ${cdna} \\
     --pyensembl-cache-dir ./ \\
     --prefix ${prefix}
+
+    mv ${prefix}.net.in.txt ${prefix}.SV.MUT.fa
+    mv ${prefix}.WT.net.in.txt ${prefix}.SV.WT.fa
 
 
     cat <<-END_VERSIONS > versions.yml
