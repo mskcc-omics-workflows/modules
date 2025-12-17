@@ -9,10 +9,12 @@ nextflow_workflow {
     tag "subworkflows_msk"
     tag "subworkflows/generate_mutated_peptides"
     tag "mutalyzer/retriever"
+    tag "neoantigenutils/generatehlastring"
     tag "generatemutfasta/1.2"
+    tag "neosv"
 
 
-    test("generate_mutated_peptides - maf,fa,gff3 - fa,log") {
+    test("generate_mutated_peptides - maf,hla,fa,gff3,gtf - fa,str,log") {
 
         when {
             workflow {
@@ -21,6 +23,7 @@ nextflow_workflow {
                 input[0] = Channel.of([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
                     ])
 
                 input[1] = Channel.value(
@@ -29,6 +32,14 @@ nextflow_workflow {
 
                 input[2] = Channel.value(
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    )
+
+                input[3] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true)
+                    )
+
+                input[4] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
                     )
 
                 """
@@ -40,14 +51,64 @@ nextflow_workflow {
                 { assert workflow.success},
                 { assert snapshot(  workflow.out.mut_fasta[0][1],
                                     workflow.out.wt_fasta[0][1],
-                                    file(workflow.out.mut_fasta_log[0][1]).name
+                                    file(workflow.out.mut_fasta_log[0][1]).name,
+                                    workflow.out.sv_mut_fasta[0][1],
+                                    workflow.out.sv_wt_fasta[0][1],
+                                    workflow.out.hla_string[0][1],
                                 ).match()
                 }
             )
         }
     }
 
-    test("generate_mutated_peptides - maf,fa,gff3 - fa,log - stub") {
+    test("generate_mutated_peptides - maf,hla,sv,fa,gff3,gtf - fa,str,log") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.of([
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['sv_filtered_bedpe'], checkIfExists: true)
+                    ])
+
+                input[1] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
+                    )
+
+                input[2] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    )
+
+                input[3] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true)
+                    )
+
+                input[4] = Channel.value(
+                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
+                    )
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(  workflow.out.mut_fasta[0][1],
+                                    workflow.out.wt_fasta[0][1],
+                                    file(workflow.out.mut_fasta_log[0][1]).name,
+                                    workflow.out.sv_mut_fasta[0][1],
+                                    workflow.out.sv_wt_fasta[0][1],
+                                    workflow.out.hla_string[0][1],
+                                ).match()
+                }
+            )
+        }
+    }
+
+    test("generate_mutated_peptides - maf,hla,sv,fa,gff3,gtf - fa,str,log - stub") {
 
         options "-stub"
 
@@ -57,15 +118,25 @@ nextflow_workflow {
 
                 input[0] = Channel.of([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true)
+                    file('somatic_filtered_maf', checkIfExists: false)
+                    file('winners_hla_txt', checkIfExists: false),
+                    file('sv_filtered_bedpe', checkIfExists: false)
                     ])
 
                 input[1] = Channel.value(
-                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
+                    file('fa_gzip', checkIfExists: false)
                     )
 
                 input[2] = Channel.value(
-                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    file('gff3', checkIfExists: false)
+                    )
+
+                input[3] = Channel.value(
+                    file('gtf', checkIfExists: false)
+                    )
+
+                input[4] = Channel.value(
+                    file('cdna', checkIfExists: false)
                     )
 
                 """
