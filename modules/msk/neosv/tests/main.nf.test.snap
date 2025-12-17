@@ -2,7 +2,7 @@
     "neosv - fa": {
         "content": [
             [
-                "versions.yml:md5,1d203387ca616b0fa7b43ad9181a3375"
+                "versions.yml:md5,67246ba34083d4598c942079d84ce9a3"
             ],
             [
                 [
@@ -25,14 +25,14 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T13:15:05.859301012"
+        "timestamp": "2025-12-12T14:17:51.755203752"
     },
     "neosv - fa - stub": {
         "content": [
             [
-                "versions.yml:md5,b970b6b530af12cc2f05bba7747125ee"
+                "versions.yml:md5,8d52a32beb1686ebae4ef05d479eabfe"
             ],
             [
                 [
@@ -57,6 +57,6 @@
             "nf-test": "0.9.2",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-12T13:20:58.920427274"
+        "timestamp": "2025-12-12T14:17:57.669815899"
     }
 }
