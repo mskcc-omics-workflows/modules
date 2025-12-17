@@ -15,9 +15,13 @@ workflow FINGERPRINT_GBCMS_BATCH {
 
     CUSTOM_FINGERPRINTCOMBINE(
         ch_fp
-            .map{ meta, tsv -> ["placeholder", tsv, meta.id, meta.genome ?: default_genome ] }
-            .groupTuple(by:[0])
-            .map{ placeholder, tsv, sampleid, genome -> [tsv, sampleid, genome] },
+            .map{ meta, tsv ->
+                def meta2 = [id:'defaultbatch']
+                if (meta.pool) {
+                    meta2.id = meta.pool
+                }
+                [meta2, tsv, meta.id, meta.genome ?: default_genome ]
+            }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
     )
     ch_versions = ch_versions.mix(CUSTOM_FINGERPRINTCOMBINE.out.versions.first())

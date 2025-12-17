@@ -1,4 +1,5 @@
 process CUSTOM_FINGERPRINTCOMBINE {
+    tag '$meta.id'
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
@@ -9,14 +10,15 @@ process CUSTOM_FINGERPRINTCOMBINE {
 
 
     input:
-    tuple path(fp_tsv), // list of paths to fingerprint TSV files
+    tuple val(meta),
+        path(fp_tsv), // list of paths to fingerprint TSV files
         val(sample), // list of sample identifiers, one per TSV file, in the same order
         val(genome_build) // list of genome builds, one per TSV file, in the same order
     path(liftover_loci_mapping)
 
     output:
-    path "*DPfilter_ALL_FP.txt", emit: combined_fp_tsv
-    path "versions.yml"        , emit: versions
+    tuple val(meta), path("*DPfilter_ALL_FP.txt"), emit: combined_fp_tsv
+    path "versions.yml"                          , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
