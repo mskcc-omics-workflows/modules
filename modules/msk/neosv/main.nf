@@ -25,10 +25,10 @@ process NEOSV {
 
     """
 
-    echo ${hlaString} | tr ',' '\n' | sed 's/^[ \\t]*//;s/[ \t]*\$//' > hla.txt
+    echo '${hlaString}' | tr ',' '\\n' | sed 's/^[ \\t]*//;s/[ \\t]*\$//' > hla.txt
     awk 'NF {print substr(\$0,1,5)"*"substr(\$0,6)}' hla.txt > temp_file && mv temp_file hla.txt
 
-    neosv --sv-file test.sv.bedpe \\
+    neosv --sv-file ${inputBedpe} \\
     --out ./ \\
     --hla-file hla.txt \\
     --gtf-file ${gtf} \\

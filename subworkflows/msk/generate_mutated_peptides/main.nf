@@ -67,8 +67,8 @@ workflow GENERATE_MUTATED_PEPTIDES {
     mut_fasta      = GENERATEMUTFASTA.out.mut_fasta                   // channel: [ val(meta), [ *.MUT_sequences.fa ] ]
     wt_fasta       = GENERATEMUTFASTA.out.wt_fasta                    // channel: [ val(meta), [ *.WT_sequences.fa ] ]
     mut_fasta_log  = GENERATEMUTFASTA.out.mut_fasta_log               // channel: [ val(meta), [ *_generate_mut_fasta.log ] ]
-    sv_mut_fasta   = NEOSV.out.sv_mut_fasta                           // channel: [ val(meta), [ *.SV.MUT.fa ] ]
-    sv_wt_fasta    = NEOSV.out.sv_wt_fasta                            // channel: [ val(meta), [ *.SV.WT.fa ] ]
+    sv_mut_fasta   = NEOSV.out.mutOut                                 // channel: [ val(meta), [ *.SV.MUT.fa ] ]
+    sv_wt_fasta    = NEOSV.out.wtOut                            // channel: [ val(meta), [ *.SV.WT.fa ] ]
     hla_string     = NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring  // channel: [ val(meta), [ hla_string ] ]
     versions       = ch_versions                                      // channel: [ versions.yml ]
 }
@@ -89,5 +89,6 @@ def createNEOSVInput(sv_bedpe, hla_str) {
             .map{
                 new Tuple(it[1][0], it[1][1], it[2][1])
             }
+            .filter{ it[1] != null && it[2] != null }
         return merged_sv_hla
 }
