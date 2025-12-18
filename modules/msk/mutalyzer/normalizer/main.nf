@@ -22,17 +22,16 @@ process MUTALYZER_NORMALIZER {
     """
     # Setup cache
 
-    mkdir -p ${task.workDir}/mutalyzer_cache
+    mkdir -p \$(pwd)/mutalyzer_cache
 
-    tar -xzf ${mutalyzer_cache} -C ${task.workDir}/mutalyzer_cache
+    tar -xzf ${mutalyzer_cache} -C \$(pwd)/mutalyzer_cache
 
-    cat <<-END_MUTALYZER_CONFIG > ${task.workDir}/config.txt
-	MUTALYZER_CACHE_DIR = "${task.workDir}/mutalyzer_cache/cache"
+    cat <<-END_MUTALYZER_CONFIG > \$(pwd)/config.txt
+	MUTALYZER_CACHE_DIR = \$(pwd)/mutalyzer_cache/cache
 	MUTALYZER_FILE_CACHE_ADD = false
 	END_MUTALYZER_CONFIG
 
-    MUTALYZER_SETTINGS="${task.workDir}/config.txt" mutalyzer_normalizer ${hgvs_description} > ${prefix}_${hgvs_description}.json
-
+    MUTALYZER_SETTINGS="\$(pwd)/config.txt" mutalyzer_normalizer "${hgvs_description}" > ${prefix}_${hgvs_description}.json
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))

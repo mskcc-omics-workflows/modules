@@ -4,6 +4,7 @@ nextflow_process {
     script "../main.nf"
     process "MUTALYZER_RETRIEVER"
 
+
     tag "modules"
     tag "modules_nfcore"
     tag "mutalyzer"

@@ -4,6 +4,8 @@ nextflow_process {
     script "../main.nf"
     process "MUTALYZER_NORMALIZER"
 
+    config "./nextflow.config"
+
     tag "modules"
     tag "modules_nfcore"
     tag "mutalyzer"
@@ -35,7 +37,7 @@ nextflow_process {
             process {
                 """
                 meta = [ id:'test' ]
-                test_hgvs_description = "ENST00000454563:c.100C>G"
+                test_hgvs_description = "ENST00000454558:c.100C>G"
                 input[0] = [ meta, test_hgvs_description ]
                 input[1] = MUTALYZER_RETRIEVER.out.mutalyzer_cache
                 """

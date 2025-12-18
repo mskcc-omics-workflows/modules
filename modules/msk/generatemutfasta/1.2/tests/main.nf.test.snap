@@ -1,35 +1,4 @@
 {
-    "generatemutfasta_1.2 - maf - fasta": {
-        "content": [
-            [
-                "versions.yml:md5,825989b899b3a496c7a3e3560389a424"
-            ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test.MUT.sequences.fa:md5,0a8a629883994fdda244eb7f4e265a37"
-                ]
-            ],
-            [
-                [
-                    {
-                        "id": "test",
-                        "single_end": false
-                    },
-                    "test.WT.sequences.fa:md5,a7f92d45f2134e84a2aa3559b75a3e63"
-                ]
-            ],
-            "test_generate_mut_fasta.log"
-        ],
-        "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-11T13:44:38.71304"
-    },
     "generatemutfasta_1.2 - maf - fasta - stub": {
         "content": [
             {
@@ -99,6 +68,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-11T13:01:39.053153"
+        "timestamp": "2025-12-18T16:08:27.448965"
     }
 }

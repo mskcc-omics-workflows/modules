@@ -7,7 +7,7 @@
                         {
                             "id": "test"
                         },
-                        "G.json:md5,104e85cd2a1822dad3dc770259470a54"
+                        "G.json:md5,e0904e697ad2ed54a9fd56b9206bbe9f"
                     ]
                 ],
                 "1": [
@@ -18,7 +18,7 @@
                         {
                             "id": "test"
                         },
-                        "G.json:md5,104e85cd2a1822dad3dc770259470a54"
+                        "G.json:md5,e0904e697ad2ed54a9fd56b9206bbe9f"
                     ]
                 ],
                 "versions": [
@@ -28,9 +28,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-19T17:58:08.321356"
+        "timestamp": "2025-12-18T16:00:42.768145"
     },
     "MUTALYZER_NORMALIZER - string - json - stub": {
         "content": [
@@ -61,8 +61,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-11-19T17:08:13.899085"
+        "timestamp": "2025-12-18T15:29:10.554785"
     }
 }

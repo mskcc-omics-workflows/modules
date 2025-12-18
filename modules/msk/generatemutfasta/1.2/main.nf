@@ -23,18 +23,18 @@ process GENERATEMUTFASTA {
     """
     # Setup cache
 
-    mkdir -p ${task.workDir}/mutalyzer_cache
+    mkdir -p \$(pwd)/mutalyzer_cache
 
-    tar -xzf ${mutalyzer_cache} -C ${task.workDir}/mutalyzer_cache
+    tar -xzf ${mutalyzer_cache} -C \$(pwd)/mutalyzer_cache
 
-    cat <<-END_MUTALYZER_CONFIG > ${task.workDir}/config.txt
-	MUTALYZER_CACHE_DIR = "${task.workDir}/mutalyzer_cache/cache"
+    cat <<-END_MUTALYZER_CONFIG > \$(pwd)/config.txt
+	MUTALYZER_CACHE_DIR = "\$(pwd)/mutalyzer_cache/cache"
 	MUTALYZER_FILE_CACHE_ADD = false
 	END_MUTALYZER_CONFIG
 
     mkdir ${prefix}_out
 
-    MUTALYZER_SETTINGS="${task.workDir}/config.txt" generateMutFasta.py --sample_id ${prefix} \
+    MUTALYZER_SETTINGS="\$(pwd)/config.txt" generateMutFasta.py --sample_id ${prefix} \
     --output_dir ${prefix}_out \
     --maf_file ${inputMaf}
 
