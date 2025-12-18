@@ -25,7 +25,7 @@
                         "XDPfilter_ALL_FP.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions_fingerprintvcfparser": [
+                "versions_fingerprintcombine": [
                     [
                         "CUSTOM_FINGERPRINTCOMBINE",
                         "complete_FP_table.R",
@@ -38,7 +38,7 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-17T13:28:48.061258305"
+        "timestamp": "2025-12-17T20:26:07.925718004"
     },
     "sarscov2 - bam": {
         "content": [
@@ -66,7 +66,7 @@
                         "0DPfilter_ALL_FP.txt:md5,66113c255cf1f52e27802183764a406d"
                     ]
                 ],
-                "versions_fingerprintvcfparser": [
+                "versions_fingerprintcombine": [
                     [
                         "CUSTOM_FINGERPRINTCOMBINE",
                         "complete_FP_table.R",
@@ -79,6 +79,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-17T13:28:39.908034467"
+        "timestamp": "2025-12-17T20:25:58.985229402"
     }
 }
