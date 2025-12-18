@@ -32,7 +32,8 @@
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
         "subworkflows/msk/fingerprint_gbcms",
-        "subworkflows/msk/genome_nexus"
+        "subworkflows/msk/genome_nexus",
+        "modules/msk/oncokb/mafannotate"
     ],
     "docker": [
     ],
