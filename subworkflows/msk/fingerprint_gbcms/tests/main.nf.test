@@ -11,6 +11,7 @@ nextflow_workflow {
     tag "subworkflows/fingerprint_gbcms_batch"
     tag "gbcms"
     tag "custom/fingerprintvcfparser"
+    tag "custom/fingerprintcontamination"
 
     test("sarscov2 - bam") {
 

@@ -10,15 +10,12 @@ process CUSTOM_FINGERPRINTCOMBINE {
 
 
     input:
-    tuple val(meta),
-        path(fp_tsv), // list of paths to fingerprint TSV files
-        val(sample), // list of sample identifiers, one per TSV file, in the same order
-        val(genome_build) // list of genome builds, one per TSV file, in the same order
+    tuple val(meta), path(fp_tsv), val(sample), val(genome_build)
     path(liftover_loci_mapping)
 
     output:
-    tuple val(meta), path("*DPfilter_ALL_FP.txt"), emit: combined_fp_tsv
-    path "versions.yml"                          , emit: versions
+    tuple val(meta), path("*DPfilter_ALL_FP.txt")                         , emit: combined_fp_tsv
+    tuple val("${task.process}"), val('complete_FP_table.R'), val('0.1.0'), emit: versions_fingerprintcombine, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -44,11 +41,6 @@ process CUSTOM_FINGERPRINTCOMBINE {
         -i input.tsv \\
         -l $liftover_loci_mapping \\
         $args
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        complete_FP_table.R: 0.1.0
-    END_VERSIONS
     """
 
     stub:
@@ -58,10 +50,5 @@ process CUSTOM_FINGERPRINTCOMBINE {
     echo $args
 
     touch XDPfilter_ALL_FP.txt
-
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        complete_FP_table.R: 0.1.0
-    END_VERSIONS
     """
 }

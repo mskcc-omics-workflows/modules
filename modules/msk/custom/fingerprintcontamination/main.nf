@@ -12,8 +12,8 @@ process CUSTOM_FINGERPRINTCONTAMINATION {
     tuple val(meta), path(fp_tumor), path(fp_normal)
 
     output:
-    tuple val(meta), path("*.contamination.tsv"), emit: contamination_tsv
-    path "versions.yml"                         , emit: versions
+    tuple val(meta), path("*.contamination.tsv")                                                                           , emit: contamination_tsv
+    tuple val("${task.process}"), val('calculate_contamination.py'), eval('calculate_contamination.py -v | cut -f 2 -d" "'), emit: versions_fingerprintvcfparser, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -28,10 +28,6 @@ process CUSTOM_FINGERPRINTCONTAMINATION {
         -o ${prefix}.contamination.tsv \\
         ${args}
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        calculate_contamination.py: \$( calculate_contamination.py --version | rev | cut -f 1 -d " " | rev )
-    END_VERSIONS
     """
 
     stub:
@@ -39,9 +35,5 @@ process CUSTOM_FINGERPRINTCONTAMINATION {
     """
     touch ${prefix}.contamination.tsv
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        calculate_contamination.py: \$( calculate_contamination.py --version | rev | cut -f 1 -d " " | rev )
-    END_VERSIONS
     """
 }

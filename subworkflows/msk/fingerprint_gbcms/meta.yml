@@ -13,6 +13,8 @@ keywords:
 components:
   - gbcms
   - custom/fingerprintvcfparser
+  - custom/fingerprintcontamination
+  - fingerprint_gbcms_batch
 input:
   - ch_bam:
       type: file

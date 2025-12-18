@@ -1,20 +1,19 @@
-// nf-core modules test custom/fingerprintcombine
 nextflow_process {
 
-    name "Test Process CUSTOM_FINGERPRINTCOMBINE"
+    name "Test Process CUSTOM_FINGERPRINTCORRELATION"
     script "../main.nf"
-    process "CUSTOM_FINGERPRINTCOMBINE"
+    process "CUSTOM_FINGERPRINTCORRELATION"
     config "./nextflow.config"
 
     tag "modules"
     tag "modules_msk"
     tag "custom"
+    tag "custom/fingerprintcorrelation"
     tag "custom/fingerprintcombine"
     tag "gbcms"
     tag "custom/fingerprintvcfparser"
 
     test("sarscov2 - bam") {
-
         setup {
             run("GBCMS"){
                 script "../../../gbcms/main.nf"
@@ -22,14 +21,14 @@ nextflow_process {
                     """
                     input[0] = Channel.of(
                                 [
-                                    [ id:'test', sample:'test', pool:'mypool' ], // meta map
+                                    [ id:'test', sample:'test' ], // meta map
                                     file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
                                     file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
                                     file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
                                     "variant_file.vcf"
                                 ],
                                 [
-                                    [ id:'test2', sample:'test2', pool:'mypool' ], // meta map
+                                    [ id:'test2', sample:'test2' ], // meta map
                                     file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
                                     file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
                                     file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
@@ -49,30 +48,39 @@ nextflow_process {
                     """
                 }
             }
+            run("CUSTOM_FINGERPRINTCOMBINE"){
+                script "../../fingerprintcombine/main.nf"
+                process {
+                    """
+                    input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
+                        .map{ meta, tsv ->
+                            def meta2 = [id:meta.pool]
+                            [[id:meta.pool], tsv, meta.id, "hg19"]
+                        }.groupTuple(by:[0])
+                    input[1] = file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)
+                    """
+                }
+            }
         }
-
         when {
             process {
                 """
-                input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
-                    .map{ meta, tsv ->
-                        println meta
-                        [[id:meta.pool], tsv, meta.id, "hg19"]
-                    }.groupTuple(by:[0])
-                input[1] = file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)
+                input[0] = CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv
                 """
             }
         }
 
         then {
+            assert process.success
             assertAll(
-                { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    process.out.observations_tab,
+                    process.out.versions_fingerprintcorrelation
+                ).match() }
             )
         }
 
     }
-
 
     test("sarscov2 - bam - stub") {
 
@@ -81,21 +89,18 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = [
-                    [id:"testsample"],
-                    [file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)],
-                    ["testsample"],
-                    ["hg19"]
-                 ]
-                input[1] = file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)
+                input[0] = [[id:'thispool'], file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
                 """
             }
         }
 
         then {
+            assert process.success
             assertAll(
-                { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert snapshot(
+                    process.out.observations_tab,
+                    process.out.versions_fingerprintcorrelation
+                ).match() }
             )
         }
 

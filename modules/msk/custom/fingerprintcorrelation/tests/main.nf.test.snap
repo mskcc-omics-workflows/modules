@@ -1,0 +1,50 @@
+{
+    "sarscov2 - bam - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "thispool"
+                    },
+                    "thispool_observations.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    "CUSTOM_FINGERPRINTCORRELATION",
+                    "plot_gbcm.R",
+                    "0.1.0"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-17T12:40:10.210681589"
+    },
+    "sarscov2 - bam": {
+        "content": [
+            [
+                [
+                    {
+                        "id": null
+                    },
+                    "batch_observations.tab:md5,858d6d115a4da81652bb98dcc8b8077f"
+                ]
+            ],
+            [
+                [
+                    "CUSTOM_FINGERPRINTCORRELATION",
+                    "plot_gbcm.R",
+                    "0.1.0"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2025-12-17T12:40:03.812030372"
+    }
+}

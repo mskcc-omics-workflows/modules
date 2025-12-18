@@ -8,7 +8,8 @@ keywords:
   - batch
   - pool
 components:
-  - modules/msk/custom/fingerprintcombine
+  - custom/fingerprintcombine
+  - custom/fingerprintcorrelation
 input:
   - ch_fp:
       type: file

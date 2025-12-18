@@ -11,11 +11,13 @@ tools:
       description: "Python Data Analysis Library"
       homepage: "https://pandas.pydata.org/"
       documentation: "https://pandas.pydata.org/docs/"
+      identifier: biotools:pandas
   - "numpy":
       description: "Scientific computing library for Python"
       homepage: "https://numpy.org/"
       documentation: "https://numpy.org/doc/"
 
+      identifier: biotools:numpy
 input:
   - - meta:
         type: map
@@ -27,7 +29,8 @@ input:
         description: Fingerprint table file for tumor sample
         pattern: "*.fp.tsv"
         ontologies:
-          - edam: "http://edamontology.org/format_3750"     # TSV
+          - edam: "http://edamontology.org/format_3750" # TSV
+          - edam: http://edamontology.org/format_3475 # TSV
     - fp_normal:
         type: file
         description: Fingerprint table file for normal sample
@@ -35,9 +38,10 @@ input:
         ontologies:
           - edam: "http://edamontology.org/format_3750"
 
+          - edam: http://edamontology.org/format_3475 # TSV
 output:
-  - contamination_tsv:
-      - meta:
+  contamination_tsv:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -48,12 +52,11 @@ output:
           pattern: "*.contamination.tsv"
           ontologies:
             - edam: "http://edamontology.org/format_3750" # TSV
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
-
+            - edam: http://edamontology.org/format_3475 # TSV
+  versions_fingerprintvcfparser:
+    - - ${task.process}: {}
+      - calculate_contamination.py: {}
+      - 'calculate_contamination.py -v | cut -f 2 -d" ': {}
 authors:
   - "@anoronh4"
 maintainers:

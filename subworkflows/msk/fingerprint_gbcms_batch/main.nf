@@ -1,5 +1,5 @@
-
-include { CUSTOM_FINGERPRINTCOMBINE } from '../../../modules/msk/custom/fingerprintcombine/main'
+include { CUSTOM_FINGERPRINTCOMBINE     } from '../../../modules/msk/custom/fingerprintcombine/main'
+include { CUSTOM_FINGERPRINTCORRELATION } from '../../../modules/msk/custom/fingerprintcorrelation/main'
 
 workflow FINGERPRINT_GBCMS_BATCH {
 
@@ -9,9 +9,6 @@ workflow FINGERPRINT_GBCMS_BATCH {
     default_genome
 
     main:
-
-    ch_versions = Channel.empty()
-
 
     CUSTOM_FINGERPRINTCOMBINE(
         ch_fp
@@ -24,9 +21,11 @@ workflow FINGERPRINT_GBCMS_BATCH {
             }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
     )
-    ch_versions = ch_versions.mix(CUSTOM_FINGERPRINTCOMBINE.out.versions.first())
+
+    CUSTOM_FINGERPRINTCORRELATION(
+        CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv
+    )
 
     emit:
     combined_fp_tsv = CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv // channel: [ val(meta), [ bam ] ]
-    versions        = ch_versions                                   // channel: [ versions.yml ]
 }

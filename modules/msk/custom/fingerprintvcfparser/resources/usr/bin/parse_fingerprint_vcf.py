@@ -15,11 +15,12 @@ from pysam import VariantFile    # version >= 0.15.2
 from itertools import groupby
 
 def usage():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(prog='parse_fingerprint_vcf.py')
     parser.add_argument('--input','-i', help = 'input file', required = True)
     parser.add_argument('--samplename','-n', help = 'sample name', required = True)
     parser.add_argument('--output','-o', help = 'output file', required = True)
     parser.add_argument('--depth-filter','-d', default = 20, type = int, help = 'minimum read depth for outputting a minor allele frequency [default = 20]')
+    parser.add_argument('--version','-v',action='version',version='%(prog)s ' + __version__, help="Show program's version number and exit.")
     return parser.parse_args()
 
 def main():

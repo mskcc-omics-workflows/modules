@@ -11,8 +11,8 @@ process CUSTOM_FINGERPRINTVCFPARSER {
     tuple val(meta), path(vcf)
 
     output:
-    tuple val(meta), path("${prefix}.fp.tsv"), emit: tsv
-    path "versions.yml"           , emit: versions
+    tuple val(meta), path("${prefix}.fp.tsv")                                                                          , emit: tsv
+    tuple val("${task.process}"), val('parse_fingerprint_vcf.py'), eval('parse_fingerprint_vcf.py -v | cut -f 2 -d" "'), emit: versions_fingerprintvcfparser, topic: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -27,10 +27,6 @@ process CUSTOM_FINGERPRINTVCFPARSER {
         --samplename ${prefix} \\
         $args
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        parse_fingerprint_vcf.py: 0.1.0
-    END_VERSIONS
     """
 
     stub:
@@ -41,9 +37,5 @@ process CUSTOM_FINGERPRINTVCFPARSER {
 
     touch ${prefix}.fp.tsv
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        parse_fingerprint_vcf.py: 0.1.0
-    END_VERSIONS
     """
 }

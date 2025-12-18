@@ -12,6 +12,7 @@ nextflow_workflow {
     tag "gbcms"
     tag "custom/fingerprintvcfparser"
     tag "custom/fingerprintcombine"
+    tag "custom/fingerprintcorrelation"
 
 
     test("sarscov2 - bam - single_end") {

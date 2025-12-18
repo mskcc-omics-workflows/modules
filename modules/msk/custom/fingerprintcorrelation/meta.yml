@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_fingerprintcorrelation"
+description: null
+keywords:
+  - sort
+  - example
+  - genomics
+tools:
+  - "custom":
+      description: ""
+      homepage: ""
+      documentation: ""
+      tool_dev_url: ""
+      doi: ""
+      licence: null
+      identifier: null
+
+input:
+  - - meta: {}
+    - combined_fp_tsv: {}
+output:
+  heatmap_pdf:
+    - - meta: {}
+      - "*_gbcm_sample-to-sample4.pdf": {}
+  heatmap_html:
+    - - meta: {}
+      - "*_interactive4.html": {}
+  observations_tab:
+    - - meta: {}
+      - "*_observations.tab": {}
+  versions_fingerprintcorrelation:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - plot_gbcm.R: {}
+      - 0.1.0: {}
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - plot_gbcm.R:
+          type: string
+          description: The name of the tool
+      - 0.1.0:
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"
