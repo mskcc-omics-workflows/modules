@@ -1,5 +1,3 @@
-include { NEOANTIGENUTILS_GENERATEHLASTRING  } from '../../../modules/msk/neoantigenutils/generatehlastring/main'
-include { NEOANTIGENUTILS_GENERATEMUTFASTA  } from '../../../modules/msk/neoantigenutils/generatemutfasta/main'
 include { NETMHCPAN4 } from '../../../modules/msk/netmhcpan4/main'
 include { NETMHC3 } from '../../../modules/msk/netmhc3/main'
 include { NETMHCSTABPAN } from '../../../modules/msk/netmhcstabpan/main'
