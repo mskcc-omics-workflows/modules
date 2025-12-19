@@ -22,19 +22,19 @@ workflow NETMHCSTABANDPAN {
 
     merged_pan_and_stab = Channel.empty()
 
-    merged_pan_and_stab.mix( NETMHCSTABPAN.out.netmhcstabpanoutput )
+    merged_pan_and_stab = merged_pan_and_stab.mix( NETMHCSTABPAN.out.netmhcstabpanoutput )
 
     if ( params.netmhc3 ) {
 
         NETMHC3( ch_netmhcinput )
         ch_versions = ch_versions.mix(NETMHC3.out.versions)
-        merged_pan_and_stab.mix(NETMHC3.out.netmhcoutput)
+        merged_pan_and_stab = merged_pan_and_stab.mix(NETMHC3.out.netmhcoutput)
     }
     else{
 
         NETMHCPAN4( ch_netmhcinput )
         ch_versions = ch_versions.mix(NETMHCPAN4.out.versions)
-        merged_pan_and_stab.mix(NETMHCPAN4.out.netmhcpanoutput)
+        merged_pan_and_stab = merged_pan_and_stab.mix(NETMHCPAN4.out.netmhcpanoutput)
     }
 
     NEOANTIGENUTILS_FORMATNETMHCPAN( merged_pan_and_stab )

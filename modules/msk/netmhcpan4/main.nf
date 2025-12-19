@@ -66,8 +66,8 @@ process NETMHCPAN4 {
     output_meta.fromStab = false
     output_meta.typePan = true
     """
-    touch ${prefix}.MUT.xls
-    touch ${prefix}.MUT.netmhcpan.output
+    touch ${prefix}.${inputType}.xls
+    touch ${prefix}.${inputType}.netmhcpan.output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

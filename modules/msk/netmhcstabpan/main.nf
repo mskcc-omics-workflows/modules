@@ -66,7 +66,7 @@ process NETMHCSTABPAN {
     def NETMHCSTABPAN_VERSION = "1.0"
 
     """
-    touch ${prefix}.MUT.netmhcstabpan.output
+    touch ${prefix}.${inputType}.netmhcstabpan.output
 
 
     cat <<-END_VERSIONS > versions.yml

@@ -37,7 +37,15 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
                 }
             )
         }
@@ -69,7 +77,15 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
                 }
             )
         }
@@ -99,7 +115,11 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name
+                                  ).match()
                 }
             )
         }
@@ -131,11 +151,16 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name
+                                  ).match()
                 }
             )
         }
     }
+
 
     test("netmhcstabandpan - fa,hla_str - tsv - stub") {
 
@@ -163,7 +188,58 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1][1]).name).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
+                }
+
+            )
+        }
+    }
+
+    test("netmhcstabandnetmhc3 - fa,hla_str - tsv - stub") {
+
+        options "-stub"
+
+        config "./nextflow.config"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sequence_fa', checkIfExists: false),
+                    file('WT_sequence_fa', checkIfExists: false),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    ])
+
+                input[1] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sv_fa', checkIfExists: false),
+                    file('WT_sv_fa', checkIfExists: false)
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
                 }
 
             )

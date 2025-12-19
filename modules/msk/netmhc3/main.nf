@@ -66,8 +66,8 @@ process NETMHC3 {
     output_meta.fromStab = false
     output_meta.typePan = false
     """
-    touch ${prefix}.MUT.netmhc.output
-    touch ${prefix}.MUT.xls
+    touch ${prefix}.${inputType}.netmhc.output
+    touch ${prefix}.${inputType}.xls
     touch ${prefix}.hla_accepted.txt
     touch ${prefix}.hla_rejected.txt
 
