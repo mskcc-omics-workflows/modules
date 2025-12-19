@@ -61,6 +61,7 @@ title = paste("Patient:", sample,"; ", nrow(all_fp_gbcm_final)," Loci used",sep 
 
 all_fp_gbcm_final_matrix <- data.matrix(all_fp_gbcm_final)
 all_fp_gbcm_final_matrix = cor(as.matrix(all_fp_gbcm_final_matrix), method = c("pearson"), use = "pairwise.complete.obs")
+write.table(all_fp_gbcm_final_matrix, paste(outdir,"/",sample,'_correlations.tab', sep = ''), sep = '\t',quote=F)
 
 gbcm_data_long <- reshape2::melt(all_fp_gbcm_final_matrix)
 gbcm_observation = crossprod(!is.na(all_fp_gbcm_final))

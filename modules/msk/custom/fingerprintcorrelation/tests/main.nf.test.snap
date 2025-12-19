@@ -6,6 +6,14 @@
                     {
                         "id": "thispool"
                     },
+                    "thispool_correlations.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "thispool"
+                    },
                     "thispool_observations.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
                 ]
             ],
@@ -21,10 +29,18 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-17T12:40:10.210681589"
+        "timestamp": "2025-12-18T20:20:30.919363465"
     },
     "sarscov2 - bam": {
         "content": [
+            [
+                [
+                    {
+                        "id": null
+                    },
+                    "batch_correlations.tab:md5,4622cb8a7eff25e7bbd28ed23b74b239"
+                ]
+            ],
             [
                 [
                     {
@@ -45,6 +61,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-17T12:40:03.812030372"
+        "timestamp": "2025-12-18T20:20:24.501583538"
     }
 }

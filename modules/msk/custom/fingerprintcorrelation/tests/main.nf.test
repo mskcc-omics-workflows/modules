@@ -74,6 +74,7 @@ nextflow_process {
             assert process.success
             assertAll(
                 { assert snapshot(
+                    process.out.correlations_tab,
                     process.out.observations_tab,
                     process.out.versions_fingerprintcorrelation
                 ).match() }
@@ -98,6 +99,7 @@ nextflow_process {
             assert process.success
             assertAll(
                 { assert snapshot(
+                    process.out.correlations_tab,
                     process.out.observations_tab,
                     process.out.versions_fingerprintcorrelation
                 ).match() }

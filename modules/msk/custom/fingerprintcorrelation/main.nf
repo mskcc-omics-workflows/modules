@@ -12,9 +12,10 @@ process CUSTOM_FINGERPRINTCORRELATION {
     tuple val(meta), path(combined_fp_tsv)
 
     output:
-    tuple val(meta), path("*_gbcm_sample-to-sample4.pdf"), emit: heatmap_pdf
-    tuple val(meta), path("*_interactive4.html"), emit: heatmap_html
-    tuple val(meta), path("*_observations.tab"), emit: observations_tab
+    tuple val(meta), path("*_gbcm_sample-to-sample4.pdf")                          , emit: heatmap_pdf
+    tuple val(meta), path("*_interactive4.html")                                   , emit: heatmap_html
+    tuple val(meta), path("*_observations.tab")                                    , emit: observations_tab
+    tuple val(meta), path("*_correlations.tab")                                    , emit: correlations_tab
     tuple val("${task.process}"), val('plot_gbcm.R'), val("0.1.0"), topic: versions, emit: versions_fingerprintcorrelation
 
     when:
@@ -37,5 +38,6 @@ process CUSTOM_FINGERPRINTCORRELATION {
     touch ${prefix}_gbcm_sample-to-sample4.pdf
     touch ${prefix}_interactive4.html
     touch ${prefix}_observations.tab
+    touch ${prefix}_correlations.tab
     """
 }
