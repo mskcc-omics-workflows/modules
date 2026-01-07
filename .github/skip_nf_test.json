@@ -29,7 +29,11 @@
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
         "subworkflows/msk/genome_nexus",
-        "modules/msk/oncokb/mafannotate"
+        "modules/msk/oncokb/mafannotate",
+        "subworkflows/msk/neoantigen_editing",
+        "subworkflows/msk/netmhcstabandpan",
+        "subworkflows/msk/phylowgs",
+        "subworkflows/msk/traceback"
     ],
     "docker": [
     ],
