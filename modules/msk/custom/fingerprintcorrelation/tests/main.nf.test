@@ -55,7 +55,7 @@ nextflow_process {
                     input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
                         .map{ meta, tsv ->
                             def meta2 = [id:meta.pool]
-                            [[id:meta.pool], tsv, meta.id, "hg19"]
+                            [[id:meta.pool], tsv, meta.id, "hg19", "default"]
                         }.groupTuple(by:[0])
                     input[1] = file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)
                     """

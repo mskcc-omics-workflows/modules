@@ -39,7 +39,7 @@
                         {
                             "id": "defaultbatch"
                         },
-                        "0DPfilter_ALL_FP.txt:md5,21ecaf823768ac5d6787fa6a6b2aca37"
+                        "0DPfilter_ALL_FP.txt:md5,2b376a207fd1bd6bec55fa765e3a3947"
                     ]
                 ],
                 "combined_fp_tsv": [
@@ -47,7 +47,7 @@
                         {
                             "id": "defaultbatch"
                         },
-                        "0DPfilter_ALL_FP.txt:md5,21ecaf823768ac5d6787fa6a6b2aca37"
+                        "0DPfilter_ALL_FP.txt:md5,2b376a207fd1bd6bec55fa765e3a3947"
                     ]
                 ],
                 "contamination_tsv": [
@@ -88,6 +88,6 @@
             "nf-test": "0.9.3",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2025-12-17T13:30:35.667469411"
+        "timestamp": "2026-01-08T23:23:53.894051098"
     }
 }
