@@ -49,7 +49,7 @@ hg19_hg38_mapper$Loci_hg38 = paste(hg19_hg38_mapper$GRCH38_CHROM,hg19_hg38_mappe
 hg19_hg38_mapper = hg19_hg38_mapper %>% select(Loci_hg19, Loci_hg38) %>% unique()
 
 message("Loading Samples")
-input_table = fread(args$input_table, header = T) %>% arrange(sample_id)
+input_table = fread(args$input_table, header = T) %>% arrange(group, sample_id)
 for (i in 1:nrow(input_table)){
   sample = input_table$sample_id[i]
   genome_build = input_table$genome_build[i]
@@ -103,6 +103,7 @@ if (!dir.exists(args$analysis_folder)) {
 
 message(paste("Output file: ", args$analysis_folder,"/",args$depth_filter,"DPfilter_ALL_FP.txt", sep=""))
 
+all_fp_gbcm_final <- apply(all_fp_gbcm_final,2,as.character)
 write.table(all_fp_gbcm_final, file = paste(args$analysis_folder,"/",args$depth_filter,"DPfilter_ALL_FP.txt", sep=""), append = F, sep = "\t", row.names = F, quote = F)
 
 message("FP file completed")

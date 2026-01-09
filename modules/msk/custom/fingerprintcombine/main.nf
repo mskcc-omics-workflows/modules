@@ -10,7 +10,7 @@ process CUSTOM_FINGERPRINTCOMBINE {
 
 
     input:
-    tuple val(meta), path(fp_tsv), val(sample), val(genome_build)
+    tuple val(meta), path(fp_tsv), val(sample), val(genome_build), val(group)
     path(liftover_loci_mapping)
 
     output:
@@ -26,15 +26,18 @@ process CUSTOM_FINGERPRINTCOMBINE {
     declare -a fp_tsv_list
     declare -a sample_list
     declare -a genome_build_list
+    declare -a group_list
     fp_tsv_list=(${fp_tsv.join(' ')})
     sample_list=(${sample.join(' ')})
     genome_build_list=(${genome_build.join(' ')})
-    echo -e "sample_id\tgenome_build\tfp_tsv" > input.tsv
+    group_list=(${group.join(' ')})
+    echo -e "sample_id\tgenome_build\tfp_tsv\tgroup" > input.tsv
     for i in \$(seq 0 1 \$((\${#fp_tsv_list[@]}-1)) ) ; do
         fp_tsv=\${fp_tsv_list[i]}
         sample=\${sample_list[i]}
         genome=\${genome_build_list[i]}
-        echo -e "\$sample\t\$genome\t\$fp_tsv"
+        group=\${group_list[i]}
+        echo -e "\$sample\t\$genome\t\$fp_tsv\t\$group"
     done >> input.tsv
 
     complete_FP_table.R \\

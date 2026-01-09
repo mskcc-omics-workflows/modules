@@ -17,7 +17,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
                 if (meta.pool) {
                     meta2.id = meta.pool
                 }
-                [meta2, tsv, meta.id, meta.genome ?: default_genome ]
+                [meta2, tsv, meta.id, meta.genome ?: default_genome, meta.group ?: "default" ]
             }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
     )
