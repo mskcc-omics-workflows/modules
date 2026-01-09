@@ -23,7 +23,10 @@ def major_contamination(tumor, depth_filter):
     homozygous = ['AA','CC','GG','TT','A','C','G','T']
     heterozygous = ~tumor_filtered['Genotype'].isin(homozygous)
 
-    return sum(heterozygous)/tumor_filtered.shape[0]
+    try:
+        return sum(heterozygous)/tumor_filtered.shape[0]
+    except Exception as e:
+        return 0
 
 def get_coverage(file, depth_filter):
     #print(file['Alleles'].str.split(' ', expand=True))
