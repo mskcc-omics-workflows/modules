@@ -53,6 +53,8 @@
 * [netmhcpan4](modules/netmhcpan4.md)
 * [calculatenoise](modules/calculatenoise.md)
   calculatenoise
+fgbio/collectduplexseqmetrics
+
 
 ## Subworkflows
 
