@@ -55,7 +55,6 @@
 genomenexus/annotationpipeline
 fgbio/collectduplexseqmetrics
 
-
 ## Subworkflows
 
 * [traceback](subworkflows/traceback.md)
