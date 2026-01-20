@@ -123,8 +123,12 @@ jobs:
         id: replace_slash
         run: |
           FRAGMENT="${{ env.SW_NAME }}"
-          MD_PATH="${FRAGMENT}"   # keep subfolders for output file
-          MD_NAME="${MD_PATH}"    # <-- key change: preserve nested folder for display text
+          DIR="$(dirname "$FRAGMENT")"
+          BASE="$(basename "$FRAGMENT")"
+
+          MD_PATH="${DIR}/${DIR}_${BASE}"
+          MD_NAME="${FRAGMENT}"
+
           echo "MD_PATH=$MD_PATH" >> $GITHUB_ENV
           echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
       - uses: EndBug/add-and-commit@v9
@@ -191,7 +195,7 @@ jobs:
       - name: Add to SUMMARY for new features
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_PATH }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "[${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_PATH }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - name: Check for changes
         run: |

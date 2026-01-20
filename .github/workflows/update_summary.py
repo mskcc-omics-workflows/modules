@@ -1,6 +1,23 @@
 import sys
 from collections import defaultdict
 
+def build_module_entry(module_id: str):
+    """
+    module_id: fgbio/collectduplexseqmetrics
+    """
+    if "/" in module_id:
+        namespace, name = module_id.split("/", 1)
+        path = f"modules/{namespace}/{namespace}_{name}.md"
+        display = name
+        parent = namespace
+    else:
+        path = f"modules/{module_id}.md"
+        display = module_id
+        parent = None
+
+    entry = f"* [{display}]({path})"
+    return entry, parent
+
 
 def update_summary_old(origin: str, new_feature: str, feature_type: str):
     out_summary = ""
@@ -32,36 +49,39 @@ def load_summary_file(origin: str):
 
 
 def add_new_feature(sections: dict, new_feature: str, feature_type: str):
-    new_list = []
-    found = False
     if feature_type == "module":
-        if new_feature.replace("\\", "") in [line.strip().replace("\\", "") for line in sections["Modules"]]:
+        entry, parent = build_module_entry(new_feature)
+
+        # Avoid duplicates (exact match)
+        existing = [line.strip() for line in sections["Modules"]]
+        if entry in existing or f"  {entry}" in existing:
             return sections
 
-        full_name = new_feature.split("]")[0].replace("* [", "").strip()
-
-        if "/" in full_name:
-            new_feature_category, display_name = full_name.split("/", 1)
-            new_feature = new_feature.replace(full_name, display_name)
-        else:
-            new_feature_category = full_name
+        new_list = []
+        inserted = False
 
         for line in sections["Modules"]:
             new_list.append(line)
-            if f"[{new_feature_category}]" in line:
-                found = True
-                new_list.append(f"  {new_feature}\n")  # two spaces indent for submodules
 
-        if not found and "/" in full_name:
-            parent_name = new_feature_category
-            parent_line = f"* [{parent_name}](modules/{parent_name}/README.md)"
-            new_list.append(parent_line + "\n")
-            new_list.append(f"  {new_feature}\n")
+            if parent and not inserted and line.startswith(f"* [{parent}]("):
+                new_list.append(f"  {entry}\n")
+                inserted = True
+
+        # Parent section doesn't exist yet
+        if parent and not inserted:
+            new_list.append(f"* [{parent}](modules/{parent}/README.md)\n")
+            new_list.append(f"  {entry}\n")
+
+        # Top-level module (no namespace)
+        if not parent:
+            new_list.append(entry + "\n")
 
         sections["Modules"] = new_list
 
-    if feature_type == "subworkflow" and new_feature not in sections["Subworkflows"]:
-        sections["Subworkflows"].append(new_feature + "\n")
+    elif feature_type == "subworkflow":
+        if new_feature + "\n" not in sections["Subworkflows"]:
+            sections["Subworkflows"].append(new_feature + "\n")
+
     return sections
 
 
