@@ -53,6 +53,8 @@
 * [netmhcpan4](modules/netmhcpan4.md)
 * [calculatenoise](modules/calculatenoise.md)
 * [fgbio\_collectduplexseqmetrics](modules/fgbio_collectduplexseqmetrics.md)
+* [genomenexus/annotationpipeline](modules/genomenexus/annotationpipeline.md)
+
 
 ## Subworkflows
 
@@ -61,3 +63,4 @@
 * [netmhcstabandpan](subworkflows/netmhcstabandpan.md)
 * [phylowgs](subworkflows/phylowgs.md)
 * [neoantigen\_editing](subworkflows/neoantigen_editing.md)
+
