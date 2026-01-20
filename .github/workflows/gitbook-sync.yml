@@ -47,12 +47,10 @@ jobs:
           fetch-depth: 2 # To retrieve the preceding commit.
 
       - name: Combine all tags.yml files
-        id: get_tags
         run: |
           echo "{}" > .github/tags.yml
 
           for f in $(find . -name "tags.yml" -not -path "./.github/*"); do
-            # Determine feature type from path
             if [[ "$f" == *"/modules/"* ]]; then
               PREFIX="modules"
             elif [[ "$f" == *"/subworkflows/"* ]]; then
@@ -62,15 +60,13 @@ jobs:
               exit 1
             fi
 
-            # Rewrite keys to be namespaced
             yq eval "
               with_entries(
                 .key = \"${PREFIX}/\" + .key
               )
             " "$f" > /tmp/tags.prefixed.yml
 
-            # Merge into final tags.yml
-            yq eval-all '. as \$item ireduce ({}; . *+ \$item)' \
+            yq eval-all '. as $item ireduce ({}; . *+ $item)' \
               .github/tags.yml /tmp/tags.prefixed.yml > /tmp/tags.merged.yml
 
             mv /tmp/tags.merged.yml .github/tags.yml
