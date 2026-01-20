@@ -117,7 +117,7 @@ jobs:
         run: |
           MATRIX_FRAGMENT="${{ matrix.tags }}"
           TEMP_NAME=$(echo $MATRIX_FRAGMENT | sed 's/subworkflows\///g')
-          SW_NAME=$(echo $TEMP_NAME | sed 's/modules\///g')
+          SW_NAME=$(echo $TEMP_NAME | sed 's/modules\///g' | sed 's/\//\//')
           echo "SW_NAME=$SW_NAME" >> $GITHUB_ENV
       - name: Rename md file
         id: replace_slash

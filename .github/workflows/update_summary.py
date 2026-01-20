@@ -15,7 +15,6 @@ def build_module_entry(module_id: str):
     entry = f"* [{display}]({path})"
     return entry, parent
 
-
 def update_summary_old(origin: str, new_feature: str, feature_type: str):
     out_summary = ""
     with open(origin, 'r') as f:
@@ -48,8 +47,6 @@ def load_summary_file(origin: str):
 def add_new_feature(sections: dict, new_feature: str, feature_type: str):
     if feature_type == "module":
         entry, parent = build_module_entry(new_feature)
-
-        # Avoid duplicates (exact match)
         existing = [line.strip() for line in sections["Modules"]]
         if entry in existing or f"  {entry}" in existing:
             return sections
@@ -59,17 +56,14 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
 
         for line in sections["Modules"]:
             new_list.append(line)
-
-            if parent and not inserted:
-                new_list.append(f"* [{parent}](modules/{parent}/README.md)\n")
+            if parent and not inserted and line.startswith(f"* [{parent}]("):
                 new_list.append(f"  {entry}\n")
+                inserted = True
 
-        # Parent section doesn't exist yet
         if parent and not inserted:
             new_list.append(f"* [{parent}](modules/{parent}/README.md)\n")
             new_list.append(f"  {entry}\n")
 
-        # Top-level module (no namespace)
         if not parent:
             new_list.append(entry + "\n")
 
@@ -80,7 +74,6 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
             sections["Subworkflows"].append(new_feature + "\n")
 
     return sections
-
 
 def rebuild_summary(origin: str, new_feature: str, feature_type: str):
     # Load current summary file to dictionary
