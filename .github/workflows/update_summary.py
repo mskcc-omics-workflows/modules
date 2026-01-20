@@ -49,9 +49,15 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
             if f"[{new_feature_category}]" in line:
                 found = True
                 new_list.append(f"  {new_feature}\n")  # two spaces indent for submodules
-        if not found:
-            # If no parent exists, add at the end
-            new_list.append(new_feature + "\n\n")
+            if not found:
+                # If no parent exists, add parent + new feature at the end
+                if "/" in new_feature:
+                    parent_name = new_feature.split("]")[0].split("/")[0].replace("* [", "").strip()
+                    parent_line = f"* [{parent_name}](modules/{parent_name}/README.md)"
+                    new_list.append(parent_line + "\n")
+                    new_list.append(f"  {new_feature}\n")
+                else:
+                    new_list.append(new_feature + "\n\n")
         sections["Modules"] = new_list
 
     if feature_type == "subworkflow" and new_feature not in sections["Subworkflows"]:
