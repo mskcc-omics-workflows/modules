@@ -198,3 +198,6 @@ jobs:
           message: "add doc for ${{ matrix.tags }}"
           add: '["*/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
+          pull: "--rebase"
+          push: true
+
