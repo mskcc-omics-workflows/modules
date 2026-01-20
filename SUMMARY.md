@@ -55,7 +55,6 @@
 * [fgbio\_collectduplexseqmetrics](modules/fgbio_collectduplexseqmetrics.md)
 * [genomenexus/annotationpipeline](modules/genomenexus/annotationpipeline.md)
 
-
 ## Subworkflows
 
 * [traceback](subworkflows/traceback.md)
