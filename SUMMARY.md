@@ -54,6 +54,8 @@
 * [calculatenoise](modules/calculatenoise.md)
 * [fgbio\_collectduplexseqmetrics](modules/fgbio_collectduplexseqmetrics.md)
 * [genomenexus/annotationpipeline](modules/genomenexus/annotationpipeline.md)
+* [fgbio/collectduplexseqmetrics](modules/fgbio/collectduplexseqmetrics.md)
+
 
 ## Subworkflows
 
