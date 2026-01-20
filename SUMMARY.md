@@ -52,9 +52,6 @@
 * [netmhc3](modules/netmhc3.md)
 * [netmhcpan4](modules/netmhcpan4.md)
 * [calculatenoise](modules/calculatenoise.md)
-* [fgbio/collectduplexseqmetrics](modules/fgbio/collectduplexseqmetrics.md)
-[genomenexus/annotationpipeline](modules/genomenexus/genomenexus_annotationpipeline.md)
-  genomenexus/annotationpipeline
 
 ## Subworkflows
 
