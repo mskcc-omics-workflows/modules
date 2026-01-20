@@ -191,8 +191,6 @@ jobs:
           if git diff --quiet; then
             echo "NO_CHANGES=true" >> $GITHUB_ENV
           fi
-      - name: Stage all changes
-        run: git add -A
       - uses: EndBug/add-and-commit@v9
         if: env.NO_CHANGES != 'true'
         with:
@@ -200,5 +198,4 @@ jobs:
           message: "add doc for ${{ matrix.tags }}"
           add: '["*/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
-          pull: "--rebase"
-          push: true
+          push: --force
