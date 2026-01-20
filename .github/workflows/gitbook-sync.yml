@@ -198,11 +198,14 @@ jobs:
           if git diff --quiet; then
             echo "NO_CHANGES=true" >> $GITHUB_ENV
           fi
+      - name: Stage new files
+        run: |
+          git add "./${{ env.FEATURE_TYPE }}/${{ env.MD_PATH }}.md"
+          git add SUMMARY.md
       - uses: EndBug/add-and-commit@v9
-        if: env.NO_CHANGES != 'true'
         with:
           default_author: github_actions
           message: "add doc for ${{ matrix.tags }}"
-          add: '["**/*.md", "SUMMARY.md"]'
+          add: '["*/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
           push: --force
