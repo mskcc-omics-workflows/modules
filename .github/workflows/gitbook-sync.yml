@@ -206,7 +206,7 @@ jobs:
             ${{ env.SUBWORKFLOW }}
       - name: Add to SUMMARY for new features
         run: |
-          curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
+          cp .github/workflows/update_summary.py /home/runner/work/modules/modules/update_summary.py
           python ${{ github.workspace }}/update_summary.py SUMMARY.md "${{ env.SW_NAME }}" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - name: Check for changes
