@@ -38,14 +38,13 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
         if new_feature.replace("\\", "") in [line.strip().replace("\\", "") for line in sections["Modules"]]:
             return sections
 
-        # Use folder as category (first part before /)
-        if "/" in new_feature:
-            new_feature_category = (new_feature.split("]")[0]
-                            .replace("* [", "")
-                            .rsplit("/", 1)[0]
-                            .strip())
+        full_name = new_feature.split("]")[0].replace("* [", "").strip()
+
+        if "/" in full_name:
+            new_feature_category, display_name = full_name.split("/", 1)
+            new_feature = new_feature.replace(full_name, display_name)
         else:
-            new_feature_category = new_feature.split("]")[0].split("_")[0].replace("* [", "").strip()
+            new_feature_category = full_name
 
         for line in sections["Modules"]:
             new_list.append(line)
@@ -53,14 +52,11 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
                 found = True
                 new_list.append(f"  {new_feature}\n")  # two spaces indent for submodules
 
-        if not found:
-            if "/" in new_feature:
-                parent_name = new_feature.split("]")[0].split("/")[0].replace("* [", "").strip()
-                parent_line = f"* [{parent_name}](modules/{parent_name}/README.md)"
-                new_list.append(parent_line + "\n")
-                new_list.append(f"  {new_feature}\n")
-            else:
-                new_list.append(new_feature + "\n\n")
+        if not found and "/" in full_name:
+            parent_name = new_feature_category
+            parent_line = f"* [{parent_name}](modules/{parent_name}/README.md)"
+            new_list.append(parent_line + "\n")
+            new_list.append(f"  {new_feature}\n")
 
         sections["Modules"] = new_list
 
