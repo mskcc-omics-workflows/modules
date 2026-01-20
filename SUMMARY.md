@@ -54,7 +54,6 @@
 * [calculatenoise](modules/calculatenoise.md)
 * [fgbio/collectduplexseqmetrics](modules/fgbio/collectduplexseqmetrics.md)
 
-
 ## Subworkflows
 
 * [traceback](subworkflows/traceback.md)
