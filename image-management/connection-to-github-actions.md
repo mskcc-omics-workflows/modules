@@ -65,8 +65,7 @@ jobs:
           jf rt build-publish
 ```
 
-* In your Github repository, under the Actions tab you should see a workflow run\
-
+* In your Github repository, under the Actions tab you should see a workflow run<br>
 
 
 

@@ -6,7 +6,7 @@ The [mskcc-omics-workflows/modules](https://github.com/mskcc-omics-workflows/mod
 
 If you would like to contribute a component to the mskcc-omics-workflows/modules repository, please refer to our documentation on [Contributing](contributing.md).
 
-If you are developing a pipeline, please see the documentation on our available [Modules](broken-reference) and [Subworkflows](broken-reference), and refer to our documentation for [Pipeline Development](pipeline-development.md).
+If you are developing a pipeline, please see the documentation on our available [Modules](/broken/pages/9Tmu3IQJPkhggI89UboS) and [Subworkflows](/broken/pages/c27EaXDS5pgsVcY793qO), and refer to our documentation for [Pipeline Development](pipeline-development.md).
 
 ### Software Requirements
 
