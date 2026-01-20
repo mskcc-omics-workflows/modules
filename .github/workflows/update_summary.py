@@ -40,7 +40,10 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
 
         # Use folder as category (first part before /)
         if "/" in new_feature:
-            new_feature_category = new_feature.split("]")[0].split("/")[0].replace("* [", "").strip()
+            new_feature_category = (new_feature.split("]")[0]
+                            .replace("* [", "")
+                            .rsplit("/", 1)[0]
+                            .strip())
         else:
             new_feature_category = new_feature.split("]")[0].split("_")[0].replace("* [", "").strip()
 
