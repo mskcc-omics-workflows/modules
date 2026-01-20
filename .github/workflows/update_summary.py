@@ -2,17 +2,14 @@ import sys
 from collections import defaultdict
 
 def build_module_entry(module_id: str):
-    """
-    module_id: fgbio/collectduplexseqmetrics
-    """
     if "/" in module_id:
         namespace, name = module_id.split("/", 1)
+        display = f"{namespace}_{name}"
         path = f"modules/{namespace}/{namespace}_{name}.md"
-        display = name
         parent = namespace
     else:
-        path = f"modules/{module_id}.md"
         display = module_id
+        path = f"modules/{module_id}.md"
         parent = None
 
     entry = f"* [{display}]({path})"

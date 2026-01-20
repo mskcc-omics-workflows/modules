@@ -137,6 +137,12 @@ jobs:
           message: "pull changes before adding doc for ${{ matrix.tags }}"
           pull: "--rebase"
           cwd: "./"
+      - name: Ensure output folder exists and debug
+        run: |
+          echo "MD_PATH=${MD_PATH}"
+          echo "Creating folder: ./modules/$(dirname ${MD_PATH})"
+          mkdir -p ./modules/$(dirname ${MD_PATH})
+          ls -la ./modules
       - name: Download convertor from yml to md
         run: |
           curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/yaml_to_md.py
