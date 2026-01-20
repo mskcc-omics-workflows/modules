@@ -11,7 +11,6 @@ def build_module_entry(module_id: str):
         display = module_id
         path = f"modules/{module_id}.md"
         parent = None
-
     entry = f"* [{display}]({path})"
     return entry, parent
 
@@ -31,37 +30,33 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
     if feature_type == "module":
         entry, parent = build_module_entry(new_feature)
         module_lines = sections["Modules"]
-        existing_lines = [line.rstrip("\n") for line in module_lines]
 
-        if entry in existing_lines or f"  {entry}" in existing_lines:
+        # Check if entry already exists
+        existing_entries = [line.strip() for line in module_lines]
+        if entry in existing_entries or f"  {entry}" in existing_entries:
             return sections
 
         if parent:
+            # Check if parent already exists
             parent_line = f"* [{parent}](modules/{parent}/README.md)"
-            parent_present = any(line.strip() == parent_line for line in existing_lines)
-            new_module_lines = []
-            inserted = False
-
-            for line in module_lines:
-                new_module_lines.append(line)
-                if parent_present and not inserted and line.strip() == parent_line:
-                    new_module_lines.append(f"  {entry}\n")
-                    inserted = True
-
-            if not parent_present:
-                new_module_lines.append(f"{parent_line}\n")
-                new_module_lines.append(f"  {entry}\n")
-
-            sections["Modules"] = new_module_lines
-
+            parent_indices = [i for i, line in enumerate(module_lines) if line.strip() == parent_line]
+            if parent_indices:
+                # Insert under existing parent
+                index = parent_indices[-1] + 1
+                module_lines.insert(index, f"  {entry}")
+            else:
+                # Add parent at end if missing, then child
+                module_lines.append(parent_line)
+                module_lines.append(f"  {entry}")
         else:
-            module_lines.append(f"{entry}\n")
-            sections["Modules"] = module_lines
+            module_lines.append(entry)
+
+        sections["Modules"] = module_lines
 
     elif feature_type == "subworkflow":
-        if new_feature + "\n" not in sections["Subworkflows"]:
-            sections["Subworkflows"].append(new_feature + "\n")
-
+        if new_feature not in sections["Subworkflows"]:
+            sections["Subworkflows"].append(new_feature)
+    return sections
 
 def rebuild_summary(origin: str, new_feature: str, feature_type: str):
     sections = load_summary_file(origin)
@@ -76,7 +71,6 @@ def rebuild_summary(origin: str, new_feature: str, feature_type: str):
     out_summary += "\n## Subworkflows\n\n"
     for line in sections["Subworkflows"]:
         out_summary += f"{line}\n"
-
     return out_summary
 
 if __name__ == "__main__":
