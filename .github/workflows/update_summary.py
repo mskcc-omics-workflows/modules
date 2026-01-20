@@ -35,24 +35,26 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
     new_list = []
     found = False
     if feature_type == "module":
-        # Check if the new feature is already in current summary file
         if new_feature.replace("\\", "") in [line.strip().replace("\\", "") for line in sections["Modules"]]:
             return sections
-        # Get module name from [] and remove the _ part.
-        # Check if the first part of the module name exists
-        new_feature_category = new_feature.split("]")[0].split("_")[0].replace("* [", "").replace("\\", "").strip()
+
+        # Use folder as category (first part before /)
+        if "/" in new_feature:
+            new_feature_category = new_feature.split("]")[0].split("/")[0].replace("* [", "").strip()
+        else:
+            new_feature_category = new_feature.split("]")[0].split("_")[0].replace("* [", "").strip()
+
         for line in sections["Modules"]:
             new_list.append(line)
             if f"[{new_feature_category}]" in line:
                 found = True
-                new_list.append(f"  {new_feature}\n")
+                new_list.append(f"  {new_feature}\n")  # two spaces indent for submodules
         if not found:
-            # If not found, put the new feature to the last
+            # If no parent exists, add at the end
             new_list.append(new_feature + "\n\n")
         sections["Modules"] = new_list
 
     if feature_type == "subworkflow" and new_feature not in sections["Subworkflows"]:
-        # There is no subset of subworkflow, so put the new feature to the last
         sections["Subworkflows"].append(new_feature + "\n")
     return sections
 
