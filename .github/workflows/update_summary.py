@@ -15,87 +15,69 @@ def build_module_entry(module_id: str):
     entry = f"* [{display}]({path})"
     return entry, parent
 
-def update_summary_old(origin: str, new_feature: str, feature_type: str):
-    out_summary = ""
-    with open(origin, 'r') as f:
-        for line in f.readlines():
-            if feature_type == "module" and line.startswith("## Subworkflows") and new_feature not in out_summary:
-                out_summary += new_feature + '\n\n'
-            if line.strip():
-                out_summary += line
-    if feature_type == "subworkflow" and new_feature not in out_summary:
-        out_summary += new_feature
-    return out_summary
-
-
 def load_summary_file(origin: str):
-    # Read the summary file to dict
-    # keys, "Table of contents", "Modules", "Subworkflows"
-    # values are list of lines
     sections = defaultdict(list)
     current_section = None
-    with open(origin, "r") as file_read:
-        for row in file_read:
+    with open(origin, "r") as f:
+        for row in f:
             if row.startswith("#"):
                 current_section = row.replace("#", "").strip()
                 continue
             if row.strip():
-                sections[current_section].append(row)
+                sections[current_section].append(row.rstrip("\n"))
     return sections
-
 
 def add_new_feature(sections: dict, new_feature: str, feature_type: str):
     if feature_type == "module":
         entry, parent = build_module_entry(new_feature)
-        existing = [line.strip() for line in sections["Modules"]]
+        existing = sections["Modules"]
 
-        if entry in existing or f"  {entry}" in existing:
+        parent_header = f"* [{parent}](modules/{parent}/README.md)" if parent else None
+        child_entry = f"  {entry}" if parent else entry
+
+        parent_exists = parent and any(line.strip() == parent_header for line in existing)
+        child_exists = any(line.strip() == child_entry.strip() for line in existing)
+
+        if child_exists:
             return sections
 
         new_list = []
-        parent_exists = any(line.startswith(f"* [{parent}](") for line in existing)
-        inserted = False
-
-        for line in sections["Modules"]:
-            new_list.append(line)
-            if parent and parent_exists and not inserted and line.startswith(f"* [{parent}]("):
-                new_list.append(f"  {entry}\n")
-                inserted = True
-
-        if parent and not parent_exists:
-            new_list.append(f"* [{parent}](modules/{parent}/README.md)\n")
-            new_list.append(f"  {entry}\n")
-
-        if not parent:
-            new_list.append(entry + "\n")
+        if parent:
+            inserted = False
+            for line in existing:
+                new_list.append(line)
+                if not inserted and line.strip() == parent_header:
+                    new_list.append(child_entry)
+                    inserted = True
+            if not parent_exists:
+                new_list.append(parent_header)
+                new_list.append(child_entry)
+        else:
+            new_list = existing + [entry]
 
         sections["Modules"] = new_list
 
     elif feature_type == "subworkflow":
-        if new_feature + "\n" not in sections["Subworkflows"]:
-            sections["Subworkflows"].append(new_feature + "\n")
+        if new_feature not in sections["Subworkflows"]:
+            sections["Subworkflows"].append(new_feature)
 
     return sections
 
-
 def rebuild_summary(origin: str, new_feature: str, feature_type: str):
-    # Load current summary file to dictionary
-    sections = load_summary_file(origin=origin)
-    # Add the new feature to summary file dict
-    updated_sections = add_new_feature(
-        sections=sections, new_feature=new_feature, feature_type=feature_type)
-    # Output the updated summary file to string
-    out_summary = "# Table of contents\n\n"
-    for line in updated_sections["Table of contents"]:
-        out_summary += line
-    out_summary += "\n## Modules\n\n"
-    for line in updated_sections["Modules"]:
-        out_summary += line
-    out_summary += "\n## Subworkflows\n\n"
-    for line in updated_sections["Subworkflows"]:
-        out_summary += line
-    return out_summary
+    sections = load_summary_file(origin)
+    sections = add_new_feature(sections, new_feature, feature_type)
 
+    out_summary = "# Table of contents\n\n"
+    for line in sections["Table of contents"]:
+        out_summary += f"{line}\n"
+    out_summary += "\n## Modules\n\n"
+    for line in sections["Modules"]:
+        out_summary += f"{line}\n"
+    out_summary += "\n## Subworkflows\n\n"
+    for line in sections["Subworkflows"]:
+        out_summary += f"{line}\n"
+
+    return out_summary
 
 if __name__ == "__main__":
     origin_summary = sys.argv[1]
