@@ -143,6 +143,12 @@ jobs:
           echo "Creating folder: ./modules/$(dirname ${MD_PATH})"
           mkdir -p ./modules/$(dirname ${MD_PATH})
           ls -la ./modules
+      - name: Ensure parent README exists
+        run: |
+          DIR="$(dirname "$MD_PATH")"
+          if [ ! -f "./modules/$DIR/README.md" ]; then
+            echo "# $DIR" > "./modules/$DIR/README.md"
+          fi
       - name: Download convertor from yml to md
         run: |
           curl -o ${{ github.workspace }}/yaml_to_md.py https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/yaml_to_md.py

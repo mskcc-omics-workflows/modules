@@ -60,9 +60,9 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
         for line in sections["Modules"]:
             new_list.append(line)
 
-            if parent and not inserted and line.startswith(f"* [{parent}]("):
+            if parent and not inserted:
+                new_list.append(f"* [{parent}](modules/{parent}/README.md)\n")
                 new_list.append(f"  {entry}\n")
-                inserted = True
 
         # Parent section doesn't exist yet
         if parent and not inserted:
