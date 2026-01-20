@@ -52,7 +52,7 @@
 * [netmhc3](modules/netmhc3.md)
 * [netmhcpan4](modules/netmhcpan4.md)
 * [calculatenoise](modules/calculatenoise.md)
-
+  calculatenoise
 
 ## Subworkflows
 
