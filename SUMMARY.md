@@ -11,6 +11,7 @@
 
 * [gbcms](modules/gbcms.md)
 * [genomenexus](modules/genomenexus/README.md)
+  * [genomenexus_annotationpipeline](modules/genomenexus/genomenexus_annotationpipeline.md)
   * [genomenexus\_vcf2maf](modules/genomenexus_vcf2maf.md)
   * [genomenexus\_annotationpipeline](modules/genomenexus/genomenexus_annotationpipeline.md)
   * [genomenexus\_vcf2maf](modules/genomenexus/genomenexus_vcf2maf.md)
@@ -52,7 +53,6 @@
 * [netmhc3](modules/netmhc3.md)
 * [netmhcpan4](modules/netmhcpan4.md)
 * [calculatenoise](modules/calculatenoise.md)
-
 
 ## Subworkflows
 
