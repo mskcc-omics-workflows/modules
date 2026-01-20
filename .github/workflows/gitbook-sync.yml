@@ -123,9 +123,8 @@ jobs:
         id: replace_slash
         run: |
           FRAGMENT="${{ env.SW_NAME }}"
-          MD_NAME=$(echo $FRAGMENT | sed 's/\//_/g')
-          echo "MD_NAME=$MD_NAME" >> $GITHUB_ENV
-          echo "${MD_NAME}"
+          MD_PATH="${FRAGMENT}"   # Keep subfolders
+          echo "MD_PATH=$MD_PATH" >> $GITHUB_ENV
       - uses: EndBug/add-and-commit@v9
         with:
           default_author: github_actions
@@ -180,11 +179,12 @@ jobs:
       - name: Run convertor to generate md file for new module
         run: |
           echo ${{ matrix.tags }}
-          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
+          mkdir -p ./${{ env.FEATURE_TYPE }}/$(dirname $MD_PATH)
+          python ${{ github.workspace }}/yaml_to_md.py all --yaml-file ${{ github.workspace }}/temp.yml --output-file ./${{ env.FEATURE_TYPE }}/${{ env.MD_PATH }}.md --schema-url https://raw.githubusercontent.com/mskcc-omics-workflows/yaml_to_md/0.0.3/nextflow_schema/${{ env.FEATURE_TYPE }}/meta-schema.json ${{ env.SUBWORKFLOW }}
       - name: Add to SUMMARY for new features
         run: |
           curl -o ${{ github.workspace }}/update_summary.py https://raw.githubusercontent.com/mskcc-omics-workflows/modules/develop/.github/workflows/update_summary.py
-          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_NAME }}](${{ env.FEATURE_TYPE }}/${{ env.MD_NAME }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
+          python ${{ github.workspace }}/update_summary.py SUMMARY.md "* [${{ env.MD_PATH }}](${{ env.FEATURE_TYPE }}/${{ env.MD_PATH }}.md)" ${{ env.SUMMARY_TYPE }} > tmp_summary.md
           mv tmp_summary.md SUMMARY.md
       - name: Check for changes
         run: |
@@ -196,6 +196,6 @@ jobs:
         with:
           default_author: github_actions
           message: "add doc for ${{ matrix.tags }}"
-          add: '["*/*.md --force", "SUMMARY.md --force"]'
+          add: '["**/*.md --force", "SUMMARY.md --force"]'
           cwd: "./"
           push: --force
