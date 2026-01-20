@@ -48,19 +48,21 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
     if feature_type == "module":
         entry, parent = build_module_entry(new_feature)
         existing = [line.strip() for line in sections["Modules"]]
+
         if entry in existing or f"  {entry}" in existing:
             return sections
 
         new_list = []
+        parent_exists = any(line.startswith(f"* [{parent}](") for line in existing)
         inserted = False
 
         for line in sections["Modules"]:
             new_list.append(line)
-            if parent and not inserted and line.startswith(f"* [{parent}]("):
+            if parent and parent_exists and not inserted and line.startswith(f"* [{parent}]("):
                 new_list.append(f"  {entry}\n")
                 inserted = True
 
-        if parent and not inserted:
+        if parent and not parent_exists:
             new_list.append(f"* [{parent}](modules/{parent}/README.md)\n")
             new_list.append(f"  {entry}\n")
 
@@ -74,6 +76,7 @@ def add_new_feature(sections: dict, new_feature: str, feature_type: str):
             sections["Subworkflows"].append(new_feature + "\n")
 
     return sections
+
 
 def rebuild_summary(origin: str, new_feature: str, feature_type: str):
     # Load current summary file to dictionary
