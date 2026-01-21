@@ -1,18 +1,19 @@
-name: "calculatenoise"
-description: Performs noise calculation for ACCESSv2 standard BAM files
+name: "fgbio_collectduplexseqmetrics"
+description: Collects a suite of metrics to QC duplex sequencing data.
 keywords:
-  - calculate
-  - noise
-  - ACCESS
+  - duplex
+  - sequencing
+  - genomics
+  - fgbio
 tools:
-  - calculatenoise:
-      description: "Performs noise calculation for ACCESSv2 standard BAM files"
-      homepage: "https://github.com/msk-access/sequence_qc"
-      documentation: "https://github.com/msk-access/sequence_qc"
-      tool_dev_url: "https://github.com/msk-access/sequence_qc"
+  - "fgbio":
+      description: "A set of tools for working with genomic and high throughput sequencing data, including UMIs"
+      homepage: "https://github.com/fulcrumgenomics/fgbio"
+      documentation: "https://github.com/fulcrumgenomics/fgbio"
+      tool_dev_url: "https://github.com/fulcrumgenomics/fgbio"
       doi: "no DOI available"
       licence: ["MIT"]
-      identifier: ""
+      identifier: biotools:fgbio
 
 input:
   - - meta:
@@ -24,114 +25,58 @@ input:
         type: file
         description: SAM/BAM/CRAM file
         pattern: "*.{sam,bam,cram}"
-    - bai:
-        type: file
-        description: Optional SAM/BAM/CRAM file index
-        pattern: "*.{sai,bai,crai}"
-    - target_intervals:
-        type: file
-        description: An interval file that contains the locations of the targets.
-        pattern: "*.{interval_list,bed,bed.gz}"
-  - - fasta:
-        type: file
-        description: Input reference sequence file
-        pattern: "*.fasta"
-  - - fai:
-        type: file
-        description: Index of the reference Fasta
-        pattern: "*.fai"
 
 output:
-  - acgt:
+  - family_sizes:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:test, single_end:false ]
-      - ${prefix}_acgt.tsv:
+      - ${prefix}.family_sizes.txt:
           type: map
-          description: noise metrics
-          pattern: "*_acgt.tsv"
-  - substitution:
+          description: Metrics on the frequency of different types of families of different sizes.
+          pattern: "*.family_sizes.txt"
+  - duplex_family_sizes:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:test, single_end:false ]
-      - "*_substitution.tsv":
+      - ${prefix}.duplex_family_sizes.txt:
           type: file
-          description: noise metrics
-          pattern: "*_substitution.tsv"
-  - bytlen:
+          description: Metrics on the frequency of duplex tag families by the number of observations from each strand.
+          pattern: "*.duplex_family_sizes.txt"
+  - duplex_yield_metrics:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:test, single_end:false ]
-      - "*_by_tlen.tsv":
+      - ${prefix}.duplex_yield_metrics.txt:
           type: file
-          description: noise metrics
-          pattern: "*_by_tlen.tsv"
-  - del:
+          description: Summary QC metrics produced using 5%, 10%, 15%...100% of the data.
+          pattern: "*.duplex_yield_metrics.txt"
+  - umi_counts:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:test, single_end:false ]
-      - "*_del.tsv":
+      - ${prefix}.umi_counts.txt:
           type: file
-          description: noise metrics
-          pattern: "*_del.tsv"
-  - count:
+          description: Metrics on the frequency of observations of UMIs within reads and tag families.
+          pattern: "*.umi_counts.txt"
+  - duplex_umi_counts:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. [ id:test, single_end:false ]
-      - "*_n.tsv":
+      - ${prefix}.duplex_umi_counts.txt:
           type: file
-          description: noise metrics
-          pattern: "*_n.tsv"
-  - positions:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - "*_positions.tsv":
-          type: file
-          description: noise metrics
-          pattern: "*_positions.tsv"
-  - positions:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - "*_positions.tsv":
-          type: file
-          description: noise metrics
-          pattern: "*_positions.tsv"
-  - html:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - "*_noise.html":
-          type: file
-          description: noise metrics
-          pattern: "*_noise.html"
-  - pileup:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - "*_pileup.tsv":
-          type: file
-          description: noise metrics
-          pattern: "*_pileup.tsv"
+          description: Metrics on the frequency of observations of duplex UMIs within reads and tag families.
+          pattern: "*.duplex_umi_counts.txt"
   - versions:
       - versions.yml:
           type: file
