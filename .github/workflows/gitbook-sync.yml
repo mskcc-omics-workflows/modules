@@ -123,10 +123,15 @@ jobs:
         id: replace_slash
         run: |
           FRAGMENT="${{ env.SW_NAME }}"
-          DIR="$(dirname "$FRAGMENT")"
-          BASE="$(basename "$FRAGMENT")"
+          if [[ "$FRAGMENT" == *"/"* ]]; then
+            DIR="$(dirname "$FRAGMENT")"
+            BASE="$(basename "$FRAGMENT")"
+            MD_PATH="${DIR}/${DIR}_${BASE}"
+          else
+            MD_PATH="$FRAGMENT"
+          fi
 
-          MD_PATH="${DIR}/${DIR}_${BASE}"
+          echo "MD_PATH=$MD_PATH" >> $GITHUB_ENV
           MD_NAME="${FRAGMENT}"
 
           echo "MD_PATH=$MD_PATH" >> $GITHUB_ENV
