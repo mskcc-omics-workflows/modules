@@ -90,6 +90,7 @@ jobs:
     needs: [pytest-changes, nf-test-changes]
     strategy:
       fail-fast: false
+      max-parallel: 1
       matrix:
         tags:
           [
