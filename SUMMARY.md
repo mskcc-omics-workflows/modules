@@ -11,6 +11,7 @@
 
 * [gbcms](modules/gbcms.md)
 * [genomenexus](modules/genomenexus/README.md)
+  * [genomenexus_annotationpipeline](modules/genomenexus/genomenexus_annotationpipeline.md)
   * [genomenexus\_vcf2maf](modules/genomenexus_vcf2maf.md)
 * [neoantigenediting](modules/neoantigenediting/README.md)
   * [neoantigenediting\_computefitness](modules/neoantigenediting_computefitness.md)
