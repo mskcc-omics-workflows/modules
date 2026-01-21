@@ -52,7 +52,6 @@
 * [netmhcpan4](modules/netmhcpan4.md)
 * [fgbio](modules/fgbio/README.md)
   * [fgbio_collectduplexseqmetrics](modules/fgbio/fgbio_collectduplexseqmetrics.md)
-* [calculatenoise](modules/calculatenoise.md)
 
 ## Subworkflows
 
