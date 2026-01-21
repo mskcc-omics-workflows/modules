@@ -12,7 +12,6 @@
 * [gbcms](modules/gbcms.md)
 * [genomenexus](modules/genomenexus/README.md)
   * [genomenexus\_vcf2maf](modules/genomenexus_vcf2maf.md)
-  * [genomenexus\_vcf2maf](modules/genomenexus/genomenexus_vcf2maf.md)
 * [neoantigenediting](modules/neoantigenediting/README.md)
   * [neoantigenediting\_computefitness](modules/neoantigenediting_computefitness.md)
   * [neoantigenediting\_aligntoiedb](modules/neoantigenediting/neoantigenediting_aligntoiedb.md)
@@ -50,8 +49,6 @@
   * [phylowgs\_multievolve](modules/phylowgs/phylowgs_multievolve.md)
 * [netmhc3](modules/netmhc3.md)
 * [netmhcpan4](modules/netmhcpan4.md)
-* [fgbio](modules/fgbio/README.md)
-  * [fgbio_collectduplexseqmetrics](modules/fgbio/fgbio_collectduplexseqmetrics.md)
 
 ## Subworkflows
 
