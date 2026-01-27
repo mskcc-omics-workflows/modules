@@ -36,7 +36,7 @@
         "subworkflows/msk/netmhcstabandpan",
         "subworkflows/msk/phylowgs",
         "subworkflows/msk/generate_mutated_peptides",
-        "subworkflows/msk/neoantigen_editing"
+        "subworkflows/msk/neoantigen_editing",
         "subworkflows/msk/traceback"
     ],
     "docker": [],
