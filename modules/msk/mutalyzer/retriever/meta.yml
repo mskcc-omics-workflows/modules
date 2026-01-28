@@ -24,7 +24,7 @@ input:
     - fasta:
         type: file
         description: A gzipped Human fasta file, ideally compressed with bgzip
-        pattern: "*.{fa.gz,fasta.gz,fa.bgz}"
+        pattern: "*.{fa.gz,fasta.gz,fa.bgz,fasta.bgz}"
     - gff3:
         type: file
         description: Gff3 file representing human annotation
