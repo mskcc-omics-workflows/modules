@@ -31,7 +31,8 @@ process MUTALYZER_NORMALIZER {
 	MUTALYZER_FILE_CACHE_ADD = false
 	END_MUTALYZER_CONFIG
 
-    MUTALYZER_SETTINGS="\$(pwd)/config.txt" mutalyzer_normalizer "${hgvs_description}" > ${prefix}_${hgvs_description}.json
+    export MUTALYZER_SETTINGS="\$(pwd)/config.txt"
+    mutalyzer_normalizer "${hgvs_description}" > ${prefix}_${hgvs_description}.json
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
         mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
