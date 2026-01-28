@@ -22,8 +22,8 @@ process MUTALYZER_RETRIEVER {
     then
         # Re-compress fasta with bgzip
 
-        mv ${fasta} ${fasta.baseName}.gzip
-        gunzip -c ${fasta.baseName}.gzip | bgzip -c > ${fasta}
+        mv ${fasta} ${fasta.baseName}.tmp.gzip
+        gunzip -c ${fasta.baseName}.tmp.gzip | bgzip -c > ${fasta}
         bgzip --reindex ${fasta}
     fi
 
