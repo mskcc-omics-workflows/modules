@@ -1,5 +1,5 @@
 {
-    "neoantigenutils_generatemutfasta - maf - fasta": {
+    "generatemutfasta_1.1 - maf - fasta - stub": {
         "content": [
             {
                 "0": [
@@ -8,7 +8,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -17,11 +17,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                    "versions.yml:md5,8f48f646e5b32003f73aa8d76c72b71c"
                 ],
                 "mut_fasta": [
                     [
@@ -29,11 +29,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
+                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                    "versions.yml:md5,8f48f646e5b32003f73aa8d76c72b71c"
                 ],
                 "wt_fasta": [
                     [
@@ -41,18 +41,18 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
+                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-03-03T15:41:55.31143705"
+        "timestamp": "2025-11-25T18:02:07.34625"
     },
-    "neoantigenutils_generatemutfasta - maf - fasta - stub": {
+    "generatemutfasta_1.1 - maf - fasta": {
         "content": [
             {
                 "0": [
@@ -61,7 +61,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
                     ]
                 ],
                 "1": [
@@ -70,11 +70,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                    "versions.yml:md5,8f48f646e5b32003f73aa8d76c72b71c"
                 ],
                 "mut_fasta": [
                     [
@@ -82,11 +82,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.MUT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.MUT.sequences.fa:md5,b668c05330e78204620421dccbb80c40"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0fa44b299ab4ec385f2cc6831bbc6923"
+                    "versions.yml:md5,8f48f646e5b32003f73aa8d76c72b71c"
                 ],
                 "wt_fasta": [
                     [
@@ -94,15 +94,15 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test.WT.sequences.fa:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test.WT.sequences.fa:md5,4fcfee0a32d3c3b75c3ed24d1c462f48"
                     ]
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.0"
         },
-        "timestamp": "2025-03-03T15:42:03.290988947"
+        "timestamp": "2025-11-25T18:01:56.281822"
     }
 }

@@ -9,9 +9,10 @@
         "modules/msk/neoantigenediting/aligntoiedb",
         "modules/msk/neoantigenutils/neoantigeninput",
         "modules/msk/neoantigenutils/convertannotjson",
-        "modules/msk/neoantigenutils/generatemutfasta",
         "modules/msk/neoantigenutils/generatehlastring",
         "modules/msk/neoantigenutils/formatnetmhcpan",
+        "modules/msk/generatemutfasta/1.1",
+        "modules/msk/generatemutfasta/1.2",
         "modules/msk/neosv",
         "modules/msk/mutect1",
         "modules/msk/snppileup",
@@ -21,6 +22,8 @@
         "modules/msk/rediscoverte",
         "modules/msk/netmhcpan4",
         "modules/msk/netmhc3",
+        "modules/msk/mutalyzer/retriever",
+        "modules/msk/mutalyzer/normalizer",
         "modules/msk/genotypevariants/all",
         "modules/msk/phylowgs/createinput",
         "modules/msk/phylowgs/multievolve",
@@ -28,15 +31,14 @@
         "modules/msk/phylowgs/parsecnvs",
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
-        "subworkflows/msk/genome_nexus",
         "modules/msk/oncokb/mafannotate",
-        "subworkflows/msk/neoantigen_editing",
+        "subworkflows/msk/genome_nexus",
         "subworkflows/msk/netmhcstabandpan",
         "subworkflows/msk/phylowgs",
+        "subworkflows/msk/generate_mutated_peptides",
+        "subworkflows/msk/neoantigen_editing",
         "subworkflows/msk/traceback"
     ],
-    "docker": [
-    ],
-    "singularity": [
-    ]
+    "docker": [],
+    "singularity": []
 }

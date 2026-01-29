@@ -9,35 +9,27 @@ nextflow_workflow {
     tag "subworkflows_msk"
     tag "subworkflows/netmhcstabandpan"
     tag "netmhcstabandpan"
-    tag "neoantigenutils/generatehlastring"
-    tag "neoantigenutils/generatemutfasta"
     tag "netmhc3"
     tag "netmhcpan4"
     tag "netmhcstabpan"
-    tag "neoantigenutils/formatnetmhcpan"
 
-    test("netmhcstabandpan - SV - tsv,xls,fa") {
+    test("netmhcstabandpan - SV - fa,hla_str - tsv") {
 
         when {
             workflow {
                 """
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
                 input[1] = Channel.value([
-                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
-                    ])
-
-                input[2] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['svfa'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['wtsvfa'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['MUT_sv_fa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WT_sv_fa'], checkIfExists: true)
                     ])
-
                 """
             }
         }
@@ -45,16 +37,21 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name,
-                                    workflow.out.mut_fasta[0][1],
-                                    workflow.out.wt_fasta[0][1]
-                                ).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
                 }
             )
         }
     }
 
-    test("netmhcstabandnetmhc3 - SV - tsv,xls,fa") {
+    test("netmhcstabandnetmhc3 - SV - fa,hla_str - tsv") {
 
         config "./nextflow.config"
 
@@ -63,21 +60,16 @@ nextflow_workflow {
                 """
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
                 input[1] = Channel.value([
-                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
-                    ])
-
-                input[2] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['svfa'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['wtsvfa'], checkIfExists: true)
+                    file(params.test_data_mskcc['neoantigen']['MUT_sv_fa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WT_sv_fa'], checkIfExists: true)
                     ])
-
                 """
             }
         }
@@ -85,37 +77,37 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name,
-                                    workflow.out.mut_fasta[0][1],
-                                    workflow.out.wt_fasta[0][1]
-                                ).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
                 }
             )
         }
     }
 
-    test("netmhcstabandpan - tsv,xls,fa") {
+    test("netmhcstabandpan - fa,hla_str - tsv") {
 
         when {
             workflow {
                 """
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
                 input[1] = Channel.value([
-                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
-                    ])
-
-                input[2] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
                     [],
                     []
                     ])
-
                 """
             }
         }
@@ -123,16 +115,17 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name,
-                                    workflow.out.mut_fasta[0][1],
-                                    workflow.out.wt_fasta[0][1]
-                                ).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name
+                                  ).match()
                 }
             )
         }
     }
 
-    test("netmhcstabandnetmhc3 - tsv,xls,fa") {
+    test("netmhcstabandnetmhc3 - fa,hla_str - tsv") {
 
         config "./nextflow.config"
 
@@ -141,21 +134,16 @@ nextflow_workflow {
                 """
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file(params.test_data_mskcc['neoantigen']['temp_test_short_maf'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
                 input[1] = Channel.value([
-                    file(params.test_data_mskcc['neoantigen']['cds'], checkIfExists: true),
-                    file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
-                    ])
-
-                input[2] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
                     [],
                     []
                     ])
-
                 """
             }
         }
@@ -163,16 +151,18 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1]).name,
-                                    workflow.out.mut_fasta[0][1],
-                                    workflow.out.wt_fasta[0][1]
-                                ).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name
+                                  ).match()
                 }
             )
         }
     }
 
-    test("netmhcstabandpan - tsv,xls,fa - stub") {
+
+    test("netmhcstabandpan - fa,hla_str - tsv - stub") {
 
         options "-stub"
 
@@ -181,19 +171,15 @@ nextflow_workflow {
                 """
                 input[0] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file('temp_test_maf'),
-                    file('winners_hla_txt')
+                    file('MUT_sequence_fa', checkIfExists: false),
+                    file('WT_sequence_fa', checkIfExists: false),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
                 input[1] = Channel.value([
-                    file('cds'),
-                    file('cdna')
-                    ])
-
-                input[2] = Channel.value([
                     [ id:'test', single_end:false ], // meta map
-                    file('svMfa'),
-                    file('svWfa')
+                    file('MUT_sv_fa', checkIfExists: false),
+                    file('WT_sv_fa', checkIfExists: false)
                     ])
                 """
             }
@@ -202,10 +188,58 @@ nextflow_workflow {
         then {
             assertAll(
                 { assert workflow.success},
-                { assert snapshot(file(workflow.out.tsv[0][1][1]).name,
-                                  workflow.out.mut_fasta[0][1],
-                                  workflow.out.wt_fasta[0][1]
-                                ).match()
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
+                }
+
+            )
+        }
+    }
+
+    test("netmhcstabandnetmhc3 - fa,hla_str - tsv - stub") {
+
+        options "-stub"
+
+        config "./nextflow.config"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sequence_fa', checkIfExists: false),
+                    file('WT_sequence_fa', checkIfExists: false),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    ])
+
+                input[1] = Channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sv_fa', checkIfExists: false),
+                    file('WT_sv_fa', checkIfExists: false)
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success},
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
                 }
 
             )
