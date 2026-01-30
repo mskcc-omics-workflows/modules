@@ -57,7 +57,7 @@ nextflow_process {
                 input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
                     .map{ meta, tsv ->
                         println meta
-                        [[id:meta.pool], tsv, meta.id, "hg19"]
+                        [[id:meta.pool], tsv, meta.id, "hg19","default"]
                     }.groupTuple(by:[0])
                 input[1] = file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)
                 """
@@ -85,7 +85,8 @@ nextflow_process {
                     [id:"testsample"],
                     [file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)],
                     ["testsample"],
-                    ["hg19"]
+                    ["hg19"],
+                    ["default"]
                  ]
                 input[1] = file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)
                 """
