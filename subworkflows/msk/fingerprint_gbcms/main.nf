@@ -64,7 +64,8 @@ workflow FINGERPRINT_GBCMS {
     }
 
     emit:
-    fp_tsv            = CUSTOM_FINGERPRINTVCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
+    fp_tsv_from_bam   = CUSTOM_FINGERPRINTVCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
+    fp_tsv            = all_fps                                               // channel: [ val(meta), tsv ]
     contamination_tsv = CUSTOM_FINGERPRINTCONTAMINATION.out.contamination_tsv // channel: [ val(meta), contamination_tsv ]
     combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv           // channel: [ tsv ]
 
