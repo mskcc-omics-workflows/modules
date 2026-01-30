@@ -68,7 +68,8 @@ for (i in 1:nrow(input_table)){
   temp_dataset$DP = as.numeric(temp_dataset$DP1) + as.numeric(temp_dataset$DP2)
   temp_dataset = temp_dataset[temp_dataset$DP >= args$depth_filter,] ## keeping loci >= 20 dp by default
   temp_dataset$VAF[is.na(temp_dataset$VAF)==T] <- 0
-  temp_dataset$Sample = sample #only loci with DP >= depth filter will have Sample info
+  #temp_dataset$Sample = sample #only loci with DP >= depth filter will have Sample info
+  temp_dataset$Sample <- rep(sample, nrow(temp_dataset))
   temp_dataset = temp_dataset %>% select("Locus","Genotype","Sample","VAF")
   temp_dataset$Locus = str_replace(temp_dataset$Locus,"chr","")
 
