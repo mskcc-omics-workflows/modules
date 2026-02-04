@@ -21,15 +21,14 @@ parse cnvs from FACETS for input to phylowgs
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| facetsgenelevel | file | single sample facets gene level output | *.{txt} |
 
 ## Outputs
 
-| Output | Type | Description | Pattern |
-|--------|------|-------------|---------|
-| meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| cnv | file | converted cnv file for phylowgs upstream processing | *.txt |
-| versions | file | File containing software versions | versions.yml |
+| Output | Suboutput | Type | Description | Pattern |
+|--------|-----------|------|-------------|---------|
+| cnv | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| cnv | cnvs.txt | file | converted cnv file for phylowgs upstream processing | *.txt |
+| versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
 
