@@ -1,57 +1,44 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "genomenexus_annotationpipeline"
-
-description:
-  DSL2 module to perform annotation of a MAF file type using the genomenexus
-  suite of conversion and annotation tools.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "netmhcstabandpan"
+description: Run netmhcpan and netmhcstabpan in parallel.
 keywords:
-  - annotate
-  - vcf
-  - maf
-  - genomenexus
-  - genomics
-tools:
-  - "genomenexus":
-      description:
-        "DSL2 module to perform an annotation of MAF file type using the
-        genomenexus suite of conversion and annotation tools."
-      homepage: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline/"
-      documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
-
-      identifier: ""
+  - peptides
+  - netmhc
+  - neoantigen
+  - tsv
+components:
+  - netmhc3
+  - netmhcpan4
+  - netmhcstabpan
+  - neoantigenutils/formatnetmhcpan
 input:
-  # Only when we have meta
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:test ]`
-    - input_maf:
-        type: file
-        description: input MAF file
-        pattern: "*.{maf}"
+  - ch_fasta_and_hla:
+      type: file
+      description: |
+        The input channel containing the fasta and hla files
+        Structure: [ val(meta), path(mut_fasta), path(wt_fasta), path(hla) ]
+      pattern: "*.{fa/txt}"
+  - ch_sv_fasta:
+      type: file
+      description: |
+        The input channel containing the structural variant fasta files
+        Structure: [ val(meta), path(sv_mut_fasta), path(sv_wt_fasta) ]
+      pattern: "*.{fa}"
 output:
-  #Only when we have meta
-  - annotated_maf:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:test ]`
-          pattern: "*_annotated.{maf}"
-      - "*.maf":
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:test ]`
-          pattern: "*_annotated.{maf}"
+  - tsv:
+      type: file
+      description: |
+        Channel containing TSV files
+        Structure: [ val(meta), path(tsv) ]
+      pattern: "*.tsv"
   - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
 authors:
-  - "@rnaidu"
+  - "@nikhil"
 maintainers:
-  - "@rnaidu"
+  - "@nikhil"
 

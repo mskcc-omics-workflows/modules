@@ -15,8 +15,6 @@ Run netmhcpan and netmhcstabpan in parallel.
 
 | Components |
 | ---------- |
-| neoantigenutils/generatehlastring |
-| neoantigenutils/generatemutfasta |
 | netmhc3 |
 | netmhcpan4 |
 | netmhcstabpan |
@@ -26,17 +24,14 @@ Run netmhcpan and netmhcstabpan in parallel.
 
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
-| ch_maf_and_hla | file | The input channel containing the maf and files Structure: [ val(meta), path(maf), path(hla) ]  | *.{maf/txt} |
-| ch_cds_and_cdna | file | The resource channel containing the cds and cdna files Structure: [ path(cds) , path(cdna) ]  | *.{fa.gz} |
+| ch_fasta_and_hla | file | The input channel containing the fasta and hla files Structure: [ val(meta), path(mut_fasta), path(wt_fasta), path(hla) ]  | *.{fa/txt} |
+| ch_sv_fasta | file | The input channel containing the structural variant fasta files Structure: [ val(meta), path(sv_mut_fasta), path(sv_wt_fasta) ]  | *.{fa} |
 
 ## Outputs
 
 | Output | Type | Description | Pattern |
 |--------|------|-------------|---------|
 | tsv | file | Channel containing TSV files Structure: [ val(meta), path(tsv) ]  | *.tsv |
-| xls | file | Channel containing XLS files Structure: [ val(meta), path(xls) ]  | *.xls |
-| mut_fasta | file | Channel containing the MUT fasta files Structure: [ val(meta), path(mut_fasta) ]  | *.fa |
-| wt_fasta | file | Channel containing the WT fasta files Structure: [ val(meta), path(wt_fasta) ]  | *.fa |
 | versions | file | File containing software versions Structure: [ path(versions.yml) ]  | versions.yml |
 
 ## Authors
