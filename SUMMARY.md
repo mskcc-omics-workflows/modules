@@ -61,6 +61,7 @@
 * [calculatenoise](modules/calculatenoise.md)
 * [fgbio](modules/fgbio/README.md)
   * [fgbio_collectduplexseqmetrics](modules/fgbio/fgbio_collectduplexseqmetrics.md)
+* [neosv](modules/neosv.md)
 
 ## Subworkflows
 
