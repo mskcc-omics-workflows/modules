@@ -14,6 +14,7 @@
   * [genomenexus_annotationpipeline](modules/genomenexus/genomenexus_annotationpipeline.md)
   * [genomenexus\_vcf2maf](modules/genomenexus_vcf2maf.md)
 * [neoantigenediting](modules/neoantigenediting/README.md)
+  * [neoantigenediting_aligntoiedb](modules/neoantigenediting/neoantigenediting_aligntoiedb.md)
   * [neoantigenediting\_computefitness](modules/neoantigenediting_computefitness.md)
   * [neoantigenediting\_aligntoiedb](modules/neoantigenediting/neoantigenediting_aligntoiedb.md)
 * [neoantigenutils](modules/neoantigenutils/README.md)
