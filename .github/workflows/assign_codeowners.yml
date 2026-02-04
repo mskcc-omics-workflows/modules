@@ -2,33 +2,53 @@ name: Assign and Update Code Owners
 
 on:
   push:
-    branches: [develop]
+    branches: [test-codeowners]  # Change to 'develop' after testing
 
 jobs:
   update-codeowners:
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          ref: ${{ github.event.pull_request.head.ref }}
-      - name: Install yq
+
+      - name: Install yq and fd-find
         run: |
           sudo snap install yq
-          sudo apt install fd-find
+          sudo apt update
+          sudo apt install -y fd-find
+
       - name: Run generate_codeowners.sh
         run: |
           chmod +x .github/generate_codeowners.sh
           ./.github/generate_codeowners.sh
+
       - name: Validate codeowners file
         uses: mszostok/codeowners-validator@v0.7.4
         with:
           checks: "files,duppatterns,syntax"
+
+      - name: Check for CODEOWNERS changes
+        id: check_changes
+        run: |
+          git diff --exit-code .github/CODEOWNERS || echo "changed=true" >> $GITHUB_ENV
+
       - name: Commit CODEOWNERS changes
-        uses: EndBug/add-and-commit@v9
+        if: env.changed == 'true'
+        run: |
+          BRANCH_NAME=update-codeowners-${GITHUB_RUN_NUMBER}
+          git checkout -b $BRANCH_NAME
+          git add .github/CODEOWNERS
+          git commit -m "Update CODEOWNERS file"
+          git push --set-upstream origin $BRANCH_NAME
+
+      - name: Create Pull Request
+        if: env.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
         with:
-          add: '[".github/CODEOWNERS --force"]'
-          message: "Update CODEOWNERS file"
-          default_author: github_actions
-          cwd: "./"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: develop
+          branch: update-codeowners-${{ github.run_number }}
+          title: "Update CODEOWNERS file"
+          body: "Automated update of CODEOWNERS"
+          draft: false
