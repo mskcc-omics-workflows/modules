@@ -159,9 +159,12 @@ def compute_effective_sample_size(sample_json):
         for clone_muts, X in zip(clone_muts_list, freqs):
             for mid in clone_muts:
                 mut_freqs[mid].append(X)
-    avev = np.mean(
-        [np.var(mut_freqs[mid]) if mut_freqs[mid] else 0 for mid in mut_freqs]
-    )
+    variances = [np.var(mut_freqs[mid]) if mut_freqs[mid] else 0 for mid in mut_freqs]
+    if not variances:
+        return 0
+    avev = np.mean(variances)
+    if avev == 0 or np.isnan(avev):
+        return 0
     n = 1 / avev
     return n
 
