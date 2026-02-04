@@ -1,0 +1,91 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "generate_mutated_peptides"
+description: Generate mutated peptides from an annpotated MAF
+keywords:
+  - peptides
+  - maf
+  - neoantigen
+  - fasta
+components:
+  - mutalyzer/retriever
+  - generatemutfasta/1.2
+  - neoantigenutils/generatemutfasta
+input:
+  - ch_maf_hla_sv:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - maf
+        type: file
+        description: |
+          The input containing the maf file
+        pattern: "*.{maf}"
+      - hla
+        type: file
+        description: |
+          The input containing the hla file
+        pattern: "*.{hla.txt}"
+      - sv
+        type: file
+        description: |
+          The input containing the sv file
+        pattern: "*.{bedpe}"
+  - ref_fasta:
+      type: file
+      description: A gzipped Human fasta file, ideally compressed with bgzip
+      pattern: "*.{fa.gz,fasta.gz,fa.bgz}"
+  - gff3:
+      type: file
+      description: Gff3 file representing human annotation
+      pattern: "*.gff3"
+  - gtf:
+      type: file
+      description: Ensemble gtf resource file
+      pattern: "*.{gtf.gz}"
+  - cdna:
+      type: file
+      description: |
+        The resource channel containing the cdna file
+      pattern: "*.{fa.gz}"
+output:
+  - mut_fasta:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_out/*.MUT.sequences.fa":
+          type: file
+          description: Mutated fasta sequence
+          pattern: "*.MUT.sequences.fa"
+  - wt_fasta:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_out/*.WT.sequences.fa":
+          type: file
+          description: Wildtype fasta sequence
+          pattern: "*.WT.sequences.fa"
+  - mut_fasta_log:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_out/*_generate_mut_fasta.log":
+          type: file
+          description: Log file for the mutated fasta generation
+          pattern: "*_generate_mut_fasta.log"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"

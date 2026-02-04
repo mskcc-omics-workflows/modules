@@ -1,0 +1,91 @@
+nextflow_process {
+
+    name "Test Process GENERATEMUTFASTA"
+    script "../main.nf"
+    process "GENERATEMUTFASTA"
+
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "generatemutfasta/1.2"
+    tag "modules_msk"
+
+    test("generatemutfasta_1.2 - maf - fasta") {
+
+        setup {
+            run("MUTALYZER_RETRIEVER"){
+                script "../../../mutalyzer/retriever/main.nf"
+                process {
+                """
+
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    ]
+
+                """
+                }
+
+            }
+        }
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true)
+                    ]
+                input[1] = MUTALYZER_RETRIEVER.out.mutalyzer_cache
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(  process.out.versions,
+                                    process.out.mut_fasta,
+                                    process.out.wt_fasta,
+                                    file(process.out.mut_fasta_log[0][1]).name
+                                ).match()
+                }
+            )
+        }
+
+    }
+
+
+    test("generatemutfasta_1.2 - maf - fasta - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file('test.maf')
+                    ]
+                input[1] = file('test.tar.gz')
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

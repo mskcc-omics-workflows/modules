@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "mutalyzer_normalizer"
+description: Normalize and predict a protein sequence from a HGVS notation variant
+keywords:
+  - annotation
+  - fasta
+  - gff3
+  - Ensembl
+  - RefSeq
+  - Mutalyzer
+tools:
+  - mutalyzer:
+      description: "A tool primarily designed to check descriptions of sequence variants according to the Human Genome Sequence Variation Society (HGVS) guidelines."
+      documentation: "https://mutalyzer.readthedocs.io/en/latest/"
+      licence: ["MIT"]
+      identifier: "mutalyzer"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'pair_id' ]`
+    - hgvs_description:
+        type: string
+        description: HGVS description with transcript and HGVS variant, e.g. ENST00000359963:c.900C>G
+        pattern: "*.:.*"
+  - mutalyzer_cache:
+      - "*.tar.gz":
+          type: file
+          description: Mutatalyzer cache to use with the normalizer
+          pattern: "*.tar.gz"
+output:
+  - normalized_model:
+      - "*.json":
+          type: file
+          description: Mutatalyzer normalized result
+          pattern: "*.json"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"
+  - "@johnoooh"

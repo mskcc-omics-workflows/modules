@@ -4,8 +4,8 @@ process NETMHCPAN4 {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/netmhctools:1.1.0':
-        'docker.io/mskcc/netmhctools:1.1.0' }"
+        'docker://ghcr.io/mskcc-omics-workflows/netmhctools:1.1.1':
+        'ghcr.io/mskcc-omics-workflows/netmhctools:1.1.1' }"
 
     input:
     tuple val(meta),  path(inputFasta), path(inputSVFasta, arity: '0..*'), val(hlaString), val(inputType)
@@ -66,8 +66,8 @@ process NETMHCPAN4 {
     output_meta.fromStab = false
     output_meta.typePan = true
     """
-    touch ${prefix}.MUT.xls
-    touch ${prefix}.MUT.netmhcpan.output
+    touch ${prefix}.${inputType}.xls
+    touch ${prefix}.${inputType}.netmhcpan.output
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
