@@ -1,12 +1,13 @@
-name: "phylowgs_createinput"
-description: Create input files for phylowgs
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "phylowgs_writeresults"
+description: Write results from trees from phylowgs_multievolve
 keywords:
   - phylowgs
-  - cnvs
-  - parser
+  - CNVs
+  - FACETs
 tools:
-  - "phylowgs_createinput":
-      description: "create phylowgs expected input"
+  - "phylowgs_writeresults":
+      description: "Write results from trees from phylowgs_multievolve"
       homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
       tool_dev_url: "https://github.com/mskcc/phylowgs"
 
@@ -17,36 +18,48 @@ input:
         description: |
           Groovy Map containing sample information
           e.g. `[ id:sample1, single_end:false ]`
-    - unfilteredmaf:
+    - trees:
         type: file
-        description: unfiltered maf file with read counts
-        pattern: "*.maf"
-    - cnv:
-        type: file
-        description: converted cnv file for phylowgs
-        pattern: "*.txt"
+        description: zip folder containing tree data from multievolve
+        pattern: "*.zip"
 output:
-  - phylowgsinput:
+  - summ:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:sample1, single_end:false ]`
-      - cnv_data.txt:
+      - "*.summ.json.gz":
           type: file
-          description: cnv_data.txt and ssm_data.txt
-          pattern: "*.txt"
-      - ssm_data.txt:
+          description: Output file for JSON-formatted tree summaries
+          pattern: "*.summ.json.gz"
+  - muts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:sample1, single_end:false ]`
+      - "*.muts.json.gz":
           type: file
-          description: cnv_data.txt and ssm_data.txt
-          pattern: "*.txt"
+          description: Output file for JSON-formatted list of mutations
+          pattern: "*.muts.json.gz"
+  - mutass:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:sample1, single_end:false ]`
+      - "*.mutass.zip":
+          type: file
+          description: Output file for JSON-formatted list of SSMs and CNVs
+          pattern: "*.mutass.zip"
   - versions:
       - versions.yml:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
 authors:
-  - "@pintoa1-mskcc"
+  - "@nikhil"
 maintainers:
-  - "@pintoa1-mskcc"
+  - "@nikhil"
 

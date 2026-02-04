@@ -21,17 +21,18 @@ Write results from trees from phylowgs_multievolve
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| trees | file | zip folder containing tree data from multievolve | *.zip |
 
 ## Outputs
 
-| Output | Type | Description | Pattern |
-|--------|------|-------------|---------|
-| meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| summ | file | Output file for JSON-formatted tree summaries | *.summ.json.gz |
-| muts | file | Output file for JSON-formatted list of mutations | *.muts.json.gz |
-| mutass | file | Output file for JSON-formatted list of SSMs and CNVs | *.mutass.zip |
-| versions | file | File containing software versions | versions.yml |
+| Output | Suboutput | Type | Description | Pattern |
+|--------|-----------|------|-------------|---------|
+| summ | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| summ | *.summ.json.gz | file | Output file for JSON-formatted tree summaries | *.summ.json.gz |
+| muts | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| muts | *.muts.json.gz | file | Output file for JSON-formatted list of mutations | *.muts.json.gz |
+| mutass | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| mutass | *.mutass.zip | file | Output file for JSON-formatted list of SSMs and CNVs | *.mutass.zip |
+| versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
 
