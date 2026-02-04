@@ -17,6 +17,7 @@
   * [neoantigenediting\_computefitness](modules/neoantigenediting_computefitness.md)
   * [neoantigenediting\_aligntoiedb](modules/neoantigenediting/neoantigenediting_aligntoiedb.md)
 * [neoantigenutils](modules/neoantigenutils/README.md)
+  * [neoantigenutils_generatehlastring](modules/neoantigenutils/neoantigenutils_generatehlastring.md)
   * [neoantigenutils\_neoantigeninput](modules/neoantigenutils_neoantigeninput.md)
   * [neoantigenutils\_generatemutfasta](modules/neoantigenutils_generatemutfasta.md)
   * [neoantigenutils\_formatnetmhcpan](modules/neoantigenutils_formatnetmhcpan.md)
