@@ -1,10 +1,10 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigenediting_aligntoiedb"
-description: Align neoantigens to the IEDB file
+name: "neoantigenediting_computefitness"
+description: Compute fitness of the neoantigens
 keywords:
   - neoantigenediting
   - neoantigens
-  - IEDB
+  - fitness
 tools:
   - "neoantigenediting":
       description:
@@ -24,21 +24,22 @@ input:
         type: file
         description: Patient data consisting of mutation, neoantigen, and tree information
         pattern: "*.json"
-  - - iedb_fasta:
+    - alignment_file:
         type: file
-        description: IEDB epitopes used for analysis
-        pattern: "*.fasta"
+        description: IEDB alignment file
+        pattern: "iedb_alignments_*.txt"
+
 output:
-  - iedb_alignment:
+  - annotated_output:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:sample1, single_end:false ]`
-      - iedb_alignments_*.txt:
+      - "*_annotated.json":
           type: file
-          description: IEDB alignment file
-          pattern: "iedb_alignments_*.txt"
+          description: Output containing neoantigen quality scores
+          pattern: "*_annotated.json"
   - versions:
       - versions.yml:
           type: file
