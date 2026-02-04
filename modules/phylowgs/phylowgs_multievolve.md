@@ -21,16 +21,14 @@ Create trees from input from phylowgs_createinput
 | Input | Type | Description | Pattern |
 |-------|------|-------------|---------|
 | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| cnv_data | file | copy number input data from phylowgs_createinput | *.{txt} |
-| ssm_data | file | mutation input data from phylowgs_createinput | *.{txt} |
 
 ## Outputs
 
-| Output | Type | Description | Pattern |
-|--------|------|-------------|---------|
-| meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
-| trees | file | Zip file containing the completed trees | trees.zip |
-| versions | file | File containing software versions | versions.yml |
+| Output | Suboutput | Type | Description | Pattern |
+|--------|-----------|------|-------------|---------|
+| trees | meta | map | Groovy Map containing sample information e.g. `[ id:sample1, single_end:false ]`  |  |
+| trees | chains/trees.zip | file | Zip file containing the completed trees | trees.zip |
+| versions | versions.yml | file | File containing software versions | versions.yml |
 
 ## Authors
 
