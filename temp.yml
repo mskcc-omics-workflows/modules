@@ -1,86 +1,44 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "netmhcpan4"
-description: Predicts binding of neoantigen peptides
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "netmhcstabandpan"
+description: Run netmhcpan and netmhcstabpan in parallel.
 keywords:
-  - immune
-  - netmhcpan
-  - genomics
-tools:
-  - "netmhcpan":
-      description:
-        " Runs netMHCpan and outputs tsvs and STDout for mutated and wild
-        type neoantigens"
-      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      licence: ["MIT"]
-      identifier: biotools:netmhcpan
-
+  - peptides
+  - netmhc
+  - neoantigen
+  - tsv
+components:
+  - netmhc3
+  - netmhcpan4
+  - netmhcstabpan
+  - neoantigenutils/formatnetmhcpan
 input:
-  # Only when we have meta
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:sample1, single_end:false ]`
-    - inputFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides generated
-          from generatemutfasta
-        pattern: "*.{fa}"
-    - inputSVFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides from
-          NeoSV
-        pattern: "*.{fa}"
-    - hlaString:
-        type: string
-        description:
-          HLA string formatted by generatehlastring.  Typically a comma separated
-          string of HLAs.
-    - inputType:
-        type: string
-        description:
-          Allows netmhcpan to run in parallel. Should be MUT or WT, it
-          will kick off two jobs. make a Channel.Of(MUT,WT) outside the module as
-          an input. Running them in series is kicked off by putting in anything other
-          than MUT or WT.
-        pattern: "WT,MUT"
+  - ch_fasta_and_hla:
+      type: file
+      description: |
+        The input channel containing the fasta and hla files
+        Structure: [ val(meta), path(mut_fasta), path(wt_fasta), path(hla) ]
+      pattern: "*.{fa/txt}"
+  - ch_sv_fasta:
+      type: file
+      description: |
+        The input channel containing the structural variant fasta files
+        Structure: [ val(meta), path(sv_mut_fasta), path(sv_wt_fasta) ]
+      pattern: "*.{fa}"
 output:
-  #Only when we have meta
-  - xls:
-      - output_meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*.xls":
-          type: file
-          description: XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens
-          pattern: "*.WT.xls,*.MUT.xls"
-  - netmhcpanoutput:
-      - output_meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
-      - "*.netmhcpan.output":
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+  - tsv:
+      type: file
+      description: |
+        Channel containing TSV files
+        Structure: [ val(meta), path(tsv) ]
+      pattern: "*.tsv"
   - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
 authors:
-  - "@johnoooh"
   - "@nikhil"
 maintainers:
-  - "@johnoooh"
   - "@nikhil"
 
