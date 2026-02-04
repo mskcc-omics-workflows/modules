@@ -64,6 +64,8 @@
 * [fgbio](modules/fgbio/README.md)
   * [fgbio_collectduplexseqmetrics](modules/fgbio/fgbio_collectduplexseqmetrics.md)
 * [neosv](modules/neosv.md)
+* [generatemutfasta](modules/generatemutfasta/README.md)
+  * [generatemutfasta_1.1](modules/generatemutfasta/generatemutfasta_1.1.md)
 
 ## Subworkflows
 
