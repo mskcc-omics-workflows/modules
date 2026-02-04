@@ -1,52 +1,90 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigenediting_computefitness"
-description: Compute fitness of the neoantigens
+name: "fgbio_collectduplexseqmetrics"
+description: Collects a suite of metrics to QC duplex sequencing data.
 keywords:
-  - neoantigenediting
-  - neoantigens
-  - fitness
+  - duplex
+  - sequencing
+  - genomics
+  - fgbio
 tools:
-  - "neoantigenediting":
-      description:
-        "Code for computing neoantigen qualities and for performing clone
-        composition predictions."
-      homepage: "https://www.nature.com/articles/s41586-022-04735-9"
-      tool_dev_url: "https://github.com/LukszaLab/NeoantigenEditing"
+  - "fgbio":
+      description: "A set of tools for working with genomic and high throughput sequencing data, including UMIs"
+      homepage: "https://github.com/fulcrumgenomics/fgbio"
+      documentation: "https://github.com/fulcrumgenomics/fgbio"
+      tool_dev_url: "https://github.com/fulcrumgenomics/fgbio"
+      doi: "no DOI available"
+      licence: ["MIT"]
+      identifier: biotools:fgbio
 
-      identifier: ""
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
-          e.g. `[ id:sample1, single_end:false ]`
-    - patient_data:
+          e.g. [ id:test, single_end:false ]
+    - bam:
         type: file
-        description: Patient data consisting of mutation, neoantigen, and tree information
-        pattern: "*.json"
-    - alignment_file:
-        type: file
-        description: IEDB alignment file
-        pattern: "iedb_alignments_*.txt"
+        description: SAM/BAM/CRAM file
+        pattern: "*.{sam,bam,cram}"
 
 output:
-  - annotated_output:
+  - family_sizes:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*_annotated.json":
+            e.g. [ id:test, single_end:false ]
+      - ${prefix}.family_sizes.txt:
+          type: map
+          description: Metrics on the frequency of different types of families of different sizes.
+          pattern: "*.family_sizes.txt"
+  - duplex_family_sizes:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:test, single_end:false ]
+      - ${prefix}.duplex_family_sizes.txt:
           type: file
-          description: Output containing neoantigen quality scores
-          pattern: "*_annotated.json"
+          description: Metrics on the frequency of duplex tag families by the number of observations from each strand.
+          pattern: "*.duplex_family_sizes.txt"
+  - duplex_yield_metrics:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:test, single_end:false ]
+      - ${prefix}.duplex_yield_metrics.txt:
+          type: file
+          description: Summary QC metrics produced using 5%, 10%, 15%...100% of the data.
+          pattern: "*.duplex_yield_metrics.txt"
+  - umi_counts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:test, single_end:false ]
+      - ${prefix}.umi_counts.txt:
+          type: file
+          description: Metrics on the frequency of observations of UMIs within reads and tag families.
+          pattern: "*.umi_counts.txt"
+  - duplex_umi_counts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. [ id:test, single_end:false ]
+      - ${prefix}.duplex_umi_counts.txt:
+          type: file
+          description: Metrics on the frequency of observations of duplex UMIs within reads and tag families.
+          pattern: "*.duplex_umi_counts.txt"
   - versions:
       - versions.yml:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
+
 authors:
-  - "@nikhil"
+  - "@mikefeixu"
 maintainers:
-  - "@nikhil"
+  - "@mikefeixu"
 
