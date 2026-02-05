@@ -1,79 +1,57 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigenutils_generatemutfasta"
-description: Generate the mutation fasta for netmhc tools
-keywords:
-  - neoantigen
-  - fasta
-  - netmhc
-  - mutation
-  - hgvsc
-  - Mutalyzer
-tools:
-  - neoantigen_utils:
-      description: "Collection of helper scripts for neoantigen processing"
-      documentation: "https://github.com/mskcc-omics-workflows/modules"
-      licence: [""]
-      identifier: ""
-  - mutalyzer:
-      description: "A tool primarily designed to check descriptions of sequence variants according to the Human Genome Sequence Variation Society (HGVS) guidelines."
-      documentation: "https://mutalyzer.readthedocs.io/en/latest/"
-      licence: ["MIT"]
-      identifier: ""
+name: "genomenexus_annotationpipeline"
 
+description:
+  DSL2 module to perform annotation of a MAF file type using the genomenexus
+  suite of conversion and annotation tools.
+keywords:
+  - annotate
+  - vcf
+  - maf
+  - genomenexus
+  - genomics
+tools:
+  - "genomenexus":
+      description:
+        "DSL2 module to perform an annotation of MAF file type using the
+        genomenexus suite of conversion and annotation tools."
+      homepage: "https://github.com/genome-nexus/genome-nexus-annotation-pipeline/"
+      documentation: "https://github.com/genome-nexus/.github/blob/main/profile/README.md"
+
+      identifier: ""
 input:
+  # Only when we have meta
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information.
-          e.g. `[ id:sample1, single_end:false ]`
-    - inputMaf:
+          Groovy Map containing sample information
+          e.g. `[ id:test ]`
+    - input_maf:
         type: file
-        description: Maf outputtted by Tempo that was run through phyloWGS
-        pattern: "*.maf"
-  - - mutalyzer_cache:
-        type: file
-        description: Mutatalyzer cache to use with the normalizer
-        pattern: "*.tar.gz"
+        description: input MAF file
+        pattern: "*.{maf}"
 output:
-  - mut_fasta:
+  #Only when we have meta
+  - annotated_maf:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*_out/*.MUT.sequences.fa":
-          type: file
-          description: Mutated fasta sequence
-          pattern: "*.MUT.sequences.fa"
-  - wt_fasta:
-      - meta:
+            e.g. `[ id:test ]`
+          pattern: "*_annotated.{maf}"
+      - "*.maf":
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*_out/*.WT.sequences.fa":
-          type: file
-          description: Wildtype fasta sequence
-          pattern: "*.WT.sequences.fa"
-  - mut_fasta_log:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*_out/*_generate_mut_fasta.log":
-          type: file
-          description: Log file for the mutated fasta generation
-          pattern: "*_generate_mut_fasta.log"
+            e.g. `[ id:test ]`
+          pattern: "*_annotated.{maf}"
   - versions:
       - versions.yml:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
 authors:
-  - "@johnoooh"
-  - "@nikhil"
+  - "@rnaidu"
 maintainers:
-  - "@johnoooh"
-  - "@nikhil"
+  - "@rnaidu"
 
