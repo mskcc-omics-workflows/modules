@@ -18,7 +18,7 @@ tools:
       description: "A tool primarily designed to check descriptions of sequence variants according to the Human Genome Sequence Variation Society (HGVS) guidelines."
       documentation: "https://mutalyzer.readthedocs.io/en/latest/"
       licence: ["MIT"]
-      identifier: "mutalyzer"
+      identifier: ""
 
 input:
   - - meta:
@@ -30,8 +30,7 @@ input:
         type: file
         description: Maf outputtted by Tempo that was run through phyloWGS
         pattern: "*.maf"
-  - mutalyzer_cache:
-      - "*.tar.gz":
+  - - mutalyzer_cache:
         type: file
         description: Mutatalyzer cache to use with the normalizer
         pattern: "*.tar.gz"
