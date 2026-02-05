@@ -1,0 +1,2 @@
+subworkflows/generate_mutated_peptides:
+  - subworkflows/msk/generate_mutated_peptides/**

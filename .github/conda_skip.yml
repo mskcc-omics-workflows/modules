@@ -1,6 +1,8 @@
 exclude:
   - path: modules/msk/nf-test
   - profile: conda
+    path: modules/msk/calculatenoise
+  - profile: conda
     path: modules/msk/gbcms
   - profile: conda
     path: modules/msk/polysolver
@@ -35,7 +37,9 @@ exclude:
   - profile: conda
     path: modules/msk/ppflagfixer
   - profile: conda
-    path: modules/msk/neoantigenutils/generatemutfasta
+    path: modules/msk/generatemutfasta/1.1
+  - profile: conda
+    path: modules/msk/generatemutfasta/1.2
   - profile: conda
     path: modules/msk/neoantigenutils/formatnetmhcpan
   - profile: conda
@@ -72,3 +76,9 @@ exclude:
     path: modules/msk/neosv
   - profile: conda
     path: modules/msk/netmhc3
+  - profile: conda
+    path: modules/msk/oncokb/mafannotate
+  - profile: conda
+    path: modules/msk/mutalyzer/normalizer
+  - profile: conda
+    path: modules/msk/mutalyzer/retriever

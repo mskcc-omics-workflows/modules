@@ -7,7 +7,7 @@ adapted from [nf-core/modules/README.md](https://github.com/nf-core/modules/blob
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
 
-![GitHub Actions Coda Linting](https://github.com/nf-core/modules/workflows/Code%20Linting/badge.svg)
+[![Run nf-test](https://github.com/mskcc-omics-workflows/modules/actions/workflows/nf-test.yml/badge.svg)](https://github.com/mskcc-omics-workflows/modules/actions/workflows/nf-test.yml)
 
 > THIS REPOSITORY IS UNDER ACTIVE DEVELOPMENT. SYNTAX, ORGANISATION AND LAYOUT MAY CHANGE WITHOUT NOTICE!
 
