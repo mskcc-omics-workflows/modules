@@ -1,48 +1,49 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigenutils_convertannotjson"
-description:
-  Takes the output of the neoantigen ediitng subworkflow and converts the
-  annotated neoantigens to tsv format.
+name: "phylowgs_multievolve"
+description: Create trees from input from phylowgs_createinput
 keywords:
-  - neoantigen
-  - tsv
-  - peptides
+  - phylowgs
+  - CNVs
+  - FACETs
 tools:
-  - neoantigen_utils:
-      description: "Collection of helper scripts for neoantigen processing"
-      documentation: "https://github.com/mskcc-omics-workflows/modules"
-      licence: [""]
-      identifier: ""
+  - "phylowgs_multievolve":
+      description: "Program to create trees from input from phylowgs_createinput"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
+      tool_dev_url: "https://github.com/mskcc/phylowgs"
 
+      identifier: ""
 input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information.
-          e.g. `[ id:sample1]`
-    - annotatedJSON:
+          Groovy Map containing sample information
+          e.g. `[ id:sample1, single_end:false ]`
+    - cnv_data:
         type: file
-        description: Json annotated by the neoantigenediting subworkflow
-        pattern: "*annotated.json"
+        description: copy number input data from phylowgs_createinput
+        pattern: "*.{txt}"
+    - ssm_data:
+        type: file
+        description: mutation input data from phylowgs_createinput
+        pattern: "*.{txt}"
 output:
-  - neoantigenTSV:
+  - trees:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. `[ id:sample1]`
-      - "*.tsv":
+            e.g. `[ id:sample1, single_end:false ]`
+      - chains/trees.zip:
           type: file
-          description: A reformatted file of neoantigens, now in TSV format!
-          pattern: "*.{tsv}"
+          description: Zip file containing the completed trees
+          pattern: "trees.zip"
   - versions:
       - versions.yml:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
 authors:
-  - "@johnoooh"
+  - "@nikhil"
 maintainers:
-  - "@johnoooh"
   - "@nikhil"
 
