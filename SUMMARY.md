@@ -63,4 +63,5 @@
 * [phylowgs](subworkflows/phylowgs.md)
 * [neoantigen\_editing](subworkflows/neoantigen_editing.md)
 netmhcstabandpan
+generate_mutated_peptides
 

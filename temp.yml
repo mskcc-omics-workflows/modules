@@ -1,86 +1,67 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "netmhcpan4"
-description: Predicts binding of neoantigen peptides
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "generate_mutated_peptides"
+description: Generate mutated peptides from an annotated MAF
 keywords:
-  - immune
-  - netmhcpan
-  - genomics
-tools:
-  - "netmhcpan":
-      description:
-        " Runs netMHCpan and outputs tsvs and STDout for mutated and wild
-        type neoantigens"
-      homepage: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      documentation: "https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/"
-      licence: ["MIT"]
-      identifier: biotools:netmhcpan
-
+  - peptides
+  - maf
+  - neoantigen
+  - fasta
+components:
+  - mutalyzer/retriever
+  - generatemutfasta/1.2
+  - neoantigenutils/generatemutfasta
 input:
-  # Only when we have meta
-  - - meta:
-        type: map
-        description: |
-          Groovy Map containing sample information
-          e.g. `[ id:sample1, single_end:false ]`
-    - inputFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides generated
-          from generatemutfasta
-        pattern: "*.{fa}"
-    - inputSVFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides from
-          NeoSV
-        pattern: "*.{fa}"
-    - hlaString:
-        type: string
-        description:
-          HLA string formatted by generatehlastring.  Typically a comma separated
-          string of HLAs.
-    - inputType:
-        type: string
-        description:
-          Allows netmhcpan to run in parallel. Should be MUT or WT, it
-          will kick off two jobs. make a Channel.Of(MUT,WT) outside the module as
-          an input. Running them in series is kicked off by putting in anything other
-          than MUT or WT.
-        pattern: "WT,MUT"
+  - ch_maf_hla_sv:
+      type: object
+      description: |
+        Object containing sample metadata and input files.
+        Properties:
+          - meta: Groovy Map containing sample information, e.g. [ id:sample1, single_end:false ]
+          - maf: The input containing the maf file
+          - hla: The input containing the hla file
+          - sv: The input containing the sv file
+      pattern: "*.{maf,hla.txt,bedpe}"
+  - ref_fasta:
+      type: file
+      description: A gzipped Human fasta file, ideally compressed with bgzip
+      pattern: "*.{fa.gz,fasta.gz,fa.bgz}"
+  - gff3:
+      type: file
+      description: Gff3 file representing human annotation
+      pattern: "*.gff3"
+  - gtf:
+      type: file
+      description: Ensemble gtf resource file
+      pattern: "*.{gtf.gz}"
+  - cdna:
+      type: file
+      description: The resource channel containing the cdna file
+      pattern: "*.{fa.gz}"
 output:
-  #Only when we have meta
-  - xls:
-      - output_meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*.xls":
-          type: file
-          description: XLS file of netMHC. A poorly formated file of neoantigens. This contains the MUT or WT antigens
-          pattern: "*.WT.xls,*.MUT.xls"
-  - netmhcpanoutput:
-      - output_meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
-      - "*.netmhcpan.output":
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-          pattern: "*.WT.netmhcpan.output,*.MUT.netmhcpan.output"
+  - mut_fasta:
+      type: file
+      description: |
+        Mutated fasta sequence output.
+        Contains: meta (Groovy Map with sample information) and mutated sequences file
+      pattern: "*_out/*.MUT.sequences.fa"
+  - wt_fasta:
+      type: file
+      description: |
+        Wildtype fasta sequence output.
+        Contains: meta (Groovy Map with sample information) and wildtype sequences file
+      pattern: "*_out/*.WT.sequences.fa"
+  - mut_fasta_log:
+      type: file
+      description: |
+        Log file for the mutated fasta generation.
+        Contains: meta (Groovy Map with sample information) and generation log
+      pattern: "*_out/*_generate_mut_fasta.log"
   - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
 authors:
-  - "@johnoooh"
   - "@nikhil"
 maintainers:
-  - "@johnoooh"
   - "@nikhil"
 
