@@ -1,12 +1,13 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "neoantigenutils_neoantigeninput"
+name: "neoantigenutils_formatnetmhcpan"
 description:
-  This module take several inputs to the Lukza neoantigen pipeline and
-  combines them into a single json file ready for input into their pipeline
+  Takes the standard out of netmhcpan tools and converts them to a tsv
+  for downstream processing
 keywords:
   - neoantigen
-  - aggregate
-  - genomics
+  - tsv
+  - peptides
+  - netmhc
 tools:
   - neoantigen_utils:
       description: "Collection of helper scripts for neoantigen processing"
@@ -18,65 +19,29 @@ input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
-          e.g. `[ id:sample1, single_end:false ]`
-    - inputMaf:
-        type: file
-        description: Maf outputtted by Tempo that was run through phyloWGS
-        pattern: "*.{maf}"
-    - inputBedpe:
-        type: file
-        description: bedpe file containing SVs
-        pattern: "winners.{tsv}"
-    - hlaFile:
-        type: file
-        description: HLA tsv outputtted by Polysolver
-        pattern: "winners.{tsv}"
-  - - meta2:
-        type: map
-        description: |
-          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
-          e.g. `[ id:sample1, single_end:false ]`
-    - phyloWGSsumm:
-        type: file
-        description: Summ json outputtted by phyloWGS
-        pattern: "*.{json.gz}"
-    - phyloWGSmut:
-        type: file
-        description: Summary json outputtted by phyloWGS
-        pattern: "*.{json.gz}"
-    - phyloWGSfolder:
-        type: file
-        description: Folder of mutations in trees output by PhyloWGS
-        pattern: ".{zip}"
-  - - meta3:
-        type: map
-        description: |
-          Groovy Map containing sample information.  Maybe cohort and patient_id as well?
-          e.g. `[ id:sample1, single_end:false ]`
-    - mutNetMHCpan:
+          Groovy Map containing sample information.
+          typeMut indicated if a mutated fasta was used
+          fromStab indicates if the output was from netmhcstabpan
+          e.g. `[ id:sample1, typeMut: false, fromStab: false ]`
+    - netmhcPanOutput:
         type: file
         description:
-          tsv formatted output from netMHCpan with the mutated neoantigens
-          .
-        pattern: ".{tsv}"
-    - wtNetMHCpan:
-        type: file
-        description:
-          tsv formatted STDOUT file of netMHCpan.  A poorly formated file
-          of neoantigens.  This containes the wild type antigens
-        pattern: ".{tsv}"
+          STDOUT file of netMHCstabpan or netMHC runs for MUT and WT.  A poorly formated
+          file of neoantigens.
+        pattern: "*.WT.*.output,*.MUT.*.output"
 output:
-  - json:
+  - netMHCpanreformatted:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:sample1, single_end:false ]`
-      - "*.json":
+      - "*.tsv":
           type: file
-          description: output combined Json ready for input into the neoantigen pipeline
-          pattern: "*.{json}"
+          description:
+            A reformatted file of neoantigens and their binding affinities
+            output by netmhcpan or netmhcstabpan.  This contains the wild type antigens
+          pattern: "*.{tsv}"
   - versions:
       - versions.yml:
           type: file
