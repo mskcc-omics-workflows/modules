@@ -1,44 +1,44 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
-name: "netmhcstabandpan"
-description: Run netmhcpan and netmhcstabpan in parallel.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neoantigenutils_generatehlastring"
+description: Generate the hla string for netmhc tools
 keywords:
-  - peptides
-  - netmhc
   - neoantigen
-  - tsv
-components:
-  - netmhc3
-  - netmhcpan4
-  - netmhcstabpan
-  - neoantigenutils/formatnetmhcpan
+  - string
+  - netmhc
+  - hla
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
+      licence: [""]
+      identifier: ""
+
 input:
-  - ch_fasta_and_hla:
-      type: file
-      description: |
-        The input channel containing the fasta and hla files
-        Structure: [ val(meta), path(mut_fasta), path(wt_fasta), path(hla) ]
-      pattern: "*.{fa/txt}"
-  - ch_sv_fasta:
-      type: file
-      description: |
-        The input channel containing the structural variant fasta files
-        Structure: [ val(meta), path(sv_mut_fasta), path(sv_wt_fasta) ]
-      pattern: "*.{fa}"
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:sample1, single_end:false ]`
+    - inputHLA:
+        type: file
+        description: Winners HLA file from polysolver
+        pattern: "*.{hla.txt}"
 output:
-  - tsv:
-      type: file
-      description: |
-        Channel containing TSV files
-        Structure: [ val(meta), path(tsv) ]
-      pattern: "*.tsv"
+  - hlastring:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:sample1, single_end:false ]`
   - versions:
-      type: file
-      description: |
-        File containing software versions
-        Structure: [ path(versions.yml) ]
-      pattern: "versions.yml"
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
 authors:
+  - "@johnoooh"
   - "@nikhil"
 maintainers:
+  - "@johnoooh"
   - "@nikhil"
 
