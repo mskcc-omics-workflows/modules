@@ -54,6 +54,8 @@
 * [neosv](modules/neosv.md)
 * [generatemutfasta](modules/generatemutfasta/README.md)
   * [generatemutfasta_1.1](modules/generatemutfasta/generatemutfasta_1.1.md)
+* [mutalyzer](modules/mutalyzer/README.md)
+  * [mutalyzer_retriever](modules/mutalyzer/mutalyzer_retriever.md)
 
 ## Subworkflows
 
