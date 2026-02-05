@@ -13,7 +13,7 @@ tools:
       description: "A tool primarily designed to check descriptions of sequence variants according to the Human Genome Sequence Variation Society (HGVS) guidelines."
       documentation: "https://mutalyzer.readthedocs.io/en/latest/"
       licence: ["MIT"]
-      identifier: "mutalyzer"
+      identifier: ""
 
 input:
   - - meta:
