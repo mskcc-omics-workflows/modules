@@ -53,6 +53,7 @@
   * [fgbio_collectduplexseqmetrics](modules/fgbio/fgbio_collectduplexseqmetrics.md)
 * [neosv](modules/neosv.md)
 * [generatemutfasta](modules/generatemutfasta/README.md)
+  * [generatemutfasta_1.2](modules/generatemutfasta/generatemutfasta_1.2.md)
   * [generatemutfasta_1.1](modules/generatemutfasta/generatemutfasta_1.1.md)
 * [mutalyzer](modules/mutalyzer/README.md)
   * [mutalyzer_retriever](modules/mutalyzer/mutalyzer_retriever.md)
