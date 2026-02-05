@@ -1,65 +1,74 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "phylowgs_writeresults"
-description: Write results from trees from phylowgs_multievolve
+name: "netmhcstabpan"
+description:
+  Runs netMHCpan and netMHCstabpan and outputs STDout for mutated and wild
+  type neoantigens"
 keywords:
-  - phylowgs
-  - CNVs
-  - FACETs
+  - immune
+  - netmhcstabpan
+  - netMHCstabpan
+  - genomics
 tools:
-  - "phylowgs_writeresults":
-      description: "Write results from trees from phylowgs_multievolve"
-      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0602-8"
-      tool_dev_url: "https://github.com/mskcc/phylowgs"
-
+  - "netmhcstabpan":
+      description:
+        " Runs netMHCstabpan and netMHCpan then outputs tsvs and STDout for
+        mutated and wild type neoantigens"
+      homepage: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+      documentation: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+      licence: ["MIT"]
       identifier: ""
+
 input:
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:sample1, single_end:false ]`
-    - trees:
+    - inputFasta:
         type: file
-        description: zip folder containing tree data from multievolve
-        pattern: "*.zip"
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides generated
+          from generatemutfasta
+        pattern: "*.{fa}"
+    - inputSVFasta:
+        type: file
+        description:
+          Multifasta containing Mutated peptides or Wildtype peptides from
+          NeoSV
+        pattern: "*.{fa}"
+    - hlaString:
+        type: string
+        description: HLA in string format. e.g. HLA-A24:02
+    - inputType:
+        type: string
+        description:
+          Allows netmhcstabpan to run in parallel. Should be MUT or WT,
+          it will kick off two jobs. make a Channel.Of(MUT,WT) outside the module
+          as an input. Running them in series is kicked off by putting in anything other
+          than MUT or WT.
+        pattern: "WT,MUT"
 output:
-  - summ:
-      - meta:
+  - netmhcstabpanoutput:
+      - output_meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:sample1, single_end:false ]`
-      - "*.summ.json.gz":
+      - "*.netmhcstabpan.output":
           type: file
-          description: Output file for JSON-formatted tree summaries
-          pattern: "*.summ.json.gz"
-  - muts:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*.muts.json.gz":
-          type: file
-          description: Output file for JSON-formatted list of mutations
-          pattern: "*.muts.json.gz"
-  - mutass:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. `[ id:sample1, single_end:false ]`
-      - "*.mutass.zip":
-          type: file
-          description: Output file for JSON-formatted list of SSMs and CNVs
-          pattern: "*.mutass.zip"
+          description:
+            STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated
+            file of neoantigens. Neoantigenutils contains a parser for this file
+          pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
   - versions:
       - versions.yml:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
 authors:
+  - "@johnoooh"
   - "@nikhil"
 maintainers:
+  - "@johnoooh"
   - "@nikhil"
 
