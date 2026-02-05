@@ -1,65 +1,67 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
-name: "netmhcstabpan"
+name: "neosv"
 description:
-  Runs netMHCpan and netMHCstabpan and outputs STDout for mutated and wild
-  type neoantigens"
+  NEOSV is a program that takes a bedpe and outputs puntitave neoantiegns
+  created from structural variants.  It has been modified so that it outputs fastas
+  for later processing ny netmhcpan.
 keywords:
   - immune
-  - netmhcstabpan
-  - netMHCstabpan
+  - neosv
   - genomics
 tools:
-  - "netmhcstabpan":
+  - "neosv":
       description:
-        " Runs netMHCstabpan and netMHCpan then outputs tsvs and STDout for
-        mutated and wild type neoantigens"
-      homepage: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
-      documentation: "https://services.healthtech.dtu.dk/services/NetMHCstabpan-1.0/"
+        " Runs a modified version of NeoSV and outputs two multifastas. \
+        \ One for mutated and another for wild type neoantigens"
+      homepage: "https://genomebiology.biomedcentral.com/articles/10.1186/s13059-023-03005-9"
+      documentation: "https://github.com/ysbioinfo/NeoSV"
       licence: ["MIT"]
       identifier: ""
 
 input:
+  # Only when we have meta
   - - meta:
         type: map
         description: |
           Groovy Map containing sample information
           e.g. `[ id:sample1, single_end:false ]`
-    - inputFasta:
+    - inputBedpe:
         type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides generated
-          from generatemutfasta
-        pattern: "*.{fa}"
-    - inputSVFasta:
-        type: file
-        description:
-          Multifasta containing Mutated peptides or Wildtype peptides from
-          NeoSV
-        pattern: "*.{fa}"
+        description: Bedpe output by Tempo or SV caller
+        pattern: "*.{bedpe}"
     - hlaString:
         type: string
-        description: HLA in string format. e.g. HLA-A24:02
-    - inputType:
-        type: string
-        description:
-          Allows netmhcstabpan to run in parallel. Should be MUT or WT,
-          it will kick off two jobs. make a Channel.Of(MUT,WT) outside the module
-          as an input. Running them in series is kicked off by putting in anything other
-          than MUT or WT.
-        pattern: "WT,MUT"
+        description: HLA string made by generatehlastring.   It is comma separated
+  - - gtf:
+        type: file
+        description: Ensemble gtf resource file
+        pattern: "*.{gtf.gz}"
+    - cdna:
+        type: file
+        description: cDNA resource fasta
+        pattern: "*.{cdna.all.fa.gz}"
 output:
-  - netmhcstabpanoutput:
-      - output_meta:
+  #Only when we have meta
+  - mutOut:
+      - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:sample1, single_end:false ]`
-      - "*.netmhcstabpan.output":
+      - "*.net.in.txt":
           type: file
-          description:
-            STDOUT file of netMHCstabpan runs for MUT and WT.  A poorly formated
-            file of neoantigens. Neoantigenutils contains a parser for this file
-          pattern: "*.WT.netmhcstabpan.output,*.MUT.netmhcstabpan.output"
+          description: Mutated SV sequences in a multifasta
+          pattern: "*.net.in.txt"
+  - wtOut:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:sample1, single_end:false ]`
+      - "*.WT.net.in.txt":
+          type: file
+          description: WT sequences in a multifasta
+          pattern: "*.WT.net.in.txt"
   - versions:
       - versions.yml:
           type: file
