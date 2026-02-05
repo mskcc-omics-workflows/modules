@@ -1,90 +1,66 @@
-name: "fgbio_collectduplexseqmetrics"
-description: Collects a suite of metrics to QC duplex sequencing data.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "neoantigenutils_generatemutfasta"
+description: Generate the mutation fasta for netmhc tools
 keywords:
-  - duplex
-  - sequencing
-  - genomics
-  - fgbio
+  - neoantigen
+  - fasta
+  - netmhc
+  - mutation
 tools:
-  - "fgbio":
-      description: "A set of tools for working with genomic and high throughput sequencing data, including UMIs"
-      homepage: "https://github.com/fulcrumgenomics/fgbio"
-      documentation: "https://github.com/fulcrumgenomics/fgbio"
-      tool_dev_url: "https://github.com/fulcrumgenomics/fgbio"
-      doi: "no DOI available"
-      licence: ["MIT"]
-      identifier: biotools:fgbio
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
+      licence: [""]
+      identifier: ""
 
 input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information
-          e.g. [ id:test, single_end:false ]
-    - bam:
+          Groovy Map containing sample information.
+          e.g. `[ id:sample1, single_end:false ]`
+    - inputMaf:
         type: file
-        description: SAM/BAM/CRAM file
-        pattern: "*.{sam,bam,cram}"
-
+        description: Maf outputtted by Tempo that was run through phyloWGS
+        pattern: "*.{maf}"
+  - - cds:
+        type: file
+        description: coding sequence resource fasta
+        pattern: "*.{cds.all.fa.gz}"
+    - cdna:
+        type: file
+        description: cDNA resource fasta
+        pattern: "*.{cdna.all.fa.gz}"
 output:
-  - family_sizes:
+  - mut_fasta:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - ${prefix}.family_sizes.txt:
-          type: map
-          description: Metrics on the frequency of different types of families of different sizes.
-          pattern: "*.family_sizes.txt"
-  - duplex_family_sizes:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - ${prefix}.duplex_family_sizes.txt:
+            e.g. `[ id:sample1, single_end:false ]`
+      - "*_out/*.MUT.sequences.fa":
           type: file
-          description: Metrics on the frequency of duplex tag families by the number of observations from each strand.
-          pattern: "*.duplex_family_sizes.txt"
-  - duplex_yield_metrics:
+          description: Mutated fasta sequence
+          pattern: "*.{MUT.sequences.fa}"
+  - wt_fasta:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - ${prefix}.duplex_yield_metrics.txt:
+            e.g. `[ id:sample1, single_end:false ]`
+      - "*_out/*.WT.sequences.fa":
           type: file
-          description: Summary QC metrics produced using 5%, 10%, 15%...100% of the data.
-          pattern: "*.duplex_yield_metrics.txt"
-  - umi_counts:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - ${prefix}.umi_counts.txt:
-          type: file
-          description: Metrics on the frequency of observations of UMIs within reads and tag families.
-          pattern: "*.umi_counts.txt"
-  - duplex_umi_counts:
-      - meta:
-          type: map
-          description: |
-            Groovy Map containing sample information
-            e.g. [ id:test, single_end:false ]
-      - ${prefix}.duplex_umi_counts.txt:
-          type: file
-          description: Metrics on the frequency of observations of duplex UMIs within reads and tag families.
-          pattern: "*.duplex_umi_counts.txt"
+          description: Wildtype fasta sequence
+          pattern: "*.{WT.sequences.fa}"
   - versions:
       - versions.yml:
           type: file
           description: File containing software versions
           pattern: "versions.yml"
-
 authors:
-  - "@mikefeixu"
+  - "@johnoooh"
+  - "@nikhil"
 maintainers:
-  - "@mikefeixu"
+  - "@johnoooh"
+  - "@nikhil"
 
