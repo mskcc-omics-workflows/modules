@@ -8,14 +8,22 @@
 import json
 import os
 import subprocess
+import sys
 import tempfile
+import warnings
 from collections import defaultdict
 import numpy as np
 import argparse
 
 import pandas as pd
 from Bio import SeqIO
-from Bio.pairwise2 import align
+
+try:
+    from Bio.Align import PairwiseAligner, substitution_matrices
+    USE_NEW_API = True
+except ImportError:
+    from Bio.pairwise2 import align
+    USE_NEW_API = False
 
 
 def load_blosum62_mat():
@@ -68,8 +76,36 @@ X  0 -1 -1 -1 -2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -2  0  0 -2 -1 -1 -1 -1 -1 -4
 def align_peptides(seq1, seq2, matrix):
     gap_open = -11
     gap_extend = -1
-    aln = align.localds(seq1.upper(), seq2.upper(), matrix, gap_open, gap_extend)
-    return aln[0]
+
+    seq1_upper = seq1.upper()
+    seq2_upper = seq2.upper()
+
+    if seq1 != seq1_upper:
+        warnings.warn("Peptide '{}' contains lowercase characters, converting to uppercase.".format(seq1))
+    if seq2 != seq2_upper:
+        warnings.warn("Epitope '{}' contains lowercase characters, converting to uppercase.".format(seq2))
+
+    if USE_NEW_API:
+        aligner = PairwiseAligner(
+            mode="local",
+            open_gap_score=gap_open,
+            extend_gap_score=gap_extend,
+            substitution_matrix=substitution_matrices.load("BLOSUM62"),
+        )
+        alignments = aligner.align(seq1_upper, seq2_upper)
+        if len(alignments) > 0:
+            return alignments[0]
+        # Return an object with score=0 for empty alignment
+        class _EmptyAlignment:
+            score = 0.0
+        return _EmptyAlignment()
+    else:
+        aln = align.localds(seq1_upper, seq2_upper, matrix, gap_open, gap_extend)
+        if aln:
+            return aln[0]
+        class _EmptyAlignment:
+            score = 0.0
+        return _EmptyAlignment()
 
 
 def run_blastp_n(pep_list, blastdb):
