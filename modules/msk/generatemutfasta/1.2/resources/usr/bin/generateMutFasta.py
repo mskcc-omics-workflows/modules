@@ -131,9 +131,9 @@ def main():
                     + " Alt:"
                     + str(mut.maf_row["Tumor_Seq_Allele2"])
                 )
-                out_fa.write(">" + id_string + "\n")
+                out_fa.write(">" + mut.identifier_key + " " + id_string + "\n")
                 out_fa.write(mut.mt_altered_aa + "\n")
-                out_WT_fa.write(">" + id_string + "\n")
+                out_WT_fa.write(">" + mut.identifier_key + " " + id_string + "\n")
                 out_WT_fa.write(mut.wt_altered_aa + "\n")
 
                 ### write out WT/MT CDS + AA for debugging purposes
