@@ -118,22 +118,9 @@ def main():
                 n_missing_tx_id += 1
 
             if len(mut.mt_altered_aa) > 5:
-                id_string = (
-                    str(mut.maf_row["Transcript_ID"])
-                    + " Variant "
-                    + str(mut.maf_row["Chromosome"])
-                    + ":"
-                    + str(mut.maf_row["Start_Position"])
-                    + "-"
-                    + str(mut.maf_row["End_Position"])
-                    + " Ref:"
-                    + str(mut.maf_row["Reference_Allele"])
-                    + " Alt:"
-                    + str(mut.maf_row["Tumor_Seq_Allele2"])
-                )
-                out_fa.write(">" + id_string + "\n")
+                out_fa.write(">" + mut.identifier_key + "_M\n")
                 out_fa.write(mut.mt_altered_aa + "\n")
-                out_WT_fa.write(">" + id_string + "\n")
+                out_WT_fa.write(">" + mut.identifier_key + "_W\n")
                 out_WT_fa.write(mut.wt_altered_aa + "\n")
 
                 ### write out WT/MT CDS + AA for debugging purposes
