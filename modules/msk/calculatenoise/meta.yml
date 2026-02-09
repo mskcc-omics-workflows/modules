@@ -10,9 +10,9 @@ tools:
       homepage: "https://github.com/msk-access/sequence_qc"
       documentation: "https://github.com/msk-access/sequence_qc"
       tool_dev_url: "https://github.com/msk-access/sequence_qc"
-      doi: ""
+      doi: "no DOI available"
       licence: ["MIT"]
-      identifier: null
+      identifier: ""
 
 input:
   - - meta:
