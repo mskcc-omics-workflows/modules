@@ -10,10 +10,11 @@ process CUSTOM_FINGERPRINTCORRELATION {
 
     input:
     tuple val(meta), path(combined_fp_tsv)
+    val(filter_term)
 
     output:
-    tuple val(meta), path("*_gbcm_sample-to-sample4.pdf")                          , emit: heatmap_pdf
-    tuple val(meta), path("*_interactive4.html")                                   , emit: heatmap_html
+    tuple val(meta), path("*.pdf")                                                 , emit: heatmap_pdf
+    tuple val(meta), path("*.html")                                                , emit: heatmap_html
     tuple val(meta), path("*_observations.tab")                                    , emit: observations_tab
     tuple val(meta), path("*_correlations.tab")                                    , emit: correlations_tab
     tuple val("${task.process}"), val('plot_gbcm.R'), val("0.1.0"), topic: versions, emit: versions_fingerprintcorrelation
@@ -24,19 +25,20 @@ process CUSTOM_FINGERPRINTCORRELATION {
     script:
     def args = task.ext.args ?: ''
     def prefix = meta.id ?: "batch"
+    def filter_args = (filter_term && filter_term != "") ?  "-p ${filter_term} -f" : ""
     """
     plot_gbcm.R \\
         -t ${combined_fp_tsv} \\
         -o ./ \\
-        -p ${prefix}
+        ${filter_args}
     """
 
     stub:
     def args = task.ext.args ?: ''
     def prefix = meta.id ?: "batch"
     """
-    touch ${prefix}_gbcm_sample-to-sample4.pdf
-    touch ${prefix}_interactive4.html
+    touch ${prefix}.pdf
+    touch ${prefix}.html
     touch ${prefix}_observations.tab
     touch ${prefix}_correlations.tab
     """

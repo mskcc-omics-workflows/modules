@@ -49,7 +49,7 @@ hg19_hg38_mapper$Loci_hg38 = paste(hg19_hg38_mapper$GRCH38_CHROM,hg19_hg38_mappe
 hg19_hg38_mapper = hg19_hg38_mapper %>% select(Loci_hg19, Loci_hg38) %>% unique()
 
 message("Loading Samples")
-input_table = fread(args$input_table, header = T) %>% arrange(group, sample_id)
+input_table = fread(args$input_table, header = T) %>% arrange(patient, sample_id)
 for (i in 1:nrow(input_table)){
   sample = input_table$sample_id[i]
   genome_build = input_table$genome_build[i]

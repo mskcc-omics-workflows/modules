@@ -4,9 +4,10 @@ include { CUSTOM_FINGERPRINTCORRELATION } from '../../../modules/msk/custom/fing
 workflow FINGERPRINT_GBCMS_BATCH {
 
     take:
-    ch_fp // channel: [ val(meta), [ bam ] ]
+    ch_fp                    // channel: [ val(meta), [ bam ] ]
     ch_liftover_loci_mapping // channel: [ liftover_loci_mapping ]
     default_genome
+    filter_terms             // channel: filterterm
 
     main:
 
@@ -17,13 +18,14 @@ workflow FINGERPRINT_GBCMS_BATCH {
                 if (meta.pool) {
                     meta2.id = meta.pool
                 }
-                [meta2, tsv, meta.id, meta.genome ?: default_genome, meta.group ?: "default" ]
+                [meta2, tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample ]
             }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
     )
 
     CUSTOM_FINGERPRINTCORRELATION(
-        CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv
+        CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv,
+        filter_terms.unique()
     )
 
     emit:

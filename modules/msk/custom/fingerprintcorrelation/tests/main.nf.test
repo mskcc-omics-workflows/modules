@@ -66,6 +66,7 @@ nextflow_process {
             process {
                 """
                 input[0] = CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv
+		input[1] = "" 
                 """
             }
         }
@@ -91,6 +92,7 @@ nextflow_process {
             process {
                 """
                 input[0] = [[id:'thispool'], file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
+		input[1] = ""
                 """
             }
         }
