@@ -6,8 +6,7 @@ modules/msk/facets/** @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/fgbio/collectduplexseqmetrics/** @mikefeixu @mskcc-omics-workflows/reviewers
 modules/msk/gatk4/applybqsr/** @yocra3 @FriederikeHanssen @mskcc-omics-workflows/reviewers
 modules/msk/gbcms/** @buehlere @mskcc-omics-workflows/reviewers
-modules/msk/generatemutfasta/1.1/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
-modules/msk/generatemutfasta/1.2/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
+modules/msk/generatemutfasta/** @johnoooh @nikhil @mskcc-omics-workflows/reviewers
 modules/msk/genomenexus/annotationpipeline/** @rnaidu @mskcc-omics-workflows/reviewers
 modules/msk/genomenexus/vcf2maf/** @rnaidu @mskcc-omics-workflows/reviewers
 modules/msk/genotypevariants/all/** @buehlere @mskcc-omics-workflows/reviewers

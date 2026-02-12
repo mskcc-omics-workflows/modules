@@ -10,7 +10,7 @@ nextflow_workflow {
     tag "subworkflows/generate_mutated_peptides"
     tag "mutalyzer/retriever"
     tag "neoantigenutils/generatehlastring"
-    tag "generatemutfasta/1.2"
+    tag "generatemutfasta"
     tag "neosv"
 
 

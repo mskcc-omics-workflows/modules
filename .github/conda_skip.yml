@@ -37,9 +37,7 @@ exclude:
   - profile: conda
     path: modules/msk/ppflagfixer
   - profile: conda
-    path: modules/msk/generatemutfasta/1.1
-  - profile: conda
-    path: modules/msk/generatemutfasta/1.2
+    path: modules/msk/generatemutfasta
   - profile: conda
     path: modules/msk/neoantigenutils/formatnetmhcpan
   - profile: conda

@@ -1,5 +1,5 @@
 {
-    "generatemutfasta_1.2 - maf - fasta": {
+    "generatemutfasta - maf - fasta": {
         "content": [
             [
                 "versions.yml:md5,825989b899b3a496c7a3e3560389a424"
@@ -30,7 +30,7 @@
         },
         "timestamp": "2026-02-09T15:03:37.884362"
     },
-    "generatemutfasta_1.2 - maf - fasta - stub": {
+    "generatemutfasta - maf - fasta - stub": {
         "content": [
             {
                 "0": [
