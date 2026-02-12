@@ -15,7 +15,7 @@ nextflow_process {
 
         setup {
             run("MUTALYZER_RETRIEVER"){
-                script "../../../mutalyzer/retriever/main.nf"
+                script "../../mutalyzer/retriever/main.nf"
                 process {
                 """
 
