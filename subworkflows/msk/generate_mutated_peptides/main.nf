@@ -1,5 +1,5 @@
 include { MUTALYZER_RETRIEVER } from '../../../modules/msk/mutalyzer/retriever/main'
-include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/1.2/main'
+include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/main'
 include { NEOSV }               from '../../../modules/msk/neosv/main'
 include { NEOANTIGENUTILS_GENERATEHLASTRING } from '../../../modules/msk/neoantigenutils/generatehlastring/main'
 
