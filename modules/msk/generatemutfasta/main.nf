@@ -27,10 +27,8 @@ process GENERATEMUTFASTA {
 
     tar -xzf ${mutalyzer_cache} -C \$(pwd)/mutalyzer_cache
 
-    cat <<-END_MUTALYZER_CONFIG > \$(pwd)/config.txt
-    MUTALYZER_CACHE_DIR = \$(pwd)/mutalyzer_cache/cache
-    MUTALYZER_FILE_CACHE_ADD = false
-    END_MUTALYZER_CONFIG
+    echo MUTALYZER_CACHE_DIR = \$(pwd)/mutalyzer_cache/cache >> \$(pwd)/config.txt
+    echo MUTALYZER_FILE_CACHE_ADD = false >> \$(pwd)/config.txt
 
     mkdir ${prefix}_out
 
