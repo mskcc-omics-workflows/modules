@@ -48,10 +48,10 @@ process NETMHCSTABPAN {
     -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
-        netmhcstabpan: v${NETMHCSTABPAN_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhcpan: v${NETMHCPAN_VERSION}
+	    netmhcstabpan: v${NETMHCSTABPAN_VERSION}
+	END_VERSIONS
 
     """
 
@@ -70,9 +70,9 @@ process NETMHCSTABPAN {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
-        netmhcstabpan: v${NETMHCSTABPAN_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhcpan: v${NETMHCPAN_VERSION}
+	    netmhcstabpan: v${NETMHCSTABPAN_VERSION}
+	END_VERSIONS
     """
 }

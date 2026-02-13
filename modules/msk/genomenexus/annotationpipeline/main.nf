@@ -25,9 +25,9 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     java -Xms${task.memory.toMega()/4}m -Xmx${task.memory.toGiga()}g -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar --filename ${input_maf} --output-filename ${meta.id}-annotated.maf
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        genomenexus: 'annotationpipeline version 1.0.5'
-    END_VERSIONS
+	"${task.process}":
+	    genomenexus: 'annotationpipeline version 1.0.5'
+	END_VERSIONS
     """
 
     stub:
@@ -38,8 +38,8 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     touch ${meta.id}-annotated.maf
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        genomenexus: 'annotation pipeline version 1.0.5
-    END_VERSIONS
+	"${task.process}":
+	    genomenexus: 'annotation pipeline version 1.0.5
+	END_VERSIONS
     """
 }

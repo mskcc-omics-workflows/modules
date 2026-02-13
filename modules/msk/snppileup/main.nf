@@ -34,11 +34,11 @@ process SNPPILEUP {
         ${extra_bams}
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
-        htstools: 0.1.1
-        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
-    END_VERSIONS
+	"${task.process}":
+	    htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
+	    htstools: 0.1.1
+	    r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
+	END_VERSIONS
     """
 
     stub:
@@ -50,10 +50,10 @@ process SNPPILEUP {
     gzip ${prefix}.snp_pileup
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
-        htstools: 0.1.1
-        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
-    END_VERSIONS
+	"${task.process}":
+	    htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
+	    htstools: 0.1.1
+	    r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
+	END_VERSIONS
     """
 }

@@ -44,9 +44,9 @@ process MUTALYZER_RETRIEVER {
     tar -zcf ${prefix}.tar.gz cache/
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
-    END_VERSIONS
+	"${task.process}":
+	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
+	END_VERSIONS
     """
 
     stub:
@@ -56,8 +56,8 @@ process MUTALYZER_RETRIEVER {
     """
     touch ${prefix}.tar.gz
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
-    END_VERSIONS
+	"${task.process}":
+	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
+	END_VERSIONS
     """
 }

@@ -45,9 +45,9 @@ process MUTECT1 {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
-    END_VERSIONS
+	"${task.process}":
+	    mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
+	END_VERSIONS
     """
 
     stub:
@@ -62,8 +62,8 @@ process MUTECT1 {
     touch ${case_sample_name}.${control_sample_name}.mutect.txt
     touch ${case_sample_name}.${control_sample_name}.mutect.vcf
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
-    END_VERSIONS
+	"${task.process}":
+	    mutect1: \$(echo \$(java -jar /opt/mutect/muTect-1.1.5.jar --help) | grep -o 'The Genome Analysis Toolkit (GATK) v[0-9]\\.[0-9]\\-[0-9]' | sed 's/.* \\([v0-9.-]*\\)/\\1/')
+	END_VERSIONS
     """
 }

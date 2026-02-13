@@ -24,9 +24,9 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
             --output_file ${prefix}_neoantigens.tsv
 
         cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            convertannotjson: \$(echo \$(convertannotjson.py -v))
-        END_VERSIONS
+	"${task.process}":
+	    convertannotjson: \$(echo \$(convertannotjson.py -v))
+	END_VERSIONS
     """
 
     stub:
@@ -37,8 +37,8 @@ process NEOANTIGENUTILS_CONVERTANNOTJSON {
         touch ${prefix}_neoantigens.tsv
 
         cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            convertannotjson: \$(echo \$(convertannotjson.py -v))
-        END_VERSIONS
+	"${task.process}":
+	    convertannotjson: \$(echo \$(convertannotjson.py -v))
+	END_VERSIONS
     """
 }

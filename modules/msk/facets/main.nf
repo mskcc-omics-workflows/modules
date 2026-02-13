@@ -45,12 +45,12 @@ process FACETS {
         --counts-file ${snp_pileup}
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        facets_suite: \$(Rscript -e "packageVersion('facetsSuite')" | grep -oP "\\d+.\\d+.\\d+")
-        facets: \$(Rscript -e "packageVersion('facets')" | grep -oP "\\d+.\\d+.\\d+")
-        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
-        pctGCdata: \$(Rscript -e "packageVersion('pctGCdata')" | grep -oP "\\d+.\\d+.\\d+")
-    END_VERSIONS
+	"${task.process}":
+	    facets_suite: \$(Rscript -e "packageVersion('facetsSuite')" | grep -oP "\\d+.\\d+.\\d+")
+	    facets: \$(Rscript -e "packageVersion('facets')" | grep -oP "\\d+.\\d+.\\d+")
+	    r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
+	    pctGCdata: \$(Rscript -e "packageVersion('pctGCdata')" | grep -oP "\\d+.\\d+.\\d+")
+	END_VERSIONS
     """
 
     stub:
@@ -79,11 +79,11 @@ process FACETS {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        facets_suite: \$(Rscript -e "packageVersion('facetsSuite')" | grep -oP "\\d+.\\d+.\\d+")
-        facets: \$(Rscript -e "packageVersion('facets')" | grep -oP "\\d+.\\d+.\\d+")
-        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
-        pctGCdata: \$(Rscript -e "packageVersion('pctGCdata')" | grep -oP "\\d+.\\d+.\\d+")
-    END_VERSIONS
+	"${task.process}":
+	    facets_suite: \$(Rscript -e "packageVersion('facetsSuite')" | grep -oP "\\d+.\\d+.\\d+")
+	    facets: \$(Rscript -e "packageVersion('facets')" | grep -oP "\\d+.\\d+.\\d+")
+	    r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
+	    pctGCdata: \$(Rscript -e "packageVersion('pctGCdata')" | grep -oP "\\d+.\\d+.\\d+")
+	END_VERSIONS
     """
 }

@@ -51,9 +51,9 @@ process NETMHC3 {
     mv hla_rejected.txt ${prefix}.hla_rejected.txt
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhc: v${NETMHC_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhc: v${NETMHC_VERSION}
+	END_VERSIONS
 
     """
 
@@ -72,8 +72,8 @@ process NETMHC3 {
     touch ${prefix}.hla_rejected.txt
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhc: v${NETMHC_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhc: v${NETMHC_VERSION}
+	END_VERSIONS
     """
 }

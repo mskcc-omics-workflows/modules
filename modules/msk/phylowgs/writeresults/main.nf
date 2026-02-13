@@ -32,9 +32,9 @@ process PHYLOWGS_WRITERESULTS {
         ${prefix}.muts.json.gz \\
         ${prefix}.mutass.zip
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        phylowgs: \$PHYLOWGS_TAG
-    END_VERSIONS
+	"${task.process}":
+	    phylowgs: \$PHYLOWGS_TAG
+	END_VERSIONS
     """
 
     stub:
@@ -46,8 +46,8 @@ process PHYLOWGS_WRITERESULTS {
     touch ${prefix}.mutass.zip
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        phylowgs: \$PHYLOWGS_TAG
-    END_VERSIONS
+	"${task.process}":
+	    phylowgs: \$PHYLOWGS_TAG
+	END_VERSIONS
     """
 }

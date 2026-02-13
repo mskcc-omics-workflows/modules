@@ -39,9 +39,9 @@ process SALMON_QUANT {
     cp ${prefix}.salmon.quant/quant.sf ${prefix}.quant.sf
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        salmon: \$(echo \$(salmon --version) | sed -e "s/salmon //g")
-    END_VERSIONS
+	"${task.process}":
+	    salmon: \$(echo \$(salmon --version) | sed -e "s/salmon //g")
+	END_VERSIONS
     """
 
     stub:
@@ -51,8 +51,8 @@ process SALMON_QUANT {
     touch ${prefix}.quant.sf
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        salmon: \$(echo \$(salmon --version) | sed -e "s/salmon //g")
-    END_VERSIONS
+	"${task.process}":
+	    salmon: \$(echo \$(salmon --version) | sed -e "s/salmon //g")
+	END_VERSIONS
     """
 }

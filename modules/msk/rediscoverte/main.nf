@@ -36,9 +36,9 @@ process REDISCOVERTE {
         --outdir=REdiscoverTE_rollup
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        rediscoverte: 1.0.0
-    END_VERSIONS
+	"${task.process}":
+	    rediscoverte: 1.0.0
+	END_VERSIONS
     """
 
     stub:
@@ -49,8 +49,8 @@ process REDISCOVERTE {
     touch REdiscoverTE_rollup/abc.RDS
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        rediscoverte: 1.0.0
-    END_VERSIONS
+	"${task.process}":
+	    rediscoverte: 1.0.0
+	END_VERSIONS
     """
 }

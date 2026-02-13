@@ -32,9 +32,9 @@ process PVMAF_TAGTRACEBACK {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        pv: \$( pv --version  )
-    END_VERSIONS
+	"${task.process}":
+	    pv: \$( pv --version  )
+	END_VERSIONS
     """
 
     stub:
@@ -44,8 +44,8 @@ process PVMAF_TAGTRACEBACK {
     """
     touch $output
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        pv: \$( pv --version  )
-    END_VERSIONS
+	"${task.process}":
+	    pv: \$( pv --version  )
+	END_VERSIONS
     """
 }

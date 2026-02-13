@@ -42,9 +42,9 @@ process GENOTYPEVARIANTS_ALL {
     $args
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        genotypevariants: \$(genotype_variants --version)
-    END_VERSIONS
+	"${task.process}":
+	    genotypevariants: \$(genotype_variants --version)
+	END_VERSIONS
     """
 
     stub:
@@ -60,8 +60,8 @@ process GENOTYPEVARIANTS_ALL {
     touch ${prefix}-SIMPLEX_genotyped.maf
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        genotypevariants: \$(genotype_variants --version)
-    END_VERSIONS
+	"${task.process}":
+	    genotypevariants: \$(genotype_variants --version)
+	END_VERSIONS
     """
 }
