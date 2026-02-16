@@ -1,6 +1,6 @@
 process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tag "$meta.id"
-    label 'process_medium'
+    label 'process_single'
     container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0"
 
     input:
