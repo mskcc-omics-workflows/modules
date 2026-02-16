@@ -8,14 +8,14 @@ nextflow_process {
 
     tag "modules"
     tag "modules_nfcore"
-    tag "generatemutfasta/1.2"
+    tag "generatemutfasta"
     tag "modules_msk"
 
-    test("generatemutfasta_1.2 - maf - fasta") {
+    test("generatemutfasta - maf - fasta") {
 
         setup {
             run("MUTALYZER_RETRIEVER"){
-                script "../../../mutalyzer/retriever/main.nf"
+                script "../../mutalyzer/retriever/main.nf"
                 process {
                 """
 
@@ -61,7 +61,7 @@ nextflow_process {
     }
 
 
-    test("generatemutfasta_1.2 - maf - fasta - stub") {
+    test("generatemutfasta - maf - fasta - stub") {
 
         options "-stub"
 

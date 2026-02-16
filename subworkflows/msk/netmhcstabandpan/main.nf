@@ -48,27 +48,27 @@ workflow NETMHCSTABANDPAN {
 }
 
 def createNETMHCInput(fastas_and_hla, sv_fastas) {
-        fastas_and_hla_channel = fastas_and_hla
+        def fastas_and_hla_channel = fastas_and_hla
             .map{
-                new Tuple(it[0],it)
+                [it[0],it]
                 }
 
-        sv_fastas_channel = sv_fastas
+        def sv_fastas_channel = sv_fastas
             .map{
-                new Tuple(it[0],it)
+                [it[0],it]
                 }
 
-        merged_mut = fastas_and_hla_channel
+        def merged_mut = fastas_and_hla_channel
             .join(sv_fastas_channel, by:0)
             .map({
-                new Tuple(it[1][0], it[1][1], it[2][1], it[1][3], "MUT")
+                [it[1][0], it[1][1], it[2][1], it[1][3], "MUT"]
             })
 
-        merged_wt = fastas_and_hla_channel
+        def merged_wt = fastas_and_hla_channel
             .join(sv_fastas_channel, by:0)
             .map({
-                new Tuple(it[1][0], it[1][2], it[2][2], it[1][3], "WT")
+                [it[1][0], it[1][2], it[2][2], it[1][3], "WT"]
             })
-        merged = merged_mut.mix(merged_wt)
+        def merged = merged_mut.mix(merged_wt)
         return merged
 }

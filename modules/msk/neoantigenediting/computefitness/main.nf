@@ -27,9 +27,9 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
         ${args}
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
-    END_VERSIONS
+	"${task.process}":
+	    neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
+	END_VERSIONS
     """
 
     stub:
@@ -40,8 +40,8 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
     touch patient_data_annotated.json
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
-    END_VERSIONS
+	"${task.process}":
+	    neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
+	END_VERSIONS
     """
 }

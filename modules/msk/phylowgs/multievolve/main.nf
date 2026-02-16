@@ -27,9 +27,9 @@ process PHYLOWGS_MULTIEVOLVE {
         --cnvs ${cnv_data}
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        phylowgs: \$PHYLOWGS_TAG
-    END_VERSIONS
+	"${task.process}":
+	    phylowgs: \$PHYLOWGS_TAG
+	END_VERSIONS
     """
 
     stub:
@@ -40,8 +40,8 @@ process PHYLOWGS_MULTIEVOLVE {
     touch chains/trees.zip
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        phylowgs: \$PHYLOWGS_TAG
-    END_VERSIONS
+	"${task.process}":
+	    phylowgs: \$PHYLOWGS_TAG
+	END_VERSIONS
     """
 }

@@ -1,5 +1,5 @@
 include { MUTALYZER_RETRIEVER } from '../../../modules/msk/mutalyzer/retriever/main'
-include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/1.2/main'
+include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/main'
 include { NEOSV }               from '../../../modules/msk/neosv/main'
 include { NEOANTIGENUTILS_GENERATEHLASTRING } from '../../../modules/msk/neoantigenutils/generatehlastring/main'
 
@@ -19,29 +19,29 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     ch_maf = ch_maf_hla_sv
                 .map{
-                    new Tuple(it[0],it[1])
+                    [it[0],it[1]]
                 }
 
     ch_hla = ch_maf_hla_sv
                 .map{
-                    new Tuple(it[0],it[2])
+                    [it[0],it[2]]
                 }
 
     ch_sv = ch_maf_hla_sv
                 .map{
-                    new Tuple(it[0],it[3])
+                    [it[0],it[3]]
                 }
 
     ch_fasta_and_gff3 =  ref_fasta
                             .merge(gff3)
                             .map{
-                                new Tuple([ id:"mutalyzer_retriever_"+file(it[0]).name +"_"+ file(it[1]).name], it[0], it[1])
+                                [[ id:"mutalyzer_retriever_"+file(it[0]).name +"_"+ file(it[1]).name], it[0], it[1]]
                             }
 
     ch_gtf_and_cdna = gtf
                             .merge(cdna)
                             .map{
-                                new Tuple(it[0], it[1])
+                                [it[0], it[1]]
                             }
 
     NEOANTIGENUTILS_GENERATEHLASTRING( ch_hla )
@@ -74,20 +74,20 @@ workflow GENERATE_MUTATED_PEPTIDES {
 }
 
 def createNEOSVInput(sv_bedpe, hla_str) {
-        sv_bedpe_channel = sv_bedpe
+        def sv_bedpe_channel = sv_bedpe
             .map{
-                new Tuple(it[0],it)
+                [it[0],it]
                 }
 
-        hla_str_channel = hla_str
+        def hla_str_channel = hla_str
             .map{
-                new Tuple(it[0],it)
+                [it[0],it]
                 }
 
-        merged_sv_hla = sv_bedpe_channel
+        def merged_sv_hla = sv_bedpe_channel
             .join(hla_str_channel, by:0)
             .map{
-                new Tuple(it[1][0], it[1][1], it[2][1])
+                [it[1][0], it[1][1], it[2][1]]
             }
             .filter{ it[1] != null && it[2] != null }
         return merged_sv_hla

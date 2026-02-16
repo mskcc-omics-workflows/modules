@@ -51,9 +51,9 @@ process NETMHCPAN4 {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhcpan: v${NETMHCPAN_VERSION}
+	END_VERSIONS
 
     """
 
@@ -70,8 +70,8 @@ process NETMHCPAN4 {
     touch ${prefix}.${inputType}.netmhcpan.output
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhcpan: v${NETMHCPAN_VERSION}
+	END_VERSIONS
     """
 }

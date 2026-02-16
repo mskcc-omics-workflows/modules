@@ -27,10 +27,8 @@ process GENERATEMUTFASTA {
 
     tar -xzf ${mutalyzer_cache} -C \$(pwd)/mutalyzer_cache
 
-    cat <<-END_MUTALYZER_CONFIG > \$(pwd)/config.txt
-	MUTALYZER_CACHE_DIR = \$(pwd)/mutalyzer_cache/cache
-	MUTALYZER_FILE_CACHE_ADD = false
-	END_MUTALYZER_CONFIG
+    echo MUTALYZER_CACHE_DIR = \$(pwd)/mutalyzer_cache/cache >> \$(pwd)/config.txt
+    echo MUTALYZER_FILE_CACHE_ADD = false >> \$(pwd)/config.txt
 
     mkdir ${prefix}_out
 
@@ -39,10 +37,10 @@ process GENERATEMUTFASTA {
     --maf_file ${inputMaf}
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        generateMutFasta: \$(echo \$(generateMutFasta.py -v))
-        mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
-    END_VERSIONS
+	"${task.process}":
+	    generateMutFasta: \$(echo \$(generateMutFasta.py -v))
+	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
+	END_VERSIONS
     """
 
     stub:
@@ -55,9 +53,9 @@ process GENERATEMUTFASTA {
         touch ${prefix}_out/${prefix}.WT.sequences.fa
         touch ${prefix}_out/${prefix}_generate_mut_fasta.log
         cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            generateMutFasta: \$(echo \$(generateMutFasta.py -v))
-            mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
-        END_VERSIONS
+	"${task.process}":
+	    generateMutFasta: \$(echo \$(generateMutFasta.py -v))
+	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
+	END_VERSIONS
     """
 }
