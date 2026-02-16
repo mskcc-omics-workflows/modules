@@ -31,9 +31,9 @@ process PVMAF_CONCAT {
 
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    pv: \$( pv --version )
-	END_VERSIONS
+    "${task.process}":
+        pv: \$( pv --version )
+    END_VERSIONS
     """
 
     stub:
@@ -45,8 +45,8 @@ process PVMAF_CONCAT {
     touch $output
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    pv: \$( pv --version )
-	END_VERSIONS
+    "${task.process}":
+        pv: \$( pv --version )
+    END_VERSIONS
     """
 }

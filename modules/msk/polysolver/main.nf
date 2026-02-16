@@ -43,9 +43,9 @@ process POLYSOLVER {
     mv ${prefix}/winners.hla.txt ${prefix}.hla.txt
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    polysolver: v3
-	END_VERSIONS
+    "${task.process}":
+        polysolver: v3
+    END_VERSIONS
     """
 
     stub:
@@ -55,8 +55,8 @@ process POLYSOLVER {
     touch ${prefix}.hla.txt
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    polysolver: v3
-	END_VERSIONS
+    "${task.process}":
+        polysolver: v3
+    END_VERSIONS
     """
 }

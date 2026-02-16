@@ -34,9 +34,9 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
         $args
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    fgbio: \$(fgbio CollectDuplexSeqMetrics --version 2>&1 | grep -o 'Version:.*' | cut -f2- -d: | xargs)
-	END_VERSIONS
+    "${task.process}":
+        fgbio: \$(fgbio CollectDuplexSeqMetrics --version 2>&1 | grep -o 'Version:.*' | cut -f2- -d: | xargs)
+    END_VERSIONS
     """
 
     stub:
@@ -51,9 +51,9 @@ process FGBIO_COLLECTDUPLEXSEQMETRICS {
     touch ${prefix}.duplex_umi_counts.txt
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    fgbio: \$(fgbio CollectDuplexSeqMetrics --version 2>&1 | grep -o 'Version:.*' | cut -f2- -d: | xargs)
-	END_VERSIONS
+    "${task.process}":
+        fgbio: \$(fgbio CollectDuplexSeqMetrics --version 2>&1 | grep -o 'Version:.*' | cut -f2- -d: | xargs)
+    END_VERSIONS
 
     """
 }

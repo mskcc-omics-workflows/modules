@@ -45,9 +45,9 @@ process GBCMS {
     --bam $sample:${bam} $args
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    GetBaseCountsMultiSample: \$(echo \$(GetBaseCountsMultiSample --help) | grep -oP '[0-9]\\.[0-9]\\.[0-9]')
-	END_VERSIONS
+    "${task.process}":
+        GetBaseCountsMultiSample: \$(echo \$(GetBaseCountsMultiSample --help) | grep -oP '[0-9]\\.[0-9]\\.[0-9]')
+    END_VERSIONS
     """
 
     stub:
@@ -57,8 +57,8 @@ process GBCMS {
 
     touch variant_file.maf
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    GetBaseCountsMultiSample:  1.2.5
-	END_VERSIONS
+    "${task.process}":
+        GetBaseCountsMultiSample:  1.2.5
+    END_VERSIONS
     """
 }

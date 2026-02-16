@@ -30,9 +30,9 @@ process ONCOKB_MAFANNOTATE {
     $args
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    MafAnnotator: \$(echo \$(MafAnnotator.py -v))
-	END_VERSIONS
+        "${task.process}":
+            MafAnnotator: \$(echo \$(MafAnnotator.py -v))
+        END_VERSIONS
     """
 
     stub:
@@ -44,8 +44,8 @@ process ONCOKB_MAFANNOTATE {
         touch ${prefix}.oncokb.maf
 
         cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    MafAnnotator: \$(echo \$(MafAnnotator.py -v))
-	END_VERSIONS
+        "${task.process}":
+            MafAnnotator: \$(echo \$(MafAnnotator.py -v))
+        END_VERSIONS
     """
 }

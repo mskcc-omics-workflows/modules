@@ -53,9 +53,9 @@ process CALCULATENOISE {
         $args
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    calculatenoise: \$(calculate_noise --help 2>/dev/null || echo "Usage")
-	END_VERSIONS
+    "${task.process}":
+        calculatenoise: \$(calculate_noise --help 2>/dev/null || echo "Usage")
+    END_VERSIONS
     """
 
     stub:
@@ -72,8 +72,8 @@ process CALCULATENOISE {
     touch ${meta.id}_pileup.tsv
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    calculatenoise: \$(calculate_noise --help 2>/dev/null || echo "Usage")
-	END_VERSIONS
+    "${task.process}":
+        calculatenoise: \$(calculate_noise --help 2>/dev/null || echo "Usage")
+    END_VERSIONS
     """
 }

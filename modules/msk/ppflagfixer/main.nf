@@ -27,10 +27,10 @@ process PPFLAGFIXER {
         ppflag.${prefix}.bam
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
-	    r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
-	END_VERSIONS
+    "${task.process}":
+        htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
+        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
+    END_VERSIONS
     """
 
     stub:
@@ -40,9 +40,9 @@ process PPFLAGFIXER {
     """
     echo "stub test" >> ppflag.${prefix}.bam
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
-	    r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
-	END_VERSIONS
+    "${task.process}":
+        htslib: \$(bgzip --version | grep -oP '(?<=\\(htslib\\) ).*')
+        r: \$(R --version | grep -oP '(?<=R version ).*(?=\\()')
+    END_VERSIONS
     """
 }

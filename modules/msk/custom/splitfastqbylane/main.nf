@@ -26,9 +26,9 @@ process CUSTOM_SPLITFASTQBYLANE {
     split_lanes_awk.sh ${prefix} ${read1} ${read2}
 
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
-	END_VERSIONS
+    "${task.process}":
+        gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
+    END_VERSIONS
     """
 
     stub:
@@ -38,8 +38,8 @@ process CUSTOM_SPLITFASTQBYLANE {
     touch out.split.fastq
     gzip out.split.fastq
     cat <<-END_VERSIONS > versions.yml
-	"${task.process}":
-	    gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
-	END_VERSIONS
+    "${task.process}":
+        gawk: \$(awk -Wversion | sed '1!d; s/.*Awk //; s/,.*//')
+    END_VERSIONS
     """
 }
