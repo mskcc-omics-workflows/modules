@@ -1,0 +1,90 @@
+name: "neoantigenutils_rnaannotate"
+description:
+  Annotate neoantigen TSV with RNA expression and VAF data from FORTE pipeline
+  outputs
+keywords:
+  - neoantigen
+  - rna
+  - expression
+  - annotation
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
+      licence:
+        - ""
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:'sample1']`
+    - neoantigen_tsv:
+        type: file
+        description: Neoantigen TSV from convertannotjson
+        pattern: "*.tsv"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:'sample1']`
+    - maf:
+        type: file
+        description: Input MAF file (may contain rna_* columns from FORTE fillout)
+        pattern: "*.maf"
+        ontologies: []
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:'sample1']`
+    - kallisto_abundance:
+        type: file
+        description: Kallisto abundance.tsv with transcript-level TPM (optional)
+        pattern: "*.tsv"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+  - gtf:
+      type: file
+      description: GTF annotation file for transcript-to-gene mapping
+      pattern: "*.gtf"
+      ontologies: []
+output:
+  annotated_tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1']`
+      - "*_rna_annotated.tsv":
+          type: file
+          description: Neoantigen TSV with RNA annotation columns added
+          pattern: "*_rna_annotated.tsv"
+          ontologies:
+            - edam: http://edamontology.org/format_3475
+  rna_report:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1']`
+      - "*_rna_report.tsv":
+          type: file
+          description: Detailed RNA report per gene and mutation
+          pattern: "*_rna_report.tsv"
+          ontologies:
+            - edam: http://edamontology.org/format_3475
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"

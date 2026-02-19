@@ -1,0 +1,37 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_FUSIONPREPARE"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_FUSIONPREPARE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/fusionprepare"
+    tag "modules_msk"
+
+    test("neoantigenutils_fusionprepare - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+                input[0] = [
+                    [ id:'test'], // meta map
+                    file('test_agfusion_dir')
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}

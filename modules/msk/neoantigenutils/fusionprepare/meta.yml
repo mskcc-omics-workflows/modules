@@ -1,0 +1,59 @@
+name: "neoantigenutils_fusionprepare"
+description:
+  Convert AGFusion output to pipeline-compatible FASTA format for fusion
+  neoantigen prediction
+keywords:
+  - neoantigen
+  - fusion
+  - fasta
+  - peptide
+tools:
+  - neoantigen_utils:
+      description: "Collection of helper scripts for neoantigen processing"
+      documentation: "https://github.com/mskcc-omics-workflows/modules"
+      licence:
+        - ""
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:'sample1']`
+    - agfusion_dir:
+        type: directory
+        description: AGFusion output directory with per-fusion subdirectories
+output:
+  mut_fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1']`
+      - "*.SV.MUT.fa":
+          type: file
+          description: FASTA of fusion mutant peptides for MHC binding prediction
+          pattern: "*.SV.MUT.fa"
+          ontologies: []
+  wt_fasta:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1']`
+      - "*.SV.WT.fa":
+          type: file
+          description: FASTA of wild-type peptide equivalents
+          pattern: "*.SV.WT.fa"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"

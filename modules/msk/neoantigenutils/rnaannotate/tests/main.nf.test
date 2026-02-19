@@ -1,0 +1,46 @@
+nextflow_process {
+
+    name "Test Process NEOANTIGENUTILS_RNAANNOTATE"
+    script "../main.nf"
+    process "NEOANTIGENUTILS_RNAANNOTATE"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "neoantigenutils"
+    tag "neoantigenutils/rnaannotate"
+    tag "modules_msk"
+
+    test("neoantigenutils_rnaannotate - stub") {
+
+        options "-stub"
+
+        when {
+
+            process {
+                """
+                input[0] = [
+                    [ id:'test'], // meta map
+                    file('test_neoantigens.tsv')
+                    ]
+                input[1] = [
+                    [ id:'test'], // meta map
+                    file('test.maf')
+                    ]
+                input[2] = [
+                    [ id:'test'], // meta map
+                    file('abundance.tsv')
+                    ]
+                input[3] = file('test.gtf')
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+}
