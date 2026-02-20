@@ -2,6 +2,7 @@
 """Annotate neoantigen TSV with RNA-seq data from FORTE outputs."""
 
 import argparse
+import gzip
 import re
 import sys
 
@@ -60,7 +61,8 @@ def extract_rna_columns_from_maf(maf_df):
 def parse_gtf_gene_map(gtf_path):
     """Parse GTF to build transcript_id -> gene_name mapping."""
     tx2gene = {}
-    with open(gtf_path) as f:
+    opener = gzip.open if gtf_path.endswith(".gz") else open
+    with opener(gtf_path, "rt") as f:
         for line in f:
             if line.startswith("#"):
                 continue
