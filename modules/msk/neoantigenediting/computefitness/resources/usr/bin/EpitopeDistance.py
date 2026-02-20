@@ -58,45 +58,29 @@ class EpitopeDistance(object):
         """Load model and format substitution matrix M_ab."""
         with open(model_file, "r") as modelf:
             c_model = json.load(modelf)
-        self.d_i = c_model.get("d_i", [1] * 9)
-        self.M_ab_dict = c_model.get("M_ab", c_model)
-        avg_val = np.mean(list(self.M_ab_dict.values())) if self.M_ab_dict else 0.0
+        self.d_i = c_model["d_i"]
+        self.M_ab_dict = c_model["M_ab"]
         M_ab = np.zeros((len(self.amino_acids), len(self.amino_acids)))
         for i, aaA in enumerate(self.amino_acids):
             for j, aaB in enumerate(self.amino_acids):
-                key = aaA + "->" + aaB
-                rev_key = aaB + "->" + aaA
-                if key in self.M_ab_dict:
-                    M_ab[i, j] = self.M_ab_dict[key]
-                elif rev_key in self.M_ab_dict:
-                    M_ab[i, j] = self.M_ab_dict[rev_key]
-                else:
-                    M_ab[i, j] = avg_val
+                M_ab[i, j] = self.M_ab_dict[aaA + "->" + aaB]
         self.M_ab = M_ab
 
     def epitope_dist(self, epiA, epiB):
-        """Compute the model difference between epitopes epiA and epiB.
+        """Compute the model difference between the 9-mers epiA and epiB.
 
-        Ignores capitalization. Supports variable-length epitopes: if the
-        epitope length matches len(d_i), position weights are applied;
-        otherwise the raw M_ab values are summed without d_i weighting.
+        Ignores capitalization.
 
         Model:
             dist({a_i}, {b_i}) = \sum_i d_i M_ab(a_i, b_i)
         """
-        n = min(len(epiA), len(epiB))
-        if n == len(self.d_i):
-            return sum(
+
+        return sum(
+            [
                 self.d_i[i]
                 * self.M_ab[
                     self.amino_acid_dict[epiA[i]], self.amino_acid_dict[epiB[i]]
                 ]
-                for i in range(n)
-            )
-        else:
-            return sum(
-                self.M_ab[
-                    self.amino_acid_dict[epiA[i]], self.amino_acid_dict[epiB[i]]
-                ]
-                for i in range(n)
-            )
+                for i in range(9)
+            ]
+        )
