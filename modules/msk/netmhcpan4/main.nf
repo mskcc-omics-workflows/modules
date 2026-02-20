@@ -36,11 +36,11 @@ process NETMHCPAN4 {
     chmod 777 ${tmpDir}
 
 
-    cat ${inputSVFasta} >> ${inputFasta}
+    cat ${inputFasta} ${inputSVFasta} > combined_input.fa
     /usr/local/bin/netMHCpan-${NETMHCPAN_VERSION}/netMHCpan \
     -s 0 \
     -BA 1 \
-    -f ${inputFasta} \
+    -f combined_input.fa \
     -a ${hla} \
     -l 9,10 \
     -inptype 0 \

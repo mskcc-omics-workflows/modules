@@ -131,6 +131,7 @@ def main():
             mutations.append(mut)
 
         out_fa.close()
+        out_WT_fa.close()
         debug_out_fa.close()
 
         logger.info("\tMAF mutations summary")
@@ -208,7 +209,7 @@ class mutation(object):
 
         variant_type_map = {
             "missense_mutation": "M",
-            "nonsense_nutation": "X",
+            "nonsense_mutation": "X",
             "silent_mutation": "S",
             "silent": "S",
             "frame_shift_ins": "I+",

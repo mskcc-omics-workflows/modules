@@ -555,12 +555,14 @@ def main(args):
                         # In this case we don't want to report the peptide as a neoantigen, its not neo
                         continue
 
-                    elif (
-                        best_pepmatch[0] != row_mut["peptide"][0]
-                        and best_pepmatch2[0] == row_mut["peptide"][0]
-                    ) or (
-                        best_pepmatch[-1] != row_mut["peptide"][-1]
-                        and best_pepmatch2[-1] == row_mut["peptide"][-1]
+                    elif best_pepmatch2 is not None and (
+                        (
+                            best_pepmatch[0] != row_mut["peptide"][0]
+                            and best_pepmatch2[0] == row_mut["peptide"][0]
+                        ) or (
+                            best_pepmatch[-1] != row_mut["peptide"][-1]
+                            and best_pepmatch2[-1] == row_mut["peptide"][-1]
+                        )
                     ):
                         # We should preferentially match the first AA if we can.  Sometimes the pairwise alignment isnt the best at this so we do a little check here.
                         # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
@@ -694,7 +696,7 @@ def makeID(maf_row):
 
     variant_type_map = {
             "missense_mutation": "M",
-            "nonsense_nutation": "X",
+            "nonsense_mutation": "X",
             "silent_mutation": "S",
             "silent": "S",
             "frame_shift_ins": "I+",
@@ -1036,6 +1038,7 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
 
     NMD = "False"
 
+    PTC_exon = None
     pos = int(pos) + 1
     for i in range(0,len(exon_ranges)):
         if pos>=exon_ranges[i][0] and pos<=exon_ranges[i][1]:
@@ -1058,7 +1061,7 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
                 else:
                     mut_to_stop_dist = mut_to_stop_dist - dist
 
-    if PTC_exon == exon_ranges[-1]:
+    if PTC_exon is not None and PTC_exon == exon_ranges[-1]:
         # "on the last exon"
         NMD = "Last Exon"
     else:

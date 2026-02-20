@@ -38,11 +38,11 @@ process NETMHCSTABPAN {
     mkdir -p ${tmpDir}
     chmod 777 ${tmpDir}
 
-    cat ${inputSVFasta} >> ${inputFasta}
+    cat ${inputFasta} ${inputSVFasta} > combined_input.fa
 
     /usr/local/bin/netMHCstabpan-${NETMHCSTABPAN_VERSION}/netMHCstabpan \
     -s -1 \
-    -f ${inputFasta} \
+    -f combined_input.fa \
     -a ${hla} \
     -l 9,10 \
     -inptype 0 > ${prefix}.${inputType}.netmhcstabpan.output
