@@ -31,7 +31,7 @@ class EpitopeDistance(object):
 
     M_ab : ndarray
         Amino acid substitution matrix. Indexed by the order of amino_acids.
-        M_ab.shape == (21, 21)
+        M_ab.shape == (20, 20)
 
 
     """
@@ -41,7 +41,7 @@ class EpitopeDistance(object):
         model_file=os.path.join(
             os.path.dirname(__file__), "distance_data", "epitope_distance_model_parameters.json"
         ),
-        amino_acids="ACDEFGHIKLMNPQRSTVWYX",
+        amino_acids="ACDEFGHIKLMNPQRSTVWY",
     ):
         """Initialize class and compute M_ab."""
 
