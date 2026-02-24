@@ -15,9 +15,6 @@ workflow FINGERPRINT_GBCMS_BATCH {
         ch_fp
             .map{ meta, tsv ->
                 def meta2 = [id:'defaultbatch']
-                if (meta.pool) {
-                    meta2.id = meta.pool
-                }
                 [meta2, tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample ]
             }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
