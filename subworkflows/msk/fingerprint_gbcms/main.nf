@@ -18,8 +18,6 @@ workflow FINGERPRINT_GBCMS {
 
     main:
 
-    println ch_fp_loci_vcf.getClass()
-    println ch_fasta.getClass()
 
     GBCMS(
         ch_bam
@@ -28,8 +26,6 @@ workflow FINGERPRINT_GBCMS {
             .map{ meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.id + ".fp.vcf" ] }.view(),
         ch_fasta.first(),
         ch_fastafai.first()
-        //ch_fasta.view().map{ if (it[0] instanceof Map){ it[1] } else { it }}.first(),
-        //ch_fastafai.view().map{ if (it[0] instanceof Map){ it[1] } else { it }}.first()
     )
 
 
@@ -48,7 +44,7 @@ workflow FINGERPRINT_GBCMS {
         }
 
     unpaired_fps = all_fps
-        .filter{ meta, tsv -> meta.id != meta.case_id || meta.control_id == null }
+        .filter{ meta, tsv -> ! meta.control_id }
         .map{ meta, tsv -> [ meta, tsv, [] ] }
 
     CUSTOM_FINGERPRINTCONTAMINATION ( paired_fps.mix(unpaired_fps).view() )
