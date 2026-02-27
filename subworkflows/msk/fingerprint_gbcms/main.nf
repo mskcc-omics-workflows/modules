@@ -1,7 +1,6 @@
 include { GBCMS                           } from '../../../modules/msk/gbcms/main'
 include { CUSTOM_FINGERPRINTVCFPARSER     } from '../../../modules/msk/custom/fingerprintvcfparser/main'
 include { CUSTOM_FINGERPRINTCONTAMINATION } from '../../../modules/msk/custom/fingerprintcontamination/main'
-include { FINGERPRINT_GBCMS_BATCH         } from '../fingerprint_gbcms_batch/main'
 
 workflow FINGERPRINT_GBCMS {
 
@@ -10,11 +9,8 @@ workflow FINGERPRINT_GBCMS {
     ch_bai // channel: [ val(meta), [ bai ] ]
     ch_fp_tsv // channel: [ val(meta), [ tsv ] ]
     ch_fp_loci_vcf // channel: [ val(meta), [ vcf ] ]
-    ch_liftover_loci_mapping // channel: [ liftover_loci_mapping ]
     ch_fasta // channel: [ fasta ]
     ch_fastafai // channel: [ fastafai ]
-    default_genome // channel: [ genome ]
-    run_correlation
 
     main:
 
@@ -23,12 +19,10 @@ workflow FINGERPRINT_GBCMS {
         ch_bam
             .combine(ch_bai, by:[0])
             .combine(ch_fp_loci_vcf.map{ if ( [it].flatten().size() > 1){ it[1] } else { it }}.first())
-            .map{ meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.id + ".fp.vcf" ] }.view(),
+            .map{ meta, bam, bai, vcf -> [ meta, bam, bai, vcf, meta.id + ".fp.vcf" ] },
         ch_fasta.first(),
         ch_fastafai.first()
     )
-
-
 
     CUSTOM_FINGERPRINTVCFPARSER ( GBCMS.out.variant_file )
 
@@ -47,24 +41,11 @@ workflow FINGERPRINT_GBCMS {
         .filter{ meta, tsv -> ! meta.control_id }
         .map{ meta, tsv -> [ meta, tsv, [] ] }
 
-    CUSTOM_FINGERPRINTCONTAMINATION ( paired_fps.mix(unpaired_fps).view() )
-
-    if (run_correlation) {
-        FINGERPRINT_GBCMS_BATCH (
-            all_fps,
-            ch_liftover_loci_mapping,
-            default_genome,
-	    []
-        )
-        combined_fp_tsv   = FINGERPRINT_GBCMS_BATCH.out.combined_fp_tsv
-    } else {
-        combined_fp_tsv   = Channel.empty()
-    }
+    CUSTOM_FINGERPRINTCONTAMINATION ( paired_fps.mix(unpaired_fps) )
 
     emit:
     fp_tsv_from_bam   = CUSTOM_FINGERPRINTVCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
     fp_tsv            = all_fps                                               // channel: [ val(meta), tsv ]
     contamination_tsv = CUSTOM_FINGERPRINTCONTAMINATION.out.contamination_tsv // channel: [ val(meta), contamination_tsv ]
-    combined_fp_tsv   = combined_fp_tsv                                       // channel: [ tsv ]
 
 }

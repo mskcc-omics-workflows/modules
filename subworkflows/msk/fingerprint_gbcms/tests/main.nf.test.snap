@@ -50,22 +50,6 @@
                         "test2.contamination.tsv:md5,2eb950d4d5e0f9b4f7ae53d41d22fb5f"
                     ]
                 ],
-                "3": [
-                    [
-                        {
-                            "id": "defaultbatch"
-                        },
-                        "0DPfilter_ALL_FP.txt:md5,2b376a207fd1bd6bec55fa765e3a3947"
-                    ]
-                ],
-                "combined_fp_tsv": [
-                    [
-                        {
-                            "id": "defaultbatch"
-                        },
-                        "0DPfilter_ALL_FP.txt:md5,2b376a207fd1bd6bec55fa765e3a3947"
-                    ]
-                ],
                 "contamination_tsv": [
                     [
                         {
@@ -118,8 +102,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "26.01.1"
         },
-        "timestamp": "2026-02-10T14:58:55.67145979"
+        "timestamp": "2026-02-26T22:35:39.868458916"
     }
 }

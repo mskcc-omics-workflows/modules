@@ -59,8 +59,7 @@ nextflow_workflow {
                 input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
                 input[1] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
                 input[2] = "hg19"
-		input[3] = Channel.empty()
-		//input[3] = Channel.of("")
+                input[3] = Channel.empty()
                 """
             }
         }

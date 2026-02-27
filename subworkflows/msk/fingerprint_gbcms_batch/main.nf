@@ -7,14 +7,18 @@ workflow FINGERPRINT_GBCMS_BATCH {
     ch_fp                    // channel: [ val(meta), [ bam ] ]
     ch_liftover_loci_mapping // channel: [ liftover_loci_mapping ]
     default_genome
-    filter_terms             // channel: filterterm
+    pool                     // channel: [ poolid ]
 
     main:
 
     CUSTOM_FINGERPRINTCOMBINE(
         ch_fp
-            .map{ meta, tsv ->
-                def meta2 = [id:'defaultbatch']
+            .combine(pool.ifEmpty("").unique())
+            .filter{meta, tsv, pool ->
+                (pool == "") || (! pool) || (pool == meta.pool)
+            }
+            .map{ meta, tsv,pool ->
+                def meta2 = [id:pool]
                 [meta2, tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample ]
             }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
@@ -22,7 +26,8 @@ workflow FINGERPRINT_GBCMS_BATCH {
 
     CUSTOM_FINGERPRINTCORRELATION(
         CUSTOM_FINGERPRINTCOMBINE.out.combined_fp_tsv,
-        filter_terms.unique()
+        []
+
     )
 
     emit:

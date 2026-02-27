@@ -24,8 +24,9 @@ process CUSTOM_FINGERPRINTCORRELATION {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = meta.id ?: "batch"
-    def filter_args = (filter_term && filter_term != "") ?  "-p ${filter_term} -f" : ""
+    prefix = meta.id ?: "batch"
+    def pool_arg = "-p ${prefix}" 
+    filter_args = (filter_term && filter_term != "") ? pool_arg + " -f" : pool_arg
     """
     plot_gbcm.R \\
         -t ${combined_fp_tsv} \\

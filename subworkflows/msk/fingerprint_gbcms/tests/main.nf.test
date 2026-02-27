@@ -8,7 +8,6 @@ nextflow_workflow {
     tag "subworkflows"
     tag "subworkflows_msk"
     tag "subworkflows/fingerprint_gbcms"
-    tag "subworkflows/fingerprint_gbcms_batch"
     tag "gbcms"
     tag "custom/fingerprintvcfparser"
     tag "custom/fingerprintcontamination"
@@ -40,11 +39,8 @@ nextflow_workflow {
                     )
                 input[2] = Channel.empty()
                 input[3] = Channel.of(file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true))
-                input[4] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
-                input[5] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true))
-                input[6] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true))
-                input[7] = "hg19"
-                input[8] = true
+                input[4] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true))
+                input[5] = Channel.of(file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true))
                 """
             }
         }
