@@ -79,8 +79,8 @@ static_plot <- function(data, max_point_size) {
             shape = 21,
             color="NA"
         ) +
-        scale_x_discrete(limits = sort(levels(data$Var1))) +
-        scale_y_discrete(limits = rev(sort(levels(data$Var2)))) +
+        scale_x_discrete(limits = levels(data$Var1)) +
+        scale_y_discrete(limits = rev(levels(data$Var2))) +
         scale_fill_viridis_c(
             name = "Correlation",
             option = "viridis",
