@@ -1,0 +1,101 @@
+nextflow_workflow {
+
+    name "Test Subworkflow HLAHD_FROM_BAM"
+    script "../main.nf"
+    workflow "HLAHD_FROM_BAM"
+
+    tag "subworkflows"
+    tag "subworkflows_msk"
+    tag "subworkflows/hlahd_from_bam"
+    tag "hlahd_from_bam"
+    tag "hlahd"
+    tag "samtools"
+    tag "gatk4"
+
+    test("hlahd_from_bam - bam - with revert sam - result") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test_sample', single_end:false ], // meta map
+                    file(params.test_data_mskcc['hlahd']['bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['hlahd']['bai'], checkIfExists: true)
+                    ])
+
+                input[1] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.result,
+                    workflow.out.versions
+                    ).match()
+                }
+            )
+        }
+    }
+
+    test("hlahd_from_bam - bam - skip revert sam - result") {
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test_sample', single_end:false ], // meta map
+                    file(params.test_data_mskcc['hlahd']['bam'], checkIfExists: true),
+                    file(params.test_data_mskcc['hlahd']['bai'], checkIfExists: true)
+                    ])
+
+                input[1] = true
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.result,
+                    workflow.out.versions
+                    ).match()
+                }
+            )
+        }
+    }
+
+    test("hlahd_from_bam - bam - stub") {
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = Channel.value([
+                    [ id:'test_sample', single_end:false ], // meta map
+                    file('test_hla_region.bam', checkIfExists: false),
+                    file('test_hla_region.bam.bai', checkIfExists: false)
+                    ])
+
+                input[1] = false
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(
+                    workflow.out.result[0][0],
+                    file(workflow.out.result[0][1]).name,
+                    workflow.out.versions
+                    ).match()
+                }
+            )
+        }
+    }
+}
