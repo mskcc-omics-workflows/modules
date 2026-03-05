@@ -4,8 +4,8 @@ process HLAHD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://ghcr.io/mskcc-omics-workflows/hlahd:1.7.1':
-        'ghcr.io/mskcc-omics-workflows/hlahd:1.7.1' }"
+        'docker://mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/hlahd:1.7.1':
+        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/hlahd:1.7.1' }"
 
     input:
     tuple val(meta), path(fastq_1), path(fastq_2)

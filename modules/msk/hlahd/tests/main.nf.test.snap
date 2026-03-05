@@ -1,0 +1,29 @@
+{
+    "hlahd - fastq pair - stub": {
+        "content": [
+            [
+                "versions.yml:md5,f196d451477cda61837f7cfb2ed3c9b4"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-05T16:10:44.004384"
+    },
+    "hlahd - fastq pair - result txt": {
+        "content": [
+            [
+                
+            ],
+            [
+                
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-03-05T16:10:39.867251"
+    }
+}
