@@ -4,15 +4,15 @@ process HLAHD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/hlahd:1.7.1':
-        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/hlahd:1.7.1' }"
+        'docker://mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/hlahd:1.7.1':
+        'mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/hlahd:1.7.1' }"
 
     input:
     tuple val(meta), path(fastq_1), path(fastq_2)
 
     output:
-    tuple val(meta), path("${prefix}/${prefix}_final.result.txt"), emit: result
-    tuple val(meta), path("${prefix}/result/*_result.txt"),        emit: result_per_locus
+    tuple val(meta), path("${prefix}/result/${prefix}_final.result.txt"), emit: result
+    tuple val(meta), path("${prefix}/result/${prefix}_*.est.txt"),       emit: result_per_locus
     path "versions.yml",                                           emit: versions
 
     when:
@@ -43,11 +43,9 @@ process HLAHD {
         ${prefix} \\
         .
 
-    HLAHD_VERSION=\$(bash ${install_dir}/bin/hlahd.sh 2>&1 | grep -oP 'HLA-HD version \\K[0-9.]+' | head -1)
-
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        hlahd: \${HLAHD_VERSION}
+        hlahd: \$(bash ${install_dir}/bin/hlahd.sh 2>&1 | grep -oP 'HLA-HD version \\K[0-9.]+' | head -1)
     END_VERSIONS
     """
 
@@ -55,12 +53,12 @@ process HLAHD {
     prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir -p ${prefix}/result
-    touch ${prefix}/${prefix}_final.result.txt
-    touch ${prefix}/result/${prefix}_A_result.txt
+    touch ${prefix}/result/${prefix}_final.result.txt
+    touch ${prefix}/result/${prefix}_A.est.txt
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        hlahd: 1.7.1
+        hlahd: \$(bash /opt/hlahd/current/bin/hlahd.sh 2>&1 | grep -oP 'HLA-HD version \\K[0-9.]+' | head -1)
     END_VERSIONS
     """
 }

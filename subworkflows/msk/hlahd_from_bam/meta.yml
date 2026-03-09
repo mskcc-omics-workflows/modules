@@ -43,20 +43,20 @@ output:
       - meta:
           type: map
           description: Groovy Map containing sample information.
-      - "*/*_final.result.txt":
+      - "**/result/*_final.result.txt":
           type: file
           description: |
             Tab-separated HLA allele calls for all typed loci produced by
             HLA-HD. One file per sample.
-          pattern: "*/*_final.result.txt"
+          pattern: "**/result/*_final.result.txt"
   - result_per_locus:
       - meta:
           type: map
           description: Groovy Map containing sample information.
-      - "*/result/*_result.txt":
+      - "**/result/*_*.est.txt":
           type: file
-          description: Per-locus HLA result files produced by HLA-HD.
-          pattern: "*/result/*_result.txt"
+          description: Per-locus HLA estimation files produced by HLA-HD.
+          pattern: "**/result/*_*.est.txt"
   - versions:
       - "versions.yml":
           type: file

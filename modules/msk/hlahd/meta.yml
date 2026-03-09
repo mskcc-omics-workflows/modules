@@ -40,20 +40,20 @@ output:
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - ${prefix}/${prefix}_final.result.txt:
+      - ${prefix}/result/${prefix}_final.result.txt:
           type: file
           description: Final HLA typing result file containing best-call alleles for all loci
-          pattern: "*_final.result.txt"
+          pattern: "**/result/*_final.result.txt"
   result_per_locus:
     - - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'sample1', single_end:false ]`
-      - ${prefix}/result/*_result.txt:
+      - ${prefix}/result/${prefix}_*.est.txt:
           type: file
-          description: Per-locus HLA typing result files (one file per HLA gene)
-          pattern: "result/*_result.txt"
+          description: Per-locus HLA estimation files (one file per HLA gene)
+          pattern: "**/result/*_*.est.txt"
   versions:
     - versions.yml:
         type: file

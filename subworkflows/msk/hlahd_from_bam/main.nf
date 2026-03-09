@@ -71,7 +71,7 @@ workflow HLAHD_FROM_BAM {
     ch_versions = ch_versions.mix(HLAHD.out.versions.first())
 
     emit:
-    result           = HLAHD.out.result           // channel: [ val(meta), path(*_final.result.txt) ]
-    result_per_locus = HLAHD.out.result_per_locus // channel: [ val(meta), path(*/result/*_result.txt) ]
+    result           = HLAHD.out.result           // channel: [ val(meta), path(result/*_final.result.txt) ]
+    result_per_locus = HLAHD.out.result_per_locus // channel: [ val(meta), path(result/*_*.est.txt) ]
     versions         = ch_versions                // channel: [ path(versions.yml) ]
 }

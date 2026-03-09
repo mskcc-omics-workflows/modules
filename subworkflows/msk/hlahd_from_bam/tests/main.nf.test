@@ -14,6 +14,8 @@ nextflow_workflow {
 
     test("hlahd_from_bam - bam - with revert sam - result") {
 
+        config "./nextflow.config"
+
         when {
             workflow {
                 """
@@ -41,6 +43,8 @@ nextflow_workflow {
     }
 
     test("hlahd_from_bam - bam - skip revert sam - result") {
+
+        config "./nextflow.config"
 
         when {
             workflow {
@@ -70,6 +74,7 @@ nextflow_workflow {
 
     test("hlahd_from_bam - bam - stub") {
 
+        config "./nextflow.config"
         options "-stub"
 
         when {

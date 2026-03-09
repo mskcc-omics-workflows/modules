@@ -1,0 +1,69 @@
+{
+    "hlahd_from_bam - bam - stub": {
+        "content": [
+            {
+                "id": "test_sample",
+                "single_end": false
+            },
+            "test_sample_final.result.txt",
+            [
+                "versions.yml:md5,181590c9fdbd5c2815c3ce5208703884",
+                "versions.yml:md5,3536f6f188f43e5bb192831b7809a671",
+                "versions.yml:md5,475acfad0fe45163f0020ba941a658c1",
+                "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
+            ]
+        ],
+        "timestamp": "2026-03-09T12:50:14.479909",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "hlahd_from_bam - bam - skip revert sam - result": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test_sample",
+                        "single_end": false
+                    },
+                    "test_sample_final.result.txt:md5,6f83fc8ac5bd3b9f56853b583595e2a0"
+                ]
+            ],
+            [
+                "versions.yml:md5,181590c9fdbd5c2815c3ce5208703884",
+                "versions.yml:md5,475acfad0fe45163f0020ba941a658c1",
+                "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
+            ]
+        ],
+        "timestamp": "2026-03-09T12:49:52.217786",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "hlahd_from_bam - bam - with revert sam - result": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test_sample",
+                        "single_end": false
+                    },
+                    "test_sample_final.result.txt:md5,6f83fc8ac5bd3b9f56853b583595e2a0"
+                ]
+            ],
+            [
+                "versions.yml:md5,181590c9fdbd5c2815c3ce5208703884",
+                "versions.yml:md5,3536f6f188f43e5bb192831b7809a671",
+                "versions.yml:md5,475acfad0fe45163f0020ba941a658c1",
+                "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
+            ]
+        ],
+        "timestamp": "2026-03-09T12:33:58.060705",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}
