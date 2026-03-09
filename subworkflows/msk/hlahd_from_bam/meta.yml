@@ -63,6 +63,6 @@ output:
           description: File containing software versions for all tools used.
           pattern: "versions.yml"
 authors:
-  - "@orgeraj"
+  - "@johnoooh"
 maintainers:
-  - "@orgeraj"
+  - "@johnoooh"
