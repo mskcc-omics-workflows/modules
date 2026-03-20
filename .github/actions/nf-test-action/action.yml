@@ -13,6 +13,14 @@ inputs:
   paths:
     description: "Test paths"
     required: true
+  jfrog_username:
+    description: "JFrog registry username"
+    required: false
+    default: ""
+  jfrog_password:
+    description: "JFrog registry password or token"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -71,6 +79,14 @@ runs:
       run: |
         nextflow secrets set ONCOKB_TOKEN $ONCOKB_TOKEN
 
+
+    - name: Login to JFrog Container Registry
+      if: ${{ inputs.profile == 'docker' && inputs.jfrog_username != '' }}
+      uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3
+      with:
+        registry: mskcc.jfrog.io
+        username: ${{ inputs.jfrog_username }}
+        password: ${{ inputs.jfrog_password }}
 
       # TODO Skip failing conda tests and document their failures
       # https://github.com/nf-core/modules/issues/7017
