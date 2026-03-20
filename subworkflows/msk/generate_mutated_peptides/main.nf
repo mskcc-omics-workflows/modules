@@ -1,5 +1,5 @@
 include { MUTALYZER_RETRIEVER } from '../../../modules/msk/mutalyzer/retriever/main'
-include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/1.2/main'
+include { GENERATEMUTFASTA }    from '../../../modules/msk/generatemutfasta/main'
 include { NEOSV }               from '../../../modules/msk/neosv/main'
 include { NEOANTIGENUTILS_GENERATEHLASTRING } from '../../../modules/msk/neoantigenutils/generatehlastring/main'
 
@@ -74,17 +74,17 @@ workflow GENERATE_MUTATED_PEPTIDES {
 }
 
 def createNEOSVInput(sv_bedpe, hla_str) {
-        sv_bedpe_channel = sv_bedpe
+        def sv_bedpe_channel = sv_bedpe
             .map{
                 new Tuple(it[0],it)
                 }
 
-        hla_str_channel = hla_str
+        def hla_str_channel = hla_str
             .map{
                 new Tuple(it[0],it)
                 }
 
-        merged_sv_hla = sv_bedpe_channel
+        def merged_sv_hla = sv_bedpe_channel
             .join(hla_str_channel, by:0)
             .map{
                 new Tuple(it[1][0], it[1][1], it[2][1])

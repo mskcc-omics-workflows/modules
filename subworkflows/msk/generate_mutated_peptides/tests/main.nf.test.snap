@@ -1,8 +1,8 @@
 {
     "generate_mutated_peptides - maf,hla,sv,fa,gff3,gtf - fa,str,log": {
         "content": [
-            "test.MUT.sequences.fa:md5,dff338ec438ac75aa674b64ea8e26544",
-            "test.WT.sequences.fa:md5,51415a40a725a16eaa8f5c51fa43799e",
+            "test.MUT.sequences.fa:md5,3d2ff66590a4329f9a24e03bdf84e0ab",
+            "test.WT.sequences.fa:md5,4bfcfc4d29d01ddc4108f39350936228",
             "test_generate_mut_fasta.log",
             "test.SV.MUT.fa:md5,90028760eba0ca5e408eb44462741b6c",
             "test.SV.WT.fa:md5,aec81221b1945efa816e1fe30665b1af",
@@ -12,12 +12,12 @@
             "nf-test": "0.9.2",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T15:35:29.564043292"
+        "timestamp": "2026-02-12T15:50:12.51494062"
     },
     "generate_mutated_peptides - maf,hla,fa,gff3,gtf - fa,str,log": {
         "content": [
-            "test.MUT.sequences.fa:md5,dff338ec438ac75aa674b64ea8e26544",
-            "test.WT.sequences.fa:md5,51415a40a725a16eaa8f5c51fa43799e",
+            "test.MUT.sequences.fa:md5,3d2ff66590a4329f9a24e03bdf84e0ab",
+            "test.WT.sequences.fa:md5,4bfcfc4d29d01ddc4108f39350936228",
             "test_generate_mut_fasta.log",
             "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02\n"
         ],
@@ -25,7 +25,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.10.2"
         },
-        "timestamp": "2026-01-28T15:32:36.412017468"
+        "timestamp": "2026-02-12T15:47:44.721521315"
     },
     "generate_mutated_peptides - maf,hla,sv,fa,gff3,gtf - fa,str,log - stub": {
         "content": [

@@ -50,17 +50,17 @@ workflow PHYLOWGS {
 }
 
 def join_maf_with_cnv(maf,cnv) {
-        maf_channel = maf
+        def maf_channel = maf
             .map{
                 new Tuple(it[0].id,it)
                 }
-        cnv_channel = cnv
+        def cnv_channel = cnv
             .map{
                 new Tuple(it[0].id,it)
                 }
-        mergedWithKey = maf_channel
+        def mergedWithKey = maf_channel
             .join(cnv_channel)
-        merged = mergedWithKey
+        def merged = mergedWithKey
             .map{
                 new Tuple(it[1][0],it[1][1],it[2][1])
             }

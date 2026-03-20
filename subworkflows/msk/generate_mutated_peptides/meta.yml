@@ -8,8 +8,7 @@ keywords:
   - fasta
 components:
   - mutalyzer/retriever
-  - generatemutfasta/1.2
-  - neoantigenutils/generatemutfasta
+  - generatemutfasta
 input:
   - ch_maf_hla_sv:
       type: object
