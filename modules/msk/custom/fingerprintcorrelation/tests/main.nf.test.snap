@@ -27,9 +27,9 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "26.01.1"
         },
-        "timestamp": "2026-02-11T12:20:48.405942771"
+        "timestamp": "2026-03-20T22:20:19.897509559"
     },
     "sarscov2 - bam": {
         "content": [
@@ -38,7 +38,7 @@
                     {
                         "id": null
                     },
-                    "fp_plots_correlations.tab:md5,dbc55d8829950501d3ed2db9a832165c"
+                    "batch_correlations.tab:md5,dbc55d8829950501d3ed2db9a832165c"
                 ]
             ],
             [
@@ -46,7 +46,7 @@
                     {
                         "id": null
                     },
-                    "fp_plots_observations.tab:md5,858d6d115a4da81652bb98dcc8b8077f"
+                    "batch_observations.tab:md5,858d6d115a4da81652bb98dcc8b8077f"
                 ]
             ],
             [
@@ -59,8 +59,8 @@
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.3"
+            "nextflow": "26.01.1"
         },
-        "timestamp": "2026-02-11T12:20:41.807879336"
+        "timestamp": "2026-03-20T22:20:13.979058971"
     }
 }
