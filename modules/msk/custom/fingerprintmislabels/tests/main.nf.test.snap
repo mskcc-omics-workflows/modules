@@ -1,0 +1,123 @@
+{
+    "sarscov2 - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_match.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_match.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_mismatch.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_mismatch.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "4": [
+                    [
+                        "CUSTOM_FINGERPRINTMISLABELS",
+                        "unexpected_match_mismatch.R",
+                        "0.1.0"
+                    ]
+                ],
+                "unexpected_match_pdf": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_match.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "unexpected_match_txt": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_match.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "unexpected_mismatch_pdf": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_mismatch.pdf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "unexpected_mismatch_txt": [
+                    [
+                        {
+                            "id": "thispool"
+                        },
+                        "thispool_unexpected_mismatch.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_fingerprintmislabels": [
+                    [
+                        "CUSTOM_FINGERPRINTMISLABELS",
+                        "unexpected_match_mismatch.R",
+                        "0.1.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-03-20T22:37:04.106330307"
+    },
+    "sarscov2 - bam": {
+        "content": [
+            [
+                [
+                    {
+                        "id": null
+                    },
+                    "null_unexpected_match.txt:md5,14af9ffece921578088528e9c1663886"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": null
+                    },
+                    "null_unexpected_mismatch.txt:md5,d5c8b66fd71b1e4b20ee403d822cd7b9"
+                ]
+            ],
+            [
+                [
+                    "CUSTOM_FINGERPRINTMISLABELS",
+                    "unexpected_match_mismatch.R",
+                    "0.1.0"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-03-20T22:36:57.641442061"
+    }
+}

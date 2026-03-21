@@ -1,0 +1,99 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_fingerprintmislabels"
+description: "Identify unexpected matches and mismatches from fingerprint correlations and observations based on patient labels"
+version: "0.1.0"
+keywords:
+  - fingerprint
+  - mislabels
+  - qc
+  - sample_swap
+tools:
+  - "custom":
+      description: "In-house R script for detecting unexpected sample matches and mismatches."
+      homepage: ""
+      documentation: ""
+      tool_dev_url: ""
+      doi: ""
+      licence: null
+      identifier: null
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'pool1' ]`
+    - correlations_tab:
+        type: file
+        description: Fingerprint correlations file from CUSTOM_FINGERPRINTCORRELATION
+        pattern: "*_correlations.tab"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+    - observations_tab:
+        type: file
+        description: Fingerprint observations file from CUSTOM_FINGERPRINTCORRELATION
+        pattern: "*_observations.tab"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+  - - sample_sheet:
+        type: file
+        description: CSV sample sheet with columns sample, patient, is_donor
+        pattern: "*.csv"
+        ontologies:
+          - edam: http://edamontology.org/format_3752
+
+output:
+  unexpected_match_pdf:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pool1' ]`
+      - "*_unexpected_match.pdf":
+          type: file
+          description: PDF plots of unexpected match analysis
+          pattern: "*_unexpected_match.pdf"
+  unexpected_match_txt:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pool1' ]`
+      - "*_unexpected_match.txt":
+          type: file
+          description: Table of flagged unexpected matches
+          pattern: "*_unexpected_match.txt"
+  unexpected_mismatch_pdf:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pool1' ]`
+      - "*_unexpected_mismatch.pdf":
+          type: file
+          description: PDF plots of unexpected mismatch analysis
+          pattern: "*_unexpected_mismatch.pdf"
+  unexpected_mismatch_txt:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pool1' ]`
+      - "*_unexpected_mismatch.txt":
+          type: file
+          description: Table of flagged unexpected mismatches
+          pattern: "*_unexpected_mismatch.txt"
+  versions_fingerprintmislabels:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - unexpected_match_mismatch.R:
+          type: string
+          description: The name of the tool
+      - 0.1.0:
+          type: eval
+          description: The version of the tool
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"
