@@ -1,5 +1,5 @@
 process CUSTOM_FINGERPRINTCORRELATION {
-    tag {'$prefix'}
+    tag {"$prefix"}
     label 'process_single'
 
     conda "${moduleDir}/environment.yml"
@@ -36,7 +36,7 @@ process CUSTOM_FINGERPRINTCORRELATION {
 
     stub:
     def args = task.ext.args ?: ''
-    def prefix = meta.id ?: "batch"
+    prefix = meta.id ?: "batch"
     """
     touch ${prefix}.pdf
     touch ${prefix}.html

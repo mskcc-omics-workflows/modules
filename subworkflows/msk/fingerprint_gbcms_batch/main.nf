@@ -8,7 +8,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
     ch_fp                    // channel: [ val(meta), [ bam ] ]
     ch_liftover_loci_mapping // channel: [ liftover_loci_mapping ]
     default_genome
-    pool                     // channel: [ poolid ]
+    ch_pool                  // channel: [ poolid ]
 
     main:
 
@@ -27,11 +27,11 @@ workflow FINGERPRINT_GBCMS_BATCH {
 
     CUSTOM_FINGERPRINTCOMBINE(
         ch_fp
-            .combine(pool.ifEmpty("").unique())
+            .combine(ch_pool.ifEmpty("").unique())
             .filter{meta, tsv, pool ->
                 (pool == "") || (! pool) || (pool == meta.pool)
             }
-            .map{ meta, tsv,pool ->
+            .map{ meta, tsv, pool ->
                 def meta2 = [id:pool]
                 [meta2, tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample ]
             }.groupTuple(by:[0]),
