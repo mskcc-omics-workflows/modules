@@ -1,29 +1,44 @@
 {
-    "sarscov2 - bam - single_end": {
+    "sarscov2 - bam - single_end - with patient - fingerprintmislabels runs": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": ""
-                        },
-                        "0DPfilter_ALL_FP.txt:md5,66113c255cf1f52e27802183764a406d"
-                    ]
-                ],
-                "combined_fp_tsv": [
-                    [
-                        {
-                            "id": ""
-                        },
-                        "0DPfilter_ALL_FP.txt:md5,66113c255cf1f52e27802183764a406d"
-                    ]
+            [
+                [
+                    {
+                        "id": ""
+                    },
+                    "batch_unexpected_match.txt:md5,2db9ebf03a048e6aab1e5d51e7457429"
                 ]
-            }
+            ],
+            [
+                [
+                    {
+                        "id": ""
+                    },
+                    "batch_unexpected_mismatch.txt:md5,c5824b697fe80bcaccc43d466150866b"
+                ]
+            ]
         ],
         "meta": {
             "nf-test": "0.9.3",
             "nextflow": "26.01.1"
         },
-        "timestamp": "2026-02-26T22:07:57.665276743"
+        "timestamp": "2026-03-23T15:15:56.531495175"
+    },
+    "sarscov2 - bam - single_end - no patient - fingerprintmislabels skipped": {
+        "content": [
+            [
+                [
+                    {
+                        "id": ""
+                    },
+                    "0DPfilter_ALL_FP.txt:md5,66113c255cf1f52e27802183764a406d"
+                ]
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-03-23T15:15:34.299247621"
     }
 }

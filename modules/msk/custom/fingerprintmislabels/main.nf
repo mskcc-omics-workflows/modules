@@ -24,6 +24,7 @@ process CUSTOM_FINGERPRINTMISLABELS {
     script:
     def args   = task.ext.args   ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    prefix = (prefix && prefix != "") ?: "batch"
     """
     unexpected_match_mismatch.R \\
         -r ${prefix} \\
