@@ -61,6 +61,7 @@ nextflow_workflow {
                 input[1] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
                 input[2] = "hg19"
                 input[3] = Channel.empty()
+                input[4] = Channel.empty()
                 """
             }
         }
@@ -70,7 +71,7 @@ nextflow_workflow {
                 { assert workflow.success },
                 { assert workflow.out.unexpected_match_txt    == [] },
                 { assert workflow.out.unexpected_mismatch_txt == [] },
-                { assert snapshot(workflow.out.combined_fp_tsv).match() }
+                { assert snapshot(workflow.out.combined_fp_tsv_all).match() }
             )
         }
 
@@ -121,6 +122,7 @@ nextflow_workflow {
                 input[1] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
                 input[2] = "hg19"
                 input[3] = Channel.empty()
+                input[4] = Channel.empty()
                 """
             }
         }
