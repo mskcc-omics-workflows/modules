@@ -42,9 +42,9 @@ workflow FINGERPRINT_GBCMS_BATCH {
     // Samples grouped by pool
     CUSTOM_FINGERPRINTCOMBINE_POOLS(
         ch_fp
-            .combine(ch_pool.ifEmpty("").unique())
+            .combine(ch_pool.unique())
             .filter { meta, tsv, pool ->
-                (pool == "") || (! pool) || (pool == meta.pool)
+                pool == meta.pool
             }
             .map { meta, tsv, pool ->
                 [[id:pool], tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample]
@@ -55,12 +55,10 @@ workflow FINGERPRINT_GBCMS_BATCH {
     // Samples grouped by patient
     CUSTOM_FINGERPRINTCOMBINE_PATIENTS(
         ch_fp
-            .filter { meta, tsv -> meta.patient != null }
-            .combine(ch_patients.ifEmpty("").unique())
+            .combine(ch_patients.unique())
             .filter { meta, tsv, patient ->
-                (patient == "") || (! patient) || (patient.toString() == meta.patient.toString())
-            }
-            .map { meta, tsv, patient ->
+                patient.toString() == meta.patient.toString()
+            }.map { meta, tsv, patient ->
                 [[id:meta.patient.toString()], tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample]
             }.groupTuple(by:[0]),
         ch_liftover_loci_mapping.first()
