@@ -12,9 +12,8 @@ keywords:
   - qc
 components:
   - gbcms
-  - custom/fingerprintvcfparser
-  - custom/fingerprintcontamination
-  - fingerprint_gbcms_batch
+  - fingerprint/vcfparser
+  - fingerprint/contamination
 input:
   - ch_bam:
       type: file

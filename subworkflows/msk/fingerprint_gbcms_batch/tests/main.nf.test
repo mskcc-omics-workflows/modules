@@ -10,10 +10,10 @@ nextflow_workflow {
     tag "subworkflows_msk"
     tag "subworkflows/fingerprint_gbcms_batch"
     tag "gbcms"
-    tag "custom/fingerprintvcfparser"
-    tag "custom/fingerprintcombine"
-    tag "custom/fingerprintcorrelation"
-    tag "custom/fingerprintmislabels"
+    tag "fingerprint/vcfparser"
+    tag "fingerprint/combine"
+    tag "fingerprint/correlation"
+    tag "fingerprint/mislabels"
 
 
     test("sarscov2 - bam - single_end - no patient - fingerprintmislabels skipped") {
@@ -44,8 +44,8 @@ nextflow_workflow {
                     """
                 }
             }
-            run("CUSTOM_FINGERPRINTVCFPARSER"){
-                script "../../../../modules/msk/custom/fingerprintvcfparser/main.nf"
+            run("FINGERPRINT_VCFPARSER"){
+                script "../../../../modules/msk/fingerprint/vcfparser/main.nf"
                 process {
                     """
                     input[0] = GBCMS.out.variant_file
@@ -57,8 +57,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
-                input[1] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
+                input[0] = FINGERPRINT_VCFPARSER.out.tsv
+                input[1] = [file("$baseDir/modules/msk/fingerprint/combine/tests/loci_mapping.tsv", checkIfExists:true)]
                 input[2] = "hg19"
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()
@@ -105,8 +105,8 @@ nextflow_workflow {
                     """
                 }
             }
-            run("CUSTOM_FINGERPRINTVCFPARSER"){
-                script "../../../../modules/msk/custom/fingerprintvcfparser/main.nf"
+            run("FINGERPRINT_VCFPARSER"){
+                script "../../../../modules/msk/fingerprint/vcfparser/main.nf"
                 process {
                     """
                     input[0] = GBCMS.out.variant_file
@@ -118,8 +118,8 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = CUSTOM_FINGERPRINTVCFPARSER.out.tsv
-                input[1] = [file("$baseDir/modules/msk/custom/fingerprintcombine/tests/loci_mapping.tsv", checkIfExists:true)]
+                input[0] = FINGERPRINT_VCFPARSER.out.tsv
+                input[1] = [file("$baseDir/modules/msk/fingerprint/combine/tests/loci_mapping.tsv", checkIfExists:true)]
                 input[2] = "hg19"
                 input[3] = Channel.empty()
                 input[4] = Channel.empty()

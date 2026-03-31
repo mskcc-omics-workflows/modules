@@ -1,6 +1,6 @@
 include { GBCMS                           } from '../../../modules/msk/gbcms/main'
-include { CUSTOM_FINGERPRINTVCFPARSER     } from '../../../modules/msk/custom/fingerprintvcfparser/main'
-include { CUSTOM_FINGERPRINTCONTAMINATION } from '../../../modules/msk/custom/fingerprintcontamination/main'
+include { FINGERPRINT_VCFPARSER           } from '../../../modules/msk/fingerprint/vcfparser/main'
+include { FINGERPRINT_CONTAMINATION       } from '../../../modules/msk/fingerprint/contamination/main'
 
 workflow FINGERPRINT_GBCMS {
 
@@ -24,9 +24,9 @@ workflow FINGERPRINT_GBCMS {
         ch_fastafai.first()
     )
 
-    CUSTOM_FINGERPRINTVCFPARSER ( GBCMS.out.variant_file )
+    FINGERPRINT_VCFPARSER ( GBCMS.out.variant_file )
 
-    all_fps = CUSTOM_FINGERPRINTVCFPARSER.out.tsv.mix(ch_fp_tsv)
+    all_fps = FINGERPRINT_VCFPARSER.out.tsv.mix(ch_fp_tsv)
 
     paired_fps = all_fps
         .filter{ meta, tsv -> meta.case_id != null && meta.control_id != null && meta.id == meta.case_id }
@@ -41,11 +41,11 @@ workflow FINGERPRINT_GBCMS {
         .filter{ meta, tsv -> ! meta.control_id }
         .map{ meta, tsv -> [ meta, tsv, [] ] }
 
-    CUSTOM_FINGERPRINTCONTAMINATION ( paired_fps.mix(unpaired_fps) )
+    FINGERPRINT_CONTAMINATION ( paired_fps.mix(unpaired_fps) )
 
     emit:
-    fp_tsv_from_bam   = CUSTOM_FINGERPRINTVCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
+    fp_tsv_from_bam   = FINGERPRINT_VCFPARSER.out.tsv                   // channel: [ val(meta), tsv ]
     fp_tsv            = all_fps                                               // channel: [ val(meta), tsv ]
-    contamination_tsv = CUSTOM_FINGERPRINTCONTAMINATION.out.contamination_tsv // channel: [ val(meta), contamination_tsv ]
+    contamination_tsv = FINGERPRINT_CONTAMINATION.out.contamination_tsv // channel: [ val(meta), contamination_tsv ]
 
 }

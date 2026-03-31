@@ -1,10 +1,10 @@
-include { CUSTOM_FINGERPRINTCOMBINE     as CUSTOM_FINGERPRINTCOMBINE_ALL      } from '../../../modules/msk/custom/fingerprintcombine/main'
-include { CUSTOM_FINGERPRINTCOMBINE     as CUSTOM_FINGERPRINTCOMBINE_POOLS    } from '../../../modules/msk/custom/fingerprintcombine/main'
-include { CUSTOM_FINGERPRINTCOMBINE     as CUSTOM_FINGERPRINTCOMBINE_PATIENTS } from '../../../modules/msk/custom/fingerprintcombine/main'
-include { CUSTOM_FINGERPRINTCORRELATION as CUSTOM_FINGERPRINTCORRELATION_ALL      } from '../../../modules/msk/custom/fingerprintcorrelation/main'
-include { CUSTOM_FINGERPRINTCORRELATION as CUSTOM_FINGERPRINTCORRELATION_POOLS    } from '../../../modules/msk/custom/fingerprintcorrelation/main'
-include { CUSTOM_FINGERPRINTCORRELATION as CUSTOM_FINGERPRINTCORRELATION_PATIENTS } from '../../../modules/msk/custom/fingerprintcorrelation/main'
-include { CUSTOM_FINGERPRINTMISLABELS   } from '../../../modules/msk/custom/fingerprintmislabels/main'
+include { FINGERPRINT_COMBINE           as FINGERPRINT_COMBINE_ALL            } from '../../../modules/msk/fingerprint/combine/main'
+include { FINGERPRINT_COMBINE           as FINGERPRINT_COMBINE_POOLS          } from '../../../modules/msk/fingerprint/combine/main'
+include { FINGERPRINT_COMBINE           as FINGERPRINT_COMBINE_PATIENTS       } from '../../../modules/msk/fingerprint/combine/main'
+include { FINGERPRINT_CORRELATION       as FINGERPRINT_CORRELATION_ALL           } from '../../../modules/msk/fingerprint/correlation/main'
+include { FINGERPRINT_CORRELATION       as FINGERPRINT_CORRELATION_POOLS         } from '../../../modules/msk/fingerprint/correlation/main'
+include { FINGERPRINT_CORRELATION       as FINGERPRINT_CORRELATION_PATIENTS      } from '../../../modules/msk/fingerprint/correlation/main'
+include { FINGERPRINT_MISLABELS         } from '../../../modules/msk/fingerprint/mislabels/main'
 
 workflow FINGERPRINT_GBCMS_BATCH {
 
@@ -31,7 +31,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
         )
 
     // All samples combined into a single group
-    CUSTOM_FINGERPRINTCOMBINE_ALL(
+    FINGERPRINT_COMBINE_ALL(
         ch_fp
             .map { meta, tsv ->
                 [[id:"all"], tsv, meta.id, meta.genome ?: default_genome, meta.patient ?: meta.sample]
@@ -40,7 +40,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
     )
 
     // Samples grouped by pool
-    CUSTOM_FINGERPRINTCOMBINE_POOLS(
+    FINGERPRINT_COMBINE_POOLS(
         ch_fp
             .combine(ch_pool.unique())
             .filter { meta, tsv, pool ->
@@ -53,7 +53,7 @@ workflow FINGERPRINT_GBCMS_BATCH {
     )
 
     // Samples grouped by patient
-    CUSTOM_FINGERPRINTCOMBINE_PATIENTS(
+    FINGERPRINT_COMBINE_PATIENTS(
         ch_fp
             .combine(ch_patients.unique())
             .filter { meta, tsv, patient ->
@@ -64,35 +64,35 @@ workflow FINGERPRINT_GBCMS_BATCH {
         ch_liftover_loci_mapping.first()
     )
 
-    CUSTOM_FINGERPRINTCORRELATION_ALL(
-        CUSTOM_FINGERPRINTCOMBINE_ALL.out.combined_fp_tsv,
+    FINGERPRINT_CORRELATION_ALL(
+        FINGERPRINT_COMBINE_ALL.out.combined_fp_tsv,
         []
     )
 
-    CUSTOM_FINGERPRINTCORRELATION_POOLS(
-        CUSTOM_FINGERPRINTCOMBINE_POOLS.out.combined_fp_tsv,
+    FINGERPRINT_CORRELATION_POOLS(
+        FINGERPRINT_COMBINE_POOLS.out.combined_fp_tsv,
         []
     )
 
-    CUSTOM_FINGERPRINTCORRELATION_PATIENTS(
-        CUSTOM_FINGERPRINTCOMBINE_PATIENTS.out.combined_fp_tsv,
+    FINGERPRINT_CORRELATION_PATIENTS(
+        FINGERPRINT_COMBINE_PATIENTS.out.combined_fp_tsv,
         []
     )
 
-    CUSTOM_FINGERPRINTMISLABELS(
-        CUSTOM_FINGERPRINTCORRELATION_ALL.out.correlations_tab
-            .join(CUSTOM_FINGERPRINTCORRELATION_ALL.out.observations_tab),
+    FINGERPRINT_MISLABELS(
+        FINGERPRINT_CORRELATION_ALL.out.correlations_tab
+            .join(FINGERPRINT_CORRELATION_ALL.out.observations_tab),
         ch_sample_sheet
             .filter { csv -> csv.readLines().size() >= 3 }
             .first()
     )
 
     emit:
-    combined_fp_tsv_all      = CUSTOM_FINGERPRINTCOMBINE_ALL.out.combined_fp_tsv          // channel: [ val(meta), tsv ]
-    combined_fp_tsv_pools    = CUSTOM_FINGERPRINTCOMBINE_POOLS.out.combined_fp_tsv        // channel: [ val(meta), tsv ]
-    combined_fp_tsv_patients = CUSTOM_FINGERPRINTCOMBINE_PATIENTS.out.combined_fp_tsv     // channel: [ val(meta), tsv ]
-    unexpected_match_pdf     = CUSTOM_FINGERPRINTMISLABELS.out.unexpected_match_pdf       // channel: [ val(meta), pdf ]
-    unexpected_match_txt     = CUSTOM_FINGERPRINTMISLABELS.out.unexpected_match_txt       // channel: [ val(meta), txt ]
-    unexpected_mismatch_pdf  = CUSTOM_FINGERPRINTMISLABELS.out.unexpected_mismatch_pdf   // channel: [ val(meta), pdf ]
-    unexpected_mismatch_txt  = CUSTOM_FINGERPRINTMISLABELS.out.unexpected_mismatch_txt   // channel: [ val(meta), txt ]
+    combined_fp_tsv_all      = FINGERPRINT_COMBINE_ALL.out.combined_fp_tsv          // channel: [ val(meta), tsv ]
+    combined_fp_tsv_pools    = FINGERPRINT_COMBINE_POOLS.out.combined_fp_tsv        // channel: [ val(meta), tsv ]
+    combined_fp_tsv_patients = FINGERPRINT_COMBINE_PATIENTS.out.combined_fp_tsv     // channel: [ val(meta), tsv ]
+    unexpected_match_pdf     = FINGERPRINT_MISLABELS.out.unexpected_match_pdf       // channel: [ val(meta), pdf ]
+    unexpected_match_txt     = FINGERPRINT_MISLABELS.out.unexpected_match_txt       // channel: [ val(meta), txt ]
+    unexpected_mismatch_pdf  = FINGERPRINT_MISLABELS.out.unexpected_mismatch_pdf   // channel: [ val(meta), pdf ]
+    unexpected_mismatch_txt  = FINGERPRINT_MISLABELS.out.unexpected_mismatch_txt   // channel: [ val(meta), txt ]
 }

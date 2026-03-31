@@ -8,8 +8,9 @@ keywords:
   - batch
   - pool
 components:
-  - custom/fingerprintcombine
-  - custom/fingerprintcorrelation
+  - fingerprint/combine
+  - fingerprint/correlation
+  - fingerprint/mislabels
 input:
   - ch_fp:
       type: file
