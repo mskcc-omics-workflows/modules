@@ -13,7 +13,7 @@
                 ],
                 "1": [
                     [
-                        "CUSTOM_FINGERPRINTCONTAMINATION",
+                        "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
                         ""
                     ]
@@ -27,20 +27,20 @@
                         "test.contamination.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
-                "versions_fingerprintvcfparser": [
+                "versions_contamination": [
                     [
-                        "CUSTOM_FINGERPRINTCONTAMINATION",
+                        "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
                         ""
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-03-31T11:55:42.453612823",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-17T13:12:25.869022442"
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
     },
     "sarscov2 - bam": {
         "content": [
@@ -56,7 +56,7 @@
                 ],
                 "1": [
                     [
-                        "CUSTOM_FINGERPRINTCONTAMINATION",
+                        "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
                         ""
                     ]
@@ -70,19 +70,19 @@
                         "test.contamination.tsv:md5,5b533c60b8eff1f4d2c5fe58a8262303"
                     ]
                 ],
-                "versions_fingerprintvcfparser": [
+                "versions_contamination": [
                     [
-                        "CUSTOM_FINGERPRINTCONTAMINATION",
+                        "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
                         ""
                     ]
                 ]
             }
         ],
+        "timestamp": "2026-03-31T11:55:33.454910171",
         "meta": {
-            "nf-test": "0.9.3",
-            "nextflow": "25.10.2"
-        },
-        "timestamp": "2025-12-17T13:12:16.153445117"
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
     }
 }

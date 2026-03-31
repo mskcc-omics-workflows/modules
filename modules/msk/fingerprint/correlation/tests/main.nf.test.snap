@@ -19,17 +19,17 @@
             ],
             [
                 [
-                    "CUSTOM_FINGERPRINTCORRELATION",
+                    "FINGERPRINT_CORRELATION",
                     "plot_gbcm.R",
                     "0.1.0"
                 ]
             ]
         ],
+        "timestamp": "2026-03-31T11:51:06.685431978",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.5",
             "nextflow": "26.01.1"
-        },
-        "timestamp": "2026-03-20T22:20:19.897509559"
+        }
     },
     "sarscov2 - bam": {
         "content": [
@@ -51,16 +51,16 @@
             ],
             [
                 [
-                    "CUSTOM_FINGERPRINTCORRELATION",
+                    "FINGERPRINT_CORRELATION",
                     "plot_gbcm.R",
                     "0.1.0"
                 ]
             ]
         ],
+        "timestamp": "2026-03-31T11:51:01.173687804",
         "meta": {
-            "nf-test": "0.9.3",
+            "nf-test": "0.9.5",
             "nextflow": "26.01.1"
-        },
-        "timestamp": "2026-03-20T22:20:13.979058971"
+        }
     }
 }
