@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "generate_mutated_peptides"
+description: Generate mutated peptides from an annotated MAF
+keywords:
+  - peptides
+  - maf
+  - neoantigen
+  - fasta
+components:
+  - mutalyzer/retriever
+  - generatemutfasta
+input:
+  - ch_maf_hla_sv:
+      type: object
+      description: |
+        Object containing sample metadata and input files.
+        Properties:
+          - meta: Groovy Map containing sample information, e.g. [ id:'sample1', single_end:false ]
+          - maf: The input containing the maf file
+          - hla: The input containing the hla file
+          - sv: The input containing the sv file
+      pattern: "*.{maf,hla.txt,bedpe}"
+  - ref_fasta:
+      type: file
+      description: A gzipped Human fasta file, ideally compressed with bgzip
+      pattern: "*.{fa.gz,fasta.gz,fa.bgz}"
+  - gff3:
+      type: file
+      description: Gff3 file representing human annotation
+      pattern: "*.gff3"
+  - gtf:
+      type: file
+      description: Ensemble gtf resource file
+      pattern: "*.{gtf.gz}"
+  - cdna:
+      type: file
+      description: The resource channel containing the cdna file
+      pattern: "*.{fa.gz}"
+output:
+  - mut_fasta:
+      type: file
+      description: |
+        Mutated fasta sequence output.
+        Contains: meta (Groovy Map with sample information) and mutated sequences file
+      pattern: "*_out/*.MUT.sequences.fa"
+  - wt_fasta:
+      type: file
+      description: |
+        Wildtype fasta sequence output.
+        Contains: meta (Groovy Map with sample information) and wildtype sequences file
+      pattern: "*_out/*.WT.sequences.fa"
+  - mut_fasta_log:
+      type: file
+      description: |
+        Log file for the mutated fasta generation.
+        Contains: meta (Groovy Map with sample information) and generation log
+      pattern: "*_out/*_generate_mut_fasta.log"
+  - versions:
+      type: file
+      description: File containing software versions
+      pattern: "versions.yml"
+authors:
+  - "@nikhil"
+maintainers:
+  - "@nikhil"

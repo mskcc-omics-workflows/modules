@@ -7,25 +7,23 @@ keywords:
   - neoantigen
   - tsv
 components:
-  - neoantigenutils/generatehlastring
-  - neoantigenutils/generatemutfasta
   - netmhc3
   - netmhcpan4
   - netmhcstabpan
   - neoantigenutils/formatnetmhcpan
 input:
-  - ch_maf_and_hla:
+  - ch_fasta_and_hla:
       type: file
       description: |
-        The input channel containing the maf and files
-        Structure: [ val(meta), path(maf), path(hla) ]
-      pattern: "*.{maf/txt}"
-  - ch_cds_and_cdna:
+        The input channel containing the fasta and hla files
+        Structure: [ val(meta), path(mut_fasta), path(wt_fasta), path(hla) ]
+      pattern: "*.{fa/txt}"
+  - ch_sv_fasta:
       type: file
       description: |
-        The resource channel containing the cds and cdna files
-        Structure: [ path(cds) , path(cdna) ]
-      pattern: "*.{fa.gz}"
+        The input channel containing the structural variant fasta files
+        Structure: [ val(meta), path(sv_mut_fasta), path(sv_wt_fasta) ]
+      pattern: "*.{fa}"
 output:
   - tsv:
       type: file
@@ -33,24 +31,6 @@ output:
         Channel containing TSV files
         Structure: [ val(meta), path(tsv) ]
       pattern: "*.tsv"
-  - xls:
-      type: file
-      description: |
-        Channel containing XLS files
-        Structure: [ val(meta), path(xls) ]
-      pattern: "*.xls"
-  - mut_fasta:
-      type: file
-      description: |
-        Channel containing the MUT fasta files
-        Structure: [ val(meta), path(mut_fasta) ]
-      pattern: "*.fa"
-  - wt_fasta:
-      type: file
-      description: |
-        Channel containing the WT fasta files
-        Structure: [ val(meta), path(wt_fasta) ]
-      pattern: "*.fa"
   - versions:
       type: file
       description: |

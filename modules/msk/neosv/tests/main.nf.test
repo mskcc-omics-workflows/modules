@@ -16,7 +16,7 @@ nextflow_process {
                 """
                 input[0] = [
                     [ id:'test', single_end:false ], // meta map
-                    file(file(params.test_data_mskcc['neoantigen']['svbedpe']), checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['svbedpe'], checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02"
                     ]
 

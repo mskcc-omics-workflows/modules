@@ -1,0 +1,2 @@
+mutalyzer/retriever:
+  - "modules/msk/mutalyzer/retriever/**"

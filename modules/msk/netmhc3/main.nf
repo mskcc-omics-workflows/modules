@@ -4,8 +4,8 @@ process NETMHC3 {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/netmhctools:1.1.0':
-        'docker.io/mskcc/netmhctools:1.1.0' }"
+        'docker://ghcr.io/mskcc-omics-workflows/netmhctools:1.1.1':
+        'ghcr.io/mskcc-omics-workflows/netmhctools:1.1.1' }"
 
     input:
     tuple val(meta),  path(inputFasta), path(inputSVFasta, arity: '0..*'), val(hlaString), val(inputType)
@@ -66,8 +66,8 @@ process NETMHC3 {
     output_meta.fromStab = false
     output_meta.typePan = false
     """
-    touch ${prefix}.MUT.netmhc.output
-    touch ${prefix}.MUT.xls
+    touch ${prefix}.${inputType}.netmhc.output
+    touch ${prefix}.${inputType}.xls
     touch ${prefix}.hla_accepted.txt
     touch ${prefix}.hla_rejected.txt
 

@@ -37,7 +37,7 @@ exclude:
   - profile: conda
     path: modules/msk/ppflagfixer
   - profile: conda
-    path: modules/msk/neoantigenutils/generatemutfasta
+    path: modules/msk/generatemutfasta
   - profile: conda
     path: modules/msk/neoantigenutils/formatnetmhcpan
   - profile: conda
@@ -76,3 +76,7 @@ exclude:
     path: modules/msk/netmhc3
   - profile: conda
     path: modules/msk/oncokb/mafannotate
+  - profile: conda
+    path: modules/msk/mutalyzer/normalizer
+  - profile: conda
+    path: modules/msk/mutalyzer/retriever

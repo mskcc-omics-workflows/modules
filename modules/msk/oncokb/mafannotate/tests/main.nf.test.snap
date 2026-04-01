@@ -9,7 +9,7 @@
                             "case_id": "sample1",
                             "control_id": "sample2"
                         },
-                        "test.oncokb.maf:md5,dd58c4431ec26cb47fb97236d063c6a5"
+                        "test.oncokb.maf:md5,4e544b3224d3a237b78c8d9a446d5541"
                     ]
                 ],
                 "1": [
@@ -22,7 +22,7 @@
                             "case_id": "sample1",
                             "control_id": "sample2"
                         },
-                        "test.oncokb.maf:md5,dd58c4431ec26cb47fb97236d063c6a5"
+                        "test.oncokb.maf:md5,4e544b3224d3a237b78c8d9a446d5541"
                     ]
                 ],
                 "versions": [
@@ -32,8 +32,8 @@
         ],
         "meta": {
             "nf-test": "0.9.2",
-            "nextflow": "24.04.4"
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-03-03T13:18:05.707580942"
+        "timestamp": "2026-02-05T11:09:58.592758567"
     }
 }
