@@ -38,7 +38,7 @@ process HLAHD {
         ${args} \\
         ${fastq_1} \\
         ${fastq_2} \\
-        ${install_dir}/HLA_gene.split.txt \\
+        ${install_dir}/HLA_gene.split.3.50.0.txt \\
         ${install_dir}/dictionary \\
         ${prefix} \\
         .
