@@ -20,11 +20,22 @@ process MUTALYZER_RETRIEVER {
     """
     if ! bgzip --reindex ${fasta} > /dev/null 2>&1
     then
-        # Re-compress fasta with bgzip
-
-        mv ${fasta} ${fasta.baseName}.tmp.gzip
-        gunzip -c ${fasta.baseName}.tmp.gzip | bgzip -c > ${fasta}
-        bgzip --reindex ${fasta}
+        # Determine compression type by magic bytes before attempting recompression
+        MAGIC=\$(xxd -l 2 -p ${fasta})
+        if [ "\$MAGIC" = "1f8b" ]; then
+            # Standard gzip — re-compress with bgzip
+            mv ${fasta} ${fasta.baseName}.tmp.gzip
+            gunzip -c ${fasta.baseName}.tmp.gzip | bgzip -c > ${fasta}
+            bgzip --reindex ${fasta}
+            rm ${fasta.baseName}.tmp.gzip
+        elif [ "\$MAGIC" = "425a" ]; then
+            echo "ERROR: ${fasta} is bzip2-compressed. Please provide a gzip or bgzip-compressed FASTA." >&2
+            exit 1
+        else
+            echo "ERROR: ${fasta} does not appear to be gzip-compressed or bgzip-indexed." >&2
+            echo "       Please provide a bgzip-compressed FASTA (e.g. bgzip genome.fa)." >&2
+            exit 1
+        fi
     fi
 
     # Build cache
