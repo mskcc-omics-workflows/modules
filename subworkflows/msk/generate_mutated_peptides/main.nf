@@ -52,7 +52,7 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     ch_versions = ch_versions.mix(MUTALYZER_RETRIEVER.out.versions)
 
-    GENERATEMUTFASTA( ch_maf, MUTALYZER_RETRIEVER.out.mutalyzer_cache )
+    GENERATEMUTFASTA( ch_maf, MUTALYZER_RETRIEVER.out.mutalyzer_cache.first() )
 
     ch_versions = ch_versions.mix(GENERATEMUTFASTA.out.versions)
 
