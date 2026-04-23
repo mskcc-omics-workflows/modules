@@ -52,7 +52,7 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     ch_versions = ch_versions.mix(MUTALYZER_RETRIEVER.out.versions)
 
-    GENERATEMUTFASTA( ch_maf, MUTALYZER_RETRIEVER.out.mutalyzer_cache )
+    GENERATEMUTFASTA( ch_maf, MUTALYZER_RETRIEVER.out.mutalyzer_cache.collect() )
 
     ch_versions = ch_versions.mix(GENERATEMUTFASTA.out.versions)
 
@@ -68,7 +68,7 @@ workflow GENERATE_MUTATED_PEPTIDES {
     wt_fasta       = GENERATEMUTFASTA.out.wt_fasta                    // channel: [ val(meta), [ *.WT_sequences.fa ] ]
     mut_fasta_log  = GENERATEMUTFASTA.out.mut_fasta_log               // channel: [ val(meta), [ *_generate_mut_fasta.log ] ]
     sv_mut_fasta   = NEOSV.out.mutOut                                 // channel: [ val(meta), [ *.SV.MUT.fa ] ]
-    sv_wt_fasta    = NEOSV.out.wtOut                            // channel: [ val(meta), [ *.SV.WT.fa ] ]
+    sv_wt_fasta    = NEOSV.out.wtOut                                  // channel: [ val(meta), [ *.SV.WT.fa ] ]
     hla_string     = NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring  // channel: [ val(meta), [ hla_string ] ]
     versions       = ch_versions                                      // channel: [ versions.yml ]
 }
