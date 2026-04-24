@@ -294,7 +294,7 @@ if __name__ == "__main__":
     parser.add_argument("--a_param", help="weight corresponding to a", default = 22.897590714815188)
     parser.add_argument("--k_param", help="weight corresponding to k", default = 1)
     parser.add_argument("--w_param", help="weight corresponding to w", default = 0.22402192838740312)
-    
+
     args = parser.parse_args()
 
     alignment_file = args.alignment
@@ -303,8 +303,8 @@ if __name__ == "__main__":
     a = float(args.a_param)
     k = float(args.k_param)
     w = float(args.w_param)
-    
-    
+
+
     epidist = EpitopeDistance()
 
     sample_file = patient_file
