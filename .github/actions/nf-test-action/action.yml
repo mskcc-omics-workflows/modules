@@ -40,6 +40,14 @@ runs:
       with:
         python-version: "3.11"
 
+    - name: Install cross-repo component dependencies
+      shell: bash
+      run: |
+        mapfile -t metas < <(find subworkflows -name meta.yml)
+        if (( ${#metas[@]} > 0 )); then
+          bash .github/scripts/install-components.sh "${metas[@]}"
+        fi
+
     - name: Install nf-test
       uses: nf-core/setup-nf-test@v1
       with:

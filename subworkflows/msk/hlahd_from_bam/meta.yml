@@ -13,9 +13,15 @@ keywords:
   - samtools
   - gatk4
 components:
-  - samtools/view
-  - gatk4/revertsam
-  - samtools/fastq
+  - name: samtools/view
+    git_remote: https://github.com/nf-core/modules.git
+    org_path: nf-core
+  - name: gatk4/revertsam
+    git_remote: https://github.com/nf-core/modules.git
+    org_path: nf-core
+  - name: samtools/fastq
+    git_remote: https://github.com/nf-core/modules.git
+    org_path: nf-core
   - hlahd
 input:
   - - meta:

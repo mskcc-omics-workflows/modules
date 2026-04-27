@@ -20,11 +20,11 @@ workflow HLAHD_FROM_BAM {
     //
     SAMTOOLS_VIEW(
         ch_bam,
+        [[],[],[]],
         [[],[]],
-        [],
+        [[],[]],
         []
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_VIEW.out.versions.first())
 
     //
     // Optional: Revert base quality score recalibration with GATK4 RevertSam.
@@ -36,7 +36,6 @@ workflow HLAHD_FROM_BAM {
         GATK4_REVERTSAM(
             SAMTOOLS_VIEW.out.bam
         )
-        ch_versions = ch_versions.mix(GATK4_REVERTSAM.out.versions.first())
         ch_for_fastq = GATK4_REVERTSAM.out.bam
 
     } else {
@@ -54,7 +53,6 @@ workflow HLAHD_FROM_BAM {
         ch_for_fastq,
         false
     )
-    ch_versions = ch_versions.mix(SAMTOOLS_FASTQ.out.versions.first())
 
     ch_fastq_for_hlahd = SAMTOOLS_FASTQ.out.fastq
         .map { meta, fastqs ->
