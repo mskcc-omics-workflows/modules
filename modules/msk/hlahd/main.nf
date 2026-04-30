@@ -29,15 +29,6 @@ process HLAHD {
     ln -sf /usr/bin/python3 ./python
     export PATH=\$PWD:${install_dir}/bin:\$PATH
 
-    echo "===== DIAG: /opt/hlahd ====="; ls -la /opt/hlahd/ 2>&1 || true
-    echo "===== DIAG: /opt/hlahd/current (resolves to) ====="; readlink -f /opt/hlahd/current 2>&1 || true
-    echo "===== DIAG: /opt/hlahd/current/bin ====="; ls -la /opt/hlahd/current/bin/ 2>&1 || true
-    echo "===== DIAG: /opt/hlahd/current/dictionary ====="; ls -la /opt/hlahd/current/dictionary/ 2>&1 | head -40 || true
-    echo "===== DIAG: /opt/hlahd/current/freq_data ====="; ls -la /opt/hlahd/current/freq_data/ 2>&1 | head -10 || true
-    echo "===== DIAG: top-level /opt/hlahd/current ====="; ls -la /opt/hlahd/current/ 2>&1 || true
-    echo "===== DIAG: which pm_extract ====="; which pm_extract 2>&1 || true
-    echo "===== DIAG: PATH ====="; echo "\$PATH"
-
     mkdir -p ${prefix}
 
     bash ${install_dir}/bin/hlahd.sh \\
