@@ -527,7 +527,7 @@ def main(args):
                 # match
                 if (
                     (WTid in WTdict)
-                    and IDsplit[1][0] != "I"
+                    and IDsplit[1][0] not in ("I", "F")
                     ):
                     #This block takes care of Missense mutations caused by polymorphisims
                     matchfound = True
@@ -536,7 +536,7 @@ def main(args):
                 else:
                     # Here we take care of INDELS and everything else
 
-                    if ("-" in IDsplit[1] or "+" in IDsplit[1]):
+                    if IDsplit[1].startswith("Fi") or IDsplit[1].startswith("Fd"):
                         frameshift = True
                     (
                         best_pepmatch,
@@ -699,8 +699,8 @@ def makeID(maf_row):
             "nonsense_mutation": "X",
             "silent_mutation": "S",
             "silent": "S",
-            "frame_shift_ins": "I+",
-            "frame_shift_del": "I-",
+            "frame_shift_ins": "Fi",
+            "frame_shift_del": "Fd",
             "in_frame_ins": "If",
             "in_frame_del": "Id",
             "splice_site": "Sp",
