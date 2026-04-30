@@ -4,8 +4,8 @@ process HLAHD {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/hlahd:1.7.1':
-        'mskcc.jfrog.io/omicswf-docker-dev-local/mskcc-omics-workflows/hlahd:1.7.1' }"
+        'docker://mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/hlahd:1.7.1':
+        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/hlahd:1.7.1' }"
 
     input:
     tuple val(meta), path(fastq_1), path(fastq_2)
@@ -27,7 +27,7 @@ process HLAHD {
     if [[ \$(ulimit -n) -lt 1024 ]]; then ulimit -n 1024; fi
 
     ln -sf /usr/bin/python3 ./python
-    export PATH=\$PWD:\$PATH
+    export PATH=\$PWD:${install_dir}/bin:\$PATH
 
     mkdir -p ${prefix}
 
