@@ -88,13 +88,27 @@ runs:
         nextflow secrets set ONCOKB_TOKEN $ONCOKB_TOKEN
 
 
-    - name: Login to JFrog Container Registry
+    - name: Login to JFrog Container Registry (docker)
       if: ${{ inputs.profile == 'docker' && inputs.jfrog_username != '' }}
       uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3
       with:
         registry: mskcc.jfrog.io
         username: ${{ inputs.jfrog_username }}
         password: ${{ inputs.jfrog_password }}
+
+    - name: Configure JFrog auth for Apptainer/Singularity
+      if: ${{ contains(inputs.profile, 'singularity') && inputs.jfrog_username != '' }}
+      shell: bash
+      env:
+        JFROG_USERNAME: ${{ inputs.jfrog_username }}
+        JFROG_PASSWORD: ${{ inputs.jfrog_password }}
+      run: |
+        # Apptainer (used by eWaterCycle/setup-apptainer) reads APPTAINER_DOCKER_*;
+        # set SINGULARITY_DOCKER_* too in case the binary still resolves via singularity envs.
+        echo "APPTAINER_DOCKER_USERNAME=${JFROG_USERNAME}" >> "$GITHUB_ENV"
+        echo "APPTAINER_DOCKER_PASSWORD=${JFROG_PASSWORD}" >> "$GITHUB_ENV"
+        echo "SINGULARITY_DOCKER_USERNAME=${JFROG_USERNAME}" >> "$GITHUB_ENV"
+        echo "SINGULARITY_DOCKER_PASSWORD=${JFROG_PASSWORD}" >> "$GITHUB_ENV"
 
       # TODO Skip failing conda tests and document their failures
       # https://github.com/nf-core/modules/issues/7017
