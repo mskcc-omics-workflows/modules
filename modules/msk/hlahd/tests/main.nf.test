@@ -25,6 +25,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
+                { System.err.println("DEBUG_FINAL_RESULT_BEGIN\n" + path(process.out.result.get(0).get(1)).text + "\nDEBUG_FINAL_RESULT_END") ; assert true },
                 { assert snapshot(
                     process.out.result,
                     process.out.versions
