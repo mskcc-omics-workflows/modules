@@ -78,7 +78,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_input.json:md5,0c9e3ec012d543da7c2655ee6665cff3"
+                        "test_patient_test_input.json:md5,8b26c4e2d6da8a5c5d73c9a26e295fc8"
                     ]
                 ],
                 "1": [
@@ -90,7 +90,7 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_input.json:md5,0c9e3ec012d543da7c2655ee6665cff3"
+                        "test_patient_test_input.json:md5,8b26c4e2d6da8a5c5d73c9a26e295fc8"
                     ]
                 ],
                 "versions": [

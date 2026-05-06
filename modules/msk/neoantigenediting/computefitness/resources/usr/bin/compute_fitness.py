@@ -326,10 +326,13 @@ if __name__ == "__main__":
     mut2neo = defaultdict(list)
     for neo in neoantigens:
         score_list = naseq2scores[neo["sequence"]]
-        neo["R"] = compute_R(score_list, a, k)
-        neo["logC"] = epidist.epitope_dist(neo["sequence"], neo["WT_sequence"])
-        neo["logA"] = np.log(neo["KdWT"] / neo["Kd"])
-        neo["quality"] = (w * neo["logC"] + (1 - w) * neo["logA"]) * neo["R"]
+        neo["R"] = compute_R(score_list, a, k) if score_list else 0.0
+        if neo["Kd"] == 0 or neo["KdWT"] == 0:
+            neo["logC"] = neo["logA"] = neo["quality"] = 0.0
+        else:
+            neo["logC"] = epidist.epitope_dist(neo["sequence"], neo["WT_sequence"])
+            neo["logA"] = np.log(neo["KdWT"] / neo["Kd"])
+            neo["quality"] = (w * neo["logC"] + (1 - w) * neo["logA"]) * neo["R"]
         mut2neo[neo["mutation_id"]].append(neo)
 
     mut2dg = mark_driver_gene_mutations(sjson)
