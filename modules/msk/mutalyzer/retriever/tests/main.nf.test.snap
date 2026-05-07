@@ -2,40 +2,66 @@
     "MUTALYZER_RETRIEVER - bgzip fasta - tar": {
         "content": [
             [
-                "versions.yml:md5,03f8b4f0a527f3d4eb0f93aebf41774c"
+                "versions.yml:md5,4ab2d845297c3e2b5da08dcdfb597219"
             ],
             "test.tar.gz"
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2025-11-19T15:47:30.148934"
+        "timestamp": "2026-04-22T17:24:36.805516"
     },
     "MUTALYZER_RETRIEVER - gzip fasta - tar": {
         "content": [
             [
-                "versions.yml:md5,03f8b4f0a527f3d4eb0f93aebf41774c"
+                "versions.yml:md5,4ab2d845297c3e2b5da08dcdfb597219"
             ],
             "test.tar.gz"
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2025-11-19T15:48:41.373661"
+        "timestamp": "2026-04-22T17:26:20.666263"
+    },
+    "MUTALYZER_RETRIEVER - bzip2 fasta - tar": {
+        "content": [
+            [
+                "versions.yml:md5,4ab2d845297c3e2b5da08dcdfb597219"
+            ],
+            "test.tar.gz"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-23T10:36:15.363805"
+    },
+    "MUTALYZER_RETRIEVER - unzipped fasta - tar": {
+        "content": [
+            [
+                "versions.yml:md5,4ab2d845297c3e2b5da08dcdfb597219"
+            ],
+            "test.tar.gz"
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-04-22T18:05:42.309498"
     },
     "MUTALYZER_RETRIEVER - fasta - tar - stub": {
         "content": [
             [
-                "versions.yml:md5,03f8b4f0a527f3d4eb0f93aebf41774c"
+                "versions.yml:md5,4ab2d845297c3e2b5da08dcdfb597219"
             ],
             "test.tar.gz"
         ],
         "meta": {
             "nf-test": "0.9.3",
-            "nextflow": "25.10.0"
+            "nextflow": "25.10.4"
         },
-        "timestamp": "2025-11-19T15:48:45.850408"
+        "timestamp": "2026-04-22T17:26:43.924997"
     }
 }

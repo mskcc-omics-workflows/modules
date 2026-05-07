@@ -18,14 +18,35 @@ process MUTALYZER_RETRIEVER {
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    if ! bgzip --reindex ${fasta} > /dev/null 2>&1
-    then
-        # Re-compress fasta with bgzip
 
-        mv ${fasta} ${fasta.baseName}.tmp.gzip
-        gunzip -c ${fasta.baseName}.tmp.gzip | bgzip -c > ${fasta}
+
+        # Read first 3 bytes and route by magic: bgzip=1f8b08,gzip=1f8b08, bzip2=425a68.
+        # Plain-text FASTA/FASTQ commonly starts with '>' (3e) or '@' (40).
+        MAGIC=\$(head -c 3 "${fasta}" | od -An -tx1 | tr -d ' \n')
+
+        case "\$MAGIC" in
+            1f8b08)
+                if ! bgzip --reindex ${fasta} > /dev/null 2>&1; then
+                    mv ${fasta} ${fasta.baseName}.tmp.gzip
+                    gunzip -c ${fasta.baseName}.tmp.gzip | bgzip -c > ${fasta}
+                fi
+                ;;
+            425a68)
+                mv ${fasta} ${fasta.baseName}.tmp.bzip2
+                bunzip2 -c "${fasta.baseName}.tmp.bzip2" | bgzip -c > ${fasta}
+                ;;
+            3e*|40*)
+                mv ${fasta} ${fasta.baseName}.tmp
+                bgzip -c "${fasta.baseName}.tmp" > "${fasta}"
+                ;;
+            *)
+                echo "ERROR: Unsupported input format for ${fasta}." >&2
+                echo "       Expected: bgzip/gzip, bzip2, or plain-text FASTA/FASTQ." >&2
+                exit 1
+                ;;
+        esac
+
         bgzip --reindex ${fasta}
-    fi
 
     # Build cache
 
@@ -44,9 +65,9 @@ process MUTALYZER_RETRIEVER {
     tar -zcf ${prefix}.tar.gz cache/
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
-    END_VERSIONS
+	"${task.process}":
+	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
+	END_VERSIONS
     """
 
     stub:
@@ -56,8 +77,8 @@ process MUTALYZER_RETRIEVER {
     """
     touch ${prefix}.tar.gz
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
-    END_VERSIONS
+	"${task.process}":
+	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
+	END_VERSIONS
     """
 }

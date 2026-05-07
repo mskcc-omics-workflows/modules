@@ -25,9 +25,9 @@ process PHYLOWGS_PARSECNVS {
         ${facetsgenelevel}
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        phylowgs: \$PHYLOWGS_TAG
-    END_VERSIONS
+	"${task.process}":
+	    phylowgs: \$PHYLOWGS_TAG
+	END_VERSIONS
     """
 
     stub:
@@ -37,8 +37,8 @@ process PHYLOWGS_PARSECNVS {
     touch cnvs.txt
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        phylowgs: \$PHYLOWGS_TAG
-    END_VERSIONS
+	"${task.process}":
+	    phylowgs: \$PHYLOWGS_TAG
+	END_VERSIONS
     """
 }

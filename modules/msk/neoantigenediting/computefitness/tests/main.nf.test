@@ -26,7 +26,7 @@ nextflow_process {
                     file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['iedb_alignments'], checkIfExists: true)
                     ]
-                
+
 
                 """
             }

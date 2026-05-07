@@ -14,12 +14,12 @@ workflow PHYLOWGS {
 
     ch_genelevel = ch_input_maf_and_genelevel
                         .map{
-                            new Tuple(it[0],it[2])
+                            [it[0],it[2]]
                         }
 
     ch_maf = ch_input_maf_and_genelevel
                         .map{
-                            new Tuple(it[0],it[1])
+                            [it[0],it[1]]
                         }
 
     PHYLOWGS_PARSECNVS(ch_genelevel)
@@ -52,17 +52,17 @@ workflow PHYLOWGS {
 def join_maf_with_cnv(maf,cnv) {
         def maf_channel = maf
             .map{
-                new Tuple(it[0].id,it)
+                [it[0].id,it]
                 }
         def cnv_channel = cnv
             .map{
-                new Tuple(it[0].id,it)
+                [it[0].id,it]
                 }
         def mergedWithKey = maf_channel
             .join(cnv_channel)
         def merged = mergedWithKey
             .map{
-                new Tuple(it[1][0],it[1][1],it[2][1])
+                [it[1][0],it[1][1],it[2][1]]
             }
         return merged
 

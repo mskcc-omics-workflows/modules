@@ -63,6 +63,76 @@ nextflow_process {
 
     }
 
+    test("MUTALYZER_RETRIEVER - bzip2 fasta - tar") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_bz2'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions, file(process.out.mutalyzer_cache[0]).name).match() }
+            )
+        }
+
+    }
+
+    test("MUTALYZER_RETRIEVER - unzipped fasta - tar") {
+
+        setup {
+            run("GUNZIP_FASTA") {
+                script "./setup.nf"
+                process {
+                    """
+
+                    input = [
+                        file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
+                        ]
+
+                    """
+                }
+
+            }
+        }
+
+        when {
+
+            process {
+                """
+
+                input[0] = GUNZIP_FASTA.out.fasta.map { fa ->
+                    [
+                        [ id:'test' ], // meta map
+                        fa,
+                        file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
+                    ]
+                }
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out.versions, file(process.out.mutalyzer_cache[0]).name).match() }
+            )
+        }
+
+    }
+
 
     test("MUTALYZER_RETRIEVER - fasta - tar - stub") {
 
