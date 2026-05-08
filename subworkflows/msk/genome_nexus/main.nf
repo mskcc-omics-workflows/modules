@@ -8,7 +8,7 @@ workflow GENOME_NEXUS {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
 
     GENOMENEXUS_VCF2MAF ( ch_vcf )

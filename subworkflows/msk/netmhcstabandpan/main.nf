@@ -12,7 +12,7 @@ workflow NETMHCSTABANDPAN {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_netmhcinput = createNETMHCInput(ch_fasta_and_hla, ch_sv_fasta)
 
@@ -20,7 +20,7 @@ workflow NETMHCSTABANDPAN {
 
     ch_versions = ch_versions.mix(NETMHCSTABPAN.out.versions)
 
-    merged_pan_and_stab = Channel.empty()
+    merged_pan_and_stab = channel.empty()
 
     merged_pan_and_stab = merged_pan_and_stab.mix( NETMHCSTABPAN.out.netmhcstabpanoutput )
 

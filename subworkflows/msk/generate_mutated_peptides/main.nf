@@ -15,7 +15,7 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_maf = ch_maf_hla_sv
                 .map{

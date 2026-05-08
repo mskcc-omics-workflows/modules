@@ -18,14 +18,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = Channel.value([
+                input[1] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['MUT_sv_fa'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['WT_sv_fa'], checkIfExists: true)
@@ -58,14 +58,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = Channel.value([
+                input[1] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['MUT_sv_fa'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['WT_sv_fa'], checkIfExists: true)
@@ -96,14 +96,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = Channel.value([
+                input[1] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     [],
                     []
@@ -132,14 +132,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['MUT_sequence_fa'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['WT_sequence_fa'], checkIfExists: true),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = Channel.value([
+                input[1] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     [],
                     []
@@ -169,14 +169,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sequence_fa', checkIfExists: false),
                     file('WT_sequence_fa', checkIfExists: false),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = Channel.value([
+                input[1] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sv_fa', checkIfExists: false),
                     file('WT_sv_fa', checkIfExists: false)
@@ -212,14 +212,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sequence_fa', checkIfExists: false),
                     file('WT_sequence_fa', checkIfExists: false),
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = Channel.value([
+                input[1] = channel.value([
                     [ id:'test', single_end:false ], // meta map
                     file('MUT_sv_fa', checkIfExists: false),
                     file('WT_sv_fa', checkIfExists: false)

@@ -16,7 +16,7 @@ workflow TRACEBACK {
     main:
 
     // declare versions channel
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     // Concat Input Mafs
     PVMAFCONCAT_INITIAL(mafs)
