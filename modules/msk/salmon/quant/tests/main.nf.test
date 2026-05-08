@@ -26,7 +26,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end: true ], // meta map
                     [ file(params.test_data_mskcc['rediscoverte']['input_R1_fq_gz'], checkIfExists: true) ]
                 ])
@@ -53,7 +53,7 @@ nextflow_process {
         when {
             process {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end: true ], // meta map
                     [ file('input_R1_fq_gz') ]
                 ])

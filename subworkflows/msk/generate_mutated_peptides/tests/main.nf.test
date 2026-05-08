@@ -20,25 +20,25 @@ nextflow_workflow {
             workflow {
                 """
 
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
                     ])
 
-                input[1] = Channel.value(
+                input[1] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
                     )
 
-                input[2] = Channel.value(
+                input[2] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
                     )
 
-                input[3] = Channel.value(
+                input[3] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true)
                     )
 
-                input[4] = Channel.value(
+                input[4] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
                     )
 
@@ -64,26 +64,26 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end:false ], // meta map
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['somatic_filtered_maf'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['winners_hla_txt'], checkIfExists: true),
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['sv_filtered_bedpe'], checkIfExists: true)
                     ])
 
-                input[1] = Channel.value(
+                input[1] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['fa_gzip'], checkIfExists: true)
                     )
 
-                input[2] = Channel.value(
+                input[2] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['small_test_chr2and16']['gff3'], checkIfExists: true)
                     )
 
-                input[3] = Channel.value(
+                input[3] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['gtf'], checkIfExists: true)
                     )
 
-                input[4] = Channel.value(
+                input[4] = channel.value(
                     file(params.test_data_mskcc['neoantigen']['cdna'], checkIfExists: true)
                     )
 
@@ -114,26 +114,26 @@ nextflow_workflow {
             workflow {
                 """
 
-                input[0] = Channel.of([
+                input[0] = channel.of([
                     [ id:'test', single_end:false ], // meta map
                     file('somatic_filtered_maf', checkIfExists: false),
                     file('winners_hla_txt', checkIfExists: false),
                     file('sv_filtered_bedpe', checkIfExists: false)
                     ])
 
-                input[1] = Channel.value(
+                input[1] = channel.value(
                     file('fa_gzip', checkIfExists: false)
                     )
 
-                input[2] = Channel.value(
+                input[2] = channel.value(
                     file('gff3', checkIfExists: false)
                     )
 
-                input[3] = Channel.value(
+                input[3] = channel.value(
                     file('gtf', checkIfExists: false)
                     )
 
-                input[4] = Channel.value(
+                input[4] = channel.value(
                     file('cdna', checkIfExists: false)
                     )
 

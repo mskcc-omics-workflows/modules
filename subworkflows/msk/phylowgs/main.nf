@@ -10,7 +10,7 @@ workflow PHYLOWGS {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_genelevel = ch_input_maf_and_genelevel
                         .map{

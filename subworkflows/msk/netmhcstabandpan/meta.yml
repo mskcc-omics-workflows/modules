@@ -28,7 +28,7 @@ output:
   - tsv:
       type: file
       description: |
-        Channel containing TSV files
+        channel containing TSV files
         Structure: [ val(meta), path(tsv) ]
       pattern: "*.tsv"
   - versions:
