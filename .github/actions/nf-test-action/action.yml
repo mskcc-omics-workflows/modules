@@ -103,12 +103,18 @@ runs:
         JFROG_USERNAME: ${{ inputs.jfrog_username }}
         JFROG_PASSWORD: ${{ inputs.jfrog_password }}
       run: |
-        # Apptainer (used by eWaterCycle/setup-apptainer) reads APPTAINER_DOCKER_*;
-        # set SINGULARITY_DOCKER_* too in case the binary still resolves via singularity envs.
-        echo "APPTAINER_DOCKER_USERNAME=${JFROG_USERNAME}" >> "$GITHUB_ENV"
-        echo "APPTAINER_DOCKER_PASSWORD=${JFROG_PASSWORD}" >> "$GITHUB_ENV"
-        echo "SINGULARITY_DOCKER_USERNAME=${JFROG_USERNAME}" >> "$GITHUB_ENV"
-        echo "SINGULARITY_DOCKER_PASSWORD=${JFROG_PASSWORD}" >> "$GITHUB_ENV"
+        # Scope JFrog creds to mskcc.jfrog.io only via a Docker-format auth
+        # file. Setting APPTAINER_DOCKER_USERNAME/PASSWORD globally would send
+        # JFrog basic-auth to every docker:// pull (incl. ghcr.io, quay.io),
+        # which the other registries reject with 403.
+        AUTH=$(printf '%s:%s' "$JFROG_USERNAME" "$JFROG_PASSWORD" | base64 -w0)
+        for d in "$HOME/.apptainer" "$HOME/.singularity"; do
+          mkdir -p "$d"
+          cat > "$d/docker-config.json" <<EOF
+        {"auths":{"mskcc.jfrog.io":{"auth":"$AUTH"}}}
+        EOF
+          chmod 600 "$d/docker-config.json"
+        done
 
       # TODO Skip failing conda tests and document their failures
       # https://github.com/nf-core/modules/issues/7017
