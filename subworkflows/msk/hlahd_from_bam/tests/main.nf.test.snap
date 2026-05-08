@@ -45,14 +45,14 @@
                         "id": "test_sample",
                         "single_end": false
                     },
-                    "test_sample_final.result.txt:md5,e51e94f442d3f7d775ffb8e8c113fb95"
+                    "test_sample_final.result.txt:md5,7ba486d37cd952b3ceff6d2f72cbcd58"
                 ]
             ],
             [
                 "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
             ]
         ],
-        "timestamp": "2026-04-27T18:15:51.303141",
+        "timestamp": "2026-05-08T18:22:29.933926",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
