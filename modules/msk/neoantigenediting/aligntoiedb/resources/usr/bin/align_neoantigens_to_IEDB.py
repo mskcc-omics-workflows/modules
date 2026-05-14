@@ -15,7 +15,13 @@ import argparse
 
 import pandas as pd
 from Bio import SeqIO
-from Bio.pairwise2 import align
+
+try:
+    from Bio.Align import PairwiseAligner, substitution_matrices
+    _USE_PAIRWISE_ALIGNER = True
+except ImportError:
+    from Bio.pairwise2 import align as _pairwise2_align
+    _USE_PAIRWISE_ALIGNER = False
 
 
 def load_blosum62_mat():
@@ -65,11 +71,33 @@ X  0 -1 -1 -1 -2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -2  0  0 -2 -1 -1 -1 -1 -1 -4
     return blosum62
 
 
+class _AlignmentResult:
+    """Minimal alignment result with a score attribute."""
+    def __init__(self, score=0.0):
+        self.score = score
+
+
 def align_peptides(seq1, seq2, matrix):
     gap_open = -11
     gap_extend = -1
-    aln = align.localds(seq1.upper(), seq2.upper(), matrix, gap_open, gap_extend)
-    return aln[0]
+    s1 = seq1.upper()
+    s2 = seq2.upper()
+    if _USE_PAIRWISE_ALIGNER:
+        blosum62 = substitution_matrices.load("BLOSUM62")
+        aligner = PairwiseAligner()
+        aligner.mode = "local"
+        aligner.substitution_matrix = blosum62
+        aligner.open_gap_score = gap_open
+        aligner.extend_gap_score = gap_extend
+        alignments = aligner.align(s1, s2)
+        if not alignments:
+            return _AlignmentResult(0.0)
+        return alignments[0]
+    else:
+        aln = _pairwise2_align.localds(s1, s2, matrix, gap_open, gap_extend)
+        if not aln:
+            return _AlignmentResult(0.0)
+        return aln[0]
 
 
 def run_blastp_n(pep_list, blastdb):

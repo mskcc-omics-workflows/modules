@@ -17,14 +17,14 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.of(
+                input[0] = channel.of(
                     [[id:'sample1', patient: 'patient1'],file('sample1.bam'),file('sample1.bam.bai'),[], [], [], []],[[id:'sample2', patient:'patient2'], [], [],
                     file('sample2-duplex.bam'),
                     file('sample2-duplex.bam.bai'),
                     file('sample2-simplex.bam'),file('sample2-simplex.bam.bai')
                     ])
 
-                input[1] = Channel.of(
+                input[1] = channel.of(
                     [[patient: 'patient1'],
                     [file('patient1.txt'),]
                     ],

@@ -1,6 +1,6 @@
 process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tag "$meta.id"
-    label 'process_single'
+    label 'process_medium'
     container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0"
 
     input:
@@ -46,9 +46,9 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
         ${args}
 
         cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            neoantigeninput: \$(echo \$(generate_input.py -v))
-        END_VERSIONS
+	"${task.process}":
+	    neoantigeninput: \$(echo \$(generate_input.py -v))
+	END_VERSIONS
     """
 
     stub:
@@ -61,8 +61,8 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
         touch ${patientid}_${id}_input.json
 
         cat <<-END_VERSIONS > versions.yml
-        "${task.process}":
-            neoantigeninput: \$(echo \$(generate_input.py -v))
-        END_VERSIONS
+	"${task.process}":
+	    neoantigeninput: \$(echo \$(generate_input.py -v))
+	END_VERSIONS
     """
 }

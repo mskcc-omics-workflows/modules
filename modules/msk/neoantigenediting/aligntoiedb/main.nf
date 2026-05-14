@@ -29,9 +29,9 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
-    END_VERSIONS
+	"${task.process}":
+	    neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
+	END_VERSIONS
     """
 
     stub:
@@ -42,8 +42,8 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
     touch iedb_alignments_example.txt
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
-    END_VERSIONS
+	"${task.process}":
+	    neoantigenEditing: \$NEOANTIGEN_EDITING_TAG
+	END_VERSIONS
     """
 }

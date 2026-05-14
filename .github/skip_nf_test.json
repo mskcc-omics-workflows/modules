@@ -17,6 +17,8 @@
         "modules/msk/snppileup",
         "modules/msk/netmhcstabpan",
         "modules/msk/genomenexus/annotationpipeline",
+        "modules/msk/salmon/index",
+        "modules/msk/salmon/quant",
         "modules/msk/genomenexus/vcf2maf",
         "modules/msk/rediscoverte",
         "modules/msk/netmhcpan4",

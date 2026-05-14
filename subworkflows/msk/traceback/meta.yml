@@ -18,14 +18,14 @@ input:
       type: channel
       description: |
         An input channel containing impact or access bams files:
-        impact: Channel.of([patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], [])
-        access: Channel.of([patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai])
+        impact: channel.of([patient:null, id:'sample'], standard.bam, standard.bam.bai, [], [], [], [])
+        access: channel.of([patient:null, id:'sample'], [], [], duplex.bam, duplex.bam.bai, simplex.bam, simplex.bam.bai])
       pattern: "*.{bam/cram/sam}"
   - mafs:
       type: channel
       description: |
         An input channel containing maf files
-        Structure: // channel: Channel.of([[patient:null, id:'sample'], [maf1,...,maf2]], [[patient:null, id:'sample'], [maf1,...,maf2] ]])
+        Structure: // channel: channel.of([[patient:null, id:'sample'], [maf1,...,maf2]], [[patient:null, id:'sample'], [maf1,...,maf2] ]])
       pattern: "*.{maf,txt,tsv}"
   - fasta:
       type: file

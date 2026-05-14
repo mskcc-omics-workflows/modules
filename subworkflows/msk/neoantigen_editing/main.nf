@@ -10,7 +10,7 @@ workflow NEOANTIGEN_EDITING {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     NEOANTIGENEDITING_ALIGNTOIEDB (neoantigenInput_ch, iedbfasta)
     ch_versions = ch_versions.mix(NEOANTIGENEDITING_ALIGNTOIEDB.out.versions.first())

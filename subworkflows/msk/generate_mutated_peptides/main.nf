@@ -15,33 +15,33 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     ch_maf = ch_maf_hla_sv
                 .map{
-                    new Tuple(it[0],it[1])
+                    [it[0],it[1]]
                 }
 
     ch_hla = ch_maf_hla_sv
                 .map{
-                    new Tuple(it[0],it[2])
+                    [it[0],it[2]]
                 }
 
     ch_sv = ch_maf_hla_sv
                 .map{
-                    new Tuple(it[0],it[3])
+                    [it[0],it[3]]
                 }
 
     ch_fasta_and_gff3 =  ref_fasta
                             .merge(gff3)
                             .map{
-                                new Tuple([ id:"mutalyzer_retriever_"+file(it[0]).name +"_"+ file(it[1]).name], it[0], it[1])
+                                [[ id:"mutalyzer_retriever_"+file(it[0]).name +"_"+ file(it[1]).name], it[0], it[1]]
                             }
 
     ch_gtf_and_cdna = gtf
                             .merge(cdna)
                             .map{
-                                new Tuple(it[0], it[1])
+                                [it[0], it[1]]
                             }
 
     NEOANTIGENUTILS_GENERATEHLASTRING( ch_hla )
@@ -52,7 +52,7 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     ch_versions = ch_versions.mix(MUTALYZER_RETRIEVER.out.versions)
 
-    GENERATEMUTFASTA( ch_maf, MUTALYZER_RETRIEVER.out.mutalyzer_cache )
+    GENERATEMUTFASTA( ch_maf, MUTALYZER_RETRIEVER.out.mutalyzer_cache.collect() )
 
     ch_versions = ch_versions.mix(GENERATEMUTFASTA.out.versions)
 
@@ -68,7 +68,7 @@ workflow GENERATE_MUTATED_PEPTIDES {
     wt_fasta       = GENERATEMUTFASTA.out.wt_fasta                    // channel: [ val(meta), [ *.WT_sequences.fa ] ]
     mut_fasta_log  = GENERATEMUTFASTA.out.mut_fasta_log               // channel: [ val(meta), [ *_generate_mut_fasta.log ] ]
     sv_mut_fasta   = NEOSV.out.mutOut                                 // channel: [ val(meta), [ *.SV.MUT.fa ] ]
-    sv_wt_fasta    = NEOSV.out.wtOut                            // channel: [ val(meta), [ *.SV.WT.fa ] ]
+    sv_wt_fasta    = NEOSV.out.wtOut                                  // channel: [ val(meta), [ *.SV.WT.fa ] ]
     hla_string     = NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring  // channel: [ val(meta), [ hla_string ] ]
     versions       = ch_versions                                      // channel: [ versions.yml ]
 }
@@ -76,18 +76,18 @@ workflow GENERATE_MUTATED_PEPTIDES {
 def createNEOSVInput(sv_bedpe, hla_str) {
         def sv_bedpe_channel = sv_bedpe
             .map{
-                new Tuple(it[0],it)
+                [it[0],it]
                 }
 
         def hla_str_channel = hla_str
             .map{
-                new Tuple(it[0],it)
+                [it[0],it]
                 }
 
         def merged_sv_hla = sv_bedpe_channel
             .join(hla_str_channel, by:0)
             .map{
-                new Tuple(it[1][0], it[1][1], it[2][1])
+                [it[1][0], it[1][1], it[2][1]]
             }
             .filter{ it[1] != null && it[2] != null }
         return merged_sv_hla

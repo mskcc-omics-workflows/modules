@@ -24,7 +24,7 @@ output:
   - maf:
       type: file
       description: |
-        Channel containing output converted and annotated MAF file
+        channel containing output converted and annotated MAF file
         Structure: [ val(meta), path(maf) ]
 
   - versions:

@@ -36,11 +36,11 @@ process NETMHCPAN4 {
     chmod 777 ${tmpDir}
 
 
-    cat ${inputSVFasta} >> ${inputFasta}
+    cat ${inputFasta} ${inputSVFasta} > combined_input.fa
     /usr/local/bin/netMHCpan-${NETMHCPAN_VERSION}/netMHCpan \
     -s 0 \
     -BA 1 \
-    -f ${inputFasta} \
+    -f combined_input.fa \
     -a ${hla} \
     -l 9,10 \
     -inptype 0 \
@@ -51,9 +51,9 @@ process NETMHCPAN4 {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhcpan: v${NETMHCPAN_VERSION}
+	END_VERSIONS
 
     """
 
@@ -70,8 +70,8 @@ process NETMHCPAN4 {
     touch ${prefix}.${inputType}.netmhcpan.output
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        netmhcpan: v${NETMHCPAN_VERSION}
-    END_VERSIONS
+	"${task.process}":
+	    netmhcpan: v${NETMHCPAN_VERSION}
+	END_VERSIONS
     """
 }

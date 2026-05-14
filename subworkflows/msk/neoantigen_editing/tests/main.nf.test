@@ -19,11 +19,11 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map,
                     file(params.test_data_mskcc['neoantigen']['patient_data'], checkIfExists: true)
                     ])
-                input[1] = Channel.value(file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true))
+                input[1] = channel.value(file(params.test_data_mskcc['neoantigen']['iedb']['iedb_fasta'], checkIfExists: true))
 
                 """
             }
@@ -49,11 +49,11 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test', single_end:false ], // meta map,
                     file('patient_data')
                     ])
-                input[1] = Channel.value(file('iedb_fasta'))
+                input[1] = channel.value(file('iedb_fasta'))
 
                 """
             }

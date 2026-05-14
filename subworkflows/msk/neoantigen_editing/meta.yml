@@ -25,7 +25,7 @@ output:
   - annotated_output:
       type: file
       description: |
-        Channel containing annpotated json output with neoantigen quality
+        channel containing annpotated json output with neoantigen quality
         Structure: [ val(meta), [ annotated_json ] ]
       pattern: "*.json"
   - versions:

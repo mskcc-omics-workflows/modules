@@ -41,9 +41,9 @@ process NEOSV {
 
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        NEOSV: \$NEOSV_TAG
-    END_VERSIONS
+	"${task.process}":
+	    NEOSV: \$NEOSV_TAG
+	END_VERSIONS
 
     """
 
@@ -55,8 +55,8 @@ process NEOSV {
     touch ${prefix}.SV.MUT.fa
 
     cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        NEOSV: \$NEOSV_TAG
-    END_VERSIONS
+	"${task.process}":
+	    NEOSV: \$NEOSV_TAG
+	END_VERSIONS
     """
 }

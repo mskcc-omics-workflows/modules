@@ -527,7 +527,7 @@ def main(args):
                 # match
                 if (
                     (WTid in WTdict)
-                    and IDsplit[1][0] != "I"
+                    and IDsplit[1][0] not in ("I", "F")
                     ):
                     #This block takes care of Missense mutations caused by polymorphisims
                     matchfound = True
@@ -536,7 +536,7 @@ def main(args):
                 else:
                     # Here we take care of INDELS and everything else
 
-                    if ("-" in IDsplit[1] or "+" in IDsplit[1]):
+                    if IDsplit[1].startswith("Fi") or IDsplit[1].startswith("Fd"):
                         frameshift = True
                     (
                         best_pepmatch,
@@ -555,12 +555,14 @@ def main(args):
                         # In this case we don't want to report the peptide as a neoantigen, its not neo
                         continue
 
-                    elif (
-                        best_pepmatch[0] != row_mut["peptide"][0]
-                        and best_pepmatch2[0] == row_mut["peptide"][0]
-                    ) or (
-                        best_pepmatch[-1] != row_mut["peptide"][-1]
-                        and best_pepmatch2[-1] == row_mut["peptide"][-1]
+                    elif best_pepmatch2 is not None and (
+                        (
+                            best_pepmatch[0] != row_mut["peptide"][0]
+                            and best_pepmatch2[0] == row_mut["peptide"][0]
+                        ) or (
+                            best_pepmatch[-1] != row_mut["peptide"][-1]
+                            and best_pepmatch2[-1] == row_mut["peptide"][-1]
+                        )
                     ):
                         # We should preferentially match the first AA if we can.  Sometimes the pairwise alignment isnt the best at this so we do a little check here.
                         # It will also do this when the last AA of the best match doesnt match but the last A of the second best match does
@@ -694,11 +696,11 @@ def makeID(maf_row):
 
     variant_type_map = {
             "missense_mutation": "M",
-            "nonsense_nutation": "X",
+            "nonsense_mutation": "X",
             "silent_mutation": "S",
             "silent": "S",
-            "frame_shift_ins": "I+",
-            "frame_shift_del": "I-",
+            "frame_shift_ins": "Fi",
+            "frame_shift_del": "Fd",
             "in_frame_ins": "If",
             "in_frame_del": "Id",
             "splice_site": "Sp",
@@ -1036,6 +1038,7 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
 
     NMD = "False"
 
+    PTC_exon = None
     pos = int(pos) + 1
     for i in range(0,len(exon_ranges)):
         if pos>=exon_ranges[i][0] and pos<=exon_ranges[i][1]:
@@ -1058,7 +1061,7 @@ def determine_NMD(chrom, pos,num_windows,len_indel, ensembl, transcriptID=None):
                 else:
                     mut_to_stop_dist = mut_to_stop_dist - dist
 
-    if PTC_exon == exon_ranges[-1]:
+    if PTC_exon is not None and PTC_exon == exon_ranges[-1]:
         # "on the last exon"
         NMD = "Last Exon"
     else:
@@ -1155,4 +1158,3 @@ if __name__ == "__main__":
         print("patient_data_file File:", args.patient_data_file)
 
     main(args)
-
