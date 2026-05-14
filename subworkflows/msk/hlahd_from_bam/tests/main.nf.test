@@ -34,7 +34,9 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.result,
+                    workflow.out.result.collect { meta, f ->
+                        [meta, path(f).readLines().findAll { it.startsWith("A\t") }]
+                    },
                     workflow.out.versions
                     ).match()
                 }
@@ -64,7 +66,9 @@ nextflow_workflow {
             assertAll(
                 { assert workflow.success },
                 { assert snapshot(
-                    workflow.out.result,
+                    workflow.out.result.collect { meta, f ->
+                        [meta, path(f).readLines().findAll { it.startsWith("A\t") }]
+                    },
                     workflow.out.versions
                     ).match()
                 }

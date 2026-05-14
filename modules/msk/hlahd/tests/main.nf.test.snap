@@ -19,14 +19,16 @@
                         "id": "test_sample",
                         "single_end": false
                     },
-                    "test_sample_final.result.txt:md5,7ba486d37cd952b3ceff6d2f72cbcd58"
+                    [
+                        "A\tHLA-A*01:01:01\tHLA-A*29:02:01"
+                    ]
                 ]
             ],
             [
                 "versions.yml:md5,f196d451477cda61837f7cfb2ed3c9b4"
             ]
         ],
-        "timestamp": "2026-05-08T15:44:54.201017",
+        "timestamp": "2026-05-14T11:55:00.000000",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"

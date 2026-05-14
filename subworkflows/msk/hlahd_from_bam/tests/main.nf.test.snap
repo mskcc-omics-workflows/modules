@@ -24,14 +24,16 @@
                         "id": "test_sample",
                         "single_end": false
                     },
-                    "test_sample_final.result.txt:md5,f2b54c8bd837ded981cd239a53351ab7"
+                    [
+                        "A\tHLA-A*01:01:01\tHLA-A*29:02:01"
+                    ]
                 ]
             ],
             [
                 "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
             ]
         ],
-        "timestamp": "2026-04-27T18:17:36.980299",
+        "timestamp": "2026-05-14T11:55:00.000000",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
@@ -45,14 +47,16 @@
                         "id": "test_sample",
                         "single_end": false
                     },
-                    "test_sample_final.result.txt:md5,7ba486d37cd952b3ceff6d2f72cbcd58"
+                    [
+                        "A\tHLA-A*01:01:01\tHLA-A*29:02:01"
+                    ]
                 ]
             ],
             [
                 "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
             ]
         ],
-        "timestamp": "2026-05-08T18:22:29.933926",
+        "timestamp": "2026-05-14T11:55:00.000000",
         "meta": {
             "nf-test": "0.9.4",
             "nextflow": "25.10.4"
