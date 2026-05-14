@@ -13,6 +13,6 @@ dependencies:
   - conda-forge::r-htmlwidgets=1.6.4
   - conda-forge::r-plotly=4.11.0
   - conda-forge::r-plyr=1.8.9
-  - conda-forge::r-reshape2=1.4.4
+  - conda-forge::r-reshape2=1.4.5
   - conda-forge::r-scales=1.4.0
   - conda-forge::r-tidyverse=2.0.0
