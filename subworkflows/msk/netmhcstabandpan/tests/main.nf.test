@@ -162,11 +162,12 @@ nextflow_workflow {
     }
 
 
-    test("netmhcstabandpan - empty SV channel - fa,hla_str - tsv - stub") {
+    test("netmhcstabandpan - padded empty SV placeholder - fa,hla_str - tsv - stub") {
 
-        // Regression test: when no SV files are provided, the upstream NEOSV process
-        // doesn't run, so the sv_fasta channel emits zero items. The createNETMHCInput
-        // helper must still emit MUT and WT tuples for each sample.
+        // Regression test for the per-sample streaming contract:
+        // when a sample has no SV data, callers (e.g. GENERATE_MUTATED_PEPTIDES)
+        // pad the SV channel with [meta, [], []] so every sample matches the
+        // inner join. The subworkflow must still emit per-sample tsv outputs.
 
         options "-stub"
 
@@ -180,7 +181,11 @@ nextflow_workflow {
                     "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
                     ])
 
-                input[1] = channel.empty()
+                input[1] = channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    [],
+                    []
+                    ])
                 """
             }
         }
@@ -191,7 +196,11 @@ nextflow_workflow {
                 { assert snapshot(workflow.out.tsv[0][0],
                                   file(workflow.out.tsv[0][1]).name,
                                   workflow.out.tsv[1][0],
-                                  file(workflow.out.tsv[1][1]).name
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
                                   ).match()
                 }
             )
