@@ -36,16 +36,12 @@ workflow PHYLOWGS {
 
     ch_versions = ch_versions.mix(PHYLOWGS_MULTIEVOLVE.out.versions)
 
-    PHYLOWGS_WRITERESULTS(PHYLOWGS_MULTIEVOLVE.out.trees)
-
-    ch_versions = ch_versions.mix(PHYLOWGS_WRITERESULTS.out.versions)
-
 
     emit:
 
-    summ        = PHYLOWGS_WRITERESULTS.out.summ        // channel: [ val(meta), [ summ ] ]
-    muts        = PHYLOWGS_WRITERESULTS.out.muts        // channel: [ val(meta), [ muts ] ]
-    mutass      = PHYLOWGS_WRITERESULTS.out.mutass      // channel: [ val(meta), [ mutass ] ]
+    summ        = PHYLOWGS_MULTIEVOLVE.out.summ        // channel: [ val(meta), [ summ ] ]
+    muts        = PHYLOWGS_MULTIEVOLVE.out.muts        // channel: [ val(meta), [ muts ] ]
+    mutass      = PHYLOWGS_MULTIEVOLVE.out.mutass      // channel: [ val(meta), [ mutass ] ]
     versions    = ch_versions                           // channel: [ versions.yml ]
 }
 

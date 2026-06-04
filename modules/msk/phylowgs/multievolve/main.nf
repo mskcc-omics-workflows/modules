@@ -10,6 +10,9 @@ process PHYLOWGS_MULTIEVOLVE {
 
     output:
     tuple val(meta), path("chains/trees.zip")   , emit: trees
+    tuple val(meta), path("*.summ.json.gz")     , emit: summ
+    tuple val(meta), path("*.muts.json.gz")     , emit: muts
+    tuple val(meta), path("*.mutass.zip")       , emit: mutass
     path "versions.yml"                         , emit: versions
 
     when:
@@ -17,6 +20,7 @@ process PHYLOWGS_MULTIEVOLVE {
 
     script:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
@@ -26,6 +30,16 @@ process PHYLOWGS_MULTIEVOLVE {
         --ssms ${ssm_data} \\
         --cnvs ${cnv_data}
 
+    python2 \\
+        /usr/bin/phylowgs/write_results.py \\
+        ${args2} \\
+        --include-ssm-names \\
+        ${prefix} \\
+        chains/trees.zip \\
+        ${prefix}.summ.json.gz \\
+        ${prefix}.muts.json.gz \\
+        ${prefix}.mutass.zip
+
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
 	    phylowgs: \$PHYLOWGS_TAG
@@ -34,10 +48,14 @@ process PHYLOWGS_MULTIEVOLVE {
 
     stub:
     def args = task.ext.args ?: ''
+    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir chains
     touch chains/trees.zip
+    touch ${prefix}.summ.json.gz
+    touch ${prefix}.muts.json.gz
+    touch ${prefix}.mutass.zip
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":

@@ -1,39 +1,28 @@
 {
     "phylowgs_multievolve - zip": {
         "content": [
-            "trees.zip"
+            "trees.zip",
+            "test.summ.json.gz",
+            "test.muts.json.gz",
+            "test.mutass.zip"
         ],
-        "timestamp": "2024-06-11T18:01:56.174868"
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-06-04T11:48:34.725751"
     },
     "phylowgs_multievolve - zip - stub": {
         "content": [
-            {
-                "0": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "trees.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "1": [
-                    "versions.yml:md5,2eaafdf0e85898fdc2e5d40dbbfee2f7"
-                ],
-                "trees": [
-                    [
-                        {
-                            "id": "test",
-                            "single_end": false
-                        },
-                        "trees.zip:md5,d41d8cd98f00b204e9800998ecf8427e"
-                    ]
-                ],
-                "versions": [
-                    "versions.yml:md5,2eaafdf0e85898fdc2e5d40dbbfee2f7"
-                ]
-            }
+            "trees.zip",
+            "test.summ.json.gz",
+            "test.muts.json.gz",
+            "test.mutass.zip"
         ],
-        "timestamp": "2024-06-11T18:02:03.678335"
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.4"
+        },
+        "timestamp": "2026-06-04T11:56:11.007179"
     }
 }
