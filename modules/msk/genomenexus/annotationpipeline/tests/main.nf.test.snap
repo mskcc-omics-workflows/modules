@@ -30,6 +30,47 @@
                 ]
             }
         ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.3"
+        },
         "timestamp": "2024-11-26T16:50:32.331962"
+    },
+    "test normal - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
+                        },
+                        "test-annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
+                ],
+                "annotated_maf": [
+                    [
+                        {
+                            "id": "test",
+                            "case_id": "sample1",
+                            "control_id": "sample2"
+                        },
+                        "test-annotated.maf:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "25.10.3"
+        },
+        "timestamp": "2026-06-09T17:03:25.918345"
     }
 }
