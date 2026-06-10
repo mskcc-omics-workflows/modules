@@ -9,7 +9,7 @@
                             "case_id": "sample1",
                             "control_id": "sample2"
                         },
-                        "test-annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                        "test-annotated.maf:md5,a8b47024c381dc8f2e5b2c0da0b24029"
                     ]
                 ],
                 "1": [
@@ -22,7 +22,7 @@
                             "case_id": "sample1",
                             "control_id": "sample2"
                         },
-                        "test-annotated.maf:md5,4547e768939e82f6d1f44e1c64b64c3a"
+                        "test-annotated.maf:md5,a8b47024c381dc8f2e5b2c0da0b24029"
                     ]
                 ],
                 "versions": [
@@ -34,7 +34,7 @@
             "nf-test": "0.9.2",
             "nextflow": "25.10.3"
         },
-        "timestamp": "2024-11-26T16:50:32.331962"
+        "timestamp": "2026-06-10T11:03:28.679902"
     },
     "test normal - stub": {
         "content": [
