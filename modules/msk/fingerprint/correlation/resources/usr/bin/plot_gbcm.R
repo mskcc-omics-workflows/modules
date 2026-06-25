@@ -53,6 +53,10 @@ calculate_point_size <- function(x,y) {
 
     #approximate max point size for geom_point (radius in mm)
     max_point_size <- max_diameter_mm
+    
+    if (n_x < 3) {
+        max_point_size = .7 * max_point_size
+    }
 
     return(max_point_size)
 }
