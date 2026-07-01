@@ -12,8 +12,8 @@ process FINGERPRINT_CONTAMINATION {
     tuple val(meta), path(fp_tumor), path(fp_normal)
 
     output:
-    tuple val(meta), path("*.contamination.tsv")                                                                           , emit: contamination_tsv
-    tuple val("${task.process}"), val('calculate_contamination.py'), eval('calculate_contamination.py -v | cut -f 2 -d" "'), emit: versions_contamination, topic: versions
+    tuple val(meta), path("*.contamination.tsv")                                                                                  , emit: contamination_tsv
+    tuple val("${task.process}"), val('calculate_contamination.py'), eval('calculate_contamination.py --version | cut -f 2 -d" "'), emit: versions_contamination, topic: versions
 
     when:
     task.ext.when == null || task.ext.when

@@ -15,7 +15,7 @@
                     [
                         "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
-                        ""
+                        "0.1.0"
                     ]
                 ],
                 "contamination_tsv": [
@@ -31,15 +31,15 @@
                     [
                         "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
-                        ""
+                        "0.1.0"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-31T11:55:42.453612823",
+        "timestamp": "2026-07-01T17:20:28.522106854",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.01.1"
+            "nextflow": "26.03.2"
         }
     },
     "sarscov2 - bam": {
@@ -58,7 +58,7 @@
                     [
                         "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
-                        ""
+                        "0.1.0"
                     ]
                 ],
                 "contamination_tsv": [
@@ -74,15 +74,15 @@
                     [
                         "FINGERPRINT_CONTAMINATION",
                         "calculate_contamination.py",
-                        ""
+                        "0.1.0"
                     ]
                 ]
             }
         ],
-        "timestamp": "2026-03-31T11:55:33.454910171",
+        "timestamp": "2026-07-01T17:20:13.624290044",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.01.1"
+            "nextflow": "26.03.2"
         }
     }
 }
