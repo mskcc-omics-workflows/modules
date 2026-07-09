@@ -28,6 +28,8 @@ process FINGERPRINT_CORRELATION {
     def pool_arg = "-p ${meta.id ?: "batch"}"
     filter_args = (filter_term && filter_term != "") ? pool_arg + " -f" : pool_arg
     """
+    export XDG_CACHE_HOME=$PWD/fontconfig-cache ; mkdir -p $XDG_CACHE_HOME
+
     plot_gbcm.R \\
         -t ${combined_fp_tsv} \\
         -o ./ \\
