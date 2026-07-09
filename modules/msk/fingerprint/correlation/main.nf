@@ -31,7 +31,8 @@ process FINGERPRINT_CORRELATION {
     plot_gbcm.R \\
         -t ${combined_fp_tsv} \\
         -o ./ \\
-        ${filter_args}
+        ${filter_args} \\
+        ${args}
     """
 
     stub:

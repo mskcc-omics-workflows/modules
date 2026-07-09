@@ -151,6 +151,11 @@ parser$add_argument('-f', '--filter',
                     help = "create pool levelel plots instead of extended plots"
 )
 
+parser$add_argument('-s', '--self_contained',
+		    action = "store_true",
+		    default = FALSE,
+		    help = "enable self-contained mode for interactive html plot")
+
 args = parser$parse_args()
 
 fingerprints = fread(args$table, sep = '\t')
@@ -208,7 +213,7 @@ ggsave(paste(outdir,"/",sample,"_", type, '.pdf', sep = ""), plot = s, width = 2
 #create interactive plot
 i = girafe(ggobj = s, width_svg = 25, height_svg = 25,
            options = list(opts_tooltip(css = "padding:5pt; font-size:16pt; color:white; background-color:black;")))
-saveWidget(i, paste(outdir,"/",sample,"_", type,'.html', sep = ""), selfcontained = TRUE)
+saveWidget(i, paste(outdir,"/",sample,"_", type,'.html', sep = ""), selfcontained = args$self_contained)
 
 #save tables
 write.table(observations, paste(outdir,"/",sample, '_observations.tab', sep = ''), sep = '\t')
