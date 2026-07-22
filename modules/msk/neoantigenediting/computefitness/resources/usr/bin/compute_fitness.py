@@ -276,6 +276,44 @@ def clean_data(tree):
                 nodes.append(child)
 
 
+STANDARD_AMINO_ACIDS = set("ACDEFGHIKLMNPQRSTVWY")
+
+
+def score_neoantigen(neo, epidist, w):
+    """
+    Sets the logC, logA and quality fields on a neoantigen entry.
+
+    Guards against division by zero (Kd or KdWT equal to 0) and against
+    peptides containing non-standard residues (e.g. "*", "X") that
+    EpitopeDistance cannot score, zeroing out the score components in
+    either case instead of raising.
+
+    :param neo: dict
+        neoantigen entry; must already have "R" set. Requires "Kd",
+        "KdWT", "sequence" and "WT_sequence" keys.
+
+    :param epidist: EpitopeDistance
+        instance used to compute the epitope crossreactivity distance
+
+    :param w: float
+        weight parameter combining logC and logA
+
+    :return dict
+        the same neo dict, mutated in place
+    """
+    if (
+        neo["Kd"] == 0
+        or neo["KdWT"] == 0
+        or set(neo["sequence"] + neo["WT_sequence"]) - STANDARD_AMINO_ACIDS
+    ):
+        neo["logC"] = neo["logA"] = neo["quality"] = 0.0
+    else:
+        neo["logC"] = epidist.epitope_dist(neo["sequence"], neo["WT_sequence"])
+        neo["logA"] = np.log(neo["KdWT"] / neo["Kd"])
+        neo["quality"] = (w * neo["logC"] + (1 - w) * neo["logA"]) * neo["R"]
+    return neo
+
+
 if __name__ == "__main__":
 
     """
@@ -327,12 +365,7 @@ if __name__ == "__main__":
     for neo in neoantigens:
         score_list = naseq2scores[neo["sequence"]]
         neo["R"] = compute_R(score_list, a, k) if score_list else 0.0
-        if neo["Kd"] == 0 or neo["KdWT"] == 0:
-            neo["logC"] = neo["logA"] = neo["quality"] = 0.0
-        else:
-            neo["logC"] = epidist.epitope_dist(neo["sequence"], neo["WT_sequence"])
-            neo["logA"] = np.log(neo["KdWT"] / neo["Kd"])
-            neo["quality"] = (w * neo["logC"] + (1 - w) * neo["logA"]) * neo["R"]
+        score_neoantigen(neo, epidist, w)
         mut2neo[neo["mutation_id"]].append(neo)
 
     mut2dg = mark_driver_gene_mutations(sjson)
