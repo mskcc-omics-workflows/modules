@@ -65,6 +65,43 @@ output:
           type: file
           description: Log file for the mutated fasta generation
           pattern: "*_generate_mut_fasta.log"
+  - alt_mut_fasta:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_out/*.altMUT.fa":
+          type: file
+          description: |
+            Net-new mutated peptides from alternate transcripts, with integer
+            surrogate headers. Only produced when --multi_transcript is set.
+          pattern: "*.altMUT.fa"
+  - alt_wt_fasta:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_out/*.altWT.fa":
+          type: file
+          description: |
+            Representative wildtype peptides paired by surrogate to the alt
+            mutated peptides. Only produced when --multi_transcript is set.
+          pattern: "*.altWT.fa"
+  - transcript_map:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*_out/*.transcript_map.tsv":
+          type: file
+          description: |
+            Provenance side-car mapping each (mutation, qualifying transcript)
+            to its consequence, RefSeq, same-as-annotated flag and surrogate id.
+            Only produced when --multi_transcript is set.
+          pattern: "*.transcript_map.tsv"
   - versions:
       - versions.yml:
           type: file
