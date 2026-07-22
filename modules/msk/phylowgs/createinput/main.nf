@@ -19,10 +19,12 @@ process PHYLOWGS_CREATEINPUT {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
+    grep -v '^#' ${unfilteredmaf} > filtered_head.maf
+
     create_phylowgs_inputs.py \\
         --cnvs S1=${cnv} \\
         ${args} \\
-        --vcf-type S1=maf S1=${unfilteredmaf}
+        --vcf-type S1=maf S1=filtered_head.maf
 
 
     cat <<-END_VERSIONS > versions.yml
