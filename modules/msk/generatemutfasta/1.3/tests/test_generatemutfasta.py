@@ -247,3 +247,60 @@ def test_empty_column_still_emits_canonical(monkeypatch):
     gmf.process_alt_transcripts(mut, 8, {}, {}, map_rows, {})
     assert len(map_rows) == 1
     assert map_rows[0]["is_annotated"] is True
+
+
+# ---------------------------------------------------------------------------
+# Primary-path resilience fixes (folded in from the large-run CHANGE_REPORT)
+# generate_translated_sequences: offline versionless requery + protein guard
+# ---------------------------------------------------------------------------
+
+
+def _primary_row(hgvsc, transcript_id="ENST00000327044"):
+    """A minimal non-synonymous MAF row the mutation() constructor accepts."""
+    return pd.Series(
+        {
+            "Chromosome": "1",
+            "Start_Position": 12345678,
+            "Reference_Allele": "A",
+            "Tumor_Seq_Allele2": "T",
+            "Variant_Classification": "Missense_Mutation",
+            "HGVSp_Short": "p.Gly214Cys",
+            "HGVSc": hgvsc,
+            "Transcript_ID": transcript_id,
+        }
+    )
+
+
+def _capturing_normalize(captured):
+    """A fake mutalyzer.normalize that records its query and returns a valid protein."""
+
+    def _normalize(query):
+        captured["q"] = query
+        return {"protein": {"predicted": "MPQRS", "reference": "MPQKS"}}
+
+    return _normalize
+
+
+def test_full_form_hgvsc_requeries_versionless(monkeypatch):
+    # A full-form HGVSc (contains ':') must be re-queried from the VERSIONLESS
+    # Transcript_ID + the c. part, so mutalyzer resolves from cache with no network.
+    captured = {}
+    monkeypatch.setattr(gmf, "normalize", _capturing_normalize(captured))
+    mut = gmf.mutation(_primary_row("ENST00000327044.6:c.640G>T"))
+    mut.generate_translated_sequences(10)
+    assert captured["q"] == "ENST00000327044:c.640G>T"
+
+
+def test_plain_hgvsc_queried_as_is(monkeypatch):
+    captured = {}
+    monkeypatch.setattr(gmf, "normalize", _capturing_normalize(captured))
+    mut = gmf.mutation(_primary_row("c.640G>T", transcript_id="ENST00000241312"))
+    mut.generate_translated_sequences(10)
+    assert captured["q"] == "ENST00000241312:c.640G>T"
+
+
+def test_missing_protein_consequence_returns_minus1(monkeypatch):
+    # No 'errors' and no usable 'protein' -> skip with -1 instead of KeyError crash.
+    monkeypatch.setattr(gmf, "normalize", lambda q: {"warnings": []})
+    mut = gmf.mutation(_primary_row("c.640G>T"))
+    assert mut.generate_translated_sequences(10) == -1

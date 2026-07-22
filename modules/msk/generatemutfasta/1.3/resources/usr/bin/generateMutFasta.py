@@ -136,7 +136,7 @@ def main():
         maf_df = skip_lines_start_with(
             maf_file, "#", low_memory=False, header=0, sep="\t"
         )
-        n_muts = n_non_syn_muts = n_missing_tx_id = 0
+        n_muts = n_non_syn_muts = n_missing_tx_id = n_errored = 0
 
         # Multi-transcript accumulators (only populated/written when --multi_transcript).
         # surrogate_by_seq maps a net-new alt MUT window sequence to its integer
@@ -152,38 +152,52 @@ def main():
 
             n_muts += 1
 
-            mut = mutation(row)
+            try:
+                mut = mutation(row)
 
-            if mut.is_non_syn():
-                n_non_syn_muts += 1
+                if mut.is_non_syn():
+                    n_non_syn_muts += 1
 
-            response = mut.generate_translated_sequences(max(peptide_lengths))
+                response = mut.generate_translated_sequences(max(peptide_lengths))
 
-            if response == -1:
-                n_missing_tx_id += 1
+                if response == -1:
+                    n_missing_tx_id += 1
 
-            if len(mut.mt_altered_aa) > 5:
-                out_fa.write(">" + mut.identifier_key + "_M\n")
-                out_fa.write(mut.mt_altered_aa + "\n")
-                out_WT_fa.write(">" + mut.identifier_key + "_W\n")
-                out_WT_fa.write(mut.wt_altered_aa + "\n")
+                if len(mut.mt_altered_aa) > 5:
+                    out_fa.write(">" + mut.identifier_key + "_M\n")
+                    out_fa.write(mut.mt_altered_aa + "\n")
+                    out_WT_fa.write(">" + mut.identifier_key + "_W\n")
+                    out_WT_fa.write(mut.wt_altered_aa + "\n")
 
-                ### write out WT/MT CDS + AA for debugging purposes
-                debug_out_fa.write(">" + mut.identifier_key + "_M\n")
-                debug_out_fa.write("mt_altered_aa: " + mut.mt_altered_aa + "\n")
-                debug_out_fa.write("wt_full_aa: " + mut.wt_aa + "\n")
-                debug_out_fa.write("mt_full_aa: " + mut.mt_aa + "\n")
-            mutations.append(mut)
+                    ### write out WT/MT CDS + AA for debugging purposes
+                    debug_out_fa.write(">" + mut.identifier_key + "_M\n")
+                    debug_out_fa.write("mt_altered_aa: " + mut.mt_altered_aa + "\n")
+                    debug_out_fa.write("wt_full_aa: " + mut.wt_aa + "\n")
+                    debug_out_fa.write("mt_full_aa: " + mut.mt_aa + "\n")
+                mutations.append(mut)
 
-            if multi_transcript:
-                process_alt_transcripts(
-                    mut,
-                    max(peptide_lengths),
-                    surrogate_by_seq,
-                    surrogate_wt,
-                    map_rows,
-                    alt_memo,
+                if multi_transcript:
+                    process_alt_transcripts(
+                        mut,
+                        max(peptide_lengths),
+                        surrogate_by_seq,
+                        surrogate_wt,
+                        map_rows,
+                        alt_memo,
+                    )
+
+            except Exception as exc:
+                ## A failure on a single variant (e.g. an uncached transcript
+                ## triggering a live Ensembl fetch that times out) must not abort
+                ## the whole sample. Log, count, and skip this variant.
+                transcript = row.get("Transcript_ID", "<unknown>")
+                hgvsc = row.get("HGVSc", "<unknown>")
+                n_errored += 1
+                logger.warning(
+                    f"Skipping variant {transcript}:{hgvsc} due to error: {exc}"
                 )
+                logger.debug(traceback.format_exc())
+                continue
 
         out_fa.close()
         out_WT_fa.close()
@@ -203,6 +217,7 @@ def main():
             + str(n_missing_tx_id)
             + ")"
         )
+        logger.info("\t\t# skipped due to errors: " + str(n_errored))
         if multi_transcript:
             logger.info("\tMulti-transcript summary")
             logger.info("\t\t# transcript_map rows: " + str(len(map_rows)))
@@ -687,8 +702,18 @@ class mutation(object):
 
         hgvsc = self.maf_row["HGVSc"]
         transcript = self.maf_row["Transcript_ID"]
-        if hgvsc and "c" in str(hgvsc):
+        if hgvsc and "c" in str(hgvsc) and ":" not in str(hgvsc):
             mutalyzer_response = normalize(f"{transcript}:{hgvsc}")
+        elif ":" in str(hgvsc):
+            ## Strip the transcript version from a full-form HGVSc and re-build the
+            ## query from the VERSIONLESS Transcript_ID. A versioned reference makes
+            ## mutalyzer issue a per-transcript TARK/Ensembl network call (assembly /
+            ## most-recent-version check) even when the transcript is fully cached;
+            ## a versionless query resolves straight from the local file cache with
+            ## zero network. The cached model already corresponds to this version, so
+            ## the resulting protein is identical -- this is required for offline runs.
+            c_part = str(hgvsc).split(":", 1)[1]
+            mutalyzer_response = normalize(f"{transcript}:{c_part}")
         else:
             return None
         if "errors" in mutalyzer_response:
@@ -701,6 +726,14 @@ class mutation(object):
                 + error_obj["details"]
             )
             return -1
+
+        protein = mutalyzer_response.get("protein")
+        if not protein or "predicted" not in protein or "reference" not in protein:
+            logger.warning(
+                f"Mutalyzer: no protein consequence for {transcript}:{hgvsc}; skipping"
+            )
+            return -1
+
         mt = mutalyzer_response["protein"]["predicted"]
         wt = mutalyzer_response["protein"]["reference"]
 
