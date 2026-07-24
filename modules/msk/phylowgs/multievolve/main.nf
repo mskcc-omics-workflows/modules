@@ -22,13 +22,20 @@ process PHYLOWGS_MULTIEVOLVE {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def unique_task_id = "${task.process}_index_${task.index}"
+    def phylo_run_dir = "${workflow.workDir}/.scratch/${unique_task_id}"
 
     """
+    mkdir -p ${phylo_run_dir}
+    cp -u ${ssm_data} ${phylo_run_dir}/
+    cp -u ${cnv_data} ${phylo_run_dir}/
+    cd ${phylo_run_dir}
+
     python2 \\
         /usr/bin/phylowgs/multievolve.py  \\
         ${args} \\
-        --ssms ${ssm_data} \\
-        --cnvs ${cnv_data}
+        --ssms ${ssm_data.name} \\
+        --cnvs ${cnv_data.name}
 
     python2 \\
         /usr/bin/phylowgs/write_results.py \\
@@ -39,6 +46,13 @@ process PHYLOWGS_MULTIEVOLVE {
         ${prefix}.summ.json.gz \\
         ${prefix}.muts.json.gz \\
         ${prefix}.mutass.zip
+
+    cp -r chains ${task.workDir}/
+    cp ${prefix}.summ.json.gz ${task.workDir}/
+    cp ${prefix}.muts.json.gz ${task.workDir}/
+    cp ${prefix}.mutass.zip ${task.workDir}/
+
+    rm -rf ${phylo_run_dir}
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
