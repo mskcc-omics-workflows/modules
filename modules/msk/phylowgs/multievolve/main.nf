@@ -62,7 +62,7 @@ process PHYLOWGS_MULTIEVOLVE {
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir chains
-    touch chains/trees.zip
+    touch trees.zip
     touch ${prefix}.summ.json.gz
     touch ${prefix}.muts.json.gz
     touch ${prefix}.mutass.zip
