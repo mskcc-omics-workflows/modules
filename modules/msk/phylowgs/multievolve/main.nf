@@ -9,7 +9,7 @@ process PHYLOWGS_MULTIEVOLVE {
     tuple val(meta), path(cnv_data), path(ssm_data)
 
     output:
-    tuple val(meta), path("chains/trees.zip")   , emit: trees
+    tuple val(meta), path("trees.zip")          , emit: trees
     tuple val(meta), path("*.summ.json.gz")     , emit: summ
     tuple val(meta), path("*.muts.json.gz")     , emit: muts
     tuple val(meta), path("*.mutass.zip")       , emit: mutass
@@ -22,20 +22,20 @@ process PHYLOWGS_MULTIEVOLVE {
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def unique_task_id = "${task.process}_index_${task.index}"
-    def phylo_run_dir = "${workflow.workDir}/.scratch/${unique_task_id}"
+    def phylo_checkpoint = "${workflow.workDir}/.scratch/${task.process}_index_${task.index}"
+    def chains = "${phylo_checkpoint}/chains"
 
     """
-    mkdir -p ${phylo_run_dir}
-    cp -u ${ssm_data} ${phylo_run_dir}/
-    cp -u ${cnv_data} ${phylo_run_dir}/
-    cd ${phylo_run_dir}
+    mkdir -p ${chains}
+    ln -sfn ${chains} chains
+    cp -f ${ssm_data} ${phylo_checkpoint}
+    cp -f ${cnv_data} ${phylo_checkpoint}
 
     python2 \\
         /usr/bin/phylowgs/multievolve.py  \\
         ${args} \\
-        --ssms ${ssm_data.name} \\
-        --cnvs ${cnv_data.name}
+        --ssms ${phylo_checkpoint}/${ssm_data.name} \\
+        --cnvs ${phylo_checkpoint}/${cnv_data.name}
 
     python2 \\
         /usr/bin/phylowgs/write_results.py \\
@@ -47,12 +47,8 @@ process PHYLOWGS_MULTIEVOLVE {
         ${prefix}.muts.json.gz \\
         ${prefix}.mutass.zip
 
-    cp -r chains ${task.workDir}/
-    cp ${prefix}.summ.json.gz ${task.workDir}/
-    cp ${prefix}.muts.json.gz ${task.workDir}/
-    cp ${prefix}.mutass.zip ${task.workDir}/
-
-    rm -rf ${phylo_run_dir}
+    cp chains/trees.zip trees.zip
+    rm -rf ${phylo_checkpoint}
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
