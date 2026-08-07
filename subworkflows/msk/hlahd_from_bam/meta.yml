@@ -19,6 +19,9 @@ components:
   - name: gatk4/revertsam
     git_remote: https://github.com/nf-core/modules.git
     org_path: nf-core
+  - name: samtools/collate
+    git_remote: https://github.com/nf-core/modules.git
+    org_path: nf-core
   - name: samtools/fastq
     git_remote: https://github.com/nf-core/modules.git
     org_path: nf-core

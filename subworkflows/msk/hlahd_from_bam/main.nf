@@ -1,7 +1,8 @@
-include { SAMTOOLS_VIEW  } from '../../../modules/nf-core/samtools/view/main'
-include { GATK4_REVERTSAM } from '../../../modules/nf-core/gatk4/revertsam/main'
-include { SAMTOOLS_FASTQ } from '../../../modules/nf-core/samtools/fastq/main'
-include { HLAHD          } from '../../../modules/msk/hlahd/main'
+include { SAMTOOLS_VIEW    } from '../../../modules/nf-core/samtools/view/main'
+include { GATK4_REVERTSAM  } from '../../../modules/nf-core/gatk4/revertsam/main'
+include { SAMTOOLS_COLLATE } from '../../../modules/nf-core/samtools/collate/main'
+include { SAMTOOLS_FASTQ   } from '../../../modules/nf-core/samtools/fastq/main'
+include { HLAHD            } from '../../../modules/msk/hlahd/main'
 
 workflow HLAHD_FROM_BAM {
 
@@ -45,12 +46,24 @@ workflow HLAHD_FROM_BAM {
     }
 
     //
+    // MODULE: Collate reads by name before FASTQ conversion.
+    // samtools fastq requires name-grouped input to pair mates correctly;
+    // SAMTOOLS_VIEW's output is coordinate-sorted, and GATK4_REVERTSAM's
+    // queryname sort is not guaranteed (e.g. when skip_revert_sam is true).
+    // Collating unconditionally makes pairing correct regardless of branch.
+    //
+    SAMTOOLS_COLLATE(
+        ch_for_fastq,
+        [[],[],[]]
+    )
+
+    //
     // MODULE: Convert BAM to paired FASTQ files.
     // SAMTOOLS_FASTQ emits .out.fastq as [ meta, [fq1, fq2] ]; unpack into
     // separate paths so HLAHD receives the three-element tuple it expects.
     //
     SAMTOOLS_FASTQ(
-        ch_for_fastq,
+        SAMTOOLS_COLLATE.out.bam,
         false
     )
 
