@@ -12,6 +12,7 @@ automatically in CI.
 - [`nf-test-action`: the composite action](#nf-test-action-the-composite-action)
 - [Cross-repo component installation](#cross-repo-component-installation)
 - [Declaring a component dependency](#declaring-a-component-dependency)
+- [Installing a subworkflow into a pipeline](#installing-a-subworkflow-into-a-pipeline)
 - [`confirm-pass`](#confirm-pass)
 
 ## Pipeline overview
@@ -120,18 +121,33 @@ components:
   - hlahd                        # bare string: local msk module, already
                                   # under version control here — skipped by
                                   # install-components.sh
-  - name: samtools/collate       # dict: external, fetched at CI time
-    git_remote: https://github.com/nf-core/modules.git
-    org_path: nf-core
-    # optional: git_sha: <sha>   # pins to a commit
-    # optional: branch: <name>  # pins to a branch (git_sha wins if both set)
+  - samtools/collate:            # dict, nested under the component name:
+      git_remote: https://github.com/nf-core/modules.git   # external, fetched at CI time
+      # optional: org_path: nf-core   # MSK-only extension, defaults to nf-core
+      # optional: git_sha: <sha>      # pins to a commit
+      # optional: branch: <name>      # pins to a branch (git_sha wins if both set)
 ```
+
+**The nesting matters.** This has to be `- <name>: {...}`, not a flat
+`- {name: <name>, ...}` — the nested-under-name shape is what
+`nf-core subworkflows install` itself expects
+(`nf_core/components/components_utils.py::get_components_to_install`), and
+`install-components.sh` mirrors it on purpose so the two consumers agree
+on one schema. Getting this wrong doesn't break CI (which only exercises
+`install-components.sh`) — it breaks installing the subworkflow into a
+downstream pipeline with the standard nf-core CLI, which is silent until
+someone actually tries it. See
+[Installing a subworkflow into a pipeline](#installing-a-subworkflow-into-a-pipeline).
 
 `org_path` defaults to `nf-core` and determines the destination directory
 (`modules/<org_path>/<name>`) as well as being validated against
 `^[a-z0-9_-]+$`; `name` is validated against `^[a-z0-9_]+(/[a-z0-9_]+)?$`.
 Both are used to build a filesystem path, so the script rejects anything
-that doesn't match before shelling out to git.
+that doesn't match before shelling out to git. `org_path` isn't part of
+nf-core's own schema (it infers the org from `git_remote` instead) — nf-core
+silently ignores the extra key, so it's safe to keep as an MSK-only
+extension for the rare case a remote's inferred org doesn't match what you
+want on disk.
 
 **When adding a new nf-core module dependency to a subworkflow** (e.g. we
 added `samtools/collate` while fixing the `hlahd_from_bam` read-pairing bug
@@ -156,6 +172,36 @@ in PR #241):
 4. Run tests locally with `--profile docker` before pushing — CI will fetch
    the same component fresh from the declared ref, so a local pass here is
    a reliable predictor of CI behavior for this step.
+
+## Installing a subworkflow into a pipeline
+
+A downstream pipeline consumes modules/subworkflows from this repo with the
+standard nf-core CLI, pointed at the MSK remote:
+
+```bash
+nf-core subworkflows \
+  --git-remote https://github.com/mskcc-omics-workflows/modules.git \
+  --branch feature/hlahd \
+  install hlahd_from_bam
+```
+
+This is a real command doing real work, not a wrapper around
+`install-components.sh` — the CLI parses the subworkflow's `meta.yml`
+`components:` list itself to resolve transitive dependencies, then clones
+each one (local MSK components from this repo, external ones from their own
+`git_remote`) and records everything in the pipeline's `modules.json`. For
+`hlahd_from_bam` that means: the `hlahd` module (local), plus
+`samtools/view`, `gatk4/revertsam`, `samtools/collate`, and
+`samtools/fastq` (all from `nf-core/modules@master`) — five components from
+two different remotes, installed with one command.
+
+Verified end-to-end against this branch in a scratch pipeline: all five
+land under `modules/{msk,nf-core}/...` and `subworkflows/msk/hlahd_from_bam/`,
+and `modules.json` records each with its own `git_sha`/`branch` and an
+`installed_by: [hlahd_from_bam]` back-reference. This is exactly why the
+`components:` schema in the previous section has to match nf-core's own
+parser — this install path doesn't go through `install-components.sh` at
+all, so a schema drift between the two would only surface here, not in CI.
 
 ## `confirm-pass`
 
