@@ -6,7 +6,14 @@
 #
 # Each META_YML may declare a `components:` list. Bare-string entries
 # (e.g. `- hlahd`) refer to components in this repo and are skipped.
-# Dict entries (e.g. `- {name: samtools/view, git_remote: …, org_path: …}`)
+# Dict entries, nested under the component name to match the schema
+# `nf-core subworkflows install` itself expects (components_utils.py):
+#   - samtools/collate:
+#       git_remote: https://github.com/nf-core/modules.git
+#       branch: master        # optional; git_sha: <sha> also accepted
+#       org_path: nf-core     # optional, MSK-only extension — nf-core's
+#                              # CLI infers this from git_remote instead and
+#                              # ignores this key, so it's safe to include
 # are sparse-checked-out into `modules/<org_path>/<name>/`.
 #
 # Notes:
@@ -18,6 +25,10 @@
 #   re-runs, delete the directory to force a refetch.
 # - Default ref is `master`. Set `git_sha:` or `branch:` per component to
 #   override.
+# - Keep this schema in sync with what `nf-core subworkflows install`
+#   expects (see docs/ci.md) — a mismatch breaks installing the
+#   subworkflow into a downstream pipeline via the standard nf-core CLI,
+#   even though this script (and CI) would still work.
 
 set -euo pipefail
 
@@ -40,10 +51,12 @@ for meta in "$@"; do
     kind=$(yq ".components[$i] | tag" "$meta")
     [[ "$kind" == "!!str" ]] && continue  # bare = local, skip
 
-    name=$(yq -r   ".components[$i].name"                            "$meta")
-    org=$(yq -r    ".components[$i].org_path         // \"nf-core\"" "$meta")
-    remote=$(yq -r ".components[$i].git_remote       // \"$DEFAULT_REMOTE\"" "$meta")
-    ref=$(yq -r    ".components[$i].git_sha // .components[$i].branch // \"$DEFAULT_REF\"" "$meta")
+    name=$(yq -r ".components[$i] | keys | .[0]" "$meta")
+    export COMP_NAME="$name"
+
+    org=$(yq -r    ".components[$i][env(COMP_NAME)].org_path   // \"nf-core\"" "$meta")
+    remote=$(yq -r ".components[$i][env(COMP_NAME)].git_remote // \"$DEFAULT_REMOTE\"" "$meta")
+    ref=$(yq -r    ".components[$i][env(COMP_NAME)].git_sha // .components[$i][env(COMP_NAME)].branch // \"$DEFAULT_REF\"" "$meta")
 
     [[ "$name" =~ $NAME_RE ]] || { echo "ERROR: invalid component name: $name (in $meta)" >&2; exit 1; }
     [[ "$org"  =~ $ORG_RE  ]] || { echo "ERROR: invalid org_path: $org (in $meta)" >&2; exit 1; }
