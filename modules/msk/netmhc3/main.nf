@@ -11,9 +11,9 @@ process NETMHC3 {
     tuple val(meta),  path(inputFasta), path(inputSVFasta, arity: '0..*'), val(hlaString), val(inputType)
 
     output:
-    tuple val(output_meta),       path("*.xls"),               emit: xls
-    tuple val(output_meta),       path("*.netmhc.output"),     emit: netmhcoutput
-    tuple val(output_meta),       path("*.hla_*.txt"),         emit: netmhc_hla_files
+    tuple val(output_meta),       path("*.${inputType}.xls"),           emit: xls
+    tuple val(output_meta),       path("*.${inputType}.netmhc.output"), emit: netmhcoutput
+    tuple val(output_meta),       path("*.hla_*.txt"),                  emit: netmhc_hla_files
     path "versions.yml",                                       emit: versions
 
     when:

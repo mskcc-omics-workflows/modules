@@ -9,7 +9,7 @@ process NEOANTIGENUTILS_FORMATNETMHCPAN {
     tuple val(meta),  path(netmhcPanOutput)
 
     output:
-    tuple val(meta), path("*.tsv"),              emit: netMHCpanreformatted
+    tuple val(meta), path("*_netmhc${meta.fromStab ? 'stab' : ''}${meta.fromPan ? 'pan' : ''}.output.${meta.typeMut ? 'MUT' : 'WT'}.tsv"),              emit: netMHCpanreformatted
     path "versions.yml",                         emit: versions
 
     when:
@@ -40,9 +40,10 @@ process NEOANTIGENUTILS_FORMATNETMHCPAN {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def netmhcOutputType = meta.typeMut ? "MUT": "WT"
-    def netmhcOutputFrom = meta.fromStab ? "STAB": "PAN"
+    def netmhcOutputStab = meta.fromStab ? "stab": ""
+    def netmhcOutputPan  = meta.fromPan ? "pan": ""
     """
-        touch ${prefix}.${netmhcOutputType}.${netmhcOutputFrom}.tsv
+        touch ${prefix}_netmhc${netmhcOutputStab}${netmhcOutputPan}.output.${netmhcOutputType}.tsv
         cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
 	    formatNetmhcpanOutput: \$(echo \$(format_netmhcpan_output.py -v))

@@ -12,7 +12,7 @@ process NETMHCSTABPAN {
 
 
     output:
-    tuple val(output_meta), path("*.netmhcstabpan.output"),   emit: netmhcstabpanoutput
+    tuple val(output_meta), path("*.${inputType}.netmhcstabpan.output"),   emit: netmhcstabpanoutput
     path "versions.yml",                                      emit: versions
 
     when:

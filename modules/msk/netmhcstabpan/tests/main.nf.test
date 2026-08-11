@@ -130,6 +130,51 @@ nextflow_process {
     }
 
 
+    test("netmhcstabpan - MUT,WT shared storeDir - no cross-collection - stub") {
+
+        options "-stub"
+        config "./storedir.config"
+
+        when {
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test', single_end:false ], // meta map
+                        file('MUT_sequence_fa'),
+                        file('MUT_sv_fa'),
+                        "HLA",
+                        "MUT"
+                    ],
+                    [
+                        [ id:'test', single_end:false ], // meta map
+                        file('WT_sequence_fa'),
+                        file('WT_sv_fa'),
+                        "HLA",
+                        "WT"
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                // both tasks ran and landed in the same storeDir folder
+                { assert process.out.netmhcstabpanoutput.size() == 2 },
+                // each task emits exactly one file, not its sibling's as well
+                { assert process.out.netmhcstabpanoutput.every { !(it[1] instanceof List) } },
+                // and the file each task emits is its own
+                { assert process.out.netmhcstabpanoutput.every { meta, f ->
+                    file(f).name == "test.${meta.typeMut ? 'MUT' : 'WT'}.netmhcstabpan.output" } },
+                { assert process.out.netmhcstabpanoutput.collect { file(it[1]).name }.sort() ==
+                    ['test.MUT.netmhcstabpan.output', 'test.WT.netmhcstabpan.output'] }
+            )
+        }
+
+    }
+
     test("netmhcstabpan - xls,output,fa - stub") {
 
         options "-stub"

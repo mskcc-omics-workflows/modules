@@ -41,7 +41,7 @@ output:
           description:
             A reformatted file of neoantigens and their binding affinities
             output by netmhcpan or netmhcstabpan.  This contains the wild type antigens
-          pattern: "*.{tsv}"
+          pattern: "*_netmhc.output.{WT,MUT}.tsv,*_netmhcpan.output.{WT,MUT}.tsv,*_netmhcstabpan.output.{WT,MUT}.tsv"
   - versions:
       - versions.yml:
           type: file

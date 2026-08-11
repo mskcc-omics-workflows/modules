@@ -153,6 +153,57 @@ nextflow_process {
         }
 
 }
+    test("neoantigenutils_formatnetmhcpan - shared storeDir - no cross-collection - tsv") {
+
+        config "./storedir.config"
+
+        when {
+
+            process {
+                """
+                input[0] = Channel.of(
+                    [
+                        [ id:'test', typeMut: true, fromStab: false, fromPan: true ], // meta map
+                        file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan'], checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test', typeMut: false, fromStab: false, fromPan: true ], // meta map
+                        file(params.test_data_mskcc['neoantigen']['WTnetMHCpan'], checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test', typeMut: true, fromStab: true, fromPan: true ], // meta map
+                        file(params.test_data_mskcc['neoantigen']['MUTnetMHCpanstab'], checkIfExists: true)
+                    ],
+                    [
+                        [ id:'test', typeMut: true, fromStab: false, fromPan: false ], // meta map
+                        file(params.test_data_mskcc['neoantigen']['MUTnetMHCpan'], checkIfExists: true)
+                    ]
+                )
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                // all four variants ran and landed in the same storeDir folder
+                { assert process.out.netMHCpanreformatted.size() == 4 },
+                // each task emits exactly one file, not its siblings' as well
+                { assert process.out.netMHCpanreformatted.every { !(it[1] instanceof List) } },
+                // and the file each task emits is the one its own meta describes
+                { assert process.out.netMHCpanreformatted.every { meta, f ->
+                    file(f).name == "test_netmhc${meta.fromStab ? 'stab' : ''}${meta.fromPan ? 'pan' : ''}.output.${meta.typeMut ? 'MUT' : 'WT'}.tsv" } },
+                { assert process.out.netMHCpanreformatted.collect { file(it[1]).name }.sort() == [
+                    'test_netmhc.output.MUT.tsv',
+                    'test_netmhcpan.output.MUT.tsv',
+                    'test_netmhcpan.output.WT.tsv',
+                    'test_netmhcstabpan.output.MUT.tsv'
+                ] }
+            )
+        }
+
+    }
+
     test("neoantigenutils_formatnetmhcpan - output(MUT,netmhcpan) - tsv - stub") {
 
         options "-stub"
