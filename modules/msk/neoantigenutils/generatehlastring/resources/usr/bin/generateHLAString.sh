@@ -2,7 +2,7 @@
 
 ### Versioning
 
-VERSION=1.0.0
+VERSION=1.1.0
 
 get_help() { echo "USAGE: generateHLASTRING.sh -f [HLA_FILE]"; exit 0; }
 get_version() { echo $VERSION; exit 0; }
@@ -17,23 +17,37 @@ while (( "$#" )); do
     shift
 done
 
-cat $file | tr "\t" "\n" | grep -v "HLA" | tr "\n" "," > massaged.winners.hla.txt
+output_hla=""
 
-input_string=`head -n 1 massaged.winners.hla.txt`
+# POLYSOLVER writes one locus per line: a "HLA-A" label followed by the winning
+# alleles, e.g.  HLA-B<TAB>hla_b_08_01_01<TAB>hla_b_18_177
+# Split on tabs, drop the label column, and keep the allele fields.
+while IFS= read -r item; do
 
-IFS=',' read -ra items <<< "$input_string"
+    [ -n "$item" ] || continue
 
-for item in "${items[@]}"; do
+    # Split on '_' rather than slicing a fixed number of characters: the second
+    # field is not always two digits (hla_b_18_177, hla_c_04_320), and truncating
+    # it silently produces a different -- sometimes real -- allele.
+    item_upper=$(echo "$item" | tr '[:lower:]' '[:upper:]')
+    IFS='_' read -r prefix gene field1 field2 _rest <<< "$item_upper"
 
-    # Append the transformed item to the output string
-    truncated_value=$(echo "$item" | cut -c 1-11)
+    if [ "$prefix" != "HLA" ] || [ -z "$gene" ] || [ -z "$field1" ] || [ -z "$field2" ]; then
+        echo "WARN: skipping unparseable HLA entry '$item'" >&2
+        continue
+    fi
 
-    # Replace the first '_', the next '_', and remaining '_' with '-', '*', and ':', respectively
-    modified_value=$(echo "$truncated_value" | tr '[:lower:]' '[:upper:]' | sed 's/_/-/; s/_//; s/_/:/g')
+    # hla_c_04_320_01 -> HLA-C04:320   (two-field allele name, as netMHCpan expects)
+    modified_value="HLA-${gene}${field1}:${field2}"
     output_hla+=",$modified_value"
 
-done
+done < <(tr '\t' '\n' < "$file" | tr -d '\r' | grep -vi '^hla-')
+
+if [ -z "$output_hla" ]; then
+    echo "ERROR: no HLA alleles parsed from $file" >&2
+    exit 1
+fi
 
 # Remove leading comma
 output_hla="${output_hla:1}"
-echo $output_hla
+echo "$output_hla"

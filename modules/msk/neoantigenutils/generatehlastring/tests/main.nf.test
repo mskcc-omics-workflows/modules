@@ -36,6 +36,50 @@ nextflow_process {
     }
 
 
+    test("neoantigenutils_generatehlastring - hla - string - three digit second field") {
+
+        setup {
+            run("WRITE_THREE_DIGIT_HLA") {
+                script "./setup.nf"
+                process {
+                    """
+
+                    input = []
+
+                    """
+                }
+            }
+        }
+
+        when {
+
+            process {
+                """
+
+                input[0] = WRITE_THREE_DIGIT_HLA.out.hla.map { hla ->
+                    [
+                        [ id:'test_three_digit', single_end:false ], // meta map
+                        hla
+                    ]
+                }
+
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                // A three digit second field must survive intact: truncating
+                // hla_b_18_177 to HLA-B18:17 silently scores the sample
+                // against an allele the patient does not carry.
+                { assert process.out.hlastring[0][1].trim() == "HLA-A02:01,HLA-A02:01,HLA-B08:01,HLA-B18:177,HLA-C04:320,HLA-C07:348" }
+            )
+        }
+
+    }
+
+
     test("neoantigenutils_generatehlastring - hla - string - stub") {
 
         options "-stub"
