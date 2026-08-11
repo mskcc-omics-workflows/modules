@@ -38,30 +38,15 @@ nextflow_process {
 
     test("neoantigenutils_generatehlastring - hla - string - three digit second field") {
 
-        setup {
-            run("WRITE_THREE_DIGIT_HLA") {
-                script "./setup.nf"
-                process {
-                    """
-
-                    input = []
-
-                    """
-                }
-            }
-        }
-
         when {
 
             process {
                 """
 
-                input[0] = WRITE_THREE_DIGIT_HLA.out.hla.map { hla ->
-                    [
-                        [ id:'test_three_digit', single_end:false ], // meta map
-                        hla
+                input[0] = [
+                    [ id:'test_three_digit', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['winners_hla_3digit_txt'], checkIfExists: true)
                     ]
-                }
 
                 """
             }
@@ -74,6 +59,41 @@ nextflow_process {
                 // hla_b_18_177 to HLA-B18:17 silently scores the sample
                 // against an allele the patient does not carry.
                 { assert process.out.hlastring[0][1].trim() == "HLA-A02:01,HLA-A02:01,HLA-B08:01,HLA-B18:177,HLA-C04:320,HLA-C07:348" }
+            )
+        }
+
+    }
+
+
+    test("neoantigenutils_generatehlastring - hla - string - hlahd") {
+
+        when {
+
+            process {
+                """
+
+                input[0] = [
+                    [ id:'test_hlahd', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['hlahd_final_result_txt'], checkIfExists: true)
+                    ]
+
+                """
+            }
+        }
+
+        then {
+            def hlastring = process.out.hlastring[0][1].trim()
+            assertAll(
+                { assert process.success },
+                // HLA-HD names alleles as HLA-A*02:01:01; the output must be the
+                // same two-field shape the POLYSOLVER path emits.
+                { assert hlastring == "HLA-A02:01,HLA-A24:02,HLA-B07:02,HLA-B08:01,HLA-C07:01,HLA-C07:02" },
+                // Class II loci and "Not typed" entries are dropped, not warned
+                // about and emitted as garbage.
+                { assert !hlastring.contains("DRB") && !hlastring.contains("DQB") },
+                // The B line lists a second, equally scoring pair. Only the first
+                // pair is used, so exactly two B alleles come out.
+                { assert hlastring.split(",").count { it.startsWith("HLA-B") } == 2 }
             )
         }
 
