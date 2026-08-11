@@ -46,8 +46,7 @@ process PHYLOWGS_MULTIEVOLVE {
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
-    mkdir chains
-    touch chains/trees.zip
+    touch trees.zip
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
