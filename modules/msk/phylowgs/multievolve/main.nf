@@ -18,7 +18,7 @@ process PHYLOWGS_MULTIEVOLVE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def phylo_checkpoint = "${workflow.workDir}/.scratch/${task.process}_index_${task.index}"
+    def phylo_checkpoint = "${workflow.workDir}/.scratch/${task.process}_${prefix}"
     def chains = "${phylo_checkpoint}/chains"
 
     """
