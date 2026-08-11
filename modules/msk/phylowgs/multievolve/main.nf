@@ -9,7 +9,7 @@ process PHYLOWGS_MULTIEVOLVE {
     tuple val(meta), path(cnv_data), path(ssm_data)
 
     output:
-    tuple val(meta), path("chains/trees.zip")   , emit: trees
+    tuple val(meta), path("trees.zip")          , emit: trees
     path "versions.yml"                         , emit: versions
 
     when:
@@ -33,7 +33,7 @@ process PHYLOWGS_MULTIEVOLVE {
         --ssms ${phylo_checkpoint}/${ssm_data.name} \\
         --cnvs ${phylo_checkpoint}/${cnv_data.name}
 
-    cp -RL ${chains} chains
+    cp chains/trees.zip trees.zip
     rm -rf ${phylo_checkpoint}
 
     cat <<-END_VERSIONS > versions.yml
