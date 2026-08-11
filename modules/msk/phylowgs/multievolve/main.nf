@@ -18,24 +18,23 @@ process PHYLOWGS_MULTIEVOLVE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def phylo_run_dir = "${workflow.workDir}/.scratch/${task.process}_${prefix}"
+    def phylo_checkpoint = "${workflow.workDir}/.scratch/${task.process}_index_${task.index}"
+    def chains = "${phylo_checkpoint}/chains"
 
     """
-    mkdir -p ${phylo_run_dir}
-    cp -u ${ssm_data} ${phylo_run_dir}/
-    cp -u ${cnv_data} ${phylo_run_dir}/
-    cd ${phylo_run_dir}
+    mkdir -p ${chains}
+    ln -sfn ${chains} chains
+    cp -f ${ssm_data} ${phylo_checkpoint}
+    cp -f ${cnv_data} ${phylo_checkpoint}
 
     python2 \\
         /usr/bin/phylowgs/multievolve.py  \\
         ${args} \\
-        --ssms ${ssm_data.name} \\
-        --cnvs ${cnv_data.name}
+        --ssms ${phylo_checkpoint}/${ssm_data.name} \\
+        --cnvs ${phylo_checkpoint}/${cnv_data.name}
 
-    cd ${task.workDir}
-    cp -r ${phylo_run_dir}/chains .
-
-    rm -rf ${phylo_run_dir}
+    cp -RL ${chains} chains
+    rm -rf ${phylo_checkpoint}
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":

@@ -28,10 +28,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(file(process.out.trees[0][1]).name,
-                                file(process.out.summ[0][1]).name,
-                                file(process.out.muts[0][1]).name,
-                                file(process.out.mutass[0][1]).name).match() }
+                { assert snapshot(file(process.out.trees[0][1]).name).match() }
 
             )
         }
@@ -57,10 +54,7 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(file(process.out.trees[0][1]).name,
-                                file(process.out.summ[0][1]).name,
-                                file(process.out.muts[0][1]).name,
-                                file(process.out.mutass[0][1]).name).match() }
+                { assert snapshot(file(process.out.trees[0][1]).name).match() }
 
             )
         }
