@@ -17,10 +17,8 @@ process PHYLOWGS_MULTIEVOLVE {
 
     script:
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def unique_task_id = "${task.process}_index_${task.index}"
-    def phylo_run_dir = "${workflow.workDir}/.scratch/${unique_task_id}"
+    def phylo_run_dir = "${workflow.workDir}/.scratch/${task.process}_${prefix}"
 
     """
     mkdir -p ${phylo_run_dir}
@@ -34,7 +32,8 @@ process PHYLOWGS_MULTIEVOLVE {
         --ssms ${ssm_data.name} \\
         --cnvs ${cnv_data.name}
 
-    cp -r chains ${task.workDir}/
+    cd ${task.workDir}
+    cp -r ${phylo_run_dir}/chains .
 
     rm -rf ${phylo_run_dir}
 
@@ -46,7 +45,6 @@ process PHYLOWGS_MULTIEVOLVE {
 
     stub:
     def args = task.ext.args ?: ''
-    def args2 = task.ext.args2 ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     """
     mkdir chains
