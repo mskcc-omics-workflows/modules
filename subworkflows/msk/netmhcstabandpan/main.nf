@@ -58,19 +58,19 @@ def createNETMHCInput(fastas_and_hla, sv_fastas) {
                 [it[0],it]
                 }
 
-        // remainder: true keeps samples that have no SV data (sv_fastas is empty when no SVs provided)
+        // Callers are expected to pre-pad sv_fastas with [meta, []] for samples without SV data,
+        // so this is a plain inner join — each sample emits as soon as its fastas are ready and
+        // we never have to wait for the SV channel to close.
         def merged_mut = fastas_and_hla_channel
-            .join(sv_fastas_channel, by:0, remainder: true)
+            .join(sv_fastas_channel, by:0)
             .map({
-                def sv = it[2] ?: [null, [], []]
-                [it[1][0], it[1][1], sv[1], it[1][3], "MUT"]
+                [it[1][0], it[1][1], it[2][1], it[1][3], "MUT"]
             })
 
         def merged_wt = fastas_and_hla_channel
-            .join(sv_fastas_channel, by:0, remainder: true)
+            .join(sv_fastas_channel, by:0)
             .map({
-                def sv = it[2] ?: [null, [], []]
-                [it[1][0], it[1][2], sv[2], it[1][3], "WT"]
+                [it[1][0], it[1][2], it[2][2], it[1][3], "WT"]
             })
         def merged = merged_mut.mix(merged_wt)
         return merged
