@@ -1,10 +1,7 @@
 {
     "phylowgs_multievolve - zip": {
         "content": [
-            "trees.zip",
-            "test.summ.json.gz",
-            "test.muts.json.gz",
-            "test.mutass.zip"
+            "trees.zip"
         ],
         "meta": {
             "nf-test": "0.9.3",
@@ -14,10 +11,7 @@
     },
     "phylowgs_multievolve - zip - stub": {
         "content": [
-            "trees.zip",
-            "test.summ.json.gz",
-            "test.muts.json.gz",
-            "test.mutass.zip"
+            "trees.zip"
         ],
         "meta": {
             "nf-test": "0.9.3",

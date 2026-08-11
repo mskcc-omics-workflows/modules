@@ -10,9 +10,6 @@ process PHYLOWGS_MULTIEVOLVE {
 
     output:
     tuple val(meta), path("chains/trees.zip")   , emit: trees
-    tuple val(meta), path("*.summ.json.gz")     , emit: summ
-    tuple val(meta), path("*.muts.json.gz")     , emit: muts
-    tuple val(meta), path("*.mutass.zip")       , emit: mutass
     path "versions.yml"                         , emit: versions
 
     when:
@@ -37,20 +34,7 @@ process PHYLOWGS_MULTIEVOLVE {
         --ssms ${ssm_data.name} \\
         --cnvs ${cnv_data.name}
 
-    python2 \\
-        /usr/bin/phylowgs/write_results.py \\
-        ${args2} \\
-        --include-ssm-names \\
-        ${prefix} \\
-        chains/trees.zip \\
-        ${prefix}.summ.json.gz \\
-        ${prefix}.muts.json.gz \\
-        ${prefix}.mutass.zip
-
     cp -r chains ${task.workDir}/
-    cp ${prefix}.summ.json.gz ${task.workDir}/
-    cp ${prefix}.muts.json.gz ${task.workDir}/
-    cp ${prefix}.mutass.zip ${task.workDir}/
 
     rm -rf ${phylo_run_dir}
 
@@ -67,9 +51,6 @@ process PHYLOWGS_MULTIEVOLVE {
     """
     mkdir chains
     touch chains/trees.zip
-    touch ${prefix}.summ.json.gz
-    touch ${prefix}.muts.json.gz
-    touch ${prefix}.mutass.zip
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
