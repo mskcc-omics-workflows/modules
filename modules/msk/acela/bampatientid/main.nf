@@ -6,12 +6,9 @@ process ACELA_BAMPATIENTID {
     // Before running a pipeline that uses this module, obtain one (`acela login`)
     secret 'ACELA_TOKEN'
     conda "${moduleDir}/environment.yml"
-    // Hosted on MSK's internal JFrog Artifactory rather than ghcr.io -- pulling it (with
-    // Docker, Podman, or Singularity/Apptainer) requires the puller to be authenticated
-    // to mskcc.jfrog.io first.
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/acela_cli:0.1.0':
-        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/acela_cli:0.1.0' }"
+        'ghcr.io/mskcc/acela-cli:0.1.0':
+        'ghcr.io/mskcc/acela-cli:0.1.0' }"
 
     input:
     tuple val(meta), val(patient_ids)
