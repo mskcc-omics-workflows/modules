@@ -7,8 +7,8 @@ process ACELA_BAMSAMPLEID {
     secret 'ACELA_TOKEN'
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/mskcc/acela-cli:0.1.0':
-        'ghcr.io/mskcc/acela-cli:0.1.0' }"
+        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/acela_cli:0.1.0':
+        'mskcc.jfrog.io/omicswf-docker-prod-local/mskcc-omics-workflows/acela_cli:0.1.0' }"
 
     input:
     tuple val(meta), val(dmp_sample_ids)
