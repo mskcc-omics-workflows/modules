@@ -1,0 +1,10 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/environment-schema.json
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  # acela-cli is a private MSKCC package, not available on Bioconda/PyPI.
+  # Install it into the container image via:
+  #   pip install git+ssh://git@github.com/mskcc/acela-cli.git
+  - "YOUR-TOOL=HERE"

@@ -1,0 +1,72 @@
+{
+    "dmp patient id - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "patient2",
+                            "id_type": "dmp"
+                        },
+                        "patient2.acela_bam.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,b92b4a337b21c1a5682425e69fcf0b20"
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "patient2",
+                            "id_type": "dmp"
+                        },
+                        "patient2.acela_bam.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,b92b4a337b21c1a5682425e69fcf0b20"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2026-08-12T15:04:38.145876"
+    },
+    "cmo patient id - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "patient1",
+                            "id_type": "cmo"
+                        },
+                        "patient1.acela_bam.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,b92b4a337b21c1a5682425e69fcf0b20"
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "patient1",
+                            "id_type": "cmo"
+                        },
+                        "patient1.acela_bam.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,b92b4a337b21c1a5682425e69fcf0b20"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.3"
+        },
+        "timestamp": "2026-08-12T15:04:35.331055"
+    }
+}

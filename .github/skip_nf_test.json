@@ -33,6 +33,8 @@
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
         "modules/msk/oncokb/mafannotate",
+        "modules/msk/acela/bampatientid",
+        "modules/msk/acela/bamsampleid",
         "subworkflows/msk/genome_nexus",
         "subworkflows/msk/netmhcstabandpan",
         "subworkflows/msk/phylowgs",
