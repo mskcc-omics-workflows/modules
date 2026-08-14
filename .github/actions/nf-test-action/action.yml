@@ -72,9 +72,7 @@ runs:
         nextflow secrets set ONCOKB_TOKEN $ONCOKB_TOKEN
 
     - name: Set up nextflow ACELA secrets
-      # acela/bampatientid and acela/bamsampleid only run stub tests in CI (the Acela API is
-      # internal-only and unreachable here), so the process's `secret 'ACELA_TOKEN'` directive
-      # just needs a value present to satisfy Nextflow -- the stub never authenticates with it.
+      # acela/bampatientid and acela/bamsampleid only run stub tests in CI (the Acela API is internal-only)
       shell: bash
       run: |
         nextflow secrets set ACELA_TOKEN stub-placeholder

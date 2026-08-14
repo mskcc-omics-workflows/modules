@@ -29,11 +29,13 @@ process ACELA_BAMPATIENTID {
     }
     def subcommand = meta.id_type == 'dmp' ? 'by-dmp-id' : 'by-cmo-id'
     def ids = (patient_ids instanceof List ? patient_ids : [patient_ids]).join(' ')
+    def sep_arg = meta.sep ? "--sep '${meta.sep}'" : ''
 
     """
     acela bam ${subcommand} \\
         ${ids} \\
         --output ${prefix}.acela_bam.tsv \\
+        ${sep_arg} \\
         $args
 
     cat <<-END_VERSIONS > versions.yml

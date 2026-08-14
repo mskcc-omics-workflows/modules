@@ -18,8 +18,10 @@ input:
   - - meta:
         type: map
         description: |
-          Groovy Map containing sample information.
-          e.g. `[ id:'sample1' ]`
+          Groovy Map containing sample information, plus an optional `sep` key selecting the
+          output field delimiter ("tsv" (default), "csv", "\s" for space, or any literal
+          character, e.g. "|").
+          e.g. `[ id:'sample1' ]` or `[ id:'sample1', sep:'csv' ]`
     - dmp_sample_ids:
         type: list
         description: |

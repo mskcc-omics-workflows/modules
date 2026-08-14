@@ -19,8 +19,9 @@ input:
         type: map
         description: |
           Groovy Map containing sample information, plus an `id_type` key selecting which Acela
-          lookup to perform.
-          e.g. `[ id:'patient1', id_type:'cmo' ]` or `[ id:'patient1', id_type:'dmp' ]`
+          lookup to perform, and an optional `sep` key selecting the output field delimiter
+          ("tsv" (default), "csv", "\s" for space, or any literal character, e.g. "|").
+          e.g. `[ id:'patient1', id_type:'cmo' ]` or `[ id:'patient1', id_type:'dmp', sep:'csv' ]`
     - patient_ids:
         type: list
         description: |

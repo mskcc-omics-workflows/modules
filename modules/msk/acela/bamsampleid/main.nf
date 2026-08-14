@@ -24,11 +24,13 @@ process ACELA_BAMSAMPLEID {
     def args   = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
     def ids = (dmp_sample_ids instanceof List ? dmp_sample_ids : [dmp_sample_ids]).join(' ')
+    def sep_arg = meta.sep ? "--sep '${meta.sep}'" : ''
 
     """
     acela bam by-sample-id \\
         ${ids} \\
         --output ${prefix}.acela_bam.tsv \\
+        ${sep_arg} \\
         $args
 
     cat <<-END_VERSIONS > versions.yml
