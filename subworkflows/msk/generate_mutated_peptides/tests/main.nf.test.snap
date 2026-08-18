@@ -85,10 +85,10 @@
                     ]
                 ],
                 "6": [
+                    "versions.yml:md5,114c668534b59a86ea2ddcb47298020f",
                     "versions.yml:md5,1fa6d346cee06ebfc0cf4a371024ff06",
                     "versions.yml:md5,299918bbdd0cdf65249ca8a59e89a463",
-                    "versions.yml:md5,2df764f07b1e77cc872f988761b019d2",
-                    "versions.yml:md5,e92f1dde1e5596f2275005ca13e61841"
+                    "versions.yml:md5,2df764f07b1e77cc872f988761b019d2"
                 ],
                 "hla_string": [
                     [
@@ -136,10 +136,10 @@
                     ]
                 ],
                 "versions": [
+                    "versions.yml:md5,114c668534b59a86ea2ddcb47298020f",
                     "versions.yml:md5,1fa6d346cee06ebfc0cf4a371024ff06",
                     "versions.yml:md5,299918bbdd0cdf65249ca8a59e89a463",
-                    "versions.yml:md5,2df764f07b1e77cc872f988761b019d2",
-                    "versions.yml:md5,e92f1dde1e5596f2275005ca13e61841"
+                    "versions.yml:md5,2df764f07b1e77cc872f988761b019d2"
                 ],
                 "wt_fasta": [
                     [
