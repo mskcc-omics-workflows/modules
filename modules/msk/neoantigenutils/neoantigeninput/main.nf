@@ -1,7 +1,7 @@
 process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_medium'
-    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.0"
+    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.1"
 
     input:
     tuple val(meta),  path(inputMaf),      path(inputBedpe, arity: '0..*'),    path(hlaFile)
