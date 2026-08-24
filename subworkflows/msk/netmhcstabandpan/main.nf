@@ -58,6 +58,9 @@ def createNETMHCInput(fastas_and_hla, sv_fastas) {
                 [it[0],it]
                 }
 
+        // Callers are expected to pre-pad sv_fastas with [meta, []] for samples without SV data,
+        // so this is a plain inner join — each sample emits as soon as its fastas are ready and
+        // we never have to wait for the SV channel to close.
         def merged_mut = fastas_and_hla_channel
             .join(sv_fastas_channel, by:0)
             .map({

@@ -162,6 +162,52 @@ nextflow_workflow {
     }
 
 
+    test("netmhcstabandpan - padded empty SV placeholder - fa,hla_str - tsv - stub") {
+
+        // Regression test for the per-sample streaming contract:
+        // when a sample has no SV data, callers (e.g. GENERATE_MUTATED_PEPTIDES)
+        // pad the SV channel with [meta, [], []] so every sample matches the
+        // inner join. The subworkflow must still emit per-sample tsv outputs.
+
+        options "-stub"
+
+        when {
+            workflow {
+                """
+                input[0] = channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    file('MUT_sequence_fa', checkIfExists: false),
+                    file('WT_sequence_fa', checkIfExists: false),
+                    "HLA-A24:02,HLA-A24:02,HLA-B39:01,HLA-B39:01,HLA-C07:01,HLA-C06:02",
+                    ])
+
+                input[1] = channel.value([
+                    [ id:'test', single_end:false ], // meta map
+                    [],
+                    []
+                    ])
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert workflow.success },
+                { assert snapshot(workflow.out.tsv[0][0],
+                                  file(workflow.out.tsv[0][1]).name,
+                                  workflow.out.tsv[1][0],
+                                  file(workflow.out.tsv[1][1]).name,
+                                  workflow.out.tsv[2][0],
+                                  file(workflow.out.tsv[2][1]).name,
+                                  workflow.out.tsv[3][0],
+                                  file(workflow.out.tsv[3][1]).name
+                                  ).match()
+                }
+            )
+        }
+    }
+
+
     test("netmhcstabandpan - fa,hla_str - tsv - stub") {
 
         options "-stub"
