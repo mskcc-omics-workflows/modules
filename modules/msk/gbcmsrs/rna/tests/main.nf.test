@@ -1,0 +1,43 @@
+// nf-core modules test gbcmsrs/rna
+nextflow_process {
+
+    name "Test Process GBCMSRS_RNA"
+    script "../main.nf"
+    process "GBCMSRS_RNA"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "gbcmsrs"
+    tag "gbcmsrs/rna"
+
+    test("sarscov2 illumina - vcf - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
+                    [ file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true) ],
+                    [ file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true) ]
+                ]
+                input[1] = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
+                input[2] = file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true)
+                input[3] = file(params.test_data['sarscov2']['genome']['genome_gtf'], checkIfExists: true)
+                input[4] = []
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
