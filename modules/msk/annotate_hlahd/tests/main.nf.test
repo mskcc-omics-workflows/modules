@@ -1,0 +1,115 @@
+nextflow_process {
+
+    name "Test Process ANNOTATE_HLAHD"
+    script "../main.nf"
+    process "ANNOTATE_HLAHD"
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "modules_msk"
+    tag "annotate_hlahd"
+
+    // Test 1: full run with real (synthetic) data.
+    // The module's result_dir input expects a single directory containing
+    // <sample>_final.result.txt and <sample>_{A,B,C}.est.txt; test_data.config
+    // registers those as individual files, so this test stages them into one
+    // directory before invoking the process.
+    test("annotate_hlahd - result_dir - annotated tsv and html") {
+
+        when {
+            process {
+                """
+                def resultDir = File.createTempDir()
+                new File(resultDir, "test_sample_final.result.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['final_result_txt'], checkIfExists: true).bytes
+                new File(resultDir, "test_sample_A.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['est_a_txt'], checkIfExists: true).bytes
+                new File(resultDir, "test_sample_B.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['est_b_txt'], checkIfExists: true).bytes
+                new File(resultDir, "test_sample_C.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['est_c_txt'], checkIfExists: true).bytes
+
+                input[0] = [
+                    [ id:'test_sample' ],
+                    file(resultDir)
+                ]
+                input[1] = file(params.test_data_mskcc['annotate_hlahd']['pgroup_file'], checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.tsv,
+                    process.out.report,
+                    process.out.versions
+                ).match() }
+            )
+        }
+    }
+
+    // Test 2: --skip_html should suppress the (optional) report output.
+    test("annotate_hlahd - skip_html - no report emitted") {
+
+        config "./nextflow.config"
+
+        when {
+            process {
+                """
+                def resultDir = File.createTempDir()
+                new File(resultDir, "test_sample_final.result.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['final_result_txt'], checkIfExists: true).bytes
+                new File(resultDir, "test_sample_A.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['est_a_txt'], checkIfExists: true).bytes
+                new File(resultDir, "test_sample_B.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['est_b_txt'], checkIfExists: true).bytes
+                new File(resultDir, "test_sample_C.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['est_c_txt'], checkIfExists: true).bytes
+
+                input[0] = [
+                    [ id:'test_sample' ],
+                    file(resultDir)
+                ]
+                input[1] = file(params.test_data_mskcc['annotate_hlahd']['pgroup_file'], checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert process.out.report == [] },
+                { assert snapshot(process.out.tsv, process.out.versions).match() }
+            )
+        }
+    }
+
+    // Test 3: stub run (no container needed)
+    test("annotate_hlahd - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test_sample' ],
+                    file('result_dir')
+                ]
+                input[1] = file('hla_nom_p.txt')
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert path(process.out.tsv.get(0).get(1)).exists() },
+                { assert path(process.out.report.get(0).get(1)).exists() },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+    }
+}

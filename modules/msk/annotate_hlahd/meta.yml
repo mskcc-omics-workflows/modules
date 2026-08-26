@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "annotate_hlahd"
+description: Annotate HLA-HD class I output with IMGT P-groups and quality flags
+keywords:
+  - hla
+  - hlahd
+  - annotation
+  - immunogenomics
+tools:
+  - "annotate_hlahd":
+      description: "Post-processes HLA-HD's per-sample final.result.txt/*.est.txt class I output, mapping each allele call to its IMGT P-group and flagging low-confidence calls."
+      homepage: "https://github.com/mskcc/HLA_HD_workflow"
+      documentation: "https://github.com/mskcc/HLA_HD_workflow"
+      licence:
+        - "MIT"
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - result_dir:
+        type: directory
+        description: Directory containing HLA-HD's <sample>_final.result.txt and <sample>_{A,B,C}.est.txt
+        pattern: "*"
+  - - pgroup_file:
+        type: file
+        description: IMGT wmda/hla_nom_p.txt P-group reference table
+        pattern: "*.txt"
+output:
+  - tsv:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - ${prefix}_annotated.tsv:
+          type: file
+          description: Per-allele annotated TSV with P-group and quality-flag columns
+          pattern: "*_annotated.tsv"
+  - report:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - ${prefix}_report.html:
+          type: file
+          description: |
+            Self-contained HTML report for the sample. Optional — pass `--skip_html`
+            via `task.ext.args` to skip generating it.
+          pattern: "*_report.html"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+          ontologies:
+            - edam: http://edamontology.org/format_3750
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"
