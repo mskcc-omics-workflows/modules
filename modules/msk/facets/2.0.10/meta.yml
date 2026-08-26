@@ -38,16 +38,26 @@ input:
         type: boolean
         description: Flag to run Facets in legacy output mode
 output:
-  - purity_seg:
+  - purity_adjusted_seg:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'pair_id' ]`
-      - "*_purity.seg":
+      - "*purity_diplogR.adjusted.seg":
           type: file
-          description: The purity seg file
-          pattern: "*_purity.seg"
+          description: The purity adjusted seg file
+          pattern: "*purity_diplogR.adjusted.seg"
+  - purity_unadjusted_seg:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'pair_id' ]`
+      - "*purity_diplogR.unadjusted.seg":
+          type: file
+          description: The purity unadjusted seg file
+          pattern: "*purity_diplogR.unadjusted.seg"
   - purity_r_data:
       - meta:
           type: map
@@ -88,16 +98,26 @@ output:
           type: file
           description: The purity cncf file. Only in legacy output mode.
           pattern: "*_purity.cncf.txt"
-  - hisens_seg:
+    - hisens_adjusted_seg:
       - meta:
           type: map
           description: |
             Groovy Map containing sample information
             e.g. `[ id:'pair_id' ]`
-      - "*_hisens.seg":
+      - "*hisens_diplogR.adjusted.seg":
           type: file
-          description: The hisens seg file
-          pattern: "*_hisens.seg"
+        description: The hisens adjusted seg file
+        pattern: "*hisens_diplogR.adjusted.seg"
+    - hisens_unadjusted_seg:
+      - meta:
+        type: map
+        description: |
+        Groovy Map containing sample information
+        e.g. `[ id:'pair_id' ]`
+      - "*hisens_diplogR.unadjusted.seg":
+        type: file
+        description: The hisens unadjusted seg file
+        pattern: "*hisens_diplogR.unadjusted.seg"
   - hisens_r_data:
       - meta:
           type: map
