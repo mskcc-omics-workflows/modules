@@ -1,0 +1,29 @@
+{
+    "sarscov2 illumina - vcf gtf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "gbcms-gtf-38d6bc761606825e.idx:md5,d4ff9cf32c02b05359f11ea9fbfb1974"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,caa12a2ea191d010798bbfbaae282c28"
+                ],
+                "cache_dir": [
+                    [
+                        "gbcms-gtf-38d6bc761606825e.idx:md5,d4ff9cf32c02b05359f11ea9fbfb1974"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,caa12a2ea191d010798bbfbaae282c28"
+                ]
+            }
+        ],
+        "timestamp": "2026-08-26T13:41:43.602052101",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}
