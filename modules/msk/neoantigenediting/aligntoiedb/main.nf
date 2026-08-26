@@ -7,7 +7,7 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
         'ghcr.io/mskcc-omics-workflows/neoantigen-editing:1.1' }"
 
     input:
-    tuple val(meta),  path(patient_data)
+    tuple val(meta),  path(sample_file)
     path(iedb_fasta)
 
     output:
@@ -24,7 +24,8 @@ process NEOANTIGENEDITING_ALIGNTOIEDB {
     """
     align_neoantigens_to_IEDB.py \\
         --fasta ${iedb_fasta} \\
-        --input ${patient_data}
+        --input ${sample_file} \\
+        ${args}
 
 
 
