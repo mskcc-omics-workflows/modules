@@ -55,7 +55,7 @@ nextflow_process {
         }
 
     }
-unfilteredmaf_with_comments
+
     test("PHYLOWGS_CREATEINPUT - txt - stub") {
 
         options "-stub"
