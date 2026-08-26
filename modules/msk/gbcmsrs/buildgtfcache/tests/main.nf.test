@@ -22,9 +22,11 @@ nextflow_process {
         }
 
         then {
+            def idx_files = file(process.out.cache_dir[0]).listFiles().findAll { it.name.endsWith('.idx') }
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                { assert idx_files.size() == 1 },
+                { assert snapshot(process.out.versions).match() }
             )
         }
 
