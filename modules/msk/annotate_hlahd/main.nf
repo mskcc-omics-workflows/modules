@@ -23,7 +23,7 @@ process ANNOTATE_HLAHD {
     def args = task.ext.args ?: ''
     prefix   = task.ext.prefix ?: "${meta.id}"
     """
-    annotate_hlahd.py \\
+    annotate_hlahd \\
         --result_dir ${result_dir} \\
         --sample ${prefix} \\
         --pgroup_file ${pgroup_file} \\

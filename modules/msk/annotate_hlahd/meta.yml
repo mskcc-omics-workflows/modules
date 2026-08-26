@@ -9,8 +9,8 @@ keywords:
 tools:
   - "annotate_hlahd":
       description: "Post-processes HLA-HD's per-sample final.result.txt/*.est.txt class I output, mapping each allele call to its IMGT P-group and flagging low-confidence calls."
-      homepage: "https://github.com/mskcc/HLA_HD_workflow"
-      documentation: "https://github.com/mskcc/HLA_HD_workflow"
+      homepage: "https://github.com/mskcc/hla-annotate"
+      documentation: "https://github.com/mskcc/hla-annotate"
       licence:
         - "MIT"
       identifier: ""
