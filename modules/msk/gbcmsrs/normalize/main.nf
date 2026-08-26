@@ -46,7 +46,7 @@ process GBCMSRS_NORMALIZE {
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        gbcms: 6.3.0
+        gbcms: \$(echo "${task.container}" | sed 's/.*://')
     END_VERSIONS
     """
 }

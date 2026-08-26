@@ -4,15 +4,18 @@ process GBCMSRS_RNA {
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
         'ghcr.io/msk-access/gbcms:6.3.0':
         'ghcr.io/msk-access/gbcms:6.3.0' }"
-
+    // The gbcms image sets ENTRYPOINT ["gbcms"], which breaks Nextflow's docker/podman
+    // invocation of .command.run unless the entrypoint is cleared here. Singularity
+    // ignores the image entrypoint already, so this is scoped to docker/podman only.
     containerOptions { workflow.containerEngine in ['docker', 'podman'] ? "--entrypoint ''" : '' }
 
     input:
-    tuple val(meta), path(variants), path(bams), path(bais)
+    tuple val(meta), path(variants), val(sample_names), path(bams), path(bais)
     path fasta
     path fasta_fai
     path gtf
     path rna_editing_db
+    path gtf_cache
 
     output:
     tuple val(meta), path("gbcms_out/*.{vcf,maf}"), emit: variant_file
@@ -25,11 +28,22 @@ process GBCMSRS_RNA {
     if (workflow.profile.tokenize(',').intersect(['conda', 'mamba']).size() >= 1) {
         error "GBCMSRS_RNA module does not support Conda. Please use Docker / Singularity instead."
     }
+    // gbcms's read filters (--filter-duplicates/-secondary/-supplementary/-qc-failed)
+    // default to ON. A pipeline mapping its own boolean params into ext.args must emit
+    // the explicit --no-filter-x form when off; omitting the flag silently keeps it on.
+    // On Nextflow >=26.04 (strict parser), CLI param overrides arrive as Strings, so
+    // `params.x ? 'a' : 'b'` sees "false" as truthy — compare with `.toString() == 'true'`.
     def args = task.ext.args ?: ''
-    def bam_args = bams.collect { "--bam ${it}" }.join(' ')
+    // Bare `--bam path` labels the sample using the staged file's stem, which is not
+    // meaningful for real BAM naming conventions. Pairing each bam with an explicit
+    // name keeps the output filename and Tumor_Sample_Barcode/VCF sample column
+    // predictable and equal to what the caller intends.
+    def bam_args = [sample_names, bams].transpose().collect { name, bam -> "--bam ${name}:${bam}" }.join(' ')
     def gtf_arg = gtf ? "--gtf ${gtf}" : ''
     def editing_db_arg = rna_editing_db ? "--rna-editing-db ${rna_editing_db}" : ''
-
+    // gtf_cache is produced by GBCMSRS_BUILDGTFCACHE.out.cache_dir; wiring that module's
+    // output into this input is a subworkflow-level concern, not this module's.
+    def gtf_cache_arg = gtf_cache ? "--gtf-cache-dir ${gtf_cache}" : ''
     """
     gbcms rna \\
         --variants ${variants} \\
@@ -39,6 +53,7 @@ process GBCMSRS_RNA {
         --threads ${task.cpus} \\
         ${gtf_arg} \\
         ${editing_db_arg} \\
+        ${gtf_cache_arg} \\
         $args
 
     cat <<-END_VERSIONS > versions.yml
@@ -48,13 +63,14 @@ process GBCMSRS_RNA {
     """
 
     stub:
+    def sample_name = sample_names[0]
     """
     mkdir -p gbcms_out
-    touch gbcms_out/${variants.baseName}.vcf
+    touch gbcms_out/${sample_name}.vcf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        gbcms: 6.3.0
+        gbcms: \$(echo "${task.container}" | sed 's/.*://')
     END_VERSIONS
     """
 }

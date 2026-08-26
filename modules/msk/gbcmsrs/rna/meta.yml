@@ -30,6 +30,13 @@ input:
         description: Input variant file in VCF or MAF format
         pattern: "*.{vcf,maf}"
         ontologies: []
+    - sample_names:
+        type: string
+        description:
+          List of sample names, parallel to `bams`, used to label each BAM
+          via `--bam <name>:<path>`. Without an explicit name, gbcms falls
+          back to the staged file's stem, which is usually not the desired
+          sample id.
     - bams:
         type: file
         description: One or more indexed RNA-seq BAM/CRAM files to count alleles in
@@ -64,6 +71,14 @@ input:
         Pass an empty list (`[]`) to omit.
       pattern: "*.{txt,txt.gz}"
       ontologies: []
+  - gtf_cache:
+      type: directory
+      description:
+        Optional prebuilt GTF index cache directory, as produced by
+        GBCMSRS_BUILDGTFCACHE.out.cache_dir, avoiding a re-parse of the GTF
+        for this sample. Pass an empty list (`[]`) to omit. Wiring the two
+        modules together is a subworkflow-level concern.
+      pattern: "gbcms_gtf_cache"
 output:
   variant_file:
     - - meta:

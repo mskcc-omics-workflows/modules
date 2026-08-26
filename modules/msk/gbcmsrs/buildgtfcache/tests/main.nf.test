@@ -10,9 +10,7 @@ nextflow_process {
     tag "gbcmsrs"
     tag "gbcmsrs/buildgtfcache"
 
-    test("sarscov2 illumina - vcf gtf - stub") {
-
-        options "-stub"
+    test("sarscov2 illumina - vcf gtf") {
 
         when {
             process {

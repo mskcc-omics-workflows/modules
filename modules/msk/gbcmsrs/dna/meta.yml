@@ -30,6 +30,13 @@ input:
         description: Input variant file in VCF or MAF format
         pattern: "*.{vcf,maf}"
         ontologies: []
+    - sample_names:
+        type: string
+        description:
+          List of sample names, parallel to `bams`, used to label each BAM
+          via `--bam <name>:<path>`. Without an explicit name, gbcms falls
+          back to the staged file's stem, which is usually not the desired
+          sample id.
     - bams:
         type: file
         description: One or more indexed BAM/CRAM files to count alleles in

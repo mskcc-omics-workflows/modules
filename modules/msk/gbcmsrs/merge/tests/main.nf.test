@@ -10,9 +10,7 @@ nextflow_process {
     tag "gbcmsrs"
     tag "gbcmsrs/merge"
 
-    test("duplex simplex maf - stub") {
-
-        options "-stub"
+    test("duplex simplex maf") {
 
         when {
             process {
@@ -21,8 +19,8 @@ nextflow_process {
                     [ id:'test' ], // meta map
                     [ 'duplex', 'simplex' ],
                     [
-                        file(params.test_data_mskcc['genome_nexus']['test_maf'], checkIfExists: true),
-                        file(params.test_data_mskcc['genome_nexus']['sample2_sample1_annotated_maf'], checkIfExists: true)
+                        file(params.test_data_mskcc['gbcmsrs']['mfsd_single_maf'], checkIfExists: true),
+                        file(params.test_data_mskcc['gbcmsrs']['mfsd_multi_maf'], checkIfExists: true)
                     ]
                 ]
                 """
