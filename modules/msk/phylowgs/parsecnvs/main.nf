@@ -2,8 +2,8 @@ process PHYLOWGS_PARSECNVS {
     tag "$meta.id"
     label 'process_low'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5-msk':
-        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5-msk' }"
+        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.1-msk':
+        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.1-msk' }"
 
     input:
     tuple val(meta), path(facetsgenelevel)
