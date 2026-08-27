@@ -56,24 +56,29 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     ch_versions = ch_versions.mix(GENERATEMUTFASTA.out.versions)
 
-    ch_neosv_input = createNEOSVInput( ch_sv , NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring )
+    ch_neosv_branched = branchNEOSVInput( ch_sv , NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring )
 
-    NEOSV( ch_neosv_input, ch_gtf_and_cdna )
+    NEOSV( ch_neosv_branched.with_sv, ch_gtf_and_cdna )
 
     ch_versions = ch_versions.mix(NEOSV.out.versions)
+
+    // Pad SV outputs with empty placeholders for samples without SV input so that
+    // downstream per-sample joins never have to wait for the full channel to close.
+    ch_sv_mut_fasta = NEOSV.out.mutOut.mix( ch_neosv_branched.without_sv.map{ [it[0], []] } )
+    ch_sv_wt_fasta  = NEOSV.out.wtOut.mix( ch_neosv_branched.without_sv.map{ [it[0], []] } )
 
     emit:
 
     mut_fasta      = GENERATEMUTFASTA.out.mut_fasta                   // channel: [ val(meta), [ *.MUT_sequences.fa ] ]
     wt_fasta       = GENERATEMUTFASTA.out.wt_fasta                    // channel: [ val(meta), [ *.WT_sequences.fa ] ]
     mut_fasta_log  = GENERATEMUTFASTA.out.mut_fasta_log               // channel: [ val(meta), [ *_generate_mut_fasta.log ] ]
-    sv_mut_fasta   = NEOSV.out.mutOut                                 // channel: [ val(meta), [ *.SV.MUT.fa ] ]
-    sv_wt_fasta    = NEOSV.out.wtOut                                  // channel: [ val(meta), [ *.SV.WT.fa ] ]
+    sv_mut_fasta   = ch_sv_mut_fasta                                  // channel: [ val(meta), [ *.SV.MUT.fa ] | [] ]
+    sv_wt_fasta    = ch_sv_wt_fasta                                   // channel: [ val(meta), [ *.SV.WT.fa ]  | [] ]
     hla_string     = NEOANTIGENUTILS_GENERATEHLASTRING.out.hlastring  // channel: [ val(meta), [ hla_string ] ]
     versions       = ch_versions                                      // channel: [ versions.yml ]
 }
 
-def createNEOSVInput(sv_bedpe, hla_str) {
+def branchNEOSVInput(sv_bedpe, hla_str) {
         def sv_bedpe_channel = sv_bedpe
             .map{
                 [it[0],it]
@@ -89,6 +94,9 @@ def createNEOSVInput(sv_bedpe, hla_str) {
             .map{
                 [it[1][0], it[1][1], it[2][1]]
             }
-            .filter{ it[1] != null && it[2] != null }
+            .branch{
+                with_sv:    it[1] != null && it[2] != null
+                without_sv: true
+            }
         return merged_sv_hla
 }

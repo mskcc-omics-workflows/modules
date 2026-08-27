@@ -213,7 +213,7 @@
         },
         "timestamp": "2025-12-19T14:22:41.854041255"
     },
-    "netmhcstabandpan - empty SV channel - fa,hla_str - tsv - stub": {
+    "netmhcstabandpan - padded empty SV placeholder - fa,hla_str - tsv - stub": {
         "content": [
             {
                 "id": "test",
@@ -230,12 +230,28 @@
                 "fromStab": true,
                 "typePan": true
             },
-            "test.WT.STAB.tsv"
+            "test.WT.STAB.tsv",
+            {
+                "id": "test",
+                "single_end": false,
+                "typeMut": true,
+                "fromStab": false,
+                "typePan": true
+            },
+            "test.MUT.PAN.tsv",
+            {
+                "id": "test",
+                "single_end": false,
+                "typeMut": true,
+                "fromStab": true,
+                "typePan": true
+            },
+            "test.MUT.STAB.tsv"
         ],
         "meta": {
             "nf-test": "0.9.2",
             "nextflow": "24.10.2"
         },
-        "timestamp": "2026-05-13T22:29:19.315483"
+        "timestamp": "2026-05-27T16:15:00.000000000"
     }
 }
