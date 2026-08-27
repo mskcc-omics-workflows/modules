@@ -1,8 +1,18 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
 name: "gbcmsrs_dna"
-description:
-  Count alleles in cfDNA/somatic DNA BAMs at known variant sites using
-  gbcms
+description: |
+  Count alleles in cfDNA/somatic DNA BAMs at known variant sites using gbcms.
+
+  Note: gbcms's read filters (--filter-duplicates/-secondary/-supplementary/-qc-failed)
+  default to ON. A pipeline that maps its own boolean params into ext.args must emit the
+  explicit --no-filter-x form when off, or the filter silently stays on since omitting
+  the flag just falls back to the CLI default. On Nextflow >=26.04 (strict parser), CLI
+  param overrides arrive as Strings, so `params.x ? 'a' : 'b'` sees "false" as truthy.
+  Example ext.args mapping:
+
+  ext.args = { [
+      params.filter_qc_failed.toString() == 'true' ? '--filter-qc-failed' : '--no-filter-qc-failed',
+  ].join(' ') }
 keywords:
   - basecount
   - genotyping
