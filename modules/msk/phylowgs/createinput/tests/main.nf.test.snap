@@ -13,7 +13,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                    "versions.yml:md5,31f370f3a9d3a6d97e16b58c488f49da"
                 ],
                 "phylowgsinput": [
                     [
@@ -26,15 +26,52 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                    "versions.yml:md5,31f370f3a9d3a6d97e16b58c488f49da"
                 ]
             }
         ],
+        "timestamp": "2026-08-26T16:39:17.275159741",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
-        },
-        "timestamp": "2025-03-03T15:59:43.605713284"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "PHYLOWGS_CREATEINPUT - with comments - txt": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,1a3d26484389d5b3b35d20ac5e01f32c",
+                        "ssm_data.txt:md5,3a23e8d67f32ea13edb62882952f4122"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,31f370f3a9d3a6d97e16b58c488f49da"
+                ],
+                "phylowgsinput": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "cnv_data.txt:md5,1a3d26484389d5b3b35d20ac5e01f32c",
+                        "ssm_data.txt:md5,3a23e8d67f32ea13edb62882952f4122"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,31f370f3a9d3a6d97e16b58c488f49da"
+                ]
+            }
+        ],
+        "timestamp": "2026-08-27T11:36:36.146549189",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "PHYLOWGS_CREATEINPUT - txt": {
         "content": [
@@ -50,7 +87,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                    "versions.yml:md5,31f370f3a9d3a6d97e16b58c488f49da"
                 ],
                 "phylowgsinput": [
                     [
@@ -63,14 +100,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,c1620c9a82e06c6ccd1e8465cc928648"
+                    "versions.yml:md5,31f370f3a9d3a6d97e16b58c488f49da"
                 ]
             }
         ],
+        "timestamp": "2026-08-27T11:36:29.797891799",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.4"
-        },
-        "timestamp": "2025-03-03T15:59:38.659729442"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }
