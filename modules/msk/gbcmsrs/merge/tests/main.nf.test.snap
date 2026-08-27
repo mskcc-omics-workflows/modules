@@ -1,0 +1,35 @@
+{
+    "duplex simplex maf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.merged.maf:md5,81bbe12fb5511ce9c66d3375b9ed71dc"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,d11192a5fe8053ad55df36e0d666e768"
+                ],
+                "merged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.merged.maf:md5,81bbe12fb5511ce9c66d3375b9ed71dc"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,d11192a5fe8053ad55df36e0d666e768"
+                ]
+            }
+        ],
+        "timestamp": "2026-08-27T10:15:04.577509879",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

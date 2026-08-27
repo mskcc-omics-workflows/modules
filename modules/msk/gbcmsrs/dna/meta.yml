@@ -1,0 +1,94 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
+name: "gbcmsrs_dna"
+description: |
+  Count alleles in cfDNA/somatic DNA BAMs at known variant sites using gbcms.
+
+  Note: gbcms's read filters (--filter-duplicates/-secondary/-supplementary/-qc-failed)
+  default to ON. A pipeline that maps its own boolean params into ext.args must emit the
+  explicit --no-filter-x form when off, or the filter silently stays on since omitting
+  the flag just falls back to the CLI default. On Nextflow >=26.04 (strict parser), CLI
+  param overrides arrive as Strings, so `params.x ? 'a' : 'b'` sees "false" as truthy.
+  Example ext.args mapping:
+
+  ext.args = { [
+      params.filter_qc_failed.toString() == 'true' ? '--filter-qc-failed' : '--no-filter-qc-failed',
+  ].join(' ') }
+keywords:
+  - basecount
+  - genotyping
+  - dna
+  - variants
+tools:
+  - "gbcms":
+      description:
+        "A high-performance, orientation-aware genotype counting system for
+        genomic variants (Rust rewrite of GetBaseCountsMultiSample)"
+      homepage: "https://github.com/msk-access/gbcms"
+      documentation: "https://msk-access.github.io/gbcms/"
+      tool_dev_url: "https://github.com/msk-access/gbcms"
+      licence: ["AGPL-3.0"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test' ]`
+    - variants:
+        type: file
+        description: Input variant file in VCF or MAF format
+        pattern: "*.{vcf,maf}"
+        ontologies: []
+    - sample_names:
+        type: string
+        description:
+          List of sample names, parallel to `bams`, used to label each BAM
+          via `--bam <name>:<path>`. Without an explicit name, gbcms falls
+          back to the staged file's stem, which is usually not the desired
+          sample id.
+    - bams:
+        type: file
+        description: One or more indexed BAM/CRAM files to count alleles in
+        pattern: "*.{bam,cram}"
+        ontologies: []
+    - bais:
+        type: file
+        description: Index file(s) for the input BAM/CRAM file(s)
+        pattern: "*.{bai,crai}"
+        ontologies: []
+  - fasta:
+      type: file
+      description: Reference genome FASTA file
+      pattern: "*.{fasta,fa}"
+      ontologies: []
+  - fasta_fai:
+      type: file
+      description: Index of the reference genome FASTA file
+      pattern: "*.fai"
+      ontologies: []
+output:
+  variant_file:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test' ]`
+      - "gbcms_out/*.{vcf,maf}":
+          type: file
+          description:
+            Variant file annotated with allele counts, strand information,
+            and statistical annotations
+          pattern: "gbcms_out/*.{vcf,maf}"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@shahr"
+maintainers:
+  - "@buehlere"
+  - "@shahr"
