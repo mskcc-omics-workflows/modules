@@ -11,7 +11,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ],
                 "pileup": [
                     [
@@ -22,11 +22,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ]
             }
         ],
-        "timestamp": "2024-02-26T11:34:57.371873"
+        "timestamp": "2026-08-26T13:12:42.16164166",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "snppileup - bam": {
         "content": [
@@ -40,7 +44,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ],
                 "pileup": [
                     [
@@ -51,11 +55,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ]
             }
         ],
-        "timestamp": "2024-02-26T11:33:58.146"
+        "timestamp": "2026-08-26T13:12:03.753279461",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "snppileup - bam with extra bam - stub": {
         "content": [
@@ -69,7 +77,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ],
                 "pileup": [
                     [
@@ -80,11 +88,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ]
             }
         ],
-        "timestamp": "2024-02-26T11:35:02.583042"
+        "timestamp": "2026-08-26T13:12:47.932635263",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "snppileup - bam - extra bam": {
         "content": [
@@ -98,7 +110,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ],
                 "pileup": [
                     [
@@ -109,11 +121,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ]
             }
         ],
-        "timestamp": "2024-02-26T11:34:22.986163"
+        "timestamp": "2026-08-26T13:12:18.698793454",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "snppileup - bam - extra bam list": {
         "content": [
@@ -127,7 +143,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ],
                 "pileup": [
                     [
@@ -138,11 +154,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ]
             }
         ],
-        "timestamp": "2024-02-26T11:34:51.747062"
+        "timestamp": "2026-08-26T13:12:36.522321677",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "snppileup - bam with extra bam list - stub": {
         "content": [
@@ -156,7 +176,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ],
                 "pileup": [
                     [
@@ -167,10 +187,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,0ca251848ee099aebdade397bedf463f"
+                    "versions.yml:md5,ff4f6e8255f9e45531005a3156d5d904"
                 ]
             }
         ],
-        "timestamp": "2024-02-26T11:35:07.596619"
+        "timestamp": "2026-08-26T13:12:53.767956011",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }

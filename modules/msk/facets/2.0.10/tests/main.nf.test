@@ -9,13 +9,14 @@ nextflow_process {
     tag "modules_nfcore"
     tag "modules_msk"
     tag "facets"
+    tag "facets/2.0.10"
     tag "snppileup"
 
     test("facets - pileup - legacy output") {
 
         setup {
             run("SNPPILEUP"){
-                script "../../snppileup/main.nf"
+                script "../../../snppileup/main.nf"
                 process {
                     """                
                     meta = [ id:'test' ] // meta map
@@ -42,9 +43,7 @@ nextflow_process {
         when {
             process {
                 """                
-                meta = [ id:'test' ] // meta map
-                input[0] = SNPPILEUP.out.pileup.collect{ meta, pileup -> pileup }.map{ pileup -> [meta, pileup, true]}               
-
+                input[0] = SNPPILEUP.out.pileup.map{ meta1, pileup -> [meta1, pileup, true] }
                 """
                                 
             }
@@ -63,9 +62,9 @@ nextflow_process {
 
         setup {
             run("SNPPILEUP"){
-                script "../../snppileup/main.nf"
+                script "../../../snppileup/main.nf"
                 process {
-                    """                
+                    """
                     meta = [ id:'test' ] // meta map
                     input[0] = [
                                     meta,
@@ -89,12 +88,9 @@ nextflow_process {
 
         when {
             process {
-                """                
-                meta = [ id:'test' ] // meta map
-                input[0] = SNPPILEUP.out.pileup.collect{ meta, pileup -> pileup }.map{ pileup -> [meta, pileup, false]}               
-
                 """
-                                
+                input[0] = SNPPILEUP.out.pileup.map{ meta1, pileup -> [meta1, pileup, false] }
+                """
             }
         }
 

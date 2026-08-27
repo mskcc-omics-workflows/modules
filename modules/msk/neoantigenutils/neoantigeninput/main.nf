@@ -1,7 +1,7 @@
 process NEOANTIGENUTILS_NEOANTIGENINPUT {
     tag "$meta.id"
     label 'process_medium'
-    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0"
+    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.1"
 
     input:
     tuple val(meta),  path(inputMaf),      path(inputBedpe, arity: '0..*'),    path(hlaFile)
@@ -22,8 +22,10 @@ process NEOANTIGENUTILS_NEOANTIGENINPUT {
     def patientid = task.ext.cohort ?: "${meta.id}_patient"
     def cohort = task.ext.cohort ?: "${meta.id}_cohort"
     def bedpe = inputBedpe ? "--bedpe_file ${inputBedpe}": ""
+    def pyensemblCacheDir = params.pyensembl_cache_dir ?: '$PWD/.pyensembl_cache'
 
     """
+        export PYENSEMBL_CACHE_DIR="${pyensemblCacheDir}"
         tree_folder_name=\$(basename -s .zip "${phyloWGSfolder}")
         mkdir \$tree_folder_name
         unzip ${phyloWGSfolder} -d \$tree_folder_name
