@@ -2,8 +2,8 @@ process PHYLOWGS_MULTIEVOLVE {
     tag "$meta.id"
     label 'process_high'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.1-msk':
-        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.1-msk' }"
+        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.2-msk':
+        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.2-msk' }"
 
     input:
     tuple val(meta), path(cnv_data), path(ssm_data)
