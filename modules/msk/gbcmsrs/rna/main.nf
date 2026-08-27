@@ -2,12 +2,8 @@ process GBCMSRS_RNA {
     tag "$meta.id"
     label 'process_medium'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/gbcms:6.3.0':
-        'ghcr.io/msk-access/gbcms:6.3.0' }"
-    // The gbcms image sets ENTRYPOINT ["gbcms"], which breaks Nextflow's docker/podman
-    // invocation of .command.run unless the entrypoint is cleared here. Singularity
-    // ignores the image entrypoint already, so this is scoped to docker/podman only.
-    containerOptions { workflow.containerEngine in ['docker', 'podman'] ? "--entrypoint ''" : '' }
+        'ghcr.io/mskcc-omics-workflows/gbcms:6.3.1':
+        'ghcr.io/mskcc-omics-workflows/gbcms:6.3.1' }"
 
     input:
     tuple val(meta), path(variants), val(sample_names), path(bams), path(bais)

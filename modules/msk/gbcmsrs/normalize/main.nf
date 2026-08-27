@@ -2,10 +2,8 @@ process GBCMSRS_NORMALIZE {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/gbcms:6.3.0':
-        'ghcr.io/msk-access/gbcms:6.3.0' }"
-
-    containerOptions { workflow.containerEngine in ['docker', 'podman'] ? "--entrypoint ''" : '' }
+        'ghcr.io/mskcc-omics-workflows/gbcms:6.3.1':
+        'ghcr.io/mskcc-omics-workflows/gbcms:6.3.1' }"
 
     input:
     tuple val(meta), path(variants)
