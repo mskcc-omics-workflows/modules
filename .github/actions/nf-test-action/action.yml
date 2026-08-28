@@ -66,10 +66,16 @@ runs:
         nextflow secrets set SENTIEON_AUTH_DATA $(python3 tests/modules/nf-core/sentieon/license_message.py encrypt --key "$SENTIEON_ENCRYPTION_KEY" --message "$SENTIEON_LICENSE_MESSAGE")
 
     - name: Set up nextflow ONCOKB secrets
-      if: env.ONCOKB_TOKEN != '' 
+      if: env.ONCOKB_TOKEN != ''
       shell: bash
       run: |
         nextflow secrets set ONCOKB_TOKEN $ONCOKB_TOKEN
+
+    - name: Set up nextflow ACELA secrets
+      # acela/bampatientid and acela/bamsampleid only run stub tests in CI (the Acela API is internal-only)
+      shell: bash
+      run: |
+        nextflow secrets set ACELA_TOKEN stub-placeholder
 
 
       # TODO Skip failing conda tests and document their failures
