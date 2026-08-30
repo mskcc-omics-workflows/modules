@@ -1,0 +1,66 @@
+nextflow_process {
+
+    name "Test Process HLAHD"
+    script "../main.nf"
+    process "HLAHD"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "hlahd"
+
+    test("hlahd - fastq pair - result txt") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test_sample', single_end:false ], // meta map
+                    file(params.test_data_mskcc['hlahd']['fastq_1'], checkIfExists: true),
+                    file(params.test_data_mskcc['hlahd']['fastq_2'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(
+                    process.out.result.collect { meta, f ->
+                        [meta, path(f).readLines().findAll { it.startsWith("A\t") }]
+                    },
+                    process.out.versions
+                    ).match()
+                }
+            )
+        }
+
+    }
+
+    test("hlahd - fastq pair - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test_sample', single_end:false ], // meta map
+                    file(params.test_data_mskcc['hlahd']['fastq_1'], checkIfExists: true),
+                    file(params.test_data_mskcc['hlahd']['fastq_2'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert path(process.out.result.get(0).get(1)).exists() },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+}

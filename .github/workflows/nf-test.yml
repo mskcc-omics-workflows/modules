@@ -135,6 +135,8 @@ jobs:
           shard: ${{ matrix.shard }}
           total_shards: ${{ env.TOTAL_SHARDS }}
           paths: "${{ join(fromJson(steps.filter.outputs.filtered_paths), ' ') }}"
+          jfrog_username: ${{ secrets.JFROG_USERNAME }}
+          jfrog_password: ${{ secrets.JFROG_PASSWORD }}
 
   confirm-pass:
     runs-on: ubuntu-latest
