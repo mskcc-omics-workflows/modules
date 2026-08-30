@@ -1,0 +1,84 @@
+{
+    "sarscov2 - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "testsample"
+                        },
+                        "XDPfilter_ALL_FP.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "FINGERPRINT_COMBINE",
+                        "complete_FP_table.R",
+                        "0.1.0"
+                    ]
+                ],
+                "combined_fp_tsv": [
+                    [
+                        {
+                            "id": "testsample"
+                        },
+                        "XDPfilter_ALL_FP.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_combine": [
+                    [
+                        "FINGERPRINT_COMBINE",
+                        "complete_FP_table.R",
+                        "0.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-31T11:50:45.066162946",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
+    },
+    "sarscov2 - bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "mypool"
+                        },
+                        "0DPfilter_ALL_FP.txt:md5,66113c255cf1f52e27802183764a406d"
+                    ]
+                ],
+                "1": [
+                    [
+                        "FINGERPRINT_COMBINE",
+                        "complete_FP_table.R",
+                        "0.1.0"
+                    ]
+                ],
+                "combined_fp_tsv": [
+                    [
+                        {
+                            "id": "mypool"
+                        },
+                        "0DPfilter_ALL_FP.txt:md5,66113c255cf1f52e27802183764a406d"
+                    ]
+                ],
+                "versions_combine": [
+                    [
+                        "FINGERPRINT_COMBINE",
+                        "complete_FP_table.R",
+                        "0.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-31T11:50:39.126837772",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
+    }
+}

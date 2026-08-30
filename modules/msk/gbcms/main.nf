@@ -12,7 +12,7 @@ process GBCMS {
 
     output:
     tuple val(meta), path('*.{vcf,maf}'), emit: variant_file
-    path "versions.yml"                 , emit: versions
+    tuple val("${task.process}"), val('gbcms'), eval("GetBaseCountsMultiSample --help | grep -oP '[0-9]\\.[0-9]\\.[0-9]'"), emit: versions_gbcms, topic: versions
 
     when:
         task.ext.when == null || task.ext.when
@@ -44,10 +44,6 @@ process GBCMS {
     --output ${output} \\
     --bam $sample:${bam} $args
 
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        GetBaseCountsMultiSample: \$(echo \$(GetBaseCountsMultiSample --help) | grep -oP '[0-9]\\.[0-9]\\.[0-9]')
-    END_VERSIONS
     """
 
     stub:
@@ -56,9 +52,5 @@ process GBCMS {
     """
 
     touch variant_file.maf
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        GetBaseCountsMultiSample:  1.2.5
-    END_VERSIONS
     """
 }

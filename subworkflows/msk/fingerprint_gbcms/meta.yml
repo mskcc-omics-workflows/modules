@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "fingerprint_gbcms"
+description: |
+  Get base counts for all fingerprinting sites from BAM/CRAM/SAM files using the GBCMS module,
+  and parse the resulting VCF files into standardized TSV format using a custom parser.
+keywords:
+  - fingerprint
+  - fingerprinting
+  - loci
+  - vcf
+  - bam
+  - qc
+components:
+  - gbcms
+  - fingerprint/vcfparser
+  - fingerprint/contamination
+input:
+  - ch_bam:
+      type: file
+      description: |
+        The input channel containing the BAM/CRAM/SAM files
+        Structure: [ val(meta), path(bam) ]
+      pattern: "*.{bam/cram/sam}"
+  - ch_bai:
+      type: file
+      description: |
+        The input channel containing the BAM index files (BAI/CSI)
+        Structure: [ val(meta), path(bai) ] # or path(csi)
+      pattern: "*.{bai/csi}"
+  - ch_fp_vcf:
+      type: file
+      description: |
+        Channel containing fingerprint VCF files
+        Structure: [ val(meta), path(vcf) ]
+      pattern: "*.vcf"
+  - ch_fasta:
+      type: file
+      description: |
+        Channel containing reference FASTA files
+        Structure: [ path(fasta) ]
+      pattern: "*.{fasta,fa}"
+  - ch_fastafai:
+      type: file
+      description: |
+        Channel containing reference FASTA index files
+        Structure: [ path(fasta.fai) ]
+      pattern: "*.{fasta,fa}.fai"
+output:
+  - tsv:
+      type: file
+      description: |
+        Channel containing standardized fingerprint TSV files
+        Structure: [ val(meta), path(tsv) ]
+      pattern: "*.fp.tsv"
+  - versions:
+      type: file
+      description: |
+        File containing software versions
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"

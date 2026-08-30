@@ -1,5 +1,9 @@
 {
     "conda": [
+        "modules/msk/custom/fingerprintvcfparser",
+        "modules/msk/custom/fingerprintcontamination",
+        "modules/msk/custom/fingerprintcombine",
+        "modules/msk/custom/fingerprintcorrelation",
         "modules/msk/calculatenoise",
         "modules/msk/ppflagfixer",
         "modules/msk/facets",
@@ -37,6 +41,7 @@
         "modules/msk/phylowgs/parsecnvs",
         "modules/msk/pvmaf/concat",
         "modules/msk/pvmaf/tagtraceback",
+        "subworkflows/msk/fingerprint_gbcms",
         "modules/msk/oncokb/mafannotate",
         "subworkflows/msk/genome_nexus",
         "subworkflows/msk/netmhcstabandpan",

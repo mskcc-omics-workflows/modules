@@ -1,0 +1,7 @@
+channels:
+  - conda-forge
+  - bioconda
+
+dependencies:
+  - numpy=2.3.3
+  - pandas=2.3.2

@@ -1,0 +1,88 @@
+{
+    "sarscov2 - vcf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.fp.tsv:md5,9fa9a081f17ee52f03463c96d46a23aa"
+                    ]
+                ],
+                "1": [
+                    [
+                        "FINGERPRINT_VCFPARSER",
+                        "parse_fingerprint_vcf.py",
+                        "0.1.0"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.fp.tsv:md5,9fa9a081f17ee52f03463c96d46a23aa"
+                    ]
+                ],
+                "versions_vcfparser": [
+                    [
+                        "FINGERPRINT_VCFPARSER",
+                        "parse_fingerprint_vcf.py",
+                        "0.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-31T11:56:37.863052588",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
+    },
+    "sarscov2 - vcf - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.fp.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "FINGERPRINT_VCFPARSER",
+                        "parse_fingerprint_vcf.py",
+                        "0.1.0"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test",
+                            "single_end": false
+                        },
+                        "test.fp.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_vcfparser": [
+                    [
+                        "FINGERPRINT_VCFPARSER",
+                        "parse_fingerprint_vcf.py",
+                        "0.1.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-03-31T11:56:43.764600116",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
+    }
+}

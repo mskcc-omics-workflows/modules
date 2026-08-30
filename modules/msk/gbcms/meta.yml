@@ -14,10 +14,9 @@ tools:
         in a given VCF file or MAF file"
       homepage: "https://github.com/msk-access/GetBaseCountsMultiSample"
       documentation: "https://github.com/msk-access/GetBaseCountsMultiSample/blob/master/README.md"
-
       identifier: ""
+
 input:
-  # Only when we have meta
   - - meta:
         type: map
         description: |
@@ -29,45 +28,65 @@ input:
           Input bam file, in the format of SAMPLE_NAME:BAM_FILE. This paramter
           need to be specified at least once
         pattern: "*.bam"
+        ontologies: []
     - bambai:
         type: file
         description: Index of Bam
         pattern: "*.bai"
+        ontologies: []
     - variant_file:
         type: file
         description:
           Input variant file in TCGA maf format. --maf or --vcf need to be
           specified at least once. But --maf and --vcf are mutually exclusive
         pattern: "*.{maf,vcf}"
+        ontologies: []
     - output:
         type: string
         description: Output file
-  - - fasta:
-        type: file
-        description: Input reference sequence file
-        pattern: "*.fasta"
-  - - fastafai:
-        type: file
-        description: Index of the reference Fasta
-        pattern: "*.fai"
+  - fasta:
+      type: file
+      description: Input reference sequence file
+      pattern: "*.fasta"
+      ontologies: []
+  - fastafai:
+      type: file
+      description: Index of the reference Fasta
+      pattern: "*.fai"
+
+      ontologies: []
 output:
-  - variant_file:
-      - meta:
-          type: file
-          description:
-            base counts in multiple BAM files for all the sites in a given
-            VCF file or MAF file
-          pattern: "*.{vcf,maf}"
+  variant_file:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test', single_end:false ]`
       - "*.{vcf,maf}":
           type: file
           description:
             base counts in multiple BAM files for all the sites in a given
             VCF file or MAF file
           pattern: "*.{vcf,maf}"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
+          ontologies: []
+  versions_gbcms:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - gbcms:
+          type: string
+          description: The name of the tool
+      - GetBaseCountsMultiSample --help | grep -oP '[0-9]\\.[0-9]\\.[0-9]': {}
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - gbcms:
+          type: string
+          description: The name of the tool
+      - GetBaseCountsMultiSample --help | grep -oP '[0-9]\\.[0-9]\\.[0-9]':
+          type: eval
+          description: The expression to obtain the version of the tool
 authors:
   - "@buehlere"

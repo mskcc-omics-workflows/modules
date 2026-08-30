@@ -1,0 +1,109 @@
+{
+    "sarscov2 - bam": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.fp.tsv:md5,c467328eb3c7fb534b555b83b0227206"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.fp.tsv:md5,c3fbcee584048e9bc4fc93bc6ca487d2"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.fp.tsv:md5,c467328eb3c7fb534b555b83b0227206"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.fp.tsv:md5,c3fbcee584048e9bc4fc93bc6ca487d2"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.contamination.tsv:md5,5b533c60b8eff1f4d2c5fe58a8262303"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.contamination.tsv:md5,2eb950d4d5e0f9b4f7ae53d41d22fb5f"
+                    ]
+                ],
+                "contamination_tsv": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.contamination.tsv:md5,5b533c60b8eff1f4d2c5fe58a8262303"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.contamination.tsv:md5,2eb950d4d5e0f9b4f7ae53d41d22fb5f"
+                    ]
+                ],
+                "fp_tsv": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.fp.tsv:md5,c467328eb3c7fb534b555b83b0227206"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.fp.tsv:md5,c3fbcee584048e9bc4fc93bc6ca487d2"
+                    ]
+                ],
+                "fp_tsv_from_bam": [
+                    [
+                        {
+                            "id": "test",
+                            "sample": "test"
+                        },
+                        "test.fp.tsv:md5,c467328eb3c7fb534b555b83b0227206"
+                    ],
+                    [
+                        {
+                            "id": "test2",
+                            "sample": "test2"
+                        },
+                        "test2.fp.tsv:md5,c3fbcee584048e9bc4fc93bc6ca487d2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "26.01.1"
+        },
+        "timestamp": "2026-02-26T22:35:39.868458916"
+    }
+}

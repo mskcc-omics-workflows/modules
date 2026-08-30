@@ -1,0 +1,66 @@
+{
+    "sarscov2 - bam - stub": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "thispool"
+                    },
+                    "thispool_correlations.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": "thispool"
+                    },
+                    "thispool_observations.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ]
+            ],
+            [
+                [
+                    "FINGERPRINT_CORRELATION",
+                    "plot_gbcm.R",
+                    "0.1.0"
+                ]
+            ]
+        ],
+        "timestamp": "2026-03-31T11:51:06.685431978",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
+    },
+    "sarscov2 - bam": {
+        "content": [
+            [
+                [
+                    {
+                        "id": null
+                    },
+                    "batch_correlations.tab:md5,dbc55d8829950501d3ed2db9a832165c"
+                ]
+            ],
+            [
+                [
+                    {
+                        "id": null
+                    },
+                    "batch_observations.tab:md5,858d6d115a4da81652bb98dcc8b8077f"
+                ]
+            ],
+            [
+                [
+                    "FINGERPRINT_CORRELATION",
+                    "plot_gbcm.R",
+                    "0.1.0"
+                ]
+            ]
+        ],
+        "timestamp": "2026-03-31T11:51:01.173687804",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.01.1"
+        }
+    }
+}

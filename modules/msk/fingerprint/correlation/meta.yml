@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "fingerprint_correlation"
+description: "Generate fingerprint correlation heatmaps and tables from a combined fingerprint table"
+keywords:
+  - fingerprint
+  - correlation
+  - qc
+  - heatmap
+tools:
+  - "plot_gbcm.R":
+      description: "In-house R script for fingerprint correlation plotting"
+      homepage: ""
+      documentation: ""
+      tool_dev_url: ""
+      doi: ""
+      licence: null
+      identifier: null
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'pool1' ]`
+    - combined_fp_tsv:
+        type: file
+        description: Combined fingerprint TSV from FINGERPRINT_COMBINE
+        pattern: "*DPfilter_ALL_FP.txt"
+  - - filter_term:
+        type: string
+        description: Optional filter term to create pool-level plots
+output:
+  heatmap_pdf:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+      - "*.pdf":
+          type: file
+          description: PDF heatmap of fingerprint correlations
+  heatmap_html:
+    - - meta:
+          type: map
+      - "*.html":
+          type: file
+          description: Interactive HTML heatmap
+  observations_tab:
+    - - meta:
+          type: map
+      - "*_observations.tab":
+          type: file
+          description: Table of loci overlap observations
+  correlations_tab:
+    - - meta:
+          type: map
+      - "*_correlations.tab":
+          type: file
+          description: Table of pairwise correlations
+  versions_correlation:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - plot_gbcm.R:
+          type: string
+          description: The name of the tool
+      - 0.1.0:
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"

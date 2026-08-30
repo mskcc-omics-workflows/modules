@@ -12,7 +12,11 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,a94265ed3bc4b5631d85b9b9b5d2b7e5"
+                    [
+                        "GBCMS",
+                        "gbcms",
+                        "1.2.4"
+                    ]
                 ],
                 "variant_file": [
                     [
@@ -23,15 +27,19 @@
                         "variant_file.vcf:md5,28c8df33c7ea5ed5d1cf9997d8e00ffa"
                     ]
                 ],
-                "versions": [
-                    "versions.yml:md5,a94265ed3bc4b5631d85b9b9b5d2b7e5"
+                "versions_gbcms": [
+                    [
+                        "GBCMS",
+                        "gbcms",
+                        "1.2.4"
+                    ]
                 ]
             }
         ],
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.3"
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
         },
-        "timestamp": "2025-02-13T17:19:51.302342"
+        "timestamp": "2025-12-17T12:07:13.813792199"
     }
 }

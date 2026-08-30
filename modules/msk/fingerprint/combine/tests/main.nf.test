@@ -1,0 +1,105 @@
+// nf-core modules test fingerprint/combine
+nextflow_process {
+
+    name "Test Process FINGERPRINT_COMBINE"
+    script "../main.nf"
+    process "FINGERPRINT_COMBINE"
+    config "./nextflow.config"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "fingerprint"
+    tag "fingerprint/combine"
+    tag "gbcms"
+    tag "fingerprint/vcfparser"
+
+    test("sarscov2 - bam") {
+
+        setup {
+            run("GBCMS"){
+                script "../../../gbcms/main.nf"
+                process {
+                    """
+                    input[0] = Channel.of(
+                                [
+                                    [ id:'test', sample:'test', pool:'mypool' ], // meta map
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
+                                    file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
+                                    "variant_file.vcf"
+                                ],
+                                [
+                                    [ id:'test2', sample:'test2', pool:'mypool' ], // meta map
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true),
+                                    file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam_bai'], checkIfExists: true),
+                                    file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true),
+                                    "variant_file.vcf"
+                                ],
+                    )
+                    input[1] = file(params.test_data['sarscov2']['genome']['genome_fasta'], checkIfExists: true)
+                    input[2] = file(params.test_data['sarscov2']['genome']['genome_fasta_fai'], checkIfExists: true)
+                    """
+                }
+            }
+            run("FINGERPRINT_VCFPARSER"){
+                script "../../vcfparser/main.nf"
+                process {
+                    """
+                    input[0] = GBCMS.out.variant_file
+                    """
+                }
+            }
+        }
+
+        when {
+            process {
+                """
+                input[0] = FINGERPRINT_VCFPARSER.out.tsv
+                    .map{ meta, tsv ->
+                        println meta
+                        [[id:meta.pool], tsv, meta.id, "hg19","default"]
+                    }.groupTuple(by:[0])
+                input[1] = file("$baseDir/modules/msk/fingerprint/combine/tests/loci_mapping.tsv", checkIfExists:true)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+
+    test("sarscov2 - bam - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [id:"testsample"],
+                    [file(params.test_data['sarscov2']['illumina']['test_single_end_sorted_bam'], checkIfExists: true)],
+                    ["testsample"],
+                    ["hg19"],
+                    ["default"]
+                 ]
+                input[1] = file("$baseDir/modules/msk/fingerprint/combine/tests/loci_mapping.tsv", checkIfExists:true)
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
