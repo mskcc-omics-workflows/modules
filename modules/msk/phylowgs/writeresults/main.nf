@@ -2,8 +2,8 @@ process PHYLOWGS_WRITERESULTS {
     tag "$meta.id"
     label 'process_medium'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5-msk':
-        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5-msk' }"
+        'docker://ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.2-msk':
+        'ghcr.io/mskcc-omics-workflows/phylowgs:v1.5.2-msk' }"
 
     input:
     tuple val(meta), path(trees)
