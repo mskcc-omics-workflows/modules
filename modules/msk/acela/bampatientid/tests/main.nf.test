@@ -1,0 +1,64 @@
+// nf-core modules test acela/bampatientid
+nextflow_process {
+
+    name "Test Process ACELA_BAMPATIENTID"
+    script "../main.nf"
+    process "ACELA_BAMPATIENTID"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "acela"
+    tag "acela/bampatientid"
+
+    // acela-cli talks to a live, internal-only MSKCC endpoint and requires a real session
+    // token, so it cannot run against fixture data in CI. Stub-only test per the MSK
+    // contributing guide's allowance for modules that can't run on small test data.
+    test("cmo patient id - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'patient1', id_type:'cmo' ], // meta map
+                    ['C-ABCDEF', 'C-GHIJKL']
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("dmp patient id - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'patient2', id_type:'dmp' ], // meta map
+                    'P-0001234'
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
