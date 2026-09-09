@@ -1,0 +1,39 @@
+// nf-core modules test gbcmsrs/merge
+nextflow_process {
+
+    name "Test Process GBCMSRS_MERGE"
+    script "../main.nf"
+    process "GBCMSRS_MERGE"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "gbcmsrs"
+    tag "gbcmsrs/merge"
+
+    test("duplex simplex maf") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ], // meta map
+                    [ 'duplex', 'simplex' ],
+                    [
+                        file(params.test_data_mskcc['gbcmsrs']['mfsd_single_maf'], checkIfExists: true),
+                        file(params.test_data_mskcc['gbcmsrs']['mfsd_multi_maf'], checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

@@ -2,7 +2,7 @@
     "neoantigenediting_computefitness - json - stub": {
         "content": [
             [
-                "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+                "versions.yml:md5,b2f0e6179131a713c93afa9a4acf2330"
             ],
             {
                 "0": [
@@ -11,11 +11,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "patient_data_annotated.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_annotated.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+                    "versions.yml:md5,b2f0e6179131a713c93afa9a4acf2330"
                 ],
                 "annotated_output": [
                     [
@@ -23,23 +23,31 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "patient_data_annotated.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "test_annotated.json:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+                    "versions.yml:md5,b2f0e6179131a713c93afa9a4acf2330"
                 ]
             }
         ],
-        "timestamp": "2024-06-19T14:54:10.949451"
+        "timestamp": "2026-08-27T14:32:58.264890185",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "neoantigenediting_computefitness - json": {
         "content": [
             [
-                "versions.yml:md5,d615e02977a234e01fe78e023a51362a"
+                "versions.yml:md5,b2f0e6179131a713c93afa9a4acf2330"
             ],
             "3_OLTS_primary_tumor_annotated.json"
         ],
-        "timestamp": "2024-06-19T14:54:04.735114"
+        "timestamp": "2026-08-27T14:32:52.720923962",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }

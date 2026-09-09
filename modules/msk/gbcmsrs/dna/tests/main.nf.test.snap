@@ -1,0 +1,35 @@
+{
+    "sarscov2 illumina - vcf": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,6263b41090085c08a45c28b2c1010836"
+                    ]
+                ],
+                "1": [
+                    "versions.yml:md5,4bf00939eda0ee2c812c22755a0ebb19"
+                ],
+                "variant_file": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.vcf:md5,6263b41090085c08a45c28b2c1010836"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,4bf00939eda0ee2c812c22755a0ebb19"
+                ]
+            }
+        ],
+        "timestamp": "2026-08-27T10:14:53.601840015",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

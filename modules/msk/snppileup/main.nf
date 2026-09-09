@@ -3,8 +3,8 @@ process SNPPILEUP {
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://mskcc/facets-suite:2.0.9':
-        'docker.io/mskcc/facets-suite:2.0.9' }"
+        'docker://ghcr.io/mskcc-omics-workflows/facets_tools:2.0.10':
+        'ghcr.io/mskcc-omics-workflows/facets_tools:2.0.10' }"
 
     input:
 

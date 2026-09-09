@@ -1,7 +1,7 @@
 process MUTALYZER_RETRIEVER {
     tag "$meta.id"
     label 'process_medium'
-    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.0"
+    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.1"
 
     input:
     tuple val(meta), path(fasta), path(gff3)
