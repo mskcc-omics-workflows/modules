@@ -61,7 +61,7 @@
                     ]
                 ],
                 "3": [
-                    "versions.yml:md5,65c59a80be6223d8e3876206f066b67d"
+                    "versions.yml:md5,36a936fa3ce5bfd17fc3706adbbd60df"
                 ],
                 "mut_fasta": [
                     [
@@ -82,7 +82,7 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,65c59a80be6223d8e3876206f066b67d"
+                    "versions.yml:md5,36a936fa3ce5bfd17fc3706adbbd60df"
                 ],
                 "wt_fasta": [
                     [
@@ -95,7 +95,7 @@
                 ]
             }
         ],
-        "timestamp": "2026-08-25T15:44:42.178280333",
+        "timestamp": "2026-09-09T13:17:21.013179246",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
