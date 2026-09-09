@@ -1,7 +1,7 @@
 process MUTALYZER_NORMALIZER {
     tag "$meta.id"
     label 'process_single'
-    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0"
+    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.0"
 
     input:
     tuple val(meta), val(hgvs_description)

@@ -4,8 +4,8 @@ process NEOSV {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0':
-        'ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0' }"
+        'docker://ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.0':
+        'ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.0' }"
 
     input:
     tuple val(meta),  path(inputBedpe), val(hlaString)

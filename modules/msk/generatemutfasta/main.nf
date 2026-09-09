@@ -1,7 +1,7 @@
 process GENERATEMUTFASTA {
     tag "$meta.id"
     label 'process_single'
-    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.4.0"
+    container "ghcr.io/mskcc-omics-workflows/neoantigen-utils-base:1.6.0"
 
     input:
     tuple val(meta),  path(inputMaf)
@@ -32,13 +32,13 @@ process GENERATEMUTFASTA {
 
     mkdir ${prefix}_out
 
-    MUTALYZER_SETTINGS="\$(pwd)/config.txt" generateMutFasta.py --sample_id ${prefix} \
+    MUTALYZER_SETTINGS="\$(pwd)/config.txt" generate_mut_fasta.py --sample_id ${prefix} \
     --output_dir ${prefix}_out \
     --maf_file ${inputMaf}
 
     cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
-	    generateMutFasta: \$(echo \$(generateMutFasta.py -v))
+	    generateMutFasta: \$(echo \$(generate_mut_fasta.py -v))
 	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
 	END_VERSIONS
     """
@@ -54,7 +54,7 @@ process GENERATEMUTFASTA {
         touch ${prefix}_out/${prefix}_generate_mut_fasta.log
         cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
-	    generateMutFasta: \$(echo \$(generateMutFasta.py -v))
+	    generateMutFasta: \$(echo \$(generate_mut_fasta.py -v))
 	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
 	END_VERSIONS
     """

@@ -3,8 +3,8 @@ process NEOANTIGENEDITING_COMPUTEFITNESS {
     label 'process_medium'
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'docker://ghcr.io/mskcc-omics-workflows/neoantigen-editing:1.3':
-        'ghcr.io/mskcc-omics-workflows/neoantigen-editing:1.3' }"
+        'docker://ghcr.io/mskcc-omics-workflows/neoantigen-editing:1.1':
+        'ghcr.io/mskcc-omics-workflows/neoantigen-editing:1.1' }"
 
     input:
     tuple val(meta),  path(patient_data), path(alignment_file)
