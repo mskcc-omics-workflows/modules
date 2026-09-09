@@ -33,6 +33,29 @@ nextflow_process {
 
     }
 
+    test("PHYLOWGS_CREATEINPUT - with comments - txt") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta map
+                    file(params.test_data_mskcc['neoantigen']['unfilteredmaf_with_comments'], checkIfExists: true),
+                    file(params.test_data_mskcc['neoantigen']['cnvs_txt'], checkIfExists: true)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
     test("PHYLOWGS_CREATEINPUT - txt - stub") {
 
         options "-stub"
