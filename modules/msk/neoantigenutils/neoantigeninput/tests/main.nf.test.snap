@@ -12,7 +12,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                    "versions.yml:md5,a318b0e353ee4f7b3d88cf64420f5118"
                 ],
                 "json": [
                     [
@@ -24,15 +24,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                    "versions.yml:md5,a318b0e353ee4f7b3d88cf64420f5118"
                 ]
             }
         ],
+        "timestamp": "2026-08-25T16:05:57.630782228",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-03-14T16:09:55.398027522"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "neoantigenutils_neoantigeninput - bedpe,json,tsv": {
         "content": [
@@ -43,11 +43,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_input.json:md5,ba459d11af4195b9cbc2e3ac63792893"
+                        "test_patient_test_input.json:md5,9421a1057318281cbce3b2d080a4919b"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                    "versions.yml:md5,a318b0e353ee4f7b3d88cf64420f5118"
                 ],
                 "json": [
                     [
@@ -55,19 +55,19 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_input.json:md5,ba459d11af4195b9cbc2e3ac63792893"
+                        "test_patient_test_input.json:md5,9421a1057318281cbce3b2d080a4919b"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                    "versions.yml:md5,a318b0e353ee4f7b3d88cf64420f5118"
                 ]
             }
         ],
+        "timestamp": "2026-08-25T16:01:07.746364516",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-03-14T16:06:45.523848459"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "neoantigenutils_neoantigeninput - json,tsv": {
         "content": [
@@ -78,11 +78,11 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_input.json:md5,8b26c4e2d6da8a5c5d73c9a26e295fc8"
+                        "test_patient_test_input.json:md5,51695207f45b5bbd64d5e80ab67965ba"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                    "versions.yml:md5,a318b0e353ee4f7b3d88cf64420f5118"
                 ],
                 "json": [
                     [
@@ -90,18 +90,18 @@
                             "id": "test",
                             "single_end": false
                         },
-                        "test_patient_test_input.json:md5,8b26c4e2d6da8a5c5d73c9a26e295fc8"
+                        "test_patient_test_input.json:md5,51695207f45b5bbd64d5e80ab67965ba"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,54d926e53336463100f72cc431eeaf09"
+                    "versions.yml:md5,a318b0e353ee4f7b3d88cf64420f5118"
                 ]
             }
         ],
+        "timestamp": "2026-08-25T16:05:50.440683286",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.5"
-        },
-        "timestamp": "2025-03-14T16:09:43.102608135"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }

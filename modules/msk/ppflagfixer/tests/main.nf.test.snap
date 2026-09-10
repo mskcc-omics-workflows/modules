@@ -11,7 +11,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                    "versions.yml:md5,f72b8ff5ced3212058437ae6f3d854f6"
                 ],
                 "ppflag_bam": [
                     [
@@ -22,15 +22,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                    "versions.yml:md5,f72b8ff5ced3212058437ae6f3d854f6"
                 ]
             }
         ],
+        "timestamp": "2026-08-26T13:52:37.085780238",
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.04.2"
-        },
-        "timestamp": "2024-02-26T23:05:23.642445"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "ppflagfixer - bam - stub": {
         "content": [
@@ -44,7 +44,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                    "versions.yml:md5,f72b8ff5ced3212058437ae6f3d854f6"
                 ],
                 "ppflag_bam": [
                     [
@@ -55,15 +55,15 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                    "versions.yml:md5,f72b8ff5ced3212058437ae6f3d854f6"
                 ]
             }
         ],
+        "timestamp": "2026-08-26T13:52:56.942210569",
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.04.2"
-        },
-        "timestamp": "2024-02-26T23:06:14.360871"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "ppflagfixer - tumor bam": {
         "content": [
@@ -77,7 +77,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                    "versions.yml:md5,f72b8ff5ced3212058437ae6f3d854f6"
                 ],
                 "ppflag_bam": [
                     [
@@ -88,14 +88,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ed3820a8eb6f0db2010ddec9aefa7249"
+                    "versions.yml:md5,f72b8ff5ced3212058437ae6f3d854f6"
                 ]
             }
         ],
+        "timestamp": "2026-08-26T13:52:50.346741597",
         "meta": {
-            "nf-test": "0.8.4",
-            "nextflow": "23.04.2"
-        },
-        "timestamp": "2024-02-26T23:06:08.243018"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }
