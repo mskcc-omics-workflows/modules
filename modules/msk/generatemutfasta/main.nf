@@ -54,7 +54,7 @@ process GENERATEMUTFASTA {
         touch ${prefix}_out/${prefix}_generate_mut_fasta.log
         cat <<-END_VERSIONS > versions.yml
 	"${task.process}":
-	    generateMutFasta: \$(echo \$(generate_mut_fasta.py -v))
+	    generateMutFasta: \$(echo \$(generateMutFasta.py -v))
 	    mutalyzer: \$(echo \$(mutalyzer_normalizer -v | tr '\n' ' ' | awk '{print \$3}'))
 	END_VERSIONS
     """
