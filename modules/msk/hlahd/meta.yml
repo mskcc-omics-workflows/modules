@@ -1,0 +1,67 @@
+name: "hlahd"
+description: HLA typing from paired-end FASTQ reads using HLA-HD
+keywords:
+  - HLA
+  - immunology
+  - typing
+  - genomics
+tools:
+  - "hlahd":
+      description:
+        "HLA-HD (HLA typing from High-quality Dictionary) performs HLA typing
+        from paired-end FASTQ reads using bowtie2 alignment against HLA allele dictionaries."
+      homepage: "https://w3.genome.med.kyoto-u.ac.jp/HLA-HD/"
+      documentation: "https://w3.genome.med.kyoto-u.ac.jp/HLA-HD/"
+      licence:
+        - "ACADEMIC SOFTWARE LICENSE"
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1', single_end:false ]`
+    - fastq_1:
+        type: file
+        description: First read of paired-end FASTQ input
+        pattern: "*.{fastq,fastq.gz,fq,fq.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_1930
+    - fastq_2:
+        type: file
+        description: Second read of paired-end FASTQ input
+        pattern: "*.{fastq,fastq.gz,fq,fq.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_1930
+output:
+  result:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - ${prefix}/result/${prefix}_final.result.txt:
+          type: file
+          description: Final HLA typing result file containing best-call alleles for all loci
+          pattern: "**/result/*_final.result.txt"
+  result_per_locus:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - ${prefix}/result/${prefix}_*.est.txt:
+          type: file
+          description: Per-locus HLA estimation files (one file per HLA gene)
+          pattern: "**/result/*_*.est.txt"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"

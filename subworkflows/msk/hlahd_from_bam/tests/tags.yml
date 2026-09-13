@@ -1,0 +1,3 @@
+subworkflows/hlahd_from_bam:
+  - subworkflows/msk/hlahd_from_bam/**
+  - modules/msk/hlahd/**

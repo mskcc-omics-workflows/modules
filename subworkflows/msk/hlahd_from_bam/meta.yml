@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "hlahd_from_bam"
+description: |
+  Extract the HLA region from a coordinate-sorted BAM file, optionally revert
+  base quality score recalibration with GATK4 RevertSam, convert to paired
+  FASTQ files with samtools fastq, and run HLA-HD for high-resolution HLA
+  typing.
+keywords:
+  - HLA
+  - typing
+  - BAM
+  - immunology
+  - samtools
+  - gatk4
+components:
+  - samtools/view:
+      git_remote: https://github.com/nf-core/modules.git
+  - gatk4/revertsam:
+      git_remote: https://github.com/nf-core/modules.git
+  - samtools/collate:
+      git_remote: https://github.com/nf-core/modules.git
+  - samtools/fastq:
+      git_remote: https://github.com/nf-core/modules.git
+  - hlahd
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. [ id:'sample_01', single_end:false ]
+    - bam:
+        type: file
+        description: |
+          Input BAM file. Must be coordinate-sorted and indexed.
+        pattern: "*.bam"
+    - bai:
+        type: file
+        description: BAM index file.
+        pattern: "*.bai"
+  - skip_revert_sam:
+      type: boolean
+      description: |
+        When true, skip the GATK4 RevertSam step. Set to true if the BAM was
+        not processed with base quality score recalibration (BQSR), or if
+        original base qualities have already been restored.
+output:
+  - result:
+      - meta:
+          type: map
+          description: Groovy Map containing sample information.
+      - "**/result/*_final.result.txt":
+          type: file
+          description: |
+            Tab-separated HLA allele calls for all typed loci produced by
+            HLA-HD. One file per sample.
+          pattern: "**/result/*_final.result.txt"
+  - result_per_locus:
+      - meta:
+          type: map
+          description: Groovy Map containing sample information.
+      - "**/result/*_*.est.txt":
+          type: file
+          description: Per-locus HLA estimation files produced by HLA-HD.
+          pattern: "**/result/*_*.est.txt"
+  - versions:
+      - "versions.yml":
+          type: file
+          description: File containing software versions for all tools used.
+          pattern: "versions.yml"
+authors:
+  - "@johnoooh"
+maintainers:
+  - "@johnoooh"
