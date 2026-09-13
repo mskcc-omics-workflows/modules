@@ -20,9 +20,15 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def xms = Math.max(256, (task.memory.toMega() / 4) as int)
+    def xmx = Math.max(1, task.memory.toGiga() as int)
 
     """
-    java -Xms${task.memory.toMega()/4}m -Xmx${task.memory.toGiga()}g -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar --filename ${input_maf} --output-filename ${meta.id}-annotated.maf
+    java -Xms${xms}m -Xmx${xmx}g \\
+        -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar \\
+        --filename ${input_maf} \\
+        --output-filename ${prefix}-annotated.maf \\
+        ${args}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
@@ -31,15 +37,14 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    touch ${meta.id}-annotated.maf
+    touch ${prefix}-annotated.maf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotation pipeline version 1.0.5
+        genomenexus: 'annotationpipeline version 1.0.5'
     END_VERSIONS
     """
 }
