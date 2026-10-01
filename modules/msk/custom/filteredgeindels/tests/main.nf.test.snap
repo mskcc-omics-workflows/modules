@@ -1,0 +1,125 @@
+{
+    "synthetic - bam - PR #288 edge indels": {
+        "content": [
+            "c27c8164d9bffebe7093d3f947c7d075",
+            [
+                [
+                    {
+                        "id": "test"
+                    },
+                    "test.edge_indel_counts.tsv:md5,7c54fcd1376148f087a2b6266c23843d"
+                ]
+            ],
+            [
+                "versions.yml:md5,fa72999f3ed9f48e4c127c07e1c24871"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "26.04.6"
+        },
+        "timestamp": "2026-10-01T14:16:52.555457"
+    },
+    "synthetic - bam - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.edge_indel_qnames.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "3": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.edge_indel_counts.tsv:md5,84cb2674553b12475c805578a54e4dcf"
+                    ]
+                ],
+                "4": [
+                    "versions.yml:md5,fa72999f3ed9f48e4c127c07e1c24871"
+                ],
+                "bai": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam.bai:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "bam": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.bam:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "counts": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.edge_indel_counts.tsv:md5,84cb2674553b12475c805578a54e4dcf"
+                    ]
+                ],
+                "qnames": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.edge_indel_qnames.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,fa72999f3ed9f48e4c127c07e1c24871"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "26.04.6"
+        },
+        "timestamp": "2026-10-01T14:17:07.754857"
+    },
+    "argos - bam - real ABRA2 output, nothing flagged": {
+        "content": [
+            "a80204d248bb85d4a95d115f6c3c42e8",
+            [
+                [
+                    {
+                        "id": "argos_normal"
+                    },
+                    "argos_normal.edge_indel_counts.tsv:md5,70cc4637f3cd1e40c457f1f78a7fdf46"
+                ]
+            ],
+            [
+                "versions.yml:md5,fa72999f3ed9f48e4c127c07e1c24871"
+            ]
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "26.04.6"
+        },
+        "timestamp": "2026-10-01T14:17:01.082559"
+    }
+}
