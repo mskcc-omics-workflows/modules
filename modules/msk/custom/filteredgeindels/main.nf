@@ -30,6 +30,7 @@ process CUSTOM_FILTEREDGEINDELS {
     // (both mates, secondary, supplementary) is dropped so no orphaned mates remain.
     def edge_indel_expr = 'cigar =~ "^[0-9]+(I[0-9]+D|D[0-9]+I|S[0-9]+[ID])" || cigar =~ "(I[0-9]+D|D[0-9]+I|[ID][0-9]+S)$"'
     """
+    set -o pipefail
     samtools view -@ ${task.cpus} -e '${edge_indel_expr}' ${bam} | cut -f1 > flagged_records.txt
     sort -u flagged_records.txt > ${prefix}.edge_indel_qnames.txt
 
