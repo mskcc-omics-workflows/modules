@@ -41,9 +41,10 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
+                // The HTML report embeds the run date, so it cannot be md5-snapshotted.
+                { assert path(process.out.report.get(0).get(1)).text.contains("HLA-HD") },
                 { assert snapshot(
                     process.out.tsv,
-                    process.out.report,
                     process.out.versions
                 ).match() }
             )
