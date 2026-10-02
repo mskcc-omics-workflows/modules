@@ -24,13 +24,13 @@ input:
         type: directory
         description: Directory containing HLA-HD's <sample>_final.result.txt and <sample>_{A,B,C}.est.txt
         pattern: "*"
-  - - pgroup_file:
-        type: file
-        description: IMGT wmda/hla_nom_p.txt P-group reference table
-        pattern: "*.txt"
+  - pgroup_file:
+      type: file
+      description: IMGT wmda/hla_nom_p.txt P-group reference table
+      pattern: "*.txt"
 output:
-  - tsv:
-      - meta:
+  tsv:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -39,8 +39,8 @@ output:
           type: file
           description: Per-allele annotated TSV with P-group and quality-flag columns
           pattern: "*_annotated.tsv"
-  - report:
-      - meta:
+  report:
+    - - meta:
           type: map
           description: |
             Groovy Map containing sample information
@@ -51,13 +51,13 @@ output:
             Self-contained HTML report for the sample. Optional — pass `--skip_html`
             via `task.ext.args` to skip generating it.
           pattern: "*_report.html"
-  - versions:
-      - versions.yml:
-          type: file
-          description: File containing software versions
-          pattern: "versions.yml"
-          ontologies:
-            - edam: http://edamontology.org/format_3750
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750
 authors:
   - "@johnoooh"
 maintainers:
