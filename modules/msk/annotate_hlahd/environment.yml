@@ -4,4 +4,9 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - "ANNOTATE_HLAHD=HERE"
+  - conda-forge::python=3.11.*
+  - conda-forge::pip=24.*
+  - conda-forge::pandas=2.*
+  - conda-forge::jinja2=3.1.*
+  - pip:
+      - git+https://github.com/mskcc/hla-annotate.git@v1.0.0
