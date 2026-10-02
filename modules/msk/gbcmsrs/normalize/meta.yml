@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
+name: "gbcmsrs_normalize"
+description:
+  Normalize variants (left-align and validate REF against the reference
+  genome) without counting, using gbcms
+keywords:
+  - normalize
+  - variants
+  - vcf
+  - maf
+tools:
+  - "gbcms":
+      description:
+        "A high-performance, orientation-aware genotype counting system for
+        genomic variants (Rust rewrite of GetBaseCountsMultiSample)"
+      homepage: "https://github.com/msk-access/gbcms"
+      documentation: "https://msk-access.github.io/gbcms/"
+      tool_dev_url: "https://github.com/msk-access/gbcms"
+      licence: ["AGPL-3.0"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test' ]`
+    - variants:
+        type: file
+        description: Input variant file in VCF or MAF format
+        pattern: "*.{vcf,maf}"
+        ontologies: []
+  - fasta:
+      type: file
+      description: Reference genome FASTA file
+      pattern: "*.{fasta,fa}"
+      ontologies: []
+  - fasta_fai:
+      type: file
+      description: Index of the reference genome FASTA file
+      pattern: "*.fai"
+      ontologies: []
+output:
+  normalized:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test' ]`
+      - "*.normalized.tsv":
+          type: file
+          description: TSV file with original and left-aligned/normalized variant coordinates
+          pattern: "*.normalized.tsv"
+          ontologies:
+            - edam: http://edamontology.org/format_3475 # TSV
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@shahr"
+maintainers:
+  - "@buehlere"
+  - "@shahr"

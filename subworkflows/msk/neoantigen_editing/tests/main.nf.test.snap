@@ -2,21 +2,29 @@
     "neoantigen_editing - json - stub": {
         "content": [
             [
-                "versions.yml:md5,03ac4fd1eeae826979dfbed8a7b3186c",
-                "versions.yml:md5,3ce37ca54350a7f641e05f0de9f87f7f"
+                "versions.yml:md5,7d037dfae9ed6e2878e32bd736bfa5d1",
+                "versions.yml:md5,8c6e9940feb41217e6780504db4156a2"
             ],
-            "patient_data_annotated.json"
+            "test_annotated.json"
         ],
-        "timestamp": "2024-06-19T14:59:58.874516"
+        "timestamp": "2026-08-27T14:33:13.292443979",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "neoantigen_editing - json": {
         "content": [
             [
-                "versions.yml:md5,03ac4fd1eeae826979dfbed8a7b3186c",
-                "versions.yml:md5,3ce37ca54350a7f641e05f0de9f87f7f"
+                "versions.yml:md5,7d037dfae9ed6e2878e32bd736bfa5d1",
+                "versions.yml:md5,8c6e9940feb41217e6780504db4156a2"
             ],
             "3_OLTS_primary_tumor_annotated.json"
         ],
-        "timestamp": "2024-06-19T14:59:52.198482"
+        "timestamp": "2026-08-27T14:33:06.586033362",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }

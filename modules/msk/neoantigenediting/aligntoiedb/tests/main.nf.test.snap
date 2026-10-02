@@ -2,7 +2,7 @@
     "neoantigenediting_aligntoiedb - json - stub": {
         "content": [
             [
-                "versions.yml:md5,ee206e836fcb1b31809f63f2ffa49519"
+                "versions.yml:md5,7b9f002bbba367b73f0a5f713c40d927"
             ],
             {
                 "0": [
@@ -15,7 +15,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,ee206e836fcb1b31809f63f2ffa49519"
+                    "versions.yml:md5,7b9f002bbba367b73f0a5f713c40d927"
                 ],
                 "iedb_alignment": [
                     [
@@ -27,19 +27,27 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,ee206e836fcb1b31809f63f2ffa49519"
+                    "versions.yml:md5,7b9f002bbba367b73f0a5f713c40d927"
                 ]
             }
         ],
-        "timestamp": "2024-06-19T14:54:25.768151"
+        "timestamp": "2026-08-27T14:34:20.912491268",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     },
     "neoantigenediting_aligntoiedb - json": {
         "content": [
             [
-                "versions.yml:md5,ee206e836fcb1b31809f63f2ffa49519"
+                "versions.yml:md5,7b9f002bbba367b73f0a5f713c40d927"
             ],
             "iedb_alignments_3-OLTS.txt"
         ],
-        "timestamp": "2024-06-19T14:54:19.606216"
+        "timestamp": "2026-08-27T14:34:15.593062961",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
     }
 }
