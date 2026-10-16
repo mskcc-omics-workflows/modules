@@ -1,4 +1,16 @@
 {
+    "test extended mode": {
+        "content": [
+            [
+                "versions.yml:md5,634e9170473741b9597e150563334f8d"
+            ]
+        ],
+        "timestamp": "2026-10-16T12:04:25.689179",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
+    },
     "test normal ": {
         "content": [
             {
@@ -9,11 +21,11 @@
                             "case_id": "sample1",
                             "control_id": "sample2"
                         },
-                        "test-annotated.maf:md5,a8b47024c381dc8f2e5b2c0da0b24029"
+                        "test-annotated.maf:md5,4aaecb28ceb2a7c40aba646ec4c78221"
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
+                    "versions.yml:md5,634e9170473741b9597e150563334f8d"
                 ],
                 "annotated_maf": [
                     [
@@ -22,19 +34,19 @@
                             "case_id": "sample1",
                             "control_id": "sample2"
                         },
-                        "test-annotated.maf:md5,a8b47024c381dc8f2e5b2c0da0b24029"
+                        "test-annotated.maf:md5,4aaecb28ceb2a7c40aba646ec4c78221"
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
+                    "versions.yml:md5,634e9170473741b9597e150563334f8d"
                 ]
             }
         ],
+        "timestamp": "2026-10-16T12:02:58.329805",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-06-10T11:03:28.679902"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
     },
     "test normal - stub": {
         "content": [
@@ -50,7 +62,7 @@
                     ]
                 ],
                 "1": [
-                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
+                    "versions.yml:md5,634e9170473741b9597e150563334f8d"
                 ],
                 "annotated_maf": [
                     [
@@ -63,14 +75,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,3eec02db5105ee47caf6ea6efb53f12c"
+                    "versions.yml:md5,634e9170473741b9597e150563334f8d"
                 ]
             }
         ],
+        "timestamp": "2026-10-16T12:04:37.689573",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-06-09T17:03:25.918345"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
     }
 }
