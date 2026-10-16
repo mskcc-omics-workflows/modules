@@ -4,8 +4,8 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
 
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.5':
-        'ghcr.io/msk-access/genomenexus_annotation-pipeline:1.0.5' }"
+        'ghcr.io/mskcc-omics-workflows/genomenexus_annotation-pipeline:1.0.8':
+        'ghcr.io/mskcc-omics-workflows/genomenexus_annotation-pipeline:1.0.8' }"
 
     input:
     tuple val(meta), path(input_maf)
@@ -20,26 +20,31 @@ process GENOMENEXUS_ANNOTATIONPIPELINE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def xms = Math.max(256, (task.memory.toMega() / 4) as int)
+    def xmx = Math.max(1, task.memory.toGiga() as int)
 
     """
-    java -Xms${task.memory.toMega()/4}m -Xmx${task.memory.toGiga()}g -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar --filename ${input_maf} --output-filename ${meta.id}-annotated.maf
+    java -Xms${xms}m -Xmx${xmx}g \\
+        -jar /genome-nexus-annotation-pipeline/annotationPipeline/target/annotationPipeline.jar \\
+        --filename ${input_maf} \\
+        --output-filename ${prefix}-annotated.maf \\
+        ${args}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotationpipeline version 1.0.5'
+        genomenexus: 'annotationpipeline version 1.0.8'
     END_VERSIONS
     """
 
     stub:
-    def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
 
     """
-    touch ${meta.id}-annotated.maf
+    touch ${prefix}-annotated.maf
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        genomenexus: 'annotation pipeline version 1.0.5
+        genomenexus: 'annotationpipeline version 1.0.8'
     END_VERSIONS
     """
 }
