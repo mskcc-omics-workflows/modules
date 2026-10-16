@@ -20,6 +20,9 @@ process HLAHD {
 
     script:
     def args        = task.ext.args  ?: ''
+    // HLA-HD -m is the minimum read LENGTH (not a read count or mapping quality).
+    // Reads shorter than this are discarded, so setting it above the input read
+    // length silently drops every read. Override via ext.args2 only for short reads.
     def min_read    = task.ext.args2 ?: '100'
     prefix          = task.ext.prefix ?: "${meta.id}"
     def install_dir = '/opt/hlahd/current'

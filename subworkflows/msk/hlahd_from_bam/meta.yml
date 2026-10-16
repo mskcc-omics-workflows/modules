@@ -5,6 +5,15 @@ description: |
   base quality score recalibration with GATK4 RevertSam, convert to paired
   FASTQ files with samtools fastq, and run HLA-HD for high-resolution HLA
   typing.
+
+  Configuration notes:
+    - SAMTOOLS_VIEW `ext.args` must restrict to the HLA region (e.g.
+      `-b chr6:28000000-34000000`, or `-b 6:28000000-34000000` for b37
+      contig names); without it HLA-HD runs on the whole BAM.
+    - Do not pass `-N` in SAMTOOLS_FASTQ `ext.args`: `/1` `/2` read-name
+      suffixes break HLA-HD mate pairing and produce false allele calls.
+    - HLAHD `ext.args2` sets HLA-HD `-m`, the minimum read LENGTH (default
+      100), not a read count; see the hlahd module.
 keywords:
   - HLA
   - typing

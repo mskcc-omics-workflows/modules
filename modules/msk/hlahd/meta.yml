@@ -1,5 +1,16 @@
 name: "hlahd"
-description: HLA typing from paired-end FASTQ reads using HLA-HD
+description: |
+  HLA typing from paired-end FASTQ reads using HLA-HD.
+
+  Options:
+    - `ext.args2` sets HLA-HD `-m`, the minimum read LENGTH (default 100).
+      Reads shorter than this are discarded; a value above the input read
+      length drops every read. It is not a read count or quality threshold.
+    - `ext.args` is appended to the hlahd.sh command line.
+
+  Input FASTQ read names must NOT carry `/1` `/2` suffixes (e.g. from
+  `samtools fastq -N`): HLA-HD pairs mates by read name, and suffixed names
+  break pairing and produce false allele calls.
 keywords:
   - HLA
   - immunology

@@ -61,6 +61,8 @@ workflow HLAHD_FROM_BAM {
     // MODULE: Convert BAM to paired FASTQ files.
     // SAMTOOLS_FASTQ emits .out.fastq as [ meta, [fq1, fq2] ]; unpack into
     // separate paths so HLAHD receives the three-element tuple it expects.
+    // Do NOT pass -N in SAMTOOLS_FASTQ's ext.args: /1 /2 read-name suffixes
+    // break HLA-HD's mate pairing and produce false allele calls.
     //
     SAMTOOLS_FASTQ(
         SAMTOOLS_COLLATE.out.bam,
