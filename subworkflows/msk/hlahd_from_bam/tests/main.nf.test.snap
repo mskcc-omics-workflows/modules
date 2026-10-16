@@ -1,0 +1,65 @@
+{
+    "hlahd_from_bam - bam - stub": {
+        "content": [
+            {
+                "id": "test_sample",
+                "single_end": false
+            },
+            "test_sample_final.result.txt",
+            [
+                "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
+            ]
+        ],
+        "timestamp": "2026-04-27T18:18:22.295121",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "hlahd_from_bam - bam - skip revert sam - result": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test_sample",
+                        "single_end": false
+                    },
+                    [
+                        "A\tHLA-A*01:01:01\tHLA-A*29:02:01"
+                    ]
+                ]
+            ],
+            [
+                "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
+            ]
+        ],
+        "timestamp": "2026-05-14T11:55:00.000000",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    },
+    "hlahd_from_bam - bam - with revert sam - result": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "test_sample",
+                        "single_end": false
+                    },
+                    [
+                        "A\tHLA-A*01:01:01\tHLA-A*29:02:01"
+                    ]
+                ]
+            ],
+            [
+                "versions.yml:md5,e0264ab44efbd0fd97853a90160075a1"
+            ]
+        ],
+        "timestamp": "2026-05-14T11:55:00.000000",
+        "meta": {
+            "nf-test": "0.9.4",
+            "nextflow": "25.10.4"
+        }
+    }
+}
