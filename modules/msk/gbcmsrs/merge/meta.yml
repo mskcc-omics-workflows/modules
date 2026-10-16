@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
+name: "gbcmsrs_merge"
+description:
+  Merge per-BAM-type genotyped MAFs (e.g. duplex/simplex) produced by gbcms
+  into a single type-prefixed output
+keywords:
+  - merge
+  - genotyping
+  - maf
+  - duplex
+tools:
+  - "gbcms":
+      description:
+        "A high-performance, orientation-aware genotype counting system for
+        genomic variants (Rust rewrite of GetBaseCountsMultiSample)"
+      homepage: "https://github.com/msk-access/gbcms"
+      documentation: "https://msk-access.github.io/gbcms/"
+      tool_dev_url: "https://github.com/msk-access/gbcms"
+      licence: ["AGPL-3.0"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'test' ]`
+    - types:
+        type: string
+        description:
+          List of BAM-type labels (e.g. `['duplex', 'simplex']`), parallel
+          to `mafs`, used to prefix the count columns of each input MAF. At least 2
+          required.
+    - mafs:
+        type: file
+        description:
+          List of genotyped MAF files to merge, parallel to `types`. At least
+          2 required.
+        pattern: "*.maf"
+        ontologies: []
+output:
+  merged:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'test' ]`
+      - "*.merged.maf":
+          type: file
+          description:
+            Outer-joined MAF with type-prefixed count columns from all input
+            MAFs
+          pattern: "*.merged.maf"
+          ontologies: []
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@shahr"
+maintainers:
+  - "@buehlere"
+  - "@shahr"

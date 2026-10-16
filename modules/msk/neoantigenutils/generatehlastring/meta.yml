@@ -21,8 +21,11 @@ input:
           e.g. `[ id:'sample1', single_end:false ]`
     - inputHLA:
         type: file
-        description: Winners HLA file from polysolver
-        pattern: "*.{hla.txt}"
+        description: |
+          HLA typing result. Either a POLYSOLVER winners file (winners.hla.txt) or an
+          HLA-HD final result file (*_final.result.txt). The format is detected from
+          the file contents; no flag is needed.
+        pattern: "*.{txt}"
 output:
   - hlastring:
       - meta:

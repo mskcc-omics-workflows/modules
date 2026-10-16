@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/yaml-schema.json
+name: "gbcmsrs_buildgtfcache"
+description:
+  Pre-build the gbcms GTF index cache once for a cohort so that per-sample
+  `gbcms rna` runs skip re-parsing the GTF
+keywords:
+  - cache
+  - gtf
+  - rna
+  - index
+tools:
+  - "gbcms":
+      description:
+        "A high-performance, orientation-aware genotype counting system for
+        genomic variants (Rust rewrite of GetBaseCountsMultiSample)"
+      homepage: "https://github.com/msk-access/gbcms"
+      documentation: "https://msk-access.github.io/gbcms/"
+      tool_dev_url: "https://github.com/msk-access/gbcms"
+      licence: ["AGPL-3.0"]
+      identifier: ""
+
+input:
+  - variants:
+      type: file
+      description:
+        Variant file (VCF/MAF) for the cohort. Only its chromosome set is
+        used, and it must be the same variant file the per-sample `gbcms rna` runs use
+        so the cache key lines up.
+      pattern: "*.{vcf,maf}"
+      ontologies: []
+  - gtf:
+      type: file
+      description: GTF annotation file (Ensembl/GENCODE)
+      pattern: "*.gtf"
+      ontologies: []
+output:
+  cache_dir:
+    - gbcms_gtf_cache:
+        type: directory
+        description:
+          Directory containing the serialized GTF index cache. Point every
+          per-sample `gbcms rna --gtf-cache-dir` at this same directory.
+        pattern: "gbcms_gtf_cache"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750 # YAML
+authors:
+  - "@shahr"
+maintainers:
+  - "@shahr"

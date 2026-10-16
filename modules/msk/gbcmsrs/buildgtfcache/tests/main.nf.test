@@ -1,0 +1,35 @@
+// nf-core modules test gbcmsrs/buildgtfcache
+nextflow_process {
+
+    name "Test Process GBCMSRS_BUILDGTFCACHE"
+    script "../main.nf"
+    process "GBCMSRS_BUILDGTFCACHE"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "gbcmsrs"
+    tag "gbcmsrs/buildgtfcache"
+
+    test("sarscov2 illumina - vcf gtf") {
+
+        when {
+            process {
+                """
+                input[0] = file(params.test_data['sarscov2']['illumina']['test_vcf'], checkIfExists: true)
+                input[1] = file(params.test_data['sarscov2']['genome']['genome_gtf'], checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            def idx_files = file(process.out.cache_dir[0]).listFiles().findAll { it.name.endsWith('.idx') }
+            assertAll(
+                { assert process.success },
+                { assert idx_files.size() == 1 },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+}
