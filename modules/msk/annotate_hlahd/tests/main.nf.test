@@ -87,7 +87,57 @@ nextflow_process {
         }
     }
 
-    // Test 3: stub run (no container needed)
+    // Test 3: hla-annotate >= 1.0.1 edge cases: homozygous A call, incomplete B
+    // coverage (incomp.7 and incomp.0), and a "No candidate." token in the C est.
+    test("annotate_hlahd - edge cases - homozygous, incomplete coverage, No candidate") {
+
+        config "./nextflow.config"
+
+        when {
+            process {
+                """
+                def resultDir = File.createTempDir()
+                new File(resultDir, "edge_sample_final.result.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['edge_final_result_txt'], checkIfExists: true).bytes
+                new File(resultDir, "edge_sample_A.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['edge_est_a_txt'], checkIfExists: true).bytes
+                new File(resultDir, "edge_sample_B.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['edge_est_b_txt'], checkIfExists: true).bytes
+                new File(resultDir, "edge_sample_C.est.txt")
+                    .bytes = file(params.test_data_mskcc['annotate_hlahd']['edge_est_c_txt'], checkIfExists: true).bytes
+
+                input[0] = [
+                    [ id:'edge_sample' ],
+                    file(resultDir)
+                ]
+                input[1] = file(params.test_data_mskcc['annotate_hlahd']['pgroup_file'], checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            def lines = path(process.out.tsv.get(0).get(1)).readLines()
+            def hdr   = lines[0].split('\t')
+            def rows  = lines.drop(1).collect { l -> [hdr, l.split('\t', -1)].transpose().collectEntries() }
+            def row  = { locus, pos -> rows.find { it.locus == locus && it.allele_position == pos } }
+            assertAll(
+                { assert process.success },
+                // homozygous: both A rows kept with the same allele
+                { assert row('A', 'allele1').allele == 'HLA-A*02:01:01' },
+                { assert row('A', 'allele2').allele == 'HLA-A*02:01:01' },
+                // any incomp status is flagged; incomplete_bp sums exon 2+3
+                { assert row('B', 'allele1').incomplete_coverage == 'True' },
+                { assert row('B', 'allele1').incomplete_bp == '7' },
+                { assert row('B', 'allele2').incomplete_coverage == 'True' },
+                { assert row('B', 'allele2').incomplete_bp == '0' },
+                // "No candidate." in est.txt does not fail the sample
+                { assert row('C', 'allele1').allele == 'HLA-C*07:02:01' },
+                { assert snapshot(process.out.tsv, process.out.versions).match() }
+            )
+        }
+    }
+
+    // Test 4: stub run (no container needed)
     test("annotate_hlahd - stub") {
 
         options "-stub"

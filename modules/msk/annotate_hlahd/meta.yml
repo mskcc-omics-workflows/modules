@@ -37,7 +37,7 @@ output:
             e.g. `[ id:'sample1' ]`
       - ${prefix}_annotated.tsv:
           type: file
-          description: Per-allele annotated TSV with P-group and quality-flag columns
+          description: Per-allele annotated TSV with P-group, quality-flag and exon 2/3 coverage columns (incl. exon2_incomplete, exon3_incomplete, incomplete_bp, incomplete_coverage)
           pattern: "*_annotated.tsv"
   report:
     - - meta:

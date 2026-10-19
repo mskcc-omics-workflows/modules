@@ -9,4 +9,4 @@ dependencies:
   - conda-forge::pandas=2.*
   - conda-forge::jinja2=3.1.*
   - pip:
-      - git+https://github.com/mskcc/hla-annotate.git@v1.0.0
+      - git+https://github.com/mskcc/hla-annotate.git@v1.0.1

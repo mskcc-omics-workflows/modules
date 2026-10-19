@@ -1,4 +1,24 @@
 {
+    "annotate_hlahd - edge cases - homozygous, incomplete coverage, No candidate": {
+        "content": [
+            [
+                [
+                    {
+                        "id": "edge_sample"
+                    },
+                    "edge_sample_annotated.tsv:md5,c75a76ff17302280c71d3ccd0401df3d"
+                ]
+            ],
+            [
+                "versions.yml:md5,e2b83c9fd0be17f1878e1c35c3814b46"
+            ]
+        ],
+        "timestamp": "2026-10-19T09:48:22.739145",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
+    },
     "annotate_hlahd - skip_html - no report emitted": {
         "content": [
             [
@@ -6,30 +26,30 @@
                     {
                         "id": "test_sample"
                     },
-                    "test_sample_annotated.tsv:md5,a8636bc09b81afefdd01e388317b1978"
+                    "test_sample_annotated.tsv:md5,fe2f144ec670dabbc7bf45060ba362d5"
                 ]
             ],
             [
-                "versions.yml:md5,7303efd9ae753a785695afaae7bca831"
+                "versions.yml:md5,e2b83c9fd0be17f1878e1c35c3814b46"
             ]
         ],
+        "timestamp": "2026-10-19T09:47:14.918135",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
-        },
-        "timestamp": "2026-08-26T17:30:52.702765"
+            "nextflow": "26.04.1"
+        }
     },
     "annotate_hlahd - stub": {
         "content": [
             [
-                "versions.yml:md5,e1c7ca2bd9524d224402cef26a5fca25"
+                "versions.yml:md5,862ea4139c34d6b397a05f11be134fcf"
             ]
         ],
+        "timestamp": "2026-10-19T09:47:32.777374",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
-        },
-        "timestamp": "2026-08-26T17:30:57.636612"
+            "nextflow": "26.04.1"
+        }
     },
     "annotate_hlahd - result_dir - annotated tsv and html": {
         "content": [
@@ -38,17 +58,17 @@
                     {
                         "id": "test_sample"
                     },
-                    "test_sample_annotated.tsv:md5,a8636bc09b81afefdd01e388317b1978"
+                    "test_sample_annotated.tsv:md5,fe2f144ec670dabbc7bf45060ba362d5"
                 ]
             ],
             [
-                "versions.yml:md5,7303efd9ae753a785695afaae7bca831"
+                "versions.yml:md5,e2b83c9fd0be17f1878e1c35c3814b46"
             ]
         ],
+        "timestamp": "2026-10-19T09:47:01.678833",
         "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "25.10.3"
-        },
-        "timestamp": "2026-10-02T11:43:11.198176"
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.1"
+        }
     }
 }
