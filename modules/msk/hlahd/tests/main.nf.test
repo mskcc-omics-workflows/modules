@@ -10,6 +10,8 @@ nextflow_process {
 
     test("hlahd - fastq pair - result txt") {
 
+        config "./nextflow.config"
+
         when {
             process {
                 """
@@ -39,6 +41,7 @@ nextflow_process {
 
     test("hlahd - fastq pair - stub") {
 
+        config "./nextflow.config"
         options "-stub"
 
         when {
