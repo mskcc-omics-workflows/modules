@@ -13,6 +13,14 @@ inputs:
   paths:
     description: "Test paths"
     required: true
+  jfrog_username:
+    description: "JFrog registry username"
+    required: false
+    default: ""
+  jfrog_password:
+    description: "JFrog registry password or token"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -31,6 +39,14 @@ runs:
       uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5
       with:
         python-version: "3.11"
+
+    - name: Install cross-repo component dependencies
+      shell: bash
+      run: |
+        mapfile -t metas < <(find subworkflows -name meta.yml)
+        if (( ${#metas[@]} > 0 )); then
+          bash .github/scripts/install-components.sh "${metas[@]}"
+        fi
 
     - name: Install nf-test
       uses: nf-core/setup-nf-test@v1
@@ -71,6 +87,34 @@ runs:
       run: |
         nextflow secrets set ONCOKB_TOKEN $ONCOKB_TOKEN
 
+
+    - name: Login to JFrog Container Registry (docker)
+      if: ${{ inputs.profile == 'docker' && inputs.jfrog_username != '' }}
+      uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3
+      with:
+        registry: mskcc.jfrog.io
+        username: ${{ inputs.jfrog_username }}
+        password: ${{ inputs.jfrog_password }}
+
+    - name: Configure JFrog auth for Apptainer/Singularity
+      if: ${{ contains(inputs.profile, 'singularity') && inputs.jfrog_username != '' }}
+      shell: bash
+      env:
+        JFROG_USERNAME: ${{ inputs.jfrog_username }}
+        JFROG_PASSWORD: ${{ inputs.jfrog_password }}
+      run: |
+        # Scope JFrog creds to mskcc.jfrog.io only via a Docker-format auth
+        # file. Setting APPTAINER_DOCKER_USERNAME/PASSWORD globally would send
+        # JFrog basic-auth to every docker:// pull (incl. ghcr.io, quay.io),
+        # which the other registries reject with 403.
+        AUTH=$(printf '%s:%s' "$JFROG_USERNAME" "$JFROG_PASSWORD" | base64 -w0)
+        for d in "$HOME/.apptainer" "$HOME/.singularity"; do
+          mkdir -p "$d"
+          cat > "$d/docker-config.json" <<EOF
+        {"auths":{"mskcc.jfrog.io":{"auth":"$AUTH"}}}
+        EOF
+          chmod 600 "$d/docker-config.json"
+        done
 
       # TODO Skip failing conda tests and document their failures
       # https://github.com/nf-core/modules/issues/7017
