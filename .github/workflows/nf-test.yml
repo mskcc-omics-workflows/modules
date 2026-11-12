@@ -19,12 +19,14 @@ concurrency:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # renovate: datasource=github-releases depName=askimed/nf-test versioning=semver
-  NFT_VER: "0.9.2"
+  NFT_VER: "0.9.5"
   NXF_ANSI_LOG: false
   NXF_SINGULARITY_CACHEDIR: ${{ github.workspace }}/.singularity
   NXF_SINGULARITY_LIBRARYDIR: ${{ github.workspace }}/.singularity
   # renovate: datasource=github-releases depName=nextflow/nextflow versioning=semver
-  NXF_VER: "24.10.2"
+  NXF_VER: "26.04.0"
+  # Run tests with strict syntax (the default from 26.04; set here so it stays on)
+  NXF_SYNTAX_PARSER: "v2"
 
 jobs:
   nf-test-changes:
@@ -125,10 +127,6 @@ jobs:
         if: ${{steps.filter.outputs.filtered_paths != '[]'}}
         uses: ./.github/actions/nf-test-action
         env:
-          SENTIEON_ENCRYPTION_KEY: ${{ secrets.SENTIEON_ENCRYPTION_KEY }}
-          SENTIEON_LICENSE_MESSAGE: ${{ secrets.SENTIEON_LICENSE_MESSAGE }}
-          SENTIEON_LICSRVR_IP: ${{ secrets.SENTIEON_LICSRVR_IP }}
-          SENTIEON_AUTH_MECH: "GitHub Actions - token"
           ONCOKB_TOKEN: ${{ secrets.ONCOKB_TOKEN }}
         with:
           profile: ${{ matrix.profile }}
