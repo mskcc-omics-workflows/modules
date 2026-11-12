@@ -21,7 +21,7 @@ process PVMAF_CONCAT {
     script:
     def args = task.ext.args ?: '-sep "tsv"'
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def flagFiles = maf_files.collect { "-f $it" }.join(' ')
+    def flagFiles = maf_files.collect { maf -> "-f ${maf}" }.join(' ')
     def output = prefix ? "${prefix}_combined.maf": 'multi_sample.maf'
     """
     pv maf concat \\
@@ -39,7 +39,7 @@ process PVMAF_CONCAT {
     stub:
     def args = task.ext.args ?: '-sep "tsv"'
     def prefix = task.ext.prefix != null ? "${task.ext.prefix}" : (meta.patient != null ? "${meta.patient}" : "")
-    def flagFiles = maf_files.collect { "-f $it" }.join(' ')
+    def flagFiles = maf_files.collect { maf -> "-f ${maf}" }.join(' ')
     def output = prefix ? "${prefix}_combined.maf": 'multi_sample.maf'
     """
     touch $output

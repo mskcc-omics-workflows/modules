@@ -24,14 +24,14 @@ workflow TRACEBACK {
 
     // get bams and mafs, grouping by patient if provided
     PVMAFCONCAT_INITIAL.out.maf
-    .map {it -> [it[0].subMap('patient')[0], *it[1..-1]] }
+    .map { row -> [row[0].subMap('patient')[0]] + row[1..-1] }
     .set{concat_maf}
 
 
     bams
-    .map { it -> [it[0].subMap('patient')[0], it[0], *it[1..-1]] }
+    .map { row -> [row[0].subMap('patient')[0], row[0]] + row[1..-1] }
     .combine(concat_maf, by:0)
-    .map { it[1..-1] }
+    .map { row -> row[1..-1] }
     .set{bam_list_maf}
     // genotype each bam combined maf, per patient if provided
     GENOTYPEVARIANTS_ALL(bam_list_maf, reference, reference_fai)
@@ -40,16 +40,16 @@ workflow TRACEBACK {
     // For impact, grab ORG-STD Maf from GENOTYPEVARIANTS_ALL
     GENOTYPEVARIANTS_ALL.out.maf
     .transpose()
-    .branch {
-        genotyped: it[1] =~ /.*ORG-STD_genotyped.maf/
+    .branch { row ->
+        genotyped: row[1] =~ /.*ORG-STD_genotyped.maf/
         }
     .set{split_genotype_imp}
 
     // For access, grab ORG-SIMPLEX-DUPLEX Maf from GENOTYPEVARIANTS_ALL
     GENOTYPEVARIANTS_ALL.out.maf
     .transpose()
-    .branch {
-        genotyped: it[1] =~ /.*ORG-SIMPLEX-DUPLEX_genotyped.maf/
+    .branch { row ->
+        genotyped: row[1] =~ /.*ORG-SIMPLEX-DUPLEX_genotyped.maf/
         }
     .set{split_genotype_xs}
 
