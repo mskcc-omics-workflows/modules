@@ -43,7 +43,9 @@
         "subworkflows/msk/phylowgs",
         "subworkflows/msk/generate_mutated_peptides",
         "subworkflows/msk/neoantigen_editing",
-        "subworkflows/msk/traceback"
+        "subworkflows/msk/traceback",
+        "modules/msk/hlahd",
+        "subworkflows/msk/hlahd_from_bam"
     ],
     "docker": [],
     "singularity": []
