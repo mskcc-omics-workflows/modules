@@ -33,6 +33,10 @@ jobs:
         with:
           version: "${{ env.NXF_VER }}"
 
+      # Subworkflows can include nf-core modules, which lint needs to resolve
+      - name: Install nf-core components used by subworkflows
+        run: bash .github/scripts/install-components.sh $(find subworkflows -name meta.yml)
+
       # Fails on strict syntax errors. Warnings are printed but don't fail the job.
       - name: Lint modules, subworkflows and test config
-        run: nextflow lint modules subworkflows tests/config
+        run: nextflow lint modules/msk subworkflows/msk tests/config
