@@ -1,7 +1,6 @@
 process MUTECT1 {
     tag "$meta.id"
     label 'process_low'
-    shell '/bin/sh'
 
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
