@@ -1,0 +1,14 @@
+{
+    "sarscov2 illumina - vcf gtf": {
+        "content": [
+            [
+                "versions.yml:md5,9d75c19a947df6e008a3918a2e97ebc6"
+            ]
+        ],
+        "timestamp": "2026-08-27T10:14:42.910180254",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

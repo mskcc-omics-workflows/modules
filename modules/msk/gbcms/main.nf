@@ -2,8 +2,8 @@ process GBCMS {
     tag "$meta.id"
     label 'process_single'
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'ghcr.io/msk-access/gbcms:1.2.5':
-        'ghcr.io/msk-access/gbcms:1.2.5' }"
+        'ghcr.io/mskcc-omics-workflows/gbcms:1.2.5':
+        'ghcr.io/mskcc-omics-workflows/gbcms:1.2.5' }"
 
     input:
     tuple val(meta), path(bam), path(bambai), path(variant_file), val(output)

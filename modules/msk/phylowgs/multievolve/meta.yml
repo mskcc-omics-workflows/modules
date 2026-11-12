@@ -37,6 +37,36 @@ output:
           type: file
           description: Zip file containing the completed trees
           pattern: "trees.zip"
+  - summ:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.summ.json.gz":
+          type: file
+          description: Output file for JSON-formatted tree summaries
+          pattern: "*.summ.json.gz"
+  - muts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.muts.json.gz":
+          type: file
+          description: Output file for JSON-formatted list of mutations
+          pattern: "*.muts.json.gz"
+  - mutass:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1', single_end:false ]`
+      - "*.mutass.zip":
+          type: file
+          description: Output file for JSON-formatted list of SSMs and CNVs
+          pattern: "*.mutass.zip"
   - versions:
       - versions.yml:
           type: file
