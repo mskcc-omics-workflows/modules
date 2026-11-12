@@ -19,6 +19,7 @@ A repository for hosting [Nextflow DSL2](https://www.nextflow.io/docs/latest/dsl
   - [Table of contents](#table-of-contents)
   - [Using existing modules](#using-existing-modules)
   - [Adding new modules](#adding-new-modules)
+  - [CI](#ci)
   - [Help](#help)
   - [Citation](#citation)
 
@@ -140,6 +141,11 @@ We use a helper command in the `nf-core/tools` package that uses the GitHub API 
 If you wish to contribute a new module, please see the documentation on the [MSK Omics Workflow website](https://mskcc-omics-workflows.gitbook.io/omics-workflows/contributing).
 
 > Please be kind to our code reviewers and submit one pull request per module :)
+
+## CI
+
+See [docs/ci.md](docs/ci.md) for how `nf-test` CI works, including how
+subworkflows declare and fetch cross-repo (nf-core) component dependencies.
 
 ## Help
 
