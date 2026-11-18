@@ -4,8 +4,8 @@ process ARRIBA_FLAGDUPES {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/32/32d8754ef9bb101ff4296e7b3e3b5ecfc06bd492aaf3b0c84ecf8074d735d57a/data':
-        'community.wave.seqera.io/library/gawk_r-base_r-data.table:b8be003a019a43d7' }"
+        'https://community-cr-prod.seqera.io/docker/registry/v2/blobs/sha256/74/74800fcf08bfab21aa145b22b3ac5ff41f7b1272273f85bc8a555e326b86f7b5/data':
+        'community.wave.seqera.io/library/gawk_gzip_r-base_r-data.table:173ac02441b705d9' }"
 
     input:
     tuple val(meta), path(fusions), path(fusions_discarded)
