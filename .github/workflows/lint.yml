@@ -1,0 +1,42 @@
+name: Run linting
+on:
+  pull_request:
+    branches: [main, develop]
+  merge_group:
+    types: [checks_requested]
+    branches: [main, develop]
+  workflow_dispatch: {}
+
+# Cancel if a newer run is started
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  # renovate: datasource=github-releases depName=nextflow/nextflow versioning=semver
+  NXF_VER: "26.04.0"
+  NXF_SYNTAX_PARSER: "v2"
+
+jobs:
+  nextflow-lint:
+    name: nextflow lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - uses: nf-core/setup-nextflow@v2
+        with:
+          version: "${{ env.NXF_VER }}"
+
+      # Subworkflows can include nf-core modules, which lint needs to resolve
+      - name: Install nf-core components used by subworkflows
+        run: bash .github/scripts/install-components.sh $(find subworkflows -name meta.yml)
+
+      # Fails on strict syntax errors. Warnings are printed but don't fail the job.
+      - name: Lint modules, subworkflows and test config
+        run: nextflow lint modules/msk subworkflows/msk tests/config

@@ -29,7 +29,9 @@ nextflow_process {
         then {
             assertAll(
                 { assert process.success },
-                { assert snapshot(process.out).match() }
+                // OncoKB data changes between releases, so don't md5 the annotated MAF
+                { assert path(process.out.oncokb_maf[0][1]).text.contains('ONCOGENIC') },
+                { assert snapshot(process.out.versions, file(process.out.oncokb_maf[0][1]).name).match() }
 
             )
         }
