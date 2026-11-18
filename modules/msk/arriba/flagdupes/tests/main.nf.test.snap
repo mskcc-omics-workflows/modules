@@ -1,4 +1,53 @@
 {
+    "arriba/flagdupes - fusions + discarded gz": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,900e6754189bc7717be84e89fba50568"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,9d8a4e6d272c3250cd76fe6895c52fcd"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,9d8a4e6d272c3250cd76fe6895c52fcd"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,900e6754189bc7717be84e89fba50568"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-18T15:43:37.687558",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
     "arriba/flagdupes - fusions only - stub": {
         "content": [
             {
@@ -19,7 +68,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
                 ],
                 "flagged": [
                     [
@@ -38,11 +87,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:31:19.439702",
+        "timestamp": "2026-11-18T15:43:44.057217",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"
@@ -68,7 +117,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
                 ],
                 "flagged": [
                     [
@@ -87,11 +136,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:31:12.898218",
+        "timestamp": "2026-11-18T15:43:30.801099",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"
@@ -117,7 +166,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
                 ],
                 "flagged": [
                     [
@@ -136,11 +185,11 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:31:05.554301",
+        "timestamp": "2026-11-18T15:43:23.918204",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.10.6"

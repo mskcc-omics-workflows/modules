@@ -25,6 +25,10 @@ process ARRIBA_FLAGDUPES {
     prefix             = task.ext.prefix ?: "${meta.id}"
     // With an Arriba fusions.discarded.tsv, also evaluate its same-gene target rows.
     def discarded_args = fusions_discarded ? "--include_discarded --discarded ${fusions_discarded}" : ''
+    def out_names      = ["${prefix}.ptd_kdd.tsv", "${prefix}.ptd_kdd.flagged.tsv"]*.toString()
+    if ([fusions, fusions_discarded].any { it && it.name in out_names }) {
+        error "Input and output names are the same, set prefix in module configuration to disambiguate!"
+    }
     """
     flag_ptd_kdd_itd_arriba.R \\
         --input ${fusions} \\

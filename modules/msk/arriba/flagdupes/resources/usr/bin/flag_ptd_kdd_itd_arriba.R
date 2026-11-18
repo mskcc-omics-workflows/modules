@@ -144,7 +144,7 @@
 # Version: VERSION below; --version prints it and exits.
 # ------------------------------------------------------------------------------
 
-VERSION <- "0.1.0"
+VERSION <- "0.1.1"
 # Checked before anything else so it works without other arguments,
 # a rules file or data.table.
 if ("--version" %in% commandArgs(trailingOnly = TRUE)) {
@@ -305,8 +305,10 @@ norm_chr <- function(x) {
 # thousands of irrelevant rows or their long read_identifiers fields.
 read_arriba <- function(path, discarded_default, same_gene_only = FALSE) {
   if (same_gene_only) {
-    hdr <- sub("^#", "", names(fread(path, sep = "\t", header = TRUE,
-                                     quote = "", nrows = 0)))
+    # Header via base R (gzfile reads plain and gzipped files), so a .gz file
+    # does not need R.utils, which fread() requires to read .gz directly.
+    hdr <- sub("^#", "", strsplit(readLines(gzfile(path), n = 1), "\t",
+                                  fixed = TRUE)[[1]])
     c1 <- match("gene1", hdr); c2 <- match("gene2", hdr)
     if (is.na(c1) || is.na(c2)) stop(path, " is missing gene1/gene2 columns")
     awk <- sprintf(paste0(
