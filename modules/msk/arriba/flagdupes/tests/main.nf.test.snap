@@ -1,0 +1,149 @@
+{
+    "arriba/flagdupes - fusions only - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-18T15:31:19.439702",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
+    "arriba/flagdupes - fusions + discarded": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,900e6754189bc7717be84e89fba50568"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,9d8a4e6d272c3250cd76fe6895c52fcd"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,9d8a4e6d272c3250cd76fe6895c52fcd"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,900e6754189bc7717be84e89fba50568"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-18T15:31:12.898218",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    },
+    "arriba/flagdupes - fusions only": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,824ddf940381ec2d1f549a20dbb44863"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,f0eebb38570a49fb8341271db616e435"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,f0eebb38570a49fb8341271db616e435"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,824ddf940381ec2d1f549a20dbb44863"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,939403177c069bdee264f7f217604d46"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-18T15:31:05.554301",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.10.6"
+        }
+    }
+}

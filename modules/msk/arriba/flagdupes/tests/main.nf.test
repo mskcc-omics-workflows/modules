@@ -1,0 +1,104 @@
+nextflow_process {
+
+    name "Test Process ARRIBA_FLAGDUPES"
+    script "../main.nf"
+    process "ARRIBA_FLAGDUPES"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "arriba"
+    tag "arriba/flagdupes"
+
+    test("arriba/flagdupes - fusions only") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
+                    []
+                ]
+                input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
+                input[2] = [ [ id:'gene_rules' ], file(params.test_data_mskcc['arriba_flagdupes']['gene_rules'], checkIfExists: true) ]
+                """
+            }
+        }
+
+        then {
+            def column = { f, name ->
+                def lines = path(f).readLines()
+                def i = lines[0].split('\t').toList().indexOf(name)
+                lines.drop(1).collect { it.split('\t', -1)[i] }
+            }
+            assertAll(
+                { assert process.success },
+                { assert column(process.out.tsv[0][1], 'gene1').size() == 5 },
+                { assert column(process.out.flagged[0][1], 'ptd_kdd_call').sort() == ['EGFR-KDD', 'FLT3-ITD', 'KMT2A-PTD'] },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("arriba/flagdupes - fusions + discarded") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions_discarded'], checkIfExists: true)
+                ]
+                input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
+                input[2] = [ [ id:'gene_rules' ], file(params.test_data_mskcc['arriba_flagdupes']['gene_rules'], checkIfExists: true) ]
+                """
+            }
+        }
+
+        then {
+            def column = { f, name ->
+                def lines = path(f).readLines()
+                def i = lines[0].split('\t').toList().indexOf(name)
+                lines.drop(1).collect { it.split('\t', -1)[i] }
+            }
+            assertAll(
+                { assert process.success },
+                { assert column(process.out.tsv[0][1], 'gene1').size() == 6 },
+                { assert !column(process.out.tsv[0][1], 'gene1').contains('TP53') },
+                { assert column(process.out.flagged[0][1], 'ptd_kdd_call').sort() == ['EGFR-KDD', 'FLT3-ITD', 'KMT2A-PTD', 'MET-KDD'] },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+    test("arriba/flagdupes - fusions only - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
+                    []
+                ]
+                input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
+                input[2] = [ [ id:'gene_rules' ], file(params.test_data_mskcc['arriba_flagdupes']['gene_rules'], checkIfExists: true) ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
