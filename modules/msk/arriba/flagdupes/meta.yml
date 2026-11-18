@@ -1,0 +1,124 @@
+name: "arriba_flagdupes"
+description: |
+  Flag partial tandem duplications (PTDs), kinase-domain duplications (KDDs)
+  and internal tandem duplications (ITDs) in Arriba fusion output, e.g.
+  KMT2A-PTD, EGFR/MET-KDD and FLT3/BCOR/RAS/UBTF-ITD, using per-gene exon
+  rules and the Ensembl canonical transcripts in a GTF.
+
+  Inputs and options:
+    - `fusions_discarded` is optional (pass `[]`). When given, the module adds
+      `--include_discarded --discarded <file>`, so the same-gene target rows of
+      Arriba's fusions.discarded.tsv are evaluated too.
+    - `ext.args` is appended to the command, e.g. `--genes KMT2A,FLT3`,
+      `--itd_max_size 500`, `--splice_exon_bp 3`, `--splice_donor_intron_bp 8`,
+      `--splice_acceptor_intron_bp 17`, `--flagged_only` (restricts the main
+      table to called rows; the flagged table is always written), or
+      `--include_discarded` alone for a table that already has a `discarded`
+      column.
+    - Exon numbers in `gene_rules` refer to the GTF's Ensembl canonical
+      transcripts (written for Ensembl GRCh38.111). Other GTF versions can
+      renumber exons.
+
+  The script runs from the module's `resources/usr/bin`, so the pipeline must
+  set `nextflow.enable.moduleBinaries = true`.
+keywords:
+  - arriba
+  - fusion
+  - duplication
+  - PTD
+  - ITD
+  - KDD
+  - RNA-seq
+tools:
+  - "flag_ptd_kdd_itd_arriba":
+      description: |
+        R script that annotates Arriba fusion calls with PTD/KDD/ITD calls,
+        tiers (canonical, atypical_exons, non_splice_site, itd), duplicated
+        exon blocks and splice-site checks.
+      homepage: "https://github.com/mskcc-omics-workflows/modules/tree/develop/modules/msk/arriba/flagdupes"
+      documentation: "https://github.com/mskcc-omics-workflows/modules/tree/develop/modules/msk/arriba/flagdupes/resources/usr/bin/flag_ptd_kdd_itd_arriba.R"
+      licence:
+        - "AGPL-3.0"
+      identifier: ""
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - fusions:
+        type: file
+        description: Arriba fusions.tsv (or a reformatted table with chr1/pos1/chr2/pos2 columns)
+        pattern: "*.{tsv,txt}"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+    - fusions_discarded:
+        type: file
+        description: Optional Arriba fusions.discarded.tsv (plain or gzipped)
+        pattern: "*.{tsv,tsv.gz,txt,txt.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+  - - meta2:
+        type: map
+        description: |
+          Groovy Map containing reference information
+          e.g. `[ id:'GRCh38.111' ]`
+    - gtf:
+        type: file
+        description: Ensembl GTF with Ensembl_canonical tags (plain or gzipped)
+        pattern: "*.{gtf,gtf.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_2306
+  - - meta3:
+        type: map
+        description: |
+          Groovy Map containing rules information
+          e.g. `[ id:'gene_rules' ]`
+    - gene_rules:
+        type: file
+        description: |
+          Per-gene rules TSV with columns gene, call, kind (exon_block or itd),
+          start_allowed, end_allowed, start_canon, end_canon, itd_exons
+        pattern: "*.tsv"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
+output:
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - ${prefix}.ptd_kdd.tsv:
+          type: file
+          description: |
+            Input table plus ptd_kdd_call, ptd_kdd_tier, dup_exons, n_dup_exons,
+            event_size, junction, donor_site_ok, acceptor_site_ok,
+            total_support, ptd_kdd_note and evaluated columns. Called rows only
+            when `--flagged_only` is set.
+          pattern: "*.ptd_kdd.tsv"
+          ontologies:
+            - edam: http://edamontology.org/format_3475
+  flagged:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - ${prefix}.ptd_kdd.flagged.tsv:
+          type: file
+          description: Only the rows with a PTD/KDD/ITD call
+          pattern: "*.ptd_kdd.flagged.tsv"
+          ontologies:
+            - edam: http://edamontology.org/format_3475
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: http://edamontology.org/format_3750
+authors:
+  - "@anoronh4"
+maintainers:
+  - "@anoronh4"
