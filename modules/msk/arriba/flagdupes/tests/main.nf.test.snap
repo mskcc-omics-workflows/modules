@@ -19,7 +19,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ],
                 "flagged": [
                     [
@@ -38,14 +38,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:43:37.687558",
+        "timestamp": "2026-11-20T14:13:06.084352",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.6"
+            "nextflow": "24.10.2"
         }
     },
     "arriba/flagdupes - fusions only - stub": {
@@ -68,7 +68,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ],
                 "flagged": [
                     [
@@ -87,14 +87,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:43:44.057217",
+        "timestamp": "2026-11-20T14:13:11.235314",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.6"
+            "nextflow": "24.10.2"
         }
     },
     "arriba/flagdupes - fusions + discarded": {
@@ -117,7 +117,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ],
                 "flagged": [
                     [
@@ -136,14 +136,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:43:30.801099",
+        "timestamp": "2026-11-20T14:12:59.87021",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.6"
+            "nextflow": "24.10.2"
         }
     },
     "arriba/flagdupes - fusions only": {
@@ -166,7 +166,7 @@
                     ]
                 ],
                 "2": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ],
                 "flagged": [
                     [
@@ -185,14 +185,14 @@
                     ]
                 ],
                 "versions": [
-                    "versions.yml:md5,a1e5d820eecbd444485e90c9a5c94a22"
+                    "versions.yml:md5,fef68efab4130ce53d2e7fd467e3a312"
                 ]
             }
         ],
-        "timestamp": "2026-11-18T15:43:23.918204",
+        "timestamp": "2026-11-20T14:12:53.752688",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.10.6"
+            "nextflow": "24.10.2"
         }
     }
 }

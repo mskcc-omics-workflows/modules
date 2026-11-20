@@ -44,6 +44,9 @@
 # NTRK1, NTRK2, RAF1, MET), the donor-side breakpoint falls inside that exon,
 # which has no splice donor. Any position in the last exon therefore counts as
 # donor_site_ok (see the splice region below), so these calls can be canonical.
+# Likewise exon 1 has no splice acceptor, so any acceptor-side position in
+# exon 1 counts as acceptor_site_ok, and blocks starting there (e.g. MAP2K1
+# e1-e11) can be canonical.
 # A donor-side breakpoint past the transcript end is not called.
 #
 # Breakpoints are converted to the duplicated exon block strand-aware:
@@ -59,7 +62,8 @@
 #                                       first 1-8 bases of the following intron,
 #                                       or anywhere in the transcript's last exon
 #                       acceptor side = first 1-3 bases of the exon, or the
-#                                       last 1-17 bases of the preceding intron
+#                                       last 1-17 bases of the preceding intron,
+#                                       or anywhere in the transcript's first exon
 #                     (sizes set by --splice_exon_bp, --splice_donor_intron_bp,
 #                      --splice_acceptor_intron_bp)
 #   atypical_exons    allowed but non-canonical exon range
@@ -132,7 +136,9 @@
 #   event_size        |pos1 - pos2| in bp
 #   donor_site_ok / acceptor_site_ok   breakpoint in the donor / acceptor
 #                     splice region defined above (a donor-side breakpoint
-#                     in the last exon is always donor_site_ok)
+#                     in the last exon is always donor_site_ok, and an
+#                     acceptor-side breakpoint in exon 1 is always
+#                     acceptor_site_ok)
 #   total_support     split_reads1 + split_reads2 + discordant_mates
 #   ptd_kdd_note      why an intragenic duplication in a target gene was or
 #                     wasn't called (NA for unrelated rows)
@@ -144,7 +150,7 @@
 # Version: VERSION below; --version prints it and exits.
 # ------------------------------------------------------------------------------
 
-VERSION <- "0.1.1"
+VERSION <- "0.1.2"
 # Checked before anything else so it works without other arguments,
 # a rules file or data.table.
 if ("--version" %in% commandArgs(trailingOnly = TRUE)) {
@@ -420,7 +426,8 @@ message(sprintf("Canonical transcripts: %s",
 # the donor or acceptor splice region (VEP-style, see header):
 #   exon k   : donor region   = last  splice_exon_bp bases (k < last exon);
 #                                the whole exon when k is the last exon
-#              acceptor region = first splice_exon_bp bases (k > 1)
+#              acceptor region = first splice_exon_bp bases (k > 1);
+#                                the whole exon when k is exon 1
 #   intron k : donor region   = first splice_donor_intron_bp bases
 #              acceptor region = last  splice_acceptor_intron_bp bases
 # Distances are 0 on the boundary base itself, so "1-3 bases" = distance 0-2.
@@ -444,7 +451,7 @@ locate_vec <- function(pos, t, ex) {
     d3 <- if (pl) e - p else p - s             # bases from exon 3' end
     region[in_ex] <- "exon"; number[in_ex] <- as.integer(k)
     in_donor[in_ex]    <- k == n | d3 < opts$splice_exon_bp
-    in_acceptor[in_ex] <- k > 1 & d5 < opts$splice_exon_bp
+    in_acceptor[in_ex] <- k == 1 | d5 < opts$splice_exon_bp
   }
   if (any(in_in)) {                             # intron k: exon k .. exon k+1
     i <- idx1[in_in]; p <- pos[in_in]
