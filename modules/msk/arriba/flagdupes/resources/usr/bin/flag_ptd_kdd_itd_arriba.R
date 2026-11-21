@@ -144,8 +144,10 @@
 # The duplication junction itself is chimeric to STAR and never in SJ.out.tab.
 # The +-1 offsets assume splice-site breakpoints are exon boundary bases;
 # on a real sample 18 of 19 Arriba splice-site breakpoints matched at exactly
-# these offsets. An --sj file whose first line isn't SJ.out.tab-shaped (9
-# tab-separated columns, no header) stops the run; an empty one is allowed.
+# these offsets. An --sj file whose first line isn't SJ.out.tab-shaped (at
+# least 9 tab-separated columns, columns 2, 3, 7 and 8 whole numbers, no
+# header) stops the run; an empty one is allowed. Plain or gzipped input is
+# told apart by content, not by the .gz extension.
 #
 # Usage:
 #   Rscript flag_ptd_kdd.R \
@@ -692,6 +694,10 @@ read_sj_counts <- function(path, keys) {
            "(9 tab-separated columns, no header)", call. = FALSE)
     }
   }
+  # gzip by content (magic bytes), not by name: a mis-named file would
+  # otherwise give empty counts without an error
+  magic  <- readBin(path, "raw", n = 2)
+  is_gz  <- length(magic) == 2 && all(magic == as.raw(c(0x1f, 0x8b)))
   kf <- tempfile(fileext = ".txt"); on.exit(unlink(kf))
   writeLines(keys, kf)
   awk <- sprintf(paste0(
@@ -700,7 +706,7 @@ read_sj_counts <- function(path, keys) {
     "ks=c\":\"$2\":s\"; ke=c\":\"$3\":e\"; ",
     "if ((ks in K) || (ke in K)) print c\"\\t\"$2\"\\t\"$3\"\\t\"$7\"\\t\"$8}' %s"),
     shQuote(kf))
-  cmd <- if (grepl("\\.gz$", path)) {
+  cmd <- if (is_gz) {
     sprintf("gzip -cd %s | %s -", shQuote(path), awk)
   } else {
     sprintf("%s %s", awk, shQuote(path))
