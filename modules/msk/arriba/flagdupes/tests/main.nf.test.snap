@@ -1,0 +1,247 @@
+{
+    "arriba/flagdupes - fusions + discarded gz": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,895af7226febb71de22fc3a473c9311b"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,194f2510de21892f9dc3df81758d40bf"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,194f2510de21892f9dc3df81758d40bf"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,895af7226febb71de22fc3a473c9311b"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-20T22:30:22.891626",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "24.10.2"
+        }
+    },
+    "arriba/flagdupes - fusions only - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-20T22:30:34.366436",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "24.10.2"
+        }
+    },
+    "arriba/flagdupes - fusions + discarded": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,895af7226febb71de22fc3a473c9311b"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,194f2510de21892f9dc3df81758d40bf"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,194f2510de21892f9dc3df81758d40bf"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,895af7226febb71de22fc3a473c9311b"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-20T22:30:16.471277",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "24.10.2"
+        }
+    },
+    "arriba/flagdupes - fusions only": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,a99a11c652f389de14b618c45b57a4cc"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,c956d47240d4229a2f49af4ff1c83757"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,c956d47240d4229a2f49af4ff1c83757"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,a99a11c652f389de14b618c45b57a4cc"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-20T22:30:10.277662",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "24.10.2"
+        }
+    },
+    "arriba/flagdupes - fusions + sj": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,3e575522109e0451d65097168d20d0d2"
+                    ]
+                ],
+                "1": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,0211e8ff3089b5a326a7d1c35fc1a979"
+                    ]
+                ],
+                "2": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ],
+                "flagged": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.flagged.tsv:md5,0211e8ff3089b5a326a7d1c35fc1a979"
+                    ]
+                ],
+                "tsv": [
+                    [
+                        {
+                            "id": "test"
+                        },
+                        "test.ptd_kdd.tsv:md5,3e575522109e0451d65097168d20d0d2"
+                    ]
+                ],
+                "versions": [
+                    "versions.yml:md5,8fbff16da8d33a3a2c939d31504b883b"
+                ]
+            }
+        ],
+        "timestamp": "2026-11-20T22:30:29.122912",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "24.10.2"
+        }
+    }
+}
