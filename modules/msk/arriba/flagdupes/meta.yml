@@ -9,6 +9,12 @@ description: |
     - `fusions_discarded` is optional (pass `[]`). When given, the module adds
       `--include_discarded --discarded <file>`, so the same-gene target rows of
       Arriba's fusions.discarded.tsv are evaluated too.
+    - `sj_tab` is optional (pass `[]`). When given (STAR's SJ.out.tab from the
+      alignment Arriba ran on), the module adds `--sj <file>` and the output
+      gets junction fractions: S, C_donor, C_acceptor, donor_frac,
+      acceptor_frac, duplicates_filtered, donor_frac_dup, acceptor_frac_dup
+      and junction_frac_flags (all NA without it). Related `ext.args`:
+      `--sj_include_multimappers`, `--sj_min_reads 5`, `--sj_max_frac_diff 0.15`.
     - `ext.args` is appended to the command, e.g. `--genes KMT2A,FLT3`,
       `--itd_max_size 500`, `--splice_exon_bp 3`, `--splice_donor_intron_bp 8`,
       `--splice_acceptor_intron_bp 17`, `--flagged_only` (restricts the main
@@ -58,6 +64,14 @@ input:
         pattern: "*.{tsv,tsv.gz,txt,txt.gz}"
         ontologies:
           - edam: http://edamontology.org/format_3475
+    - sj_tab:
+        type: file
+        description: |
+          Optional STAR SJ.out.tab (plain or gzipped) from the alignment Arriba
+          ran on, for junction fractions
+        pattern: "*.{tab,tab.gz}"
+        ontologies:
+          - edam: http://edamontology.org/format_3475
   - - meta2:
         type: map
         description: |
@@ -94,8 +108,9 @@ output:
           description: |
             Input table plus ptd_kdd_call, ptd_kdd_tier, dup_exons, n_dup_exons,
             event_size, junction, donor_site_ok, acceptor_site_ok,
-            total_support, ptd_kdd_note and evaluated columns. Called rows only
-            when `--flagged_only` is set.
+            total_support, the junction-fraction columns (NA without sj_tab)
+            and ptd_kdd_note. read_identifiers is written as ".". Called rows
+            only when `--flagged_only` is set.
           pattern: "*.ptd_kdd.tsv"
           ontologies:
             - edam: http://edamontology.org/format_3475

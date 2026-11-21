@@ -8,7 +8,7 @@ process ARRIBA_FLAGDUPES {
         'community.wave.seqera.io/library/gawk_gzip_r-base_r-data.table:173ac02441b705d9' }"
 
     input:
-    tuple val(meta), path(fusions), path(fusions_discarded)
+    tuple val(meta), path(fusions), path(fusions_discarded), path(sj_tab)
     tuple val(meta2), path(gtf)
     tuple val(meta3), path(gene_rules)
 
@@ -25,6 +25,8 @@ process ARRIBA_FLAGDUPES {
     prefix             = task.ext.prefix ?: "${meta.id}"
     // With an Arriba fusions.discarded.tsv, also evaluate its same-gene target rows.
     def discarded_args = fusions_discarded ? "--include_discarded --discarded ${fusions_discarded}" : ''
+    // With STAR's SJ.out.tab (from the alignment Arriba used), add junction fractions.
+    def sj_args        = sj_tab ? "--sj ${sj_tab}" : ''
     if ("${fusions}" == "${prefix}.ptd_kdd.tsv" || "${fusions}" == "${prefix}.ptd_kdd.flagged.tsv" ||
         "${fusions_discarded}" == "${prefix}.ptd_kdd.tsv" || "${fusions_discarded}" == "${prefix}.ptd_kdd.flagged.tsv") {
         error "Input and output names are the same, set prefix in module configuration to disambiguate!"
@@ -36,6 +38,7 @@ process ARRIBA_FLAGDUPES {
         --rules ${gene_rules} \\
         --output ${prefix}.ptd_kdd.tsv \\
         ${discarded_args} \\
+        ${sj_args} \\
         ${args}
 
     cat <<-END_VERSIONS > versions.yml

@@ -117,6 +117,36 @@
 #   (11), NTRK1 ENST00000524377 (17), NTRK2 ENST00000277120 (19), PDGFRB
 #   ENST00000261799 (23), RAF1 ENST00000251849 (17).
 #
+# Junction fractions (--sj, a STAR SJ.out.tab from the alignment Arriba used),
+# for every evaluated same-gene target duplication, called or not, ITDs
+# included, whose gene has a canonical transcript on the breakpoints'
+# chromosome. Donor/acceptor are the donor-/acceptor-side breakpoints above.
+#   S              split_reads1 + split_reads2 (discordant mates don't cross
+#                  the junction, so they have no SJ.out.tab counterpart)
+#   C_donor        SJ reads leaving the donor:    + strand col2 == donor + 1,
+#                                                 - strand col3 == donor - 1
+#   C_acceptor     SJ reads entering the acceptor: + strand col3 == acceptor - 1,
+#                                                 - strand col2 == acceptor + 1
+#                  (col 7 unique reads; plus col 8 with --sj_include_multimappers)
+#   donor_frac     S / (S + C_donor);  acceptor_frac  S / (S + C_acceptor)
+#   duplicates_filtered  n from "duplicates(n)" in Arriba's filters, else 0
+#   *_frac_dup     the same with S + duplicates_filtered: Arriba drops PCR
+#                  duplicates but SJ.out.tab counts them (approximate: the
+#                  count can include discordant mates)
+#   Fractions are NA when S + C is 0 and rounded to 4 decimals.
+#   junction_frac_flags, comma-separated, empty if none:
+#     low_S            S < --sj_min_reads (default 5)
+#     no_sj_donor / no_sj_acceptor   no SJ.out.tab row at that site
+#     frac_discordant  |donor_frac - acceptor_frac| > --sj_max_frac_diff
+#                      (default 0.15): alternative first/last exon, another
+#                      event at the site, or coverage bias; check in IGV
+# There is no splice-site gate: SJ.out.tab also has unannotated junctions.
+# The duplication junction itself is chimeric to STAR and never in SJ.out.tab.
+# The +-1 offsets assume splice-site breakpoints are exon boundary bases;
+# on a real sample 18 of 19 Arriba splice-site breakpoints matched at exactly
+# these offsets. An --sj file whose first line isn't SJ.out.tab-shaped (9
+# tab-separated columns, no header) stops the run; an empty one is allowed.
+#
 # Usage:
 #   Rscript flag_ptd_kdd.R \
 #       --input  sample.fusions.tsv \
@@ -124,7 +154,9 @@
 #       --output sample.ptd_kdd.tsv \
 #       [--rules gene_rules.tsv] [--genes KMT2A,EGFR (default: all in rules)] [--itd_max_size 500] \
 #       [--splice_exon_bp 3] [--splice_donor_intron_bp 8] [--splice_acceptor_intron_bp 17] \
-#       [--flagged_only] [--include_discarded] [--discarded sample.fusions.discarded.tsv]
+#       [--flagged_only] [--include_discarded] [--discarded sample.fusions.discarded.tsv] \
+#       [--sj sample.SJ.out.tab] [--sj_include_multimappers] [--sj_min_reads 5] \
+#       [--sj_max_frac_diff 0.15]
 #   Rscript flag_ptd_kdd.R --version    # print the version and exit
 #
 # Output: the input table plus columns
@@ -140,17 +172,22 @@
 #                     acceptor-side breakpoint in exon 1 is always
 #                     acceptor_site_ok)
 #   total_support     split_reads1 + split_reads2 + discordant_mates
+#   S, C_donor, C_acceptor, donor_frac, acceptor_frac, duplicates_filtered,
+#   donor_frac_dup, acceptor_frac_dup, junction_frac_flags
+#                     junction fractions (see above); NA without --sj and on
+#                     rows they don't apply to
 #   ptd_kdd_note      why an intragenic duplication in a target gene was or
 #                     wasn't called (NA for unrelated rows)
-#   evaluated         FALSE for rows skipped (discarded, when not included)
+# read_identifiers, if present, is written as "." to keep the output small;
+# the Arriba input still has the read names.
 # A second file <output>.flagged.tsv holds only the called rows.
 #
 # Requires: data.table, and gene_rules.tsv beside this script (or --rules).
-# Reading the GTF uses awk (and gzip -cd for .gtf.gz).
+# Reading the GTF and SJ.out.tab uses awk (and gzip -cd for .gz input).
 # Version: VERSION below; --version prints it and exits.
 # ------------------------------------------------------------------------------
 
-VERSION <- "0.1.2"
+VERSION <- "0.1.3"
 # Checked before anything else so it works without other arguments,
 # a rules file or data.table.
 if ("--version" %in% commandArgs(trailingOnly = TRUE)) {
@@ -249,9 +286,13 @@ defaults <- list(
   itd_max_size      = 500,
   discarded         = NA_character_,
   include_discarded = "FALSE",
-  flagged_only      = "FALSE"
+  flagged_only      = "FALSE",
+  sj                = NA_character_,        # STAR SJ.out.tab for junction fractions
+  sj_include_multimappers = "FALSE",
+  sj_min_reads      = 5,
+  sj_max_frac_diff  = 0.15
 )
-flags <- c("include_discarded", "flagged_only")
+flags <- c("include_discarded", "flagged_only", "sj_include_multimappers")
 
 parse_args <- function(args, opts) {
   i <- 1
@@ -283,6 +324,15 @@ if (is.na(opts$itd_max_size) || opts$itd_max_size < 1) {
 }
 opts$include_discarded <- as.logical(opts$include_discarded)
 opts$flagged_only      <- as.logical(opts$flagged_only)
+opts$sj_include_multimappers <- as.logical(opts$sj_include_multimappers)
+opts$sj_min_reads <- suppressWarnings(as.integer(opts$sj_min_reads))
+if (is.na(opts$sj_min_reads) || opts$sj_min_reads < 0) {
+  stop("--sj_min_reads must be a whole number >= 0")
+}
+opts$sj_max_frac_diff <- suppressWarnings(as.numeric(opts$sj_max_frac_diff))
+if (is.na(opts$sj_max_frac_diff) || opts$sj_max_frac_diff < 0 || opts$sj_max_frac_diff > 1) {
+  stop("--sj_max_frac_diff must be between 0 and 1")
+}
 opts$genes             <- toupper(trimws(strsplit(opts$genes, ",")[[1]]))
 if (is.na(opts$input)) stop("--input is required")
 if (is.na(opts$gtf)) stop("--gtf is required")
@@ -290,6 +340,7 @@ if (is.na(opts$output)) {
   opts$output <- sub("(\\.tsv|\\.txt)?$", ".ptd_kdd.tsv", opts$input)
 }
 stopifnot(file.exists(opts$input), file.exists(opts$gtf))
+if (!is.na(opts$sj) && !file.exists(opts$sj)) stop("--sj file not found: ", opts$sj)
 missing_rules <- setdiff(opts$genes, names(RULES))
 if (length(missing_rules) > 0) {
   stop("No PTD/KDD rule defined for: ", paste(missing_rules, collapse = ", "),
@@ -613,6 +664,99 @@ evaluate_batch <- function(gene, c1, p1, c2, p2, type) {
   out
 }
 
+# integer column with NA -> 0; all zeros if the column is missing
+int_col <- function(d, col) {
+  if (!col %in% names(d)) return(rep(0L, nrow(d)))
+  v <- suppressWarnings(as.integer(d[[col]])); v[is.na(v)] <- 0L; v
+}
+
+# ---- junction fractions (--sj) -----------------------------------------------
+# See "Junction fractions" in the header. Every row starts NA; only evaluated
+# same-gene target duplications whose gene has a canonical transcript on the
+# breakpoints' chromosome get values.
+jf_cols <- list(S = NA_integer_, C_donor = NA_integer_, C_acceptor = NA_integer_,
+                donor_frac = NA_real_, acceptor_frac = NA_real_,
+                duplicates_filtered = NA_integer_, donor_frac_dup = NA_real_,
+                acceptor_frac_dup = NA_real_, junction_frac_flags = NA_character_)
+
+# Summed SJ.out.tab reads per site key: "chr:pos:s" (col 2, first intron base)
+# and "chr:pos:e" (col 3, last intron base). awk passes on only the rows that
+# hit one of `keys`, so R never parses the whole file.
+read_sj_counts <- function(path, keys) {
+  first <- tryCatch(readLines(gzfile(path), n = 1, warn = FALSE),
+                    error = function(e) NA_character_)
+  if (length(first) > 0) {             # an empty SJ.out.tab just has no junctions
+    f <- if (is.na(first)) character(0) else strsplit(first, "\t", fixed = TRUE)[[1]]
+    if (length(f) < 9 || !all(grepl("^[0-9]+$", f[c(2, 3, 7, 8)]))) {
+      stop("--sj ", path, " does not look like a STAR SJ.out.tab ",
+           "(9 tab-separated columns, no header)", call. = FALSE)
+    }
+  }
+  kf <- tempfile(fileext = ".txt"); on.exit(unlink(kf))
+  writeLines(keys, kf)
+  awk <- sprintf(paste0(
+    "awk -F'\\t' 'NR==FNR{K[$1]=1; next} ",
+    "{c=$1; sub(/^[cC][hH][rR]/,\"\",c); if (c==\"M\") c=\"MT\"; ",
+    "ks=c\":\"$2\":s\"; ke=c\":\"$3\":e\"; ",
+    "if ((ks in K) || (ke in K)) print c\"\\t\"$2\"\\t\"$3\"\\t\"$7\"\\t\"$8}' %s"),
+    shQuote(kf))
+  cmd <- if (grepl("\\.gz$", path)) {
+    sprintf("gzip -cd %s | %s -", shQuote(path), awk)
+  } else {
+    sprintf("%s %s", awk, shQuote(path))
+  }
+  hits <- system(cmd, intern = TRUE)
+  if (length(hits) == 0) return(setNames(integer(0), character(0)))
+  sj <- fread(text = hits, sep = "\t", header = FALSE, quote = "",
+              col.names = c("chr", "start", "end", "unique", "multi"),
+              colClasses = c("character", "integer", "integer", "integer", "integer"))
+  n <- sj$unique + if (opts$sj_include_multimappers) sj$multi else 0L
+  tab <- data.table(site = c(paste(sj$chr, sj$start, "s", sep = ":"),
+                             paste(sj$chr, sj$end,   "e", sep = ":")),
+                    n = c(n, n))[, .(n = sum(n)), by = site]
+  setNames(tab$n, tab$site)
+}
+
+junction_fractions <- function(d, rows) {
+  out <- as.data.table(jf_cols)[rep(1L, nrow(d))]
+  if (is.na(opts$sj) || length(rows) == 0) return(out)
+  ti <- match(d$`.g1`[rows], tx$gene_name)
+  c1 <- norm_chr(d$chr1[rows]); c2 <- norm_chr(d$chr2[rows])
+  p1 <- d$pos1[rows]; p2 <- d$pos2[rows]
+  ok <- grepl("duplication", d$type[rows], fixed = TRUE) & !is.na(ti) &
+        (c1 == tx$chr[ti] & c2 == tx$chr[ti]) %in% TRUE &
+        (p1 != p2) %in% TRUE
+  if (!any(ok)) return(out)
+  rows <- rows[ok]; ti <- ti[ok]; chr <- c1[ok]; p1 <- p1[ok]; p2 <- p2[ok]
+  pl   <- tx$strand[ti] == "+"
+  dpos <- ifelse(pl == (p1 > p2), p1, p2)     # donor side: further downstream
+  apos <- ifelse(dpos == p1, p2, p1)
+  dkey <- ifelse(pl, sprintf("%s:%d:s", chr, dpos + 1L), sprintf("%s:%d:e", chr, dpos - 1L))
+  akey <- ifelse(pl, sprintf("%s:%d:e", chr, apos - 1L), sprintf("%s:%d:s", chr, apos + 1L))
+  counts <- read_sj_counts(opts$sj, unique(c(dkey, akey)))
+  cd <- unname(counts[dkey]); ca <- unname(counts[akey])
+  no_d <- is.na(cd); no_a <- is.na(ca); cd[no_d] <- 0L; ca[no_a] <- 0L
+
+  S    <- int_col(d, "split_reads1")[rows] + int_col(d, "split_reads2")[rows]
+  filt <- if ("filters" %in% names(d)) as.character(d$filters[rows]) else rep("", length(rows))
+  has  <- grepl("duplicates\\([0-9]+\\)", filt)
+  dups <- rep(0L, length(rows))
+  dups[has] <- as.integer(sub(".*duplicates\\(([0-9]+)\\).*", "\\1", filt[has]))
+  frac <- function(s, c) ifelse(s + c > 0, round(s / (s + c), 4), NA_real_)
+  df <- frac(S, cd); af <- frac(S, ca); Sd <- S + dups
+  fl <- cbind(low_S           = S < opts$sj_min_reads,
+              no_sj_donor     = no_d,
+              no_sj_acceptor  = no_a,
+              frac_discordant = (abs(df - af) > opts$sj_max_frac_diff) %in% TRUE)
+  flag_str <- apply(fl, 1, function(r) paste(colnames(fl)[r], collapse = ","))
+  vals <- list(S = S, C_donor = cd, C_acceptor = ca, donor_frac = df,
+               acceptor_frac = af, duplicates_filtered = dups,
+               donor_frac_dup = frac(Sd, cd), acceptor_frac_dup = frac(Sd, ca),
+               junction_frac_flags = flag_str)
+  for (col in names(vals)) set(out, i = rows, j = col, value = vals[[col]])
+  out
+}
+
 # ---- run ---------------------------------------------------------------------
 message(sprintf("Evaluating %d candidate rows (%s) ...", length(cand),
                 if (opts$include_discarded) "including discarded"
@@ -625,19 +769,22 @@ if (length(cand) > 0) {
                          fus$chr2[cand], fus$pos2[cand], fus$type[cand])
   for (col in names(vals)) set(ann, i = cand, j = col, value = vals[[col]])
 }
-fus[, c(".g1", ".g2", ".same_target") := NULL]
-res <- cbind(fus, ann)
-
-num <- function(col) {
-  if (!col %in% names(res)) return(rep(0L, nrow(res)))
-  v <- suppressWarnings(as.integer(res[[col]])); v[is.na(v)] <- 0L; v
+jf <- junction_fractions(fus, cand)
+if (!is.na(opts$sj)) {
+  message(sprintf("Junction fractions from %s for %d rows.", opts$sj, sum(!is.na(jf$S))))
 }
-res[, total_support := num("split_reads1") + num("split_reads2") +
-                       num("discordant_mates")]
-setcolorder(res, c(setdiff(names(res), c(names(ann), "total_support", "evaluated")),
+fus[, c(".g1", ".g2", ".same_target") := NULL]
+res <- cbind(fus, ann, jf)
+
+res[, total_support := int_col(res, "split_reads1") + int_col(res, "split_reads2") +
+                       int_col(res, "discordant_mates")]
+res[, evaluated := NULL]
+# read names make the field very long; the Arriba input still has them
+if ("read_identifiers" %in% names(res)) res[, read_identifiers := "."]
+setcolorder(res, c(setdiff(names(res), c(names(ann), "total_support", names(jf_cols))),
                    "ptd_kdd_call", "ptd_kdd_tier", "dup_exons", "n_dup_exons", "event_size",
                    "junction", "donor_site_ok", "acceptor_site_ok",
-                   "total_support", "ptd_kdd_note", "evaluated"))
+                   "total_support", names(jf_cols), "ptd_kdd_note"))
 
 flagged <- res[!is.na(ptd_kdd_call)]
 out <- if (opts$flagged_only) flagged else res

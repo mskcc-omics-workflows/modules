@@ -17,6 +17,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test' ],
                     file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
+                    [],
                     []
                 ]
                 input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
@@ -35,6 +36,9 @@ nextflow_process {
             assertAll(
                 { assert process.success },
                 { assert column(process.out.tsv[0][1], 'gene1').size() == 5 },
+                { assert !path(process.out.tsv[0][1]).readLines()[0].split('\t').contains('evaluated') },
+                { assert column(process.out.tsv[0][1], 'read_identifiers').every { it == '.' } },
+                { assert column(process.out.tsv[0][1], 'donor_frac').every { it == 'NA' } },
                 { assert column(process.out.flagged[0][1], 'ptd_kdd_call').sort() == ['EGFR-KDD', 'FLT3-ITD', 'KMT2A-PTD'] },
                 { assert snapshot(process.out).match() }
             )
@@ -50,7 +54,8 @@ nextflow_process {
                 input[0] = [
                     [ id:'test' ],
                     file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
-                    file(params.test_data_mskcc['arriba_flagdupes']['fusions_discarded'], checkIfExists: true)
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions_discarded'], checkIfExists: true),
+                    []
                 ]
                 input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
                 input[2] = [ [ id:'gene_rules' ], file(params.test_data_mskcc['arriba_flagdupes']['gene_rules'], checkIfExists: true) ]
@@ -84,7 +89,8 @@ nextflow_process {
                 input[0] = [
                     [ id:'test' ],
                     file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
-                    file(params.test_data_mskcc['arriba_flagdupes']['fusions_discarded_gz'], checkIfExists: true)
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions_discarded_gz'], checkIfExists: true),
+                    []
                 ]
                 input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
                 input[2] = [ [ id:'gene_rules' ], file(params.test_data_mskcc['arriba_flagdupes']['gene_rules'], checkIfExists: true) ]
@@ -110,6 +116,48 @@ nextflow_process {
 
     }
 
+    test("arriba/flagdupes - fusions + sj") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test' ],
+                    file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
+                    [],
+                    file(params.test_data_mskcc['arriba_flagdupes']['sj'], checkIfExists: true)
+                ]
+                input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
+                input[2] = [ [ id:'gene_rules' ], file(params.test_data_mskcc['arriba_flagdupes']['gene_rules'], checkIfExists: true) ]
+                """
+            }
+        }
+
+        then {
+            def row = { f, gene ->
+                def lines = path(f).readLines()
+                def head  = lines[0].split('\t', -1).toList()
+                def hit   = lines.drop(1).find { it.split('\t', -1)[0] == gene }
+                assert hit : "no ${gene} row"
+                [head, hit.split('\t', -1).toList()].transpose().collectEntries()
+            }
+            def jf = ['S', 'C_donor', 'C_acceptor', 'donor_frac', 'acceptor_frac',
+                      'duplicates_filtered', 'donor_frac_dup', 'acceptor_frac_dup', 'junction_frac_flags']
+            assertAll(
+                { assert process.success },
+                { assert row(process.out.tsv[0][1], 'EGFR').subMap(jf) ==
+                    [S:'22', C_donor:'48', C_acceptor:'60', donor_frac:'0.3143', acceptor_frac:'0.2683',
+                     duplicates_filtered:'3', donor_frac_dup:'0.3425', acceptor_frac_dup:'0.2941', junction_frac_flags:''] },
+                { assert row(process.out.tsv[0][1], 'FLT3').subMap(['donor_frac', 'acceptor_frac', 'junction_frac_flags']) ==
+                    [donor_frac:'0.2683', acceptor_frac:'0.5238', junction_frac_flags:'frac_discordant'] },
+                { assert row(process.out.tsv[0][1], 'KMT2A')['junction_frac_flags'] == 'no_sj_donor,no_sj_acceptor' },
+                { assert row(process.out.tsv[0][1], 'BCR')['donor_frac'] == 'NA' },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
     test("arriba/flagdupes - fusions only - stub") {
 
         options "-stub"
@@ -120,6 +168,7 @@ nextflow_process {
                 input[0] = [
                     [ id:'test' ],
                     file(params.test_data_mskcc['arriba_flagdupes']['fusions'], checkIfExists: true),
+                    [],
                     []
                 ]
                 input[1] = [ [ id:'grch38_111' ], file(params.test_data_mskcc['arriba_flagdupes']['gtf'], checkIfExists: true) ]
