@@ -19,7 +19,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test_sample', single_end:false ], // meta map
                     file(params.test_data_mskcc['hlahd']['bam'], checkIfExists: true),
                     file(params.test_data_mskcc['hlahd']['bai'], checkIfExists: true)
@@ -51,7 +51,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test_sample', single_end:false ], // meta map
                     file(params.test_data_mskcc['hlahd']['bam'], checkIfExists: true),
                     file(params.test_data_mskcc['hlahd']['bai'], checkIfExists: true)
@@ -84,7 +84,7 @@ nextflow_workflow {
         when {
             workflow {
                 """
-                input[0] = Channel.value([
+                input[0] = channel.value([
                     [ id:'test_sample', single_end:false ], // meta map
                     file('test_hla_region.bam', checkIfExists: false),
                     file('test_hla_region.bam.bai', checkIfExists: false)

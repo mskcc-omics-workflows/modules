@@ -12,7 +12,7 @@ workflow HLAHD_FROM_BAM {
 
     main:
 
-    ch_versions = Channel.empty()
+    ch_versions = channel.empty()
 
     //
     // MODULE: Extract HLA region from BAM using samtools view.

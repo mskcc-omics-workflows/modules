@@ -1,7 +1,6 @@
 process MUTECT1 {
     tag "$meta.id"
     label 'process_low'
-    shell '/bin/sh'
 
 
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -27,7 +26,6 @@ process MUTECT1 {
     def args2 = task.ext.args2 ?: ''
     def case_sample_name = task.ext.prefix ?: "${meta.case_id}"
     def control_sample_name = task.ext.prefix ?: "${meta.control_id}"
-    def bed_file = bed_file ? "--intervals ${bed_file}" : ''
 
 
     """
@@ -55,7 +53,6 @@ process MUTECT1 {
     def args2 = task.ext.args2 ?: ''
     def case_sample_name = task.ext.prefix ?: "${meta.case_id}"
     def control_sample_name = task.ext.prefix ?: "${meta.control_id}"
-    def bed_file = bed_file ? "--intervals ${bed_file}" : ''
 
     """
 

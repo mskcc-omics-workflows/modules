@@ -24,7 +24,8 @@ workflow NETMHCSTABANDPAN {
 
     merged_pan_and_stab = merged_pan_and_stab.mix( NETMHCSTABPAN.out.netmhcstabpanoutput )
 
-    if ( params.netmhc3 ) {
+    // Strict syntax passes CLI params as strings, so `--netmhc3 false` would be truthy
+    if ( params.netmhc3.toString() == 'true' ) {
 
         NETMHC3( ch_netmhcinput )
         ch_versions = ch_versions.mix(NETMHC3.out.versions)
@@ -49,13 +50,13 @@ workflow NETMHCSTABANDPAN {
 
 def createNETMHCInput(fastas_and_hla, sv_fastas) {
         def fastas_and_hla_channel = fastas_and_hla
-            .map{
-                [it[0],it]
+            .map{ row ->
+                [row[0],row]
                 }
 
         def sv_fastas_channel = sv_fastas
-            .map{
-                [it[0],it]
+            .map{ row ->
+                [row[0],row]
                 }
 
         // Callers are expected to pre-pad sv_fastas with [meta, []] for samples without SV data,
@@ -63,14 +64,14 @@ def createNETMHCInput(fastas_and_hla, sv_fastas) {
         // we never have to wait for the SV channel to close.
         def merged_mut = fastas_and_hla_channel
             .join(sv_fastas_channel, by:0)
-            .map({
-                [it[1][0], it[1][1], it[2][1], it[1][3], "MUT"]
+            .map({ row ->
+                [row[1][0], row[1][1], row[2][1], row[1][3], "MUT"]
             })
 
         def merged_wt = fastas_and_hla_channel
             .join(sv_fastas_channel, by:0)
-            .map({
-                [it[1][0], it[1][2], it[2][2], it[1][3], "WT"]
+            .map({ row ->
+                [row[1][0], row[1][2], row[2][2], row[1][3], "WT"]
             })
         def merged = merged_mut.mix(merged_wt)
         return merged

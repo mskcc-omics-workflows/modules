@@ -18,30 +18,30 @@ workflow GENERATE_MUTATED_PEPTIDES {
     ch_versions = channel.empty()
 
     ch_maf = ch_maf_hla_sv
-                .map{
-                    [it[0],it[1]]
+                .map{ row ->
+                    [row[0],row[1]]
                 }
 
     ch_hla = ch_maf_hla_sv
-                .map{
-                    [it[0],it[2]]
+                .map{ row ->
+                    [row[0],row[2]]
                 }
 
     ch_sv = ch_maf_hla_sv
-                .map{
-                    [it[0],it[3]]
+                .map{ row ->
+                    [row[0],row[3]]
                 }
 
     ch_fasta_and_gff3 =  ref_fasta
                             .merge(gff3)
-                            .map{
-                                [[ id:"mutalyzer_retriever_"+file(it[0]).name +"_"+ file(it[1]).name], it[0], it[1]]
+                            .map{ row ->
+                                [[ id:"mutalyzer_retriever_"+file(row[0]).name +"_"+ file(row[1]).name], row[0], row[1]]
                             }
 
     ch_gtf_and_cdna = gtf
                             .merge(cdna)
-                            .map{
-                                [it[0], it[1]]
+                            .map{ row ->
+                                [row[0], row[1]]
                             }
 
     NEOANTIGENUTILS_GENERATEHLASTRING( ch_hla )
@@ -64,8 +64,8 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
     // Pad SV outputs with empty placeholders for samples without SV input so that
     // downstream per-sample joins never have to wait for the full channel to close.
-    ch_sv_mut_fasta = NEOSV.out.mutOut.mix( ch_neosv_branched.without_sv.map{ [it[0], []] } )
-    ch_sv_wt_fasta  = NEOSV.out.wtOut.mix( ch_neosv_branched.without_sv.map{ [it[0], []] } )
+    ch_sv_mut_fasta = NEOSV.out.mutOut.mix( ch_neosv_branched.without_sv.map{ row -> [row[0], []] } )
+    ch_sv_wt_fasta  = NEOSV.out.wtOut.mix( ch_neosv_branched.without_sv.map{ row -> [row[0], []] } )
 
     emit:
 
@@ -80,22 +80,22 @@ workflow GENERATE_MUTATED_PEPTIDES {
 
 def branchNEOSVInput(sv_bedpe, hla_str) {
         def sv_bedpe_channel = sv_bedpe
-            .map{
-                [it[0],it]
+            .map{ row ->
+                [row[0],row]
                 }
 
         def hla_str_channel = hla_str
-            .map{
-                [it[0],it]
+            .map{ row ->
+                [row[0],row]
                 }
 
         def merged_sv_hla = sv_bedpe_channel
             .join(hla_str_channel, by:0)
-            .map{
-                [it[1][0], it[1][1], it[2][1]]
+            .map{ row ->
+                [row[1][0], row[1][1], row[2][1]]
             }
-            .branch{
-                with_sv:    it[1] != null && it[2] != null
+            .branch{ row ->
+                with_sv:    row[1] != null && row[2] != null
                 without_sv: true
             }
         return merged_sv_hla
