@@ -39,15 +39,13 @@ nextflow_process {
     }
 
 
-    test("test normal - stub") {
+    test("test extended mode") {
 
-        options "-stub"
+        config "./extended.config"
 
         when {
             process {
                 """
-
-
                 input[0] = [
                     [ id:'test',case_id:'sample1',control_id:'sample2'], // meta map
                     file(params.test_data_mskcc['genome_nexus']['sample2_sample1_annotated_maf'], checkIfExists: true)
@@ -58,7 +56,35 @@ nextflow_process {
 
         then {
             assertAll(
-                { assert process.success }
+                { assert process.success },
+                { assert path(process.out.annotated_maf[0][1]).readLines().find { !it.startsWith('#') }.split('\t').contains('Additional_Transcripts') },
+                { assert snapshot(process.out.versions).match() }
+            )
+        }
+
+    }
+
+
+    test("test normal - stub") {
+
+        tag "stub"
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test',case_id:'sample1',control_id:'sample2'], // meta map
+                    file('dummy.maf', checkIfExists: false)
+                    ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
 
             )
         }
