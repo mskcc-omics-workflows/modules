@@ -1,0 +1,99 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_filteredgeindels"
+description: |
+  Drop every read pair containing a read whose CIGAR begins or ends with an unanchored indel
+  (first or last two operations ID, DI, SI or SD), as produced by ABRA2 realignment, so that
+  Manta can process the BAM. Same rule as Illumina/manta PR #288. Reports how many were dropped.
+keywords:
+  - bam
+  - filter
+  - cigar
+  - abra2
+  - manta
+tools:
+  - "samtools":
+      description: "Tools for dealing with SAM, BAM and CRAM files"
+      homepage: "http://www.htslib.org/"
+      documentation: "http://www.htslib.org/doc/samtools.html"
+      tool_dev_url: "https://github.com/samtools/samtools"
+      doi: "10.1093/bioinformatics/btp352"
+      licence: ["MIT"]
+      identifier: "biotools:samtools"
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - bam:
+        type: file
+        description: Coordinate-sorted BAM file
+        pattern: "*.bam"
+        ontologies:
+          - edam: "http://edamontology.org/format_2572"
+    - bai:
+        type: file
+        description: BAM index
+        pattern: "*.{bai,bam.bai}"
+        ontologies:
+          - edam: "http://edamontology.org/format_3327"
+output:
+  - bam:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "${prefix}.bam":
+          type: file
+          description: Input BAM without any record whose read name was flagged
+          pattern: "*.bam"
+          ontologies:
+            - edam: "http://edamontology.org/format_2572"
+  - bai:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "${prefix}.bam.bai":
+          type: file
+          description: Index of the filtered BAM
+          pattern: "*.bam.bai"
+          ontologies:
+            - edam: "http://edamontology.org/format_3327"
+  - qnames:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "${prefix}.edge_indel_qnames.txt":
+          type: file
+          description: Unique read names that were flagged and dropped (one per line)
+          pattern: "*.edge_indel_qnames.txt"
+  - counts:
+      - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "${prefix}.edge_indel_counts.tsv":
+          type: file
+          description: |
+            Tab-separated header plus one row: sample, flagged_records (records matching the rule),
+            flagged_pairs (unique flagged read names), primary_reads_in, primary_reads_out
+          pattern: "*.edge_indel_counts.tsv"
+          ontologies:
+            - edam: "http://edamontology.org/format_3475"
+  - versions:
+      - versions.yml:
+          type: file
+          description: File containing software versions
+          pattern: "versions.yml"
+          ontologies:
+            - edam: "http://edamontology.org/format_3750"
+authors:
+  - "@pintoa1-mskcc"
+maintainers:
+  - "@pintoa1-mskcc"
