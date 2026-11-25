@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "acela_bampatientid"
+description: Look up mirrored BAM file paths and sample metadata by CMO or DMP patient ID using the Acela CLI.
+keywords:
+  - acela
+  - bam
+  - mirror
+  - mskcc
+tools:
+  - "acela-cli":
+      description: "Command-line client for the Acela BAM mirror API. Looks up BAM files by patient/sample ID and returns tab-delimited or JSON results. Requires network access to the internal MSKCC Acela/Voyager endpoint and a valid session token. Before running a pipeline that uses this module, obtain a token (`acela login`, or set ACELA_USER/ACELA_PASSWORD once) and register it locally with `nextflow secrets set ACELA_TOKEN <token>` -- Nextflow injects it into the task environment at runtime."
+      homepage: "https://github.com/mskcc/acela-cli"
+      documentation: "https://github.com/mskcc/acela-cli"
+      licence: ["unspecified (private MSKCC repository)"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information, plus an `id_type` key selecting which Acela
+          lookup to perform, and an optional `sep` key selecting the output field delimiter
+          ("tsv" (default), "csv", "\s" for space, or any literal character, e.g. "|").
+          e.g. `[ id:'patient1', id_type:'cmo' ]` or `[ id:'patient1', id_type:'dmp', sep:'csv' ]`
+    - patient_ids:
+        type: list
+        description: |
+          One or more patient identifiers to look up, matching `meta.id_type`: CMO patient IDs
+          (e.g. `C-ABCDEF`) when `id_type` is `cmo`, or DMP patient IDs (e.g. `P-0001234`) when
+          `id_type` is `dmp`. A single String is also accepted for a one-off lookup.
+output:
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'patient1', id_type:'cmo' ]`
+      - "*.acela_bam.tsv":
+          type: file
+          description: Tab-delimited mirrored BAM paths and sample metadata returned by the Acela API.
+          pattern: "*.acela_bam.tsv"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: "http://edamontology.org/format_3750" # YAML
+authors:
+  - "@buehlere"
+maintainers:
+  - "@buehlere"

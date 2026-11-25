@@ -74,10 +74,16 @@ runs:
         conda-remove-defaults: true
 
     - name: Set up nextflow ONCOKB secrets
-      if: env.ONCOKB_TOKEN != '' 
+      if: env.ONCOKB_TOKEN != ''
       shell: bash
       run: |
         nextflow secrets set ONCOKB_TOKEN $ONCOKB_TOKEN
+
+    - name: Set up nextflow ACELA secrets
+      # acela/bampatientid and acela/bamsampleid only run stub tests in CI (the Acela API is internal-only)
+      shell: bash
+      run: |
+        nextflow secrets set ACELA_TOKEN stub-placeholder
 
 
     - name: Login to JFrog Container Registry (docker)

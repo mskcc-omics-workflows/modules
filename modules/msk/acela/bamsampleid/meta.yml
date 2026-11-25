@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "acela_bamsampleid"
+description: Look up mirrored BAM file paths and sample metadata by DMP sample ID using the Acela CLI.
+keywords:
+  - acela
+  - bam
+  - mirror
+  - mskcc
+tools:
+  - "acela-cli":
+      description: "Command-line client for the Acela BAM mirror API. Looks up BAM files by patient/sample ID and returns tab-delimited or JSON results. Requires network access to the internal MSKCC Acela/Voyager endpoint and a valid session token. Before running a pipeline that uses this module, obtain a token (`acela login`, or set ACELA_USER/ACELA_PASSWORD once) and register it locally with `nextflow secrets set ACELA_TOKEN <token>` -- Nextflow injects it into the task environment at runtime."
+      homepage: "https://github.com/mskcc/acela-cli"
+      documentation: "https://github.com/mskcc/acela-cli"
+      licence: ["unspecified (private MSKCC repository)"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information, plus an optional `sep` key selecting the
+          output field delimiter ("tsv" (default), "csv", "\s" for space, or any literal
+          character, e.g. "|").
+          e.g. `[ id:'sample1' ]` or `[ id:'sample1', sep:'csv' ]`
+    - dmp_sample_ids:
+        type: list
+        description: |
+          One or more DMP sample IDs to look up, e.g. `P-0001234-T01-IM6`. A single String is
+          also accepted for a one-off lookup.
+output:
+  tsv:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "*.acela_bam.tsv":
+          type: file
+          description: Tab-delimited mirrored BAM paths and sample metadata returned by the Acela API.
+          pattern: "*.acela_bam.tsv"
+  versions:
+    - versions.yml:
+        type: file
+        description: File containing software versions
+        pattern: "versions.yml"
+        ontologies:
+          - edam: "http://edamontology.org/format_3750" # YAML
+authors:
+  - "@buehlere"
+maintainers:
+  - "@buehlere"

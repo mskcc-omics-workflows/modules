@@ -1,0 +1,40 @@
+// nf-core modules test acela/bamsampleid
+nextflow_process {
+
+    name "Test Process ACELA_BAMSAMPLEID"
+    script "../main.nf"
+    process "ACELA_BAMSAMPLEID"
+
+    tag "modules"
+    tag "modules_msk"
+    tag "acela"
+    tag "acela/bamsampleid"
+
+    // acela-cli talks to a live, internal-only MSKCC endpoint and requires a real session
+    // token, so it cannot run against fixture data in CI. Stub-only test per the MSK
+    // contributing guide's allowance for modules that can't run on small test data.
+    test("dmp sample id - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'sample1' ], // meta map
+                    'P-0001234-T01-IM6'
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
